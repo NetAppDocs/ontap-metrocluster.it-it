@@ -1,0 +1,31 @@
+---
+permalink: install-fc/task_download_the_brocade_fc_rcf_switch_software.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, download, brocade, fc, switch, rcf, file 
+summary: 'È necessario scaricare il file di configurazione di riferimento (RCF) su ogni switch nella configurazione MetroCluster Fabric.' 
+---
+= Download del file RCF dello switch FC Brocade
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario scaricare il file di configurazione di riferimento (RCF) su ogni switch nella configurazione MetroCluster Fabric.
+
+.A proposito di questa attività
+Per utilizzare questi file RCF, il sistema deve eseguire ONTAP 9.1 o versione successiva ed è necessario utilizzare il layout delle porte per ONTAP 9.1 o versione successiva.
+
+Se si prevede di utilizzare solo una delle porte FC sui bridge FibreBridge, configurare manualmente gli switch Fibre Channel back-end seguendo le istruzioni riportate nella sezione, link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.1 e versioni successive"].
+
+.Fasi
+. Fare riferimento alla tabella dei file RCF nella pagina di download di Brocade RCF e identificare il file RCF corretto per ogni switch nella configurazione.
++
+I file RCF devono essere applicati agli switch corretti.
+
+. Scaricare i file RCF per gli switch da https://mysupport.netapp.com/site/products/all/details/metrocluster-rcf/downloads-tab["Download di MetroCluster RCF"] pagina.
++
+I file devono essere collocati in una posizione in cui possono essere trasferiti allo switch. È disponibile un file separato per ciascuno dei quattro switch che compongono il fabric a due switch.
+
+. Ripetere questi passaggi su ogni switch nella configurazione.
+

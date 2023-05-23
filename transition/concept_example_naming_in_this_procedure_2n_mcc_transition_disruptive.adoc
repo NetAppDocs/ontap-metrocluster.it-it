@@ -1,0 +1,76 @@
+---
+permalink: transition/concept_example_naming_in_this_procedure_2n_mcc_transition_disruptive.html 
+sidebar: sidebar 
+keywords: procedure, example, name, identify, dr, group, node, switch, involve, naming 
+summary: Questa procedura utilizza nomi di esempio per identificare i gruppi DR, i nodi e gli switch coinvolti. 
+---
+= Esempio di denominazione in questa procedura
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Questa procedura utilizza nomi di esempio per identificare i gruppi DR, i nodi e gli switch coinvolti.
+
+I nodi nella configurazione originale hanno il suffisso -FC, che indica che si trovano in una configurazione Fabric-Attached o Stretch MetroCluster.
+
+[cols="22,39,39"]
+|===
+
+
+| Componenti | Cluster_A presso il sito_A. | Cluster_B nel sito_B. 
+
+
+ a| 
+dr_Group_1-FC
+ a| 
+* Node_A_1-FC
+* Shelf_A_1
+* Shelf_A_2
+
+ a| 
+* Node_B_1-FC
+* Shelf_B_1
+* Shelf_B_2
+
+
+
+
+ a| 
+dr_Group_2-IP
+ a| 
+* Node_A_1-IP
+* Node_A_2-IP
+* Shelf_A_1
+* Shelf_A_2
+* Shelf_A_3-new
+* Shelf_A_4-new
+
+ a| 
+* Node_B_1-IP
+* Node_B_2-IP
+* Shelf_B_1
+* Shelf_B_2
+* Shelf_B_3-new
+* Shelf_B_4-new
+
+
+
+
+ a| 
+Switch
+ a| 
+* Switch_A_1-FC
+* Switch_A_2-FC
+* Switch_A_1-IP
+* Switch_A_2-IP
+
+ a| 
+* Switch_B_1-FC
+* Switch_B_2-FC
+* Switch_B_1-IP
+* Switch_B_2-IP
+
+
+|===

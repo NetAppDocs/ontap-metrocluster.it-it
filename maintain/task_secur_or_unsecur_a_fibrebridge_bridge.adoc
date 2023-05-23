@@ -1,0 +1,70 @@
+---
+permalink: maintain/task_secur_or_unsecur_a_fibrebridge_bridge.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, secure, unsecure, fibrebridge, bridge 
+summary: 'Per disattivare facilmente i protocolli Ethernet potenzialmente non sicuri su un bridge, a partire da ONTAP 9.5 è possibile proteggere il bridge. In questo modo vengono disattivate le porte Ethernet del bridge. È anche possibile riabilitare l"accesso Ethernet.' 
+---
+= Protezione o annullamento della protezione del bridge FibreBridge
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Per disattivare facilmente i protocolli Ethernet potenzialmente non sicuri su un bridge, a partire da ONTAP 9.5 è possibile proteggere il bridge. In questo modo vengono disattivate le porte Ethernet del bridge. È anche possibile riabilitare l'accesso Ethernet.
+
+* La protezione del bridge disattiva il protocollo telnet e altri protocolli e servizi delle porte IP (FTP, ExpressNAV, ICMP o barra di navigazione) sul bridge.
+* Questa procedura utilizza la gestione out-of-band utilizzando il prompt ONTAP, disponibile a partire da ONTAP 9.5.
++
+Se non si utilizza la gestione fuori banda, è possibile eseguire i comandi dalla CLI del bridge.
+
+* Il `*unsecurebridge*` Il comando può essere utilizzato per riabilitare le porte Ethernet.
+* In ONTAP 9.7 e versioni precedenti, con l'esecuzione di `*securebridge*` Il comando sul FibreBridge atto potrebbe non aggiornare correttamente lo stato del bridge sul cluster partner. In tal caso, eseguire `*securebridge*` dal cluster partner.
+
+
+
+NOTE: A partire da ONTAP 9.8, la `*storage bridge*` il comando viene sostituito con `*system bridge*`. La procedura riportata di seguito mostra `*storage bridge*` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `*system bridge*` è preferibile utilizzare il comando.
+
+.Fasi
+. Dal prompt ONTAP del cluster contenente il bridge, proteggere o non proteggere il bridge.
++
+Il seguente comando protegge Bridge_A_1:
+
++
+[listing]
+----
+cluster_A> storage bridge run-cli -bridge bridge_A_1 -command securebridge
+----
++
+Il seguente comando sprotegge Bridge_A_1:
+
++
+[listing]
+----
+cluster_A> storage bridge run-cli -bridge bridge_A_1 -command unsecurebridge
+----
+. Dal prompt ONTAP del cluster contenente il bridge, salvare la configurazione del bridge:
++
+`*storage bridge run-cli -bridge _bridge-name_ -command saveconfiguration*`
+
++
+Il seguente comando protegge Bridge_A_1:
+
++
+[listing]
+----
+cluster_A> storage bridge run-cli -bridge bridge_A_1 -command saveconfiguration
+----
+. Dal prompt ONTAP del cluster che contiene il bridge, riavviare il firmware del bridge:
++
+`*storage bridge run-cli -bridge _bridge-name_ -command firmwarerestart*`
+
++
+Il seguente comando protegge Bridge_A_1:
+
++
+[listing]
+----
+cluster_A> storage bridge run-cli -bridge bridge_A_1 -command firmwarerestart
+----
+

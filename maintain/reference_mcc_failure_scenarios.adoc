@@ -1,0 +1,111 @@
+---
+permalink: maintain/reference_mcc_failure_scenarios.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, failure, recovery, scenarios 
+summary: È necessario conoscere il modo in cui la configurazione MetroCluster risponde a diversi eventi di errore. 
+---
+= Scenari di guasti e recovery di MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario conoscere il modo in cui la configurazione MetroCluster risponde a diversi eventi di errore.
+
+
+NOTE: Per ulteriori informazioni sul ripristino da guasti dei nodi, vedere la sezione "scelta della procedura di ripristino corretta" in link:../disaster-recovery/concept_dr_workflow.html["Ripristino in caso di disastro"].
+
+|===
+
+
+| Evento | Impatto | Recovery (recupero) 
+
+
+ a| 
+Guasto a nodo singolo
+ a| 
+Viene attivato un failover.
+ a| 
+La configurazione viene ripristinata attraverso un Takeover locale. Il RAID non viene influenzato. Rivedere i messaggi di sistema e sostituire le FRU guaste secondo necessità.
+
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+
+
+
+ a| 
+Due nodi si guastano in un sito
+ a| 
+Due nodi si guastano solo se è abilitato lo switchover automatico nel software MetroCluster Tiebreaker.
+ a| 
+Unplanned switchover manuale (USO) se il switchover automatico nel software MetroCluster Tiebreaker non è abilitato.
+
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+
+
+
+ a| 
+Interfaccia IP MetroCluster - errore di una porta
+ a| 
+Il sistema è degradato. Un errore di porta aggiuntivo influisce sul mirroring ha.
+ a| 
+Viene utilizzata la seconda porta. Health Monitor genera un avviso in caso di interruzione del collegamento fisico alla porta. Rivedere i messaggi di sistema e sostituire le FRU guaste secondo necessità.
+
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+
+
+
+ a| 
+Interfaccia IP MetroCluster - errore di entrambe le porte
+ a| 
+La funzionalità HA è interessata. RAID SyncMirror del nodo interrompe la sincronizzazione.
+ a| 
+È necessario un recupero manuale immediato in quanto non è previsto un Takeover in ha. Rivedere i messaggi di sistema e sostituire le FRU guaste secondo necessità.
+
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+
+
+
+ a| 
+Guasto di uno switch IP MetroCluster
+ a| 
+Nessun impatto. La ridondanza viene fornita attraverso la seconda rete.
+ a| 
+Sostituire lo switch guasto secondo necessità.
+
+link:task_replace_an_ip_switch.html["Sostituzione di uno switch IP"]
+
+
+
+ a| 
+Guasto di due switch IP MetroCluster che si trovano nella stessa rete
+ a| 
+Nessun impatto. La ridondanza viene fornita attraverso la seconda rete.
+ a| 
+Sostituire lo switch guasto secondo necessità.
+
+link:task_replace_an_ip_switch.html["Sostituzione di uno switch IP"]
+
+
+
+ a| 
+Guasto di due switch IP MetroCluster presenti in un sito
+ a| 
+RAID SyncMirror del nodo interrompe la sincronizzazione. La funzionalità HA viene influenzata e il cluster esce dal quorum.
+ a| 
+Sostituire lo switch guasto secondo necessità.
+
+link:task_replace_an_ip_switch.html["Sostituzione di uno switch IP"]
+
+
+
+ a| 
+Guasto di due switch IP MetroCluster che si trovano in siti diversi e non sulla stessa rete (errore diagonale)
+ a| 
+RAID SyncMirror del nodo interrompe la sincronizzazione.
+ a| 
+RAID SyncMirror del nodo interrompe la sincronizzazione. Le funzionalità cluster e ha non vengono influenzate. Sostituire lo switch guasto secondo necessità.
+
+link:task_replace_an_ip_switch.html["Sostituzione di uno switch IP"]
+
+|===

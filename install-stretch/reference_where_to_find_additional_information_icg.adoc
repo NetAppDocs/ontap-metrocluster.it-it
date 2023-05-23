@@ -1,0 +1,132 @@
+---
+permalink: install-stretch/reference_where_to_find_additional_information_icg.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, additional, information 
+summary: Per ulteriori informazioni sulla configurazione e sul funzionamento di MetroCluster, consulta la documentazione NetApp. 
+---
+= Dove trovare ulteriori informazioni
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Scopri di più sulla configurazione e sul funzionamento di MetroCluster.
+
+
+
+== MetroCluster e informazioni varie
+
+|===
+
+
+| Informazioni | Soggetto 
+
+
+ a| 
+https://docs.netapp.com/us-en/ontap/index.html["Documentazione di ONTAP 9"^]
+ a| 
+* Tutte le guide MetroCluster
+
+
+
+
+ a| 
+ a| 
+* Panoramica tecnica della configurazione e del funzionamento del MetroCluster FC.
+* Best practice per la configurazione MetroCluster FC.
+
+
+
+
+ a| 
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"]
+ a| 
+* Architettura Fabric-Attached MetroCluster
+* Cablaggio della configurazione
+* Configurazione dei bridge FC-SAS
+* Configurazione degli switch FC
+* Configurazione di MetroCluster in ONTAP
+
+
+
+
+ a| 
+https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_considerations_differences.html["Installazione e configurazione di MetroCluster IP: Differenze tra le configurazioni di ONTAP MetroCluster"]
+ a| 
+* Architettura IP di MetroCluster
+* Cablaggio della configurazione
+* Configurazione di MetroCluster in ONTAP
+
+
+
+
+ a| 
+https://docs.netapp.com/us-en/ontap-metrocluster/manage/index.html["Gestione MetroCluster e disaster recovery"]
+ a| 
+* Informazioni sulla configurazione di MetroCluster
+* Switchover, healing e switchback
+* Disaster recovery (DR)
+
+
+
+
+ a| 
+link:../maintain/index.html["Gestire i componenti di MetroCluster"]
+ a| 
+* Linee guida per la manutenzione in una configurazione MetroCluster FC
+* Sostituzione o aggiornamento dell'hardware. Procedure di aggiornamento del firmware per bridge FC-SAS e switch FC
+* Aggiunta a caldo di uno shelf di dischi in una configurazione MetroCluster FC fabric-attached o stretch
+* Rimozione a caldo di uno shelf di dischi in una configurazione MetroCluster FC con connessione fabric o stretch
+* Sostituzione dell'hardware in un sito di disaster recovery in una configurazione MetroCluster FC con connessione fabric o stretch
+* Espansione di una configurazione MetroCluster FC a due nodi collegata a fabric o estesa a una configurazione MetroCluster a quattro nodi.
+* Espansione di una configurazione FC MetroCluster con collegamento fabric a quattro nodi o estensione in una configurazione FC MetroCluster a otto nodi.
+
+
+
+
+ a| 
+https://docs.netapp.com/us-en/ontap-metrocluster/transition/concept_choosing_your_transition_procedure_mcc_transition.html["Transizione da MetroCluster FC a MetroCluster IP"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_an_upgrade_method_mcc.html["Guida all'upgrade e all'espansione di MetroCluster"]
+ a| 
+* Aggiornamento o aggiornamento di una configurazione MetroCluster
+* Passaggio da una configurazione MetroCluster FC a una configurazione MetroCluster IP
+* Espansione di una configurazione MetroCluster mediante l'aggiunta di nodi aggiuntivi
+
+
+
+
+ a| 
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/home.html["Installazione e configurazione del software MetroCluster Tiebreaker"]
+ a| 
+* Monitoraggio della configurazione MetroCluster con il software MetroCluster Tiebreaker
+
+
+
+
+ a| 
+Documentazione Active IQ Unified Manager
+
+https://www.netapp.com/support-and-training/documentation/["Documentazione NetApp: Guide e risorse sui prodotti"^]
+ a| 
+* Monitoraggio della configurazione e delle prestazioni di MetroCluster
+
+
+
+
+ a| 
+https://docs.netapp.com/us-en/ontap-7mode-transition/copy-based/index.html["Transizione basata sulla copia"]
+ a| 
+* Transizione dei dati dai sistemi storage 7-Mode ai sistemi storage in cluster
+
+
+
+
+ a| 
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-concepts/home.html["Concetti di ONTAP"]
+ a| 
+* Come funzionano gli aggregati mirrorati
+
+
+|===

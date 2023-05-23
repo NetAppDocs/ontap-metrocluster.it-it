@@ -1,0 +1,323 @@
+---
+permalink: upgrade/task_refresh_4n_mcc_ip.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, refresh, four, node, ip, configuration, add, autosupport 
+summary: 'A partire da ONTAP 9.8, è possibile aggiornare i controller e lo storage in una configurazione MetroCluster IP a quattro nodi espandendo la configurazione fino a diventare una configurazione temporanea a otto nodi e rimuovendo quindi il vecchio gruppo di disaster recovery (DR).' 
+---
+= Aggiornamento di una configurazione MetroCluster IP a quattro o otto nodi (ONTAP 9.8 e versioni successive)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile utilizzare questa procedura per aggiornare controller e storage in configurazioni a quattro o otto nodi.
+
+A partire da ONTAP 9.13.1, è possibile aggiornare i controller e lo storage in una configurazione MetroCluster IP a otto nodi espandendo la configurazione fino a diventare una configurazione temporanea a dodici nodi e rimuovendo i vecchi gruppi di disaster recovery (DR).
+
+A partire da ONTAP 9.8, è possibile aggiornare i controller e lo storage in una configurazione MetroCluster IP a quattro nodi espandendo la configurazione fino a diventare una configurazione temporanea a otto nodi e rimuovendo quindi il vecchio gruppo di DR.
+
+.A proposito di questa attività
+* Se si dispone di una configurazione a otto nodi, il sistema deve eseguire ONTAP 9.13.1 o versione successiva.
+* Se si dispone di una configurazione a quattro nodi, il sistema deve eseguire ONTAP 9.8 o versione successiva.
+* Se si stanno aggiornando anche gli switch IP, è necessario aggiornarli prima di eseguire questa procedura di aggiornamento.
+* Questa procedura descrive i passaggi necessari per aggiornare un gruppo DR a quattro nodi. Se si dispone di una configurazione a otto nodi (due gruppi DR), è possibile aggiornare uno o entrambi i gruppi DR.
++
+Se si aggiornano entrambi i gruppi di DR, è necessario aggiornare un gruppo di DR alla volta.
+
+* I riferimenti ai "vecchi nodi" indicano i nodi che si intende sostituire.
+* Per le configurazioni a otto nodi, è necessario supportare la combinazione di piattaforme MetroCluster a otto nodi di origine e destinazione.
++
+
+NOTE: Se si aggiornano entrambi i gruppi di DR, la combinazione di piattaforme potrebbe non essere supportata dopo l'aggiornamento del primo gruppo di DR. È necessario aggiornare entrambi i gruppi di DR per ottenere una configurazione a otto nodi supportata.
+
+* È possibile aggiornare solo modelli di piattaforma specifici utilizzando questa procedura in una configurazione MetroCluster IP.
++
+** Per informazioni sulle combinazioni di upgrade della piattaforma supportate, consultare la tabella di aggiornamento dell'IP MetroCluster in link:../upgrade/concept_choosing_tech_refresh_mcc.html#supported-metrocluster-ip-tech-refresh-combinations["Scelta di un metodo di refresh del sistema"].
+
+
+* Si applicano i limiti inferiori delle piattaforme di origine e di destinazione. Se si passa a una piattaforma superiore, i limiti della nuova piattaforma si applicano solo dopo il completamento dell'aggiornamento tecnico di tutti i gruppi di DR.
+* Se si esegue un aggiornamento tecnico su una piattaforma con limiti inferiori rispetto alla piattaforma di origine, è necessario regolare e ridurre i limiti in modo che siano pari o inferiori ai limiti della piattaforma di destinazione prima di eseguire questa procedura.
+
+
+.Fasi
+. Raccogliere informazioni dai vecchi nodi.
++
+A questo punto, la configurazione a quattro nodi viene visualizzata come mostrato nell'immagine seguente:
+
++
+image::../media/mcc_dr_group_a.png[mcc dr gruppo a]
+
++
+La configurazione a otto nodi viene visualizzata come mostrato nell'immagine seguente:
+
++
+image::../media/mcc_dr_groups_8_node.gif[mcc dr raggruppa 8 nodi]
+
+. Per impedire la generazione automatica del caso di supporto, inviare un messaggio AutoSupport per indicare che l'aggiornamento è in corso.
++
+.. Eseguire il seguente comando: +
+`system node autosupport invoke -node * -type all -message "MAINT=10h Upgrading _old-model_ to _new-model"_`
++
+Nell'esempio seguente viene specificata una finestra di manutenzione di 10 ore. A seconda del piano, potrebbe essere necessario dedicare più tempo.
+
++
+Se la manutenzione viene completata prima che sia trascorso il tempo, è possibile richiamare un messaggio AutoSupport che indica la fine del periodo di manutenzione:
+
++
+`system node autosupport invoke -node * -type all -message MAINT=end`
+
+.. Ripetere il comando sul cluster partner.
+
+
+. Rimuovere la configurazione MetroCluster esistente da Tiebreaker, Mediator o altro software in grado di avviare lo switchover.
++
+[cols="2*"]
+|===
+
+
+| Se si utilizza... | Utilizzare questa procedura... 
+
+
+ a| 
+Spareggio
+ a| 
+.. Utilizzare l'interfaccia CLI di tiebreaker `monitor remove` Comando per rimuovere la configurazione MetroCluster.
++
+Nell'esempio seguente, "`cluster_A`" viene rimosso dal software:
+
++
+[listing]
+----
+
+NetApp MetroCluster Tiebreaker :> monitor remove -monitor-name cluster_A
+Successfully removed monitor from NetApp MetroCluster Tiebreaker
+software.
+----
+.. Verificare che la configurazione MetroCluster sia stata rimossa correttamente utilizzando l'interfaccia CLI di tiebreaker `monitor show -status` comando.
++
+[listing]
+----
+
+NetApp MetroCluster Tiebreaker :> monitor show -status
+----
+
+
+
+
+ a| 
+Mediatore
+ a| 
+Immettere il seguente comando dal prompt di ONTAP:
+
+`metrocluster configuration-settings mediator remove`
+
+
+
+ a| 
+Applicazioni di terze parti
+ a| 
+Consultare la documentazione del prodotto.
+
+|===
+. Eseguire tutte le operazioni descritte in link:../upgrade/task_expand_a_four_node_mcc_ip_configuration.html["Espansione di una configurazione IP MetroCluster"] per aggiungere i nuovi nodi e lo storage alla configurazione.
++
+Al termine della procedura di espansione, la configurazione temporanea viene visualizzata come mostrato nelle seguenti immagini:
+
++
+.Configurazione temporanea a otto nodi
+image::../media/mcc_dr_group_b.png[mcc dr gruppo b]
+
++
+.Configurazione temporanea a dodici nodi
+image::../media/mcc_dr_group_c4.png[gruppo dr mcc c4]
+
+. Spostare i volumi CRS.
++
+Eseguire le operazioni descritte in link:../maintain/task_move_a_metadata_volume_in_mcc_configurations.html["Spostamento di un volume di metadati nelle configurazioni MetroCluster"].
+
+. Spostare i dati dai vecchi nodi ai nuovi nodi seguendo le procedure descritte in link:https://docs.netapp.com/us-en/ontap-systems-upgrade/index.html["Documentazione sull'upgrade dei sistemi AFF e FAS"^]
++
+.. Eseguire tutte le operazioni descritte in http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-AFE432F6-60AD-4A79-86C0-C7D12957FA63.html["Creazione di un aggregato e spostamento dei volumi nei nuovi nodi"^].
++
+
+NOTE: È possibile scegliere di eseguire il mirroring dell'aggregato quando o dopo la sua creazione.
+
+.. Eseguire tutte le operazioni descritte in http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-95CA9262-327D-431D-81AA-C73DEFF3DEE2.html["Spostamento di LIF di dati non SAN e LIF di gestione del cluster nei nuovi nodi"].
+
+
+. Modificare l'indirizzo IP per il peer del cluster dei nodi in transizione per ciascun cluster:
++
+.. Identificare il peer cluster_A utilizzando `cluster peer show` comando:
++
+[listing]
+----
+cluster_A::> cluster peer show
+Peer Cluster Name         Cluster Serial Number Availability   Authentication
+------------------------- --------------------- -------------- --------------
+cluster_B         1-80-000011           Unavailable    absent
+----
++
+... Modificare l'indirizzo IP del peer cluster_A:
++
+`cluster peer modify -cluster cluster_A -peer-addrs node_A_3_IP -address-family ipv4`
+
+
+
+.. Identificare il peer cluster_B utilizzando `cluster peer show` comando:
++
+[listing]
+----
+cluster_B::> cluster peer show
+Peer Cluster Name         Cluster Serial Number Availability   Authentication
+------------------------- --------------------- -------------- --------------
+cluster_A         1-80-000011           Unavailable    absent
+----
++
+... Modificare l'indirizzo IP del peer cluster_B:
++
+`cluster peer modify -cluster cluster_B -peer-addrs node_B_3_IP -address-family ipv4`
+
+
+
+.. Verificare che l'indirizzo IP del peer del cluster sia aggiornato per ciascun cluster:
++
+... Verificare che l'indirizzo IP sia aggiornato per ciascun cluster utilizzando `cluster peer show -instance` comando.
++
+Il `Remote Intercluster Addresses` Nei seguenti esempi viene visualizzato l'indirizzo IP aggiornato.
+
++
+Esempio per cluster_A:
+
++
+[listing]
+----
+cluster_A::> cluster peer show -instance
+
+Peer Cluster Name: cluster_B
+           Remote Intercluster Addresses: 172.21.178.204, 172.21.178.212
+      Availability of the Remote Cluster: Available
+                     Remote Cluster Name: cluster_B
+                     Active IP Addresses: 172.21.178.212, 172.21.178.204
+                   Cluster Serial Number: 1-80-000011
+                    Remote Cluster Nodes: node_B_3-IP,
+                                          node_B_4-IP
+                   Remote Cluster Health: true
+                 Unreachable Local Nodes: -
+          Address Family of Relationship: ipv4
+    Authentication Status Administrative: use-authentication
+       Authentication Status Operational: ok
+                        Last Update Time: 4/20/2023 18:23:53
+            IPspace for the Relationship: Default
+Proposed Setting for Encryption of Inter-Cluster Communication: -
+Encryption Protocol For Inter-Cluster Communication: tls-psk
+  Algorithm By Which the PSK Was Derived: jpake
+
+cluster_A::>
+
+----
++
+Esempio per cluster_B.
+
++
+[listing]
+----
+cluster_B::> cluster peer show -instance
+
+                       Peer Cluster Name: cluster_A
+           Remote Intercluster Addresses: 172.21.178.188, 172.21.178.196 <<<<<<<< Should reflect the modified address
+      Availability of the Remote Cluster: Available
+                     Remote Cluster Name: cluster_A
+                     Active IP Addresses: 172.21.178.196, 172.21.178.188
+                   Cluster Serial Number: 1-80-000011
+                    Remote Cluster Nodes: node_A_3-IP,
+                                          node_A_4-IP
+                   Remote Cluster Health: true
+                 Unreachable Local Nodes: -
+          Address Family of Relationship: ipv4
+    Authentication Status Administrative: use-authentication
+       Authentication Status Operational: ok
+                        Last Update Time: 4/20/2023 18:23:53
+            IPspace for the Relationship: Default
+Proposed Setting for Encryption of Inter-Cluster Communication: -
+Encryption Protocol For Inter-Cluster Communication: tls-psk
+  Algorithm By Which the PSK Was Derived: jpake
+
+cluster_B::>
+----
+
+
+
+
+. Seguire la procedura descritta in link:concept_removing_a_disaster_recovery_group.html["Rimozione di un gruppo di disaster recovery"] Per rimuovere il vecchio gruppo DR.
+. Se si desidera aggiornare entrambi i gruppi di DR in una configurazione a otto nodi, è necessario ripetere l'intera procedura per ciascun gruppo di DR.
++
+Dopo aver rimosso il vecchio gruppo DR, la configurazione viene visualizzata come mostrato nelle seguenti immagini:
+
++
+.Configurazione a quattro nodi
+image::../media/mcc_dr_group_d.png[gruppo dr mcc d]
+
++
+.Configurazione a otto nodi
+image::../media/mcc_dr_group_c5.png[gruppo dr mcc c5]
+
+. Confermare la modalità operativa della configurazione MetroCluster ed eseguire un controllo MetroCluster.
++
+.. Verificare la configurazione MetroCluster e che la modalità operativa sia normale:
++
+`metrocluster show`
+
+.. Verificare che siano visualizzati tutti i nodi previsti:
++
+`metrocluster node show`
+
+.. Immettere il seguente comando:
++
+`metrocluster check run`
+
+.. Visualizzare i risultati del controllo MetroCluster:
++
+`metrocluster check show`
+
+
+
+. Ripristinare il monitoraggio, se necessario, utilizzando la procedura per la configurazione.
++
+[cols="2*"]
+|===
+
+
+| Se si utilizza... | Utilizzare questa procedura 
+
+
+ a| 
+Spareggio
+ a| 
+link:../tiebreaker/concept_configuring_the_tiebreaker_software.html#adding-metrocluster-configurations["Aggiunta di configurazioni MetroCluster"] Nella sezione _Installazione e configurazione di MetroCluster Tiebreaker_.
+
+
+
+ a| 
+Mediatore
+ a| 
+link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_mediator_requirements.html["Configurazione del servizio ONTAP Mediator da una configurazione IP MetroCluster"] In _Installazione e configurazione IP MetroCluster_.
+
+
+
+ a| 
+Applicazioni di terze parti
+ a| 
+Consultare la documentazione del prodotto.
+
+|===
+. Per riprendere la generazione automatica del caso di supporto, inviare un messaggio AutoSupport per indicare che la manutenzione è stata completata.
++
+.. Immettere il seguente comando:
++
+`system node autosupport invoke -node * -type all -message MAINT=end`
+
+.. Ripetere il comando sul cluster partner.
+
+
+

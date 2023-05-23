@@ -1,0 +1,36 @@
+---
+permalink: transition/concept_considerations_for_using_existing_ip_switches.html 
+sidebar: sidebar 
+keywords: ensure, ip, switch, support, exist, model, metrocluster, fc, configuration, ip, consideration, support 
+summary: Assicurarsi che gli switch IP siano supportati. Se il modello di switch esistente è supportato sia dalla configurazione MetroCluster FC originale che dalla nuova configurazione MetroCluster IP, è possibile riutilizzare gli switch esistenti. 
+---
+= Considerazioni sugli switch IP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Assicurarsi che gli switch IP siano supportati. Se il modello di switch esistente è supportato sia dalla configurazione MetroCluster FC originale che dalla nuova configurazione MetroCluster IP, è possibile riutilizzare gli switch esistenti.
+
+
+
+== Switch supportati
+
+È necessario utilizzare gli switch forniti da NetApp.
+
+* L'utilizzo di switch compatibili con MetroCluster (switch non validati e forniti da NetApp) non è supportato per la transizione.
+* Gli switch IP devono essere supportati come switch di cluster sia dalla configurazione MetroCluster FC che dalla configurazione MetroCluster IP.
+* Gli switch IP possono essere riutilizzati nella nuova configurazione MetroCluster IP se MetroCluster FC è un cluster con switch e gli switch del cluster IP sono supportati dalla configurazione MetroCluster IP.
+* I nuovi switch IP vengono in genere utilizzati nei seguenti casi:
++
+** MetroCluster FC è un cluster senza switch, pertanto sono necessari nuovi switch.
+** MetroCluster FC è un cluster con switch, ma gli switch IP esistenti non sono supportati nella configurazione MetroCluster IP.
+** Si desidera utilizzare switch diversi per la configurazione IP MetroCluster.
+
+
+
+
+Per informazioni sul modello di piattaforma e sul supporto dello switch, consulta la sezione _NetApp Hardware Universe_.
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

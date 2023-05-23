@@ -1,0 +1,55 @@
+---
+permalink: upgrade/task_prepare_for_the_upgrade_add_2nd_controller_to_create_ha_pair.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, prepare, upgrade 
+summary: 'Prima di eseguire l"aggiornamento a una coppia ha, è necessario verificare che il sistema soddisfi tutti i requisiti e disporre di tutte le informazioni necessarie.' 
+---
+= Preparazione per l'aggiornamento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Prima di eseguire l'aggiornamento a una coppia ha, è necessario verificare che il sistema soddisfi tutti i requisiti e disporre di tutte le informazioni necessarie.
+
+.Fasi
+. Identificare i dischi non assegnati o i dischi spare che è possibile assegnare al nuovo modulo controller utilizzando i seguenti comandi:
++
+** `storage disk show -container-type spare`
+** `storage disk show -container-type unassigned`
+
+
+. Completare i seguenti passaggi secondari:
++
+.. Determinare dove si trovano gli aggregati per il nodo esistente:
++
+`storage aggregate show`
+
+.. Se l'assegnazione automatica della proprietà del disco è attivata, disattivarla:
++
+`storage disk option modify -node _node_name_ -autoassign off`
+
+.. Rimuovere la proprietà sui dischi che non dispongono di aggregati:
++
+`storage disk removeowner _disk_name_`
+
+.. Ripetere il passaggio precedente per tutti i dischi necessari per il nuovo nodo.
+
+
+. Verificare che i cavi siano pronti per le seguenti connessioni:
++
+** Connessioni cluster
++
+Se si crea un cluster senza switch a due nodi, sono necessari due cavi per collegare i moduli controller. In caso contrario, sono necessari almeno quattro cavi, due per ogni connessione del modulo controller allo switch cluster-network. Gli altri sistemi (come la serie 80xx) dispongono di quattro o sei connessioni cluster predefinite.
+
+** Connessioni di interconnessione HA, se il sistema si trova in una coppia ha a doppio chassis
+
+
+. Verificare di disporre di una console con porta seriale per i moduli controller.
+. Verificare che l'ambiente soddisfi i requisiti di sito e di sistema.
++
+https://hwu.netapp.com["NetApp Hardware Universe"^]
+
+. Raccogliere tutti gli indirizzi IP e gli altri parametri di rete per il nuovo modulo controller.
+

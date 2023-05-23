@@ -1,0 +1,26 @@
+---
+permalink: install-fc/task_cable_the_management_and_data_connections.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, cable, management, data, connections 
+summary: È necessario collegare le porte di gestione e dati di ciascun controller di storage alle reti del sito. 
+---
+= Cablaggio della gestione e delle connessioni dati
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario collegare le porte di gestione e dati di ciascun controller di storage alle reti del sito.
+
+.A proposito di questa attività
+Questa attività deve essere ripetuta per ogni nuovo controller in entrambi i siti MetroCluster.
+
+È possibile collegare le porte di gestione del controller e dello switch del cluster agli switch esistenti nella rete o a nuovi switch di rete dedicati, come gli switch di gestione del cluster NetApp CN1601.
+
+.Fase
+. Collegare le porte dati e di gestione del controller alle reti dati e di gestione del sito locale.
++
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"]
+
+

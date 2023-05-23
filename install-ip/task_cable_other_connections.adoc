@@ -1,0 +1,33 @@
+---
+permalink: install-ip/task_cable_other_connections.html 
+sidebar: sidebar 
+keywords: cabling, cable, component, peering, management, network, hardware, component, switch, cluster, connection, management, data, configuring, configure 
+summary: È necessario collegare le porte del modulo controller utilizzate per il peering del cluster, la gestione e la connettività dati. 
+---
+= Cablaggio delle porte di peering, dati e gestione del controller
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario collegare le porte del modulo controller utilizzate per il peering del cluster, la gestione e la connettività dati.
+
+Questa attività deve essere eseguita su ciascun modulo controller nella configurazione MetroCluster.
+
+Per il peering dei cluster, è necessario utilizzare almeno due porte su ciascun modulo controller.
+
+La larghezza di banda minima consigliata per le porte e la connettività di rete è 1 GbE.
+
+. Identificare e collegare almeno due porte per il peering del cluster e verificare che dispongano di connettività di rete con il cluster partner.
++
+Il peering del cluster può essere eseguito su porte dedicate o su porte dati. L'utilizzo di porte dedicate offre un throughput più elevato per il traffico di peering del cluster.
+
++
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-clus-peer/home.html["Configurazione rapida del peering di cluster e SVM"]
+
+. Collegare le porte dati e di gestione del controller alle reti dati e di gestione del sito locale.
++
+Seguire le istruzioni di installazione della piattaforma in https://docs.netapp.com/us-en/ontap-systems/["Documentazione sui sistemi AFF e FAS"].
+
+

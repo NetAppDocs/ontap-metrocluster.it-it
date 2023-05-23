@@ -1,0 +1,69 @@
+---
+permalink: upgrade/task_refresh_4n_mcc_fc.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, refresh, four, node, fc, configuration 
+summary: È possibile aggiornare i controller e lo storage in una configurazione MetroCluster a quattro nodi espandendo la configurazione fino a diventare una configurazione a otto nodi e rimuovendo quindi il vecchio gruppo di disaster recovery. 
+---
+= Aggiornamento di una configurazione MetroCluster FC a quattro nodi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile aggiornare i controller e lo storage in una configurazione MetroCluster a quattro nodi espandendo la configurazione fino a diventare una configurazione a otto nodi e rimuovendo quindi il vecchio gruppo di disaster recovery (DR).
+
+.A proposito di questa attività
+I riferimenti ai "vecchi nodi" indicano i nodi che si intende sostituire.
+
+* È possibile aggiornare solo modelli di piattaforma specifici utilizzando questa procedura in una configurazione MetroCluster FC.
++
+** Per informazioni sulle combinazioni di upgrade della piattaforma supportate, consultare la tabella di refresh MetroCluster FC in link:../upgrade/concept_choosing_tech_refresh_mcc.html#supported-metrocluster-fc-tech-refresh-combinations["Scelta di un metodo di refresh del sistema"].
+
+
+
+
+.Fasi
+. Raccogliere informazioni dai vecchi nodi.
++
+A questo punto, la configurazione a quattro nodi viene visualizzata come mostrato nell'immagine seguente:
+
++
+image::../media/mcc_dr_group_a.png[mcc dr gruppo a]
+
+. Eseguire tutti i passaggi della procedura di espansione a quattro nodi per il tipo di MetroCluster in uso.
++
+link:task_expand_a_four_node_mcc_fc_configuration_to_an_eight_node_configuration.html["Espansione di una configurazione MetroCluster FC a quattro nodi in una configurazione a otto nodi"]
+
++
+Al termine della procedura di espansione, la configurazione viene visualizzata come mostrato nell'immagine seguente:
+
++
+image::../media/mcc_dr_group_b.png[mcc dr gruppo b]
+
+. Spostare i volumi CRS.
++
+Eseguire le operazioni descritte in link:https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_move_a_metadata_volume_in_mcc_configurations.html["Spostamento di un volume di metadati nelle configurazioni MetroCluster"].
+
+. Spostare i dati dai vecchi nodi ai nuovi nodi utilizzando le seguenti procedure da https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/home.html["Altre procedure della piattaforma: Aggiornamento rapido dell'hardware del controller"^].
++
+.. Eseguire tutte le operazioni descritte in http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-AFE432F6-60AD-4A79-86C0-C7D12957FA63.html["Creazione di un aggregato e spostamento dei volumi nei nuovi nodi"].
++
+
+NOTE: È possibile scegliere di eseguire il mirroring dell'aggregato quando o dopo la sua creazione.
+
+.. Eseguire tutte le operazioni descritte in http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-95CA9262-327D-431D-81AA-C73DEFF3DEE2.html["Spostamento di LIF di dati non SAN e LIF di gestione del cluster nei nuovi nodi"].
+.. Eseguire tutte le operazioni descritte in http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-91EC7830-0C28-4C78-952F-6F956CC5A62F.html["Eliminazione di LIF SAN dai nodi originali"].
+
+
+. Seguire i passi della procedura per rimuovere il vecchio gruppo DR.
++
+link:concept_removing_a_disaster_recovery_group.html["Rimozione di un gruppo di disaster recovery"]
+
++
+Dopo aver rimosso il vecchio gruppo DR (gruppo DR uno), la configurazione viene visualizzata come mostrato nell'immagine seguente:
+
++
+image::../media/mcc_dr_group_d.png[gruppo dr mcc d]
+
+

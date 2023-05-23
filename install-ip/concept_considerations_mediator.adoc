@@ -1,0 +1,69 @@
+---
+permalink: install-ip/concept_considerations_mediator.html 
+sidebar: sidebar 
+keywords: differences, eight-node, four-node, fabric-attached, stretch, metrocluster ip, storage, bridges, fc-to-sas, atto, fibrebridge, SAS, local HA, auso, automatic unplanned switchover, array luns, mediator, tiebreaker 
+summary: Le varie configurazioni MetroCluster presentano differenze chiave nei componenti richiesti. 
+---
+= Differenze tra ONTAP Mediator e MetroCluster Tiebreaker
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A partire da ONTAP 9.7, è possibile utilizzare il MAUSO (Automatic Unplanned switchover) assistito dal mediatore ONTAP nella configurazione IP di MetroCluster oppure il software MetroCluster Tiebreaker. Solo uno dei due servizi può essere utilizzato con la configurazione IP di MetroCluster.
+
+Le diverse configurazioni MetroCluster eseguono lo switchover automatico in diverse circostanze:
+
+* *Configurazioni MetroCluster FC che utilizzano la funzionalità AUSO (non presente nelle configurazioni MetroCluster IP)*
++
+In queste configurazioni, AUSO viene avviato se i controller si guastano ma lo storage (e i bridge, se presenti) rimangono operativi.
+
+* *Configurazioni IP MetroCluster che utilizzano il servizio ONTAP Mediator (ONTAP 9.7 e versioni successive)*
++
+In queste configurazioni, MAUSO viene avviato nelle stesse circostanze di AUSO, come descritto sopra, e anche dopo un guasto completo del sito (controller, storage e switch).
+
++
+
+NOTE: MAUSO viene avviato solo se il mirroring della cache non volatile (_DR mirroring_) e il mirroring SyncMirror plex sono sincronizzati al momento dell'errore.
+
+* *Configurazioni MetroCluster IP o FC che utilizzano il software Tiebreaker in modalità attiva*
++
+In queste configurazioni, il Tiebreaker avvia lo switchover non pianificato dopo un guasto completo del sito.
+
++
+Prima di utilizzare il software Tiebreaker, consultare link:../tiebreaker/concept_overview_of_the_tiebreaker_software.html["Installazione e configurazione del software MetroCluster Tiebreaker"]
+
+
+
+
+
+== Interoperabilità di ONTAP Mediator con altre applicazioni e appliance
+
+Non è possibile utilizzare applicazioni o appliance di terze parti in grado di attivare uno switchover in combinazione con ONTAP Mediator. Inoltre, il monitoraggio di una configurazione MetroCluster con il software MetroCluster Tiebreaker non è supportato quando si utilizza ONTAP Mediator.
+
+
+
+== In che modo il mediatore ONTAP supporta lo switchover automatico non pianificato
+
+Il mediatore ONTAP memorizza le informazioni di stato relative ai nodi MetroCluster nelle cassette postali situate sull'host del mediatore. I nodi MetroCluster possono utilizzare queste informazioni per monitorare lo stato dei propri partner DR e implementare un MAUSO in caso di disastro.
+
+Quando un nodo rileva un guasto di un sito che richiede uno switchover, prende le misure necessarie per confermare che lo switchover è appropriato e, in tal caso, esegue lo switchover.
+
+Un MAUSO viene avviato solo nei seguenti scenari:
+
+* Il mirroring SyncMirror e il mirroring DR della cache non volatile di ciascun nodo sono in funzione e le cache e i mirror vengono sincronizzati al momento dell'errore.
+* Nessuno dei nodi nel sito sopravvissuto è in stato di Takeover.
+* In caso di disastro del sito. Un disastro del sito è un guasto di *tutti* nodi nello stesso sito.
+* A partire da ONTAP 9.13.1, se si verificano le condizioni sopra indicate e un guasto alla ventola o all'hardware avvia un arresto ambientale, ad esempio un guasto all'unità di alimentazione, alla batteria NVRAM o al battito cardiaco del processore di servizio, oppure una temperatura elevata o bassa.
+
+
+Un MAUSO viene *not* avviato nei seguenti scenari di arresto:
+
+* Si avvia un arresto. Ad esempio, quando:
++
+** arrestare i nodi
+** riavviare i nodi
+
+
+

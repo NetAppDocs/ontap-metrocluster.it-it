@@ -1,0 +1,26 @@
+---
+permalink: manage/task_heal_the_configuration_in_a_mcc_fc_configuration_supertask.html 
+sidebar: sidebar 
+keywords: switchover, perform, heal, operation, restore, metrocluster, functionality, fc, configuration 
+summary: Dopo uno switchover, è necessario eseguire le operazioni di riparazione in ordine specifico per ripristinare la funzionalità MetroCluster. 
+---
+= Riparazione della configurazione in una configurazione MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo uno switchover, è necessario eseguire le operazioni di riparazione in ordine specifico per ripristinare la funzionalità MetroCluster.
+
+* Lo switchover deve essere stato eseguito e il sito sopravvissuto deve fornire i dati.
+* I nodi nel sito di disastro devono essere arrestati o spenti.
++
+Non devono essere completamente avviati durante il processo di riparazione.
+
+* Lo storage nel sito di disastro deve essere accessibile (gli shelf sono accesi, funzionali e accessibili).
+* Nelle configurazioni Fabric-Attached MetroCluster, i collegamenti inter-switch (ISL) devono essere operativi.
+* Nelle configurazioni MetroCluster a quattro nodi, i nodi nel sito sopravvissuto non devono essere in stato di failover ha (tutti i nodi devono essere attivi e in esecuzione per ogni coppia ha).
+
+
+L'operazione di riparazione deve essere eseguita prima sugli aggregati di dati, quindi sugli aggregati root.

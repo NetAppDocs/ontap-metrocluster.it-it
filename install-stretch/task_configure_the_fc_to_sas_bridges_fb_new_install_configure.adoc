@@ -1,0 +1,238 @@
+---
+permalink: install-stretch/task_configure_the_fc_to_sas_bridges_fb_new_install_configure.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, configuration, fc, sas, bridges 
+summary: Prima di collegare il modello di bridge FC-SAS, è necessario configurare le impostazioni nel software FibreBridge. 
+---
+= Configurazione dei bridge FC-SAS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Prima di collegare il modello di bridge FC-SAS, è necessario configurare le impostazioni nel software FibreBridge.
+
+.A proposito di questa attività
+Devi decidere se utilizzare la gestione in-band dei bridge.
+
+
+NOTE: A partire da ONTAP 9.8, la `storage bridge` il comando viene sostituito con `system bridge`. La procedura riportata di seguito mostra `storage bridge` comando. Tuttavia, se si utilizza ONTAP 9.8 o versione successiva, la `system bridge` è preferibile utilizzare il comando.
+
+Se si utilizza la gestione in-band del bridge anziché la gestione IP, è possibile ignorare i passaggi per la configurazione della porta Ethernet e delle impostazioni IP.
+
+.Fasi
+. Se si esegue la configurazione per la gestione in banda, collegare un cavo dalla porta seriale RS-232 di FibreBridge alla porta seriale (COM) di un personal computer.
++
+La connessione seriale verrà utilizzata per la configurazione iniziale. Quindi, è possibile utilizzare la gestione in-band tramite ONTAP e le porte FC per monitorare e gestire il bridge.
+
+. Se si esegue la configurazione per la gestione IP, collegare la porta Ethernet 1 di gestione di ciascun bridge alla rete utilizzando un cavo Ethernet.
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
++
+La porta di gestione Ethernet 1 consente di scaricare rapidamente il firmware del bridge (utilizzando le interfacce di gestione ATTO ExpressNAV o FTP) e di recuperare i file principali ed estrarre i log.
+
+. Se si esegue la configurazione per la gestione IP, configurare la porta di gestione Ethernet 1 per ciascun bridge seguendo la procedura descritta nella sezione 2.0 del _ATTO FibreBridge Installation and Operation Manual_ per il modello di bridge in uso.
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
++
+Quando si esegue la barra di navigazione per configurare una porta di gestione Ethernet, viene configurata solo la porta di gestione Ethernet collegata tramite il cavo Ethernet. Ad esempio, se si desidera configurare anche la porta di gestione Ethernet 2, è necessario collegare il cavo Ethernet alla porta 2 ed eseguire la barra di navigazione.
+
+. Configurare il bridge.
++
+Annotare il nome utente e la password designati.
+
++
+
+NOTE: Non configurare la sincronizzazione dell'ora su ATTO FibreBridge 7600N o 7500N. La sincronizzazione temporale per ATTO FibreBridge 7600N o 7500N viene impostata sul tempo del cluster dopo il rilevamento del bridge da parte di ONTAP. Viene inoltre sincronizzato periodicamente una volta al giorno. Il fuso orario utilizzato è GMT e non è modificabile.
+
++
+.. Se si esegue la configurazione per la gestione IP, configurare le impostazioni IP del bridge.
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
++
+Per impostare l'indirizzo IP senza l'utilità barra di navigazione, è necessario disporre di una connessione seriale a FibreBridge.
+
++
+Se si utilizza l'interfaccia CLI, è necessario eseguire i seguenti comandi:
+
++
+`set ipaddress mp1 _ip-address_`
+
++
+`set ipsubnetmask mp1 _subnet-mask_`
+
++
+`set ipgateway mp1 x.x.x.x`
+
++
+`set ipdhcp mp1 disabled`
+
++
+`set ethernetspeed mp1 1000`
+
+.. Configurare il nome del bridge.
++
+I bridge devono avere un nome univoco all'interno della configurazione MetroCluster.
+
++
+Esempi di nomi di bridge per un gruppo di stack su ciascun sito:
+
++
+*** bridge_A_1a
+*** bridge_A_1b
+*** bridge_B_1a
+*** bridge_B_1b
++
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
++
+`set bridgename _bridgename_`
+
+
+
+.. Se si esegue ONTAP 9.4 o versioni precedenti, attivare SNMP sul bridge: +
+`set SNMP enabled`
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
+
+
+. Configurare le porte FC del bridge.
++
+.. Configurare la velocità/velocità dei dati delle porte FC del bridge.
++
+La velocità di trasferimento dati FC supportata dipende dal modello di bridge in uso.
+
++
+*** Il bridge FibreBridge 7600 supporta fino a 32, 16 o 8 Gbps.
+*** Il bridge FibreBridge 7500 supporta fino a 16, 8 o 4 Gbps.
+*** Il bridge FibreBridge 6500 supporta fino a 8, 4 o 2 Gbps.
++
+
+NOTE: La velocità FCDataRate selezionata è limitata alla velocità massima supportata sia dal bridge che dalla porta FC del modulo controller a cui si connette la porta bridge. Le distanze di cablaggio non devono superare i limiti degli SFP e di altri hardware.
+
++
+--
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
+`set FCDataRate _port-numberport-speed_`
+
+--
+
+
+.. Se si sta configurando un bridge FibreBridge 7500N o 6500N, configurare la modalità di connessione utilizzata dalla porta per ptp.
++
+
+NOTE: L'impostazione FCConnMode non è richiesta quando si configura un bridge FibreBridge 7600N.
+
++
+--
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
+`set FCConnMode _port-number_ ptp`
+
+--
+.. Se si sta configurando un bridge FibreBridge 7600N o 7500N, è necessario configurare o disattivare la porta FC2.
++
+*** Se si utilizza la seconda porta, è necessario ripetere i passaggi precedenti per la porta FC2.
+*** Se non si utilizza la seconda porta, è necessario disattivare la porta: +
+`FCPortDisable port-number`
++
+L'esempio seguente mostra la disattivazione della porta FC 2:
+
++
+[listing]
+----
+FCPortDisable 2
+
+Fibre Channel Port 2 has been disabled.
+----
+
+
+.. Se si sta configurando un bridge FibreBridge 7600N o 7500N, disattivare le porte SAS inutilizzate: +
+`SASPortDisable _sas-port_`
++
+
+NOTE: Le porte SAS Da A a D sono attivate per impostazione predefinita. È necessario disattivare le porte SAS non utilizzate.
+
++
+Se si utilizza solo la porta SAS A, è necessario disattivare le porte SAS B, C e D. Nell'esempio seguente viene illustrata la disattivazione della porta SAS B. Analogamente, è necessario disattivare le porte SAS C e D:
+
++
+....
+SASPortDisable b
+
+SAS Port B has been disabled.
+....
+
+
+. Accesso sicuro al bridge e salvataggio della configurazione del bridge. Scegliere un'opzione tra quelle riportate di seguito, a seconda della versione di ONTAP in esecuzione nel sistema.
++
+|===
+
+
+| Versione di ONTAP | Fasi 
+
+
+ a| 
+*ONTAP 9.5 o versione successiva*
+ a| 
+.. Visualizzare lo stato dei bridge: `storage bridge show`
++
+L'output mostra quale bridge non è protetto.
+
+.. Fissare il bridge: +
+`securebridge`
+
+
+
+
+ a| 
+*ONTAP 9.4 o versione precedente*
+ a| 
+.. Visualizzare lo stato dei bridge: `storage bridge show`
++
+L'output mostra quale bridge non è protetto.
+
+.. Controllare lo stato delle porte del bridge non protetto:
++
+`info`
+
++
+L'output mostra lo stato delle porte Ethernet MP1 e MP2.
+
+.. Se la porta Ethernet MP1 è abilitata, eseguire:
++
+`set EthernetPort mp1 disabled`
+
++
+Se è attivata anche la porta Ethernet MP2, ripetere il passaggio precedente per la porta MP2.
+
+.. Salvare la configurazione del bridge.
++
+È necessario eseguire i seguenti comandi:
+
++
+`SaveConfiguration`
+
++
+`FirmwareRestart`
+
++
+Viene richiesto di riavviare il bridge.
+
+
+
+|===
+. Dopo aver completato la configurazione MetroCluster, utilizzare `flashimages` Comando per verificare la versione del firmware FibreBridge in uso e, se i bridge non utilizzano la versione più recente supportata, aggiornare il firmware su tutti i bridge nella configurazione.
++
+link:../maintain/index.html["Gestire i componenti di MetroCluster"]
+
+
+
+.Informazioni correlate
+link:concept_in_band_management_of_the_fc_to_sas_bridges.html["Gestione in-band dei bridge FC-SAS"]

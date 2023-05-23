@@ -1,0 +1,209 @@
+---
+permalink: install-ip/task_sw_config_assign_pool0.html 
+sidebar: sidebar 
+keywords: metrocluster, controller, assign drives, pool 0, disk assign 
+summary: Se i sistemi preconfigurati non sono stati ricevuti dalla fabbrica, potrebbe essere necessario assegnare manualmente il pool 0 dischi. A seconda del modello di piattaforma e se il sistema utilizza ADP, è necessario assegnare manualmente le unità al pool 0 per ciascun nodo nella configurazione IP di MetroCluster. La procedura da seguire dipende dalla versione di ONTAP in uso. 
+---
+= Assegnazione manuale delle unità al pool 0
+:allow-uri-read: 
+
+
+[role="lead"]
+Se i sistemi preconfigurati non sono stati ricevuti dalla fabbrica, potrebbe essere necessario assegnare manualmente il pool 0 dischi. A seconda del modello di piattaforma e se il sistema utilizza ADP, è necessario assegnare manualmente le unità al pool 0 per ciascun nodo nella configurazione IP di MetroCluster. La procedura da seguire dipende dalla versione di ONTAP in uso.
+
+
+
+== Assegnazione manuale dei dischi per il pool 0 (ONTAP 9.4 e versioni successive)
+
+Se il sistema non è stato preconfigurato in fabbrica e non soddisfa i requisiti per l'assegnazione automatica del disco, è necessario assegnare manualmente il pool 0 dischi.
+
+.A proposito di questa attività
+Questa procedura si applica alle configurazioni che eseguono ONTAP 9.4 o versioni successive.
+
+Per determinare se il sistema richiede l'assegnazione manuale del disco, è necessario esaminare link:concept_considerations_drive_assignment.html["Considerazioni sull'assegnazione automatica dei dischi e sui sistemi ADP in ONTAP 9.4 e versioni successive"].
+
+Questa procedura viene eseguita in modalità manutenzione. La procedura deve essere eseguita su ciascun nodo della configurazione.
+
+Gli esempi di questa sezione si basano sui seguenti presupposti:
+
+* Node_A_1 e Node_A_2 su:
++
+** Site_A-shelf_1 (locale)
+** Sito_B-shelf_2 (remoto)
+
+
+* Node_B_1 e Node_B_2 su:
++
+** Sito_B-shelf_1 (locale)
+** Site_A-shelf_2 (remoto)
+
+
+
+
+.Fasi
+. Visualizzare il menu di avvio:
++
+`boot_ontap menu`
+
+. Selezionare l'opzione 9a e rispondere `no` quando richiesto.
++
+La seguente schermata mostra il prompt del menu di avvio:
+
++
+[listing]
+----
+
+Please choose one of the following:
+
+(1) Normal Boot.
+(2) Boot without /etc/rc.
+(3) Change password.
+(4) Clean configuration and initialize all disks.
+(5) Maintenance mode boot.
+(6) Update flash from backup config.
+(7) Install new software first.
+(8) Reboot node.
+(9) Configure Advanced Drive Partitioning.
+(10) Set Onboard Key Manager recovery secrets.
+(11) Configure node for external key management.
+Selection (1-11)? 9a
+
+...
+
+########## WARNING: AGGREGATES WILL BE DESTROYED ##########
+This is a disruptive operation that applies to all the disks
+that are attached and visible to this node.
+
+Before proceeding further, make sure that:
+
+The aggregates visible from this node do not contain
+data that needs to be preserved.
+This option (9a) has been executed or will be executed
+on the HA partner node (and DR/DR-AUX partner nodes if
+applicable), prior to reinitializing any system in the
+HA-pair or MetroCluster configuration.
+The HA partner node (and DR/DR-AUX partner nodes if
+applicable) is currently waiting at the boot menu.
+Do you want to abort this operation (yes/no)? no
+----
+. Al riavvio del nodo, premere Ctrl-C quando richiesto per visualizzare il menu di avvio, quindi selezionare l'opzione *Maintenance mode boot* (Avvio in modalità manutenzione).
+. In modalità Maintenance (manutenzione), assegnare manualmente i dischi per gli aggregati locali sul nodo:
++
+`disk assign _disk-id_ -p 0 -s _local-node-sysid_`
+
++
+I dischi devono essere assegnati simmetricamente, in modo che ogni nodo abbia un numero uguale di dischi. La procedura seguente riguarda una configurazione con due shelf di storage in ogni sito.
+
++
+.. Durante la configurazione di Node_A_1, assegnare manualmente le unità dallo slot 0 a 11 al pool 0 del nodo A1 da Site_A-shelf_1.
+.. Durante la configurazione di Node_A_2, assegnare manualmente le unità dallo slot 12 a 23 al pool 0 del nodo A2 da Site_A-shelf_1.
+.. Durante la configurazione di Node_B_1, assegnare manualmente le unità dallo slot 0 a 11 al pool 0 del nodo B1 da Site_B-shelf_1.
+.. Durante la configurazione di Node_B_2, assegnare manualmente le unità dallo slot 12 a 23 al pool 0 del nodo B2 dal sito_B-shelf_1.
+
+
+. Uscire dalla modalità di manutenzione:
++
+`halt`
+
+. Visualizzare il menu di avvio:
++
+`boot_ontap menu`
+
+. Ripetere questa procedura sugli altri nodi nella configurazione IP MetroCluster.
+. Selezionare l'opzione *4* dal menu di boot su entrambi i nodi e lasciare che il sistema si avvii.
+. Passare a. link:task_sw_config_setup_ontap.html["Configurazione di ONTAP"].
+
+
+
+
+== Assegnazione manuale delle unità per il pool 0 (ONTAP 9.3)
+
+Se si dispone di almeno due shelf di dischi per ciascun nodo, si utilizza la funzionalità di assegnazione automatica di ONTAP per assegnare automaticamente i dischi locali (pool 0).
+
+.A proposito di questa attività
+Mentre il nodo è in modalità manutenzione, è necessario assegnare un singolo disco sugli shelf appropriati al pool 0. ONTAP assegna quindi automaticamente il resto dei dischi sullo shelf allo stesso pool. Questa attività non è richiesta sui sistemi ricevuti dalla fabbrica, che hanno il pool 0 per contenere l'aggregato root preconfigurato.
+
+Questa procedura si applica alle configurazioni che eseguono ONTAP 9.3.
+
+Questa procedura non è necessaria se si riceve la configurazione MetroCluster dalla fabbrica. I nodi della fabbrica sono configurati con pool 0 dischi e aggregati root.
+
+Questa procedura può essere utilizzata solo se si dispone di almeno due shelf di dischi per ciascun nodo, che consente l'assegnazione automatica a livello di shelf dei dischi. Se non è possibile utilizzare l'assegnazione automatica a livello di shelf, è necessario assegnare manualmente i dischi locali in modo che ogni nodo disponga di un pool locale di dischi (pool 0).
+
+Questi passaggi devono essere eseguiti in modalità manutenzione.
+
+Gli esempi di questa sezione presuppongono i seguenti shelf di dischi:
+
+* Node_A_1 possiede i dischi su:
++
+** Site_A-shelf_1 (locale)
+** Sito_B-shelf_2 (remoto)
+
+
+* Node_A_2 è connesso a:
++
+** Site_A-shelf_3 (locale)
+** Sito_B-shelf_4 (remoto)
+
+
+* Node_B_1 è connesso a:
++
+** Sito_B-shelf_1 (locale)
+** Site_A-shelf_2 (remoto)
+
+
+* Node_B_2 è connesso a:
++
+** Sito_B-shelf_3 (locale)
+** Site_A-shelf_4 (remoto)
+
+
+
+
+.Fasi
+. Assegnare manualmente un singolo disco per l'aggregato root su ciascun nodo:
++
+`disk assign _disk-id_ -p 0 -s _local-node-sysid_`
+
++
+L'assegnazione manuale di questi dischi consente alla funzione di assegnazione automatica ONTAP di assegnare il resto dei dischi su ogni shelf.
+
++
+.. Sul nodo_A_1, assegnare manualmente un disco dal sito locale_A-shelf_1 al pool 0.
+.. Sul nodo_A_2, assegnare manualmente un disco dal sito locale_A-shelf_3 al pool 0.
+.. Sul nodo_B_1, assegnare manualmente un disco dal sito locale_B-shelf_1 al pool 0.
+.. Sul nodo_B_2, assegnare manualmente un disco dal sito locale_B-shelf_3 al pool 0.
+
+
+. Avviare ciascun nodo nel sito A, utilizzando l'opzione 4 del menu di boot:
++
+Completare questo passaggio su un nodo prima di passare al nodo successivo.
+
++
+.. Uscire dalla modalità di manutenzione:
++
+`halt`
+
+.. Visualizzare il menu di avvio:
++
+`boot_ontap menu`
+
+.. Selezionare l'opzione 4 dal menu di avvio e procedere.
+
+
+. Avviare ciascun nodo nel sito B, utilizzando l'opzione 4 del menu di boot:
++
+Completare questo passaggio su un nodo prima di passare al nodo successivo.
+
++
+.. Uscire dalla modalità di manutenzione:
++
+`halt`
+
+.. Visualizzare il menu di avvio:
++
+`boot_ontap menu`
+
+.. Selezionare l'opzione 4 dal menu di avvio e procedere.
+
+
+

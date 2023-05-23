@@ -1,0 +1,58 @@
+---
+permalink: upgrade/task_shut_down_the_exist_controller_when_add_a_2nd_controller_in_c_mode.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, shut, down, existing, controller, module 
+summary: Per verificare che tutti i dati siano stati scritti su disco, è necessario eseguire un arresto completo del modulo controller esistente. È inoltre necessario scollegare gli alimentatori. 
+---
+= Arresto del modulo controller esistente
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Per verificare che tutti i dati siano stati scritti su disco, è necessario eseguire un arresto completo del modulo controller esistente. È inoltre necessario scollegare gli alimentatori.
+
+.A proposito di questa attività
+--
+
+IMPORTANT: Prima di sostituire i componenti del sistema, è necessario eseguire un arresto pulito del sistema per evitare la perdita di dati non scritti nella NVRAM o NVMEM.
+
+--
+.Fasi
+. Arrestare il nodo dal prompt del modulo controller esistente:
++
+`halt local -inhibit-takeover true`
+
++
+Se viene richiesto di continuare la procedura di interruzione, immettere `y` Quando richiesto, quindi attendere che il sistema si arresti al prompt DEL CARICATORE.
+
++
+In un sistema 80xx, il LED NVRAM si trova sul modulo controller a destra delle porte di rete, contrassegnato dal simbolo della batteria.
+
++
+Questo LED lampeggia se nella NVRAM sono presenti dati non scritti. Se questo LED lampeggia in ambra dopo aver immesso il comando halt, riavviare il sistema e provare a interromperlo di nuovo.
+
+. Se non si è già collegati a terra, mettere a terra l'utente.
+. Spegnere gli alimentatori e scollegare l'alimentazione, utilizzando il metodo corretto per il sistema e il tipo di alimentatore in uso:
++
+|===
+
+
+| Se il sistema utilizza... | Quindi... 
+
+
+ a| 
+Alimentatori CA
+ a| 
+Scollegare i cavi di alimentazione dalla fonte di alimentazione, quindi rimuovere i cavi di alimentazione.
+
+
+
+ a| 
+Alimentatori CC
+ a| 
+Scollegare l'alimentazione dalla fonte CC, quindi rimuovere i cavi CC, se necessario.
+
+|===
+

@@ -1,0 +1,236 @@
+---
+permalink: install-stretch/concept_considerations_differences.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, configurations, all san array, asa 
+summary: Le varie configurazioni MetroCluster presentano differenze chiave nei componenti richiesti. 
+---
+= Differenze tra le configurazioni ONTAP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le varie configurazioni MetroCluster presentano differenze chiave nei componenti richiesti.
+
+In tutte le configurazioni, ciascuno dei due siti MetroCluster è configurato come cluster ONTAP. In una configurazione MetroCluster a due nodi, ciascun nodo viene configurato come cluster a nodo singolo.
+
+|===
+
+
+| Funzione | Configurazioni IP 2+| Configurazioni fabric attached 2+| Configurazioni di estensione 
+
+
+|  |  | *Quattro o otto nodi* | *Due nodi* | *Connessione a ponte a due nodi* | *Direct-attached a due nodi* 
+
+
+ a| 
+Numero di controller
+ a| 
+Quattro o otto*
+ a| 
+Quattro o otto
+ a| 
+Due
+ a| 
+Due
+ a| 
+Due
+
+
+
+ a| 
+Utilizza un fabric storage switch FC
+ a| 
+No
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+No
+ a| 
+No
+
+
+
+ a| 
+Utilizza un fabric di storage IP switch
+ a| 
+Sì
+ a| 
+No
+ a| 
+No
+ a| 
+No
+ a| 
+No
+
+
+
+ a| 
+Utilizza bridge FC-SAS
+ a| 
+No
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+No
+
+
+
+ a| 
+Utilizza lo storage SAS direct-attached
+ a| 
+Sì (solo locale collegato)
+ a| 
+No
+ a| 
+No
+ a| 
+No
+ a| 
+Sì
+
+
+
+ a| 
+Supporta ADP
+ a| 
+Sì (a partire da ONTAP 9.4)
+ a| 
+No
+ a| 
+No
+ a| 
+No
+ a| 
+No
+
+
+
+ a| 
+Supporta ha locale
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+No
+ a| 
+No
+ a| 
+No
+
+
+
+ a| 
+Supporta lo switchover automatico non pianificato ONTAP (USO)
+ a| 
+No
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+Sì
+
+
+
+ a| 
+Supporta aggregati senza mirror
+ a| 
+Sì (a partire da ONTAP 9.8)
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+Sì
+
+
+
+ a| 
+Supporta LUN array
+ a| 
+No
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+Sì
+
+
+
+ a| 
+Supporta il mediatore ONTAP
+ a| 
+Sì (a partire da ONTAP 9.7)
+ a| 
+No
+ a| 
+No
+ a| 
+No
+ a| 
+No
+
+
+
+ a| 
+Supporta MetroCluster Tiebreaker
+ a| 
+Sì (non in combinazione con il mediatore ONTAP)
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+Sì
+
+
+
+| Supporta <<Supporto per tutti i sistemi array SAN nelle configurazioni MetroCluster,Tutti gli array SAN>>  a| 
+Sì
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+Sì
+
+|===
+*Importante*
+
+Tenere presente le seguenti considerazioni per le configurazioni IP MetroCluster a otto nodi:
+
+* Le configurazioni a otto nodi sono supportate a partire da ONTAP 9.9.1.
+* Sono supportati solo gli switch MetroCluster validati da NetApp (ordinati da NetApp).
+* Le configurazioni che utilizzano connessioni backend con routing IP (Layer 3) non sono supportate.
+* Le configurazioni che utilizzano reti private Layer 2 condivise non sono supportate.
+* Le configurazioni che utilizzano uno switch condiviso Cisco 9336C-FX2 non sono supportate.
+
+
+
+
+== Supporto per tutti i sistemi array SAN nelle configurazioni MetroCluster
+
+Alcuni degli All SAN Array (ASA) sono supportati nelle configurazioni MetroCluster. Nella documentazione MetroCluster, le informazioni relative ai modelli AFF si applicano al sistema ASA corrispondente. Ad esempio, tutti i cavi e altre informazioni per il sistema AFF A400 si applicano anche al sistema ASA AFF A400.
+
+Le configurazioni di piattaforma supportate sono elencate nella https://hwu.netapp.com["NetApp Hardware Universe"].

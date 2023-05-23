@@ -1,0 +1,33 @@
+---
+permalink: transition/concept_requirements_for_fc_to_ip_transition_mcc.html 
+sidebar: sidebar 
+keywords: start, transition, process, configuration, requirement, nondisruptive, fc-to-ip 
+summary: Prima di avviare il processo di transizione, è necessario assicurarsi che la configurazione soddisfi i requisiti. 
+---
+= Requisiti per la transizione FC-IP senza interruzioni
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Prima di avviare il processo di transizione, è necessario assicurarsi che la configurazione soddisfi i requisiti.
+
+* Se si dispone di una configurazione a otto nodi, tutti i nodi devono eseguire ONTAP 9.13.1 o versione successiva.
+* Se si dispone di una configurazione a quattro nodi, tutti i nodi devono eseguire ONTAP 9.8 o versione successiva.
+* Le piattaforme esistenti e nuove devono essere una combinazione supportata per la transizione.
++
+link:concept_choosing_your_transition_procedure_mcc_transition.html["Piattaforme supportate per una transizione senza interruzioni"]
+
+* Deve supportare una configurazione del cluster con switch.
++
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+* Deve soddisfare tutti i requisiti e i cavi descritti nelle _procedure di installazione e configurazione di MetroCluster_.
++
+link:../install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"]
+
++
+link:../install-stretch/concept_considerations_differences.html["Estensione dell'installazione e della configurazione di MetroCluster"]
+
+

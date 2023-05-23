@@ -1,0 +1,85 @@
+---
+permalink: manage/task_verify_a_successful_switchback.html 
+sidebar: sidebar 
+keywords: perform, switchback, aggregate, storage, virtual, machine, svm, switch, back, online, verify, successful 
+summary: 'Dopo aver eseguito lo switchback, verificare che tutti gli aggregati e le macchine virtuali dello storage (SVM) siano ripristinati e in linea.' 
+---
+= Verifica di uno switchback riuscito
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo aver eseguito lo switchback, si desidera confermare che tutti gli aggregati e le macchine virtuali di storage (SVM) siano ripristinati e in linea.
+
+. Verificare che gli aggregati di dati di switchover siano ripristinati:
++
+`storage aggregate show`
+
++
+Nell'esempio seguente, aggr_b2 sul nodo B2 è tornato:
+
++
+[listing]
+----
+node_B_1::> storage aggregate show
+Aggregate     Size Available Used% State   #Vols  Nodes            RAID Status
+--------- -------- --------- ----- ------- ------ ---------------- ------------
+...
+aggr_b2    227.1GB   227.1GB    0% online       0 node_B_2   raid_dp,
+                                                                   mirrored,
+                                                                   normal
+----
+. Verificare che tutte le SVM di destinazione della sincronizzazione sul cluster sopravvissuto siano inattive (mostrando uno stato di amministrazione di "`ssurfared`") e che le SVM di origine della sincronizzazione sul cluster di emergenza siano attive e in esecuzione:
++
+`vserver show -subtype sync-source`
+
++
+[listing]
+----
+node_B_1::> vserver show -subtype sync-source
+                               Admin      Root                       Name    Name
+Vserver     Type    Subtype    State      Volume     Aggregate       Service Mapping
+----------- ------- ---------- ---------- ---------- ----------      ------- -------
+...
+vs1a        data    sync-source
+                               running    vs1a_vol   node_B_2        file    file
+                                                                     aggr_b2
+
+node_A_1::> vserver show -subtype sync-destination
+                               Admin      Root                         Name    Name
+Vserver            Type    Subtype    State      Volume     Aggregate  Service Mapping
+-----------        ------- ---------- ---------- ---------- ---------- ------- -------
+...
+cluster_A-vs1a-mc  data    sync-destination
+                                      stopped    vs1a_vol   sosb_      file    file
+                                                                       aggr_b2
+----
++
+Gli aggregati Sync-destination nella configurazione MetroCluster hanno il suffisso "`-mc`" aggiunto automaticamente al loro nome per facilitarne l'identificazione.
+
+. Verificare che le operazioni di switchback siano riuscite utilizzando `metrocluster operation show` comando.
++
+|===
+
+
+| Se l'output del comando mostra... | Quindi... 
+
+
+ a| 
+Che lo stato operativo di switchback sia riuscito.
+ a| 
+Il processo di switchback è completo ed è possibile procedere con il funzionamento del sistema.
+
+
+
+ a| 
+Che l'operazione di switchback o l'operazione switchback-continuation-Agent abbia parzialmente esito positivo.
+ a| 
+Eseguire la correzione suggerita nell'output di `metrocluster operation show` comando.
+
+|===
+
+
+Ripetere le sezioni precedenti per eseguire il switchback nella direzione opposta. Se Site_A ha eseguito uno switchover di Site_B, chiedere a Site_B di eseguire uno switchover di Site_A.

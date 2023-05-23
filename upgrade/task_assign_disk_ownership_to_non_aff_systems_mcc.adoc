@@ -1,0 +1,164 @@
+---
+permalink: upgrade/task_assign_disk_ownership_to_non_aff_systems_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, assign, disk, ownership, aff, systems 
+summary: Se i dischi non sono stati assegnati correttamente ai nodi MetroCluster o se si utilizzano shelf di dischi DS460C nella configurazione, è necessario assegnare i dischi a ciascuno dei nodi nella configurazione MetroCluster in base allo shelf-by-shelf. Verrà creata una configurazione in cui ciascun nodo ha lo stesso numero di dischi nei pool di dischi locali e remoti. 
+---
+= Assegnazione della proprietà del disco in sistemi non AFF
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se i dischi non sono stati assegnati correttamente ai nodi MetroCluster o se si utilizzano shelf di dischi DS460C nella configurazione, è necessario assegnare i dischi a ciascuno dei nodi nella configurazione MetroCluster in base allo shelf-by-shelf. Verrà creata una configurazione in cui ciascun nodo ha lo stesso numero di dischi nei pool di dischi locali e remoti.
+
+.A proposito di questa attività
+I controller dello storage devono essere in modalità Maintenance (manutenzione).
+
+Se la configurazione non include shelf di dischi DS460C, questa attività non è necessaria se i dischi sono stati assegnati correttamente al momento della ricezione dalla fabbrica.
+
+[NOTE]
+====
+Il pool 0 contiene sempre i dischi che si trovano nello stesso sito del sistema di storage che li possiede.
+
+Il pool 1 contiene sempre i dischi remoti del sistema di storage proprietario.
+
+====
+Se la configurazione include shelf di dischi DS460C, è necessario assegnare manualmente i dischi utilizzando le seguenti linee guida per ciascun cassetto da 12 dischi:
+
+|===
+
+
+| Assegnare questi dischi nel cassetto... | A questo nodo e pool... 
+
+
+ a| 
+0 - 2
+ a| 
+Pool del nodo locale 0
+
+
+
+ a| 
+3 - 5
+ a| 
+Pool del nodo partner HA 0
+
+
+
+ a| 
+6 - 8
+ a| 
+Partner DR del pool del nodo locale 1
+
+
+
+ a| 
+9 - 11
+ a| 
+Partner DR del pool del partner ha 1
+
+|===
+Questo schema di assegnazione dei dischi garantisce che un aggregato venga influenzato in modo minimo nel caso in cui un cassetto venga scollegato.
+
+.Fasi
+. In caso contrario, avviare ciascun sistema in modalità di manutenzione.
+. Assegnare gli shelf di dischi ai nodi situati nel primo sito (sito A):
++
+Gli shelf di dischi nello stesso sito del nodo vengono assegnati al pool 0 e gli shelf di dischi situati nel sito del partner vengono assegnati al pool 1.
+
++
+È necessario assegnare un numero uguale di shelf a ciascun pool.
+
++
+.. Sul primo nodo, assegnare sistematicamente gli shelf di dischi locali al pool 0 e gli shelf di dischi remoti al pool 1:
++
+`disk assign -shelf _local-switch-name:shelf-name.port_ -p _pool_`
+
++
+Se lo storage controller Controller Controller Controller_A_1 dispone di quattro shelf, eseguire i seguenti comandi:
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_A_1:1-4.shelf1 -p 0
+*> disk assign -shelf FC_switch_A_1:1-4.shelf2 -p 0
+
+*> disk assign -shelf FC_switch_B_1:1-4.shelf1 -p 1
+*> disk assign -shelf FC_switch_B_1:1-4.shelf2 -p 1
+----
+.. Ripetere la procedura per il secondo nodo nel sito locale, assegnando sistematicamente gli shelf di dischi locali al pool 0 e gli shelf di dischi remoti al pool 1:
++
+`disk assign -shelf _local-switch-name:shelf-name.port_ -p _pool_`
+
++
+Se lo storage controller Controller Controller Controller_A_2 dispone di quattro shelf, eseguire i seguenti comandi:
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_A_1:1-4.shelf3 -p 0
+*> disk assign -shelf FC_switch_B_1:1-4.shelf4 -p 1
+
+*> disk assign -shelf FC_switch_A_1:1-4.shelf3 -p 0
+*> disk assign -shelf FC_switch_B_1:1-4.shelf4 -p 1
+----
+
+
+. Assegnare gli shelf di dischi ai nodi situati nel secondo sito (sito B):
++
+Gli shelf di dischi nello stesso sito del nodo vengono assegnati al pool 0 e gli shelf di dischi situati nel sito del partner vengono assegnati al pool 1.
+
++
+È necessario assegnare un numero uguale di shelf a ciascun pool.
+
++
+.. Sul primo nodo del sito remoto, assegnare sistematicamente i propri shelf di dischi locali al pool 0 e i relativi shelf di dischi remoti al pool 1:
++
+`disk assign -shelf _local-switch-nameshelf-name_ -p _pool_`
+
++
+Se lo storage controller Controller Controller_B_1 dispone di quattro shelf, eseguire i seguenti comandi:
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_B_1:1-5.shelf1 -p 0
+*> disk assign -shelf FC_switch_B_1:1-5.shelf2 -p 0
+
+*> disk assign -shelf FC_switch_A_1:1-5.shelf1 -p 1
+*> disk assign -shelf FC_switch_A_1:1-5.shelf2 -p 1
+----
+.. Ripetere la procedura per il secondo nodo del sito remoto, assegnando sistematicamente i propri shelf di dischi locali al pool 0 e i relativi shelf di dischi remoti al pool 1:
++
+`disk assign -shelf _shelf-name_ -p _pool_`
+
++
+Se lo storage controller Controller Controller Controller_B_2 dispone di quattro shelf, eseguire i seguenti comandi:
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_B_1:1-5.shelf3 -p 0
+*> disk assign -shelf FC_switch_B_1:1-5.shelf4 -p 0
+
+*> disk assign -shelf FC_switch_A_1:1-5.shelf3 -p 1
+*> disk assign -shelf FC_switch_A_1:1-5.shelf4 -p 1
+----
+
+
+. Confermare le assegnazioni degli shelf:
++
+`storage show shelf`
+
+. Uscire dalla modalità di manutenzione:
++
+`halt`
+
+. Visualizzare il menu di avvio:
++
+`boot_ontap menu`
+
+. Su ciascun nodo, selezionare l'opzione *4* per inizializzare tutti i dischi.
+

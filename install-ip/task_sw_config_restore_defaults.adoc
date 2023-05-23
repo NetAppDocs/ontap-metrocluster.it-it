@@ -1,0 +1,97 @@
+---
+permalink: install-ip/task_sw_config_restore_defaults.html 
+sidebar: sidebar 
+keywords: metrocluster, controller, restore defaults 
+summary: Per garantire una configurazione pulita, è necessario reimpostare e ripristinare le impostazioni predefinite dei moduli controller. 
+---
+= Ripristino delle impostazioni predefinite di sistema su un modulo controller
+:allow-uri-read: 
+
+
+[role="lead"]
+Ripristinare le impostazioni predefinite dei moduli controller.
+
+. Al prompt DEL CARICATORE, riportare le variabili ambientali alle impostazioni predefinite: `set-defaults`
+. Avviare il nodo dal menu di boot: `boot_ontap menu`
++
+Dopo aver eseguito questo comando, attendere che venga visualizzato il menu di avvio.
+
+. Cancellare la configurazione del nodo:
++
+--
+** Se si utilizzano sistemi configurati per ADP, selezionare l'opzione `9a` dal menu di avvio e rispondere `no` quando richiesto.
++
+
+NOTE: Questo processo è disgregativo.
+
++
+La seguente schermata mostra il prompt del menu di avvio:
+
++
+[listing]
+----
+
+Please choose one of the following:
+
+(1) Normal Boot.
+(2) Boot without /etc/rc.
+(3) Change password.
+(4) Clean configuration and initialize all disks.
+(5) Maintenance mode boot.
+(6) Update flash from backup config.
+(7) Install new software first.
+(8) Reboot node.
+(9) Configure Advanced Drive Partitioning.
+(10) Set Onboard Key Manager recovery secrets.
+(11) Configure node for external key management.
+Selection (1-11)? 9a
+...
+
+########## WARNING: AGGREGATES WILL BE DESTROYED ##########
+This is a disruptive operation that applies to all the disks
+that are attached and visible to this node.
+
+Before proceeding further, make sure that:
+
+The aggregates visible from this node do not contain
+data that needs to be preserved.
+This option (9a) has been executed or will be executed
+on the HA partner node (and DR/DR-AUX partner nodes if
+applicable), prior to reinitializing any system in the
+HA-pair or MetroCluster configuration.
+The HA partner node (and DR/DR-AUX partner nodes if
+applicable) is currently waiting at the boot menu.
+Do you want to abort this operation (yes/no)? no
+----
+
+
+--
++
+** Se il sistema non è configurato per ADP, digitare `wipeconfig` Al prompt del menu di avvio, quindi premere Invio.
++
+La seguente schermata mostra il prompt del menu di avvio:
+
++
+[listing]
+----
+
+Please choose one of the following:
+
+    (1) Normal Boot.
+    (2) Boot without /etc/rc.
+    (3) Change password.
+    (4) Clean configuration and initialize all disks.
+    (5) Maintenance mode boot.
+    (6) Update flash from backup config.
+    (7) Install new software first.
+    (8) Reboot node.
+    (9) Configure Advanced Drive Partitioning.
+    Selection (1-9)?  wipeconfig
+This option deletes critical system configuration, including cluster membership.
+Warning: do not run this option on a HA node that has been taken over.
+Are you sure you want to continue?: yes
+Rebooting to finish wipeconfig request.
+----
+
+
+

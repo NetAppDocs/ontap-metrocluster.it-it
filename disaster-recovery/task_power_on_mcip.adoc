@@ -1,0 +1,26 @@
+---
+permalink: disaster-recovery/task_power_on_mcip.html 
+sidebar: sidebar 
+keywords: power, ip, disaster, site, configuration 
+summary: È necessario accendere gli shelf di dischi e i componenti degli switch IP MetroCluster nel sito di emergenza. 
+---
+= Accensione dell'apparecchiatura nel sito di emergenza (configurazioni MetroCluster IP)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario accendere gli shelf di dischi e i componenti degli switch IP MetroCluster nel sito di emergenza. I moduli controller nel sito di emergenza rimangono al prompt DEL CARICATORE.
+
+.A proposito di questa attività
+Gli esempi di questa procedura presuppongono quanto segue:
+
+* Il sito A è il sito di disastro.
+* Il sito B è il sito sopravvissuto.
+
+
+.Fasi
+. Accendere gli shelf di dischi nel sito di disastro e assicurarsi che tutti i dischi siano in esecuzione.
+. Accendere gli switch IP MetroCluster se non sono già accesi.
+

@@ -1,0 +1,67 @@
+---
+permalink: upgrade/concept_choosing_an_upgrade_method_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, choose, upgrade, refresh, method 
+summary: 'La procedura di aggiornamento o refresh utilizzata dipende dal modello di piattaforma, dall"ambito dell"aggiornamento e dal tipo di configurazione MetroCluster.' 
+---
+= Inizia qui: Scegli tra upgrade del controller, refresh del sistema o espansione
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A seconda dell'ambito dell'aggiornamento dell'apparecchiatura, è possibile scegliere una procedura di aggiornamento del controller, una procedura di aggiornamento del sistema o una procedura di espansione.
+
+* Le procedure di aggiornamento del controller si applicano solo ai moduli controller. I controller vengono sostituiti con un nuovo modello di controller.
++
+I modelli di shelf storage non vengono aggiornati.
+
++
+** Nelle procedure di switchover e switchback, l'operazione di switchover MetroCluster viene utilizzata per fornire un servizio senza interruzioni ai client mentre i moduli controller sul cluster partner vengono aggiornati.
+** In una procedura di upgrade del controller basata su ARL, le operazioni di trasferimento aggregato vengono utilizzate per spostare i dati senza interruzioni dalla vecchia configurazione alla nuova configurazione aggiornata.
+
+
+* Le procedure di refresh si applicano ai controller e agli shelf di storage.
++
+Nelle procedure di refresh, nuovi controller e shelf vengono aggiunti alla configurazione di MetroCluster, creando un secondo gruppo di DR e quindi i dati vengono migrati senza interruzioni nei nuovi nodi.
+
++
+I controller originali vengono quindi ritirati.
+
+* Le procedure di espansione aggiungono controller e shelf aggiuntivi alla configurazione MetroCluster senza rimuoverne nessuno.
++
+La procedura utilizzata dipende dal tipo di MetroCluster e dal numero di controller esistenti.
+
+
+
+[cols="2,5"]
+|===
+
+
+| Tipo di upgrade | Vai a... 
+
+
+ a| 
+Upgrade del controller
+ a| 
+link:../upgrade/concept_choosing_controller_upgrade_mcc.html["Scegliere una procedura di aggiornamento del controller"]
+
+
+
+ a| 
+Refresh del sistema
+ a| 
+link:../upgrade/concept_choosing_tech_refresh_mcc.html["Scegliere una procedura di aggiornamento del sistema"]
+
+
+
+ a| 
+Espansione
+ a| 
+* link:../upgrade/task_expand_a_two_node_mcc_fc_configuration_to_a_four_node_fc_configuration_supertask.html["MetroCluster da due nodi a quattro"]
+* link:../upgrade/task_expand_a_four_node_mcc_fc_configuration_to_an_eight_node_configuration.html["MetroCluster FC a quattro nodi fino a otto"]
+* link:../upgrade/task_expand_a_four_node_mcc_ip_configuration.html["IP MetroCluster a quattro nodi fino a otto"]
+
+
+|===

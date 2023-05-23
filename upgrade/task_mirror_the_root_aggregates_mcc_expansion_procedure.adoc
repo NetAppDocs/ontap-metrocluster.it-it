@@ -1,0 +1,33 @@
+---
+permalink: upgrade/task_mirror_the_root_aggregates_mcc_expansion_procedure.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, mirror, root, aggregate, new, controller 
+summary: 'È necessario eseguire il mirroring dell"aggregato root per fornire la protezione dei dati quando si aggiunge un controller a una configurazione MetroCluster.' 
+---
+= Mirroring dell'aggregato root sul nuovo controller
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario eseguire il mirroring dell'aggregato root per fornire la protezione dei dati quando si aggiunge un controller a una configurazione MetroCluster.
+
+Questa attività deve essere eseguita sul nuovo modulo controller.
+
+. Eseguire il mirroring dell'aggregato root:
++
+`storage aggregate mirror _aggr_name_`
+
++
+Il seguente comando esegue il mirroring dell'aggregato root per controller_A_1:
+
++
+[listing]
+----
+controller_A_1::> storage aggregate mirror aggr0_controller_A_1
+----
++
+Questo esegue il mirroring dell'aggregato, quindi è costituito da un plex locale e da un plex remoto situati nel sito MetroCluster remoto.
+
+

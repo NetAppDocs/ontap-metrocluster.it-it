@@ -1,0 +1,206 @@
+---
+permalink: tiebreaker/concept_configuring_the_tiebreaker_software.html 
+sidebar: sidebar 
+keywords: installation, tiebreaker, software, add, modify, metrocluster, configuration, remove, configuring, configure, launch, cli, add, command, modify, removing 
+summary: 'Dopo l"installazione del software Tiebreaker, è possibile aggiungere o modificare le configurazioni MetroCluster o rimuoverle dal software Tiebreaker.' 
+---
+= Configurazione del software Tiebreaker
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo l'installazione del software Tiebreaker, è possibile aggiungere o modificare le configurazioni MetroCluster o rimuoverle dal software Tiebreaker.
+
+
+
+== Avvio della CLI del software Tiebreaker
+
+Dopo aver installato il software Tiebreaker, è necessario avviarne la CLI per configurare il software.
+
+. Avviare la CLI dal prompt dell'host su cui è stato installato il software:
++
+`netapp-metrocluster-tiebreaker-software-cli`
+
+. Dopo l'installazione e durante il primo avvio, immettere la password per l'utente di Tiebreaker per accedere al database. Si tratta della password specificata per l'utente del database durante l'installazione.
+
+
+
+
+== Aggiunta di configurazioni MetroCluster
+
+Dopo aver installato il software NetApp MetroCluster Tiebreaker, è possibile aggiungere altre configurazioni MetroCluster, una alla volta.
+
+È necessario aver installato la configurazione MetroCluster in un ambiente ONTAP e aver attivato le impostazioni nel software.
+
+. Utilizzare il comando add dell'interfaccia a riga di comando (CLI) di tiebreaker per aggiungere configurazioni MetroCluster.
++
+Se si utilizza il nome host, questo deve essere il nome di dominio completo (FQDN).
+
++
+L'esempio seguente mostra la configurazione di cluster_A:
+
++
+[listing]
+----
+
+NetApp MetroCluster Tiebreaker :> monitor add wizard
+Enter monitor Name: cluster_A
+Enter Cluster IP Address: 10.222.196.130
+Enter Cluster Username: admin
+Enter Cluster Password:
+Enter Peer Cluster IP Address: 10.222.196.40
+Enter Peer Cluster Username: admin
+Enter Peer Cluster Password:
+Successfully added monitor to NetApp MetroCluster Tiebreaker software.
+----
+. Verificare che la configurazione MetroCluster sia stata aggiunta correttamente utilizzando l'interfaccia CLI di tiebreaker `monitor show -status` comando.
++
+[listing]
+----
+
+NetApp MetroCluster Tiebreaker :> monitor show -status
+----
+. Disattivare la modalità osservatore affinché il software di spareggio avvii automaticamente uno switchover dopo aver rilevato un guasto del sito:
++
+`monitor modify -monitor-name monitor_name -observer-mode false`
+
++
+[listing]
+----
+NetApp MetroCluster Tiebreaker :> monitor modify -monitor-name 8pack -observer-mode false
+Warning: If you are turning observer-mode to false, make sure to review the 'risks and limitations'
+as described in the MetroCluster Tiebreaker installation and configuration.
+Are you sure you want to enable automatic switchover capability for monitor "8pack"? [Y/N]: y
+----
+
+
+.Informazioni correlate
+link:concept_risks_and_limitation_of_using_mcc_tiebreaker_in_active_mode.html["Rischi e limitazioni dell'utilizzo di MetroCluster Tiebreaker in modalità attiva"]
+
+
+
+== Comandi per la modifica delle configurazioni di MetroCluster Tiebreaker
+
+È possibile modificare la configurazione MetroCluster ogni volta che si desidera modificare le impostazioni.
+
+Il comando tiebreaker CLI monitor modify può essere utilizzato con una delle seguenti opzioni. È possibile confermare le modifiche con il comando monitor show -status.
+
+[cols="30,70"]
+|===
+
+
+| Opzione | Descrizione 
+
+
+ a| 
+-nome-monitor
+ a| 
+Nome della configurazione MetroCluster
+
+
+
+ a| 
+-enable-monitor
+ a| 
+Attiva e disattiva il monitoraggio della configurazione MetroCluster
+
+
+
+ a| 
+-silent-period
+ a| 
+Periodo in secondi per il quale il software MetroCluster Tiebreaker attende la conferma di un errore del sito dopo il rilevamento
+
+
+
+ a| 
+-observer-mode
+ a| 
+La modalità osservatore (true) fornisce solo il monitoraggio e non attiva uno switchover in caso di disastro del sito. La modalità online (false) attiva uno switchover in caso di disastro del sito.
+
+* link:concept_overview_of_the_tiebreaker_software.html["Il modo in cui il software Tiebreaker rileva i guasti del sito"]
+* link:concept_risks_and_limitation_of_using_mcc_tiebreaker_in_active_mode.html["Rischi e limitazioni dell'utilizzo di MetroCluster Tiebreaker in modalità attiva"]
+
+
+|===
+Nell'esempio seguente viene modificato il periodo di silenzio per la configurazione.
+
+[listing]
+----
+
+NetApp MetroCluster Tiebreaker :> monitor modify -monitor-name cluster_A -silent-period 15
+Successfully modified monitor in NetApp MetroCluster Tiebreaker
+software.
+----
+La CLI di spareggio `debug` il comando può essere utilizzato per modificare la modalità di registrazione.
+
+[cols="30,70"]
+|===
+
+
+| Comando | Descrizione 
+
+
+ a| 
+stato di debug
+ a| 
+Visualizza lo stato della modalità di debug
+
+
+
+ a| 
+abilitazione debug
+ a| 
+Attiva la modalità di debug per la registrazione
+
+
+
+ a| 
+disattivazione del debug
+ a| 
+Disattiva la modalità di debug per la registrazione
+
+|===
+Nei sistemi che eseguono tiebreaker 1.4 e versioni precedenti, la CLI di tiebreaker `update-mcctb-password` è possibile utilizzare il comando per aggiornare la password utente. Questo comando è obsoleto in tiebreaker 1.5 e versioni successive.
+
+[cols="30,70"]
+|===
+
+
+| Comando | Descrizione 
+
+
+ a| 
+update-mctb-password
+ a| 
+La password utente è stata aggiornata correttamente
+
+|===
+
+
+== Rimozione delle configurazioni MetroCluster
+
+È possibile rimuovere la configurazione MetroCluster monitorata dal software Tiebreaker quando non si desidera più monitorare una configurazione MetroCluster.
+
+. Utilizzare l'interfaccia CLI di tiebreaker `monitor remove` Comando per rimuovere la configurazione MetroCluster.
++
+Nell'esempio seguente, "`cluster_A`" viene rimosso dal software:
+
++
+[listing]
+----
+
+NetApp MetroCluster Tiebreaker :> monitor remove -monitor-name cluster_A
+Successfully removed monitor from NetApp MetroCluster Tiebreaker
+software.
+----
+. Verificare che la configurazione MetroCluster sia stata rimossa correttamente utilizzando l'interfaccia CLI di Tiebreaker `monitor show -status` comando.
++
+[listing]
+----
+
+NetApp MetroCluster Tiebreaker :> monitor show -status
+----
+

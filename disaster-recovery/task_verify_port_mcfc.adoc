@@ -1,0 +1,73 @@
+---
+permalink: disaster-recovery/task_verify_port_mcfc.html 
+sidebar: sidebar 
+keywords: verify, port, environmental, metrocluster, configuration 
+summary: È necessario impostare le variabili ambientali sul nodo e quindi spegnerlo per prepararlo alla configurazione MetroCluster. 
+---
+= Verifica della configurazione delle porte (solo configurazioni MetroCluster FC)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario impostare le variabili ambientali sul nodo e quindi spegnerlo per prepararlo alla configurazione MetroCluster.
+
+.A proposito di questa attività
+Questa procedura viene eseguita con i moduli controller sostitutivi in modalità di manutenzione.
+
+La procedura per controllare la configurazione delle porte è necessaria solo nei sistemi in cui le porte FC o CNA vengono utilizzate in modalità initiator.
+
+.Fasi
+. In modalità Maintenance (manutenzione), ripristinare la configurazione della porta FC:
++
+`ucadmin modify -m fc -t initiatoradapter_name`
+
++
+Se si desidera utilizzare solo una coppia di porte nella configurazione dell'iniziatore, immettere un nome adattatore preciso.
+
+. Eseguire una delle seguenti operazioni, a seconda della configurazione:
++
+|===
+
+
+| Se la configurazione della porta FC è... | Quindi... 
+
+
+ a| 
+Lo stesso vale per entrambe le porte
+ a| 
+Rispondere "`y`" quando richiesto dal sistema, perché la modifica di una porta in una coppia di porte modifica anche l'altra porta.
+
+
+
+ a| 
+Diverso
+ a| 
+.. Rispondere "`n`" quando richiesto dal sistema.
+.. Ripristinare la configurazione della porta FC:
+
+
+`ucadmin modify -m fc -t initiator|targetadapter_name`
+
+|===
+. Uscire dalla modalità di manutenzione:
++
+`halt`
+
++
+Dopo aver inviato il comando, attendere che il sistema si arresti al prompt DEL CARICATORE.
+
+. Riavviare il nodo in modalità Maintenance per rendere effettive le modifiche di configurazione:
++
+`boot_ontap maint`
+
+. Verificare i valori delle variabili:
++
+`ucadmin show`
+
+. Uscire dalla modalità di manutenzione e visualizzare il prompt DEL CARICATORE:
++
+`halt`
+
+

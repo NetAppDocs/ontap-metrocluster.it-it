@@ -1,0 +1,1481 @@
+---
+permalink: maintain/task_replace_a_sle_fc_to_sas_bridge.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, replace, single, fc, sas, bridge 
+summary: È possibile sostituire senza interruzioni un bridge con uno stesso modello bridge o con un nuovo modello bridge. 
+---
+= Sostituzione di un singolo bridge FC-SAS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile sostituire senza interruzioni un bridge con uno stesso modello bridge o con un nuovo modello bridge.
+
+.Prima di iniziare
+È necessaria la password admin e l'accesso a un server FTP o SCP.
+
+.A proposito di questa attività
+Questa procedura è senza interruzioni e richiede circa 60 minuti.
+
+Questa procedura utilizza la CLI del bridge per configurare e gestire un bridge e per aggiornare il firmware del bridge e l'utility barra di navigazione atto per configurare la porta di gestione Ethernet del bridge 1. È possibile utilizzare altre interfacce se soddisfano i requisiti.
+
+link:reference_requirements_for_using_other_interfaces_to_configure_and_manage_fibrebridge_bridges.html["Requisiti per l'utilizzo di altre interfacce per configurare e gestire i bridge FibreBridge"]
+
+.Informazioni correlate
+link:task_fb_consolidate_replace_a_pair_of_fibrebridge_6500n_bridges_with_7500n_bridges.html["Sostituzione di una coppia di bridge FibreBridge 6500N con bridge 7600N o 7500N"]
+
+
+
+== Verifica della connettività dello storage
+
+Prima di sostituire i bridge, verificare la connettività del bridge e dello storage. Familiarizzare con l'output dei comandi consente di confermare successivamente la connettività dopo aver apportato modifiche alla configurazione.
+
+.A proposito di questa attività
+È possibile eseguire questi comandi dal prompt admin di uno qualsiasi dei moduli controller nella configurazione MetroCluster del sito sottoposto a manutenzione.
+
+.Fasi
+. Confermare la connettività ai dischi immettendo il seguente comando su uno qualsiasi dei nodi MetroCluster:
++
+`run local sysconfig -v`
+
++
+L'output mostra i dischi collegati alle porte dell'iniziatore sul controller e identifica gli shelf collegati ai bridge FC-SAS:
+
++
+[listing]
+----
+
+node_A_1> run local sysconfig -v
+NetApp Release 9.3.2X18: Sun Dec 13 01:23:24 PST 2017
+System ID: 4068741258 (node_A_1); partner ID: 4068741260 (node_B_1)
+System Serial Number: 940001025471 (node_A_1)
+System Rev: 70
+System Storage Configuration: Multi-Path HA**<=== Configuration should be multi-path HA**
+.
+.
+.
+slot 0: FC Host Adapter 0g (QLogic 8324 rev. 2, N-port, <UP>)**<=== Initiator port**
+		Firmware rev:      7.5.0
+		Flash rev:         0.0.0
+		Host Port Id:      0x60130
+		FC Node Name:      5:00a:098201:bae312
+		FC Port Name:      5:00a:098201:bae312
+		SFP Vendor:        UTILITIES CORP.
+		SFP Part Number:   FTLF8529P3BCVAN1
+		SFP Serial Number: URQ0Q9R
+		SFP Capabilities:  4, 8 or 16 Gbit
+		Link Data Rate:    16 Gbit
+		Switch Port:       brcd6505-fcs40:1
+  **<List of disks visible to port\>**
+		 ID     Vendor   Model            FW    Size
+		brcd6505-fcs29:12.126L1527     : NETAPP   X302_HJUPI01TSSM NA04 847.5GB (1953525168 512B/sect)
+		brcd6505-fcs29:12.126L1528     : NETAPP   X302_HJUPI01TSSA NA02 847.5GB (1953525168 512B/sect)
+		.
+		.
+		.
+		**<List of FC-to-SAS bridges visible to port\>**
+		FC-to-SAS Bridge:
+		brcd6505-fcs40:12.126L0        : ATTO     FibreBridge6500N 1.61  FB6500N102980
+		brcd6505-fcs42:13.126L0        : ATTO     FibreBridge6500N 1.61  FB6500N102980
+		brcd6505-fcs42:6.126L0         : ATTO     FibreBridge6500N 1.61  FB6500N101167
+		brcd6505-fcs42:7.126L0         : ATTO     FibreBridge6500N 1.61  FB6500N102974
+		.
+		.
+		.
+  **<List of storage shelves visible to port\>**
+		brcd6505-fcs40:12.shelf6: DS4243  Firmware rev. IOM3 A: 0200  IOM3 B: 0200
+		brcd6505-fcs40:12.shelf8: DS4243  Firmware rev. IOM3 A: 0200  IOM3 B: 0200
+		.
+		.
+		.
+----
+
+
+
+
+== Sostituzione a caldo di un bridge con un bridge sostitutivo dello stesso modello
+
+È possibile sostituire a caldo un bridge guasto con un altro bridge dello stesso modello.
+
+.A proposito di questa attività
+Se si utilizza la gestione in-band del bridge piuttosto che la gestione IP, è possibile saltare i passaggi per la configurazione della porta Ethernet e delle impostazioni IP, come indicato nei relativi passaggi.
+
+
+NOTE: A partire da ONTAP 9.8, la `storage bridge` il comando viene sostituito con `system bridge`. La procedura riportata di seguito mostra `storage bridge` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `system bridge` è preferibile utilizzare il comando.
+
+.Fasi
+. Se il vecchio bridge è accessibile, è possibile recuperare le informazioni di configurazione.
++
+[cols="35,65"]
+|===
+
+
+| Se... | Quindi... 
+
+
+ a| 
+*Si utilizza la gestione IP*
+ a| 
+Connettersi al vecchio bridge con una connessione Telnet e copiare l'output della configurazione del bridge.
+
+
+
+ a| 
+*Si utilizza la gestione in-band*
+ a| 
+Utilizzare l'interfaccia utente di ONTAP per recuperare le informazioni di configurazione con i seguenti comandi:
+
+`storage bridge run-cli -name _bridge-name_ -command "info"`
+
+`storage bridge run-cli -name _bridge-name_ -command "sasportlist"`
+
+|===
++
+.. Immettere il comando:
++
+`storage bridge run-cli -name bridge_A1 -command "info"`
+
++
+[listing]
+----
+info
+
+Device Status         = Good
+Unsaved Changes       = None
+Device                = "FibreBridge 7500N"
+Serial Number         = FB7500N100000
+Device Version        = 3.10
+Board Revision        = 7
+Build Number          = 007A
+Build Type            = Release
+Build Date            = "Aug 20 2019" 11:01:24
+Flash Revision        = 0.02
+Firmware Version      = 3.10
+BCE Version (FPGA 1)  = 15
+BAU Version (FPGA 2)  = 33
+User-defined name     = "bridgeA1"
+World Wide Name       = 20 00 00 10 86 A1 C7 00
+MB of RAM Installed   = 512
+FC1 Node Name         = 20 00 00 10 86 A1 C7 00
+FC1 Port Name         = 21 00 00 10 86 A1 C7 00
+FC1 Data Rate         = 16Gb
+FC1 Connection Mode   = ptp
+FC1 FW Revision       = 11.4.337.0
+FC2 Node Name         = 20 00 00 10 86 A1 C7 00
+FC2 Port Name         = 22 00 00 10 86 A1 C7 00
+FC2 Data Rate         = 16Gb
+FC2 Connection Mode   = ptp
+FC2 FW Revision       = 11.4.337.0
+SAS FW Revision       = 3.09.52
+MP1 IP Address        = 10.10.10.10
+MP1 IP Subnet Mask    = 255.255.255.0
+MP1 IP Gateway        = 10.10.10.1
+MP1 IP DHCP           = disabled
+MP1 MAC Address       = 00-10-86-A1-C7-00
+MP2 IP Address        = 0.0.0.0 (disabled)
+MP2 IP Subnet Mask    = 0.0.0.0
+MP2 IP Gateway        = 0.0.0.0
+MP2 IP DHCP           = enabled
+MP2 MAC Address       = 00-10-86-A1-C7-01
+SNMP                  = enabled
+SNMP Community String = public
+PS A Status           = Up
+PS B Status           = Up
+Active Configuration  = NetApp
+
+Ready.
+----
+.. Immettere il comando:
++
+`storage bridge run-cli -name bridge_A1 -command "sasportlist"`
+
++
+[listing]
+----
+
+
+SASPortList
+
+;Connector      PHY     Link            Speed   SAS Address
+;=============================================================
+Device  A       1       Up              6Gb     5001086000a1c700
+Device  A       2       Up              6Gb     5001086000a1c700
+Device  A       3       Up              6Gb     5001086000a1c700
+Device  A       4       Up              6Gb     5001086000a1c700
+Device  B       1       Disabled        12Gb    5001086000a1c704
+Device  B       2       Disabled        12Gb    5001086000a1c704
+Device  B       3       Disabled        12Gb    5001086000a1c704
+Device  B       4       Disabled        12Gb    5001086000a1c704
+Device  C       1       Disabled        12Gb    5001086000a1c708
+Device  C       2       Disabled        12Gb    5001086000a1c708
+Device  C       3       Disabled        12Gb    5001086000a1c708
+Device  C       4       Disabled        12Gb    5001086000a1c708
+Device  D       1       Disabled        12Gb    5001086000a1c70c
+Device  D       2       Disabled        12Gb    5001086000a1c70c
+Device  D       3       Disabled        12Gb    5001086000a1c70c
+Device  D       4       Disabled        12Gb    5001086000a1c70c
+----
+
+
+. Se il bridge si trova in una configurazione Fabric-Attached MetroCluster, disattivare tutte le porte dello switch che si collegano alla porta FC del bridge.
+. Dal prompt del cluster ONTAP, rimuovere il bridge sottoposto a manutenzione dal monitoraggio dello stato di salute:
++
+.. Rimuovere il bridge: +
+`storage bridge remove -name _bridge-name_`
+.. Visualizzare l'elenco dei bridge monitorati e verificare che il bridge rimosso non sia presente: +
+`storage bridge show`
+
+
+. Mettere a terra l'utente.
+. Spegnere il bridge atto.
++
+[cols="35,65"]
+|===
+
+
+| Se si utilizza un... | Quindi... 
+
+
+ a| 
+Bridge FibreBridge 7600N o 7500N
+ a| 
+Rimuovere i cavi di alimentazione collegati al bridge.
+
+
+
+ a| 
+Bridge FibreBridge 6500N
+ a| 
+Spegnere l'interruttore di alimentazione del bridge.
+
+|===
+. Scollegare i cavi collegati al vecchio bridge.
++
+Prendere nota della porta a cui ciascun cavo è stato collegato.
+
+. Rimuovere il vecchio bridge dal rack.
+. Installare il nuovo bridge nel rack.
+. Ricollegare il cavo di alimentazione e, se si configura l'accesso IP al bridge, un cavo Ethernet schermato.
++
+
+IMPORTANT: Non ricollegare i cavi SAS o FC in questo momento.
+
+. Collegare il bridge a una fonte di alimentazione, quindi accenderlo.
++
+Il LED Bridge Ready potrebbe impiegare fino a 30 secondi per accendersi, a indicare che il bridge ha completato la sequenza di test automatico all'accensione.
+
+. Se si esegue la configurazione per la gestione in banda, collegare un cavo dalla porta seriale RS-232 di FibreBridge alla porta seriale (COM) di un personal computer.
++
+La connessione seriale viene utilizzata per la configurazione iniziale, quindi la gestione in-band tramite ONTAP e le porte FC possono essere utilizzate per monitorare e gestire il bridge.
+
+. Se si esegue la configurazione per la gestione IP, configurare la porta di gestione Ethernet 1 per ciascun bridge seguendo la procedura descritta nella sezione 2.0 del _ATTO FibreBridge Installation and Operation Manual_ per il modello di bridge in uso.
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
++
+Quando si esegue la barra di navigazione per configurare una porta di gestione Ethernet, viene configurata solo la porta di gestione Ethernet collegata tramite il cavo Ethernet. Ad esempio, se si desidera configurare anche la porta di gestione Ethernet 2, è necessario collegare il cavo Ethernet alla porta 2 ed eseguire la barra di navigazione.
+
+. Configurare il bridge.
++
+Se le informazioni di configurazione sono state recuperate dal vecchio bridge, utilizzare le informazioni per configurare il nuovo bridge.
+
++
+Annotare il nome utente e la password designati.
+
++
+Il _Manuale d'installazione e funzionamento di FibreBridge atto_ per il tuo modello di bridge contiene le informazioni più aggiornate sui comandi disponibili e su come utilizzarli.
+
++
+
+NOTE: Non configurare la sincronizzazione dell'ora su ATTO FibreBridge 7600N o 7500N. La sincronizzazione temporale per ATTO FibreBridge 7600N o 7500N viene impostata sul tempo del cluster dopo il rilevamento del bridge da parte di ONTAP. Viene inoltre sincronizzato periodicamente una volta al giorno. Il fuso orario utilizzato è GMT e non è modificabile.
+
++
+.. Se si esegue la configurazione per la gestione IP, configurare le impostazioni IP del bridge.
++
+Per impostare l'indirizzo IP senza l'utilità barra di navigazione, è necessario disporre di una connessione seriale a FibreBridge.
+
++
+Se si utilizza l'interfaccia CLI, è necessario eseguire i seguenti comandi:
+
++
+`set ipaddress mp1 _ip-address`
+
++
+`set ipsubnetmask mp1 _subnet-mask_`
+
++
+`set ipgateway mp1 x.x.x.x`
+
++
+`set ipdhcp mp1 disabled`
+
++
+`set ethernetspeed mp1 1000`
+
+.. Configurare il nome del bridge.
++
+I bridge devono avere un nome univoco all'interno della configurazione MetroCluster.
+
++
+Esempi di nomi di bridge per un gruppo di stack su ciascun sito:
+
++
+*** bridge_A_1a
+*** bridge_A_1b
+*** bridge_B_1a
+*** bridge_B_1b
++
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
++
+`set bridgename _bridgename_`
+
+
+
+.. Se si esegue ONTAP 9.4 o versioni precedenti, attivare SNMP sul bridge:
++
+`set SNMP enabled`
+
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
+
+
+. Configurare le porte FC del bridge.
++
+.. Configurare la velocità/velocità dei dati delle porte FC del bridge.
++
+La velocità di trasferimento dati FC supportata dipende dal modello di bridge in uso.
+
++
+*** Il bridge FibreBridge 7600 supporta fino a 32, 16 o 8 Gbps.
+*** Il bridge FibreBridge 7500 supporta fino a 16, 8 o 4 Gbps.
+*** Il bridge FibreBridge 6500 supporta fino a 8, 4 o 2 Gbps.
++
+
+NOTE: La velocità FCDataRate selezionata è limitata alla velocità massima supportata sia dal bridge che dallo switch a cui si connette la porta bridge. Le distanze di cablaggio non devono superare i limiti degli SFP e di altri hardware.
+
++
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
++
+`set FCDataRate _port-number port-speed_`
+
+
+
+.. Se si sta configurando un bridge FibreBridge 7500N o 6500N, configurare la modalità di connessione utilizzata dalla porta per ptp.
++
+
+NOTE: L'impostazione FCConnMode non è richiesta quando si configura un bridge FibreBridge 7600N.
+
++
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
++
+`set FCConnMode _port-number_ ptp`
+
+.. Se si sta configurando un bridge FibreBridge 7600N o 7500N, è necessario configurare o disattivare la porta FC2.
++
+*** Se si utilizza la seconda porta, è necessario ripetere i passaggi precedenti per la porta FC2.
+*** Se non si utilizza la seconda porta, è necessario disattivarla:
++
+`FCPortDisable _port-number_`
+
+
+
+.. Se si sta configurando un bridge FibreBridge 7600N o 7500N, disattivare le porte SAS inutilizzate:
++
+`SASPortDisable _sas-port_`
+
++
+
+NOTE: Le porte SAS Da A a D sono attivate per impostazione predefinita. È necessario disattivare le porte SAS non utilizzate. Se si utilizza solo la porta SAS A, è necessario disattivare le porte SAS B, C e D.
+
+
+
+. Accesso sicuro al bridge e salvataggio della configurazione del bridge.
++
+.. Dal prompt del controller, controllare lo stato dei bridge: `storage bridge show`
++
+L'output mostra quale bridge non è protetto.
+
+.. Controllare lo stato delle porte del bridge non protetto:
++
+`info`
+
++
+L'output mostra lo stato delle porte Ethernet MP1 e MP2.
+
+.. Se la porta Ethernet MP1 è abilitata, eseguire il seguente comando:
++
+`set EthernetPort mp1 disabled`
+
++
+
+NOTE: Se è attivata anche la porta Ethernet MP2, ripetere il passaggio precedente per la porta MP2.
+
+.. Salvare la configurazione del bridge.
++
+È necessario eseguire i seguenti comandi:
+
++
+`SaveConfiguration`
+
++
+`FirmwareRestart`
+
++
+Viene richiesto di riavviare il bridge.
+
+
+
+. Aggiornare il firmware FibreBridge su ciascun bridge.
++
+Se il nuovo bridge è dello stesso tipo del bridge partner, eseguire l'aggiornamento allo stesso firmware del bridge partner. Se il nuovo bridge è di tipo diverso da quello del bridge partner, eseguire l'aggiornamento al firmware più recente supportato dal bridge e dalla versione di ONTAP. Consultare la sezione "aggiornamento del firmware su un bridge FibreBridge" in _manutenzione MetroCluster_.
+
+. [[step17-Reconnect-newbridge]] ricollegare i cavi SAS e FC alle stesse porte del nuovo bridge.
++
+Se il nuovo bridge è un FibreBridge 7600N o 7500N, è necessario sostituire i cavi che collegano il bridge alla parte superiore o inferiore dello shelf stack. Il bridge FibreBridge 6500N utilizza cavi SAS; i bridge FibreBridge 7600N e 7500N richiedono cavi mini-SAS per queste connessioni.
+
++
+
+NOTE: Attendere almeno 10 secondi prima di collegare la porta. I connettori dei cavi SAS sono dotati di chiave; se orientati correttamente in una porta SAS, il connettore scatta in posizione e il LED LNK della porta SAS dello shelf di dischi si illumina di verde. Per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso il basso (nella parte inferiore del connettore). Per i controller, l'orientamento delle porte SAS può variare a seconda del modello di piattaforma; pertanto, l'orientamento corretto del connettore del cavo SAS varia.
+
+. [[step18-verify-each-bridge]]verificare che ciascun bridge sia in grado di visualizzare tutti i dischi e gli shelf di dischi a cui è collegato il bridge.
++
+[cols="35,65"]
+|===
+
+
+| Se si utilizza... | Quindi... 
+
+
+ a| 
+GUI ExpressNAV
+ a| 
+.. In un browser Web supportato, inserire l'indirizzo IP del bridge nella casella del browser.
++
+Viene visualizzato il link alla homepage di ATTO FibreBridge.
+
+.. Fare clic sul collegamento, quindi immettere il nome utente e la password designati al momento della configurazione del bridge.
++
+Viene visualizzata la pagina di stato di atto FibreBridge con un menu a sinistra.
+
+.. Fare clic su *Avanzate* nel menu.
+.. Visualizzare i dispositivi connessi:
++
+`sastargets`
+
+.. Fare clic su *Invia*.
+
+
+
+
+ a| 
+Connessione alla porta seriale
+ a| 
+Visualizzare i dispositivi connessi:
+
+`sastargets`
+
+|===
++
+L'output mostra i dispositivi (dischi e shelf di dischi) a cui è collegato il bridge. Le linee di output sono numerate in sequenza in modo da poter contare rapidamente i dispositivi.
+
++
+
+NOTE: Se la risposta di testo troncata viene visualizzata all'inizio dell'output, è possibile utilizzare Telnet per connettersi al bridge e visualizzare l'output utilizzando `sastargets` comando.
+
++
+Il seguente output indica che sono collegati 10 dischi:
+
++
+[listing]
+----
+Tgt VendorID ProductID        Type SerialNumber
+  0 NETAPP   X410_S15K6288A15 DISK 3QP1CLE300009940UHJV
+  1 NETAPP   X410_S15K6288A15 DISK 3QP1ELF600009940V1BV
+  2 NETAPP   X410_S15K6288A15 DISK 3QP1G3EW00009940U2M0
+  3 NETAPP   X410_S15K6288A15 DISK 3QP1EWMP00009940U1X5
+  4 NETAPP   X410_S15K6288A15 DISK 3QP1FZLE00009940G8YU
+  5 NETAPP   X410_S15K6288A15 DISK 3QP1FZLF00009940TZKZ
+  6 NETAPP   X410_S15K6288A15 DISK 3QP1CEB400009939MGXL
+  7 NETAPP   X410_S15K6288A15 DISK 3QP1G7A900009939FNTT
+  8 NETAPP   X410_S15K6288A15 DISK 3QP1FY0T00009940G8PA
+  9 NETAPP   X410_S15K6288A15 DISK 3QP1FXW600009940VERQ
+----
+. Verificare che l'output del comando indichi che il bridge è collegato a tutti i dischi e gli shelf di dischi appropriati nello stack.
++
+[cols="35,65"]
+|===
+
+
+| Se l'output è... | Quindi... 
+
+
+ a| 
+Esatto
+ a| 
+Ripetere <<step18-verify-each-bridge,Fase 18>> per ogni bridge rimanente.
+
+
+
+ a| 
+Non corretto
+ a| 
+.. Verificare l'eventuale presenza di cavi SAS allentati o correggere il cablaggio SAS ripetendo le operazioni <<step17-reconnect-newbridge,Fase 17>>.
+.. Ripetere <<step18-verify-each-bridge,Fase 18>>.
+
+
+|===
+. Se il bridge si trova in una configurazione Fabric-Attached MetroCluster, riattivare la porta dello switch FC disattivata all'inizio di questa procedura.
++
+Deve essere la porta che si connette al bridge.
+
+. Dalla console di sistema di entrambi i moduli controller, verificare che tutti i moduli controller abbiano accesso attraverso il nuovo bridge agli shelf di dischi (ovvero che il sistema sia cablato per ha multipath):
++
+`run local sysconfig`
+
++
+
+NOTE: Il completamento del rilevamento potrebbe richiedere fino a un minuto.
+
++
+Se l'output non indica ha multipath, è necessario correggere il cablaggio SAS e FC poiché non tutte le unità disco sono accessibili attraverso il nuovo bridge.
+
++
+Il seguente output indica che il sistema è cablato per ha multipath:
+
++
+[listing]
+----
+NetApp Release 8.3.2: Tue Jan 26 01:41:49 PDT 2016
+System ID: 1231231231 (node_A_1); partner ID: 4564564564 (node_A_2)
+System Serial Number: 700000123123 (node_A_1); partner Serial Number: 700000456456 (node_A_2)
+System Rev: B0
+System Storage Configuration: Multi-Path HA
+System ACP Connectivity: NA
+----
++
+
+IMPORTANT: Quando il sistema non è cablato come ha multipath, il riavvio di un bridge potrebbe causare la perdita di accesso ai dischi e causare un panico per più dischi.
+
+. Se si esegue ONTAP 9.4 o versioni precedenti, verificare che il bridge sia configurato per SNMP.
++
+Se si utilizza la CLI bridge, eseguire il seguente comando:
+
++
+[listing]
+----
+get snmp
+----
+. Dal prompt del cluster ONTAP, aggiungere il bridge al monitoraggio dello stato di salute:
++
+.. Aggiungere il bridge utilizzando il comando per la versione di ONTAP in uso:
++
+[cols="25,75"]
+|===
+
+
+| Versione di ONTAP | Comando 
+
+
+ a| 
+9.5 e versioni successive
+ a| 
+`storage bridge add -address 0.0.0.0 -managed-by in-band -name _bridge-name_`
+
+
+
+ a| 
+9.4 e versioni precedenti
+ a| 
+`storage bridge add -address _bridge-ip-address_ -name _bridge-name_`
+
+|===
+.. Verificare che il bridge sia stato aggiunto e configurato correttamente:
++
+`storage bridge show`
+
++
+A causa dell'intervallo di polling, potrebbero essere necessari 15 minuti per riflettere tutti i dati. Il monitor dello stato di ONTAP può contattare e monitorare il bridge se il valore nella colonna "`Satus`" è "`ok`" e se vengono visualizzate altre informazioni, come il nome globale (WWN).
+
++
+L'esempio seguente mostra che i bridge FC-SAS sono configurati:
+
++
+[listing]
+----
+controller_A_1::> storage bridge show
+
+Bridge              Symbolic Name Is Monitored  Monitor Status  Vendor Model                Bridge WWN
+------------------  ------------- ------------  --------------  ------ -----------------    ----------
+ATTO_10.10.20.10  atto01        true          ok              Atto   FibreBridge 7500N   	20000010867038c0
+ATTO_10.10.20.11  atto02        true          ok              Atto   FibreBridge 7500N   	20000010867033c0
+ATTO_10.10.20.12  atto03        true          ok              Atto   FibreBridge 7500N   	20000010867030c0
+ATTO_10.10.20.13  atto04        true          ok              Atto   FibreBridge 7500N   	2000001086703b80
+
+4 entries were displayed
+
+ controller_A_1::>
+----
+
+
+. Verificare il funzionamento della configurazione MetroCluster in ONTAP:
++
+.. Verificare che il sistema sia multipercorso: +
+`node run -node _node-name_ sysconfig -a`
+.. Verificare la presenza di eventuali avvisi sullo stato di salute su entrambi i cluster: +
+`system health alert show`
+.. Confermare la configurazione MetroCluster e verificare che la modalità operativa sia normale: +
+`metrocluster show`
+.. Eseguire un controllo MetroCluster: +
+`metrocluster check run`
+.. Visualizzare i risultati del controllo MetroCluster: +
+`metrocluster check show`
+.. Verificare la presenza di eventuali avvisi sullo stato di salute sugli interruttori (se presenti): +
+`storage switch show`
+.. Eseguire Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Download NetApp: Config Advisor"^]
+
+.. Dopo aver eseguito Config Advisor, esaminare l'output dello strumento e seguire le raccomandazioni nell'output per risolvere eventuali problemi rilevati.
+
+
+
+
+.Informazioni correlate
+link:concept_in_band_management_of_the_fc_to_sas_bridges.html["Gestione in-band dei bridge FC-SAS"]
+
+
+
+== Scambio a caldo di un FibreBridge 7500N con un bridge 7600N
+
+È possibile sostituire a caldo un bridge FibreBridge 7500N con un bridge 7600N.
+
+.A proposito di questa attività
+Se si utilizza la gestione in-band del bridge piuttosto che la gestione IP, è possibile saltare i passaggi per la configurazione della porta Ethernet e delle impostazioni IP, come indicato nei relativi passaggi.
+
+
+NOTE: A partire da ONTAP 9.8, la `storage bridge` il comando viene sostituito con `system bridge`. La procedura riportata di seguito mostra `storage bridge` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `system bridge` è preferibile utilizzare il comando.
+
+.Fasi
+. Se il bridge si trova in una configurazione Fabric-Attached MetroCluster, disattivare tutte le porte dello switch che si collegano alla porta FC del bridge.
+. Dal prompt del cluster ONTAP, rimuovere il bridge sottoposto a manutenzione dal monitoraggio dello stato di salute:
++
+.. Rimuovere il bridge: +
+`storage bridge remove -name _bridge-name_`
+.. Visualizzare l'elenco dei bridge monitorati e verificare che il bridge rimosso non sia presente: +
+`storage bridge show`
+
+
+. Mettere a terra l'utente.
+. Rimuovere i cavi di alimentazione collegati al bridge per spegnere il bridge.
+. Scollegare i cavi collegati al vecchio bridge.
++
+Prendere nota della porta a cui ciascun cavo è stato collegato.
+
+. Rimuovere il vecchio bridge dal rack.
+. Installare il nuovo bridge nel rack.
+. Ricollegare il cavo di alimentazione e il cavo Ethernet schermato.
++
+
+IMPORTANT: Non ricollegare i cavi SAS o FC in questo momento.
+
+. Collegare il bridge a una fonte di alimentazione, quindi accenderlo.
++
+Il LED Bridge Ready potrebbe impiegare fino a 30 secondi per accendersi, a indicare che il bridge ha completato la sequenza di test automatico all'accensione.
+
+. Se si esegue la configurazione per la gestione in banda, collegare un cavo dalla porta seriale RS-232 di FibreBridge alla porta seriale (COM) di un personal computer.
++
+La connessione seriale viene utilizzata per la configurazione iniziale, quindi la gestione in-band tramite ONTAP e le porte FC possono essere utilizzate per monitorare e gestire il bridge.
+
+. Se si esegue la configurazione per la gestione in banda, collegare un cavo dalla porta seriale RS-232 di FibreBridge alla porta seriale (COM) di un personal computer.
++
+La connessione seriale viene utilizzata per la configurazione iniziale, quindi la gestione in-band tramite ONTAP e le porte FC possono essere utilizzate per monitorare e gestire il bridge.
+
+. Se si esegue la configurazione per la gestione IP, configurare la porta di gestione Ethernet 1 per ciascun bridge seguendo la procedura descritta nella sezione 2.0 del _ATTO FibreBridge Installation and Operation Manual_ per il modello di bridge in uso.
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
++
+Quando si esegue la barra di navigazione per configurare una porta di gestione Ethernet, viene configurata solo la porta di gestione Ethernet collegata tramite il cavo Ethernet. Ad esempio, se si desidera configurare anche la porta di gestione Ethernet 2, è necessario collegare il cavo Ethernet alla porta 2 ed eseguire la barra di navigazione.
+
+. Configurare i bridge.
++
+Annotare il nome utente e la password designati.
+
++
+Il _Manuale d'installazione e funzionamento di FibreBridge atto_ per il tuo modello di bridge contiene le informazioni più aggiornate sui comandi disponibili e su come utilizzarli.
+
++
+
+NOTE: Non configurare la sincronizzazione dell'ora su FibreBridge 7600N. La sincronizzazione dell'ora per FibreBridge 7600N viene impostata sul tempo del cluster dopo il rilevamento del bridge da parte di ONTAP. Viene inoltre sincronizzato periodicamente una volta al giorno. Il fuso orario utilizzato è GMT e non è modificabile.
+
++
+.. Se si esegue la configurazione per la gestione IP, configurare le impostazioni IP del bridge.
++
+Per impostare l'indirizzo IP senza l'utilità barra di navigazione, è necessario disporre di una connessione seriale a FibreBridge.
+
++
+Se si utilizza l'interfaccia CLI, è necessario eseguire i seguenti comandi:
+
++
+`set ipaddress mp1 _ip-address_`
+
++
+`set ipsubnetmask mp1 _subnet-mask_`
+
++
+`set ipgateway mp1 x.x.x.x`
+
++
+`set ipdhcp mp1 disabled`
+
++
+`set ethernetspeed mp1 1000`
+
+.. Configurare il nome del bridge.
++
+I bridge devono avere un nome univoco all'interno della configurazione MetroCluster.
+
++
+Esempi di nomi di bridge per un gruppo di stack su ciascun sito:
+
++
+*** bridge_A_1a
+*** bridge_A_1b
+*** bridge_B_1a
+*** bridge_B_1b
++
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
++
+`set bridgename _bridgename_`
+
+
+
+.. Se si esegue ONTAP 9.4 o versioni precedenti, attivare SNMP sul bridge: +
+`set SNMP enabled`
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
+
+
+. Configurare le porte FC del bridge.
++
+.. Configurare la velocità/velocità dei dati delle porte FC del bridge.
++
+La velocità di trasferimento dati FC supportata dipende dal modello di bridge in uso.
+
++
+*** Il bridge FibreBridge 7600 supporta fino a 32, 16 o 8 Gbps.
+*** Il bridge FibreBridge 7500 supporta fino a 16, 8 o 4 Gbps.
+*** Il bridge FibreBridge 6500 supporta fino a 8, 4 o 2 Gbps.
++
+
+NOTE: La velocità FCDataRate selezionata è limitata alla velocità massima supportata dal bridge e dalla porta FC del modulo controller o dello switch a cui si connette la porta bridge. Le distanze di cablaggio non devono superare i limiti degli SFP e di altri hardware.
+
++
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
++
+`set FCDataRate _port-number port-speed_`
+
+
+
+.. È necessario configurare o disattivare la porta FC2.
++
+*** Se si utilizza la seconda porta, è necessario ripetere i passaggi precedenti per la porta FC2.
+*** Se non si utilizza la seconda porta, è necessario disattivare la porta inutilizzata:
++
+`FCPortDisable port-number`
+
++
+L'esempio seguente mostra la disattivazione della porta FC 2:
+
++
+[listing]
+----
+FCPortDisable 2
+
+Fibre Channel Port 2 has been disabled.
+----
+
+
+.. Disattivare le porte SAS inutilizzate:
++
+`SASPortDisable _sas-port_`
+
++
+
+NOTE: Le porte SAS Da A a D sono attivate per impostazione predefinita. È necessario disattivare le porte SAS non utilizzate.
+
++
+Se si utilizza solo la porta SAS A, è necessario disattivare le porte SAS B, C e D. Nell'esempio seguente viene illustrata la disattivazione della porta SAS B. Analogamente, è necessario disattivare le porte SAS C e D:
+
++
+[listing]
+----
+SASPortDisable b
+
+SAS Port B has been disabled.
+----
+
+
+. Accesso sicuro al bridge e salvataggio della configurazione del bridge.
++
+.. Dal prompt del controller, controllare lo stato dei bridge:
++
+`storage bridge show`
+
++
+L'output mostra quale bridge non è protetto.
+
+.. Controllare lo stato delle porte del bridge non protetto:
++
+`info`
+
++
+L'output mostra lo stato delle porte Ethernet MP1 e MP2.
+
+.. Se la porta Ethernet MP1 è abilitata, eseguire il seguente comando:
++
+`set EthernetPort mp1 disabled`
+
++
+
+NOTE: Se è attivata anche la porta Ethernet MP2, ripetere il passaggio precedente per la porta MP2.
+
+.. Salvare la configurazione del bridge.
++
+Eseguire i seguenti comandi: +
+
++
+`SaveConfiguration`
+
++
+`FirmwareRestart`
+
++
+Viene richiesto di riavviare il bridge.
+
+
+
+. Aggiornare il firmware FibreBridge su ciascun bridge.
++
+link:task_update_firmware_on_a_fibrebridge_bridge_parent_topic.html["Aggiornamento del firmware su bridge FibreBridge 7600N o 7500N su configurazioni con ONTAP 9.4 e versioni successive"]
+
+. [[step17-Reconnect-cables]]ricollegare i cavi SAS e FC alle stesse porte del nuovo bridge.
++
+
+NOTE: Attendere almeno 10 secondi prima di collegare la porta. I connettori dei cavi SAS sono dotati di chiave; se orientati correttamente in una porta SAS, il connettore scatta in posizione e il LED LNK della porta SAS dello shelf di dischi si illumina di verde. Per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso il basso (nella parte inferiore del connettore). Per i controller, l'orientamento delle porte SAS può variare a seconda del modello di piattaforma; pertanto, l'orientamento corretto del connettore del cavo SAS varia.
+
+. Verificare che ciascun bridge sia in grado di visualizzare tutti i dischi e gli shelf di dischi a cui è collegato il bridge:
++
+`sastargets`
+
++
+L'output mostra i dispositivi (dischi e shelf di dischi) a cui è collegato il bridge. Le linee di output sono numerate in sequenza in modo da poter contare rapidamente i dispositivi.
+
++
+Il seguente output indica che sono collegati 10 dischi:
+
++
+[listing]
+----
+Tgt VendorID ProductID        Type        SerialNumber
+  0 NETAPP   X410_S15K6288A15 DISK        3QP1CLE300009940UHJV
+  1 NETAPP   X410_S15K6288A15 DISK        3QP1ELF600009940V1BV
+  2 NETAPP   X410_S15K6288A15 DISK        3QP1G3EW00009940U2M0
+  3 NETAPP   X410_S15K6288A15 DISK        3QP1EWMP00009940U1X5
+  4 NETAPP   X410_S15K6288A15 DISK        3QP1FZLE00009940G8YU
+  5 NETAPP   X410_S15K6288A15 DISK        3QP1FZLF00009940TZKZ
+  6 NETAPP   X410_S15K6288A15 DISK        3QP1CEB400009939MGXL
+  7 NETAPP   X410_S15K6288A15 DISK        3QP1G7A900009939FNTT
+  8 NETAPP   X410_S15K6288A15 DISK        3QP1FY0T00009940G8PA
+  9 NETAPP   X410_S15K6288A15 DISK        3QP1FXW600009940VERQ
+----
+. Verificare che l'output del comando indichi che il bridge è collegato a tutti i dischi e gli shelf di dischi appropriati nello stack.
++
+[cols="25,75"]
+|===
+
+
+| Se l'output è... | Quindi... 
+
+
+ a| 
+Esatto
+ a| 
+Ripetere il passaggio precedente per ogni bridge rimanente.
+
+
+
+ a| 
+Non corretto
+ a| 
+.. Verificare l'eventuale presenza di cavi SAS allentati o correggere il cablaggio SAS ripetendo le operazioni <<step17-reconnect-cables,Fase 17>>.
+.. Ripetere la fase precedente.
+
+
+|===
+. Se il bridge si trova in una configurazione Fabric-Attached MetroCluster, riabilitare la porta dello switch FC disattivata all'inizio di questa procedura.
++
+Deve essere la porta che si connette al bridge.
+
+. Dalla console di sistema di entrambi i moduli controller, verificare che tutti i moduli controller abbiano accesso attraverso il nuovo bridge agli shelf di dischi (ovvero che il sistema sia cablato per ha multipath):
++
+`run local sysconfig`
+
++
+
+NOTE: Il completamento del rilevamento potrebbe richiedere fino a un minuto.
+
++
+Se l'output non indica ha multipath, è necessario correggere il cablaggio SAS e FC poiché non tutte le unità disco sono accessibili attraverso il nuovo bridge.
+
++
+Il seguente output indica che il sistema è cablato per ha multipath:
+
++
+[listing]
+----
+NetApp Release 8.3.2: Tue Jan 26 01:41:49 PDT 2016
+System ID: 1231231231 (node_A_1); partner ID: 4564564564 (node_A_2)
+System Serial Number: 700000123123 (node_A_1); partner Serial Number: 700000456456 (node_A_2)
+System Rev: B0
+System Storage Configuration: Multi-Path HA
+System ACP Connectivity: NA
+----
++
+
+IMPORTANT: Quando il sistema non è cablato come ha multipath, il riavvio di un bridge potrebbe causare la perdita di accesso ai dischi e causare un panico per più dischi.
+
+. Se si esegue ONTAP 9.4 o versioni precedenti, verificare che il bridge sia configurato per SNMP.
++
+Se si utilizza la CLI bridge, eseguire il seguente comando:
+
++
+`get snmp`
+
+. Dal prompt del cluster ONTAP, aggiungere il bridge al monitoraggio dello stato di salute:
++
+.. Aggiungere il bridge utilizzando il comando per la versione di ONTAP in uso:
++
+[cols="25,75"]
+|===
+
+
+| Versione di ONTAP | Comando 
+
+
+ a| 
+9.5 e versioni successive
+ a| 
+`storage bridge add -address 0.0.0.0 -managed-by in-band -name _bridge-name_`
+
+
+
+ a| 
+9.4 e versioni precedenti
+ a| 
+`storage bridge add -address _bridge-ip-address_ -name _bridge-name_`
+
+|===
+.. Verificare che il bridge sia stato aggiunto e configurato correttamente:
++
+`storage bridge show`
+
++
+A causa dell'intervallo di polling, potrebbero essere necessari 15 minuti per riflettere tutti i dati. Il monitor dello stato di ONTAP può contattare e monitorare il bridge se il valore nella colonna "`Satus`" è "`ok`" e se vengono visualizzate altre informazioni, come il nome globale (WWN).
+
++
+L'esempio seguente mostra che i bridge FC-SAS sono configurati:
+
++
+[listing]
+----
+controller_A_1::> storage bridge show
+
+Bridge              Symbolic Name Is Monitored  Monitor Status  Vendor Model                Bridge WWN
+------------------  ------------- ------------  --------------  ------ -----------------    ----------
+ATTO_10.10.20.10  atto01        true          ok              Atto   FibreBridge 7500N   	20000010867038c0
+ATTO_10.10.20.11  atto02        true          ok              Atto   FibreBridge 7500N   	20000010867033c0
+ATTO_10.10.20.12  atto03        true          ok              Atto   FibreBridge 7500N   	20000010867030c0
+ATTO_10.10.20.13  atto04        true          ok              Atto   FibreBridge 7500N   	2000001086703b80
+
+4 entries were displayed
+
+ controller_A_1::>
+----
+
+
+. Verificare il funzionamento della configurazione MetroCluster in ONTAP:
++
+.. Verificare che il sistema sia multipercorso: +
+`node run -node _node-name_ sysconfig -a`
+.. Verificare la presenza di eventuali avvisi sullo stato di salute su entrambi i cluster: +
+`system health alert show`
+.. Confermare la configurazione MetroCluster e verificare che la modalità operativa sia normale: +
+`metrocluster show`
+.. Eseguire un controllo MetroCluster: +
+`metrocluster check run`
+.. Visualizzare i risultati del controllo MetroCluster: +
++
+`metrocluster check show`
+
+.. Verificare la presenza di eventuali avvisi sullo stato di salute sugli interruttori (se presenti): +
+`storage switch show`
+.. Eseguire Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Download NetApp: Config Advisor"^]
+
+.. Dopo aver eseguito Config Advisor, esaminare l'output dello strumento e seguire le raccomandazioni nell'output per risolvere eventuali problemi rilevati.
+
+
+
+
+.Informazioni correlate
+link:concept_in_band_management_of_the_fc_to_sas_bridges.html["Gestione in-band dei bridge FC-SAS"]
+
+
+
+== Scambio a caldo di un bridge FibreBridge 6500N con un bridge FibreBridge 7600N o 7500N
+
+È possibile sostituire a caldo un bridge FibreBridge 6500N con un bridge FibreBridge 7600N o 7500N per sostituire un bridge guasto o aggiornare il bridge in una configurazione MetroCluster collegata a fabric o a bridge.
+
+.A proposito di questa attività
+* Questa procedura consente di sostituire a caldo un singolo bridge FibreBridge 6500N con un singolo bridge FibreBridge 7600N o 7500N.
+* Quando si esegue la sostituzione a caldo di un bridge FibreBridge 6500N con un bridge FibreBridge 7600N o 7500N, è necessario utilizzare solo una porta FC e una porta SAS sul bridge FibreBridge 7600N o 7500N.
+* Se si utilizza la gestione in-band del bridge piuttosto che la gestione IP, è possibile saltare i passaggi per la configurazione della porta Ethernet e delle impostazioni IP, come indicato nei relativi passaggi.
+
+
+
+IMPORTANT: Se si scambiano a caldo entrambi i bridge FibreBridge 6500N in coppia, è necessario utilizzare link:task_fb_consolidate_replace_a_pair_of_fibrebridge_6500n_bridges_with_7500n_bridges.html["Consolidare più stack di storage"] procedura per le istruzioni di zoning. Sostituendo entrambi i bridge FibreBridge 6500N sul bridge, è possibile sfruttare le porte aggiuntive del bridge FibreBridge 7600N o 7500N.
+
+
+NOTE: A partire da ONTAP 9.8, la `storage bridge` il comando viene sostituito con `system bridge`. La procedura riportata di seguito mostra `storage bridge` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `system bridge` è preferibile utilizzare il comando.
+
+.Fasi
+. Effettuare una delle seguenti operazioni:
++
+** Se il bridge guasto si trova in una configurazione Fabric-Attached MetroCluster, disattivare la porta dello switch che si connette alla porta FC del bridge.
+** Se il bridge guasto si trova in una configurazione stretch MetroCluster, utilizzare una delle porte FC disponibili.
+
+
+. Dal prompt del cluster ONTAP, rimuovere il bridge sottoposto a manutenzione dal monitoraggio dello stato di salute:
++
+.. Rimuovere il bridge:
++
+`storage bridge remove -name _bridge-name_`
+
+.. Visualizzare l'elenco dei bridge monitorati e verificare che il bridge rimosso non sia presente:
++
+`storage bridge show`
+
+
+
+. Mettere a terra l'utente.
+. Spegnere l'interruttore di alimentazione del bridge.
+. Scollegare i cavi collegati dallo shelf alle porte e ai cavi di alimentazione del bridge FibreBridge 6500N.
++
+Prendere nota delle porte a cui ciascun cavo è stato collegato.
+
+. Rimuovere dal rack il bridge FibreBridge 6500N da sostituire.
+. Installare il nuovo bridge FibreBridge 7600N o 7500N nel rack.
+. Ricollegare il cavo di alimentazione e, se necessario, il cavo Ethernet schermato.
++
+
+IMPORTANT: Non ricollegare i cavi SAS o FC in questo momento.
+
+. Se si esegue la configurazione per la gestione in banda, collegare un cavo dalla porta seriale RS-232 di FibreBridge alla porta seriale (COM) di un personal computer.
++
+La connessione seriale viene utilizzata per la configurazione iniziale, quindi la gestione in-band tramite ONTAP e le porte FC possono essere utilizzate per monitorare e gestire il bridge.
+
+. Se si esegue la configurazione per la gestione IP, collegare la porta Ethernet 1 di gestione di ciascun bridge alla rete utilizzando un cavo Ethernet.
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
++
+La porta di gestione Ethernet 1 consente di scaricare rapidamente il firmware del bridge (utilizzando le interfacce di gestione ATTO ExpressNAV o FTP) e di recuperare i file principali ed estrarre i log.
+
+. Se si esegue la configurazione per la gestione IP, configurare la porta di gestione Ethernet 1 per ciascun bridge seguendo la procedura descritta nella sezione 2.0 del _ATTO FibreBridge Installation and Operation Manual_ per il modello di bridge in uso.
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
++
+Quando si esegue la barra di navigazione per configurare una porta di gestione Ethernet, viene configurata solo la porta di gestione Ethernet collegata tramite il cavo Ethernet. Ad esempio, se si desidera configurare anche la porta di gestione Ethernet 2, è necessario collegare il cavo Ethernet alla porta 2 ed eseguire la barra di navigazione.
+
+. Configurare il bridge.
++
+Se le informazioni di configurazione sono state recuperate dal vecchio bridge, utilizzare le informazioni per configurare il nuovo bridge.
+
++
+Annotare il nome utente e la password designati.
+
++
+Il _Manuale d'installazione e funzionamento di FibreBridge atto_ per il tuo modello di bridge contiene le informazioni più aggiornate sui comandi disponibili e su come utilizzarli.
+
++
+
+NOTE: Non configurare la sincronizzazione dell'ora su ATTO FibreBridge 7600N o 7500N. La sincronizzazione temporale per ATTO FibreBridge 7600N o 7500N viene impostata sul tempo del cluster dopo il rilevamento del bridge da parte di ONTAP. Viene inoltre sincronizzato periodicamente una volta al giorno. Il fuso orario utilizzato è GMT e non è modificabile.
+
++
+.. Se si esegue la configurazione per la gestione IP, configurare le impostazioni IP del bridge.
++
+Per impostare l'indirizzo IP senza l'utilità barra di navigazione, è necessario disporre di una connessione seriale a FibreBridge.
+
++
+Se si utilizza l'interfaccia CLI, è necessario eseguire i seguenti comandi:
+
++
+`set ipaddress mp1 _ip-address_`
+
++
+`set ipsubnetmask mp1 _subnet-mask_`
+
++
+`set ipgateway mp1 x.x.x.x`
+
++
+`set ipdhcp mp1 disabled`
+
++
+`set ethernetspeed mp1 1000`
+
+.. Configurare il nome del bridge.
++
+I bridge devono avere un nome univoco all'interno della configurazione MetroCluster.
+
++
+Esempi di nomi di bridge per un gruppo di stack su ciascun sito:
+
++
+*** bridge_A_1a
+*** bridge_A_1b
+*** bridge_B_1a
+*** bridge_B_1b
++
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
++
+`set bridgename _bridgename_`
+
+
+
+.. Se si esegue ONTAP 9.4 o versioni precedenti, attivare SNMP sul bridge: +
+`set SNMP enabled`
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
+
+
+. Configurare le porte FC del bridge.
++
+.. Configurare la velocità/velocità dei dati delle porte FC del bridge.
++
+La velocità di trasferimento dati FC supportata dipende dal modello di bridge in uso.
+
++
+*** Il bridge FibreBridge 7600 supporta fino a 32, 16 o 8 Gbps.
+*** Il bridge FibreBridge 7500 supporta fino a 16, 8 o 4 Gbps.
+*** Il bridge FibreBridge 6500 supporta fino a 8, 4 o 2 Gbps.
++
+
+NOTE: La velocità FCDataRate selezionata è limitata alla velocità massima supportata sia dal bridge che dallo switch a cui si connette la porta bridge. Le distanze di cablaggio non devono superare i limiti degli SFP e di altri hardware.
+
++
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
++
+`set FCDataRate _port-number port-speed_`
+
+
+
+.. Se si sta configurando un bridge FibreBridge 7500N o 6500N, configurare la modalità di connessione utilizzata dalla porta per ptp.
++
+
+NOTE: L'impostazione FCConnMode non è richiesta quando si configura un bridge FibreBridge 7600N.
+
++
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
++
+`set FCConnMode _port-number_ ptp`
+
+.. Se si sta configurando un bridge FibreBridge 7600N o 7500N, è necessario configurare o disattivare la porta FC2.
++
+*** Se si utilizza la seconda porta, è necessario ripetere i passaggi precedenti per la porta FC2.
+*** Se non si utilizza la seconda porta, è necessario disattivarla:
++
+`FCPortDisable _port-number_`
+
+
+
+.. Se si sta configurando un bridge FibreBridge 7600N o 7500N, disattivare le porte SAS inutilizzate:
++
+`SASPortDisable _sas-port_`
+
++
+
+NOTE: Le porte SAS Da A a D sono attivate per impostazione predefinita. È necessario disattivare le porte SAS non utilizzate. Se si utilizza solo la porta SAS A, è necessario disattivare le porte SAS B, C e D.
+
+
+
+. Accesso sicuro al bridge e salvataggio della configurazione del bridge.
++
+.. Dal prompt del controller, controllare lo stato dei bridge:
++
+`storage bridge show`
+
++
+L'output mostra quale bridge non è protetto.
+
+.. Controllare lo stato delle porte del bridge non protetto:
++
+`info`
+
++
+L'output mostra lo stato delle porte Ethernet MP1 e MP2.
+
+.. Se la porta Ethernet MP1 è abilitata, eseguire il seguente comando:
++
+`set EthernetPort mp1 disabled`
+
++
+
+NOTE: Se è attivata anche la porta Ethernet MP2, ripetere il passaggio precedente per la porta MP2.
+
+.. Salvare la configurazione del bridge.
++
+È necessario eseguire i seguenti comandi:
+
++
+`SaveConfiguration`
+
++
+`FirmwareRestart`
+
++
+Viene richiesto di riavviare il bridge.
+
+
+
+. Attivare il monitoraggio dello stato di salute per il bridge FibreBridge 7600N o 7500N.
+. Aggiornare il firmware FibreBridge su ciascun bridge.
++
+Se il nuovo bridge è dello stesso tipo del bridge partner, eseguire l'aggiornamento allo stesso firmware del bridge partner. Se il nuovo bridge è di tipo diverso da quello del bridge partner, eseguire l'aggiornamento al firmware più recente supportato dal bridge e dalla versione di ONTAP. Consultare la sezione "aggiornamento del firmware su un bridge FibreBridge" nella _Guida alla manutenzione di MetroCluster_.
+
+. [[step17-recable]]ricollegare i cavi SAS e FC alle porte SAS A e Fibre Channel 1 del nuovo bridge.
++
+La porta SAS deve essere collegata alla stessa porta shelf a cui era collegato il bridge FibreBridge 6500N.
+
++
+La porta FC deve essere collegata alla stessa porta dello switch o del controller a cui era collegato il bridge FibreBridge 6500N.
+
++
+
+NOTE: Non forzare un connettore in una porta. I cavi mini-SAS sono dotati di chiavi; se orientati correttamente in una porta SAS, il cavo SAS scatta in posizione e il LED LNK della porta SAS dello shelf di dischi si illumina di verde. Per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso il basso (nella parte inferiore del connettore). Per i controller, l'orientamento delle porte SAS può variare a seconda del modello di piattaforma; pertanto, l'orientamento corretto del connettore per cavo SAS varia.
+
+. Verificare che il bridge sia in grado di rilevare tutte le unità disco e gli shelf di dischi a cui è collegato.
++
+[cols="25,75"]
+|===
+
+
+| Se si utilizza... | Quindi... 
+
+
+ a| 
+GUI ExpressNAV
+ a| 
+.. In un browser Web supportato, inserire l'indirizzo IP del bridge nella casella del browser.
++
+Viene visualizzato il link alla homepage di ATTO FibreBridge.
+
+.. Fare clic sul collegamento, quindi immettere il nome utente e la password designati al momento della configurazione del bridge.
++
+Viene visualizzata la pagina di stato di atto FibreBridge con un menu a sinistra.
+
+.. Fare clic su *Avanzate* nel menu.
+.. Immettere il seguente comando, quindi fare clic su *Submit* (Invia) per visualizzare l'elenco dei dischi visibili al bridge:
++
+`sastargets`
+
+
+
+
+
+ a| 
+Connessione alla porta seriale
+ a| 
+Visualizzare l'elenco dei dischi visibili al bridge:
+
+`sastargets`
+
+|===
++
+L'output mostra i dispositivi (dischi e shelf di dischi) a cui è collegato il bridge. Le linee di output sono numerate in sequenza in modo da poter contare rapidamente i dispositivi. Ad esempio, il seguente output mostra che sono collegati 10 dischi:
+
++
+[listing]
+----
+
+Tgt VendorID ProductID        Type        SerialNumber
+  0 NETAPP   X410_S15K6288A15 DISK        3QP1CLE300009940UHJV
+  1 NETAPP   X410_S15K6288A15 DISK        3QP1ELF600009940V1BV
+  2 NETAPP   X410_S15K6288A15 DISK        3QP1G3EW00009940U2M0
+  3 NETAPP   X410_S15K6288A15 DISK        3QP1EWMP00009940U1X5
+  4 NETAPP   X410_S15K6288A15 DISK        3QP1FZLE00009940G8YU
+  5 NETAPP   X410_S15K6288A15 DISK        3QP1FZLF00009940TZKZ
+  6 NETAPP   X410_S15K6288A15 DISK        3QP1CEB400009939MGXL
+  7 NETAPP   X410_S15K6288A15 DISK        3QP1G7A900009939FNTT
+  8 NETAPP   X410_S15K6288A15 DISK        3QP1FY0T00009940G8PA
+  9 NETAPP   X410_S15K6288A15 DISK        3QP1FXW600009940VERQ
+----
++
+
+NOTE: Se all'inizio dell'output viene visualizzato il testo "`respesse tronced`", è possibile utilizzare Telnet per accedere al bridge e immettere lo stesso comando per visualizzare tutti gli output.
+
+. Verificare che l'output del comando indichi che il bridge è collegato a tutti i dischi e gli shelf di dischi necessari nello stack.
++
+[cols="25,75"]
+|===
+
+
+| Se l'output è... | Quindi... 
+
+
+ a| 
+Esatto
+ a| 
+Ripetere il passaggio precedente per ogni bridge rimanente.
+
+
+
+ a| 
+Non corretto
+ a| 
+.. Verificare l'eventuale presenza di cavi SAS allentati o correggere il cablaggio SAS ripetendo le operazioni <<step17-recable,Fase 17>>.
+.. Ripetere il passaggio precedente per ogni bridge rimanente.
+
+
+|===
+. Riabilitare la porta dello switch FC che si collega al bridge.
+. Verificare che tutti i controller abbiano accesso attraverso il nuovo bridge agli shelf di dischi (che il sistema sia cablato per ha multipath), sulla console di sistema di entrambi i controller:
++
+`run local sysconfig`
+
++
+
+NOTE: Il completamento del rilevamento potrebbe richiedere fino a un minuto.
+
++
+Ad esempio, il seguente output mostra che il sistema è cablato per ha multipath:
+
++
+[listing]
+----
+NetApp Release 8.3.2: Tue Jan 26 01:23:24 PST 2016
+System ID: 1231231231 (node_A_1); partner ID: 4564564564 (node_A_2)
+System Serial Number: 700000123123 (node_A_1); partner Serial Number: 700000456456 (node_A_2)
+System Rev: B0
+System Storage Configuration: Multi-Path HA
+System ACP Connectivity: NA
+----
++
+Se l'output del comando indica che la configurazione è ha a percorso misto o a percorso singolo, è necessario correggere il cablaggio SAS e FC poiché non tutti i dischi sono accessibili attraverso il nuovo bridge.
+
++
+
+IMPORTANT: Quando il sistema non è cablato come ha multipath, il riavvio di un bridge potrebbe causare la perdita di accesso ai dischi e causare un panico per più dischi.
+
+. Dal prompt del cluster ONTAP, aggiungere il bridge al monitoraggio dello stato di salute:
++
+.. Aggiungere il bridge utilizzando il comando per la versione di ONTAP in uso:
++
+[cols="25,75"]
+|===
+
+
+| Versione di ONTAP | Comando 
+
+
+ a| 
+9.5 e versioni successive
+ a| 
+`storage bridge add -address 0.0.0.0 -managed-by in-band -name _bridge-name_`
+
+
+
+ a| 
+9.4 e versioni precedenti
+ a| 
+`storage bridge add -address _bridge-ip-address_ -name _bridge-name_`
+
+|===
+.. Verificare che il bridge sia stato aggiunto e configurato correttamente: +
+`storage bridge show`
++
+A causa dell'intervallo di polling, potrebbero essere necessari 15 minuti per riflettere tutti i dati. Il monitor dello stato di ONTAP può contattare e monitorare il bridge se il valore nella colonna "`Satus`" è "`ok`" e se vengono visualizzate altre informazioni, come il nome globale (WWN).
+
++
+L'esempio seguente mostra che i bridge FC-SAS sono configurati:
+
++
+[listing]
+----
+controller_A_1::> storage bridge show
+
+Bridge              Symbolic Name Is Monitored  Monitor Status  Vendor Model                Bridge WWN
+------------------  ------------- ------------  --------------  ------ -----------------    ----------
+ATTO_10.10.20.10  atto01        true          ok              Atto   FibreBridge 7500N   	20000010867038c0
+ATTO_10.10.20.11  atto02        true          ok              Atto   FibreBridge 7500N   	20000010867033c0
+ATTO_10.10.20.12  atto03        true          ok              Atto   FibreBridge 7500N   	20000010867030c0
+ATTO_10.10.20.13  atto04        true          ok              Atto   FibreBridge 7500N   	2000001086703b80
+
+4 entries were displayed
+
+ controller_A_1::>
+----
+
+
+. Verificare il funzionamento della configurazione MetroCluster in ONTAP:
++
+.. Verificare che il sistema sia multipercorso:
++
+`node run -node _node-name_ sysconfig -a`
+
+.. Verificare la presenza di eventuali avvisi sullo stato di salute su entrambi i cluster: +
+`system health alert show`
+.. Verificare la configurazione MetroCluster e che la modalità operativa sia normale:
++
+`metrocluster show`
+
+.. Eseguire un controllo MetroCluster:
++
+`metrocluster check run`
+
+.. Visualizzare i risultati del controllo MetroCluster:
++
+`metrocluster check show`
+
+.. Verificare la presenza di eventuali avvisi sullo stato di salute sugli switch (se presenti):
++
+`storage switch show`
+
+.. Eseguire Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Download NetApp: Config Advisor"^]
+
+.. Dopo aver eseguito Config Advisor, esaminare l'output dello strumento e seguire le raccomandazioni nell'output per risolvere eventuali problemi rilevati.
+
+
+. Dopo aver sostituito il componente, restituire il componente guasto a NetApp, come descritto nelle istruzioni RMA fornite con il kit. Vedere link:https://mysupport.netapp.com/site/info/rma["Amp per restituzione parti; sostituzioni"] per ulteriori informazioni.
+
+
+.Informazioni correlate
+link:concept_in_band_management_of_the_fc_to_sas_bridges.html["Gestione in-band dei bridge FC-SAS"]

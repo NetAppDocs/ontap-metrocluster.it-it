@@ -1,0 +1,137 @@
+---
+permalink: maintain/task_replace_a_shelf_nondisruptively_in_a_stretch_mcc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, replace, shelf, nondisruptively, stretch, configuration 
+summary: Puoi sostituire gli shelf di dischi senza interruzioni in una configurazione stretch MetroCluster con uno shelf di dischi completamente popolato o uno shelf di dischi e trasferire i componenti dallo shelf che stai rimuovendo. 
+---
+= Sostituzione senza interruzioni di uno shelf in una configurazione stretch MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puoi sostituire gli shelf di dischi senza interruzioni in una configurazione stretch MetroCluster con uno shelf di dischi completamente popolato o uno shelf di dischi e trasferire i componenti dallo shelf che stai rimuovendo.
+
+Il modello di shelf di dischi che si sta installando deve soddisfare i requisiti di sistema storage specificati nella link:https://hwu.netapp.com["Hardware Universe"^], Che include i modelli di shelf supportati, i tipi di dischi supportati, il numero massimo di shelf di dischi in uno stack e le versioni ONTAP supportate.
+
+.Fasi
+. Mettere a terra l'utente.
+. Identificare tutti gli aggregati e i volumi che hanno dischi del loop che contengono lo shelf che si sta sostituendo e prendere nota del nome del plex interessato.
++
+Entrambi i nodi potrebbero contenere dischi del loop dello shelf interessato e aggregati host o volumi host.
+
+. Scegliere una delle due opzioni seguenti in base allo scenario di sostituzione che si sta pianificando.
++
+** Se si sta sostituendo uno shelf completo di dischi, inclusi chassis, dischi e moduli i/o (IOM), eseguire l'azione corrispondente come descritto nella tabella seguente:
++
+|===
+
+
+| Scenario | Azione 
+
+
+ a| 
+Il plesso interessato contiene meno dischi dallo shelf interessato.
+ a| 
+Sostituire i dischi uno per uno sullo shelf interessato con parti di ricambio di un altro shelf.
+
+
+NOTE: Dopo aver completato la sostituzione del disco, è possibile portare il plex offline.
+
+
+
+ a| 
+Il plesso interessato contiene più dischi di quelli presenti nello shelf interessato.
+ a| 
+Spostare il plex offline ed eliminare il plex.
+
+
+
+ a| 
+Il plesso interessato contiene qualsiasi disco dello shelf interessato.
+ a| 
+Spostare il plex offline ma non eliminarlo.
+
+|===
+** Se si sta sostituendo solo lo chassis dello shelf di dischi e nessun altro componente, attenersi alla seguente procedura:
++
+... Offline i plex interessati dal controller in cui sono ospitati:
++
+`aggregate offline`
+
+... Verificare che i plessi siano offline:
++
+`aggregate status -r`
+
+
+
+
+
+. Identificare le porte SAS del controller a cui è collegato lo shelf loop interessato e disattivare le porte SAS su entrambi i controller del sito:
++
+`storage port disable -node _node_name_ -port _SAS_port_`
+
++
+Lo shelf loop interessato è collegato a entrambi i siti.
+
+. Attendere che ONTAP riconosca l'assenza del disco.
++
+.. Verificare che il disco non sia presente:
++
+`sysconfig -a` oppure `sysconfig -r`
+
+
+
+. Spegnere l'interruttore di alimentazione sullo shelf di dischi.
+. Scollegare tutti i cavi di alimentazione dallo shelf di dischi.
+. Annotare le porte da cui si scollegano i cavi in modo da poter collegare il nuovo shelf di dischi allo stesso modo.
+. Scollegare e rimuovere i cavi che collegano lo shelf di dischi agli altri shelf di dischi o al sistema di storage.
+. Rimuovere lo shelf del disco dal rack.
++
+Per rendere lo shelf di dischi più leggero e facile da manovrare, rimuovere gli alimentatori e l'IOM. Se si desidera installare uno chassis per shelf di dischi, rimuovere anche i dischi o i supporti. In caso contrario, evitare di rimuovere i dischi o i supporti, se possibile, poiché una manipolazione eccessiva può causare danni al disco interno.
+
+. Installare e fissare lo shelf di dischi sostitutivo sulle staffe di supporto e sul rack.
+. Se è stato installato uno chassis per shelf di dischi, reinstallare gli alimentatori e IOM.
+. Riconfigurare lo stack di shelf di dischi collegando tutti i cavi alle porte dello shelf di dischi sostitutivi esattamente come sono stati configurati sullo shelf di dischi rimosso.
+. Accendere lo shelf di dischi sostitutivo e attendere che i dischi si accendano.
+. Modificare l'ID dello shelf del disco con un ID univoco compreso tra 0 e 98.
+. Abilitare le porte SAS precedentemente disattivate.
++
+.. Attendere che ONTAP riconosca che i dischi sono stati inseriti.
+.. Verificare che i dischi siano inseriti:
++
+`sysconfig -a` oppure `sysconfig -r`
+
+
+
+. Se si sta sostituendo lo shelf completo di dischi (chassis per shelf di dischi, dischi, IOM), attenersi alla seguente procedura:
++
+
+NOTE: Se si sta sostituendo solo lo chassis dello shelf di dischi e nessun altro componente, passare alla fase 19.
+
++
+.. Determinare se l'assegnazione automatica del disco è attivata (on).
++
+`storage disk option modify -autoassign`
+
++
+L'assegnazione dei dischi avviene automaticamente.
+
+.. Se l'assegnazione automatica del disco non è attivata, assegnare manualmente la proprietà del disco.
+
+
+. Sposta di nuovo online i plex:
++
+`aggregate online _plex name_`
+
+. Ricreare eventuali plex cancellati eseguendo il mirroring dell'aggregato.
+. Monitorare i plessi mentre iniziano la risincronizzazione:
++
+`aggregate status -r <aggregate name>`
+
+. Verificare che il sistema storage funzioni come previsto:
++
+`system health alert show`
+
+

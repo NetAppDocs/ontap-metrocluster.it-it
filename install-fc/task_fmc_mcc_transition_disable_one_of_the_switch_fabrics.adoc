@@ -1,0 +1,88 @@
+---
+permalink: install-fc/task_fmc_mcc_transition_disable_one_of_the_switch_fabrics.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, disable, switch, fabrics 
+summary: 'È necessario disattivare uno dei fabric dello switch per modificarne la configurazione. Una volta completata la configurazione e riattivata la struttura dello switch, ripetere la procedura sull"altro fabric.' 
+---
+= Disattivazione di uno dei fabric dello switch
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario disattivare uno dei fabric dello switch per modificarne la configurazione. Una volta completata la configurazione e riattivata la struttura dello switch, ripetere la procedura sull'altro fabric.
+
+.Prima di iniziare
+È necessario eseguire l'utility fmc_DC sulla configurazione Fabric MetroCluster 7-Mode esistente e risolvere eventuali problemi prima di iniziare il processo di configurazione.
+
+.A proposito di questa attività
+Per garantire il funzionamento continuo della configurazione MetroCluster, non è necessario disattivare il secondo fabric mentre il primo fabric è disattivato.
+
+.Fasi
+. Disattivare ciascuno switch nel fabric:
++
+`switchCfgPersistentDisable`
+
++
+Se questo comando non è disponibile, utilizzare `switchDisable` comando.
+
++
+** L'esempio seguente mostra il comando emesso su FC_switch_A_1:
++
+[listing]
+----
+FC_switch_A_1:admin> switchCfgPersistentDisable
+----
+** L'esempio seguente mostra il comando emesso su FC_switch_B_1:
++
+[listing]
+----
+FC_switch_B_1:admin> switchCfgPersistentDisable
+----
+
+
+. Assicurarsi che la configurazione 7-Mode MetroCluster funzioni correttamente utilizzando il fabric ridondante:
++
+.. Verificare che il failover del controller sia integro: +
+`cf status`
++
+[listing]
+----
+node_A> cf status
+Controller Failover enabled, node_A is up.
+VIA Interconnect is up (link 0 down, link 1 up).
+----
+.. Verificare che i dischi siano visibili: +
+`storage show disk –p`
++
+[listing]
+----
+node_A> storage show disk –p
+
+PRIMARY                     PORT  SECONDARY          PORT SHELF BAY
+--------------------------- ----  ------------------ ---- ---------
+Brocade-6510-2K0GG:5.126L27  B                              1    0
+Brocade-6510-2K0GG:5.126L28  B                              1    1
+Brocade-6510-2K0GG:5.126L29  B                              1    2
+Brocade-6510-2K0GG:5.126L30  B                              1    3
+Brocade-6510-2K0GG:5.126L31  B                              1    4
+
+.
+.
+.
+----
+.. Verificare che gli aggregati siano integri: +
+`aggr status`
++
+[listing]
+----
+node_A> aggr status
+           Aggr State           Status              Options
+          aggr0 online          raid_dp, aggr       root, nosnap=on
+                                mirrored
+                                64-bit
+----
+
+
+

@@ -1,0 +1,32 @@
+---
+permalink: disaster-recovery/task_verify_storage_mcfc.html 
+sidebar: sidebar 
+keywords: verify, storage, configuration 
+summary: È necessario confermare che tutto lo storage sia visibile dai nodi sopravvissuti. 
+---
+= Verifica della configurazione dello storage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario confermare che tutto lo storage sia visibile dai nodi sopravvissuti.
+
+.Fasi
+. Verificare che tutti i componenti di storage del sito di emergenza siano uguali in quantità e tipo nel sito di sopravvivenza.
++
+Il sito sopravvissuto e il sito di emergenza devono avere lo stesso numero di stack di shelf di dischi, shelf di dischi e dischi. In una configurazione MetroCluster con collegamento a ponte o con collegamento a fabric, i siti devono avere lo stesso numero di bridge FC-SAS.
+
+. Verificare che tutti i dischi che sono stati sostituiti nel sito di disastro non siano di proprietà:
++
+`run local disk show-n`
+
++
+I dischi dovrebbero apparire come non di proprietà.
+
+. Se non sono stati sostituiti dischi, verificare che siano presenti tutti i dischi:
++
+`disk show`
+
+

@@ -1,0 +1,57 @@
+---
+permalink: install-stretch/concept_considerations_firewalls.html 
+sidebar: sidebar 
+keywords: metrocluster, firewall, ports, prepare, tcp, udp 
+summary: 'Se si utilizza un firewall in un sito MetroCluster, è necessario garantire l"accesso a determinate porte richieste.' 
+---
+= Utilizzo del firewall nei siti MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+
+
+== Considerazioni sull'utilizzo del firewall nei siti MetroCluster
+
+Se si utilizza un firewall in un sito MetroCluster, è necessario garantire l'accesso per le porte richieste.
+
+La seguente tabella mostra l'utilizzo della porta TCP/UDP in un firewall esterno posizionato tra due siti MetroCluster.
+
+|===
+
+
+| Tipo di traffico | Porta/servizi 
+
+
+ a| 
+Peering dei cluster
+ a| 
+11104 / TCP
+
+11105 / TCP
+
+
+
+ a| 
+Gestore di sistema di ONTAP
+ a| 
+443 / TCP
+
+
+
+ a| 
+MetroCluster IP Intercluster LIF
+ a| 
+65200 / TCP
+
+10006 / TCP e UDP
+
+
+
+ a| 
+Assistenza hardware
+ a| 
+4444 / TCP
+
+|===

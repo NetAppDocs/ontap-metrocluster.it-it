@@ -1,0 +1,673 @@
+---
+permalink: install-fc/task_cable_the_fc_vi_and_hba_ports_to_switches_in_an_eight_node_fabric_attached_mcc_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, cable, fc, vi, hba, ports, eight, node, array, luns 
+summary: Se si sta configurando una configurazione Fabric-Attached MetroCluster a otto nodi con LUN array, è necessario collegare le porte FC-VI e HBA alle porte dello switch. 
+---
+= Cablaggio delle porte FC-VI e HBA in una configurazione Fabric-Attached MetroCluster a otto nodi con LUN array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se si sta configurando una configurazione Fabric-Attached MetroCluster a otto nodi con LUN array, è necessario collegare le porte FC-VI e HBA alle porte dello switch.
+
+.A proposito di questa attività
+* È necessario ripetere questa attività per ciascun controller in entrambi i siti MetroCluster.
+* Se si prevede di utilizzare dischi in aggiunta alle LUN degli array nella configurazione MetroCluster, è necessario utilizzare le porte HBA e le porte dello switch specificate per la configurazione con i dischi.
++
+** link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.1 e versioni successive"]
+** link:concept_port_assignments_for_fc_switches_when_using_ontap_9_0.html["Assegnazioni delle porte per switch FC quando si utilizza ONTAP 9.0"]
+
+
+
+
+.Fase
+. Collegare le porte FC-VI e HBA da ciascun controller alle porte degli switch FC alternativi. Fare riferimento alle seguenti tabelle:
+
+
+
+
+== Configurazioni di cablaggio per FibreBridge 7500N o 7600N utilizzando entrambe le porte FC
+
+[cols="15,15,16,18,18,18"]
+|===
+
+
+6+| Configurazioni che utilizzano FibreBridge 7500N o 7600N utilizzando entrambe le porte FC (FC1 e FC2) 
+
+
+6+| MetroCluster 1 o DR Group 1 
+
+
+2.2+| Componente .2+| Porta 2+| Switch Brocade modelli 6505, 6510, 6520, 7810, 7840, G610, G620, G620-1, G630, G630-1, E DCX 8510-8 | Switch Brocade G720 
+
+
+| Si connette a FC_switch... | Si collega alla porta dello switch... | Si collega alla porta dello switch... 
+
+
+ a| 
+controller_x_1
+ a| 
+Porta FC-VI A.
+ a| 
+1
+ a| 
+0
+ a| 
+0
+
+
+
+ a| 
+Porta FC-VI b
+ a| 
+2
+ a| 
+0
+ a| 
+0
+
+
+
+ a| 
+Porta FC-VI c
+ a| 
+1
+ a| 
+1
+ a| 
+1
+
+
+
+ a| 
+Porta FC-VI d
+ a| 
+2
+ a| 
+1
+ a| 
+1
+
+
+
+ a| 
+Porta HBA a
+ a| 
+1
+ a| 
+2
+ a| 
+8
+
+
+
+ a| 
+Porta HBA b
+ a| 
+2
+ a| 
+2
+ a| 
+8
+
+
+
+ a| 
+Porta HBA c
+ a| 
+1
+ a| 
+3
+ a| 
+9
+
+
+
+ a| 
+Porta HBA d
+ a| 
+2
+ a| 
+3
+ a| 
+9
+
+
+
+ a| 
+controller_x_2
+ a| 
+Porta FC-VI A.
+ a| 
+1
+ a| 
+4
+ a| 
+4
+
+
+
+ a| 
+Porta FC-VI b
+ a| 
+2
+ a| 
+4
+ a| 
+4
+
+
+
+ a| 
+Porta FC-VI c
+ a| 
+1
+ a| 
+5
+ a| 
+5
+
+
+
+ a| 
+Porta FC-VI d
+ a| 
+2
+ a| 
+5
+ a| 
+5
+
+
+
+ a| 
+Porta HBA a
+ a| 
+1
+ a| 
+6
+ a| 
+12
+
+
+
+ a| 
+Porta HBA b
+ a| 
+2
+ a| 
+6
+ a| 
+12
+
+
+
+ a| 
+Porta HBA c
+ a| 
+1
+ a| 
+7
+ a| 
+13
+
+
+
+ a| 
+Porta HBA d
+ a| 
+2
+ a| 
+7
+ a| 
+13
+
+
+
+.4+| Stack 1  a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+8
+ a| 
+10
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+8
+ a| 
+10
+
+
+
+ a| 
+bridge_x_1B
+ a| 
+FC1
+ a| 
+1
+ a| 
+9
+ a| 
+11
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+9
+ a| 
+11
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+10
+ a| 
+14
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+10
+ a| 
+14
+
+
+
+ a| 
+bridge_x_2B
+ a| 
+FC1
+ a| 
+1
+ a| 
+11
+ a| 
+15
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+11
+ a| 
+15
+
+
+
+ a| 
+Stack 3
+ a| 
+bridge_x_3a
+ a| 
+FC1
+ a| 
+1
+ a| 
+12*
+ a| 
+16
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+12*
+ a| 
+16
+
+
+
+ a| 
+bridge_x_3B
+ a| 
+FC1
+ a| 
+1
+ a| 
+13*
+ a| 
+17
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+13*
+ a| 
+17
+
+
+
+ a| 
+Stack y
+ a| 
+bridge_x_ya
+ a| 
+FC1
+ a| 
+1
+ a| 
+14*
+ a| 
+20
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+14*
+ a| 
+20
+
+
+
+ a| 
+bridge_x_yb
+ a| 
+FC1
+ a| 
+1
+ a| 
+15*
+ a| 
+21
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+15*
+ a| 
+21
+
+
+
+6+| * Le porte da 12 a 15 sono riservate al secondo gruppo MetroCluster o DR dello switch Brocade 7840. 
+
+
+6+| *Nota*: È possibile collegare altri bridge alle porte 16, 17, 20 e 21 negli switch G620, G630, G620-1 e G630-1. 
+|===
+.Al termine
+È necessario collegare gli ISL tra gli switch FC nei siti MetroCluster.
+
+
+
+== Configurazioni di cablaggio per Cisco 9250i
+
+|===
+
+
+4+| Cisco 9250i* 
+
+
+| Componente | Porta | Interruttore 1 | Interruttore 2 
+
+
+ a| 
+controller_x_1
+ a| 
+Porta FC-VI A.
+ a| 
+1
+ a| 
+-
+
+
+
+ a| 
+Porta FC-VI b
+ a| 
+-
+ a| 
+1
+
+
+
+ a| 
+Porta HBA a
+ a| 
+2
+ a| 
+-
+
+
+
+ a| 
+Porta HBA b
+ a| 
+-
+ a| 
+2
+
+
+
+ a| 
+Porta HBA c
+ a| 
+3
+ a| 
+-
+
+
+
+ a| 
+Porta HBA d
+ a| 
+-
+ a| 
+3
+
+
+
+ a| 
+controller_x_2
+ a| 
+Porta FC-VI A.
+ a| 
+4
+ a| 
+-
+
+
+
+ a| 
+Porta FC-VI b
+ a| 
+-
+ a| 
+4
+
+
+
+ a| 
+Porta HBA a
+ a| 
+5
+ a| 
+-
+
+
+
+ a| 
+Porta HBA b
+ a| 
+-
+ a| 
+5
+
+
+
+ a| 
+Porta HBA c
+ a| 
+6
+ a| 
+-
+
+
+
+ a| 
+Porta HBA d
+ a| 
+-
+ a| 
+6
+
+
+
+ a| 
+controller_x_3
+ a| 
+Porta FC-VI A.
+ a| 
+7
+ a| 
+-
+
+
+
+ a| 
+Porta FC-VI b
+ a| 
+-
+ a| 
+7
+
+
+
+ a| 
+Porta HBA a
+ a| 
+8
+ a| 
+-
+
+
+
+ a| 
+Porta HBA b
+ a| 
+-
+ a| 
+8
+
+
+
+ a| 
+Porta HBA c
+ a| 
+9
+ a| 
+-
+
+
+
+ a| 
+Porta HBA d
+ a| 
+-
+ a| 
+9
+
+
+
+ a| 
+controller_x_4
+ a| 
+Porta FC-VI A.
+ a| 
+10
+ a| 
+-
+
+
+
+ a| 
+Porta FC-VI b
+ a| 
+-
+ a| 
+10
+
+
+
+ a| 
+Porta HBA a
+ a| 
+11
+ a| 
+-
+
+
+
+ a| 
+Porta HBA b
+ a| 
+-
+ a| 
+11
+
+
+
+ a| 
+Porta HBA c
+ a| 
+13
+ a| 
+-
+
+
+
+ a| 
+Porta HBA d
+ a| 
+-
+ a| 
+13
+
+|===
+.Al termine
+È necessario collegare gli ISL tra gli switch FC nei siti MetroCluster.

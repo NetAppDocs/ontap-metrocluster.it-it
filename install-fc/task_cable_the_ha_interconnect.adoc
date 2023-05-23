@@ -1,0 +1,32 @@
+---
+permalink: install-fc/task_cable_the_ha_interconnect.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, cable, ha, interconnect, cabling 
+summary: 'Se si dispone di una configurazione MetroCluster a otto o quattro nodi e i controller storage all"interno delle coppie ha si trovano in uno chassis separato, è necessario collegare l"interconnessione ha tra i controller.' 
+---
+= Cablaggio dell'interconnessione ha
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se si dispone di una configurazione MetroCluster a otto o quattro nodi e i controller storage all'interno delle coppie ha si trovano in uno chassis separato, è necessario collegare l'interconnessione ha tra i controller.
+
+.A proposito di questa attività
+* Questa attività non si applica alle configurazioni MetroCluster a due nodi.
+* Questa attività deve essere eseguita in entrambi i siti MetroCluster.
+* L'interconnessione ha deve essere cablata solo se i controller storage all'interno della coppia ha si trovano in uno chassis separato.
++
+Alcuni modelli di storage controller supportano due controller in un unico chassis, nel qual caso utilizzano un'interconnessione ha interna.
+
+
+
+.Fasi
+. Collegare l'interconnessione ha se il partner ha del controller di storage si trova in uno chassis separato.
++
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"]
+
+. Se il sito MetroCluster include due coppie ha, ripetere i passaggi precedenti sulla seconda coppia ha.
+. Ripetere questa operazione sul sito del partner MetroCluster.
+

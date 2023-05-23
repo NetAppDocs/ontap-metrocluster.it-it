@@ -1,0 +1,194 @@
+---
+permalink: disaster-recovery/concept_choosing_the_correct_recovery_procedure_parent_concept.html 
+sidebar: sidebar 
+keywords: failure, metrocluster, configuration, correct, recovery, procedure, choosing, choose, controller, module, scenarios, two-node 
+summary: 'Dopo un errore in una configurazione MetroCluster, selezionare la procedura di ripristino corretta, a seconda dell"entità dell"errore.' 
+---
+= Scelta della procedura di ripristino corretta
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo un errore in una configurazione MetroCluster, selezionare la procedura di ripristino corretta. Utilizzare la tabella e gli esempi seguenti per selezionare la procedura di ripristino appropriata.
+
+Le informazioni contenute in questa tabella presuppongono che l'installazione o la transizione siano completate, il che significa che `metrocluster configure` comando eseguito correttamente.
+
+|===
+
+
+| Scopo dei guasti in un sito di disastro | Procedura 
+
+
+ a| 
+* Nessun guasto al modulo controller
+* Si è verificato un guasto nell'altro hardware
+
+ a| 
+link:task_recover_from_a_non_controller_failure_mcc_dr.html["Ripristino da un guasto non del controller"]
+
+
+
+ a| 
+* Guasto al modulo controller singolo o guasto dei componenti FRU all'interno del modulo controller
+* I dischi non si sono guastati
+
+ a| 
+Se un guasto è limitato a un singolo modulo controller, è necessario utilizzare la procedura di sostituzione FRU del modulo controller per il modello di piattaforma. In una configurazione MetroCluster a quattro o otto nodi, tale errore viene isolato alla coppia ha locale.
+
+*Nota:* la procedura di sostituzione FRU del modulo controller può essere utilizzata in una configurazione MetroCluster a due nodi se non si verificano guasti al disco o ad altri hardware.
+
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"]
+
+
+
+ a| 
+* Guasto al modulo controller singolo o guasto dei componenti FRU all'interno del modulo controller
+* I dischi si sono guastati
+
+ a| 
+link:task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristino in seguito a un errore di storage o multi-controller"]
+
+
+
+ a| 
+* Guasto al modulo controller singolo o guasto dei componenti FRU all'interno del modulo controller
+* I dischi non si sono guastati
+* Si è verificato un guasto all'hardware aggiuntivo esterno del modulo controller
+
+ a| 
+link:task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristino in seguito a un errore di storage o multi-controller"]
+
+Saltare tutti i passaggi per l'assegnazione del disco.
+
+
+
+ a| 
+* Guasto di più moduli controller (con o senza guasti aggiuntivi) all'interno di un gruppo di DR
+
+ a| 
+link:task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristino in seguito a un errore di storage o multi-controller"]
+
+|===
+
+
+== Scenari di guasto del modulo controller durante l'installazione di MetroCluster
+
+La risposta a un errore del modulo controller durante la procedura di configurazione MetroCluster dipende dal fatto che il `metrocluster configure` comando completato correttamente.
+
+* Se il `metrocluster configure` Il comando non è stato ancora eseguito o non è stato eseguito; è necessario riavviare la procedura di configurazione del software MetroCluster dall'inizio con un modulo controller sostitutivo.
++
+
+NOTE: Eseguire le operazioni descritte in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_sw_config_restore_defaults.html["Ripristino delle impostazioni predefinite di sistema su un modulo controller"] su ciascun controller (incluso il controller sostitutivo) per verificare che la configurazione precedente sia stata rimossa.
+
+* Se il `metrocluster configure` il comando è stato completato correttamente e il modulo controller ha avuto esito negativo. utilizzare la tabella precedente per determinare la procedura di ripristino corretta.
+
+
+
+
+== Scenari di guasto del modulo controller durante la transizione MetroCluster FC-IP
+
+La procedura di ripristino può essere utilizzata se si verifica un guasto del sito durante la transizione. Tuttavia, può essere utilizzato solo se la configurazione è una configurazione mista stabile, con il gruppo FC DR e il gruppo IP DR completamente configurati. L'output di `metrocluster node show` Il comando dovrebbe mostrare entrambi i gruppi DR con tutti e otto i nodi.
+
+
+IMPORTANT: Se il guasto si è verificato durante la transizione quando i nodi sono in fase di aggiunta o rimozione, è necessario contattare il supporto tecnico.
+
+
+
+== Scenari di guasto del modulo controller nelle configurazioni MetroCluster a otto nodi
+
+Scenari di guasto:
+
+* <<Guasti a un singolo modulo controller in un singolo gruppo di DR>>
+* <<Due guasti del modulo controller in un singolo gruppo di DR>>
+* <<Guasti a un singolo modulo controller in gruppi di DR separati>>
+* <<Tre guasti del modulo controller distribuiti tra i gruppi di DR>>
+
+
+
+
+=== Guasti a un singolo modulo controller in un singolo gruppo di DR
+
+In questo caso il guasto è limitato a una coppia ha.
+
+* Se non è necessario sostituire lo storage, è possibile utilizzare la procedura di sostituzione FRU del modulo controller per il modello di piattaforma.
++
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+
+* Se lo storage deve essere sostituito, è possibile utilizzare la procedura di ripristino del modulo multi-controller.
++
+link:task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristino in seguito a un errore di storage o multi-controller"]
+
++
+Questo scenario si applica anche alle configurazioni MetroCluster a quattro nodi.
+
++
+image::../media/mcc_dr_groups_8_node_with_a_single_controller_failure.gif[mcc dr raggruppa 8 nodi con un singolo guasto del controller]
+
+
+
+
+
+=== Due guasti del modulo controller in un singolo gruppo di DR
+
+In questo caso il guasto richiede uno switchover. È possibile utilizzare la procedura di failure recovery del modulo multi-controller.
+
+link:task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristino in seguito a un errore di storage o multi-controller"]
+
+Questo scenario si applica anche alle configurazioni MetroCluster a quattro nodi.
+
+image::../media/mcc_dr_groups_8_node_with_a_multi_controller_failure.gif[mcc dr raggruppa 8 nodi con un guasto a più controller]
+
+
+
+=== Guasti a un singolo modulo controller in gruppi di DR separati
+
+In questo caso il guasto è limitato a coppie ha separate.
+
+* Se non è necessario sostituire lo storage, è possibile utilizzare la procedura di sostituzione FRU del modulo controller per il modello di piattaforma.
++
+La procedura di sostituzione della FRU viene eseguita due volte, una per ogni modulo controller guasto.
+
++
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+
+* Se lo storage deve essere sostituito, è possibile utilizzare la procedura di ripristino del modulo multi-controller.
++
+link:task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristino in seguito a un errore di storage o multi-controller"]
+
+
+
+image::../media/mcc_dr_groups_8_node_with_two_single_controller_failures.gif[mcc dr raggruppa 8 nodi con due guasti a singolo controller]
+
+
+
+=== Tre guasti del modulo controller distribuiti tra i gruppi di DR
+
+In questo caso il guasto richiede uno switchover. È possibile utilizzare la procedura di failure recovery del modulo multi-controller per il gruppo DR uno.
+
+link:task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristino in seguito a un errore di storage o multi-controller"]
+
+È possibile utilizzare la procedura di sostituzione FRU del modulo controller specifico della piattaforma per DR Gruppo due.
+
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+
+image::../media/mcc_dr_groups_8_node_with_a_3_controller_failure.gif[mcc dr raggruppa 8 nodi con un guasto a 3 controller]
+
+
+
+== Scenari di guasto del modulo controller nelle configurazioni MetroCluster a due nodi
+
+La procedura utilizzata dipende dall'entità del guasto.
+
+* Se non è necessario sostituire lo storage, è possibile utilizzare la procedura di sostituzione FRU del modulo controller per il modello di piattaforma.
++
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+
+* Se lo storage deve essere sostituito, è possibile utilizzare la procedura di ripristino del modulo multi-controller.
++
+link:task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristino in seguito a un errore di storage o multi-controller"]
+
+
+
+image::../media/mcc_dr_groups_2_node_with_a_single_controller_failure.gif[mcc dr raggruppa 2 nodi con un singolo guasto del controller]

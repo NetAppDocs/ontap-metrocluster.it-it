@@ -1,0 +1,77 @@
+---
+permalink: upgrade/concept_choosing_tech_refresh_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, choose, upgrade, refresh, method 
+summary: 'La procedura di refresh utilizzata dipende dal modello di piattaforma, dall"ambito dell"aggiornamento e dal tipo di configurazione MetroCluster.' 
+---
+= Scelta di un metodo di refresh del sistema
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La procedura di refresh del sistema utilizzata dipende dal modello di piattaforma e dal tipo di configurazione MetroCluster. Le procedure di refresh si applicano ai controller e agli shelf di storage. Nelle procedure di refresh, nuovi controller e shelf vengono aggiunti alla configurazione di MetroCluster, creando un secondo gruppo di DR e quindi i dati vengono migrati senza interruzioni nei nuovi nodi. I controller originali vengono quindi ritirati.
+
+
+
+=== Combinazioni di aggiornamento tecnico FC MetroCluster supportate
+
+image::../media/metrocluster_fc_tech_refresh.png[aggiornamento tecnico di MetroCluster fc]
+
+* È necessario completare la procedura di aggiornamento tecnico prima di aggiungere un nuovo carico.
+
+
+[NOTE]
+====
+* Non superare i limiti di oggetti della "parte inferiore" delle piattaforme nella combinazione. Applicare il limite inferiore di oggetti delle due piattaforme.
+* Se i limiti della piattaforma di destinazione sono inferiori ai limiti MetroCluster, è necessario riconfigurare il MetroCluster in modo che sia pari o inferiore ai limiti della piattaforma di destinazione prima di aggiungere i nuovi nodi.
+* Fare riferimento a. link:https://hwu.netapp.html["Hardware Universe"^] per i limiti della piattaforma.
+
+
+====
+
+
+=== Combinazioni di aggiornamento tecnico MetroCluster IP supportate
+
+image::../media/metrocluster_techref_ip.png[Combinazioni di aggiornamento tecnico IP di MetroCluster]
+
+* È necessario completare la procedura di aggiornamento tecnico prima di aggiungere un nuovo carico.
+
+
+[NOTE]
+====
+* Non superare i limiti di oggetti della "parte inferiore" delle piattaforme nella combinazione. Applicare il limite inferiore di oggetti delle due piattaforme.
+* Se i limiti della piattaforma di destinazione sono inferiori ai limiti MetroCluster, è necessario riconfigurare il MetroCluster in modo che sia uguale o inferiore ai limiti della piattaforma di destinazione prima di aggiungere i nuovi nodi.
+* Fare riferimento a. link:https://hwu.netapp.html["Hardware Universe"^] per i limiti della piattaforma.
+
+
+====
+[cols="2,1,1,2"]
+|===
+| Metodo di refresh | Tipo di configurazione | Versione di ONTAP | Procedura 
+
+
+ a| 
+* Metodo: Espandere la configurazione MetroCluster e rimuovere i nodi precedenti
+
+ a| 
+FC a quattro nodi
+ a| 
+9.6 e versioni successive
+ a| 
+link:task_refresh_4n_mcc_fc.html["Collegamento alla procedura"]
+
+
+
+ a| 
+* Metodo: Espandere la configurazione MetroCluster e rimuovere i nodi precedenti
+
+ a| 
+IP a quattro nodi
+ a| 
+9.8 e versioni successive
+ a| 
+link:task_refresh_4n_mcc_ip.html["Collegamento alla procedura"]
+
+|===

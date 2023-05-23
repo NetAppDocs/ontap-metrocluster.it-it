@@ -1,0 +1,160 @@
+---
+permalink: upgrade/task_boot_the_new_controllers_and_join_them_to_the_cluster.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, boot, new, controller, join, cluster 
+summary: 'Per unire i nuovi controller al cluster, è necessario avviare ciascun nuovo modulo controller e utilizzare la procedura guidata di configurazione del cluster ONTAP per identificare l"Unione del cluster.' 
+---
+= Avviare i nuovi controller e unirli al cluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Per unire i nuovi controller al cluster, è necessario avviare ciascun nuovo modulo controller e utilizzare la procedura guidata di configurazione del cluster ONTAP per identificare l'Unione del cluster.
+
+.Prima di iniziare
+La configurazione MetroCluster deve essere cablata.
+
+Non è necessario aver configurato il Service Processor prima di eseguire questa attività.
+
+.A proposito di questa attività
+Questa attività deve essere eseguita su ciascuno dei nuovi controller in entrambi i cluster nella configurazione MetroCluster.
+
+.Fasi
+. Se non lo si è già fatto, accendere ciascun nodo e lasciarlo avviare completamente.
++
+Se il sistema è in modalità manutenzione, eseguire il `halt` Per uscire dalla modalità di manutenzione, quindi immettere il seguente comando dal prompt DEL CARICATORE:
+
++
+`boot_ontap`
+
++
+Il modulo controller accede alla procedura guidata di configurazione dei nodi.
+
++
+L'output dovrebbe essere simile a quanto segue:
+
++
+[listing]
+----
+Welcome to node setup
+
+You can enter the following commands at any time:
+  "help" or "?" - if you want to have a question clarified,
+  "back" - if you want to change previously answered questions, and
+  "exit" or "quit" - if you want to quit the setup wizard.
+				Any changes you made before quitting will be saved.
+
+To accept a default or omit a question, do not enter a value.
+.
+.
+.
+----
+. Attivare lo strumento AutoSupport seguendo le istruzioni fornite dal sistema.
+. Rispondere alle richieste per configurare l'interfaccia di gestione dei nodi.
++
+I prompt sono simili ai seguenti:
+
++
+[listing]
+----
+Enter the node management interface port: [e0M]:
+Enter the node management interface IP address: 10.228.160.229
+Enter the node management interface netmask: 225.225.252.0
+Enter the node management interface default gateway: 10.228.160.1
+----
+. Verificare che i nodi siano configurati in modalità ad alta disponibilità:
++
+`storage failover show -fields mode`
+
++
+In caso contrario, eseguire il seguente comando su ciascun nodo, quindi riavviare il nodo:
+
++
+`storage failover modify -mode ha -node localhost`
+
++
+Questo comando configura la modalità di disponibilità elevata ma non attiva il failover dello storage. Il failover dello storage viene attivato automaticamente quando si esegue il `metrocluster configure` comando più avanti nel processo di configurazione.
+
+. Verificare che siano configurate quattro porte come interconnessioni cluster:
++
+`network port show`
+
++
+L'esempio seguente mostra l'output per due controller in cluster_A. Se si tratta di una configurazione MetroCluster a due nodi, l'output mostra solo un nodo.
+
++
+[listing]
+----
+cluster_A::> network port show
+                                                             Speed (Mbps)
+Node   Port      IPspace      Broadcast Domain Link   MTU    Admin/Oper
+------ --------- ------------ ---------------- ----- ------- ------------
+node_A_1
+       **e0a       Cluster      Cluster          up       1500  auto/1000
+       e0b       Cluster      Cluster          up       1500  auto/1000**
+       e0c       Default      Default          up       1500  auto/1000
+       e0d       Default      Default          up       1500  auto/1000
+       e0e       Default      Default          up       1500  auto/1000
+       e0f       Default      Default          up       1500  auto/1000
+       e0g       Default      Default          up       1500  auto/1000
+node_A_2
+       **e0a       Cluster      Cluster          up       1500  auto/1000
+       e0b       Cluster      Cluster          up       1500  auto/1000**
+       e0c       Default      Default          up       1500  auto/1000
+       e0d       Default      Default          up       1500  auto/1000
+       e0e       Default      Default          up       1500  auto/1000
+       e0f       Default      Default          up       1500  auto/1000
+       e0g       Default      Default          up       1500  auto/1000
+14 entries were displayed.
+----
+. Poiché si sta utilizzando la CLI per configurare il cluster, uscire dalla procedura guidata Node Setup:
++
+`exit`
+
+. Accedere all'account admin utilizzando `admin` nome utente.
+. Avviare l'installazione guidata del cluster, quindi unirsi al cluster esistente:
++
+`cluster setup`
+
++
+[listing]
+----
+::> cluster setup
+
+Welcome to the cluster setup wizard.
+
+You can enter the following commands at any time:
+  "help" or "?" - if you want to have a question clarified,
+  "back" - if you want to change previously answered questions, and
+  "exit" or "quit" - if you want to quit the cluster setup wizard.
+     Any changes you made before quitting will be saved.
+
+You can return to cluster setup at any time by typing "cluster setup".
+To accept a default or omit a question, do not enter a value.
+
+
+Do you want to create a new cluster or join an existing cluster? {create, join}:`join`
+----
+. Una volta completata la procedura guidata *Cluster Setup* e chiusa, verificare che il cluster sia attivo e che il nodo funzioni correttamente:
++
+`cluster show`
+
++
+L'esempio seguente mostra un cluster in cui il primo nodo (cluster1-01) è integro e idoneo a partecipare:
+
++
+[listing]
+----
+cluster_A::> cluster show
+Node               Health  Eligibility
+------------------ ------- ------------
+node_A_1           true    true
+node_A_2           true    true
+node_A_3           true    true
+----
++
+Se è necessario modificare una delle impostazioni immesse per l'SVM amministrativa o il nodo SVM, è possibile accedere alla procedura guidata *Cluster Setup* utilizzando `cluster setup command`.
+
+

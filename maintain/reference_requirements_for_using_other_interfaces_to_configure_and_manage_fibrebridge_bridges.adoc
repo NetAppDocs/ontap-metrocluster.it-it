@@ -1,0 +1,65 @@
+---
+permalink: maintain/reference_requirements_for_using_other_interfaces_to_configure_and_manage_fibrebridge_bridges.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, requirements, interfaces, fibrebridge, bridges, manage, configures 
+summary: 'È possibile utilizzare la combinazione di una porta seriale, Telnet e FTP per gestire i bridge FibreBridge invece delle interfacce di gestione consigliate. Il sistema deve soddisfare i requisiti dell"interfaccia applicabile prima di installare i bridge.' 
+---
+= Requisiti per l'utilizzo di altre interfacce per configurare e gestire i bridge FibreBridge
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile utilizzare la combinazione di una porta seriale, Telnet e FTP per gestire i bridge FibreBridge invece delle interfacce di gestione consigliate. Il sistema deve soddisfare i requisiti dell'interfaccia applicabile prima di installare i bridge.
+
+È possibile utilizzare una porta seriale o Telnet per configurare il bridge e la porta di gestione Ethernet 1 e per gestire il bridge. È possibile utilizzare FTP per aggiornare il firmware del bridge.
+
+
+NOTE: Il _Manuale d'installazione e di funzionamento di FibreBridge atto_ per il tuo modello bridge contiene ulteriori informazioni sulle interfacce di gestione.
+
+È possibile accedere a questo documento sul sito Web di atto utilizzando il link fornito nella pagina ATTO Fibrebridge Description.
+
+
+
+== Porta seriale
+
+Quando si utilizza la porta seriale per configurare e gestire un bridge e per configurare la porta di gestione Ethernet 1, il sistema deve soddisfare i seguenti requisiti:
+
+* Un cavo seriale (che collega la porta seriale del bridge a una porta seriale (COM) del computer utilizzato per la configurazione)
++
+La porta seriale del bridge è RJ-45 e ha lo stesso pin-out dei controller.
+
+* Un programma di emulazione di terminale come Hyperterminal, Teraterm o putty per accedere alla console
++
+Il programma terminale deve essere in grado di registrare l'output dello schermo in un file.
+
+
+
+
+
+== Telnet
+
+Quando si utilizza Telnet per configurare e gestire un bridge, il sistema deve soddisfare i seguenti requisiti:
+
+* Un cavo seriale (che collega la porta seriale del bridge a una porta seriale (COM) del computer utilizzato per la configurazione)
++
+La porta seriale del bridge è RJ-45 e ha lo stesso pin-out dei controller.
+
+* (Consigliato) un nome utente e una password non predefiniti (per l'accesso al bridge)
+* Un programma di emulazione di terminale come Hyperterminal, Teraterm o putty per accedere alla console
++
+Il programma terminale deve essere in grado di registrare l'output dello schermo in un file.
+
+* Un indirizzo IP, una subnet mask e informazioni sul gateway per la porta di gestione Ethernet 1 su ciascun bridge
+
+
+
+
+== FTP
+
+Quando si utilizza FTP per aggiornare il firmware del bridge, il sistema deve soddisfare i seguenti requisiti:
+
+* Un cavo Ethernet standard (che collega la porta di gestione Ethernet del bridge 1 alla rete)
+* (Consigliato) un nome utente e una password non predefiniti (per l'accesso al bridge)
+

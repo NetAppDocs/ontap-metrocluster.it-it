@@ -1,0 +1,272 @@
+---
+permalink: transition/task_disruptively_transition_while_move_volumes_from_old_shelves_to_new_shelves.html 
+sidebar: sidebar 
+keywords: start, ontap, disruptive, transition, two-node, metrocluster, fc, configuration, four-node, two-node, retire, storage, shelves, shelf, procedure, exist, drive, requirement, retiring, workflow, moving, data, move, retiring, retire, migrate, migrating, root, aggregate, 
+summary: A partire da ONTAP 9.8, è possibile passare in modo disgregante da una configurazione MetroCluster FC a due nodi a una configurazione MetroCluster IP a quattro nodi e dismettere gli shelf di storage esistenti. La procedura include passaggi per spostare i dati dagli shelf di dischi esistenti alla nuova configurazione e poi ritirare i vecchi shelf. 
+---
+= Transizione senza interruzioni da MetroCluster FC a MetroCluster IP quando si ritirano gli shelf di storage (ONTAP 9.8 e versioni successive)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A partire da ONTAP 9.8, è possibile passare in modo disgregante da una configurazione MetroCluster FC a due nodi a una configurazione MetroCluster IP a quattro nodi e dismettere gli shelf di storage esistenti. La procedura include passaggi per spostare i dati dagli shelf di dischi esistenti alla nuova configurazione e poi ritirare i vecchi shelf.
+
+* Questa procedura viene utilizzata quando si prevede di dismettere gli shelf di storage esistenti e spostare tutti i dati nei nuovi shelf nella configurazione IP di MetroCluster.
+* I modelli di shelf di storage esistenti devono essere supportati dai nuovi nodi IP MetroCluster.
+* Questa procedura è supportata nei sistemi che eseguono ONTAP 9.8 e versioni successive.
+* Questa procedura ha un'interruzione.
+* Questa procedura si applica solo a una configurazione MetroCluster FC a due nodi.
++
+Se si dispone di una configurazione MetroCluster FC a quattro nodi, vedere link:concept_choosing_your_transition_procedure_mcc_transition.html["Scelta della procedura di transizione"].
+
+* È necessario soddisfare tutti i requisiti e seguire tutte le fasi della procedura.
+
+
+
+
+== Requisiti per la transizione quando si ritirano i vecchi shelf
+
+Prima di iniziare il processo di transizione, è necessario assicurarsi che la configurazione MetroCluster FC esistente soddisfi i requisiti.
+
+* Deve essere una configurazione Fabric-Attached a due nodi o Stretch MetroCluster e tutti i nodi devono eseguire ONTAP 9.8 o versione successiva.
++
+I nuovi moduli controller IP MetroCluster devono eseguire la stessa versione di ONTAP 9.8.
+
+* Le piattaforme esistenti e nuove devono essere una combinazione supportata per la transizione.
++
+link:concept_supported_platforms_for_transition.html["Piattaforme supportate per una transizione senza interruzioni"]
+
+* Deve soddisfare tutti i requisiti e i cavi descritti nelle _Guide di installazione e configurazione di MetroCluster_.
++
+link:../install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"]
+
+
+
+La nuova configurazione deve inoltre soddisfare i seguenti requisiti:
+
+* I nuovi modelli di piattaforma MetroCluster IP devono supportare i vecchi modelli di shelf storage.
++
+https://hwu.netapp.com["NetApp Hardware Universe"^]
+
+* A seconda dei dischi spare disponibili negli shelf esistenti, è necessario aggiungere ulteriori dischi.
++
+Questo potrebbe richiedere ulteriori shelf di dischi.
+
++
+È necessario disporre di ulteriori 14 - 18 unità per ciascun controller:
+
++
+** Tre dischi pool 0
+** Tre dischi pool 1
+** Due dischi di riserva
+** Da sei a dieci dischi per il volume di sistema
+
+
+* È necessario assicurarsi che la configurazione, inclusi i nuovi nodi, non superi i limiti della piattaforma per la configurazione, inclusi il numero di dischi, la capacità delle dimensioni dell'aggregato root e così via
++
+Queste informazioni sono disponibili per ciascun modello di piattaforma all'indirizzo https://hwu.netapp.com["NetApp Hardware Universe"^]
+
+
+
+È necessario disporre dell'accesso remoto alla console per tutti e sei i nodi dal sito MetroCluster o pianificare il trasferimento tra i siti come richiesto dalla procedura.
+
+
+
+== Workflow per una transizione senza interruzioni durante lo spostamento dei dati e il ritiro dei vecchi shelf di storage
+
+Devi seguire il workflow specifico per garantire una transizione di successo.
+
+Mentre ti prepari per la transizione, pianifica i viaggi tra i siti. Tenere presente che, dopo aver eseguito il racking e il cablaggio dei nodi remoti, è necessario accedere al terminale seriale per i nodi. L'accesso al Service Processor non sarà disponibile fino a quando i nodi non saranno configurati.
+
+image::../media/workflow_2n_transition_moving_data_to_new_shelves.png[workflow 2n transizione spostamento dei dati su nuovi shelf]
+
+
+
+== Transizione della configurazione
+
+Seguire la procedura di transizione dettagliata.
+
+.A proposito di questa attività
+Nelle fasi seguenti, si viene indirizzati ad altre procedure. È necessario eseguire i passaggi di ciascuna procedura di riferimento nell'ordine indicato.
+
+.Fasi
+. Pianificare la mappatura delle porte utilizzando i passaggi descritti in link:../transition/concept_requirements_for_fc_to_ip_transition_2n_mcc_transition.html#mapping-ports-from-the-metrocluster-fc-nodes-to-the-metrocluster-ip-nodes["Mappatura delle porte dai nodi FC MetroCluster ai nodi IP MetroCluster"].
+. Preparare i controller IP MetroCluster seguendo la procedura descritta in link:../transition/concept_requirements_for_fc_to_ip_transition_2n_mcc_transition.html#preparing-the-metrocluster-ip-controllers["Preparazione dei controller IP MetroCluster"].
+. Verificare lo stato della configurazione MetroCluster FC.
++
+Eseguire le operazioni descritte in link:../transition/concept_requirements_for_fc_to_ip_transition_2n_mcc_transition.html#verifying-the-health-of-the-metrocluster-fc-configuration["Verifica dello stato della configurazione MetroCluster FC"].
+
+. Raccogliere informazioni dalla configurazione MetroCluster FC.
++
+Eseguire le operazioni descritte in link:task_transition_the_mcc_fc_nodes_2n_mcc_transition_supertask.html#gathering-information-from-the-existing-controller-modules-before-the-transition["Raccolta di informazioni dai moduli controller esistenti prima della transizione"].
+
+. Rimuovere il monitoraggio di spareggio, se necessario.
++
+Eseguire le operazioni descritte in link:../transition/concept_requirements_for_fc_to_ip_transition_2n_mcc_transition.html#verifying-the-health-of-the-metrocluster-fc-configuration["Rimozione della configurazione esistente dal software di monitoraggio o dallo spareggio"].
+
+. Preparare e rimuovere i nodi FC MetroCluster esistenti.
++
+Eseguire le operazioni descritte in link:task_transition_the_mcc_fc_nodes_2n_mcc_transition_supertask.html["Transizione dei nodi FC MetroCluster"].
+
+. Collegare i nuovi nodi IP MetroCluster.
++
+Eseguire le operazioni descritte in link:task_connect_the_mcc_ip_controller_modules_2n_mcc_transition_supertask.html["Collegamento dei moduli del controller IP MetroCluster"].
+
+. Configurare i nuovi nodi IP MetroCluster e completare la transizione.
++
+Eseguire le operazioni descritte in link:task_configure_the_new_nodes_and_complete_transition.html["Configurazione dei nuovi nodi e completamento della transizione"].
+
+
+
+
+
+== Migrazione degli aggregati root
+
+Una volta completata la transizione, migrare gli aggregati root esistenti rimanenti dalla configurazione MetroCluster FC ai nuovi shelf nella configurazione MetroCluster IP.
+
+.A proposito di questa attività
+Questa attività sposta gli aggregati root per Node_A_1-FC e Node_B_1-FC negli shelf di dischi di proprietà dei nuovi controller IP MetroCluster:
+
+.Fasi
+. Assegnare il pool di dischi 0 sul nuovo shelf di storage locale al controller che ha la radice migrata (ad esempio, se la radice del nodo_A_1-FC viene migrata, assegnare il pool di dischi 0 sul nuovo shelf al nodo_A_1-IP)
++
+Si noti che la migrazione _rimuove e non crea di nuovo il mirror root_, pertanto non è necessario assegnare i dischi del pool 1 prima di inviare il comando di migrazione
+
+. Impostare la modalità dei privilegi su Advanced (avanzata):
++
+`set priv advanced`
+
+. Migrare l'aggregato root:
++
+`system node migrate-root -node node-name -disklist disk-id1,disk-id2,diskn -raid-type raid-type`
+
++
+** Il nome del nodo è il nodo in cui viene migrato l'aggregato root.
+** L'id disco identifica il pool 0 dischi sul nuovo shelf.
+** il tipo raid è normalmente lo stesso del tipo raid dell'aggregato root esistente.
+** È possibile utilizzare il comando `job show -idjob-id-instance` per controllare lo stato della migrazione, dove id lavoro è il valore fornito quando viene emesso il comando migrate-root.
++
+Ad esempio, se l'aggregato root per Node_A_1-FC consisteva in tre dischi con raid_dp, per migrare root in un nuovo shelf 11 viene utilizzato il seguente comando:
+
++
+[listing]
+----
+system node migrate-root -node node_A_1-IP -disklist 3.11.0,3.11.1,3.11.2 -raid-type raid_dp
+----
+
+
+. Attendere il completamento dell'operazione di migrazione e il riavvio automatico del nodo.
+. Assegnare i dischi del pool 1 per l'aggregato root su un nuovo shelf direttamente connesso al cluster remoto.
+. Eseguire il mirroring dell'aggregato root migrato.
+. Attendere che l'aggregato root completi la risincronizzazione.
++
+È possibile utilizzare il comando show dell'aggregato di storage per controllare lo stato di sincronizzazione degli aggregati.
+
+. Ripetere questi passaggi per l'altro aggregato root.
+
+
+
+
+== Migrazione degli aggregati di dati
+
+Crea aggregati di dati sui nuovi shelf e utilizza lo spostamento dei volumi per trasferire i volumi di dati dai vecchi shelf agli aggregati dei nuovi shelf.
+
+. Spostare i volumi di dati in aggregati sui nuovi controller, un volume alla volta.
++
+http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-AFE432F6-60AD-4A79-86C0-C7D12957FA63.html["Creazione di un aggregato e spostamento dei volumi nei nuovi nodi"^]
+
+
+
+
+
+== Shelf ritirati spostati da Node_A_1-FC e Node_A_2-FC
+
+I vecchi shelf di storage vengono ritirati dalla configurazione FC originale di MetroCluster. Questi shelf erano originariamente di proprietà di Node_A_1-FC e Node_A_2-FC.
+
+. Identificare gli aggregati sui vecchi shelf sul cluster_B che devono essere cancellati.
++
+In questo esempio, i seguenti aggregati di dati sono ospitati dal cluster MetroCluster FC_B e devono essere cancellati: aggr_data_a1 e aggr_data_a2.
+
++
+
+NOTE: È necessario eseguire i passaggi per identificare, offline ed eliminare gli aggregati di dati sugli shelf. L'esempio riguarda un solo cluster.
+
++
+[listing]
+----
+cluster_B::> aggr show
+
+Aggregate     Size Available Used% State   #Vols  Nodes            RAID Status
+--------- -------- --------- ----- ------- ------ ---------------- ------------
+aggr0_node_A_1-FC
+           349.0GB   16.83GB   95% online       1 node_A_1-IP      raid_dp,
+                                                                   mirrored,
+                                                                   normal
+aggr0_node_A_2-IP
+           349.0GB   16.83GB   95% online       1 node_A_2-IP      raid_dp,
+                                                                   mirrored,
+                                                                   normal
+...
+8 entries were displayed.
+
+cluster_B::>
+----
+. Controllare se gli aggregati di dati hanno volumi MDV_aud ed eliminarli prima di eliminare gli aggregati.
++
+È necessario eliminare i volumi MDV_aud in quanto non possono essere spostati.
+
+. Portare tutti gli aggregati offline, quindi eliminarli:
++
+.. Portare l'aggregato offline:
++
+`storage aggregate offline -aggregate aggregate-name`
+
++
+L'esempio seguente mostra che il nodo aggregato_B_1_aggr0 è stato portato offline:
+
++
+[listing]
+----
+cluster_B::> storage aggregate offline -aggregate node_B_1_aggr0
+
+Aggregate offline successful on aggregate: node_B_1_aggr0
+----
+.. Eliminare l'aggregato:
++
+`storage aggregate delete -aggregate aggregate-name`
+
++
+Quando richiesto, è possibile distruggere il plex.
+
++
+Nell'esempio seguente viene illustrato il nodo aggregato B_1_aggr0 che viene cancellato.
+
++
+[listing]
+----
+cluster_B::> storage aggregate delete -aggregate node_B_1_aggr0
+Warning: Are you sure you want to destroy aggregate "node_B_1_aggr0"? {y|n}: y
+[Job 123] Job succeeded: DONE
+
+cluster_B::>
+----
+
+
+. Dopo aver eliminato tutti gli aggregati, spegnere, scollegare e rimuovere gli shelf.
+. Ripetere i passaggi precedenti per dismettere gli shelf cluster_A.
+
+
+
+
+== Completamento della transizione
+
+Dopo aver rimosso i vecchi moduli controller, è possibile completare il processo di transizione.
+
+.Fase
+. Completare il processo di transizione.
++
+Eseguire le operazioni descritte in link:task_return_the_system_to_normal_operation_2n_mcc_transition_supertask.html["Ripristino del normale funzionamento del sistema"].
+
+

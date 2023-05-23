@@ -1,0 +1,71 @@
+---
+permalink: maintain/task_add_lsls_to_a_cisco_fc_switch.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, add, isl, cisco, switch 
+summary: Potrebbe essere necessario aggiungere gli ISL a uno switch se si sta aggiungendo o aggiornando hardware come controller aggiuntivi o più veloci o switch più veloci. 
+---
+= Aggiunta di LSL a uno switch Cisco
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Potrebbe essere necessario aggiungere gli ISL a uno switch se si sta aggiungendo o aggiornando hardware come controller aggiuntivi o più veloci o switch più veloci.
+
+Per garantire la connettività ISL, è necessario completare anche i passaggi completati su uno switch.
+
+.Fasi
+. Disattivare le porte ISL degli ISL da aggiungere su entrambi gli switch del fabric:
++
+`*FC_switch_A_1#config t*`
+
++
+Immettere i comandi di configurazione, uno per riga. Terminare con CTRL-Z dopo aver inserito tutti i comandi di configurazione.
+
++
+[listing]
+----
+
+	FC_switch_A_1(config)# interface fc1/36
+	FC_switch_A_1(config-if)# shut
+	FC_switch_A_1(config)# end
+----
+. Inserire gli SFP nelle porte che si stanno aggiungendo come porte ISL e cablarli come indicato nella _Guida all'installazione e alla configurazione_.
++
+Assicurarsi che queste porte siano elencate nella _Guida all'installazione e alla configurazione_ dello switch a cui si desidera aggiungerle.
+
+. Configurare le porte ISL in base alla _Guida all'installazione e alla configurazione_.
+. Abilitare tutte le porte ISL (se non attivate) su entrambi gli switch del fabric:
++
+`*FC_switch_A_1# config t*`
+
++
+Immettere i comandi di configurazione, uno per riga. Terminare con CTRL-Z.
+
++
+[listing]
+----
+
+ FC_switch_A_1# interface fc1/36
+	FC_switch_A_1(config-if)# no shut
+	FC_switch_A_1(config)# end
+----
+. Verificare che gli ISL siano stati stabiliti tra entrambi gli switch:
++
+`*show topology isl*`
+
+. Ripetere la procedura sul secondo fabric:
++
+[listing]
+----
+--------------------------------------------------------------------------------
+	__________Local_________ _________Remote_________ VSAN Cost I/F  PC    I/F  Band
+	 PC Domain SwName   Port  Port   SwName Domain PC          Stat Stat Speed width
+	--------------------------------------------------------------------------------
+	  1   0x11 cisco9 fc1/36  fc1/36 cisco9 0xbc    1    1   15 up   up    16g   64g
+	  1   0x11 cisco9 fc1/40  fc1/40 cisco9 0xbc    1    1   15 up   up    16g   64g
+	  1   0x11 cisco9 fc1/44  fc1/44 cisco9 0xbc    1    1   15 up   up    16g   64g
+	  1   0x11 cisco9 fc1/48  fc1/48 cisco9 0xbc    1    1   15 up   up    16g   64g
+----
+

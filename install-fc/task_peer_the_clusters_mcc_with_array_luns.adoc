@@ -1,0 +1,25 @@
+---
+permalink: install-fc/task_peer_the_clusters_mcc_with_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, peering, cluster 
+summary: I cluster nella configurazione di MetroCluster devono essere in una relazione peer in modo da poter comunicare tra loro ed eseguire il mirroring dei dati essenziale per il disaster recovery di MetroCluster. 
+---
+= Peering dei cluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+I cluster nella configurazione di MetroCluster devono essere in una relazione peer in modo da poter comunicare tra loro ed eseguire il mirroring dei dati essenziale per il disaster recovery di MetroCluster.
+
+.Fasi
+. Configurare le LIF tra cluster utilizzando la procedura descritta in:
++
+link:../upgrade/task_configure_intercluster_lifs_to_use_dedicated_intercluster_ports.html["Configurazione delle LIF tra cluster"]
+
+. Creare una relazione peer del cluster utilizzando la procedura descritta in:
++
+link:concept_configure_the_mcc_software_in_ontap.html#peering-the-clusters["Peering dei cluster"]
+
+

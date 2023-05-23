@@ -1,0 +1,194 @@
+---
+permalink: install-fc/concept_example_of_switch_zoning_in_a_two_node_mcc_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, switch, zoning, two, node, array, luns 
+summary: Lo zoning dello switch definisce i percorsi tra i nodi connessi. La configurazione dello zoning consente di definire quali LUN di array possono essere visualizzati da specifici sistemi ONTAP. 
+---
+= Esempio di zoning dello switch in una configurazione MetroCluster a due nodi con LUN array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lo zoning dello switch definisce i percorsi tra i nodi connessi. La configurazione dello zoning consente di definire quali LUN di array possono essere visualizzati da specifici sistemi ONTAP.
+
+È possibile utilizzare il seguente esempio come riferimento per determinare lo zoning per una configurazione MetroCluster a due nodi collegata al fabric con LUN di array:
+
+image::../media/zoning_two_node_mcc_fabric_attached.gif[creazione di zone con fabric mcc a due nodi collegato]
+
+L'esempio mostra lo zoning da singolo iniziatore a destinazione singola per le configurazioni MetroCluster. Le linee dell'esempio rappresentano zone piuttosto che connessioni; ciascuna linea è etichettata con il relativo numero di zona.
+
+Nell'esempio, le LUN degli array sono allocate su ciascun array di storage. I LUN di pari dimensione vengono forniti sugli array di storage di entrambi i siti, un requisito SyncMirror. Ogni sistema ONTAP dispone di due percorsi per l'array LUN. Le porte dell'array di storage sono ridondanti.
+
+Le coppie di porte array ridondanti per entrambi i siti sono le seguenti:
+
+* Storage array presso il sito A:
++
+** Porte 1A e 2A
+** Porte 1B e 2B
+
+
+* Storage array presso il sito B:
++
+** Porte 1A' e 2A'
+** Porte 1B' e 2B'
+
+
+
+
+Le coppie di porte ridondanti su ciascun array di storage formano percorsi alternativi. Pertanto, entrambe le porte delle coppie di porte possono accedere alle LUN sui rispettivi array di storage.
+
+La seguente tabella mostra le zone per le illustrazioni:
+
+|===
+
+
+| Zona | Controller ONTAP e porta iniziatore | Porta dello storage array 
+
+
+3+| *FC_switch_A_1* 
+
+
+ a| 
+z1
+ a| 
+Controller A: Porta 0a
+ a| 
+Porta 1A
+
+
+
+ a| 
+z3
+ a| 
+Controller A: Porta 0c
+ a| 
+Porta 1A'
+
+
+
+3+| *FC_switch_A_2* 
+
+
+ a| 
+z2
+ a| 
+Controller A: Porta 0b
+ a| 
+Porta 2A'
+
+
+
+ a| 
+z4
+ a| 
+Controller A: Porta 0d
+ a| 
+Porta 2A
+
+
+
+3+| *FC_switch_B_1* 
+
+
+ a| 
+z5
+ a| 
+Controller B: Porta 0a
+ a| 
+Porta 1B'
+
+
+
+ a| 
+z7
+ a| 
+Controller B: Porta 0c
+ a| 
+Porta 1B
+
+
+
+3+| *FC_switch_B_2* 
+
+
+ a| 
+z6
+ a| 
+Controller B: Porta 0b
+ a| 
+Porta 2B
+
+
+
+ a| 
+z8
+ a| 
+Controller B: Porta 0d
+ a| 
+Porta 2B'
+
+|===
+La seguente tabella mostra le zone per le connessioni FC-VI:
+
+|===
+
+
+| Zona | Controller ONTAP e porta iniziatore | Switch 
+
+
+3+| *Sito A* 
+
+
+ a| 
+ZX
+ a| 
+Controller A: Porta FC-VI A.
+ a| 
+Switch_FC_A_1
+
+
+
+ a| 
+ZY
+ a| 
+Controller A: Porta FC-VI b
+ a| 
+Switch_FC_A_2
+
+
+
+3+| *Sito B* 
+
+
+ a| 
+ZX
+ a| 
+Controller B: Porta FC-VI a
+ a| 
+Switch_FC_B_1
+
+
+
+ a| 
+ZY
+ a| 
+Controller B: Porta FC-VI b
+ a| 
+Switch_FC_B_2
+
+|===
+.Informazioni correlate
+* Lo zoning dello switch definisce i percorsi tra i nodi connessi. La configurazione dello zoning consente di definire quali LUN di array possono essere visualizzati da un sistema ONTAP specifico.
++
+link:reference_requirements_for_switch_zoning_in_a_mcc_configuration_with_array_luns.html["Requisiti per lo zoning dello switch in una configurazione MetroCluster con LUN array"]
+
++
+link:concept_example_of_switch_zoning_in_a_four_node_mcc_configuration_with_array_luns.html["Esempio di zoning dello switch in una configurazione MetroCluster a quattro nodi con LUN array"]
+
+* Quando si utilizza lo zoning dello switch in una configurazione MetroCluster con LUN array, è necessario assicurarsi che vengano rispettati alcuni requisiti di base.
++
+link:concept_example_of_switch_zoning_in_an_eight_node_mcc_configuration_with_array_luns.html["Esempio di zoning dello switch in una configurazione MetroCluster a otto nodi con LUN array"]
+
+

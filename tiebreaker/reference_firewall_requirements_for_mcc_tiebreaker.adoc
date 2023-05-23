@@ -1,0 +1,121 @@
+---
+permalink: tiebreaker/reference_firewall_requirements_for_mcc_tiebreaker.html 
+sidebar: sidebar 
+keywords: metrocluster, tiebreaker, port, communicate, specific, service, firewall, requirement 
+summary: MetroCluster Tiebreaker utilizza una serie di porte per comunicare con servizi specifici. 
+---
+= Requisiti del firewall per MetroCluster Tiebreaker
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+MetroCluster Tiebreaker utilizza una serie di porte per comunicare con servizi specifici.
+
+La tabella seguente elenca le porte che è necessario consentire nel firewall:
+
+|===
+
+
+| Porta/servizi | Origine | Destinazione | Scopo 
+
+
+ a| 
+443 / TCP
+ a| 
+Spareggio
+ a| 
+Internet
+ a| 
+Invio di messaggi AutoSupport a NetApp
+
+
+
+ a| 
+22 / TCP
+ a| 
+Host di gestione
+ a| 
+Spareggio
+ a| 
+Gestione di spareggio
+
+
+
+ a| 
+443 / TCP
+ a| 
+Spareggio
+ a| 
+LIF di gestione del cluster
+ a| 
+Comunicazioni sicure al cluster tramite HTTP (SSL)
+
+
+
+ a| 
+22 / TCP
+ a| 
+Spareggio
+ a| 
+LIF di gestione del cluster
+ a| 
+Comunicazioni sicure al cluster tramite SSH
+
+
+
+ a| 
+443 / TCP
+ a| 
+Spareggio
+ a| 
+LIF di gestione dei nodi
+ a| 
+Comunicazioni sicure al nodo tramite HTTP (SSL)
+
+
+
+ a| 
+22 / TCP
+ a| 
+Spareggio
+ a| 
+LIF di gestione dei nodi
+ a| 
+Comunicazioni sicure al nodo tramite SSH
+
+
+
+ a| 
+162/UDP
+ a| 
+Spareggio
+ a| 
+Host trap SNMP
+ a| 
+Utilizzato per inviare messaggi trap SNMP di notifica degli avvisi
+
+
+
+ a| 
+ICMP (ping)
+ a| 
+Spareggio
+ a| 
+LIF di gestione del cluster
+ a| 
+Controllare se l'IP del cluster è raggiungibile
+
+
+
+ a| 
+ICMP (ping)
+ a| 
+Spareggio
+ a| 
+LIF di gestione dei nodi
+ a| 
+Verificare che l'IP del nodo sia raggiungibile
+
+|===

@@ -1,0 +1,178 @@
+---
+permalink: maintain/task_upgrade_to_new_brocade_switches.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, cluster, new, brocade, fc, switches 
+summary: 'Se si esegue l"aggiornamento a nuovi switch FC Brocade, è necessario sostituire gli switch nel primo fabric, verificare che la configurazione MetroCluster sia completamente operativa, quindi sostituire gli switch nel secondo fabric.' 
+---
+= Aggiornamento a nuovi switch Brocade FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se si esegue l'aggiornamento a nuovi switch FC Brocade, è necessario sostituire gli switch nel primo fabric, verificare che la configurazione MetroCluster sia completamente operativa, quindi sostituire gli switch nel secondo fabric.
+
+* La configurazione di MetroCluster deve essere in buone condizioni e in condizioni di funzionamento normali.
+* I fabric switch MetroCluster sono costituiti da quattro switch Brocade.
++
+Le illustrazioni riportate nelle fasi seguenti mostrano gli interruttori correnti.
+
+* Gli switch devono utilizzare il firmware supportato più recente.
++
+https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp"^]
+
+* Questa procedura è senza interruzioni e richiede circa due ore per essere completata.
+* È necessaria la password admin e l'accesso a un server FTP o SCP.
+
+
+I fabric degli switch vengono aggiornati uno alla volta.
+
+Al termine di questa procedura, tutti e quattro gli switch verranno aggiornati ai nuovi switch.
+
+image::../media/brocade_upgr_to_g620_replacement_completed.gif[aggiornamento di brocade a sostituzione di g620 completato]
+
+.Fasi
+. Disattivare il primo fabric dello switch:
++
+`*FC_switch_A_1:admin> switchCfgPersistentDisable*`
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchCfgPersistentDisable
+----
++
+image::../media/brocade_upgr_to_g620_fab_1_down.gif[brocade upgr a g620 fab 1 down]
+
+. Sostituire i vecchi switch in un sito MetroCluster.
++
+.. Scollegare e rimuovere lo switch disattivato.
+.. Installare il nuovo switch nel rack.
++
+image::../media/brocade_upgr_to_g620_replaced_a_1.gif[l'aggiornamento di brocade a g620 ha sostituito un 1]
+
+.. Disattivare i nuovi switch:
++
+`switchCfgPersistentDisable`
+
++
+Il comando disattiva entrambi gli switch nel fabric dello switch.
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchCfgPersistentDisable
+----
+.. Collegare il nuovo switch utilizzando le assegnazioni delle porte consigliate.
++
+link:concept_port_assignments_for_fc_switches_when_using_ontap_9_0.html["Assegnazioni delle porte per switch FC quando si utilizza ONTAP 9.0"]
+
++
+link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.1 e versioni successive"]
+
+.. Ripetere questi passaggi secondari sul sito MetroCluster del partner per sostituire il secondo switch nel primo fabric.
++
+Entrambi gli switch del fabric 1 sono stati sostituiti.
+
++
+image::../media/brocade_upgr_to_g620_replaced_b_1.gif[aggiornamento brocade a g620 sostituito b 1]
+
+
+
+. Accendere i nuovi switch e lasciarli avviare.
+. Scaricare i file RCF per il nuovo switch.
+. Applicare i file RCF a entrambi i nuovi switch del fabric, seguendo le istruzioni riportate nella pagina di download.
+. Salvare la configurazione dello switch:
++
+`cfgSave`
+
+. Attendere 10 minuti per consentire alla configurazione di stabilizzarsi.
+. Confermare la connettività ai dischi immettendo il seguente comando su uno qualsiasi dei nodi MetroCluster:
++
+`run local sysconfig -v`
+
++
+L'output mostra i dischi collegati alle porte dell'iniziatore sul controller e identifica gli shelf collegati ai bridge FC-SAS:
+
++
+[listing]
+----
+
+node_A_1> run local sysconfig -v
+NetApp Release 9.3.2X18: Sun Dec 13 01:23:24 PST 2017
+System ID: 4068741258 (node_A_1); partner ID: 4068741260 (node_B_1)
+System Serial Number: 940001025471 (node_A_1)
+System Rev: 70
+System Storage Configuration: Multi-Path HA**<=== Configuration should be multi-path HA**
+.
+.
+.
+slot 0: FC Host Adapter 0g (QLogic 8324 rev. 2, N-port, <UP>)**<=== Initiator port**
+		Firmware rev:      7.5.0
+		Flash rev:         0.0.0
+		Host Port Id:      0x60130
+		FC Node Name:      5:00a:098201:bae312
+		FC Port Name:      5:00a:098201:bae312
+		SFP Vendor:        UTILITIES CORP.
+		SFP Part Number:   FTLF8529P3BCVAN1
+		SFP Serial Number: URQ0Q9R
+		SFP Capabilities:  4, 8 or 16 Gbit
+		Link Data Rate:    16 Gbit
+		Switch Port:       brcd6505-fcs40:1
+  **<List of disks visible to port\>**
+		 ID     Vendor   Model            FW    Size
+		brcd6505-fcs29:12.126L1527     : NETAPP   X302_HJUPI01TSSM NA04 847.5GB (1953525168 512B/sect)
+		brcd6505-fcs29:12.126L1528     : NETAPP   X302_HJUPI01TSSA NA02 847.5GB (1953525168 512B/sect)
+		.
+		.
+		.
+		**<List of FC-to-SAS bridges visible to port\>**
+		FC-to-SAS Bridge:
+		brcd6505-fcs40:12.126L0        : ATTO     FibreBridge6500N 1.61  FB6500N102980
+		brcd6505-fcs42:13.126L0        : ATTO     FibreBridge6500N 1.61  FB6500N102980
+		brcd6505-fcs42:6.126L0         : ATTO     FibreBridge6500N 1.61  FB6500N101167
+		brcd6505-fcs42:7.126L0         : ATTO     FibreBridge6500N 1.61  FB6500N102974
+		.
+		.
+		.
+  **<List of storage shelves visible to port\>**
+		brcd6505-fcs40:12.shelf6: DS4243  Firmware rev. IOM3 A: 0200  IOM3 B: 0200
+		brcd6505-fcs40:12.shelf8: DS4243  Firmware rev. IOM3 A: 0200  IOM3 B: 0200
+		.
+		.
+		.
+----
+. Tornare al prompt dello switch, verificare la versione del firmware dello switch:
++
+`firmwareShow`
+
++
+Gli switch devono utilizzare il firmware supportato più recente.
+
++
+https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp"]
+
+. Simulare un'operazione di switchover:
++
+.. Dal prompt di qualsiasi nodo, passare al livello di privilegio avanzato: +
+`set -privilege advanced`
++
+Quando viene richiesto di passare alla modalità avanzata, rispondere con "`y`" e visualizzare il prompt della modalità avanzata (*).
+
+.. Eseguire l'operazione di switchover con `-simulate` parametro:
++
+`metrocluster switchover -simulate`
+
+.. Tornare al livello di privilegio admin:
++
+`set -privilege admin`
+
+
+
+. Ripetere i passaggi precedenti sul secondo fabric dello switch.
+
+
+Dopo aver ripetuto i passaggi, tutti e quattro gli switch sono stati aggiornati e la configurazione MetroCluster funziona normalmente.
+
+image::../media/brocade_upgr_to_g620_replacement_completed.gif[aggiornamento di brocade a sostituzione di g620 completato]

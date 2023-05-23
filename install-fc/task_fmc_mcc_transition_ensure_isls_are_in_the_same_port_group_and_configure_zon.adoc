@@ -1,0 +1,59 @@
+---
+permalink: install-fc/task_fmc_mcc_transition_ensure_isls_are_in_the_same_port_group_and_configure_zon.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, ensure, port, group, configure, zoning 
+summary: Assicurarsi che i collegamenti tra switch si trovino nello stesso gruppo di porte e configurare lo zoning per le configurazioni MetroCluster in modo che condividano correttamente i fabric dello switch. 
+---
+= Garantire che gli ISL si trovino nello stesso gruppo di porte e configurare lo zoning
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Assicurarsi che i collegamenti interswitch (ISL) si trovino nello stesso gruppo di porte e configurare lo zoning per le configurazioni MetroCluster in modo che condividano correttamente i fabric switch.
+
+.Fasi
+. Se gli ISL non si trovano nello stesso gruppo di porte, spostare una delle porte ISL nello stesso gruppo di porte dell'altra.
++
+È possibile utilizzare qualsiasi porta disponibile, ad eccezione di 32 fino a 45, utilizzata dalla nuova configurazione MetroCluster. Le porte ISL consigliate sono 46 e 47.
+
+. Seguire la procedura descritta in link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Configurazione dello zoning sugli switch Brocade FC"] Sezione per attivare il trunking e la zona QoS.
++
+I numeri delle porte durante la condivisione dei fabric sono diversi da quelli mostrati nella sezione. Durante la condivisione, utilizzare le porte 46 e 47 per le porte ISL. Se sono state spostate le porte ISL, è necessario utilizzare la procedura descritta in link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Configurazione delle e-port (porte ISL) su uno switch FC Brocade"] per configurare le porte.
+
+. [[fase 3_zone]] seguire i passaggi descritti nella link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Configurazione delle porte non-e sullo switch Brocade"] Sezione per configurare le porte non-E.
+. Non eliminare le zone o i set di zone già presenti negli switch back-end (per 7-Mode Fabric MetroCluster) ad eccezione delle zone di isolamento del traffico (ti) in <<step3_zones,Fase 3>>.
+. Seguire la procedura descritta in link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Configurazione delle e-port (porte ISL) su uno switch FC Brocade"] Sezione per aggiungere le zone richieste dal nuovo MetroCluster ai set di zone esistenti.
++
+L'esempio seguente mostra i comandi e l'output di sistema per la creazione delle zone:
+
++
+[listing]
+----
+Brocade-6510-2K0GG:admin> zonecreate "QOSH2_FCVI_1", "2,32; 2,35; 1,32; 1,35"
+
+Brocade-6510-2K0GG:admin> zonecreate "STOR_A_2_47", "2,33; 2,34; 2,36; 2,37; 1,33; 1,34; 1,36; 1,37; 1,47"
+
+Brocade-6510-2K0GG:admin> zonecreate "STOR_B_2_47", "2,33; 2,34; 2,36; 2,37; 1,33; 1,34; 1,36; 1,37; 2,47"
+
+
+Brocade-6510-2K0GG:admin> cfgadd config_1_FAB2, "QOSH2_FCVI_1; STOR_A_2_47; STOR_B_2_47"
+
+Brocade-6510-2K0GG:admin> cfgenable "config_1_FAB2"
+You are about to enable a new zoning configuration.
+This action will replace the old zoning configuration with the
+current configuration selected. If the update includes changes
+to one or more traffic isolation zones, the update may result in
+localized disruption to traffic on ports associated with
+the traffic isolation zone changes
+Do you want to enable 'config_1_FAB2' configuration  (yes, y, no, n): [no] yes
+
+Brocade-6510-2K0GG:admin> cfgsave
+You are about to save the Defined zoning configuration. This
+action will only save the changes on Defined configuration.
+Do you want to save the Defined zoning configuration only?  (yes, y, no, n): [no] yes
+Nothing changed: nothing to save, returning ...
+Brocade-6510-2K0GG:admin>
+----
+

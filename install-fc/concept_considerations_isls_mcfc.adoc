@@ -1,0 +1,97 @@
+---
+permalink: install-fc/concept_considerations_isls_mcfc.html 
+sidebar: sidebar 
+keywords: preparing, prepare, metrocluster, mcc, installation, install, differences, configurations, between, considerations, all, san, array, asa, cluster, peering, prerequisites, dedicated, ports, sharing, data, ports, native, disk, shelves, array, luns, transitions, 7-mode, isls, tdm/wdm, fabric-attached, iod, ood, encryption, devices, unmirrored, aggregates, maintenance, requiring, power, shutdown, firewall, hardware, racking, cabling, setup, checklist, all san array, asa, san 
+summary: È necessario determinare il numero di ISL necessari per ciascun fabric di switch FC nella configurazione MetroCluster. 
+---
+= Considerazioni per gli ISL
+:allow-uri-read: 
+
+
+[role="lead"]
+È necessario determinare il numero di ISL necessari per ciascun fabric di switch FC nella configurazione MetroCluster. A partire da ONTAP 9.2, in alcuni casi, invece di dedicare switch FC e ISL a ogni singola configurazione MetroCluster, è possibile condividere gli stessi quattro switch.
+
+
+
+== Considerazioni sulla condivisione ISL (ONTAP 9.2)
+
+A partire da ONTAP 9.2, è possibile utilizzare la condivisione ISL nei seguenti casi:
+
+* Una configurazione MetroCluster a due nodi e una a quattro nodi
+* Due configurazioni MetroCluster separate a quattro nodi
+* Due configurazioni MetroCluster separate a due nodi
+* Due gruppi di DR in una configurazione MetroCluster a otto nodi
+
+
+Il numero di ISL richiesti tra gli switch condivisi dipende dalla larghezza di banda dei modelli di piattaforma collegati agli switch condivisi.
+
+Per determinare il numero di ISL necessari, considerare i seguenti aspetti della configurazione.
+
+* I dispositivi non MetroCluster non devono essere collegati a nessuno degli switch FC che forniscono la connettività MetroCluster back-end.
+* La condivisione ISL è supportata su tutti gli switch, ad eccezione degli switch Cisco 9250i e Cisco 9148.
+* Tutti i nodi devono eseguire ONTAP 9.2 o versione successiva.
+* Il cablaggio dello switch FC per la condivisione ISL è lo stesso del cablaggio MetroCluster a otto nodi.
+* I file RCF per la condivisione ISL sono gli stessi del cablaggio MetroCluster a otto nodi.
+* Verificare che tutte le versioni hardware e software siano supportate.
++
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+* La velocità e il numero di ISL devono essere dimensionati per supportare il carico del client su entrambi i sistemi MetroCluster.
+* Gli ISL back-end e i componenti back-end devono essere dedicati solo alla configurazione MetroCluster.
+* L'ISL deve utilizzare una delle velocità supportate: 4 Gbps, 8 Gbps, 16 Gbps o 32 Gbps.
+* Gli ISL su un fabric devono essere tutti della stessa velocità e lunghezza.
+* Gli ISL su un fabric devono avere tutti la stessa topologia. Ad esempio, dovrebbero essere tutti collegamenti diretti o, se il sistema utilizza WDM, dovrebbero utilizzare tutti WDM.
+
+
+
+
+== Considerazioni ISL specifiche per la piattaforma
+
+Il numero di ISL consigliati è specifico per il modello di piattaforma. La seguente tabella mostra i requisiti ISL per ciascun fabric in base al modello di piattaforma. Si presume che ogni ISL abbia una capacità di 16 Gbps.
+
+|===
+
+
+| Modello di piattaforma | Numero consigliato di ISL per gruppo DR a quattro nodi (per fabric switch) 
+
+
+ a| 
+AFF A900 e FAS9500
+ a| 
+Otto
+
+
+
+ a| 
+AFF A700
+ a| 
+Sei
+
+
+
+ a| 
+FAS9000
+ a| 
+Sei
+
+
+
+ a| 
+8080
+ a| 
+Quattro
+
+
+
+ a| 
+Tutti gli altri
+ a| 
+Due
+
+|===
+Se il fabric dello switch supporta otto nodi (parte di una singola configurazione MetroCluster a otto nodi o due configurazioni a quattro nodi che condividono gli ISL), il numero totale consigliato di ISL per il fabric è la somma di quello richiesto per ciascun gruppo DR a quattro nodi. Ad esempio:
+
+* Se il gruppo DR 1 include quattro sistemi AFF A700, sono necessari sei ISL.
+* Se il gruppo di DR 2 include quattro sistemi FAS8200, sono necessari due ISL.
+* Il numero totale di ISL consigliati per il fabric dello switch è otto.
+

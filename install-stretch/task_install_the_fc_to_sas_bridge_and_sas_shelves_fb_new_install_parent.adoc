@@ -1,0 +1,41 @@
+---
+permalink: install-stretch/task_install_the_fc_to_sas_bridge_and_sas_shelves_fb_new_install_parent.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, install, fc, sas, bridge, shelves 
+summary: 'Dopo aver ottenuto che il sistema soddisfi tutti i requisiti indicati nella sezione "preparazione dell"installazione", è possibile installare il nuovo sistema.' 
+---
+= Installazione del bridge FC-SAS e degli shelf SAS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Una volta che il sistema soddisfa tutti i requisiti indicati nella sezione "`preparazione dell'installazione`", è possibile installare il nuovo sistema.
+
+* La configurazione del disco e dello shelf in entrambi i siti deve essere identica.
++
+Se si utilizza un aggregato non mirrorato, la configurazione di disco e shelf in ogni sito potrebbe essere diversa.
+
++
+
+NOTE: Tutti i dischi del gruppo di disaster recovery (DR) devono utilizzare lo stesso tipo di connessione ed essere visibili a tutti i nodi del gruppo di disaster recovery, indipendentemente dai dischi utilizzati per l'aggregato mirrorato o non mirrorato.
+
+* I requisiti di connettività di sistema per le distanze massime per shelf di dischi, switch FC e dispositivi a nastro di backup che utilizzano cavi in fibra ottica multimodale da 50 micron si applicano anche ai bridge FibreBridge.
++
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+* Una combinazione di moduli IOM12 e moduli IOM3 non è supportata nello stesso stack di storage. Una combinazione di moduli IOM12 e moduli IOM6 è supportata nello stesso stack di storage se il sistema esegue una versione supportata di ONTAP.
+
+
+[NOTE]
+====
+L'ACP in-band è supportato senza cavi aggiuntivi nei seguenti shelf e bridge FibreBridge 7500N o 7600N:
+
+* IOM12 (DS460C) dietro un bridge 7500N o 7600N con ONTAP 9.2 e versioni successive
+* IOM12 (DS212C e DS224C) con un bridge 7500N o 7600N con ONTAP 9.1 e versioni successive
+
+
+====
+
+NOTE: Gli shelf SAS nelle configurazioni MetroCluster non supportano il cablaggio ACP.

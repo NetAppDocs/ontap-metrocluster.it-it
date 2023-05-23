@@ -1,0 +1,36 @@
+---
+permalink: install-fc/reference_example_of_cabling_array_luns_to_fc_switches_in_an_eight_node_mcc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, cabling, storage, array, ports, fc, switches, eight, node 
+summary: In una configurazione MetroCluster con LUN array, è necessario collegare le porte dello storage array che formano una coppia di porte ridondanti a switch FC alternativi. 
+---
+= Esempio di collegamento delle porte dello storage array agli switch FC in una configurazione MetroCluster a otto nodi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+In una configurazione MetroCluster con LUN array, è necessario collegare le porte dello storage array che formano una coppia di porte ridondanti a switch FC alternativi.
+
+Una configurazione MetroCluster a otto nodi è costituita da due gruppi DR a quattro nodi. Il primo gruppo di DR è costituito dai seguenti nodi:
+
+* Controller_A_1
+* Controller_A_2
+* Controller_B_1
+* Controller_B_2
+
+
+Il secondo gruppo di DR è costituito dai seguenti nodi:
+
+* Controller_A_3
+* Controller_A_4
+* Controller_B_3
+* Controller_B_4
+
+
+Per collegare le porte dell'array per il primo gruppo DR, è possibile utilizzare gli esempi di cablaggio per una configurazione MetroCluster a quattro nodi per il primo gruppo DR.
+
+link:reference_example_of_cabling_array_luns_to_fc_switches_in_a_four_node_mcc_configuration.html["Esempio di collegamento delle porte dello storage array agli switch FC in una configurazione MetroCluster a quattro nodi"]
+
+Per collegare le porte dell'array per il secondo gruppo DR, seguire gli stessi esempi ed estrapolare le porte FC-VI e le porte FC Initiator appartenenti ai controller del secondo gruppo DR.

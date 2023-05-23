@@ -1,0 +1,169 @@
+---
+permalink: disaster-recovery/task_heal_restore_mcfc.html 
+sidebar: sidebar 
+keywords: configure, fc, switches, metrocluster, configuration 
+summary: 'Dopo la sostituzione dell"hardware e l"assegnazione dei dischi, è possibile eseguire le operazioni di riparazione del MetroCluster.' 
+---
+= Esecuzione della riparazione degli aggregati e ripristino dei mirror (configurazioni MetroCluster FC)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo la sostituzione dell'hardware e l'assegnazione dei dischi, è possibile eseguire le operazioni di riparazione del MetroCluster. È quindi necessario confermare che gli aggregati sono sottoposti a mirroring e, se necessario, riavviare il mirroring.
+
+.Fasi
+. Eseguire le due fasi di riparazione (riparazione aggregata e riparazione root) sul sito di emergenza:
++
+[listing]
+----
+cluster_B::> metrocluster heal -phase aggregates
+
+cluster_B::> metrocluster heal -phase root aggregates
+----
+. Monitorare la riparazione e verificare che gli aggregati siano in stato di risyncing o mirrorato:
++
+`storage aggregate show -node local`
+
++
+|===
+
+
+| Se l'aggregato mostra questo stato... | Quindi... 
+
+
+ a| 
+risyncing
+ a| 
+Non è richiesta alcuna azione. Consentire all'aggregato di completare la risyncing.
+
+
+
+ a| 
+mirror degradato
+ a| 
+Passare a. <<step3_fc_aggr_healing,Se uno o più plessi rimangono offline, sono necessari ulteriori passaggi per ricostruire il mirror.>>
+
+
+
+ a| 
+mirrorato, normale
+ a| 
+Non è richiesta alcuna azione.
+
+
+
+ a| 
+sconosciuto, offline
+ a| 
+L'aggregato root mostra questo stato se sono stati sostituiti tutti i dischi dei siti di disastro.
+
+|===
++
+[listing]
+----
+cluster_B::> storage aggregate show -node local
+
+ Aggregate     Size Available Used% State   #Vols  Nodes      RAID Status
+ --------- -------- --------- ----- ------- ------ ---------- ------------
+ node_B_1_aggr1
+            227.1GB   11.00GB   95% online       1 node_B_1   raid_dp,
+                                                              resyncing
+ NodeA_1_aggr2
+            430.3GB   28.02GB   93% online       2 node_B_1   raid_dp,
+                                                              mirror
+                                                              degraded
+ node_B_1_aggr3
+            812.8GB   85.37GB   89% online       5 node_B_1   raid_dp,
+                                                              mirrored,
+                                                              normal
+ 3 entries were displayed.
+
+cluster_B::>
+----
++
+Nei seguenti esempi, i tre aggregati si trovano ciascuno in uno stato diverso:
+
++
+|===
+
+
+| Nodo | Stato 
+
+
+ a| 
+Node_B_1_aggr1
+ a| 
+risyncing
+
+
+
+ a| 
+Node_B_1_aggr2
+ a| 
+mirror degradato
+
+
+
+ a| 
+Node_B_1_aggr3
+ a| 
+mirrorato, normale
+
+|===
+. [[step3_fc_aggr_healing]] se uno o più plessi rimangono offline, sono necessari ulteriori passaggi per ricostruire il mirror.
++
+Nella tabella precedente, il mirror per node_B_1_aggr2 deve essere ricostruito.
+
++
+.. Visualizza i dettagli dell'aggregato per identificare eventuali plessi guasti:
++
+`storage aggregate show -r -aggregate node_B_1_aggr2`
+
++
+Nell'esempio seguente, plex /node_B_1_aggr2/plex0 è in uno stato di errore:
+
++
+[listing]
+----
+cluster_B::> storage aggregate show -r -aggregate node_B_1_aggr2
+
+ Owner Node: node_B_1
+  Aggregate: node_B_1_aggr2 (online, raid_dp, mirror degraded) (block checksums)
+   Plex: /node_B_1_aggr2/plex0 (offline, failed, inactive, pool0)
+    RAID Group /node_B_1_aggr2/plex0/rg0 (partial)
+                                                               Usable Physical
+      Position Disk                     Pool Type     RPM     Size     Size Status
+      -------- ------------------------ ---- ----- ------ -------- -------- ----------
+
+   Plex: /node_B_1_aggr2/plex1 (online, normal, active, pool1)
+    RAID Group /node_B_1_aggr2/plex1/rg0 (normal, block checksums)
+                                                               Usable Physical
+      Position Disk                     Pool Type     RPM     Size     Size Status
+      -------- ------------------------ ---- ----- ------ -------- -------- ----------
+      dparity  1.44.8                    1   SAS    15000  265.6GB  273.5GB (normal)
+      parity   1.41.11                   1   SAS    15000  265.6GB  273.5GB (normal)
+      data     1.42.8                    1   SAS    15000  265.6GB  273.5GB (normal)
+      data     1.43.11                   1   SAS    15000  265.6GB  273.5GB (normal)
+      data     1.44.9                    1   SAS    15000  265.6GB  273.5GB (normal)
+      data     1.43.18                   1   SAS    15000  265.6GB  273.5GB (normal)
+ 6 entries were displayed.
+
+ cluster_B::>
+----
+.. Eliminare il plesso guasto:
++
+`storage aggregate plex delete -aggregate aggregate-name -plex plex`
+
+.. Ristabilire il mirror:
++
+`storage aggregate mirror -aggregate aggregate-name`
+
+.. Monitorare la risincronizzazione e lo stato di mirroring del plex fino a quando tutti i mirror non vengono ristabilita e tutti gli aggregati mostrano lo stato normale e mirrorato:
++
+`storage aggregate show`
+
+
+
+

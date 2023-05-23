@@ -1,0 +1,46 @@
+---
+permalink: install-stretch/task_cable_a_fibrebridge_7600n_or_7500n_bridge_fb_new_install_cable_7500_pangolin.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, cable, fibrebridge, iom3, iom6, modules, shelves, bridge 
+summary: Dopo aver configurato il bridge, è possibile avviare il cablaggio del sistema. Il bridge FibreBridge 7600N o 7500N utilizza connettori mini-SAS e supporta shelf che utilizzano moduli IOM6 o IOM3. 
+---
+= Collegamento di un bridge FibreBridge 7600N o 7500N con shelf utilizzando moduli IOM6 o IOM3
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo aver configurato il bridge, è possibile avviare il cablaggio del sistema. Il bridge FibreBridge 7600N o 7500N utilizza connettori mini-SAS e supporta shelf che utilizzano moduli IOM6 o IOM3.
+
+I moduli IOM3 non sono supportati con i bridge FibreBridge 7600N.
+
+Per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso il basso (nella parte inferiore del connettore).
+
+.Fasi
+. Concatenare a margherita gli shelf in ogni stack.
++
+.. Per il primo stack di shelf, collegare IOM A una porta quadrata del primo shelf alla porta SAS A su FibreBridge A.
+.. Per il primo stack di shelf, collegare la porta IOM B circolare dell'ultimo shelf alla porta SAS A su FibreBridge B.
++
+La _Guida all'installazione e al servizio_ per il modello di shelf fornisce informazioni dettagliate sugli shelf con concatenamento a margherita.
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMP1119629["Guida all'installazione e al servizio degli shelf di dischi SAS per DS4243, DS2246, DS4486 e DS4246"^]
+
++
+La figura seguente mostra un set di bridge collegati a una pila di shelf:
+
++
+image::../media/mcc_cabling_bridge_and_sas_stack_with_7500n_and_single_stack.gif[bridge di cablaggio mcc e stack sas con 7500n e stack singolo]
+
+
+
+. Per ulteriori stack di shelf, ripetere i passaggi precedenti utilizzando la successiva porta SAS disponibile sui bridge FibreBridge. Utilizzare la porta B per un secondo stack, la porta C per un terzo stack e la porta D per un quarto stack.
++
+La figura seguente mostra quattro stack collegati a una coppia di bridge FibreBridge 7600N o 7500N.
+
++
+image::../media/mcc_cabling_bridge_and_sas_stack_with_7500n_four_stacks.gif[bridge di cablaggio mcc e stack sas con 7500n quattro stack]
+
+

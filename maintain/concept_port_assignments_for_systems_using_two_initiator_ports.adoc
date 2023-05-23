@@ -1,0 +1,223 @@
+---
+permalink: maintain/concept_port_assignments_for_systems_using_two_initiator_ports.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, port, assignments, system, two, initiator, ports 
+summary: È possibile configurare i sistemi FAS8020, AFF8020, FAS8200 e AFF A300 utilizzando una singola porta iniziatore per ciascun fabric e due porte iniziatore per ciascun controller. 
+---
+= Assegnazioni delle porte per i sistemi che utilizzano due porte initiator
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile configurare i sistemi FAS8020, AFF8020, FAS8200 e AFF A300 utilizzando una singola porta iniziatore per ciascun fabric e due porte iniziatore per ciascun controller.
+
+.A proposito di questa attività
+È possibile seguire il cablaggio del bridge FibreBridge 6500N o del bridge FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2). Invece di utilizzare quattro iniziatori, collegare solo due iniziatori e lasciare vuoti gli altri due collegati alla porta dello switch.
+
+È necessario applicare il file RCF corretto per la configurazione del bridge FibreBridge 6500N.
+
+Se lo zoning viene eseguito manualmente, seguire la zoning utilizzata per un bridge FibreBridge 6500N o FibreBridge 7500N o 7600N utilizzando una porta FC (FC1 o FC2). In questo scenario, viene aggiunta una porta iniziatore anziché due a ciascun membro di zona per fabric.
+
+È possibile modificare lo zoning o eseguire un aggiornamento da FibreBridge 6500 a FibreBridge 7500 utilizzando la procedura _Hot-swapping di un bridge FibreBridge 6500N con un bridge FibreBridge 7500N o 7600N_ da link:../maintain/index.html["Gestire i componenti di MetroCluster"].
+
+La seguente tabella mostra le assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.1 e versioni successive.
+
+|===
+
+
+4+| Configurazioni che utilizzano bridge FibreBridge 6500N o FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2) 
+
+
+4+| MetroCluster 1 o DR Group 1 
+
+
+.2+| Componente .2+| Porta 2+| Switch Brocade modelli 6505, 6510, 6520, 7840, G620, G610 e DCX 8510-8 
+
+
+| Si connette allo switch FC... | Si collega alla porta dello switch... 
+
+
+ a| 
+controller_x_1
+ a| 
+Porta FC-VI A.
+ a| 
+1
+ a| 
+0
+
+
+
+ a| 
+Porta FC-VI b
+ a| 
+2
+ a| 
+0
+
+
+
+ a| 
+Porta FC-VI c
+ a| 
+1
+ a| 
+1
+
+
+
+ a| 
+Porta FC-VI d
+ a| 
+2
+ a| 
+1
+
+
+
+ a| 
+Porta HBA a
+ a| 
+1
+ a| 
+2
+
+
+
+ a| 
+Porta HBA b
+ a| 
+2
+ a| 
+2
+
+
+
+ a| 
+Porta HBA c
+ a| 
+-
+ a| 
+-
+
+
+
+ a| 
+Porta HBA d
+ a| 
+-
+ a| 
+-
+
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+1
+ a| 
+8
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+2
+ a| 
+8
+
+
+
+ a| 
+Stack y
+ a| 
+bridge_x_ya
+ a| 
+1
+ a| 
+11
+
+
+
+ a| 
+bridge_x_yb
+ a| 
+2
+ a| 
+11
+
+|===
+La seguente tabella mostra le assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.0.
+
+|===
+
+
+4+| Configurazione MetroCluster a due nodi 
+
+
+.2+| Componente .2+| Porta 2+| Brocade 6505, 6510 o DCX 8510-8 
+
+
+| FC_switch_x_1 | FC_switch_x_2 
+
+
+ a| 
+controller_x_1
+ a| 
+Porta FC-VI A.
+ a| 
+0
+ a| 
+-
+
+
+
+ a| 
+Porta FC-VI b
+ a| 
+-
+ a| 
+0
+
+
+
+ a| 
+Porta HBA a
+ a| 
+1
+ a| 
+-
+
+
+
+ a| 
+Porta HBA b
+ a| 
+-
+ a| 
+1
+
+
+
+ a| 
+Porta HBA c
+ a| 
+2
+ a| 
+-
+
+
+
+ a| 
+Porta HBA d
+ a| 
+-
+ a| 
+2
+
+|===

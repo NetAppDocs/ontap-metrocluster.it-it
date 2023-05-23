@@ -1,0 +1,239 @@
+---
+permalink: maintain/task_replace_an_ip_switch.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, replace, ip, switch 
+summary: 'Potrebbe essere necessario sostituire uno switch guasto oppure eseguire l"upgrade o il downgrade di uno switch. Il nuovo switch può essere lo stesso del vecchio switch in caso di guasto oppure è possibile modificare il tipo di switch (aggiornare o eseguire il downgrade dello switch).' 
+---
+= Sostituire uno switch IP o modificare l'utilizzo degli switch IP MetroCluster esistenti
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Potrebbe essere necessario sostituire uno switch guasto, aggiornare o eseguire il downgrade di uno switch o modificare l'utilizzo degli switch IP MetroCluster esistenti.
+
+Questa procedura si applica quando si utilizzano switch validati da NetApp. Se si utilizzano switch compatibili con MetroCluster, rivolgersi al fornitore dello switch.
+
+Questa procedura supporta le seguenti conversioni:
+
+* Modifica del vendor, del tipo o di entrambi gli switch. Il nuovo switch può essere lo stesso del vecchio switch in caso di guasto oppure è possibile modificare il tipo di switch (aggiornare o eseguire il downgrade dello switch).
++
+Ad esempio, per espandere una configurazione MetroCluster IP da una singola configurazione a quattro nodi utilizzando controller AFF A400 e switch BES-53248 a una configurazione a otto nodi utilizzando controller AFF A400, è necessario modificare gli switch in un tipo supportato per la configurazione, in quanto gli switch BES-53248 non sono supportati nella nuova configurazione.
+
++
+Se si desidera sostituire uno switch guasto con lo stesso tipo di switch, sostituire solo lo switch guasto. Se si desidera aggiornare o eseguire il downgrade di uno switch, è necessario regolare due switch che si trovano nella stessa rete. Due switch si trovano nella stessa rete quando sono collegati con un collegamento inter-switch (ISL) e non si trovano nello stesso sito. Ad esempio, la rete 1 include IP_switch_A_1 e IP_switch_B_1, mentre la rete 2 include IP_switch_A_2 e IP_switch_B_2, come mostrato nel diagramma seguente:
+
++
+image::../media/mcc_ip_hardware_architecture_ip_interconnect.png[interconnessione ip con architettura hardware ip mcc]
+
++
+
+NOTE: Se si sostituisce uno switch o si esegue l'aggiornamento a switch diversi, è possibile preconfigurare gli switch installando il firmware dello switch e il file RCF.
+
+* Convertire una configurazione IP MetroCluster in una configurazione IP MetroCluster utilizzando switch MetroCluster di storage condiviso.
++
+Ad esempio, se si dispone di una configurazione MetroCluster IP regolare utilizzando i controller AFF A700 e si desidera riconfigurare MetroCluster per collegare gli shelf NS224 agli stessi switch.
+
++
+[NOTE]
+====
+** Se si aggiungono o rimuovono shelf in una configurazione MetroCluster IP utilizzando switch MetroCluster IP storage condiviso, seguire la procedura descritta in link:https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_add_shelves_using_shared_storage.html["Aggiunta di shelf a un MetroCluster IP utilizzando switch MetroCluster per lo storage condiviso"]
+** Il tuo MetroCluster IP potrebbe già essere collegato direttamente agli shelf NS224 o a switch storage dedicati.
+
+
+====
+
+
+.Foglio di lavoro sull'utilizzo delle porte
+Di seguito viene riportato un esempio di foglio di lavoro per la conversione di una configurazione MetroCluster IP in una configurazione storage condivisa che collega due shelf NS224 utilizzando gli switch esistenti.
+
+Definizioni dei fogli di lavoro:
+
+* Configurazione esistente: Il cablaggio della configurazione MetroCluster esistente.
+* Nuova configurazione con shelf NS224: La configurazione di destinazione in cui gli switch sono condivisi tra lo storage e MetroCluster.
+
+
+I campi evidenziati in questo foglio di lavoro indicano quanto segue:
+
+* Verde: Non è necessario modificare il cablaggio.
+* Giallo: È necessario spostare le porte con la stessa configurazione o con una configurazione diversa.
+* Blu: Porte nuove connessioni.
+
+
+image:../media/mcc_port_usage_workflow.png[""]
+
+.Fasi
+. [[all_step1]]controllare lo stato della configurazione.
++
+.. Verificare che MetroCluster sia configurato e in modalità normale su ciascun cluster: `*metrocluster show*`
++
+[listing]
+----
+cluster_A::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+Remote: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+----
+.. Verificare che il mirroring sia attivato su ciascun nodo: `*metrocluster node show*`
++
+[listing]
+----
+cluster_A::> metrocluster node show
+DR                           Configuration  DR
+Group Cluster Node           State          Mirroring Mode
+----- ------- -------------- -------------- --------- --------------------
+1     cluster_A
+              node_A_1       configured     enabled   normal
+      cluster_B
+              node_B_1       configured     enabled   normal
+2 entries were displayed.
+----
+.. Verificare che i componenti di MetroCluster siano in buone condizioni: `*metrocluster check run*`
++
+[listing]
+----
+cluster_A::> metrocluster check run
+
+Last Checked On: 10/1/2014 16:03:37
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          ok
+4 entries were displayed.
+
+Command completed. Use the "metrocluster check show -instance" command or sub-commands in "metrocluster check" directory for detailed results.
+To check if the nodes are ready to do a switchover or switchback operation, run "metrocluster switchover -simulate" or "metrocluster switchback -simulate", respectively.
+----
+.. Verificare che non siano presenti avvisi sullo stato di salute: `*system health alert show*`
+
+
+. Configurare il nuovo switch prima dell'installazione.
++
+Se si stanno riutilizzando gli switch esistenti, passare a. <<existing_step4,Fase 4>>.
+
++
+
+NOTE: Se si stanno aggiornando o eseguendo il downgrade degli switch, è necessario configurare tutti gli switch della rete.
+
++
+Seguire le istruzioni della sezione _Configurazione degli switch IP_ in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installazione e configurazione di MetroCluster IP."]
+
++
+Assicurarsi di applicare il file RCF corretto per lo switch _A_1, _A_2, _B_1 o _B_2. Se il nuovo switch è lo stesso del vecchio switch, è necessario applicare lo stesso file RCF.
+
++
+Se si esegue l'aggiornamento o il downgrade di uno switch, applicare il file RCF più recente supportato per il nuovo switch.
+
+. Eseguire il comando port show per visualizzare le informazioni relative alle porte di rete:
++
+`*network port show*`
+
+. [[existing_step4]]Disconnetti le connessioni dal vecchio switch.
++
+
+NOTE: Si scollegano solo le connessioni che non utilizzano la stessa porta nelle configurazioni precedenti e nuove. Se si utilizzano nuovi switch, è necessario scollegare tutte le connessioni.
+
++
+Rimuovere i collegamenti nel seguente ordine:
+
++
+** Se le interfacce del cluster locale sono collegate a uno switch:
++
+*** Scollegare le interfacce del cluster locale
+*** Disconnettere gli ISL del cluster locale
+
+
+** Scollegare le interfacce IP di MetroCluster
+** Disconnettere gli ISL MetroCluster
++
+Nell'esempio <<port_usage_worksheet>>, gli switch non cambiano. Gli ISL MetroCluster vengono ricollocati e devono essere disconnessi. Non è necessario scollegare le connessioni contrassegnate in verde sul foglio di lavoro.
+
+
+
+. Se si utilizzano nuovi switch, spegnere il vecchio switch, rimuovere i cavi e rimuovere fisicamente il vecchio switch.
++
+Se si stanno riutilizzando gli switch esistenti, passare a. <<existing_step6,Fase 6>>.
+
++
+
+NOTE: Non collegare * i nuovi switch ad eccezione dell'interfaccia di gestione (se utilizzata).
+
+. [[existing_step6]]Configura gli switch esistenti.
++
+Se gli switch sono già stati preconfigurati, è possibile saltare questo passaggio.
+
++
+Per configurare gli switch esistenti, seguire la procedura per installare e aggiornare il firmware e i file RCF:
+
++
+** link:https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_upgrade_firmware_on_mcc_ip_switches.html["Aggiornamento del firmware sugli switch IP MetroCluster"]
+** link:https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_upgrade_rcf_files_on_mcc_ip_switches.html["Aggiornare i file RCF sugli switch IP MetroCluster"]
+
+
+. Collegare gli switch.
++
+Seguire la procedura descritta nella sezione _collegamento degli switch IP_ di link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installazione e configurazione di MetroCluster IP"].
+
++
+Collegare gli switch nel seguente ordine (se necessario):
+
++
+.. Collegare gli ISL al sito remoto.
+.. Collegare le interfacce IP di MetroCluster.
+.. Collegare le interfacce del cluster locale.
++
+[NOTE]
+====
+*** Se il tipo di switch è diverso, le porte utilizzate potrebbero essere diverse da quelle del vecchio switch. Se si stanno aggiornando o eseguendo il downgrade degli switch, *NON* collegare gli ISL locali. Collegare gli ISL locali solo se si aggiornano o si esegue il downgrade degli switch nella seconda rete e entrambi gli switch in un sito sono dello stesso tipo e del medesimo cablaggio.
+*** Se si sta aggiornando Switch-A1 e Switch-B1, eseguire i passaggi da 1 a 6 per gli switch Switch-A2 e Switch-B2.
+
+
+====
+
+
+. Finalizzare il cablaggio del cluster locale.
++
+.. Se le interfacce del cluster locale sono collegate a uno switch:
++
+... Collegare via cavo gli ISL del cluster locale.
+
+
+.. Se le interfacce del cluster locale sono *non* collegate a uno switch:
++
+... Utilizzare link:https://docs.netapp.com/us-en/ontap-systems-switches/switch-bes-53248/migrate-to-2n-switched.html["Migrare a un ambiente cluster NetApp con switch"] procedura per convertire un cluster senza switch in un cluster con switch. Utilizzare le porte indicate nella link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installazione e configurazione di MetroCluster IP"] Oppure i file di cablaggio RCF per collegare l'interfaccia cluster locale.
+
+
+
+
+. Accendere lo switch o gli switch.
++
+Se il nuovo switch è lo stesso, accendere il nuovo switch. Se si stanno aggiornando o eseguendo il downgrade degli switch, accendere entrambi gli switch. La configurazione può funzionare con due switch diversi in ogni sito fino all'aggiornamento della seconda rete.
+
+. Verificare che la configurazione di MetroCluster sia corretta ripetendo la configurazione <<all_step1,Fase 1>>.
++
+Se si aggiornano o si esegue il downgrade degli switch nella prima rete, potrebbero essere visualizzati alcuni avvisi relativi al clustering locale.
+
++
+
+NOTE: Se si esegue l'aggiornamento o il downgrade delle reti, ripetere tutti i passaggi per la seconda rete.
+
+. In alternativa, spostare gli shelf NS224.
++
+Se si sta riconfigurando una configurazione IP MetroCluster che non collega gli shelf NS224 agli switch IP MetroCluster, utilizzare la procedura appropriata per aggiungere o spostare gli shelf NS224:
+
++
+** link:https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_add_shelves_using_shared_storage.html["Aggiunta di shelf a un MetroCluster IP utilizzando switch MetroCluster per lo storage condiviso"]
+** link:https://docs.netapp.com/us-en/ontap-systems-switches/switch-cisco-9336c-fx2-shared/migrate-from-switchless-cluster-dat-storage.html["Migrazione da un cluster senza switch con storage direct-attached"^]
+** link:https://docs.netapp.com/us-en/ontap-systems-switches/switch-cisco-9336c-fx2-shared/migrate-from-switchless-configuration-sat-storage.html["Migrare da una configurazione senza switch con storage collegato a switch riutilizzando gli switch storage"^]
+
+
+

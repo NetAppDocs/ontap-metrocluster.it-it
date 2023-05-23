@@ -1,0 +1,226 @@
+---
+permalink: disaster-recovery/task_boot_ontap_mcip.html 
+sidebar: sidebar 
+keywords: metrocluster, ip, configuration, replacement, controller, module, disaster, site, boot 
+summary: È necessario avviare i nodi sostitutivi nel sito di emergenza sul sistema operativo ONTAP. 
+---
+= Avvio di ONTAP su moduli controller sostitutivi in configurazioni MetroCluster IP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario avviare i nodi sostitutivi nel sito di emergenza sul sistema operativo ONTAP.
+
+.A proposito di questa attività
+Questa attività inizia con i nodi nel sito di emergenza in modalità manutenzione.
+
+.Fasi
+. Su uno dei nodi sostitutivi, uscire al prompt DEL CARICATORE: `halt`
+. Visualizzare il menu di avvio: `boot_ontap menu`
+. Dal menu di avvio, selezionare l'opzione 6, *Update flash from backup config* (Aggiorna flash da configurazione backup).
++
+Il sistema si avvia due volte. Dovresti rispondere `yes` quando viene richiesto di continuare. Dopo il secondo avvio, dovresti rispondere `y` Quando viene richiesto di indicare la mancata corrispondenza dell'ID di sistema.
+
++
+
+NOTE: Se il contenuto della NVRAM di un modulo controller sostitutivo usato non è stato ancora deseleziona, potrebbe essere visualizzato il seguente messaggio di emergenza: `PANIC: NVRAM contents are invalid....` In tal caso, avviare nuovamente il sistema al prompt ONTAP (`boot_ontap menu`). Quindi, è necessario <<Reset-the-boot-recovery,Ripristinare boot_recovery e i bootargs rdb_corrotto>>
+
++
+** Richiesta di conferma per continuare:
++
+[listing]
+----
+Selection (1-9)? 6
+
+This will replace all flash-based configuration with the last backup to
+disks. Are you sure you want to continue?: yes
+----
+** Richiesta di mancata corrispondenza ID sistema:
++
+[listing]
+----
+WARNING: System ID mismatch. This usually occurs when replacing a boot device or NVRAM cards!
+Override system ID? {y|n} y
+----
+
+
+. Dal sito sopravvissuto, verificare che ai nodi siano stati applicati gli ID di sistema del partner corretti:
++
+`metrocluster node show -fields node-systemid,ha-partner-systemid,dr-partner-systemid,dr-auxiliary-systemid`
+
++
+--
+In questo esempio, i seguenti nuovi ID di sistema dovrebbero apparire nell'output:
+
+** Node_A_1: 1574774970
+** Node_A_2: 1574774991
+
+
+La colonna "ha-partner-systemid" dovrebbe mostrare i nuovi ID di sistema.
+
+[listing]
+----
+metrocluster node show -fields node-systemid,ha-partner-systemid,dr-partner-systemid,dr-auxiliary-systemid
+
+dr-group-id cluster    node      node-systemid ha-partner-systemid dr-partner-systemid dr-auxiliary-systemid
+----------- ---------- --------  ------------- ------ ------------ ------ ------------ ------ --------------
+1           Cluster_A  Node_A_1  1574774970    1574774991          4068741254          4068741256
+1           Cluster_A  Node_A_2  1574774991    1574774970          4068741256          4068741254
+1           Cluster_B  Node_B_1  -             -                   -                   -
+1           Cluster_B  Node_B_2  -             -                   -                   -
+4 entries were displayed.
+----
+--
+. Se gli ID del sistema partner non sono stati impostati correttamente, è necessario impostare manualmente il valore corretto:
++
+.. Arrestare e visualizzare il prompt DEL CARICATORE sul nodo.
+.. Verificare il valore corrente del bootarg partner-sysID:
++
+`printenv`
+
+.. Impostare il valore sull'ID di sistema del partner corretto:
++
+`setenv partner-sysid partner-sysID`
+
+.. Avviare il nodo:
++
+`boot_ontap`
+
+.. Se necessario, ripetere questi passaggi secondari sull'altro nodo.
+
+
+. Verificare che i nodi sostitutivi nel sito di disastro siano pronti per lo switchback:
++
+`metrocluster node show`
+
++
+I nodi sostitutivi devono essere in attesa della modalità di recovery switchback. Se invece si trovano in modalità normale, è possibile riavviare i nodi sostitutivi. Dopo l'avvio, i nodi devono essere in attesa della modalità di ripristino switchback.
+
++
+L'esempio seguente mostra che i nodi sostitutivi sono pronti per lo switchback:
+
++
+[listing]
+----
+cluster_B::> metrocluster node show
+DR                               Configuration  DR
+Group Cluster Node               State          Mirroring Mode
+----- ------- ------------------ -------------- --------- --------------------
+1     cluster_B
+              node_B_1           configured     enabled   switchover completed
+              node_B_2           configured     enabled   switchover completed
+      cluster_A
+              node_A_1           configured     enabled   waiting for switchback recovery
+              node_A_2           configured     enabled   waiting for switchback recovery
+4 entries were displayed.
+
+cluster_B::>
+----
+. Verificare le impostazioni di configurazione della connessione MetroCluster:
++
+`metrocluster configuration-settings connection show`
+
++
+Lo stato di configurazione deve indicare Completed (completato).
+
++
+[listing]
+----
+cluster_B::*> metrocluster configuration-settings connection show
+DR                    Source          Destination
+Group Cluster Node    Network Address Network Address Partner Type Config State
+----- ------- ------- --------------- --------------- ------------ ------------
+1     cluster_B
+              node_B_2
+                 Home Port: e5a
+                      172.17.26.13    172.17.26.12    HA Partner   completed
+                 Home Port: e5a
+                      172.17.26.13    172.17.26.10    DR Partner   completed
+                 Home Port: e5a
+                      172.17.26.13    172.17.26.11    DR Auxiliary completed
+                 Home Port: e5b
+                      172.17.27.13    172.17.27.12    HA Partner   completed
+                 Home Port: e5b
+                      172.17.27.13    172.17.27.10    DR Partner   completed
+                 Home Port: e5b
+                      172.17.27.13    172.17.27.11    DR Auxiliary completed
+              node_B_1
+                 Home Port: e5a
+                      172.17.26.12    172.17.26.13    HA Partner   completed
+                 Home Port: e5a
+                      172.17.26.12    172.17.26.11    DR Partner   completed
+                 Home Port: e5a
+                      172.17.26.12    172.17.26.10    DR Auxiliary completed
+                 Home Port: e5b
+                      172.17.27.12    172.17.27.13    HA Partner   completed
+                 Home Port: e5b
+                      172.17.27.12    172.17.27.11    DR Partner   completed
+                 Home Port: e5b
+                      172.17.27.12    172.17.27.10    DR Auxiliary completed
+      cluster_A
+              node_A_2
+                 Home Port: e5a
+                      172.17.26.11    172.17.26.10    HA Partner   completed
+                 Home Port: e5a
+                      172.17.26.11    172.17.26.12    DR Partner   completed
+                 Home Port: e5a
+                      172.17.26.11    172.17.26.13    DR Auxiliary completed
+                 Home Port: e5b
+                      172.17.27.11    172.17.27.10    HA Partner   completed
+                 Home Port: e5b
+                      172.17.27.11    172.17.27.12    DR Partner   completed
+                 Home Port: e5b
+                      172.17.27.11    172.17.27.13    DR Auxiliary completed
+              node_A_1
+                 Home Port: e5a
+                      172.17.26.10    172.17.26.11    HA Partner   completed
+                 Home Port: e5a
+                      172.17.26.10    172.17.26.13    DR Partner   completed
+                 Home Port: e5a
+                      172.17.26.10    172.17.26.12    DR Auxiliary completed
+                 Home Port: e5b
+                      172.17.27.10    172.17.27.11    HA Partner   completed
+                 Home Port: e5b
+                      172.17.27.10    172.17.27.13    DR Partner   completed
+                 Home Port: e5b
+                      172.17.27.10    172.17.27.12    DR Auxiliary completed
+24 entries were displayed.
+
+cluster_B::*>
+----
+. Ripetere i passaggi precedenti sull'altro nodo del sito di emergenza.
+
+
+
+
+=== [[Reset-the-boot-recovery]]Ripristina boot_recovery e bootargs rdb_corrotto
+
+[role="lead"]
+Se necessario, è possibile ripristinare boot_recovery e rdb_corrotto_bootargs
+
+.Fasi
+. Arrestare nuovamente il nodo al prompt DEL CARICATORE:
++
+[listing]
+----
+node_A_1::*> halt -node _node-name_
+----
+. Controllare se sono stati impostati i seguenti bootargs:
++
+[listing]
+----
+LOADER> printenv bootarg.init.boot_recovery
+LOADER> printenv bootarg.rdb_corrupt
+----
+. Se uno dei due bootarg è stato impostato su un valore, disimpostarlo e avviare ONTAP:
++
+[listing]
+----
+LOADER> unsetenv bootarg.init.boot_recovery
+LOADER> unsetenv bootarg.rdb_corrupt
+LOADER> saveenv
+LOADER> bye
+----
+

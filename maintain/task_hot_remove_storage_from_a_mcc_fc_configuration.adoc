@@ -1,0 +1,146 @@
+---
+permalink: maintain/task_hot_remove_storage_from_a_mcc_fc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, hot, remove, storage, fc, configuration 
+summary: 'È possibile rimuovere a caldo gli shelf di dischi, ovvero rimuovere fisicamente gli shelf che hanno rimosso gli aggregati dai dischi, da una configurazione MetroCluster FC in grado di gestire i dati. Puoi rimuovere a caldo uno o più shelf da qualsiasi punto all"interno di una pila di shelf o rimuovere una pila di shelf.' 
+---
+= Rimozione a caldo dello storage da una configurazione MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile rimuovere a caldo gli shelf di dischi, ovvero rimuovere fisicamente gli shelf che hanno rimosso gli aggregati dai dischi, da una configurazione MetroCluster FC in grado di gestire i dati. Puoi rimuovere a caldo uno o più shelf da qualsiasi punto all'interno di una pila di shelf o rimuovere una pila di shelf.
+
+* Il sistema deve essere una configurazione ha multipath, multipath, ha quad-path o quad-path.
+* In una configurazione MetroCluster FC a quattro nodi, la coppia ha locale non può trovarsi in uno stato di Takeover.
+* È necessario aver già rimosso tutti gli aggregati dai dischi negli shelf che si stanno rimuovendo.
++
+
+IMPORTANT: Se si tenta di eseguire questa procedura su configurazioni FC non MetroCluster con aggregati sullo shelf che si sta rimuovendo, si potrebbe causare il malfunzionamento del sistema con un panic su più dischi.
+
++
+La rimozione degli aggregati implica la suddivisione degli aggregati mirrorati sugli shelf che si stanno rimuovendo e la ricreazione degli aggregati mirrorati con un altro set di dischi.
+
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"]
+
+* È necessario rimuovere la proprietà del disco dopo aver rimosso gli aggregati dai dischi negli shelf che si stanno rimuovendo.
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"]
+
+* Se si rimuovono uno o più shelf dall'interno di uno stack, è necessario aver preso in considerazione la distanza per evitare gli shelf che si stanno rimuovendo.
++
+Se i cavi attuali non sono abbastanza lunghi, è necessario disporre di cavi più lunghi.
+
+
+
+Questa attività si applica alle seguenti configurazioni MetroCluster FC:
+
+* Configurazioni MetroCluster FC a collegamento diretto, in cui gli shelf di storage sono collegati direttamente ai controller di storage con cavi SAS
+* Configurazioni MetroCluster FC con collegamento a fabric o bridge, in cui gli shelf di storage sono collegati mediante bridge FC-SAS
+
+
+.Fasi
+. Verificare il funzionamento della configurazione MetroCluster in ONTAP:
++
+.. Verificare che il sistema sia multipercorso: +
+`*node run -node _node-name_ sysconfig -a*`
+.. Verificare la presenza di eventuali avvisi sullo stato di salute su entrambi i cluster:
++
+`*system health alert show*`
+
+.. Confermare la configurazione MetroCluster e verificare che la modalità operativa sia normale: +
+`*metrocluster show*`
+.. Eseguire un controllo MetroCluster:
++
+`*metrocluster check run*`
+
+.. Visualizzare i risultati del controllo MetroCluster:
++
+`*metrocluster check show*`
+
+.. Verificare la presenza di eventuali avvisi sullo stato di salute sugli switch (se presenti):
++
+`*storage switch show*`
+
+.. Eseguire Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Download NetApp: Config Advisor"]
+
+.. Dopo aver eseguito Config Advisor, esaminare l'output dello strumento e seguire le raccomandazioni nell'output per risolvere eventuali problemi rilevati.
+
+
+. Impostare il livello di privilegio su Advanced (avanzato):
++
+`*set -privilege advanced*`
+
+. Verificare che sugli shelf non siano presenti unità mailbox:
+`*storage failover mailbox-disk show*`
+. Rimuovere lo shelf seguendo i passaggi per lo scenario pertinente.
++
+|===
+
+
+| Scenario | Fasi 
+
+
+ a| 
+Per rimuovere un aggregato quando lo shelf contiene unmirrored, mirrored o entrambi i tipi di aggregato...
+ a| 
+.. Utilizzare `storage aggregate delete -aggregate _aggregate name_` comando per rimuovere l'aggregato.
+.. Utilizzare la procedura standard per rimuovere la proprietà di tutti i dischi nello shelf, quindi rimuovere fisicamente lo shelf.
++
+Per rimuovere a caldo gli shelf, seguire le istruzioni riportate nella _SAS Disk Shelf Service Guide_ relativa al modello di shelf in uso.
+
+
+
+
+
+ a| 
+Per rimuovere un plesso da un aggregato mirrorato, è necessario eseguire il mirroring dell'aggregato.
+ a| 
+.. Identificare il plesso che si desidera rimuovere utilizzando `run -node local sysconfig -r` comando.
++
+Nell'esempio seguente, è possibile identificare il plex dalla linea `Plex /dpg_mcc_8020_13_a1_aggr1/plex0`. In questo caso, il plex da specificare è "`plex0`".
+
++
+[listing]
+----
+dpgmcc_8020_13_a1a2::storage aggregate> run -node local sysconfig -r
+*** This system has taken over dpg-mcc-8020-13-a1
+Aggregate dpg_mcc_8020_13_a1_aggr1 (online, raid_dp, mirrored) (block checksums)
+  Plex /dpg_mcc_8020_13_a1_aggr1/plex0 (online, normal, active, pool0)
+    RAID group /dpg_mcc_8020_13_a1_aggr1/plex0/rg0 (normal, block checksums)
+      RAID Disk Device                          HA  SHELF BAY CHAN Pool Type  RPM  Used (MB/blks)    Phys (MB/blks)
+      --------- ------                          ------------- ---- ---- ---- ----- --------------    --------------
+      dparity   mcc-cisco-8Gb-fab-2:1-1.126L16  0c    32  15  FC:B   0   SAS 15000 272000/557056000  274845/562884296
+      parity    mcc-cisco-8Gb-fab-2:1-1.126L18  0c    32  17  FC:B   0   SAS 15000 272000/557056000  274845/562884296
+      data      mcc-cisco-8Gb-fab-2:1-1.126L19  0c    32  18  FC:B   0   SAS 15000 272000/557056000  274845/562884296
+      data      mcc-cisco-8Gb-fab-2:1-1.126L21  0c    32  20  FC:B   0   SAS 15000 272000/557056000  274845/562884296
+      data      mcc-cisco-8Gb-fab-2:1-1.126L22  0c    32  21  FC:B   0   SAS 15000 272000/557056000  274845/562884296
+
+  Plex /dpg_mcc_8020_13_a1_aggr1/plex1 (online, normal, active, pool1)
+    RAID group /dpg_mcc_8020_13_a1_aggr1/plex1/rg0 (normal, block checksums)
+
+      RAID Disk Device                          HA  SHELF BAY CHAN Pool Type  RPM  Used (MB/blks)    Phys (MB/blks)
+      --------- ------                          ------------- ---- ---- ---- ----- --------------    --------------
+      dparity   mcc-cisco-8Gb-fab-3:1-1.126L37  0d    34  10  FC:A   1   SAS 15000 272000/557056000  280104/573653840
+      parity    mcc-cisco-8Gb-fab-3:1-1.126L14  0d    33  13  FC:A   1   SAS 15000 272000/557056000  280104/573653840
+      data      mcc-cisco-8Gb-fab-3:1-1.126L41  0d    34  14  FC:A   1   SAS 15000 272000/557056000  280104/573653840
+      data      mcc-cisco-8Gb-fab-3:1-1.126L15  0d    33  14  FC:A   1   SAS 15000 272000/557056000  280104/573653840
+      data      mcc-cisco-8Gb-fab-3:1-1.126L45  0d    34  18  FC:A   1   SAS 15000 272000/557056000  280104/573653840
+----
+.. Utilizzare `storage aggregate plex delete -aggregate _aggr_name_ -plex _plex_name_` comando per rimuovere il plex.
++
+plex definisce il nome del plex, ad esempio "`plex3`" o "`plex6`".
+
+.. Utilizzare la procedura standard per rimuovere la proprietà di tutti i dischi nello shelf, quindi rimuovere fisicamente lo shelf.
++
+Per rimuovere a caldo gli shelf, seguire le istruzioni riportate nella _SAS Disk Shelf Service Guide_ relativa al modello di shelf in uso.
+
+
+
+|===
+

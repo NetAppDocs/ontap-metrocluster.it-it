@@ -1,0 +1,75 @@
+---
+permalink: upgrade/task_change_the_ha_config_setts_mcc_add_a_2nd_controller.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, change, ha, config, sett, existing, new, controller, modules 
+summary: 'Quando si espande una configurazione MetroCluster, è necessario aggiornare l"impostazione ha-config del modulo controller esistente e del nuovo modulo controller. È inoltre necessario determinare l"ID di sistema del nuovo modulo controller.' 
+---
+= Modifica dell'impostazione ha-config sui moduli controller esistenti e nuovi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Quando si espande una configurazione MetroCluster, è necessario aggiornare l'impostazione ha-config del modulo controller esistente e del nuovo modulo controller. È inoltre necessario determinare l'ID di sistema del nuovo modulo controller.
+
+.A proposito di questa attività
+Questa attività viene eseguita in modalità di manutenzione sui moduli controller esistenti e nuovi.
+
+.Fasi
+. Modificare l'impostazione ha-config del modulo controller esistente:
++
+.. Visualizzare l'impostazione ha-config del modulo controller e dello chassis esistenti:
++
+`ha-config show`
+
++
+L'impostazione ha-config è "`mcc-2n`" per tutti i componenti perché il modulo controller era in una configurazione MetroCluster a due nodi.
+
+.. Modificare l'impostazione ha-config del modulo controller esistente in "`mcc`": +
+`ha-config modify controller mcc`
+.. Modificare l'impostazione ha-config dello chassis esistente in "`mcc`":
++
+`ha-config modify chassis mcc`
+
+.. Recuperare l'ID di sistema per il modulo controller esistente:
++
+`sysconfig`
+
++
+Annotare l'ID del sistema. È necessario quando si imposta l'ID partner sul nuovo modulo controller.
+
+.. Uscire dalla modalità di manutenzione per tornare al prompt DEL CARICATORE:
++
+`halt`
+
+
+
+. Modificare l'impostazione ha-config e recuperare l'ID di sistema del nuovo modulo controller:
++
+.. Se il nuovo modulo controller non è già in modalità di manutenzione, avviarlo in modalità di manutenzione:
++
+`boot_ontap maint`
+
+.. Modificare l'impostazione ha-config del nuovo modulo controller in "`mcc`":
++
+`ha-config modify controller mcc`
+
+.. Modificare l'impostazione ha-config del nuovo chassis in mcc:
++
+`ha-config modify chassis mcc`
+
+.. Recuperare l'ID di sistema per il nuovo modulo controller:
++
+`sysconfig`
+
++
+Annotare l'ID del sistema. È necessario quando si imposta l'ID partner e si assegnano i dischi al nuovo modulo controller.
+
+.. Uscire dalla modalità di manutenzione per tornare al prompt DEL CARICATORE:
++
+`halt`
+
+
+
+

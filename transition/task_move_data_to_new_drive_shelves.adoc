@@ -1,0 +1,47 @@
+---
+permalink: transition/task_move_data_to_new_drive_shelves.html 
+sidebar: sidebar 
+keywords: Generating and applying RCFs to the new IP switches, review, requirement, preparing, prepare, transition, perform, procedure, order, completing, complete, step, task, moving, move, controller, storage, shelves, shelf, exist, configuration, direct, metrocluster, fc, ip, verify, health, removing, remove, tiebreaker, monitor, software, generating, generate, apply, rcf, switch, controller, configure, prepare, preparing 
+summary: Durante la transizione, i dati vengono spostati dagli shelf di dischi nella configurazione MetroCluster FC alla nuova configurazione MetroCluster IP. 
+---
+= Spostamento dei dati nei nuovi shelf di dischi
+:allow-uri-read: 
+
+
+[role="lead"]
+Durante la transizione, i dati vengono spostati dagli shelf di dischi nella configurazione MetroCluster FC alla nuova configurazione MetroCluster IP.
+
+.Prima di iniziare
+È necessario creare nuove LIF SAN sui nodi di destinazione o IP e connettere gli host prima di spostare i volumi nei nuovi aggregati.
+
+. Per riprendere la generazione automatica del caso di supporto, inviare un messaggio AutoSupport per indicare che la manutenzione è stata completata.
++
+.. Immettere il seguente comando: `system node autosupport invoke -node * -type all -message MAINT=end`
+.. Ripetere il comando sul cluster partner.
+
+
+. Spostare i volumi di dati in aggregati sui nuovi controller, un volume alla volta.
++
+Seguire la procedura descritta in http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-AFE432F6-60AD-4A79-86C0-C7D12957FA63.html["Creazione di un aggregato e spostamento dei volumi nei nuovi nodi"].
+
+. Creare LIF SAN sui nodi aggiunti di recente.
++
+Seguire la procedura descritta in http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-expand/GUID-E3BB89AF-6251-4210-A979-130E845BC9A1.html["Aggiornamento dei percorsi LUN per i nuovi nodi"^].
+
+. Controllare se sono presenti licenze con blocco di nodo sui nodi FC; in tal caso, è necessario aggiungerli ai nodi appena aggiunti.
++
+Seguire la procedura descritta in http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-expand/GUID-487FAC36-3C5C-4314-B4BD-4253CB67ABE8.html["Aggiunta di licenze con blocco a nodo"^].
+
+. Eseguire la migrazione delle LIF dei dati.
++
+Seguire la procedura descritta in  http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-95CA9262-327D-431D-81AA-C73DEFF3DEE2.html["Spostamento di LIF di dati non SAN e LIF di gestione del cluster nei nuovi nodi"^] Tuttavia, *non* eseguire gli ultimi due passaggi per migrare le LIF di gestione del cluster.
+
+
+
+[NOTE]
+====
+* Non è possibile migrare una LIF utilizzata per le operazioni di copy-offload con le API vStorage VMware per l'integrazione array (VAAI).
+* Una volta completata la transizione dei nodi MetroCluster da FC a IP, potrebbe essere necessario spostare le connessioni host iSCSI sui nuovi nodi, vedere link:task_move_linux_iscsi_hosts_from_mcc_fc_to_mcc_ip_nodes.html["Spostamento degli host iSCSI Linux da MetroCluster FC a nodi IP MetroCluster."]
+
+
+====

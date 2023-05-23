@@ -1,0 +1,73 @@
+---
+permalink: upgrade/task_configure_the_fc_to_sas_bridges_for_health_monitor.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, configure, fc, sas, bridges, health, monitoring 
+summary: Gli strumenti di monitoraggio SNMP di terze parti non sono supportati per i bridge FibreBridge. A partire da ONTAP 9.8, i bridge FC-SAS vengono monitorati per impostazione predefinita tramite connessioni in-band e non è necessaria alcuna configurazione aggiuntiva. 
+---
+= Configurazione di bridge FC-SAS per il monitoraggio dello stato di salute
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+.A proposito di questa attività
+* Gli strumenti di monitoraggio SNMP di terze parti non sono supportati per i bridge FibreBridge.
+* A partire da ONTAP 9.8, i bridge FC-SAS vengono monitorati per impostazione predefinita tramite connessioni in-band e non è necessaria alcuna configurazione aggiuntiva.
+
+
+
+NOTE: A partire da ONTAP 9.8, la `storage bridge` il comando viene sostituito con `system bridge`. La procedura riportata di seguito mostra `storage bridge` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `system bridge` è preferibile utilizzare il comando.
+
+.Fase
+. Dal prompt del cluster ONTAP, aggiungere il bridge al monitoraggio dello stato di salute:
++
+.. Aggiungere il bridge utilizzando il comando per la versione di ONTAP in uso:
++
+|===
+
+
+| Versione di ONTAP | Comando 
+
+
+ a| 
+9.5 e versioni successive
+ a| 
+`storage bridge add -address 0.0.0.0 -managed-by in-band -name _bridge-name_`
+
+
+
+ a| 
+9.4 e versioni precedenti
+ a| 
+`storage bridge add -address _bridge-ip-address_ -name _bridge-name_`
+
+|===
+.. Verificare che il bridge sia stato aggiunto e configurato correttamente:
++
+`storage bridge show`
+
++
+A causa dell'intervallo di polling, potrebbero essere necessari 15 minuti per riflettere tutti i dati. Il monitor dello stato di ONTAP può contattare e monitorare il bridge se il valore nella colonna "Stato" è "ok" e vengono visualizzate altre informazioni, ad esempio il nome internazionale (WWN).
+
++
+L'esempio seguente mostra che i bridge FC-SAS sono configurati:
+
++
+[listing]
+----
+controller_A_1::> storage bridge show
+
+Bridge              Symbolic Name Is Monitored  Monitor Status  Vendor Model                Bridge WWN
+------------------  ------------- ------------  --------------  ------ -----------------    ----------
+ATTO_10.10.20.10  atto01        true          ok              Atto   FibreBridge 7500N   	20000010867038c0
+ATTO_10.10.20.11  atto02        true          ok              Atto   FibreBridge 7500N   	20000010867033c0
+ATTO_10.10.20.12  atto03        true          ok              Atto   FibreBridge 7500N   	20000010867030c0
+ATTO_10.10.20.13  atto04        true          ok              Atto   FibreBridge 7500N   	2000001086703b80
+
+4 entries were displayed
+
+ controller_A_1::>
+----
+
+
+

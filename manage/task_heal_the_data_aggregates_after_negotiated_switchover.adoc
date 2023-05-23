@@ -1,0 +1,62 @@
+---
+permalink: manage/task_heal_the_data_aggregates_after_negotiated_switchover.html 
+sidebar: sidebar 
+keywords: heal, data, aggregate, completing, complete, maintenance, test, process, resynchronize, prepare, disaster, operation, root, negotiate, switchover 
+summary: È necessario riparare gli aggregati di dati dopo aver completato qualsiasi manutenzione o test. Questo processo risincronizza gli aggregati di dati e prepara il sito di emergenza per il normale funzionamento. È necessario riparare gli aggregati di dati prima di riparare gli aggregati root. 
+---
+= Riparazione degli aggregati di dati dopo lo switchover negoziato
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario riparare gli aggregati di dati dopo aver completato qualsiasi manutenzione o test. Questo processo risincronizza gli aggregati di dati e prepara il sito di emergenza per il normale funzionamento. È necessario riparare gli aggregati di dati prima di riparare gli aggregati root.
+
+Tutti gli aggiornamenti della configurazione nel cluster remoto vengono replicati correttamente nel cluster locale. L'alimentazione dello storage nel sito di disastro viene eseguita nell'ambito di questa procedura, ma non è necessario accendere i moduli controller nel sito di disastro.
+
+.Fasi
+. Assicurarsi che lo switchover sia stato completato eseguendo il comando show di MetroCluster Operation.
++
+[listing]
+----
+controller_A_1::> metrocluster operation show
+  Operation: switchover
+      State: successful
+ Start Time: 7/25/2014 20:01:48
+   End Time: 7/25/2014 20:02:14
+     Errors: -
+----
+. Risincronizzare gli aggregati di dati eseguendo il comando MetroCluster Heal -Phase Aggregates dal cluster esistente.
++
+[listing]
+----
+controller_A_1::> metrocluster heal -phase aggregates
+[Job 130] Job succeeded: Heal Aggregates is successful.
+----
++
+Se la riparazione è vetoed, è possibile emettere nuovamente il comando MetroCluster Heal con il parametro --override-vetoes. Se si utilizza questo parametro opzionale, il sistema sovrascrive qualsiasi veto soft che impedisca l'operazione di riparazione.
+
+. Verificare che l'operazione sia stata completata eseguendo il comando MetroCluster Operation show.
++
+[listing]
+----
+controller_A_1::> metrocluster operation show
+    Operation: heal-aggregates
+      State: successful
+Start Time: 7/25/2014 18:45:55
+   End Time: 7/25/2014 18:45:56
+     Errors: -
+----
+. Controllare lo stato degli aggregati eseguendo il comando show dell'aggregato di storage.
++
+[listing]
+----
+controller_A_1::> storage aggregate show
+Aggregate     Size Available Used% State   #Vols  Nodes            RAID Status
+--------- -------- --------- ----- ------- ------ ---------------- ------------
+...
+aggr_b2    227.1GB   227.1GB    0% online       0 mcc1-a2          raid_dp, mirrored, normal...
+----
+. Se lo storage è stato sostituito nel sito di disastro, potrebbe essere necessario eseguire il remirrore degli aggregati.
+

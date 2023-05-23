@@ -1,0 +1,41 @@
+---
+permalink: transition/concept_how_transition_impacts_the_mcc_hardware_components.html 
+sidebar: sidebar 
+keywords: complete, completing, transition, procedure, key, component, exist, metrocluster, configuration, replace, reconfigure, impact, hardware, component 
+summary: Dopo aver completato la procedura di transizione, i componenti principali della configurazione MetroCluster esistente sono stati sostituiti o riconfigurati. 
+---
+= Impatto della transizione sui componenti hardware di MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo aver completato la procedura di transizione, i componenti principali della configurazione MetroCluster esistente sono stati sostituiti o riconfigurati.
+
+* *Moduli controller*
++
+I moduli controller esistenti vengono sostituiti da nuovi moduli controller. I moduli controller esistenti vengono dismessi al termine delle procedure di transizione.
+
+* *Storage shelf*
++
+I dati vengono spostati dai vecchi shelf ai nuovi shelf. I vecchi shelf vengono dismessi al termine delle procedure di transizione.
+
+* *MetroCluster (back-end) e switch cluster*
++
+La funzionalità dello switch back-end viene sostituita dal fabric dello switch IP. Se la configurazione MetroCluster FC include switch FC e bridge FC-SAS, questi vengono dismessi al termine di questa procedura.
+
++
+Se la configurazione MetroCluster FC utilizzava switch cluster per l'interconnessione del cluster, in alcuni casi possono essere riutilizzati per fornire il fabric dello switch IP back-end. Gli switch cluster riutilizzati devono essere riconfigurati con RCF specifici per piattaforma e switch. procedure.
+
++
+Se la configurazione MetroCluster FC non utilizza switch cluster, vengono aggiunti nuovi switch IP per fornire il fabric switch back-end.
+
++
+link:concept_considerations_for_using_existing_ip_switches.html["Considerazioni sugli switch IP"]
+
+* *Cluster peering network*
++
+Per la nuova configurazione IP di MetroCluster, è possibile utilizzare la rete di peering cluster fornita dal cliente. Il peering del cluster viene configurato sui nodi IP MetroCluster come parte della procedura di transizione.
+
+

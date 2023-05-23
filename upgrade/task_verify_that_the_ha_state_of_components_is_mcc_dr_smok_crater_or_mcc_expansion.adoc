@@ -1,0 +1,38 @@
+---
+permalink: upgrade/task_verify_that_the_ha_state_of_components_is_mcc_dr_smok_crater_or_mcc_expansion.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, verify, ha, config, component, state 
+summary: In una configurazione MetroCluster, lo stato ha-config del modulo controller e dei componenti del telaio deve essere impostato su mcc per consentire il corretto avvio. 
+---
+= Verifica dello stato ha-config dei componenti
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+In una configurazione MetroCluster, lo stato ha-config del modulo controller e dei componenti dello chassis deve essere impostato su *mcc* per consentire il corretto avvio.
+
+.A proposito di questa attività
+* Il sistema deve essere in modalità di manutenzione.
+* Questa attività deve essere eseguita su ogni nuovo modulo controller.
+
+
+.Fasi
+. In modalità Maintenance (manutenzione), visualizzare lo stato ha del modulo controller e dello chassis:
++
+`ha-config show`
+
++
+Lo stato ha per tutti i componenti deve essere "mcc".
+
+. Se lo stato di sistema visualizzato del controller non è corretto, impostare lo stato ha per il modulo controller:
++
+`ha-config modify controller mcc`
+
+. Se lo stato di sistema visualizzato dello chassis non è corretto, impostare lo stato ha per lo chassis:
++
+`ha-config modify chassis mcc`
+
+. Ripetere questi passaggi sull'altro nodo sostitutivo.
+

@@ -1,0 +1,54 @@
+---
+permalink: install-fc/task_assign_ownership_of_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, assigning, ownership, array, luns 
+summary: Le LUN degli array devono essere di proprietà di un nodo prima di poter essere aggiunte a un aggregato per essere utilizzate come storage. 
+---
+= Assegnazione della proprietà delle LUN degli array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le LUN degli array devono essere di proprietà di un nodo prima di poter essere aggiunte a un aggregato per essere utilizzate come storage.
+
+.Prima di iniziare
+* Il test della configurazione back-end (test della connettività e della configurazione dei dispositivi dietro i sistemi ONTAP) deve essere completato.
+* I LUN degli array che si desidera assegnare devono essere presentati ai sistemi ONTAP.
+
+
+.A proposito di questa attività
+È possibile assegnare la proprietà di LUN array con le seguenti caratteristiche:
+
+* Non sono di proprietà.
+* Non presentano errori di configurazione degli array di storage, come ad esempio:
++
+** Il LUN dell'array è inferiore o superiore alle dimensioni supportate da ONTAP.
+** LDEV è mappato su una sola porta.
+** All'LDEV sono assegnati ID LUN non coerenti.
+** Il LUN è disponibile su un solo percorso.
+
+
+
+
+ONTAP genera un messaggio di errore se si tenta di assegnare la proprietà di un LUN dell'array con errori di configurazione back-end che interferirebbero con il sistema ONTAP e l'array di storage che funzionano insieme. È necessario correggere tali errori prima di procedere con l'assegnazione del LUN dell'array.
+
+ONTAP avvisa l'utente se si tenta di assegnare un LUN di array con un errore di ridondanza: Ad esempio, tutti i percorsi a questo LUN di array sono collegati allo stesso controller o solo a un percorso del LUN di array. È possibile correggere un errore di ridondanza prima o dopo l'assegnazione della proprietà del LUN.
+
+.Fasi
+. Visualizzare le LUN degli array non ancora assegnate a un nodo:
++
+`storage disk show -container-type unassigned`
+
+. Assegnare un LUN di array a questo nodo:
++
+`storage disk assign -disk _array_LUN_name_ -owner _nodename_`
+
++
+Se si desidera correggere un errore di ridondanza dopo l'assegnazione del disco anziché in precedenza, è necessario utilizzare `-force` con il comando di assegnazione del disco di storage.
+
+
+
+.Informazioni correlate
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.vs-irrg/home.html["Requisiti e riferimenti per l'installazione della virtualizzazione FlexArray"]

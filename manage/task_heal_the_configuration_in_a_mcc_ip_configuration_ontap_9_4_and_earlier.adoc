@@ -1,0 +1,68 @@
+---
+permalink: manage/task_heal_the_configuration_in_a_mcc_ip_configuration_ontap_9_4_and_earlier.html 
+sidebar: sidebar 
+keywords: heal, aggregate, preparation, switchback, operation, configuration, metrocluster, ip, ontap 
+summary: 'È necessario riparare gli aggregati in preparazione dell"operazione di switchback.' 
+---
+= Riparazione della configurazione in una configurazione MetroCluster IP (ONTAP 9.4 e versioni precedenti)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario riparare gli aggregati in preparazione dell'operazione di switchback.
+
+
+NOTE: Nei sistemi MetroCluster IP che eseguono ONTAP 9.5, la riparazione viene eseguita automaticamente ed è possibile ignorare queste attività.
+
+Prima di eseguire la procedura di riparazione, devono sussistere le seguenti condizioni:
+
+* Lo switchover deve essere stato eseguito e il sito sopravvissuto deve fornire i dati.
+* Gli shelf di storage nel sito di disastro devono essere alimentati, funzionali e accessibili.
+* Gli ISL devono essere operativi.
+* I nodi nel sito sopravvissuto non devono essere in stato di failover ha (entrambi i nodi devono essere attivi e in esecuzione).
+
+
+Questa attività si applica solo alle configurazioni IP di MetroCluster con versioni di ONTAP precedenti alla 9.5.
+
+Questa procedura differisce dalla procedura di riparazione per le configurazioni MetroCluster FC.
+
+.Fasi
+. Accendere ciascun modulo controller sul sito che è stato attivato e lasciarlo avviare completamente.
++
+Se il sistema visualizza il prompt DEL CARICATORE, eseguire `boot_ontap` comando.
+
+. Eseguire la fase di healing dell'aggregato root: `metrocluster heal root-aggregates`
++
+[listing]
+----
+cluster_A::> metrocluster heal root-aggregates
+[Job 137] Job succeeded: Heal Root-Aggregates is successful
+----
++
+Se la riparazione è vetoed, è possibile emettere nuovamente il comando MetroCluster heal root-aggregates con il parametro --override-vetoes. Se si utilizza questo parametro opzionale, il sistema sovrascrive qualsiasi veto soft che impedisca l'operazione di riparazione.
+
+. Risincronizzare gli aggregati: `metrocluster heal aggregates`
++
+[listing]
+----
+cluster_A::> metrocluster heal aggregates
+[Job 137] Job succeeded: Heal Aggregates is successful
+----
++
+Se la riparazione è vetoed, è possibile emettere nuovamente il comando MetroCluster Heal con il parametro --override-vetoes. Se si utilizza questo parametro opzionale, il sistema sovrascrive qualsiasi veto soft che impedisca l'operazione di riparazione.
+
+. Verificare che l'operazione di riparazione sia completa eseguendo il comando MetroCluster Operation show sul cluster integro:
++
+[listing]
+----
+
+cluster_A::> metrocluster operation show
+  Operation: heal-aggregates
+      State: successful
+ Start Time: 7/29/2017 20:54:41
+   End Time: 7/29/2017 20:54:42
+     Errors: -
+----
+

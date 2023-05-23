@@ -1,0 +1,31 @@
+---
+permalink: upgrade/task_install_licenses_on_the_new_controller_module_cluster_mode.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, install, license, new, controller, module 
+summary: 'È necessario aggiungere licenze per il nuovo modulo controller per tutti i servizi ONTAP che richiedono licenze standard (con blocco a nodo). Per le funzionalità con licenze standard, ogni nodo del cluster deve disporre di una propria chiave per la funzionalità.' 
+---
+= Installazione delle licenze per il nuovo modulo controller
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario aggiungere le licenze per il nuovo modulo controller per tutti i servizi ONTAP che richiedono licenze standard (con blocco a nodo). Per le funzionalità con licenze standard, ogni nodo del cluster deve disporre di una propria chiave per la funzionalità.
+
+Per informazioni dettagliate sulle licenze, consultare l'articolo della Knowledge base 3013749: Panoramica e riferimenti sulle licenze di Data ONTAP 8.2 sul sito di supporto NetApp e il documento _riferimento per l'amministrazione del sistema_.
+
+.Fasi
+. Se necessario, procurarsi le chiavi di licenza per il nuovo nodo sul sito di supporto NetApp nella sezione My Support (supporto personale) sotto Software licenss (licenze software).
++
+Per ulteriori informazioni sulle sostituzioni delle licenze, consultare l'articolo della Knowledge base link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/Post_Motherboard_Replacement_Process_to_update_Licensing_on_a_AFF_FAS_system["Processo di sostituzione della scheda madre per aggiornare le licenze su un sistema AFF/FAS."^]
+
+. Immettere il seguente comando per installare ogni chiave di licenza:
++
+`system license add -license-code _license_key_`
+
++
+Il `_license_key_` lunghezza: 28 cifre.
+
+. Ripetere questo passaggio per ogni licenza standard richiesta (bloccata da nodo).
+

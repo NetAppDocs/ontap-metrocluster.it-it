@@ -1,0 +1,44 @@
+---
+permalink: install-stretch/concept_parts_of_a_two_node_sas_attached_stretch_mcc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, parts, two, node, sas, attached, configuration 
+summary: La configurazione con collegamento SAS a due nodi MetroCluster richiede diverse parti, tra cui due cluster a nodo singolo in cui i controller di storage sono collegati direttamente allo storage mediante cavi SAS. 
+---
+= Parti di una configurazione di Stretch MetroCluster con collegamento SAS a due nodi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La configurazione con collegamento SAS a due nodi MetroCluster richiede diverse parti, tra cui due cluster a nodo singolo in cui i controller di storage sono collegati direttamente allo storage mediante cavi SAS.
+
+La configurazione MetroCluster include i seguenti elementi hardware principali:
+
+* Controller di storage
++
+I controller di storage si collegano direttamente allo storage utilizzando cavi SAS.
+
++
+Ogni controller di storage è configurato come partner di DR per uno storage controller sul sito del partner.
+
++
+** I cavi SAS in rame possono essere utilizzati per distanze più brevi.
+** I cavi SAS ottici possono essere utilizzati per lunghe distanze.
++
+
+NOTE: Nei sistemi che utilizzano LUN array e-Series, i controller storage possono essere collegati direttamente agli array storage e-Series. Per gli altri LUN di array, sono necessarie connessioni tramite switch FC.
+
++
+https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp"]
+
++
+In IMT, è possibile utilizzare il campo soluzione storage per selezionare la soluzione MetroCluster. Utilizzare *Esplora componenti* per selezionare i componenti e la versione di ONTAP per perfezionare la ricerca. È possibile fare clic su *Mostra risultati* per visualizzare l'elenco delle configurazioni supportate che corrispondono ai criteri.
+
+
+
+* Rete di peering del cluster
++
+La rete di peering del cluster fornisce la connettività per il mirroring della configurazione SVM (Storage Virtual Machine). La configurazione di tutte le SVM su un cluster viene sottoposta a mirroring nel cluster partner.
+
+

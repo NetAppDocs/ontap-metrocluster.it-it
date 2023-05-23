@@ -1,0 +1,83 @@
+---
+permalink: transition/concept_switchover_and_switchback_operations_during_transition.html 
+sidebar: sidebar 
+keywords: stage, transition, process, metrocluster, switchover, heal, switchback, operation, fc, ip, workflow 
+summary: A seconda della fase del processo di transizione, le operazioni di switchover, riparazione e switchback di MetroCluster utilizzano il flusso di lavoro MetroCluster FC o MetroCluster IP. 
+---
+= Operazioni di switchover, riparazione e switchback durante la transizione senza interruzioni
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A seconda della fase del processo di transizione, le operazioni di switchover, riparazione e switchback di MetroCluster utilizzano il flusso di lavoro MetroCluster FC o MetroCluster IP.
+
+La seguente tabella mostra i flussi di lavoro utilizzati nelle diverse fasi del processo di transizione. In alcune fasi, lo switchover e lo switchback non sono supportati.
+
+* Nel flusso di lavoro MetroCluster FC, le fasi di switchover, riparazione e switchback sono quelle utilizzate da una configurazione MetroCluster FC.
+* Nel flusso di lavoro IP di MetroCluster, le fasi di switchover, riparazione e switchback sono quelle utilizzate da una configurazione IP di MetroCluster.
+* Nel flusso di lavoro unificato, quando sono configurati entrambi i nodi FC e IP, le operazioni dipendono dall'esecuzione di NSO o USO. I dettagli sono riportati nella tabella.
+
+
+Per informazioni sui flussi di lavoro FC e IP di MetroCluster per lo switchover, la riparazione e lo switchback, vedere link:../manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html["Comprensione della protezione dei dati e del disaster recovery di MetroCluster"].
+
+
+NOTE: Lo switchover automatico non pianificato non è disponibile durante il processo di transizione.
+
+[cols="2,1,3"]
+|===
+
+
+| Fase della transizione | Lo switchover negoziato utilizza questo workflow... | Lo switchover non pianificato utilizza questo workflow... 
+
+
+ a| 
+Prima che i nodi IP MetroCluster si siano Uniti al cluster
+ a| 
+FC MetroCluster
+ a| 
+FC MetroCluster
+
+
+
+ a| 
+Dopo che i nodi IP MetroCluster sono entrati a far parte del cluster, prima di `metrocluster configure` viene eseguito il comando
+ a| 
+Non supportato
+ a| 
+FC MetroCluster
+
+
+
+ a| 
+Dopo il `metrocluster configure` il comando è stato emesso. Lo spostamento del volume può essere in corso.
+ a| 
+Unificato: Tutti i nodi del sito remoto rimangono attivi e la riparazione viene eseguita automaticamente
+ a| 
+Unificato:
+
+* Gli aggregati mirrorati di proprietà del nodo MetroCluster FC vengono mirrorati se lo storage è accessibile, tutti gli altri vengono degradati dopo lo switchover.
+* Tutti i nodi del sito remoto sono in grado di avviarsi.
+* Il `heal aggregate` e. `heal root` i comandi devono essere eseguiti manualmente.
+
+
+
+
+ a| 
+I nodi MetroCluster FC non sono stati configurati.
+ a| 
+Non supportato
+ a| 
+IP MetroCluster
+
+
+
+ a| 
+Il `cluster unjoin` Il comando è stato eseguito sui nodi FC MetroCluster.
+ a| 
+IP MetroCluster
+ a| 
+IP MetroCluster
+
+|===

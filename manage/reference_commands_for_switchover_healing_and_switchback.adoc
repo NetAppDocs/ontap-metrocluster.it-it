@@ -1,0 +1,70 @@
+---
+permalink: manage/reference_commands_for_switchover_healing_and_switchback.html 
+sidebar: sidebar 
+keywords: ontap, command, perform, metrocluster, disaster, recovery, process, switchover, heal, switchback 
+summary: 'Esistono comandi ONTAP specifici per l"esecuzione dei processi di disaster recovery di MetroCluster.' 
+---
+= Comandi per switchover, healing e switchback
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esistono comandi ONTAP specifici per l'esecuzione dei processi di disaster recovery di MetroCluster.
+
+[cols="1,2"]
+|===
+
+
+| Se si desidera... | Utilizzare questo comando... 
+
+
+ a| 
+Verificare che lo switchover possa essere eseguito senza errori o veti.
+ a| 
+`metrocluster switchover -simulate` + a livello di privilegi avanzati
+
+
+
+ a| 
+Verificare che lo switchback possa essere eseguito senza errori o veti.
+ a| 
+`metrocluster switchback -simulate` + a livello di privilegi avanzati
+
+
+
+ a| 
+Passare ai nodi partner (switchover negoziato).
+ a| 
+`metrocluster switchover`
+
+
+
+ a| 
+Passare ai nodi partner (switchover forzato).
+ a| 
+`metrocluster switchover -forced-on-disaster true`
+
+
+
+ a| 
+Eseguire la riparazione degli aggregati di dati.
+ a| 
+`metrocluster heal -phase aggregates`
+
+
+
+ a| 
+Eseguire la riparazione dell'aggregato root.
+ a| 
+`metrocluster heal -phase root-aggregates`
+
+
+
+ a| 
+Tornare ai nodi home.
+ a| 
+`metrocluster switchback`
+
+|===

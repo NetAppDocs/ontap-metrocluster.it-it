@@ -1,0 +1,37 @@
+---
+permalink: install-stretch/task_synchronize_the_system_time_us_ntp.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, synchronize, system, time, ntp 
+summary: 'Ogni cluster necessita di un proprio server NTP (Network Time Protocol) per sincronizzare l"ora tra i nodi e i relativi client. È possibile utilizzare la finestra di dialogo Edit DateTime (Modifica data) in System Manager per configurare il server NTP.' 
+---
+= Sincronizzazione dell'ora di sistema mediante NTP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ogni cluster necessita di un proprio server NTP (Network Time Protocol) per sincronizzare l'ora tra i nodi e i relativi client. È possibile utilizzare la finestra di dialogo Edit DateTime (Modifica data) in System Manager per configurare il server NTP.
+
+Verificare di aver scaricato e installato System Manager. System Manager è disponibile sul sito di supporto NetApp.
+
+* Non è possibile modificare le impostazioni del fuso orario per un nodo guasto o per il nodo partner dopo l'acquisizione.
+* Ogni cluster nella configurazione MetroCluster FC deve disporre di uno o più server NTP separati utilizzati dai nodi e (se presenti) bridge FC-SAS in quel sito MetroCluster.
++
+Se si utilizza il software MetroCluster Tiebreaker, deve disporre anche di un server NTP separato.
+
+
+
+.Fasi
+. Dalla home page, fare doppio clic sul sistema di storage appropriato.
+. Espandere la gerarchia *Cluster* nel riquadro di navigazione a sinistra.
+. Nel riquadro di navigazione, fare clic su *Configuration* *System Tools* *DateTime*.
+. Fare clic su *Edit* (Modifica).
+. Selezionare il fuso orario.
+. Specificare gli indirizzi IP dei server di riferimento orario, quindi fare clic su *Aggiungi*.
++
+È necessario aggiungere un server NTP all'elenco dei server di riferimento orario. Il controller di dominio può essere un server autorevole.
+
+. Fare clic su *OK*.
+. Verificare le modifiche apportate alle impostazioni di data e ora nella finestra Data e ora.
+

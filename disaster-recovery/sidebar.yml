@@ -1,0 +1,82 @@
+---
+section: disaster-recovery
+title: Ripristino in caso di disastro
+entries:
+- title: Workflow per il disaster recovery
+  url: "/disaster-recovery/concept_dr_workflow.html"
+- title: Eseguire uno switchover forzato dopo un disastro
+  url: "/disaster-recovery/task_perform_a_forced_switchover_after_a_disaster.html"
+- title: Scelta della procedura di ripristino corretta
+  url: "/disaster-recovery/concept_choosing_the_correct_recovery_procedure_parent_concept.html"
+- title: Ripristino in caso di guasto di un multi-controller o di uno storage
+  entries:
+  - title: Prima di iniziare
+    url: "/disaster-recovery/task_recover_from_a_multi_controller_and_or_storage_failure.html"
+  - title: Sostituire l'hardware e avviare nuovi controller
+    url: "/disaster-recovery/task_replace_hardware_and_boot_new_controllers.html"
+  - title: Prepararsi per lo switchback in una configurazione IP MetroCluster
+    entries:
+    - title: Panoramica
+      url: "/disaster-recovery/task_prepare_for_switchback_in_a_mcc_ip_configuration_supertask.html"
+    - title: Impostare le variabili ambientali richieste nelle configurazioni MetroCluster
+        IP
+      url: "/disaster-recovery/task_set_env_mcip.html"
+    - title: Accendere l'apparecchiatura nel sito di emergenza (configurazioni MetroCluster
+        IP)
+      url: "/disaster-recovery/task_power_on_mcip.html"
+    - title: Configurazione degli switch IP (configurazioni IP MetroCluster)
+      url: "/disaster-recovery/task_config_switches_mcip.html"
+    - title: Verificare la connettività dello storage al sito remoto (configurazioni
+        MetroCluster IP)
+      url: "/disaster-recovery/task_verify_connectivity_mcip.html"
+    - title: Riassegnare la proprietà del disco per il pool di dischi 1 nel sito di
+        emergenza (configurazioni MetroCluster IP)
+      url: "/disaster-recovery/task_reassign_pool1_disastersite_mcip.html"
+    - title: Eseguire l'avvio da ONTAP sui moduli controller sostitutivi nelle configurazioni
+        IP MetroCluster
+      url: "/disaster-recovery/task_boot_ontap_mcip.html"
+    - title: Ripristinare la connettività dai nodi sopravvissuti al sito di emergenza
+        (configurazioni MetroCluster IP)
+      url: "/disaster-recovery/task_restore_connectivity_mcip.html"
+    - title: Verificare l'assegnazione automatica o assegnare manualmente i dischi
+        del pool 0
+      url: "/disaster-recovery/task_verify_assignment_mcip.html"
+    - title: Assegnare il pool 1 di dischi sul sito sopravvissuto (configurazioni
+        IP MetroCluster)
+      url: "/disaster-recovery/task_assign_pool1_survivingsite_mcip.html"
+    - title: Eliminare i plex guasti di proprietà del sito sopravvissuto (configurazioni
+        IP MetroCluster)
+      url: "/disaster-recovery/task_delete_plexes_mcip.html"
+    - title: Eseguire mirror di ripristino e riparazione aggregati (configurazioni
+        MetroCluster IP)
+      url: "/disaster-recovery/task_heal_restore_mcip.html"
+  - title: Prepararsi per lo switchback in una configurazione MetroCluster FC
+    entries:
+    - title: Verifica della configurazione della porta (solo configurazioni MetroCluster
+        FC)
+      url: "/disaster-recovery/task_verify_port_mcfc.html"
+    - title: Configurazione dei bridge FC-SAS (solo configurazioni MetroCluster FC)
+      url: "/disaster-recovery/task_cfg_bridges_mcfc.html"
+    - title: Configurazione degli switch FC (solo configurazioni MetroCluster FC)
+      url: "/disaster-recovery/task_cfg_switches_mcfc.html"
+    - title: Verificare la configurazione dello storage
+      url: "/disaster-recovery/task_verify_storage_mcfc.html"
+    - title: Accendere l'apparecchiatura nel sito di emergenza
+      url: "/disaster-recovery/task_power_on_mcfc.html"
+    - title: Assegnare la proprietà delle unità sostituite
+      url: "/disaster-recovery/task_assign_ownership_mcfc.html"
+    - title: Eseguire la riparazione degli aggregati e ripristinare i mirror (configurazioni
+        MetroCluster FC)
+      url: "/disaster-recovery/task_heal_restore_mcfc.html"
+    - title: Riassegnare la proprietà dei dischi per gli aggregati root ai moduli
+        controller sostitutivi (configurazioni MetroCluster FC)
+      url: "/disaster-recovery/task_reassign_roots_mcfc.html"
+    - title: Avviare i nuovi moduli controller (configurazioni MetroCluster FC)
+      url: "/disaster-recovery/task_boot_new_mcfc.html"
+  - title: Preparare i nodi per lo switchback in una configurazione mista (recovery
+      durante la transizione)
+    url: "/disaster-recovery/task_prepare_the_nodes_for_switchback_in_a_mixed_configuration.html"
+  - title: Ripristino completo
+    url: "/disaster-recovery/task_complete_recovery.html"
+- title: Ripristino in caso di guasto non del controller
+  url: "/disaster-recovery/task_recover_from_a_non_controller_failure_mcc_dr.html"

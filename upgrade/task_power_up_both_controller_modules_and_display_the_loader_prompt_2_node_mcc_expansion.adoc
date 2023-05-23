@@ -1,0 +1,59 @@
+---
+permalink: upgrade/task_power_up_both_controller_modules_and_display_the_loader_prompt_2_node_mcc_expansion.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, power, up, controller. modules, display, loader, prompt 
+summary: Accendere il modulo controller esistente e il nuovo modulo controller per visualizzare il prompt DEL CARICATORE. 
+---
+= Accendere entrambi i moduli controller e visualizzare il prompt DEL CARICATORE
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Accendere il modulo controller esistente e il nuovo modulo controller per visualizzare il prompt DEL CARICATORE.
+
+.Fasi
+Accendere i moduli controller e interrompere il processo di avvio, seguendo la procedura per la configurazione:
+
+[cols="25,75"]
+|===
+
+
+| Se i moduli controller sono... | Quindi... 
+
+
+ a| 
+Nello stesso chassis
+ a| 
+. Verificare che il nuovo modulo controller sia *non* completamente inserito nell'alloggiamento.
++
+Il modulo controller esistente deve essere inserito completamente nell'alloggiamento perché non è mai stato rimosso dallo chassis, ma il nuovo modulo controller non dovrebbe esserlo.
+
+. Collegare l'alimentazione e accendere gli alimentatori in modo che il modulo controller esistente riceva alimentazione.
+. Interrompere il processo di avvio sul modulo controller esistente premendo Ctrl-C.
+. Inserire saldamente il nuovo modulo controller nell'alloggiamento.
++
+Una volta inserito completamente, il nuovo modulo controller riceve alimentazione e si avvia automaticamente.
+
+. Interrompere il processo di avvio premendo Ctrl-C.
+. Serrare la vite a testa zigrinata sull'impugnatura della camma, se presente.
+. Installare il dispositivo di gestione dei cavi, se presente.
+. Collegare i cavi al dispositivo di gestione dei cavi con il gancio e la fascetta.
+
+
+
+
+ a| 
+In uno chassis separato
+ a| 
+. Accendere gli alimentatori del modulo controller esistente.
+. Interrompere il processo di avvio premendo Ctrl-C.
+. Ripetere questa procedura per il nuovo modulo controller
+
+
+|===
+Ogni modulo controller dovrebbe visualizzare il prompt DEL CARICATORE (`LOADER>`, `LOADER-A>`, o. `LOADER-B>`).
+
+
+NOTE: Se non viene visualizzato alcun prompt DEL CARICATORE, annotare il messaggio di errore. Se il sistema visualizza il menu di avvio, riavviare e tentare di interrompere nuovamente il processo di avvio.

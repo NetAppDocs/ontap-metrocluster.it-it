@@ -1,0 +1,72 @@
+---
+permalink: maintain/concept_in_band_management_of_the_fc_to_sas_bridges.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, in, band, management, fc, sas, bridges 
+summary: A partire dai bridge ONTAP 9.5 con FibreBridge 7500N o 7600N, la gestione in-band dei bridge è supportata come alternativa alla gestione IP dei bridge. A partire da ONTAP 9.8, la gestione fuori banda è obsoleta. 
+---
+= Gestione in-band dei bridge FC-SAS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A partire dai bridge ONTAP 9.5 con FibreBridge 7500N o 7600N, la gestione in-band dei bridge è supportata come alternativa alla gestione IP dei bridge. A partire da ONTAP 9.8, la gestione fuori banda è obsoleta.
+
+.A proposito di questa attività
+
+NOTE: A partire da ONTAP 9.8, la `storage bridge` il comando viene sostituito con `system bridge`. La procedura riportata di seguito mostra `storage bridge` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `system bridge` è preferibile utilizzare il comando.
+
+Quando si utilizza la gestione in-band, i bridge possono essere gestiti e monitorati dall'interfaccia CLI ONTAP tramite la connessione FC al bridge. Non è richiesto l'accesso fisico al bridge tramite le porte Ethernet del bridge, riducendo la vulnerabilità di sicurezza del bridge.
+
+La disponibilità della gestione in-band dei bridge dipende dalla versione di ONTAP:
+
+* A partire da ONTAP 9.8, i bridge vengono gestiti tramite connessioni in-band per impostazione predefinita e la gestione out-of-band dei bridge tramite SNMP è obsoleta.
+* ONTAP da 9.5 a 9.7: È supportata la gestione in-band o fuori banda.
+* Prima di ONTAP 9.5, è supportata solo la gestione SNMP out-of-band.
+
+
+I comandi di Bridge CLI possono essere emessi dall'interfaccia ONTAP `storage bridge run-cli -name _bridge-name_ -command _bridge-command-name_` All'interfaccia ONTAP.
+
+
+NOTE: Si consiglia di utilizzare la gestione in-band con accesso IP disattivato per migliorare la sicurezza limitando la connettività fisica del bridge.
+
+.Informazioni correlate
+link:task_replace_a_sle_fc_to_sas_bridge.html#hot-swapping-a-bridge-with-a-replacement-bridge-of-the-same-model["Sostituzione a caldo di un bridge con un bridge sostitutivo dello stesso modello"]
+
+link:task_replace_a_sle_fc_to_sas_bridge.html#hot-swapping-a-fibrebridge-7500n-with-a-7600n-bridge["Scambio a caldo di un FibreBridge 7500N con un bridge 7600N"]
+
+link:task_replace_a_sle_fc_to_sas_bridge.html#hot-swapping-a-fibrebridge-a-6500n-bridge-with-a-fibrebrdige-7600n-or-7500n-bridge["Scambio a caldo di un bridge FibreBridge 6500N con un bridge FibreBridge 7600N o 7500N"]
+
+link:task_fb_hot_add_stack_of_shelves_and_bridges.html#hot-adding-a-stack-of-sas-disk-shelves-and-bridges["Aggiunta a caldo di uno stack di shelf e bridge di dischi SAS"]
+
+
+
+== Gestione di un bridge FibreBridge da ONTAP
+
+A partire da ONTAP 9.5, è possibile utilizzare l'interfaccia utente di ONTAP per passare i comandi FibreBridge al bridge e visualizzare i risultati di tali comandi.
+
+.A proposito di questa attività
+--
+
+NOTE: A partire da ONTAP 9.8, la `storage bridge` il comando viene sostituito con `system bridge`. La procedura riportata di seguito mostra `storage bridge` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `system bridge` è preferibile utilizzare il comando.
+
+--
+.Fasi
+. Eseguire il comando FiberBridge applicabile all'interno di `storage bridge run-cli` comando:
++
+`storage bridge run-cli -name _bridge-name_ -command _"command-text"_`
+
++
+Il seguente comando esegue FibreBridge `SASPortDisable` Dal prompt di ONTAP per disattivare la porta SAS b sul bridge:
+
++
+[listing]
+----
+cluster_A::> storage bridge run-cli -name "SASPortDisable b"
+
+SAS Port B has been disabled.
+Ready
+cluster_A::>
+----
+

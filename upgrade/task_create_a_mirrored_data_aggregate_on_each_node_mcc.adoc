@@ -1,0 +1,79 @@
+---
+permalink: upgrade/task_create_a_mirrored_data_aggregate_on_each_node_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, create, mirrored, data, aggregate, node 
+summary: È necessario creare un aggregato di dati mirrorato su ciascun nodo del gruppo DR. 
+---
+= Creazione di un aggregato di dati mirrorato su ciascun nodo
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario creare un aggregato di dati mirrorato su ciascun nodo del gruppo DR.
+
+.A proposito di questa attività
+* Devi sapere quali dischi verranno utilizzati nel nuovo aggregato.
+* Se nel sistema sono presenti più tipi di dischi (storage eterogeneo), è necessario comprendere come assicurarsi di selezionare il tipo di disco corretto.
+* I dischi sono di proprietà di un nodo specifico; quando si crea un aggregato, tutti i dischi in tale aggregato devono essere di proprietà dello stesso nodo, che diventa il nodo principale per quell'aggregato.
++
+Nei sistemi che utilizzano ADP, gli aggregati vengono creati utilizzando partizioni in cui ciascun disco viene partizionato nelle partizioni P1, P2 e P3.
+
+* I nomi degli aggregati devono essere conformi allo schema di denominazione stabilito al momento della pianificazione della configurazione MetroCluster.
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"]
+
+
+
+.Fasi
+. Visualizzare un elenco delle parti di ricambio disponibili:
++
+`storage disk show -spare -owner _node_name_`
+
+. Creare l'aggregato:
++
+`storage aggregate create -mirror true`
+
++
+Se si è connessi al cluster nell'interfaccia di gestione del cluster, è possibile creare un aggregato su qualsiasi nodo del cluster. Per assicurarsi che l'aggregato venga creato su un nodo specifico, utilizzare `-node` o specificare i dischi di proprietà di quel nodo.
+
++
+È possibile specificare le seguenti opzioni:
+
++
+** Nodo principale dell'aggregato (ovvero, il nodo proprietario dell'aggregato durante il normale funzionamento)
+** Elenco dei dischi specifici da aggiungere all'aggregato
+** Numero di dischi da includere
++
+
+NOTE: Nella configurazione minima supportata, in cui è disponibile un numero limitato di dischi, è necessario utilizzare l'opzione force-Small-aggregate per consentire la creazione di un aggregato RAID-DP a tre dischi.
+
+** Stile checksum da utilizzare per l'aggregato
+** Tipo di dischi da utilizzare
+** Dimensioni delle unità da utilizzare
+** Velocità del disco da utilizzare
+** Tipo RAID per i gruppi RAID sull'aggregato
+** Numero massimo di dischi che possono essere inclusi in un gruppo RAID
+** Se sono consentiti dischi con diversi RPM
++
+Per ulteriori informazioni su queste opzioni, consultare `storage aggregate create` pagina man.
+
++
+Il seguente comando crea un aggregato mirrorato con 10 dischi:
+
++
+[listing]
+----
+cluster_A::> storage aggregate create aggr1_node_A_1 -diskcount 10 -node node_A_1 -mirror true
+[Job 15] Job is queued: Create aggr1_node_A_1.
+[Job 15] The job is starting.
+[Job 15] Job succeeded: DONE
+----
+
+
+. Verificare il gruppo RAID e i dischi del nuovo aggregato:
++
+`storage aggregate show-status -aggregate _aggregate-name_`
+
+

@@ -1,0 +1,51 @@
+---
+permalink: install-stretch/task_cable_a_fibrebridge_7600n_or_7500n_bridge_with_disk_shelves_us_iom12_modules_sas3.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, cable, fibrebridge, bridge, disk, shelves, iom12, modules 
+summary: Dopo aver configurato il bridge, è possibile avviare il cablaggio del sistema. 
+---
+= Collegamento di un bridge FibreBridge 7600N o 7500N con shelf di dischi mediante moduli IOM12
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo aver configurato il bridge, è possibile avviare il cablaggio del sistema.
+
+Per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso il basso (nella parte inferiore del connettore).
+
+.Fasi
+. Collegamento a margherita degli shelf di dischi in ogni stack:
++
+.. A partire dal primo shelf logico nello stack, collegare la porta IOM A 3 alla porta IOM A 1 dello shelf successivo. Ripetere la procedura fino a collegare ciascun IOM A nello stack.
+.. Ripetere il passaggio precedente per IOM B.
+.. Ripetere i passaggi precedenti per ogni stack.
+
+
++
+La _Guida all'installazione e al servizio_ per il modello di shelf di dischi fornisce informazioni dettagliate sugli shelf di dischi con concatenamento a margherita.
+
+. Accendere gli shelf di dischi, quindi impostare gli ID dello shelf.
++
+** È necessario spegnere e riaccendere ogni shelf di dischi.
+** Gli shelf ID devono essere univoci per ogni shelf di dischi SAS all'interno di ciascun gruppo di DR MetroCluster (inclusi entrambi i siti).
+
+
+. Collegare gli shelf di dischi ai bridge FibreBridge.
++
+.. Per il primo stack di shelf di dischi, collegare IOM A del primo shelf alla porta SAS A su FibreBridge A. Cavo IOM B dell'ultimo shelf alla porta SAS A su FibreBridge B.
+.. Per ulteriori stack di shelf, ripetere il passaggio precedente utilizzando la successiva porta SAS disponibile sui bridge FibreBridge, utilizzando la porta B per il secondo stack, la porta C per il terzo stack e la porta D per il quarto stack.
+.. Durante il cablaggio, collegare gli stack basati sui moduli IOM12 e IOM3/IOM6 allo stesso bridge, purché siano collegati a porte SAS separate.
++
+
+NOTE: Ogni stack può utilizzare diversi modelli di IOM, ma tutti gli shelf di dischi all'interno di uno stack devono utilizzare lo stesso modello.
+
+
+
++
+La figura seguente mostra gli shelf di dischi collegati a una coppia di bridge FibreBridge 7600N o 7500N:
+
+
+
+image::../media/mcc_cabling_bridge_and_sas3_stack_with_7500n_and_multiple_stacks.gif[bridge di cablaggio mcc e stack sas3 con 7500n e stack multipli]

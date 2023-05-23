@@ -1,0 +1,30 @@
+---
+permalink: transition/concept_nondisruptively_transitioning_from_a_four_node_mcc_fc_to_a_mcc_ip_configuration.html 
+sidebar: sidebar 
+keywords: nondisruptive, transition, fc, ip 
+summary: A partire da ONTAP 9.13.1, è possibile eseguire una transizione senza interruzioni di carichi di lavoro e dati da una configurazione MetroCluster FC a otto nodi esistente a una nuova configurazione MetroCluster IP. 
+---
+= Transizione senza interruzioni da una configurazione MetroCluster FC a una configurazione MetroCluster IP (ONTAP 9.8 e versioni successive)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile eseguire transizioni senza interruzioni di carichi di lavoro e dati da una configurazione MetroCluster FC esistente a una nuova configurazione MetroCluster IP.
+
+A partire da ONTAP 9.13.1, è possibile eseguire una transizione senza interruzioni di carichi di lavoro e dati da una configurazione MetroCluster FC a otto nodi esistente a una nuova configurazione MetroCluster IP.
+
+A partire da ONTAP 9.8, è possibile eseguire una transizione senza interruzioni di carichi di lavoro e dati da una configurazione MetroCluster FC a quattro nodi esistente a una nuova configurazione MetroCluster IP.
+
+* Questa procedura è senza interruzioni.
++
+La configurazione MetroCluster può continuare a fornire dati durante l'operazione.
+
+* Questa procedura si applica solo alle configurazioni MetroCluster FC a quattro e otto nodi.
++
+Se si dispone di una configurazione MetroCluster FC a due nodi, vedere link:concept_choosing_your_transition_procedure_mcc_transition.html["Scelta della procedura di transizione"].
+
+* Questa procedura descrive i passaggi necessari per la transizione di un gruppo DR FC a quattro nodi. Se si dispone di una configurazione a otto nodi (due gruppi DR FC), è necessario ripetere l'intera procedura per ciascun gruppo DR FC.
+* È necessario soddisfare tutti i requisiti e seguire tutte le fasi della procedura.
+

@@ -1,0 +1,70 @@
+---
+permalink: upgrade/task_prepare_the_netboot_server_cluster_mode.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, prepare, netboot, server, download, image 
+summary: 'Quando si è pronti per preparare il server netboot, è necessario scaricare l"immagine di netboot ONTAP corretta dal sito del supporto NetApp sul server netboot e annotare l"indirizzo IP.' 
+---
+= Preparazione del server netboot per il download dell'immagine
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Quando si è pronti per preparare il server netboot, è necessario scaricare l'immagine di netboot ONTAP corretta dal sito del supporto NetApp sul server netboot e annotare l'indirizzo IP.
+
+.A proposito di questa attività
+* È necessario poter accedere a un server HTTP dal sistema prima e dopo aver aggiunto il nuovo modulo controller.
+* Per scaricare i file di sistema necessari per la piattaforma e la versione di ONTAP in uso, è necessario accedere al sito del supporto NetApp.
++
+https://mysupport.netapp.com/site/global/dashboard["Sito di supporto NetApp"]
+
+* Entrambi i moduli controller della coppia ha devono eseguire la stessa versione di ONTAP.
+
+
+.Fasi
+. Scaricare il software ONTAP appropriato dalla sezione di download del software del sito di supporto NetApp e memorizzare il `<ontap_version>_image.tgz` file in una directory accessibile dal web.
++
+Il `<ontap_version>_image.tgz` file viene utilizzato per eseguire un netboot del sistema.
+
+. Passare alla directory accessibile dal Web e verificare che i file necessari siano disponibili.
++
+|===
+
+
+| Per... | Quindi... 
+
+
+ a| 
+SISTEMI DELLE SERIE FAS2200, FAS2500, FAS3200, FAS6200, FAS/AFF8000
+ a| 
+Estrarre il contenuto del file ontap_version_image.tgz nella directory di destinazione:
+
+`tar -zxvf <ontap_version>_image.tgz`
+
+
+NOTE: Se si sta estraendo il contenuto su Windows, utilizzare 7-zip o WinRAR per estrarre l'immagine di netboot.
+
+L'elenco delle directory deve contenere una cartella netboot con un file kernel:
+
+`netboot/kernel`
+
+
+
+ a| 
+Tutti gli altri sistemi
+ a| 
+L'elenco delle directory deve contenere il seguente file:
+
+`<ontap_version>_image.tgz`
+
+
+NOTE: Non è necessario estrarre il contenuto del file.
+
+|===
+. Determinare l'indirizzo IP del modulo controller esistente.
++
+Questo indirizzo viene indicato più avanti in questa procedura come `_ip-address-of-existing controller_`.
+
+. Ping `_ip-address-of-existing controller_` Per verificare che l'indirizzo IP sia raggiungibile.
+

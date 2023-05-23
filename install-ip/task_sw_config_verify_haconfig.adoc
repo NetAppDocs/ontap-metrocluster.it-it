@@ -1,0 +1,34 @@
+---
+permalink: install-ip/task_sw_config_verify_haconfig.html 
+sidebar: sidebar 
+keywords: metrocluster, ha-config, mccip, haconfig, verify, high-availability 
+summary: In una configurazione MetroCluster IP non preconfigurata in fabbrica, è necessario verificare che lo stato ha-config dei componenti del controller e del telaio sia impostato su mccip in modo che si avviino correttamente. Per i sistemi ricevuti dalla fabbrica, questo valore è preconfigurato e non è necessario verificarlo. 
+---
+= Verifica dello stato ha-config dei componenti
+:allow-uri-read: 
+
+
+[role="lead"]
+In una configurazione IP MetroCluster non preconfigurata in fabbrica, verificare che lo stato ha-config dei componenti del controller e del telaio sia impostato su "`mcip`" in modo che si avviino correttamente. Per i sistemi ricevuti dalla fabbrica, questo valore è preconfigurato e non è necessario verificarlo.
+
+.Prima di iniziare
+Il sistema deve essere in modalità di manutenzione.
+
+.Fasi
+. Visualizzare lo stato ha del modulo controller e dello chassis:
++
+`ha-config show`
+
++
+Il modulo controller e lo chassis devono visualizzare il valore "`mcip`".
+
+. Se lo stato di sistema visualizzato del controller non è "`mccip`", impostare lo stato ha per il controller:
++
+`ha-config modify controller mccip`
+
+. Se lo stato di sistema visualizzato dello chassis non è "`mccip`", impostare lo stato ha per lo chassis:
++
+`ha-config modify chassis mccip`
+
+. Ripetere questi passaggi su ciascun nodo della configurazione MetroCluster.
+

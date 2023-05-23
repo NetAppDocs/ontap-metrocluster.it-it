@@ -1,0 +1,54 @@
+---
+permalink: install-stretch/task_rack_the_hardware_components_mcc_2_node_stretch_atto.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, rack, harware, components 
+summary: 'Se l"apparecchiatura non è già stata installata negli armadi, è necessario installarli in rack.' 
+---
+= Scaffalatura dei componenti hardware
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se l'apparecchiatura non è già stata installata negli armadi, è necessario installarli in rack.
+
+Questa attività deve essere eseguita su entrambi i siti MetroCluster.
+
+.Fasi
+. Pianificare il posizionamento dei componenti di MetroCluster.
++
+Lo spazio rack dipende dal modello di piattaforma dei controller di storage, dai tipi di switch e dal numero di stack di shelf di dischi nella configurazione.
+
+. Mettere a terra l'utente.
+. Installare i controller di storage nel rack o nell'armadietto.
++
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"]
+
+. Installare gli shelf di dischi, accenderli e impostare gli ID degli shelf.
++
+** È necessario spegnere e riaccendere ogni shelf di dischi.
+** Gli shelf ID devono essere univoci per ogni shelf di dischi SAS all'interno di ciascun gruppo di DR MetroCluster (inclusi entrambi i siti).
+
+
+. Installare ciascun bridge FC-SAS:
++
+.. Fissare le staffe "`L`" sulla parte anteriore del bridge alla parte anteriore del rack (montaggio a filo) con le quattro viti.
++
+Le aperture delle staffe "`L`" del ponte sono conformi allo standard ETA-310-X per rack da 19" (482.6 mm).
+
++
+Per ulteriori informazioni e un'illustrazione dell'installazione, consultare il _Manuale d'installazione e funzionamento di FibreBridge atto relativo al modello di bridge in uso_.
+
+.. Collegare ciascun bridge a una fonte di alimentazione che fornisca una messa a terra adeguata.
+.. Accendere ciascun bridge.
++
+
+NOTE: Per ottenere la massima resilienza, i bridge collegati allo stesso stack di shelf di dischi devono essere collegati a diverse fonti di alimentazione.
+
++
+Il LED Bridge Ready potrebbe impiegare fino a 30 secondi per accendersi, a indicare che il bridge ha completato la sequenza di test automatico all'accensione.
+
+
+
+

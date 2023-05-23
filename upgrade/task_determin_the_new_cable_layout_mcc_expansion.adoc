@@ -1,0 +1,28 @@
+---
+permalink: upgrade/task_determin_the_new_cable_layout_mcc_expansion.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, determine, new, cabling, layout 
+summary: È necessario determinare il cablaggio dei nuovi moduli controller e dei nuovi shelf di dischi per gli switch FC esistenti. 
+---
+= Determinazione del nuovo layout di cablaggio
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario determinare il cablaggio dei nuovi moduli controller e dei nuovi shelf di dischi per gli switch FC esistenti.
+
+.A proposito di questa attività
+Questa attività deve essere eseguita in ogni sito MetroCluster.
+
+.Fasi
+. Seguire la procedura descritta in link:../install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"] Per creare un layout di cablaggio per il proprio tipo di switch, utilizzando l'utilizzo della porta per una configurazione MetroCluster a otto nodi.
++
+L'utilizzo della porta dello switch FC deve corrispondere all'utilizzo descritto nella procedura per poter utilizzare i file di configurazione di riferimento (RCF).
+
++
+
+NOTE: Se non è possibile cablare l'ambiente in modo da poter utilizzare i file RCF, è necessario configurare manualmente il sistema in base alle istruzioni riportate nella link:../install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"]. Non utilizzare questa procedura se il cablaggio non utilizza file RCF.
+
+

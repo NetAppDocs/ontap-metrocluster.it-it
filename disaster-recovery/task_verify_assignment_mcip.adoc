@@ -1,0 +1,91 @@
+---
+permalink: disaster-recovery/task_verify_assignment_mcip.html 
+sidebar: sidebar 
+keywords: verify, adp, verify, drives, pool, automatically, assign 
+summary: Nei sistemi configurati per ADP, è necessario verificare che il pool di dischi 0 sia stato assegnato automaticamente. 
+---
+= Verifica dell'assegnazione automatica o assegnazione manuale dei dischi del pool 0
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nei sistemi configurati per ADP, è necessario verificare che il pool di dischi 0 sia stato assegnato automaticamente. Nei sistemi non configurati per ADP, è necessario assegnare manualmente il pool 0 dischi.
+
+
+
+== Verifica dell'assegnazione dei dischi del pool 0 su sistemi ADP nel sito di emergenza (sistemi IP MetroCluster)
+
+Se i dischi sono stati sostituiti nel sito di emergenza e il sistema è configurato per ADP, è necessario verificare che i dischi remoti siano visibili ai nodi e siano stati assegnati correttamente.
+
+.Fase
+. Verificare che i dischi del pool 0 siano assegnati automaticamente:
++
+`disk show`
+
++
+Nell'esempio seguente per un sistema AFF A800 senza shelf esterni, un quarto (8 dischi) è stato assegnato automaticamente al nodo_A_1 e un quarto è stato assegnato automaticamente al nodo_A_2. I dischi rimanenti saranno unità remote (pool 1) per Node_B_1 e Node_B_2.
+
++
+[listing]
+----
+cluster_A::*> disk show
+                 Usable     Disk      Container           Container
+Disk             Size       Shelf Bay Type    Type        Name      Owner
+---------------- ---------- ----- --- ------- ----------- --------- --------
+node_A_1:0n.12   1.75TB     0     12  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.13   1.75TB     0     13  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.14   1.75TB     0     14  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.15   1.75TB     0     15  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.16   1.75TB     0     16  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.17   1.75TB     0     17  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.18   1.75TB     0     18  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.19   1.75TB     0     19  SSD-NVM shared      -         node_A_1
+node_A_2:0n.0    1.75TB     0     0   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.1    1.75TB     0     1   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.2    1.75TB     0     2   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.3    1.75TB     0     3   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.4    1.75TB     0     4   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.5    1.75TB     0     5   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.6    1.75TB     0     6   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.7    1.75TB     0     7   SSD-NVM shared      -         node_A_2
+node_A_2:0n.24   -          0     24  SSD-NVM unassigned  -         -
+node_A_2:0n.25   -          0     25  SSD-NVM unassigned  -         -
+node_A_2:0n.26   -          0     26  SSD-NVM unassigned  -         -
+node_A_2:0n.27   -          0     27  SSD-NVM unassigned  -         -
+node_A_2:0n.28   -          0     28  SSD-NVM unassigned  -         -
+node_A_2:0n.29   -          0     29  SSD-NVM unassigned  -         -
+node_A_2:0n.30   -          0     30  SSD-NVM unassigned  -         -
+node_A_2:0n.31   -          0     31  SSD-NVM unassigned  -         -
+node_A_2:0n.36   -          0     36  SSD-NVM unassigned  -         -
+node_A_2:0n.37   -          0     37  SSD-NVM unassigned  -         -
+node_A_2:0n.38   -          0     38  SSD-NVM unassigned  -         -
+node_A_2:0n.39   -          0     39  SSD-NVM unassigned  -         -
+node_A_2:0n.40   -          0     40  SSD-NVM unassigned  -         -
+node_A_2:0n.41   -          0     41  SSD-NVM unassigned  -         -
+node_A_2:0n.42   -          0     42  SSD-NVM unassigned  -         -
+node_A_2:0n.43   -          0     43  SSD-NVM unassigned  -         -
+32 entries were displayed.
+----
+
+
+
+
+== Assegnazione di pool 0 dischi su sistemi non ADP nel sito di disastro (configurazioni IP MetroCluster)
+
+Se i dischi sono stati sostituiti nel sito di emergenza e il sistema non è configurato per ADP, è necessario assegnare manualmente i nuovi dischi al pool 0.
+
+.A proposito di questa attività
+Per i sistemi ADP, i dischi vengono assegnati automaticamente.
+
+.Fasi
+. Su uno dei nodi di sostituzione nel sito di disastro, riassegnare il pool di nodi 0 dischi:
++
+`storage disk assign -n number-of-replacement disks -p 0`
+
++
+Questo comando assegna i dischi appena aggiunti (e non posseduti) nel sito di emergenza. È necessario assegnare lo stesso numero e dimensione (o superiore) dei dischi che il nodo aveva prima del disastro. Il `storage disk assign` la pagina man contiene ulteriori informazioni su come eseguire un'assegnazione più granulare dei dischi.
+
+. Ripetere il passaggio sull'altro nodo sostitutivo nel sito di emergenza.
+

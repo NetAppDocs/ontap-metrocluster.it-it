@@ -1,0 +1,28 @@
+---
+permalink: upgrade/task_disconnect_the_exist_dr_group_mcc_expansion.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, disconnect, existing, dr, group, fabric 
+summary: È necessario scollegare i moduli controller esistenti dagli switch FC nel fabric. 
+---
+= Disconnessione del gruppo DR esistente dal fabric
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario scollegare i moduli controller esistenti dagli switch FC nel fabric.
+
+.A proposito di questa attività
+Questa attività deve essere eseguita in ogni sito MetroCluster.
+
+.Fasi
+. Disattivare le porte HBA che collegano i moduli controller esistenti al fabric switch in fase di manutenzione:
++
+`storage port disable -node _node-name_ -port _port-number_`
+
+. Sugli switch FC locali, rimuovere i cavi dalle porte dei bridge HBA, FC-VI e ATTO del modulo controller esistente.
++
+I cavi devono essere etichettati per facilitarne l'identificazione quando vengono riccavi. Solo le porte ISL devono rimanere cablate.
+
+

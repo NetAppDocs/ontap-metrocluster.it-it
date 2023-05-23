@@ -1,0 +1,32 @@
+---
+permalink: maintain/task_hot_add_a_sas_disk_shelf_in_a_direct_attached_mcc_configuration_us_sas_optical_cables.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, hot, add, sas, disk, shelf, direct, attached, fc, configuration, optical, cables 
+summary: È possibile utilizzare i cavi ottici SAS per aggiungere a caldo uno shelf di dischi SAS a uno stack esistente di shelf di dischi SAS in una configurazione MetroCluster FC a collegamento diretto o come nuovo stack a un HBA SAS o a una porta SAS integrata del controller. 
+---
+= Aggiunta a caldo di uno shelf di dischi SAS in una configurazione MetroCluster FC a collegamento diretto mediante cavi ottici SAS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile utilizzare i cavi ottici SAS per aggiungere a caldo uno shelf di dischi SAS a uno stack esistente di shelf di dischi SAS in una configurazione MetroCluster FC a collegamento diretto o come nuovo stack a un HBA SAS o a una porta SAS integrata del controller.
+
+* Questa procedura è senza interruzioni e richiede circa due ore per essere completata.
+* È necessaria la password admin e l'accesso a un server FTP o SCP.
+* Se si aggiunge uno shelf IOM12 a uno stack di shelf IOM6, vedere link:https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-ds-mix-hotadd/home.html["Aggiunta a caldo di shelf IOM12 a una pila di shelf IOM6"].
+
+
+Questa attività si applica a una configurazione MetroCluster FC in cui lo storage è collegato direttamente ai controller di storage mediante cavi SAS. Non si applica alle configurazioni MetroCluster FC che utilizzano bridge FC-SAS o fabric switch FC.
+
+.Fasi
+. Seguire le istruzioni per l'aggiunta a caldo di uno shelf di dischi SAS nella _Guida all'installazione_ del modello di shelf di dischi per eseguire le seguenti operazioni per aggiungere a caldo uno shelf di dischi:
++
+.. Installare uno shelf di dischi per un'aggiunta a caldo.
+.. Accendere gli alimentatori e impostare l'ID dello shelf per un componente aggiuntivo a caldo.
+.. Cablare lo shelf di dischi aggiunto a caldo.
+.. Verificare la connettività SAS.
+
+
+

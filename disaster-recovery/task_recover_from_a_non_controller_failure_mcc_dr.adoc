@@ -1,0 +1,479 @@
+---
+permalink: disaster-recovery/task_recover_from_a_non_controller_failure_mcc_dr.html 
+sidebar: sidebar 
+keywords: equipment, disaster, site, undergone, require, maintenance, replacement, controller, replace, process, metrocluster, configuration, data, aggregate, switchback, operation, recover, non-controller, failure, heal, configuration, metrocluster, fc, data, aggregate, root, disaster, verify, system, switchback, verification, result, perform, successful, delete, deleting, stale, listing 
+summary: 'Dopo che l"apparecchiatura nel sito di emergenza ha subito qualsiasi manutenzione o sostituzione richiesta, ma non è stato sostituito alcun controller, è possibile iniziare il processo di ripristino della configurazione MetroCluster in uno stato completamente ridondante. Ciò include la riparazione della configurazione (prima gli aggregati di dati e poi gli aggregati root) e l"esecuzione dell"operazione di switchback.' 
+---
+= Ripristino da un guasto non del controller
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo che l'apparecchiatura nel sito di emergenza ha subito qualsiasi manutenzione o sostituzione richiesta, ma non è stato sostituito alcun controller, è possibile iniziare il processo di ripristino della configurazione MetroCluster in uno stato completamente ridondante. Ciò include la riparazione della configurazione (prima gli aggregati di dati e poi gli aggregati root) e l'esecuzione dell'operazione di switchback.
+
+.Prima di iniziare
+* Tutto l'hardware MetroCluster nel cluster di emergenza deve essere funzionale.
+* La configurazione generale di MetroCluster deve essere in switchover.
+* In una configurazione Fabric-Attached MetroCluster, l'ISL deve essere attivo e funzionante tra i siti MetroCluster.
+
+
+
+
+== Riparazione della configurazione in una configurazione MetroCluster FC
+
+Dopo uno switchover, è necessario eseguire le operazioni di riparazione in ordine specifico per ripristinare la funzionalità MetroCluster.
+
+.Prima di iniziare
+* Lo switchover deve essere stato eseguito e il sito sopravvissuto deve fornire i dati.
+* I nodi nel sito di disastro devono essere arrestati o spenti.
++
+Non devono essere completamente avviati durante il processo di riparazione.
+
+* Lo storage nel sito di disastro deve essere accessibile (gli shelf sono accesi, funzionali e accessibili).
+* Nelle configurazioni Fabric-Attached MetroCluster, i collegamenti inter-switch (ISL) devono essere operativi.
+* Nelle configurazioni MetroCluster a quattro nodi, i nodi nel sito sopravvissuto non devono essere in stato di failover ha (tutti i nodi devono essere attivi e in esecuzione per ogni coppia ha).
+
+
+.A proposito di questa attività
+L'operazione di riparazione deve essere eseguita prima sugli aggregati di dati, quindi sugli aggregati root.
+
+
+
+=== Riparazione degli aggregati di dati
+
+È necessario riparare gli aggregati di dati dopo aver riparato e sostituito qualsiasi hardware nel sito di disastro. Questo processo risincronizza gli aggregati di dati e prepara il sito di emergenza (ora riparato) per il normale funzionamento. È necessario riparare gli aggregati di dati prima di riparare gli aggregati root.
+
+.A proposito di questa attività
+Nell'esempio seguente viene illustrato uno switchover forzato, in cui è possibile portare online l'aggregato switchover. Tutti gli aggiornamenti della configurazione nel cluster remoto vengono replicati correttamente nel cluster locale. L'alimentazione dello storage nel sito di disastro viene eseguita nell'ambito di questa procedura, ma non è necessario accendere i moduli controller nel sito di disastro.
+
+.Fasi
+. Verificare che lo switchover sia stato completato:
++
+`metrocluster operation show`
+
++
+[listing]
+----
+controller_A_1::> metrocluster operation show
+  Operation: switchover
+      State: successful
+ Start Time: 7/25/2014 20:01:48
+   End Time: 7/25/2014 20:02:14
+     Errors: -
+----
+. Risincronizzare gli aggregati di dati eseguendo il seguente comando dal cluster esistente:
++
+`metrocluster heal -phase aggregates`
+
++
+[listing]
+----
+controller_A_1::> metrocluster heal -phase aggregates
+[Job 130] Job succeeded: Heal Aggregates is successful.
+----
++
+Se la riparazione è vetoed, si ha la possibilità di riemettere il `metrocluster heal` con il `--override-vetoes` parametro. Se si utilizza questo parametro opzionale, il sistema sovrascrive qualsiasi veto soft che impedisca l'operazione di riparazione.
+
+. Verificare che l'operazione sia stata completata:
++
+`metrocluster operation show`
+
++
+[listing]
+----
+controller_A_1::> metrocluster operation show
+    Operation: heal-aggregates
+      State: successful
+Start Time: 7/25/2014 18:45:55
+   End Time: 7/25/2014 18:45:56
+     Errors: -
+----
+. Controllare lo stato degli aggregati:
++
+`storage aggregate show` comando.
+
++
+[listing]
+----
+controller_A_1::> storage aggregate show
+Aggregate Size     Available Used% State   #Vols  Nodes        RAID Status
+--------- -------- --------- ----- ------- ------ ------------ ------------
+...
+aggr_b2   227.1GB  227.1GB   0%    online  0      mcc1-a2      raid_dp, mirrored, normal...
+----
+. Se lo storage è stato sostituito nel sito di disastro, potrebbe essere necessario eseguire il remirrore degli aggregati.
+
+
+
+
+=== Riparazione degli aggregati root dopo un disastro
+
+Una volta guariti gli aggregati di dati, è necessario riparare gli aggregati root in preparazione dell'operazione di switchback.
+
+.Prima di iniziare
+La fase di aggregazione dei dati del processo di riparazione MetroCluster deve essere stata completata correttamente.
+
+.Fasi
+. Ripristinare gli aggregati mirrorati:
++
+`metrocluster heal -phase root-aggregates`
+
++
+[listing]
+----
+mcc1A::> metrocluster heal -phase root-aggregates
+[Job 137] Job succeeded: Heal Root Aggregates is successful
+----
++
+Se la riparazione è vetoed, si ha la possibilità di riemettere il `metrocluster heal` con il `--override-vetoes` parametro. Se si utilizza questo parametro opzionale, il sistema sovrascrive qualsiasi veto soft che impedisca l'operazione di riparazione.
+
+. Assicurarsi che l'operazione di riparazione sia completa eseguendo il seguente comando sul cluster di destinazione:
++
+`metrocluster operation show`
+
++
+[listing]
+----
+
+mcc1A::> metrocluster operation show
+  Operation: heal-root-aggregates
+      State: successful
+ Start Time: 7/29/2014 20:54:41
+   End Time: 7/29/2014 20:54:42
+     Errors: -
+----
+. Accendere ciascun modulo controller nel sito di emergenza.
+. Dopo l'avvio dei nodi, verificare che gli aggregati root siano mirrorati.
++
+Se sono presenti entrambi i plessi, la risincronizzazione viene avviata automaticamente. In caso di errore di un plex, occorre distruggere tale plex e ricreare il mirror utilizzando il seguente comando per ristabilire la relazione di mirroring.
+
++
+`storage aggregate mirror -aggregate <aggregate-name>`
+
+
+
+
+
+== Verificare che il sistema sia pronto per lo switchback
+
+Se il sistema si trova già nello stato di switchover, è possibile utilizzare `-simulate` opzione per visualizzare in anteprima i risultati di un'operazione di switchback.
+
+.Fasi
+. Simulare l'operazione di switchback:
++
+.. Dal prompt di uno dei nodi sopravvissuti, passare al livello di privilegio avanzato:
++
+`set -privilege advanced`
+
++
+Devi rispondere con `y` quando viene richiesto di passare alla modalità avanzata e di visualizzare il prompt della modalità avanzata (*).
+
+.. Eseguire l'operazione di switchback con `-simulate` parametro:
++
+`metrocluster switchback -simulate`
+
+.. Tornare al livello di privilegio admin:
++
+`set -privilege admin`
+
+
+
+. Esaminare l'output restituito.
++
+L'output mostra se l'operazione di switchback si sarebbe arresa in errori.
+
+
+
+
+
+=== Esempio di risultati della verifica
+
+L'esempio seguente mostra la verifica riuscita di un'operazione di switchback:
+
+[listing]
+----
+cluster4::*> metrocluster switchback -simulate
+  (metrocluster switchback)
+[Job 130] Setting up the nodes and cluster components for the switchback operation...DBG:backup_api.c:327:backup_nso_sb_vetocheck : MetroCluster Switch Back
+[Job 130] Job succeeded: Switchback simulation is successful.
+
+cluster4::*> metrocluster op show
+  (metrocluster operation show)
+  Operation: switchback-simulate
+      State: successful
+ Start Time: 5/15/2014 16:14:34
+   End Time: 5/15/2014 16:15:04
+     Errors: -
+
+cluster4::*> job show -name Me*
+                            Owning
+Job ID Name                 Vserver    Node           State
+------ -------------------- ---------- -------------- ----------
+130    MetroCluster Switchback
+                            cluster4
+                                       cluster4-01
+                                                      Success
+       Description: MetroCluster Switchback Job - Simulation
+----
+
+
+== Esecuzione di uno switchback
+
+Dopo aver corretto la configurazione MetroCluster, è possibile eseguire l'operazione di switchback MetroCluster. L'operazione di switchback MetroCluster riporta la configurazione al suo normale stato operativo, con le macchine virtuali dello storage di origine di sincronizzazione (SVM) sul sito di emergenza attive e i dati provenienti dai pool di dischi locali.
+
+.Prima di iniziare
+* Il cluster di emergenza deve essere passato correttamente al cluster esistente.
+* La riparazione deve essere stata eseguita sui dati e sugli aggregati root.
+* I nodi del cluster sopravvissuti non devono trovarsi nello stato di failover ha (tutti i nodi devono essere attivi e in esecuzione per ogni coppia ha).
+* I moduli controller del sito di emergenza devono essere completamente avviati e non in modalità ha Takeover.
+* L'aggregato root deve essere mirrorato.
+* I collegamenti Inter-Switch (ISL) devono essere online.
+* Tutte le licenze richieste devono essere installate sul sistema.
+
+
+.Fasi
+. Verificare che tutti i nodi siano nello stato abilitato:
++
+`metrocluster node show`
+
++
+Nell'esempio seguente vengono visualizzati i nodi che si trovano nello stato "Enabled" (attivato):
+
++
+[listing]
+----
+cluster_B::>  metrocluster node show
+
+DR                        Configuration  DR
+Group Cluster Node        State          Mirroring Mode
+----- ------- ----------- -------------- --------- --------------------
+1     cluster_A
+              node_A_1    configured     enabled   heal roots completed
+              node_A_2    configured     enabled   heal roots completed
+      cluster_B
+              node_B_1    configured     enabled   waiting for switchback recovery
+              node_B_2    configured     enabled   waiting for switchback recovery
+4 entries were displayed.
+----
+. Verificare che la risincronizzazione sia completa su tutte le SVM:
++
+`metrocluster vserver show`
+
+. Verificare che tutte le migrazioni LIF automatiche eseguite dalle operazioni di riparazione siano state completate correttamente:
++
+`metrocluster check lif show`
+
+. Eseguire lo switchback eseguendo il seguente comando da qualsiasi nodo del cluster esistente.
++
+`metrocluster switchback`
+
+. Controllare l'avanzamento dell'operazione di switchback:
++
+`metrocluster show`
+
++
+L'operazione di switchback è ancora in corso quando l'output visualizza "Waiting-for-switchback" (in attesa di switchback):
+
++
+[listing]
+----
+cluster_B::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_B         Configuration state configured
+                          Mode                switchover
+                          AUSO Failure Domain -
+Remote: cluster_A         Configuration state configured
+                          Mode                waiting-for-switchback
+                          AUSO Failure Domain -
+----
++
+L'operazione di switchback è completa quando l'output visualizza "normale":
+
++
+[listing]
+----
+cluster_B::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain -
+Remote: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain -
+----
++
+Se il completamento di uno switchback richiede molto tempo, è possibile verificare lo stato delle linee di base in corso utilizzando il comando seguente a livello di privilegi avanzati.
+
++
+`metrocluster config-replication resync-status show`
+
+. Ripristinare le configurazioni SnapMirror o SnapVault.
++
+In ONTAP 8.3, è necessario ristabilire manualmente una configurazione di SnapMirror persa dopo un'operazione di switchback MetroCluster. In ONTAP 9.0 e versioni successive, la relazione viene ristabilita automaticamente.
+
+
+
+
+
+== Verifica di uno switchback riuscito
+
+Dopo aver eseguito lo switchback, si desidera confermare che tutti gli aggregati e le macchine virtuali di storage (SVM) siano ripristinati e in linea.
+
+.Fasi
+. Verificare che gli aggregati di dati di switchover siano ripristinati:
++
+`storage aggregate show`
+
++
+Nell'esempio seguente, aggr_b2 sul nodo B2 è tornato:
+
++
+[listing]
+----
+node_B_1::> storage aggregate show
+Aggregate     Size Available Used% State   #Vols  Nodes            RAID Status
+--------- -------- --------- ----- ------- ------ ---------------- ------------
+...
+aggr_b2    227.1GB   227.1GB    0% online       0 node_B_2   raid_dp,
+                                                                   mirrored,
+                                                                   normal
+
+node_A_1::> aggr show
+Aggregate     Size Available Used% State   #Vols  Nodes            RAID Status
+--------- -------- --------- ----- ------- ------ ---------------- ------------
+...
+aggr_b2          -         -     - unknown      - node_A_1
+----
++
+Se il sito di disastro includeva aggregati senza mirror e gli aggregati senza mirror non sono più presenti, l'aggregato potrebbe essere visualizzato con uno stato "sconosciuto" nell'output di `storage aggregate show` comando. Contattare il supporto tecnico per rimuovere le voci non aggiornate per gli aggregati senza mirror e consultare l'articolo della Knowledge base link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/How_to_remove_stale_unmirrored_aggregate_entries_in_a_MetroCluster_following_disaster_where_storage_was_lost["Come rimuovere le voci aggregate obsolete senza mirror in un MetroCluster in seguito a un disastro in cui lo storage è stato perso."^]
+
+. Verificare che tutte le SVM di destinazione della sincronizzazione sul cluster sopravvissuto siano inattive (mostrando uno stato di amministrazione "arrestato") e che le SVM di origine della sincronizzazione sul cluster di emergenza siano attive e in esecuzione:
++
+`vserver show -subtype sync-source`
+
++
+[listing]
+----
+node_B_1::> vserver show -subtype sync-source
+                               Admin      Root                       Name    Name
+Vserver     Type    Subtype    State      Volume     Aggregate       Service Mapping
+----------- ------- ---------- ---------- ---------- ----------      ------- -------
+...
+vs1a        data    sync-source
+                               running    vs1a_vol   node_B_2        file    file
+                                                                     aggr_b2
+
+node_A_1::> vserver show -subtype sync-destination
+                               Admin      Root                         Name    Name
+Vserver            Type    Subtype    State      Volume     Aggregate  Service Mapping
+-----------        ------- ---------- ---------- ---------- ---------- ------- -------
+...
+cluster_A-vs1a-mc  data    sync-destination
+                                      stopped    vs1a_vol   sosb_      file    file
+                                                                       aggr_b2
+----
++
+Gli aggregati Sync-destination nella configurazione MetroCluster hanno il suffisso "-mc" aggiunto automaticamente al loro nome per facilitarne l'identificazione.
+
+. Verificare che le operazioni di switchback siano riuscite:
++
+`metrocluster operation show`
+
+
+
+|===
+
+
+| Se l'output del comando mostra... | Quindi... 
+
+
+ a| 
+Che lo stato operativo di switchback sia riuscito.
+ a| 
+Il processo di switchback è completo ed è possibile procedere con il funzionamento del sistema.
+
+
+
+ a| 
+Che l'operazione di switchback o. `switchback-continuation-agent` operazione parzialmente riuscita.
+ a| 
+Eseguire la correzione suggerita nell'output di `metrocluster operation show` comando.
+
+|===
+.Al termine
+Ripetere le sezioni precedenti per eseguire il switchback nella direzione opposta. Se Site_A ha eseguito uno switchover di Site_B, chiedere a Site_B di eseguire uno switchover di Site_A.
+
+
+
+== Eliminazione di elenchi aggregati obsoleti dopo lo switchback
+
+In alcuni casi, dopo lo switchback, si potrebbe notare la presenza di aggregati _obsoleti_. Gli aggregati obsoleti sono aggregati che sono stati rimossi da ONTAP, ma le cui informazioni rimangono registrate su disco. Gli aggregati obsoleti vengono visualizzati con `nodeshell aggr status -r` ma non con `storage aggregate show` comando. È possibile eliminare questi record in modo che non vengano più visualizzati.
+
+.A proposito di questa attività
+Gli aggregati obsoleti possono verificarsi se si riallocano gli aggregati mentre la configurazione MetroCluster era in switchover. Ad esempio:
+
+. Il sito A passa al sito B.
+. Si elimina il mirroring per un aggregato e si ricolloca l'aggregato da Node_B_1 a Node_B_2 per il bilanciamento del carico.
+. Si esegue la riparazione aggregata.
+
+
+A questo punto viene visualizzato un aggregato obsoleto su Node_B_1, anche se l'aggregato effettivo è stato cancellato da quel nodo. Questo aggregato viene visualizzato nell'output di `nodeshell aggr status -r` comando. Non viene visualizzato nell'output di `storage aggregate show` comando.
+
+. Confrontare l'output dei seguenti comandi:
++
+`storage aggregate show`
+
++
+`run local aggr status -r`
+
++
+Gli aggregati obsoleti vengono visualizzati in `run local aggr status -r` output ma non in `storage aggregate show` output. Ad esempio, il seguente aggregato potrebbe essere visualizzato in `run local aggr status -r` uscita:
+
++
+[listing]
+----
+
+Aggregate aggr05 (failed, raid_dp, partial) (block checksums)
+Plex /aggr05/plex0 (offline, failed, inactive)
+  RAID group /myaggr/plex0/rg0 (partial, block checksums)
+
+ RAID Disk Device  HA  SHELF BAY CHAN Pool Type  RPM  Used (MB/blks)  Phys (MB/blks)
+ --------- ------  ------------- ---- ---- ----  ----- --------------  --------------
+ dparity   FAILED          N/A                        82/ -
+ parity    0b.5    0b    -   -   SA:A   0 VMDISK  N/A 82/169472      88/182040
+ data      FAILED          N/A                        82/ -
+ data      FAILED          N/A                        82/ -
+ data      FAILED          N/A                        82/ -
+ data      FAILED          N/A                        82/ -
+ data      FAILED          N/A                        82/ -
+ data      FAILED          N/A                        82/ -
+ Raid group is missing 7 disks.
+----
+. Rimuovere l'aggregato obsoleta:
++
+.. Dal prompt di entrambi i nodi, passare al livello di privilegio avanzato:
++
+`set -privilege advanced`
+
++
+Devi rispondere con `y` quando viene richiesto di passare alla modalità avanzata e di visualizzare il prompt della modalità avanzata (*).
+
+.. Rimuovere l'aggregato obsoleta:
++
+`aggregate remove-stale-record -aggregate aggregate_name`
+
+.. Tornare al livello di privilegio admin:
++
+`set -privilege admin`
+
+
+
+. Confermare che il record aggregato obsoleta è stato rimosso:
++
+`run local aggr status -r`
+
+

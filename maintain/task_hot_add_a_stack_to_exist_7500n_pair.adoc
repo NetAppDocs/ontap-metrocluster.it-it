@@ -1,0 +1,246 @@
+---
+permalink: maintain/task_hot_add_a_stack_to_exist_7500n_pair.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, hot, add, stack, sas, disk, shelves, existing, pair, fibrebridge, bridge 
+summary: È possibile aggiungere a caldo uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7500N dotati di porte disponibili. 
+---
+= Aggiunta a caldo di uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7500N
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile aggiungere a caldo uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7500N dotati di porte disponibili.
+
+.Prima di iniziare
+* È necessario aver scaricato l'ultima versione del firmware dello shelf di dischi e dischi.
+* Tutti gli shelf di dischi nella configurazione MetroCluster (shelf esistenti) devono eseguire la stessa versione del firmware. Se uno o più dischi o shelf non utilizzano la versione più recente del firmware, aggiornare il firmware prima di collegare i nuovi dischi o shelf.
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Download NetApp: Firmware del disco"^]
+
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Download NetApp: Firmware shelf di dischi"^]
+
+* I bridge FibreBridge 7500N devono essere collegati e disporre di porte SAS disponibili.
+
+
+.A proposito di questa attività
+Questa procedura si basa sul presupposto che si stiano utilizzando le interfacce di gestione del bridge consigliate: L'interfaccia grafica di ATTO ExpressNAV e l'utility di barra di navigazione atto.
+
+È possibile utilizzare l'interfaccia grafica di ATTO ExpressNAV per configurare e gestire un bridge e per aggiornare il firmware del bridge. È possibile utilizzare l'utility barra di navigazione atto per configurare la porta di gestione Ethernet del bridge 1.
+
+Se necessario, è possibile utilizzare altre interfacce di gestione. Queste opzioni includono l'utilizzo di una porta seriale o Telnet per configurare e gestire un bridge e per configurare la porta di gestione Ethernet 1 e l'utilizzo di FTP per aggiornare il firmware del bridge. Se si sceglie una di queste interfacce di gestione, è necessario soddisfare i requisiti applicabili in link:reference_requirements_for_using_other_interfaces_to_configure_and_manage_fibrebridge_bridges.html["Altre interfacce di gestione del bridge"].
+
+
+IMPORTANT: Se si inserisce un cavo SAS nella porta errata, quando si rimuove il cavo da una porta SAS, è necessario attendere almeno 120 secondi prima di collegarlo a una porta SAS diversa. In caso contrario, il sistema non riconosce che il cavo è stato spostato su un'altra porta.
+
+.Fasi
+. Mettere a terra l'utente.
+. Dalla console di uno dei controller, verificare che l'assegnazione automatica dei dischi sia abilitata nel sistema:
++
+`storage disk option show`
+
++
+La colonna Auto Assign (assegnazione automatica) indica se l'assegnazione automatica del disco è attivata.
+
++
+[listing]
+----
+
+Node        BKg. FW. Upd.  Auto Copy   Auto Assign  Auto Assign Policy
+----------  -------------  ----------  -----------  ------------------
+node_A_1             on           on           on           default
+node_A_2             on           on           on           default
+2 entries were displayed.
+----
+. Disattivare le porte dello switch per il nuovo stack.
+. Aggiornare il firmware FibreBridge su ciascun bridge.
++
+Se il nuovo bridge è dello stesso tipo del bridge partner, eseguire l'aggiornamento allo stesso firmware del bridge partner. Se il nuovo bridge è di tipo diverso da quello del bridge partner, eseguire l'aggiornamento al firmware più recente supportato dal bridge e dalla versione di ONTAP. Consultare la sezione "aggiornamento del firmware su un bridge FibreBridge" nella _Guida alla manutenzione di MetroCluster_.
+
+. Su ciascun bridge della coppia, attivare la porta SAS che si connette al nuovo stack:
++
+`SASPortEnable _port-letter_`
+
++
+La stessa porta SAS (B, C o D) deve essere utilizzata su entrambi i bridge.
+
+. Salvare la configurazione e riavviare ciascun bridge:
++
+`SaveConfiguration Restart`
+
+. Collegare gli shelf di dischi ai bridge:
++
+.. Collegare a margherita gli shelf di dischi in ogni stack.
++
+La _Guida all'installazione e al servizio_ per il modello di shelf di dischi fornisce informazioni dettagliate sugli shelf di dischi con concatenamento a margherita.
+
+.. Per ogni stack di shelf di dischi, collegare il cavo IOM A del primo shelf alla porta SAS A di FibreBridge A, quindi collegare il cavo IOM B dell'ultimo shelf alla porta SAS A di FibreBridge B.
++
+link:../install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"]
+
++
+link:../install-stretch/concept_considerations_differences.html["Estensione dell'installazione e della configurazione di MetroCluster"]
+
++
+Ogni bridge ha un percorso per la propria pila di shelf di dischi; il bridge A si collega al lato A dello stack attraverso il primo shelf e il bridge B si collega al lato B dello stack attraverso l'ultimo shelf.
+
++
+
+NOTE: La porta SAS bridge B è disattivata.
+
+
+
+. Verificare che ciascun bridge sia in grado di rilevare tutte le unità disco e gli shelf di dischi a cui è collegato il bridge.
++
+[cols="30,70"]
+|===
+
+
+| Se si utilizza... | Quindi... 
+
+
+ a| 
+GUI ExpressNAV
+ a| 
+.. In un browser Web supportato, inserire l'indirizzo IP di un bridge nella casella del browser.
++
+Viene visualizzata la home page di ATTO FibreBridge, che contiene un link.
+
+.. Fare clic sul collegamento, quindi immettere il nome utente e la password designati al momento della configurazione del bridge.
++
+Viene visualizzata la pagina di stato di atto FibreBridge con un menu a sinistra.
+
+.. Fare clic su *Avanzate* nel menu.
+.. Visualizzare i dispositivi connessi:
++
+`sastargets`
+
+.. Fare clic su *Invia*.
+
+
+
+
+ a| 
+Connessione alla porta seriale
+ a| 
+Visualizzare i dispositivi connessi:
+
+`sastargets`
+
+|===
++
+L'output mostra i dispositivi (dischi e shelf di dischi) a cui è collegato il bridge. Le linee di output sono numerate in sequenza in modo da poter contare rapidamente i dispositivi.
+
++
+
+NOTE: Se all'inizio dell'output viene visualizzato il testo "`respesse tronced`", è possibile utilizzare Telnet per connettersi al bridge e visualizzare l'output utilizzando `sastargets` comando.
+
++
+Il seguente output indica che sono collegati 10 dischi:
+
++
+[listing]
+----
+Tgt VendorID ProductID        Type        SerialNumber
+  0 NETAPP   X410_S15K6288A15 DISK        3QP1CLE300009940UHJV
+  1 NETAPP   X410_S15K6288A15 DISK        3QP1ELF600009940V1BV
+  2 NETAPP   X410_S15K6288A15 DISK        3QP1G3EW00009940U2M0
+  3 NETAPP   X410_S15K6288A15 DISK        3QP1EWMP00009940U1X5
+  4 NETAPP   X410_S15K6288A15 DISK        3QP1FZLE00009940G8YU
+  5 NETAPP   X410_S15K6288A15 DISK        3QP1FZLF00009940TZKZ
+  6 NETAPP   X410_S15K6288A15 DISK        3QP1CEB400009939MGXL
+  7 NETAPP   X410_S15K6288A15 DISK        3QP1G7A900009939FNTT
+  8 NETAPP   X410_S15K6288A15 DISK        3QP1FY0T00009940G8PA
+  9 NETAPP   X410_S15K6288A15 DISK        3QP1FXW600009940VERQ
+----
+. Verificare che l'output del comando indichi che il bridge è collegato a tutti i dischi e gli shelf di dischi appropriati nello stack.
++
+[cols="30,70"]
+|===
+
+
+| Se l'output è... | Quindi... 
+
+
+ a| 
+Esatto
+ a| 
+Ripetere il passaggio precedente per ogni bridge rimanente.
+
+
+
+ a| 
+Non corretto
+ a| 
+.. Verificare l'eventuale presenza di cavi SAS allentati o correggere il cablaggio SAS ripetendo la procedura per collegare gli shelf di dischi ai bridge.
+.. Ripetere il passaggio precedente per ogni bridge rimanente.
+
+
+|===
+. Aggiornare il firmware del disco alla versione più recente dalla console di sistema:
++
+`disk_fw_update`
+
++
+Eseguire questo comando su entrambi i controller.
+
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Download NetApp: Firmware del disco"^]
+
+. Aggiornare il firmware dello shelf di dischi alla versione più recente utilizzando le istruzioni per il firmware scaricato.
++
+È possibile eseguire i comandi della procedura dalla console di sistema di uno dei controller.
+
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Download NetApp: Firmware shelf di dischi"^]
+
+. Se il sistema non dispone dell'assegnazione automatica dei dischi attivata, assegnare la proprietà dei dischi.
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"^]
+
++
+
+NOTE: Se si suddivide la proprietà di un singolo stack di shelf di dischi tra più controller, è necessario disattivare l'assegnazione automatica dei dischi (`storage disk option modify -autoassign off *` da entrambi i nodi del cluster) prima di assegnare la proprietà del disco; in caso contrario, quando si assegna un disco singolo, i dischi rimanenti potrebbero essere assegnati automaticamente allo stesso controller e pool.
+
++
+
+NOTE: Non è necessario aggiungere dischi ad aggregati o volumi fino a quando il firmware del disco e del firmware dello shelf di dischi non sono stati aggiornati e le fasi di verifica di questa attività non sono state completate.
+
+. Abilitare le porte dello switch per il nuovo stack.
+. Verificare il funzionamento della configurazione MetroCluster in ONTAP:
++
+.. Verificare che il sistema sia multipercorso:
++
+`node run -node _node-name_ sysconfig -a`
+
+.. Verificare la presenza di eventuali avvisi sullo stato di salute su entrambi i cluster:
++
+`system health alert show`
+
+.. Verificare la configurazione MetroCluster e che la modalità operativa sia normale:
++
+`metrocluster show`
+
+.. Eseguire un controllo MetroCluster:
++
+`metrocluster check run`
+
+.. Visualizzare i risultati del controllo MetroCluster:
++
+`metrocluster check show`
+
+.. Verificare la presenza di eventuali avvisi sullo stato di salute sugli switch (se presenti):
++
+`storage switch show`
+
+.. Eseguire Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Download NetApp: Config Advisor"^]
+
+.. Dopo aver eseguito Config Advisor, esaminare l'output dello strumento e seguire le raccomandazioni nell'output per risolvere eventuali problemi rilevati.
+
+
+. Se applicabile, ripetere questa procedura per il sito del partner.
+

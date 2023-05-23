@@ -1,0 +1,90 @@
+---
+permalink: upgrade/task_verify_the_health_of_the_mcc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, health, verify, conofiguration 
+summary: Verificare lo stato della configurazione MetroCluster per verificarne il corretto funzionamento. 
+---
+= Verifica dello stato della configurazione MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Verificare lo stato della configurazione MetroCluster per verificarne il corretto funzionamento.
+
+.Fasi
+. Verificare che MetroCluster sia configurato e in modalità normale su ciascun cluster:
++
+`metrocluster show`
+
++
+[listing]
+----
+cluster_A::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+Remote: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+----
+. Verificare che il mirroring sia attivato su ciascun nodo:
++
+`metrocluster node show`
+
++
+[listing]
+----
+cluster_A::> metrocluster node show
+DR                           Configuration  DR
+Group Cluster Node           State          Mirroring Mode
+----- ------- -------------- -------------- --------- --------------------
+1     cluster_A
+              node_A_1       configured     enabled   normal
+      cluster_B
+              node_B_1       configured     enabled   normal
+2 entries were displayed.
+----
+. Verificare che i componenti di MetroCluster siano in buone condizioni:
++
+`metrocluster check run`
+
++
+[listing]
+----
+cluster_A::> metrocluster check run
+
+Last Checked On: 10/1/2014 16:03:37
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          ok
+4 entries were displayed.
+
+Command completed. Use the "metrocluster check show -instance" command or sub-commands in "metrocluster check" directory for detailed results.
+To check if the nodes are ready to do a switchover or switchback operation, run "metrocluster switchover -simulate" or "metrocluster switchback -simulate", respectively.
+----
+. Verificare che non siano presenti avvisi sullo stato di salute:
++
+`system health alert show`
+
+. Simulare un'operazione di switchover:
++
+.. Dal prompt di qualsiasi nodo, passare al livello di privilegio avanzato: +
+`set -privilege advanced`
++
+Devi rispondere con `*y*` quando viene richiesto di passare alla modalità avanzata e di visualizzare il prompt della modalità avanzata (*).
+
+.. Eseguire l'operazione di switchover con il parametro -simulate: +
+`metrocluster switchover -simulate`
+.. Tornare al livello di privilegio admin: +
+`set -privilege admin`
+
+
+

@@ -1,0 +1,220 @@
+---
+permalink: disaster-recovery/task_assign_ownership_mcfc.html 
+sidebar: sidebar 
+keywords: assign, ownership, drives, replaced 
+summary: 'Se sono stati sostituiti i dischi durante il ripristino dell"hardware nel sito di disastro, è necessario assegnare la proprietà ai dischi interessati.' 
+---
+= Assegnazione della proprietà per i dischi sostituiti
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se sono stati sostituiti i dischi durante il ripristino dell'hardware nel sito di disastro o si è dovuto azzerare i dischi o rimuovere la proprietà, è necessario assegnare la proprietà ai dischi interessati.
+
+.Prima di iniziare
+Il sito di disaster recovery deve disporre di un numero di dischi almeno pari a quello disponibile prima del disastro.
+
+La disposizione degli shelf di dischi e dei dischi deve soddisfare i requisiti di link:../install-ip/concept_required_mcc_ip_components_and_naming_guidelines_mcc_ip.html["Requisiti per il componente IP MetroCluster e le convenzioni di denominazione"] della sezione link:../install-ip/concept_considerations_differences.html["Installazione e configurazione di MetroCluster IP"].
+
+.A proposito di questa attività
+Questi passaggi vengono eseguiti sul cluster del sito di emergenza.
+
+Questa procedura mostra la riassegnazione di tutti i dischi e la creazione di nuovi plessi nel sito di disastro. I nuovi plessi sono complessi remoti di siti sopravvissuti e plessi locali di siti di disastro.
+
+Questa sezione fornisce esempi di configurazioni a due e quattro nodi. Per le configurazioni a due nodi, è possibile ignorare i riferimenti al secondo nodo in ogni sito. Per le configurazioni a otto nodi, è necessario tenere conto dei nodi aggiuntivi nel secondo gruppo di DR. Gli esempi fanno le seguenti ipotesi:
+
+* Il sito A è il sito di disastro.
++
+** Il nodo_A_1 è stato sostituito.
+** Il nodo_A_2 è stato sostituito.
++
+Presente solo nelle configurazioni MetroCluster a quattro nodi.
+
+
+
+* Il sito B è il sito sopravvissuto.
++
+** Node_B_1 è integro.
+** Node_B_2 è integro.
++
+Presente solo nelle configurazioni MetroCluster a quattro nodi.
+
+
+
+
+
+I moduli controller hanno i seguenti ID di sistema originali:
+
+|===
+
+
+| Numero di nodi nella configurazione MetroCluster | Nodo | ID di sistema originale 
+
+
+ a| 
+Quattro
+ a| 
+Node_A_1
+ a| 
+4068741258
+
+
+
+ a| 
+Node_A_2
+ a| 
+4068741260
+ a| 
+Node_B_1
+
+
+
+ a| 
+4068741254
+ a| 
+Node_B_2
+ a| 
+4068741256
+
+
+
+ a| 
+Due
+ a| 
+Node_A_1
+ a| 
+4068741258
+
+|===
+Quando si assegnano i dischi, tenere presenti i seguenti punti:
+
+* Il vecchio numero di dischi deve essere almeno lo stesso numero di dischi per ogni nodo presente prima del disastro.
++
+Se viene specificato o presente un numero inferiore di dischi, le operazioni di riparazione potrebbero non essere completate a causa dello spazio insufficiente.
+
+* I nuovi plex da creare sono i plex remoti appartenenti al sito sopravvissuto (Node_B_x pool1) e i plex locali appartenenti al sito di disastro (Node_B_x pool0).
+* Il numero totale di dischi richiesti non deve includere i dischi root aggr.
++
+Se n dischi sono assegnati al pool 1 del sito sopravvissuto, n-3 dischi devono essere assegnati al sito di emergenza con il presupposto che l'aggregato root utilizzi tre dischi.
+
+* Nessuno dei dischi può essere assegnato a un pool diverso da quello a cui sono assegnati tutti gli altri dischi dello stesso stack.
+* I dischi appartenenti al sito sopravvissuto vengono assegnati al pool 1 e i dischi appartenenti al sito di disastro vengono assegnati al pool 0.
+
+
+.Fasi
+. Assegnare i nuovi dischi non proprietari in base alla configurazione MetroCluster a quattro o due nodi:
++
+** Per le configurazioni MetroCluster a quattro nodi, assegnare i nuovi dischi non proprietari ai pool di dischi appropriati utilizzando la seguente serie di comandi sui nodi sostitutivi:
++
+... Assegnare sistematicamente i dischi sostituiti per ciascun nodo ai rispettivi pool di dischi:
++
+`disk assign -s sysid -n old-count-of-disks -p pool`
+
++
+Dal sito sopravvissuto, viene inviato un comando di assegnazione del disco per ciascun nodo:
+
++
+[listing]
+----
+cluster_B::> disk assign -s node_B_1-sysid -n old-count-of-disks -p 1 **\(remote pool of surviving site\)**
+cluster_B::> disk assign -s node_B_2-sysid -n old-count-of-disks -p 1 **\(remote pool of surviving site\)**
+cluster_B::> disk assign -s node_A_1-old-sysid -n old-count-of-disks -p 0 **\(local pool of disaster site\)**
+cluster_B::> disk assign -s node_A_2-old-sysid -n old-count-of-disks -p 0 **\(local pool of disaster site\)**
+----
++
+L'esempio seguente mostra i comandi con gli ID di sistema:
+
++
+[listing]
+----
+cluster_B::> disk assign -s 4068741254 -n 21 -p 1
+cluster_B::> disk assign -s 4068741256 -n 21 -p 1
+cluster_B::> disk assign -s 4068741258 -n 21 -p 0
+cluster_B::> disk assign -s 4068741260 -n 21 -p 0
+----
+... Confermare la proprietà dei dischi:
++
+`storage disk show -fields owner, pool`
+
++
+[listing]
+----
+storage disk show -fields owner, pool
+cluster_A::> storage disk show -fields owner, pool
+disk     owner          pool
+-------- ------------- -----
+0c.00.1  node_A_1      Pool0
+0c.00.2  node_A_1      Pool0
+.
+.
+.
+0c.00.8  node_A_1      Pool1
+0c.00.9  node_A_1      Pool1
+.
+.
+.
+0c.00.15 node_A_2      Pool0
+0c.00.16 node_A_2      Pool0
+.
+.
+.
+0c.00.22 node_A_2      Pool1
+0c.00.23 node_A_2      Pool1
+.
+.
+.
+----
+
+
+** Per le configurazioni MetroCluster a due nodi, assegnare i nuovi dischi non proprietari ai pool di dischi appropriati utilizzando la seguente serie di comandi sul nodo sostitutivo:
++
+... Visualizzare gli ID dello shelf locale:
++
+`run local storage show shelf`
+
+... Assegnare i dischi sostituiti per il nodo integro al pool 1:
++
+`run local disk assign -shelf shelf-id -n old-count-of-disks -p 1 -s node_B_1-sysid -f`
+
+... Assegnare i dischi sostituiti per il nodo sostitutivo al pool 0:
++
+`run local disk assign -shelf shelf-id -n old-count-of-disks -p 0 -s node_A_1-sysid -f`
+
+
+
+
+
+. Sul sito sopravvissuto, attivare nuovamente l'assegnazione automatica del disco:
++
+`storage disk option modify -autoassign on *`
+
++
+[listing]
+----
+cluster_B::> storage disk option modify -autoassign on *
+2 entries were modified.
+----
+. Sul sito sopravvissuto, verificare che l'assegnazione automatica del disco sia attivata:
++
+`storage disk option show`
+
++
+[listing]
+----
+ cluster_B::> storage disk option show
+ Node     BKg. FW. Upd.  Auto Copy   Auto Assign  Auto Assign Policy
+--------  -------------  -----------  -----------  ------------------
+node_B_1       on            on          on             default
+node_B_2       on            on          on             default
+2 entries were displayed.
+
+ cluster_B::>
+----
+
+
+.Informazioni correlate
+link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"^]
+
+link:../manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html#how-metrocluster-configurations-use-syncmirror-to-provide-data-redundancy["In che modo le configurazioni MetroCluster utilizzano SyncMirror per fornire ridondanza dei dati"]

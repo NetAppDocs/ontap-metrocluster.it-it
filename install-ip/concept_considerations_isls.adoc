@@ -1,0 +1,256 @@
+---
+permalink: install-ip/concept_considerations_isls.html 
+sidebar: sidebar 
+keywords: isl, isls, layer 2, layer 3, shared switch 
+summary: È necessario conoscere i requisiti ISL per la configurazione. 
+---
+= Considerazioni per gli ISL
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+È necessario conoscere i requisiti ISL per la configurazione.
+
+
+
+== Requisiti ISL di base per MetroCluster
+
+I seguenti requisiti devono essere soddisfatti per gli ISL su tutte le configurazioni IP di MetroCluster:
+
+* Una porta dello switch ISL a velocità nativa deve essere collegata a una porta dello switch ISL a velocità nativa.
++
+Ad esempio, una porta da 40 Gbps si collega a una porta da 40 Gbps.
+
+* Una porta a 10 Gbps in modalità nativa (ovvero, non utilizzando un cavo di breakout) può collegarsi a una porta a 10 Gbps in modalità nativa.
+* Gli ISL tra gli switch IP MetroCluster e la rete del cliente, nonché gli ISL tra gli switch intermedi, seguono le stesse regole in termini di velocità.
+* Il numero di ISL che si trovano tra gli switch MetroCluster e gli switch di rete del cliente e il numero di ISL che si trovano tra gli switch di rete del cliente non devono necessariamente corrispondere.
++
+Ad esempio, gli switch MetroCluster possono connettersi utilizzando due ISL agli switch intermedi e gli switch intermedi possono connettersi tra loro utilizzando 10 ISL.
+
+* La velocità degli ISL che si trovano tra gli switch MetroCluster e gli switch di rete del cliente e la velocità degli ISL che si trovano tra gli switch di rete del cliente non devono necessariamente corrispondere.
++
+Ad esempio, gli switch MetroCluster possono connettersi agli switch intermedi utilizzando un ISL a 40 Gbps e gli switch intermedi possono connettersi tra loro utilizzando ISL a 100 Gbps.
+
+* Il numero e la velocità degli ISL che collegano ogni switch MetroCluster allo switch intermedio devono essere uguali su entrambi i siti MetroCluster.
+
+
+
+
+== Requisiti ISL nelle reti condivise Layer 2
+
+Quando link:../install-ip/concept_considerations_layer_2.html["Condivisione del traffico ISL in una rete condivisa"], È necessario assicurarsi di disporre di capacità adeguata e dimensionare gli ISL in modo appropriato. La bassa latenza è fondamentale per la replica dei dati tra i siti MetroCluster. I problemi di latenza su queste connessioni possono influire sull'i/o del client
+
+Esaminare queste sezioni per calcolare correttamente la capacità end-to-end richiesta degli ISL. La replica continua dello storage e della cache non volatile con bassa latenza è fondamentale per le configurazioni MetroCluster. La latenza nella rete back-end influisce sulla latenza e sul throughput visti dall'io del client.
+
+
+
+=== Limiti di latenza e perdita di pacchetti negli ISL
+
+I seguenti requisiti devono essere soddisfatti per il traffico di andata e ritorno tra gli switch IP MetroCluster nel sito_A e nel sito_B, con la configurazione MetroCluster in modalità stazionaria:
+
+* Per informazioni specifiche sulla latenza di andata e ritorno e sui requisiti di distanza massima per la configurazione, fare riferimento a. link:https://hwu.netapp.com/["Hardware Universe."^]
++
+Con l'aumentare della distanza tra due siti MetroCluster, la latenza aumenta, di solito nell'intervallo di 1 ms di ritardo di andata e ritorno per 100 km (62 miglia). Questa latenza dipende anche dallo SLA (Network Service Level Agreement) in termini di larghezza di banda dei collegamenti ISL, velocità di caduta dei pacchetti e jitter sulla rete. La bassa larghezza di banda, l'elevato jitter e le cadute casuali di pacchetti portano a diversi meccanismi di ripristino da parte degli switch o del motore TCP sui moduli controller per una corretta erogazione dei pacchetti. Questi meccanismi di recovery possono aumentare la latenza complessiva.
+
++
+Qualsiasi dispositivo che contribuisca alla latenza deve essere considerato.
+
+* La perdita di pacchetti deve essere inferiore o uguale al 0.01%.
++
+La perdita di pacchetti include la perdita fisica o la perdita dovuta a congestione o oversubscription.
+
++
+Le interruzioni dei pacchetti possono causare ritrasmissioni e una finestra di congestione ridotta.
+
+* Il valore di jitter supportato è di 3 ms per il round trip (o 1.5 ms per un solo senso).
+* La rete deve allocare e mantenere lo SLA per la larghezza di banda richiesta per il traffico MetroCluster, tenendo conto di microdoppi e picchi nel traffico.
++
+Una larghezza di banda bassa può causare ritardi nell'accodamento e cadute di coda sugli switch. Se si utilizza ONTAP 9.7 o versione successiva, la rete intermedia tra i due siti deve fornire una larghezza di banda minima di 4.5 Gbps per la configurazione MetroCluster.
+
+* Il traffico MetroCluster non deve consumare l'intera larghezza di banda e avere un impatto negativo sul traffico non MetroCluster.
+* La rete condivisa deve essere configurata per il monitoraggio della rete in modo da monitorare l'utilizzo degli ISL, gli errori (cadute, connessioni flap, danneggiamento e così via) e gli errori.
+
+
+
+
+=== Limiti di connessione e trunking negli switch del cliente
+
+Gli switch intermedi forniti dal cliente devono soddisfare i seguenti requisiti:
+
+* Il numero di switch intermedi non è limitato e sono supportati più di due switch tra gli switch IP MetroCluster.
++
+Gli switch IP MetroCluster devono essere posizionati il più vicino possibile agli switch intermedi che forniscono il collegamento a lungo raggio. Tutte le connessioni ISL lungo il percorso devono soddisfare tutti i requisiti per MetroCluster ISL.
+
+* Gli ISL nella rete del cliente (gli ISL tra gli switch del cliente) devono essere configurati in modo da fornire una larghezza di banda sufficiente e preservare l'ordine di erogazione.
++
+Questo può essere fatto con il trunking di un numero sufficiente di collegamenti e l'applicazione di policy di bilanciamento del carico per preservare l'ordine.
+
+
+
+
+
+=== Altri requisiti di rete
+
+Gli switch intermedi forniti dal cliente devono soddisfare i seguenti requisiti:
+
+* La rete del cliente deve fornire le stesse VLAN tra i siti corrispondenti alle VLAN MetroCluster impostate nel file RCF.
++
+Le VLAN di livello 2 con ID corrispondenti agli ID VLAN MetroCluster devono estendersi sulla rete condivisa.
+
++
+** In ONTAP 9.7 e versioni precedenti, i sistemi FAS2750 e AFF A220 richiedono VLAN 10 e 20.
+** In ONTAP 9.8 e versioni successive, FAS2750, AFF A220, FAS500f, AFF A250, Per impostazione predefinita, i sistemi FAS8300, AFF A400 e FAS8700 utilizzano le VLAN 10 e 20. È possibile configurare altre VLAN durante la creazione dell'interfaccia, che devono essere comprese nell'intervallo 101-4096. Per tutte le piattaforme menzionate in precedenza, è possibile specificare la VLAN solo durante la creazione dell'interfaccia. Una volta create le interfacce MetroCluster, l'ID VLAN non può essere modificato. Per tutte le altre piattaforme non menzionate in precedenza, è possibile utilizzare qualsiasi VLAN e modificare l'ID VLAN per tali piattaforme in qualsiasi momento, ma richiede la creazione e l'applicazione di un nuovo file RCF.
+
+
+
+
+--
+[NOTE]
+====
+RcfFileGenerator non consente la creazione di un file RCF utilizzando VLAN non supportate dalla piattaforma.
+
+RcfFileGenerator potrebbe limitare l'utilizzo di determinati ID VLAN (ad esempio, se destinati a un utilizzo futuro). In genere, le VLAN riservate sono fino a 100 incluse.
+
+====
+--
+* La dimensione MTU deve essere impostata su 9216 su tutti i dispositivi della rete end-to-end.
+* Nessun altro traffico può essere configurato con una priorità più alta rispetto alla classe di servizio (COS) cinque.
+* ECN (Explicit Congestion Notification) deve essere configurato su tutti i percorsi end-to-end.
+
+
+
+
+=== Requisiti di cablaggio quando si utilizzano ISL condivisi
+
+[role="lead"]
+Quando si utilizzano gli ISL condivisi in una configurazione IP di MetroCluster, è necessario conoscere i requisiti dell'ISL MetroCluster end-to-end in esecuzione dalle porte dei controller del sito A alle porte dei controller del sito B.
+
+
+NOTE: Seguire la <<Requisiti ISL di base per MetroCluster>>.
+
+
+
+=== Numero di ISL e cavi di breakout nella rete condivisa
+
+Il numero di ISL che collegano gli switch IP MetroCluster alla rete condivisa varia a seconda del modello e del tipo di porta dello switch.
+
+|===
+
+
+| Modello di switch IP MetroCluster | Tipo di porta | Numero di ISL 
+
+
+ a| 
+Switch BES-53248 supportati da Broadcom
+ a| 
+Porte native
+ a| 
+4 ISL che utilizzano porte da 10 o 25 Gbps
+
+
+
+ a| 
+Cisco 3132Q-V.
+ a| 
+Porte native
+ a| 
+6 ISL che utilizzano porte a 40 Gbps
+
+
+
+ a| 
+Cisco 3132Q-V.
+ a| 
+Cavi di breakout
+ a| 
+16 ISL da 10 Gbps
+
+
+
+ a| 
+Cisco 3232C
+ a| 
+Porte native
+ a| 
+6 ISL che utilizzano porte da 40 o 100 Gbps
+
+
+
+ a| 
+Cisco 3232C
+ a| 
+Cavi di breakout
+ a| 
+16 ISL da 10 Gbps
+
+
+
+ a| 
+Cisco 9336C-FX2 (non collegato agli shelf NS224)
+ a| 
+Porte native
+ a| 
+6 ISL che utilizzano 40 o 100 Gbps
+
+
+
+ a| 
+Cisco 9336C-FX2 (non collegato agli shelf NS224)
+ a| 
+Cavi di breakout
+ a| 
+16 ISL con 10 Gbps
+
+
+
+ a| 
+Cisco 9336C-FX2 (collegamento di shelf NS224)
+ a| 
+Porte native (2)
+ a| 
+4 ISL che utilizzano 40 o 100 Gbps
+
+
+
+ a| 
+Cisco 9336C-FX2 (collegamento di shelf NS224)
+ a| 
+Cavi di breakout (2)
+ a| 
+16 ISL con 10 Gbps
+
+|===
+* L'utilizzo di porte ISL a 40 o 100 Gbps sullo switch BES-53248 richiede una licenza aggiuntiva.
+* Quando si creano i file RCF per un Cisco 9336C-FX2 (connessione degli shelf NS224), è necessario scegliere di configurare gli ISL in modalità di breakout nativa *o*.
+* Gli switch Cisco supportano l'utilizzo di cavi di breakout (una porta fisica viene utilizzata come 4 porte da 10 Gbps).
+* I file RCF per gli switch IP dispongono di porte in modalità nativa e di breakout configurate.
++
+Non è supportata una combinazione di porte ISL in modalità nativa di velocità e breakout. Tutti gli ISL dagli switch IP MetroCluster agli switch intermedi di una rete devono essere della stessa velocità e lunghezza.
+
+* L'utilizzo di dispositivi di crittografia esterni (ad esempio, la crittografia di collegamenti esterni o la crittografia fornita tramite dispositivi WDM) è supportato fintanto che la latenza di round-trip rimane entro i requisiti di cui sopra.
+
+
+Per ottenere prestazioni ottimali, è necessario utilizzare almeno 1 x 40 Gbps o più ISL da 10 Gbps per rete. L'utilizzo di un singolo ISL a 10 Gbps per rete per i sistemi AFF A800 è fortemente sconsigliato.
+
+Il throughput teorico massimo degli ISL condivisi (ad esempio, 240 Gbps con sei ISL da 40 Gbps) è uno scenario ottimale. Quando si utilizzano più ISL, il bilanciamento del carico statistico può influire sul throughput massimo. Può verificarsi un bilanciamento irregolare e ridurre il throughput a quello di un singolo ISL.
+
+Se la configurazione utilizza VLAN L2, devono estendersi in modo nativo sui siti. L'overlay VLAN come Virtual Extensible LAN (VXLAN) non è supportato.
+
+Gli ISL che trasportano traffico MetroCluster devono essere collegamenti nativi tra gli switch. I servizi di condivisione dei collegamenti, ad esempio i collegamenti MPLS (MultiProtocol Label Switching), non sono supportati.
+
+
+
+=== Supporto degli ISL WAN sullo switch Broadcom BES-53248
+
+* Numero minimo di ISL WAN per fabric: 1 (10 GbE, 25 GbE, 40 GbE o 100 GbE)
+* Numero massimo di ISL WAN da 10 GbE per fabric: 4
+* Numero massimo di ISL WAN da 25 GbE per fabric: 4
+* Numero massimo di ISL WAN da 40 GbE per fabric: 2
+* Numero massimo di ISL WAN da 100 GbE per fabric: 2
+
+
+Un ISL WAN a 40 GbE o 100 GbE richiede un file RCF versione 1.40 o superiore.
+
+
+NOTE: Per le porte aggiuntive sono necessarie licenze aggiuntive.

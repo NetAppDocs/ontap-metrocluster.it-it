@@ -1,0 +1,560 @@
+---
+permalink: disaster-recovery/task_set_env_mcip.html 
+sidebar: sidebar 
+keywords: metrocluster, ip, configuration, setting, require, environmental, variable 
+summary: 'Nelle configurazioni MetroCluster IP, è possibile recuperare l"indirizzo IP delle interfacce MetroCluster sulle porte Ethernet e utilizzarli per configurare le interfacce sui moduli controller sostitutivi.' 
+---
+= Impostazione delle variabili ambientali richieste nelle configurazioni MetroCluster IP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nelle configurazioni MetroCluster IP, è necessario recuperare l'indirizzo IP delle interfacce MetroCluster sulle porte Ethernet e utilizzarli per configurare le interfacce sui moduli controller sostitutivi.
+
+.A proposito di questa attività
+Questa attività è necessaria solo nelle configurazioni IP di MetroCluster.
+
+I comandi di questa attività vengono eseguiti dal prompt del cluster del sito sopravvissuto e dal prompt DEL CARICATORE dei nodi nel sito di emergenza.
+
+I nodi in questi esempi hanno i seguenti indirizzi IP per le connessioni IP MetroCluster:
+
+
+NOTE: Questi esempi si riferiscono a un sistema AFF A700 o FAS9000. Le interfacce variano in base al modello di piattaforma.
+
+|===
+
+
+| Nodo | Porta | Indirizzo IP 
+
+
+ a| 
+Node_A_1
+ a| 
+e5a
+ a| 
+172.17.26.10
+
+
+
+ a| 
+e5b
+ a| 
+172.17.27.10
+
+
+
+ a| 
+Node_A_2
+ a| 
+e5a
+ a| 
+172.17.26.11
+
+
+
+ a| 
+e5b
+ a| 
+172.17.27.11
+
+
+
+ a| 
+Node_B_1
+ a| 
+e5a
+ a| 
+172.17.26.13
+
+
+
+ a| 
+e5b
+ a| 
+172.17.27.13
+
+
+
+ a| 
+Node_B_2
+ a| 
+e5a
+ a| 
+172.17.26.12
+
+
+
+ a| 
+e5b
+ a| 
+172.17.27.12
+
+|===
+Nella tabella seguente sono riepilogate le relazioni tra i nodi e gli indirizzi IP MetroCluster di ciascun nodo.
+
+|===
+
+
+| Nodo | Partner HA | Partner DR | Partner ausiliario DR 
+
+
+ a| 
+Node_A_1
+
+* e5a: 172.17.26.10
+* e5b: 172.17.27.10
+
+ a| 
+Node_A_2
+
+* e5a: 172.17.26.11
+* e5b: 172.17.27.11
+
+ a| 
+Node_B_1
+
+* e5a: 172.17.26.13
+* e5b: 172.17.27.13
+
+ a| 
+Node_B_2
+
+* e5a: 172.17.26.12
+* e5b: 172.17.27.12
+
+
+
+
+ a| 
+Node_A_2
+
+* e5a: 172.17.26.11
+* e5b: 172.17.27.11
+
+ a| 
+Node_A_1
+
+* e5a: 172.17.26.10
+* e5b: 172.17.27.10
+
+ a| 
+Node_B_2
+
+* e5a: 172.17.26.12
+* e5b: 172.17.27.12
+
+ a| 
+Node_B_1
+
+* e5a: 172.17.26.13
+* e5b: 172.17.27.13
+
+
+
+
+ a| 
+Node_B_1
+
+* e5a: 172.17.26.13
+* e5b: 172.17.27.13
+
+ a| 
+Node_B_2
+
+* e5a: 172.17.26.12
+* e5b: 172.17.27.12
+
+ a| 
+Node_A_1
+
+* e5a: 172.17.26.10
+* e5b: 172.17.27.10
+
+ a| 
+Node_A_2
+
+* e5a: 172.17.26.11
+* e5b: 172.17.27.11
+
+
+
+
+ a| 
+Node_B_2
+
+* e5a: 172.17.26.12
+* e5b: 172.17.27.12
+
+ a| 
+Node_B_1
+
+* e5a: 172.17.26.13
+* e5b: 172.17.27.13
+
+ a| 
+Node_A_2
+
+* e5a: 172.17.26.11
+* e5b: 172.17.27.11
+
+ a| 
+Node_A_1
+
+* e5a: 172.17.26.10
+* e5b: 172.17.27.10
+
+
+|===
+La seguente tabella elenca i modelli di piattaforma che utilizzano gli ID VLAN sulle interfacce IP MetroCluster. Questi modelli potrebbero richiedere ulteriori passaggi se non si utilizzano gli ID VLAN predefiniti.
+
+|===
+
+
+2+| Modelli di piattaforme che utilizzano ID VLAN con le interfacce IP MetroCluster 
+
+
+ a| 
+* AFF A220
+* AFF A250
+* AFF A400
+
+ a| 
+* FAS500f
+* FAS2750
+* FAS8300
+* FAS8700
+
+
+|===
+.Fasi
+. Dal sito sopravvissuto, raccogliere gli indirizzi IP delle interfacce MetroCluster sul sito di emergenza:
++
+`metrocluster configuration-settings connection show`
+
++
+Gli indirizzi richiesti sono gli indirizzi partner DR indicati nella colonna *Indirizzo di rete di destinazione*.
+
++
+Il seguente output mostra gli indirizzi IP per una configurazione con i sistemi AFF A700 e FAS9000 con le interfacce IP MetroCluster sulle porte e5a e e5b. Le interfacce variano a seconda del tipo di piattaforma.
+
++
+[listing]
+----
+cluster_B::*> metrocluster configuration-settings connection show
+DR                    Source          Destination
+DR                    Source          Destination
+Group Cluster Node    Network Address Network Address Partner Type Config State
+----- ------- ------- --------------- --------------- ------------ ------------
+1     cluster_B
+              node_B_1
+                 Home Port: e5a
+                      172.17.26.13    172.17.26.12    HA Partner   completed
+                 Home Port: e5a
+                      172.17.26.13    172.17.26.10    DR Partner   completed
+                 Home Port: e5a
+                      172.17.26.13    172.17.26.11    DR Auxiliary completed
+                 Home Port: e5b
+                      172.17.27.13    172.17.27.12    HA Partner   completed
+                 Home Port: e5b
+                      172.17.27.13    172.17.27.10    DR Partner   completed
+                 Home Port: e5b
+                      172.17.27.13    172.17.27.11    DR Auxiliary completed
+              node_B_2
+                 Home Port: e5a
+                      172.17.26.12    172.17.26.13    HA Partner   completed
+                 Home Port: e5a
+                      172.17.26.12    172.17.26.11    DR Partner   completed
+                 Home Port: e5a
+                      172.17.26.12    172.17.26.10    DR Auxiliary completed
+                 Home Port: e5b
+                      172.17.27.12    172.17.27.13    HA Partner   completed
+                 Home Port: e5b
+                      172.17.27.12    172.17.27.11    DR Partner   completed
+                 Home Port: e5b
+                      172.17.27.12    172.17.27.10    DR Auxiliary completed
+12 entries were displayed.
+----
+. Se è necessario determinare l'ID VLAN o l'indirizzo del gateway per l'interfaccia, determinare gli ID VLAN dal sito sopravvissuto:
++
+`metrocluster configuration-settings interface show`
+
++
+** È necessario l'ID VLAN se i modelli di piattaforma utilizzano gli ID VLAN (vedere l'elenco sopra) e se non si utilizzano gli ID VLAN predefiniti.
+** Se si utilizza, è necessario l'indirizzo del gateway link:../install-ip/concept_considerations_layer_3.html["Reti wide-area Layer 3"].
++
+Gli ID VLAN sono inclusi nella colonna *Indirizzo di rete* dell'output. La colonna *Gateway* mostra l'indirizzo IP del gateway.
+
++
+In questo esempio le interfacce sono e0a con VLAN ID 120 e e0b con VLAN ID 130:
+
++
+[listing]
+----
+Cluster-A::*> metrocluster configuration-settings interface show
+DR                                                                     Config
+Group Cluster Node     Network Address Netmask         Gateway         State
+----- ------- ------- --------------- --------------- --------------- ---------
+1
+      cluster_A
+              node_A_1
+                  Home Port: e0a-120
+                          172.17.26.10  255.255.255.0  -            completed
+                  Home Port: e0b-130
+                          172.17.27.10  255.255.255.0  -            completed
+----
+
+
+. Se i nodi del sito di emergenza utilizzano gli ID VLAN (vedere l'elenco sopra), al prompt DEL CARICATORE per ciascuno dei nodi del sito di emergenza, impostare i seguenti bootargs:
++
+--
+....
+setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
+
+setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
+....
+[NOTE]
+====
+** Se le interfacce utilizzano le VLAN predefinite o il modello di piattaforma non richiede una VLAN (vedere l'elenco precedente), non è necessario il _vlan-id_.
+** Se la configurazione non utilizza link:../install-ip/concept_considerations_layer_3.html["Layer3 Wide-Area Network"], Il valore per _gateway-IP-address_ è *0* (zero).
+
+
+====
+** Se le interfacce utilizzano le VLAN predefinite o il modello di piattaforma non richiede una VLAN (vedere l'elenco precedente), non è necessario il _vlan-id_.
+** Se la configurazione non utilizza link:../install-ip/concept_considerations_layer_3.html["connessioni back-end di livello 3"], Il valore per _gateway-IP-address_ è *0* (zero).
++
+I seguenti comandi impostano i valori per Node_A_1 utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:
+
+
+
+....
+setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,172.17.26.11,172.17.26.13,172.17.26.12,120
+
+setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,172.17.27.11,172.17.27.13,172.17.27.12,130
+....
+L'esempio seguente mostra i comandi per Node_A_1 senza ID VLAN:
+
+....
+setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,172.17.26.11,172.17.26.13,172.17.26.12
+
+setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,172.17.27.11,172.17.27.13,172.17.27.12
+....
+--
+. Se i nodi del sito di emergenza non sono sistemi che utilizzano ID VLAN, al prompt DEL CARICATORE per ciascuno dei nodi di emergenza, impostare i seguenti bootargs con local_IP/mask,gateway:
++
+....
+setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address
+
+
+setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address
+....
++
+[NOTE]
+====
+** Se le interfacce utilizzano le VLAN predefinite o il modello di piattaforma non richiede una VLAN (vedere l'elenco precedente), non è necessario il _vlan-id_.
+** Se la configurazione non utilizza link:../install-ip/concept_considerations_layer_3.html["Reti wide-area Layer 3"], Il valore per _gateway-IP-address_ è *0* (zero).
+
+
+====
++
+I seguenti comandi impostano i valori per Node_A_1. In questo esempio, i valori _gateway-IP-address_ e _vlan-id_ non vengono utilizzati.
+
++
+....
+setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,172.17.26.11,172.17.26.13,172.17.26.12
+
+setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,172.17.27.11,172.17.27.13,172.17.27.12
+....
+. Dal sito sopravvissuto, raccogliere gli UUID per il sito di emergenza:
++
+`metrocluster node show -fields node-cluster-uuid, node-uuid`
+
++
+[listing]
+----
+cluster_B::> metrocluster node show -fields node-cluster-uuid, node-uuid
+
+  (metrocluster node show)
+dr-group-id cluster     node     node-uuid                            node-cluster-uuid
+----------- ----------- -------- ------------------------------------ ------------------------------
+1           cluster_A   node_A_1 f03cb63c-9a7e-11e7-b68b-00a098908039 ee7db9d5-9a82-11e7-b68b-00a098
+                                                                        908039
+1           cluster_A   node_A_2 aa9a7a7a-9a81-11e7-a4e9-00a098908c35 ee7db9d5-9a82-11e7-b68b-00a098
+                                                                        908039
+1           cluster_B   node_B_1 f37b240b-9ac1-11e7-9b42-00a098c9e55d 07958819-9ac6-11e7-9b42-00a098
+                                                                        c9e55d
+1           cluster_B   node_B_2 bf8e3f8f-9ac4-11e7-bd4e-00a098ca379f 07958819-9ac6-11e7-9b42-00a098
+                                                                        c9e55d
+4 entries were displayed.
+cluster_A::*>
+----
++
+|===
+
+
+| Nodo | UUID 
+
+
+ a| 
+Cluster_B
+ a| 
+07958819-9ac6-11e7-9b42-00a098c9e55d
+
+
+
+ a| 
+Node_B_1
+ a| 
+f37b240b-9ac1-11e7-9b42-00a098c9e55d
+
+
+
+ a| 
+Node_B_2
+ a| 
+bf8e3f8f-9ac4-11e7-bd4e-00a098ca379f
+
+
+
+ a| 
+Cluster_A.
+ a| 
+ee7db9d5-9a82-11e7-b68b-00a098908039
+
+
+
+ a| 
+Node_A_1
+ a| 
+f03cb63c-9a7e-11e7-b68b-00a098908039
+
+
+
+ a| 
+Node_A_2
+ a| 
+aa9a7a7a-9a81-11e7-a4e9-00a098908c35
+
+|===
+. Al prompt DEL CARICATORE dei nodi sostitutivi, impostare gli UUID:
++
+....
+setenv bootarg.mgwd.partner_cluster_uuid partner-cluster-UUID
+
+setenv bootarg.mgwd.cluster_uuid local-cluster-UUID
+
+setenv bootarg.mcc.pri_partner_uuid DR-partner-node-UUID
+
+setenv bootarg.mcc.aux_partner_uuid DR-aux-partner-node-UUID
+
+setenv bootarg.mcc_iscsi.node_uuid local-node-UUID`
+....
++
+.. Impostare gli UUID su Node_A_1.
++
+L'esempio seguente mostra i comandi per impostare gli UUID su Node_A_1:
+
++
+....
+setenv bootarg.mgwd.cluster_uuid ee7db9d5-9a82-11e7-b68b-00a098908039
+
+setenv bootarg.mgwd.partner_cluster_uuid 07958819-9ac6-11e7-9b42-00a098c9e55d
+
+setenv bootarg.mcc.pri_partner_uuid f37b240b-9ac1-11e7-9b42-00a098c9e55d
+
+setenv bootarg.mcc.aux_partner_uuid bf8e3f8f-9ac4-11e7-bd4e-00a098ca379f
+
+setenv bootarg.mcc_iscsi.node_uuid f03cb63c-9a7e-11e7-b68b-00a098908039
+....
+.. Impostare gli UUID su Node_A_2:
++
+L'esempio seguente mostra i comandi per impostare gli UUID su Node_A_2:
+
++
+....
+setenv bootarg.mgwd.cluster_uuid ee7db9d5-9a82-11e7-b68b-00a098908039
+
+setenv bootarg.mgwd.partner_cluster_uuid 07958819-9ac6-11e7-9b42-00a098c9e55d
+
+setenv bootarg.mcc.pri_partner_uuid bf8e3f8f-9ac4-11e7-bd4e-00a098ca379f
+
+setenv bootarg.mcc.aux_partner_uuid f37b240b-9ac1-11e7-9b42-00a098c9e55d
+
+setenv bootarg.mcc_iscsi.node_uuid aa9a7a7a-9a81-11e7-a4e9-00a098908c35
+....
+
+
+. Se i sistemi originali sono stati configurati per ADP, al prompt DEL CARICATORE di ciascun nodo sostitutivo, abilitare ADP:
++
+`setenv bootarg.mcc.adp_enabled true`
+
+. Se si esegue ONTAP 9.5, 9.6 o 9.7, al prompt DEL CARICATORE di ciascun nodo sostitutivo, attivare la seguente variabile:
++
+`setenv bootarg.mcc.lun_part true`
+
++
+.. Impostare le variabili su Node_A_1.
++
+Nell'esempio seguente vengono illustrati i comandi per l'impostazione dei valori su Node_A_1 quando si esegue ONTAP 9.6:
+
++
+[listing]
+----
+setenv bootarg.mcc.lun_part true
+----
+.. Impostare le variabili su Node_A_2.
++
+L'esempio seguente mostra i comandi per l'impostazione dei valori su Node_A_2 quando si esegue ONTAP 9.6:
+
++
+[listing]
+----
+setenv bootarg.mcc.lun_part true
+----
+
+
+. Se i sistemi originali sono stati configurati per ADP, al prompt DEL CARICATORE di ciascun nodo sostitutivo, impostare l'ID di sistema originale (*non* l'ID di sistema del modulo controller sostitutivo) e l'ID di sistema del partner DR del nodo:
++
+`setenv bootarg.mcc.local_config_id original-sysID`
+
++
+`setenv bootarg.mcc.dr_partner dr_partner-sysID`
+
++
+link:task_replace_hardware_and_boot_new_controllers.html#determining-the-system-ids-of-the-replacement-controller-modules["Determinazione degli ID di sistema e degli ID VLAN dei vecchi moduli controller"]
+
++
+.. Impostare le variabili su Node_A_1.
++
+L'esempio seguente mostra i comandi per impostare gli ID di sistema su Node_A_1:
+
++
+*** Il vecchio ID di sistema di Node_A_1 è 4068741258.
+*** L'ID di sistema di Node_B_1 è 4068741254.
++
+[listing]
+----
+setenv bootarg.mcc.local_config_id 4068741258
+setenv bootarg.mcc.dr_partner 4068741254
+----
+
+
+.. Impostare le variabili su Node_A_2.
++
+L'esempio seguente mostra i comandi per impostare gli ID di sistema su Node_A_2:
+
++
+*** Il vecchio ID di sistema di Node_A_1 è 4068741260.
+*** L'ID di sistema di Node_B_1 è 4068741256.
++
+[listing]
+----
+setenv bootarg.mcc.local_config_id 4068741260
+setenv bootarg.mcc.dr_partner 4068741256
+----
+
+
+
+
+

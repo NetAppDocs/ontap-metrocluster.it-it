@@ -1,0 +1,868 @@
+---
+permalink: install-ip/task_switch_config_broadcom.html 
+sidebar: sidebar 
+keywords: ip, switch, connection, configuring, configure, broadcom, factory defaults 
+summary: 'È necessario configurare gli switch IP Broadcom per l"utilizzo come interconnessione del cluster e per la connettività IP MetroCluster back-end.' 
+---
+= Configurazione degli switch IP Broadcom
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario configurare gli switch IP Broadcom per l'utilizzo come interconnessione del cluster e per la connettività IP MetroCluster back-end.
+
+
+NOTE: La configurazione richiede licenze aggiuntive (6 licenze per porte da 100 GB) nei seguenti scenari:
+
+* Le porte 53 e 54 vengono utilizzate come ISL MetroCluster a 40 Gbps o 100 Gbps.
+* Si utilizza una piattaforma che connette il cluster locale e le interfacce MetroCluster alle porte 49 - 52.
+
+
+
+
+== Ripristino delle impostazioni predefinite dello switch IP Broadcom
+
+Prima di installare una nuova versione del software dello switch e gli RCF, è necessario cancellare le impostazioni dello switch Broadcom ed eseguire la configurazione di base.
+
+.A proposito di questa attività
+* È necessario ripetere questa procedura su ciascuno switch IP nella configurazione IP di MetroCluster.
+* È necessario essere collegati allo switch mediante la console seriale.
+* Questa attività ripristina la configurazione della rete di gestione.
+
+
+.Fasi
+. Passare al prompt dei comandi con privilegi elevati (`#`): `enable`
++
+[listing]
+----
+(IP_switch_A_1)> enable
+(IP_switch_A_1) #
+----
+. Cancellare la configurazione di avvio e rimuovere il banner
++
+.. Cancellare la configurazione di avvio:
++
+*`erase startup-config`*
+
++
+[listing]
+----
+(IP_switch_A_1) #erase startup-config
+
+Are you sure you want to clear the configuration? (y/n) y
+
+(IP_switch_A_1) #
+----
++
+Questo comando non cancella il banner.
+
+.. Rimuovere lo striscione:
++
+*`no set clibanner`*
+
++
+[listing]
+----
+(IP_switch_A_1) #configure
+(IP_switch_A_1)(Config) # no set clibanner
+(IP_switch_A_1)(Config) #
+----
+
+
+. Riavviare lo switch:*`(IP_switch_A_1) #reload*`
++
+[listing]
+----
+Are you sure you would like to reset the system? (y/n) y
+----
++
+
+NOTE: Se il sistema chiede se salvare la configurazione non salvata o modificata prima di ricaricare lo switch, selezionare *No*.
+
+. Attendere che lo switch si ricarichi, quindi accedere allo switch.
++
+L'utente predefinito è "`admin`" e non è stata impostata alcuna password. Viene visualizzato un prompt simile al seguente:
+
++
+[listing]
+----
+(Routing)>
+----
+. Passare al prompt dei comandi con privilegi elevati:
++
+`enable`
+
++
+[listing]
+----
+Routing)> enable
+(Routing) #
+----
+. Impostare il protocollo della porta di servizio su `none`:
++
+`serviceport protocol none`
+
++
+[listing]
+----
+(Routing) #serviceport protocol none
+Changing protocol mode will reset ip configuration.
+Are you sure you want to continue? (y/n) y
+
+(Routing) #
+----
+. Assegnare l'indirizzo IP alla porta di servizio:
++
+`serviceport ip _ip-address_ _netmask_ _gateway_`
+
++
+L'esempio seguente mostra un indirizzo IP assegnato alla porta di servizio "10.10.10.10" con la subnet "255.255.255.0" e il gateway "10.10.10.1":
+
++
+[listing]
+----
+(Routing) #serviceport ip 10.10.10.10 255.255.255.0 10.10.10.1
+----
+. Verificare che la porta di servizio sia configurata correttamente:
++
+`show serviceport`
+
++
+L'esempio seguente mostra che la porta è attiva e che sono stati assegnati gli indirizzi corretti:
+
++
+[listing]
+----
+(Routing) #show serviceport
+
+Interface Status............................... Up
+IP Address..................................... 10.10.10.10
+Subnet Mask.................................... 255.255.255.0
+Default Gateway................................ 10.10.10.1
+IPv6 Administrative Mode....................... Enabled
+IPv6 Prefix is ................................ fe80::dac4:97ff:fe56:87d7/64
+IPv6 Default Router............................ fe80::222:bdff:fef8:19ff
+Configured IPv4 Protocol....................... None
+Configured IPv6 Protocol....................... None
+IPv6 AutoConfig Mode........................... Disabled
+Burned In MAC Address.......................... D8:C4:97:56:87:D7
+
+(Routing) #
+----
+. Se lo si desidera, configurare il server SSH.
++
+
+NOTE: Il file RCF disattiva il protocollo Telnet. Se non si configura il server SSH, è possibile accedere al bridge solo utilizzando la connessione alla porta seriale.
+
++
+.. Generare chiavi RSA.
++
+[listing]
+----
+(Routing) #configure
+(Routing) (Config)#crypto key generate rsa
+----
+.. Generare chiavi DSA (opzionale)
++
+[listing]
+----
+(Routing) #configure
+(Routing) (Config)#crypto key generate dsa
+----
+.. Se si utilizza la versione conforme a FIPS di EFOS, generare le chiavi ECDSA. Nell'esempio seguente vengono create le chiavi con una lunghezza di 256. I valori validi sono 256, 384 o 521.
++
+[listing]
+----
+(Routing) #configure
+(Routing) (Config)#crypto key generate ecdsa 256
+----
+.. Abilitare il server SSH.
++
+Se necessario, uscire dal contesto di configurazione.
+
++
+[listing]
+----
+(Routing) (Config)#end
+(Routing) #ip ssh server enable
+----
++
+
+NOTE: Se le chiavi sono già presenti, potrebbe essere richiesto di sovrascriverle.
+
+
+
+. Se lo si desidera, configurare il dominio e il server dei nomi:
++
+`configure`
+
++
+Nell'esempio riportato di seguito viene illustrato il `ip domain` e. `ip name server` comandi:
+
++
+[listing]
+----
+(Routing) # configure
+(Routing) (Config)#ip domain name lab.netapp.com
+(Routing) (Config)#ip name server 10.99.99.1 10.99.99.2
+(Routing) (Config)#exit
+(Routing) (Config)#
+----
+. Se lo si desidera, configurare il fuso orario e la sincronizzazione dell'ora (SNTP).
++
+Nell'esempio riportato di seguito viene illustrato il `sntp` Che specifica l'indirizzo IP del server SNTP e il relativo fuso orario.
+
++
+[listing]
+----
+(Routing) #
+(Routing) (Config)#sntp client mode unicast
+(Routing) (Config)#sntp server 10.99.99.5
+(Routing) (Config)#clock timezone -7
+(Routing) (Config)#exit
+(Routing) (Config)#
+----
+. Configurare il nome dello switch:
++
+`hostname IP_switch_A_1`
+
++
+Il prompt di switch visualizza il nuovo nome:
+
++
+[listing]
+----
+(Routing) # hostname IP_switch_A_1
+
+(IP_switch_A_1) #
+----
+. Salvare la configurazione:
++
+`write memory`
+
++
+Si ricevono messaggi e output simili al seguente esempio:
+
++
+[listing]
+----
+(IP_switch_A_1) #write memory
+
+This operation may take a few minutes.
+Management interfaces will not be available during this time.
+
+Are you sure you want to save? (y/n) y
+
+Config file 'startup-config' created successfully .
+
+
+Configuration Saved!
+
+(IP_switch_A_1) #
+----
+. Ripetere i passaggi precedenti sugli altri tre switch nella configurazione IP MetroCluster.
+
+
+
+
+== Download e installazione del software EFOS dello switch Broadcom
+
+È necessario scaricare il file del sistema operativo dello switch e il file RCF su ciascun switch nella configurazione IP MetroCluster.
+
+.A proposito di questa attività
+Questa attività deve essere ripetuta su ogni switch nella configurazione IP MetroCluster.
+
+[]
+====
+*Nota:*
+
+* Quando si esegue l'aggiornamento da EFOS 3.4.x.x a EFOS 3.7.x.x o versioni successive, lo switch deve eseguire EFOS 3.4.4.6 (o versioni successive 3.4.x.x). Se si esegue una release precedente, aggiornare prima lo switch a EFOS 3.4.4.6 (o versione successiva 3.4.x.x), quindi aggiornare lo switch a EFOS 3.7.x.x o versione successiva.
+* La configurazione per EFOS 3.4.x.x e 3.7.x.x o versioni successive è diversa. Se si modifica la versione di EFOS da 3.4.x.x a 3.7.x.x o successiva o viceversa, è necessario ripristinare le impostazioni predefinite dello switch e applicare nuovamente i file RCF per la versione di EFOS corrispondente. Questa procedura richiede l'accesso tramite la porta seriale della console.
+* A partire dalla versione EFOS 3.7.x.x o successiva, è disponibile una versione non conforme a FIPS e una conforme a FIPS. Quando si passa da una versione non conforme a FIPS a una versione conforme a FIPS o viceversa, si applicano diverse procedure. Se si cambia EFOS da una versione non conforme a FIPS a una conforme a FIPS o viceversa, si ripristinano le impostazioni predefinite dello switch. Questa procedura richiede l'accesso tramite la porta seriale della console.
+
+
+====
+.Fasi
+. Verificare che la versione di EFOS in uso sia conforme a FIPS o non conforme a FIPS utilizzando `show fips status` comando. Negli esempi seguenti, `IP_switch_A_1` Utilizza EFOS conforme a FIPS e. `IP_switch_A_2` Utilizza EFOS non conforme a FIPS.
++
+*Esempio 1*
+
++
+[listing]
+----
+IP_switch_A_1 #show fips status
+
+System running in FIPS mode
+
+IP_switch_A_1 #
+----
++
+*Esempio 2*
+
++
+[listing]
+----
+IP_switch_A_2 #show fips status
+                     ^
+% Invalid input detected at `^` marker.
+
+IP_switch_A_2 #
+----
+. Utilizzare la seguente tabella per determinare il metodo da seguire:
++
+|===
+
+
+| *Procedura* | *Versione EFOS corrente* | *Nuova versione EFOS* | *Fasi di alto livello* 
+
+
+ a| 
+Procedura per l'aggiornamento di EFOS tra due versioni (non) conformi a FIPS
+ a| 
+3.4.x.x
+ a| 
+3.4.x.x
+ a| 
+Installare la nuova immagine EFOS utilizzando il metodo 1) le informazioni di configurazione e licenza vengono conservate
+
+
+
+ a| 
+3.4.4.6 (o versione successiva 3.4.x.x)
+ a| 
+3.7.x.x o versioni successive non conformi a FIPS
+ a| 
+Aggiornare EFOS utilizzando il metodo 1. Ripristinare le impostazioni predefinite dello switch e applicare il file RCF per EFOS 3.7.x.x o versioni successive
+
+
+
+.2+| 3.7.x.x o versioni successive non conformi a FIPS  a| 
+3.4.4.6 (o versione successiva 3.4.x.x)
+ a| 
+Eseguire il downgrade di EFOS utilizzando il metodo 1. Ripristinare le impostazioni predefinite dello switch e applicare il file RCF per EFOS 3.4.x.x.
+
+
+
+ a| 
+3.7.x.x o versioni successive non conformi a FIPS
+ a| 
+Installare la nuova immagine EFOS utilizzando il metodo 1. Le informazioni di configurazione e licenza vengono conservate
+
+
+
+ a| 
+3.7.x.x o successivo conforme a FIPS
+ a| 
+3.7.x.x o successivo conforme a FIPS
+ a| 
+Installare la nuova immagine EFOS utilizzando il metodo 1. Le informazioni di configurazione e licenza vengono conservate
+
+
+
+ a| 
+Procedura per l'aggiornamento a/da una versione EFOS conforme a FIPS
+ a| 
+Non conforme a FIPS
+ a| 
+Conforme a FIPS
+ a| 
+Installazione dell'immagine EFOS con il metodo 2. La configurazione dello switch e le informazioni sulla licenza andranno perse.
+
+
+
+ a| 
+Conforme a FIPS
+ a| 
+Non conforme a FIPS
+
+|===
++
+** Metodo 1: <<Procedura per l'aggiornamento di EFOS con il download dell'immagine software nella partizione di boot di backup>>
+** Metodo 2: <<Procedura per aggiornare EFOS utilizzando l'installazione del sistema operativo ONIE>>
+
+
+
+
+
+
+=== Procedura per l'aggiornamento di EFOS con il download dell'immagine software nella partizione di boot di backup
+
+È possibile eseguire i seguenti passaggi solo se entrambe le versioni di EFOS non sono conformi a FIPS o se entrambe le versioni di EFOS sono conformi a FIPS.
+
+
+NOTE: Non seguire questa procedura se una versione è conforme a FIPS e l'altra non è conforme a FIPS.
+
+.Fasi
+. Copiare il software dello switch sullo switch: `+copy sftp://user@50.50.50.50/switchsoftware/efos-3.4.4.6.stk backup+`
++
+In questo esempio, il file del sistema operativo efos-3.4.4.6.stk viene copiato dal server SFTP all'indirizzo 50.50.50.50 nella partizione di backup. È necessario utilizzare l'indirizzo IP del server TFTP/SFTP e il nome file del file RCF da installare.
+
++
+[listing]
+----
+(IP_switch_A_1) #copy sftp://user@50.50.50.50/switchsoftware/efos-3.4.4.6.stk backup
+Remote Password:*************
+
+Mode........................................... SFTP
+Set Server IP.................................. 50.50.50.50
+Path........................................... /switchsoftware/
+Filename....................................... efos-3.4.4.6.stk
+Data Type...................................... Code
+Destination Filename........................... backup
+
+Management access will be blocked for the duration of the transfer
+Are you sure you want to start? (y/n) y
+
+File transfer in progress. Management access will be blocked for the duration of the transfer. Please wait...
+SFTP Code transfer starting...
+
+
+File transfer operation completed successfully.
+
+(IP_switch_A_1) #
+----
+. Impostare lo switch per l'avvio dalla partizione di backup al successivo riavvio dello switch:
++
+`boot system backup`
+
++
+[listing]
+----
+(IP_switch_A_1) #boot system backup
+Activating image backup ..
+
+(IP_switch_A_1) #
+----
+. Verificare che la nuova immagine di avvio sia attiva al prossimo avvio:
++
+`show bootvar`
+
++
+[listing]
+----
+(IP_switch_A_1) #show bootvar
+
+Image Descriptions
+
+ active :
+ backup :
+
+
+ Images currently available on Flash
+
+ ----  -----------  --------  ---------------  ------------
+ unit       active    backup   current-active   next-active
+ ----  -----------  --------  ---------------  ------------
+
+	1       3.4.4.2    3.4.4.6      3.4.4.2        3.4.4.6
+
+(IP_switch_A_1) #
+----
+. Salvare la configurazione:
++
+`write memory`
+
++
+[listing]
+----
+(IP_switch_A_1) #write memory
+
+This operation may take a few minutes.
+Management interfaces will not be available during this time.
+
+Are you sure you want to save? (y/n) y
+
+
+Configuration Saved!
+
+(IP_switch_A_1) #
+----
+. Riavviare lo switch:
++
+`reload`
+
++
+[listing]
+----
+(IP_switch_A_1) #reload
+
+Are you sure you would like to reset the system? (y/n) y
+----
+. Attendere il riavvio dello switch.
++
+
+NOTE: In rari casi, lo switch potrebbe non avviarsi. Seguire la <<Procedura per aggiornare EFOS utilizzando l'installazione del sistema operativo ONIE>> per installare la nuova immagine.
+
+. Se si cambia lo switch da EFOS 3.4.x.x a EFOS 3.7.x.x o viceversa, seguire le due procedure seguenti per applicare la configurazione corretta (RCF):
++
+.. <<Ripristino delle impostazioni predefinite dello switch IP Broadcom>>
+.. <<Download e installazione dei file RCF Broadcom>>
+
+
+. Ripetere questa procedura sui tre switch IP rimanenti nella configurazione IP MetroCluster.
+
+
+
+
+=== Procedura per aggiornare EFOS utilizzando l'installazione del sistema operativo ONIE
+
+Se una versione di EFOS è conforme a FIPS e l'altra non è conforme a FIPS, eseguire le seguenti operazioni. Questa procedura può essere utilizzata per installare l'immagine EFOS 3.7.x.x non conforme a FIPS o FIPS da ONIE in caso di mancato avvio dello switch.
+
+.Fasi
+. Avviare lo switch in modalità di installazione ONIE.
++
+Durante l'avvio, selezionare ONIE quando viene visualizzata la seguente schermata:
+
++
+[listing]
+----
+ +--------------------------------------------------------------------+
+ |EFOS                                                                |
+ |*ONIE                                                               |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ +--------------------------------------------------------------------+
+
+----
++
+Dopo aver selezionato "ONIE", lo switch si carica e presenta le seguenti opzioni:
+
++
+[listing]
+----
+ +--------------------------------------------------------------------+
+ |*ONIE: Install OS                                                   |
+ | ONIE: Rescue                                                       |
+ | ONIE: Uninstall OS                                                 |
+ | ONIE: Update ONIE                                                  |
+ | ONIE: Embed ONIE                                                   |
+ | DIAG: Diagnostic Mode                                              |
+ | DIAG: Burn-In Mode                                                 |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ +--------------------------------------------------------------------+
+
+----
++
+Lo switch si avvia in modalità di installazione ONIE.
+
+. Interrompere il rilevamento ONIE e configurare l'interfaccia ethernet
++
+Una volta visualizzato il seguente messaggio, premere Invio per richiamare la console ONIE:
+
++
+[listing]
+----
+ Please press Enter to activate this console. Info: eth0:  Checking link... up.
+ ONIE:/ #
+----
++
+
+NOTE: Il rilevamento ONIE continua e i messaggi vengono stampati sulla console.
+
++
+[listing]
+----
+Stop the ONIE discovery
+ONIE:/ # onie-discovery-stop
+discover: installer mode detected.
+Stopping: discover... done.
+ONIE:/ #
+----
+. Configurare l'interfaccia ethernet e aggiungere il percorso utilizzando `ifconfig eth0 <ipAddress> netmask <netmask> up` e. `route add default gw <gatewayAddress>`
++
+[listing]
+----
+ONIE:/ # ifconfig eth0 10.10.10.10 netmask 255.255.255.0 up
+ONIE:/ # route add default gw 10.10.10.1
+----
+. Verificare che il server che ospita il file di installazione ONIE sia raggiungibile:
++
+[listing]
+----
+ONIE:/ # ping 50.50.50.50
+PING 50.50.50.50 (50.50.50.50): 56 data bytes
+64 bytes from 50.50.50.50: seq=0 ttl=255 time=0.429 ms
+64 bytes from 50.50.50.50: seq=1 ttl=255 time=0.595 ms
+64 bytes from 50.50.50.50: seq=2 ttl=255 time=0.369 ms
+^C
+--- 50.50.50.50 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.369/0.464/0.595 ms
+ONIE:/ #
+----
+. Installare il nuovo software dello switch
++
+[listing]
+----
+
+ONIE:/ # onie-nos-install http:// 50.50.50.50/Software/onie-installer-x86_64
+discover: installer mode detected.
+Stopping: discover... done.
+Info: Fetching http:// 50.50.50.50/Software/onie-installer-3.7.0.4 ...
+Connecting to 50.50.50.50 (50.50.50.50:80)
+installer            100% |*******************************| 48841k  0:00:00 ETA
+ONIE: Executing installer: http:// 50.50.50.50/Software/onie-installer-3.7.0.4
+Verifying image checksum ... OK.
+Preparing image archive ... OK.
+----
++
+Il software installerà e riavvierà lo switch. Lasciare che lo switch si riavvii normalmente nella nuova versione di EFOS.
+
+. Verificare che il nuovo software dello switch sia installato
++
+*`show bootvar`*
+
++
+[listing]
+----
+
+(Routing) #show bootvar
+Image Descriptions
+active :
+backup :
+Images currently available on Flash
+---- 	----------- -------- --------------- ------------
+unit 	active 	   backup   current-active  next-active
+---- 	----------- -------- --------------- ------------
+1 	3.7.0.4     3.7.0.4  3.7.0.4         3.7.0.4
+(Routing) #
+----
+. Completare l'installazione
++
+Lo switch si riavvia senza alcuna configurazione applicata e ripristina le impostazioni predefinite. Seguire le due procedure per configurare le impostazioni di base dello switch e applicare il file RCF come indicato nei due documenti seguenti:
+
++
+.. Configurare le impostazioni di base dello switch. Seguire i passaggi 4 e successivi: <<Ripristino delle impostazioni predefinite dello switch IP Broadcom>>
+.. Creare e applicare il file RCF come descritto in <<Download e installazione dei file RCF Broadcom>>
+
+
+
+
+
+
+== Download e installazione dei file RCF Broadcom
+
+È necessario scaricare e installare il file RCF dello switch su ogni switch nella configurazione IP MetroCluster.
+
+.Prima di iniziare
+Questa attività richiede un software per il trasferimento dei file, ad esempio FTP, TFTP, SFTP o SCP, per copiare i file sui centralini.
+
+.A proposito di questa attività
+Questa procedura deve essere ripetuta su ciascuno switch IP nella configurazione IP di MetroCluster.
+
+Sono disponibili quattro file RCF, uno per ciascuno dei quattro switch nella configurazione IP di MetroCluster. È necessario utilizzare i file RCF corretti per il modello di switch in uso.
+
+|===
+
+
+| Switch | File RCF 
+
+
+ a| 
+IP_switch_A_1
+ a| 
+v1.32_Switch-A1.txt
+
+
+
+ a| 
+IP_switch_A_2
+ a| 
+v1.32_Switch-A2.txt
+
+
+
+ a| 
+IP_switch_B_1
+ a| 
+v1.32_Switch-B1.txt
+
+
+
+ a| 
+IP_switch_B_2
+ a| 
+v1.32_Switch-B2.txt
+
+|===
+
+NOTE: File RCF per EFOS versione 3.4.4.6 o successiva 3.4.x.x. La release e la versione 3.7.0.4 di EFOS sono diverse. Assicurarsi di aver creato i file RCF corretti per la versione EFOS in esecuzione sullo switch.
+
+|===
+
+
+| Versione EFOS | Versione del file RCF 
+
+
+| 3.4.x.x | v1.3x, v1.4x 
+
+
+| 3.7.x.x | v2.x 
+|===
+.Fasi
+. Generare i file RCF Broadcom per l'IP MetroCluster.
++
+.. Scaricare il https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator per MetroCluster IP"]
+.. Generare il file RCF per la configurazione utilizzando RcfFileGenerator per MetroCluster IP.
++
+
+NOTE: Le modifiche apportate ai file RCF dopo il download non sono supportate.
+
+
+
+. Copiare i file RCF sugli switch:
++
+.. Copiare i file RCF sul primo switch:
+`copy sftp://user@FTP-server-IP-address/RcfFiles/switch-specific-RCF/BES-53248_v1.32_Switch-A1.txt nvram:script BES-53248_v1.32_Switch-A1.scr`
++
+In questo esempio, il file RCF "BES-53248_v1.32_Switch-A1.txt" viene copiato dal server SFTP in "50.50.50.50" al bootflash locale. È necessario utilizzare l'indirizzo IP del server TFTP/SFTP e il nome file del file RCF da installare.
+
++
+[listing]
+----
+(IP_switch_A_1) #copy sftp://user@50.50.50.50/RcfFiles/BES-53248_v1.32_Switch-A1.txt nvram:script BES-53248_v1.32_Switch-A1.scr
+
+Remote Password:*************
+
+Mode........................................... SFTP
+Set Server IP.................................. 50.50.50.50
+Path........................................... /RcfFiles/
+Filename....................................... BES-53248_v1.32_Switch-A1.txt
+Data Type...................................... Config Script
+Destination Filename........................... BES-53248_v1.32_Switch-A1.scr
+
+Management access will be blocked for the duration of the transfer
+Are you sure you want to start? (y/n) y
+
+File transfer in progress. Management access will be blocked for the duration of the transfer. Please wait...
+File transfer operation completed successfully.
+
+
+Validating configuration script...
+
+config
+
+set clibanner "***************************************************************************
+
+* NetApp Reference Configuration File (RCF)
+
+*
+
+* Switch    : BES-53248
+
+
+...
+The downloaded RCF is validated. Some output is being logged here.
+...
+
+
+Configuration script validated.
+File transfer operation completed successfully.
+
+(IP_switch_A_1) #
+----
+.. Verificare che il file RCF sia salvato come script:
++
+`script list`
+
++
+[listing]
+----
+(IP_switch_A_1) #script list
+
+Configuration Script Name        Size(Bytes)  Date of Modification
+-------------------------------  -----------  --------------------
+BES-53248_v1.32_Switch-A1.scr             852   2019 01 29 18:41:25
+
+1 configuration script(s) found.
+2046 Kbytes free.
+(IP_switch_A_1) #
+----
+.. Applicare lo script RCF:
++
+`script apply BES-53248_v1.32_Switch-A1.scr`
+
++
+[listing]
+----
+(IP_switch_A_1) #script apply BES-53248_v1.32_Switch-A1.scr
+
+Are you sure you want to apply the configuration script? (y/n) y
+
+
+config
+
+set clibanner "********************************************************************************
+
+* NetApp Reference Configuration File (RCF)
+
+*
+
+* Switch    : BES-53248
+
+...
+The downloaded RCF is validated. Some output is being logged here.
+...
+
+Configuration script 'BES-53248_v1.32_Switch-A1.scr' applied.
+
+(IP_switch_A_1) #
+----
+.. Salvare la configurazione:
++
+`write memory`
+
++
+[listing]
+----
+(IP_switch_A_1) #write memory
+
+This operation may take a few minutes.
+Management interfaces will not be available during this time.
+
+Are you sure you want to save? (y/n) y
+
+
+Configuration Saved!
+
+(IP_switch_A_1) #
+----
+.. Riavviare lo switch:
++
+`reload`
+
++
+[listing]
+----
+(IP_switch_A_1) #reload
+
+Are you sure you would like to reset the system? (y/n) y
+----
+.. Ripetere i passaggi precedenti per ciascuno degli altri tre switch, assicurandosi di copiare il file RCF corrispondente sullo switch corrispondente.
+
+
+. Ricaricare lo switch:
++
+`reload`
+
++
+[listing]
+----
+IP_switch_A_1# reload
+----
+. Ripetere i passaggi precedenti sugli altri tre switch nella configurazione IP MetroCluster.
+

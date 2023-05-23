@@ -1,0 +1,31 @@
+---
+permalink: install-stretch/concept_in_band_management_of_the_fc_to_sas_bridges.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, in, band, management, fc, sas, bridges 
+summary: A partire dai bridge ONTAP 9.5 con FibreBridge 7500N o 7600N, la gestione in-band dei bridge è supportata come alternativa alla gestione IP dei bridge. A partire da ONTAP 9.8, la gestione fuori banda è obsoleta. 
+---
+= Gestione in-band dei bridge FC-SAS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A partire dai bridge ONTAP 9.5 con FibreBridge 7500N o 7600N, la _gestione in-band_ dei bridge è supportata come alternativa alla gestione IP dei bridge. A partire da ONTAP 9.8, la gestione fuori banda è obsoleta.
+
+
+NOTE: A partire da ONTAP 9.8, la `*storage bridge*` il comando viene sostituito da `*system bridge*` comando. La procedura riportata di seguito mostra `*storage bridge*` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `*system bridge*` è preferibile utilizzare il comando.
+
+Quando si utilizza la gestione in-band, i bridge possono essere gestiti e monitorati dall'interfaccia CLI ONTAP tramite la connessione FC al bridge. Non è richiesto l'accesso fisico al bridge tramite le porte Ethernet del bridge, riducendo la vulnerabilità di sicurezza del bridge.
+
+La disponibilità della gestione in-band dei bridge dipende dalla versione di ONTAP:
+
+* A partire da ONTAP 9.8, i bridge vengono gestiti tramite connessioni in-band per impostazione predefinita e la gestione out-of-band dei bridge tramite SNMP è obsoleta.
+* ONTAP da 9.5 a 9.7: È supportata la gestione in-band o fuori banda.
+* Prima di ONTAP 9.5, è supportata solo la gestione SNMP out-of-band.
+
+
+I comandi di Bridge CLI possono essere emessi dall'interfaccia ONTAP `storage bridge run-cli -name _bridge-name_ -command _bridge-command-name_` All'interfaccia ONTAP.
+
+
+NOTE: Si consiglia di utilizzare la gestione in-band con accesso IP disattivato per migliorare la sicurezza limitando la connettività fisica del bridge.

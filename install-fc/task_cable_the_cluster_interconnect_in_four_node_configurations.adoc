@@ -1,0 +1,28 @@
+---
+permalink: install-fc/task_cable_the_cluster_interconnect_in_four_node_configurations.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, cable, cluster, interconnect, four, node 
+summary: 'Nelle configurazioni MetroCluster a otto o quattro nodi, è necessario cablare l"interconnessione del cluster tra i moduli controller locali di ciascun sito.' 
+---
+= Cablaggio dell'interconnessione del cluster in configurazioni a otto o quattro nodi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Nelle configurazioni MetroCluster a otto o quattro nodi, è necessario collegare l'interconnessione del cluster tra i moduli controller locali di ciascun sito.
+
+.A proposito di questa attività
+Questa attività non è richiesta nelle configurazioni MetroCluster a due nodi.
+
+Questa attività deve essere eseguita in entrambi i siti MetroCluster.
+
+.Fase
+. Collegare l'interconnessione del cluster da un modulo controller all'altro o, se si utilizzano switch di interconnessione del cluster, da ciascun modulo controller agli switch.
+
+
+.Informazioni correlate
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"]
+
+link:https://docs.netapp.com/us-en/ontap/network-management/index.html["Gestione di rete e LIF"^]

@@ -1,0 +1,21 @@
+---
+permalink: upgrade/task_enable_the_ha_mode_on_the_exist_controller_mcc_when_add_a_2nd_controller.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, set, up, ha, mode, existing, controller, module 
+summary: È necessario utilizzare il comando di modifica del failover dello storage per impostare la modalità sul modulo controller esistente. Il valore della modalità viene attivato in seguito, dopo il riavvio del modulo controller. 
+---
+= Impostazione della modalità ha sul modulo controller esistente
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario utilizzare il comando di modifica del failover dello storage per impostare la modalità sul modulo controller esistente. Il valore della modalità viene attivato in seguito, dopo il riavvio del modulo controller.
+
+.Fasi
+. Impostare la modalità su ha:
++
+`storage failover modify -mode ha -node _existing_node_name_`
+
+

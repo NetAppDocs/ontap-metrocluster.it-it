@@ -1,0 +1,113 @@
+---
+permalink: upgrade/task_assign_disk_ownership_in_aff_systems_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, assign, disk, ownership, aff, systems 
+summary: 'Se si utilizzano sistemi AFF in una configurazione con aggregati mirrorati e i nodi non hanno i dischi (SSD) assegnati correttamente, è necessario assegnare metà dei dischi su ogni shelf a un nodo locale e l"altra metà dei dischi al nodo partner ha. È necessario creare una configurazione in cui ciascun nodo abbia lo stesso numero di dischi nei pool di dischi locali e remoti.' 
+---
+= Assegnazione della proprietà del disco nei sistemi AFF
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se si utilizzano sistemi AFF in una configurazione con aggregati mirrorati e i nodi non hanno i dischi (SSD) assegnati correttamente, è necessario assegnare metà dei dischi su ogni shelf a un nodo locale e l'altra metà dei dischi al nodo partner ha. È necessario creare una configurazione in cui ciascun nodo abbia lo stesso numero di dischi nei pool di dischi locali e remoti.
+
+.A proposito di questa attività
+I controller dello storage devono essere in modalità Maintenance (manutenzione).
+
+Ciò non si applica alle configurazioni che hanno aggregati senza mirror, una configurazione attiva/passiva o che hanno un numero di dischi diverso nei pool locali e remoti.
+
+Questa attività non è necessaria se i dischi sono stati assegnati correttamente al momento della ricezione dalla fabbrica.
+
+
+NOTE: Il pool 0 contiene sempre i dischi che si trovano nello stesso sito del sistema di storage che li possiede, mentre il Pool 1 contiene sempre i dischi che sono remoti al sistema di storage che li possiede.
+
+.Fasi
+. In caso contrario, avviare ciascun sistema in modalità di manutenzione.
+. Assegnare i dischi ai nodi situati nel primo sito (sito A):
++
+È necessario assegnare un numero uguale di dischi a ciascun pool.
+
++
+.. Sul primo nodo, assegnare sistematicamente metà dei dischi su ogni shelf al pool 0 e l'altra metà al pool del partner ha 0: +
+`disk assign -disk _disk-name_ -p _pool_ -n _number-of-disks_`
++
+Se lo storage controller Controller Controller Controller_A_1 ha quattro shelf, ciascuno con 8 SSD, devi eseguire i seguenti comandi:
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_A_1:1-4.shelf1 -p 0 -n 4
+*> disk assign -shelf FC_switch_A_1:1-4.shelf2 -p 0 -n 4
+
+*> disk assign -shelf FC_switch_B_1:1-4.shelf1 -p 1 -n 4
+*> disk assign -shelf FC_switch_B_1:1-4.shelf2 -p 1 -n 4
+----
+.. Ripetere la procedura per il secondo nodo del sito locale, assegnando sistematicamente metà dei dischi su ogni shelf al pool 1 e l'altra metà al pool 1 del partner ha: +
+`disk assign -disk _disk-name_ -p _pool_`
++
+Se lo storage controller Controller Controller Controller_A_1 ha quattro shelf, ciascuno con 8 SSD, devi eseguire i seguenti comandi:
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_A_1:1-4.shelf3 -p 0 -n 4
+*> disk assign -shelf FC_switch_B_1:1-4.shelf4 -p 1 -n 4
+
+*> disk assign -shelf FC_switch_A_1:1-4.shelf3 -p 0 -n 4
+*> disk assign -shelf FC_switch_B_1:1-4.shelf4 -p 1 -n 4
+----
+
+
+. Assegnare i dischi ai nodi situati nel secondo sito (sito B):
++
+È necessario assegnare un numero uguale di dischi a ciascun pool.
+
++
+.. Sul primo nodo del sito remoto, assegnare sistematicamente metà dei dischi su ogni shelf al pool 0 e l'altra metà al pool del partner ha 0: +
+`disk assign -disk _disk-name_ -p _pool_`
++
+Se lo storage controller Controller Controller_B_1 ha quattro shelf, ciascuno con 8 SSD, devi eseguire i seguenti comandi:
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_B_1:1-5.shelf1 -p 0 -n 4
+*> disk assign -shelf FC_switch_B_1:1-5.shelf2 -p 0 -n 4
+
+*> disk assign -shelf FC_switch_A_1:1-5.shelf1 -p 1 -n 4
+*> disk assign -shelf FC_switch_A_1:1-5.shelf2 -p 1 -n 4
+----
+.. Ripetere la procedura per il secondo nodo del sito remoto, assegnando sistematicamente metà dei dischi su ogni shelf al pool 1 e l'altra metà al pool 1 del partner ha:
++
+`disk assign -disk _disk-name_ -p _pool_`
+
++
+Se lo storage controller Controller Controller Controller_B_2 dispone di quattro shelf, ciascuno con 8 SSD, devi eseguire i seguenti comandi:
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_B_1:1-5.shelf3 -p 0 -n 4
+*> disk assign -shelf FC_switch_B_1:1-5.shelf4 -p 0 -n 4
+
+*> disk assign -shelf FC_switch_A_1:1-5.shelf3 -p 1 -n 4
+*> disk assign -shelf FC_switch_A_1:1-5.shelf4 -p 1 -n 4
+----
+
+
+. Confermare le assegnazioni dei dischi:
++
+`storage show disk`
+
+. Uscire dalla modalità di manutenzione:
++
+`halt`
+
+. Visualizzare il menu di avvio:
++
+`boot_ontap menu`
+
+. Su ciascun nodo, selezionare l'opzione *4* per inizializzare tutti i dischi.
+

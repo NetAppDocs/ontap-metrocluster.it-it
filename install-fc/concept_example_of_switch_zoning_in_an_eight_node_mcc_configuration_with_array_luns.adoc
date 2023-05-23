@@ -1,0 +1,50 @@
+---
+permalink: install-fc/concept_example_of_switch_zoning_in_an_eight_node_mcc_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, example, eight, node, array, luns, mcc 
+summary: Lo zoning dello switch definisce i percorsi tra i nodi connessi. La configurazione dello zoning consente di definire quali LUN di array possono essere visualizzati da specifici sistemi ONTAP. 
+---
+= Esempio di zoning dello switch in una configurazione MetroCluster a otto nodi con LUN array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lo zoning dello switch definisce i percorsi tra i nodi connessi. La configurazione dello zoning consente di definire quali LUN di array possono essere visualizzati da specifici sistemi ONTAP.
+
+Una configurazione MetroCluster a otto nodi è costituita da due gruppi DR a quattro nodi. Il primo gruppo di DR è costituito dai seguenti nodi:
+
+* Controller_A_1
+* Controller_A_2
+* Controller_B_1
+* Controller_B_2
+
+
+Il secondo gruppo di DR è costituito dai seguenti nodi:
+
+* Controller_A_3
+* Controller_A_4
+* Controller_B_3
+* Controller_B_4
+
+
+Per configurare lo zoning dello switch, è possibile utilizzare gli esempi di zoning per una configurazione MetroCluster a quattro nodi per il primo gruppo DR.
+
+link:concept_example_of_switch_zoning_in_a_four_node_mcc_configuration_with_array_luns.html["Esempio di zoning dello switch in una configurazione MetroCluster a quattro nodi con LUN array"]
+
+Per configurare lo zoning per il secondo gruppo DR, seguire gli stessi esempi e requisiti per le porte FC Initiator e le LUN array appartenenti ai controller del secondo gruppo DR.
+
+.Informazioni correlate
+* Lo zoning dello switch definisce i percorsi tra i nodi connessi. La configurazione dello zoning consente di definire quali LUN di array possono essere visualizzati da specifici sistemi ONTAP.
++
+link:concept_example_of_switch_zoning_in_a_two_node_mcc_configuration_with_array_luns.html["Esempio di zoning dello switch in una configurazione MetroCluster a due nodi con LUN array"]
+
++
+link:concept_example_of_switch_zoning_in_a_four_node_mcc_configuration_with_array_luns.html["Esempio di zoning dello switch in una configurazione MetroCluster a quattro nodi con LUN array"]
+
+* Quando si utilizza lo zoning dello switch in una configurazione MetroCluster con LUN array, è necessario assicurarsi che vengano rispettati alcuni requisiti di base.
++
+link:reference_requirements_for_switch_zoning_in_a_mcc_configuration_with_array_luns.html["Requisiti per lo zoning dello switch in una configurazione MetroCluster con LUN array"]
+
+

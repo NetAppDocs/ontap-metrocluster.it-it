@@ -1,0 +1,41 @@
+= Considerazioni sull'utilizzo di aggregati senza mirror
+:allow-uri-read: 
+
+
+
+
+== Considerazioni sull'utilizzo di aggregati senza mirror
+
+Se la configurazione include aggregati senza mirror, è necessario essere consapevoli dei potenziali problemi di accesso che seguono le operazioni di switchover.
+
+
+
+== Considerazioni per gli aggregati senza mirror quando si eseguono interventi di manutenzione che richiedono lo spegnimento dell'alimentazione
+
+Se si esegue uno switchover negoziato per motivi di manutenzione che richiedono uno spegnimento dell'alimentazione a livello di sito, è necessario prima portare manualmente fuori linea gli aggregati senza mirror di proprietà del sito di disastro.
+
+Se non si offline alcun aggregato senza mirror, i nodi del sito sopravvissuto potrebbero andare in stato di inattività a causa di una panica su più dischi. Questo potrebbe verificarsi se gli aggregati senza mirror passano offline o mancano, a causa della perdita di connettività allo storage nel sito di disastro. Questo è il risultato di un arresto dell'alimentazione o di una perdita degli ISL.
+
+
+
+== Considerazioni per gli aggregati senza mirror e gli spazi dei nomi gerarchici
+
+Se si utilizzano spazi dei nomi gerarchici, è necessario configurare il percorso di giunzione in modo che tutti i volumi in quel percorso siano solo su aggregati mirrorati o solo su aggregati senza mirror. La configurazione di una combinazione di aggregati senza mirror e mirrorati nel percorso di giunzione potrebbe impedire l'accesso agli aggregati senza mirror dopo l'operazione di switchover.
+
+
+
+== Considerazioni per aggregati senza mirror e volumi di metadati CRS e volumi root SVM di dati
+
+Il volume di metadati del servizio di replica della configurazione (CRS) e i volumi radice SVM dei dati devono trovarsi su un aggregato mirrorato. Non è possibile spostare questi volumi in un aggregato senza mirror. Se si trovano su un aggregato senza mirror, le operazioni di switchover e switchback negoziate vengono vetoed. In questo caso, il comando MetroCluster check fornisce un avviso.
+
+
+
+== Considerazioni per aggregati senza mirror e SVM
+
+Le SVM devono essere configurate solo su aggregati mirrorati o solo su aggregati senza mirror. La configurazione di una combinazione di aggregati senza mirror e con mirroring può portare a un'operazione di switchover che supera i 120 secondi e a un'interruzione dei dati se gli aggregati senza mirror non vengono online.
+
+
+
+== Considerazioni per aggregati senza mirror e SAN
+
+Nelle versioni di ONTAP precedenti alla 9.9.1, un LUN non deve trovarsi in un aggregato senza mirror. La configurazione di un LUN su un aggregato senza mirror può comportare un'operazione di switchover che supera i 120 secondi e un'interruzione dei dati.

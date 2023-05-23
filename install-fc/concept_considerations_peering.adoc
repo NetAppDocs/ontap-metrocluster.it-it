@@ -1,0 +1,110 @@
+---
+permalink: install-fc/concept_considerations_peering.html 
+sidebar: sidebar 
+keywords: preparing, prepare, metrocluster, mcc, installation, install, differences, configurations, between, considerations, all, san, array, asa, cluster, peering, prerequisites, dedicated, ports, sharing, data, ports, native, disk, shelves, array, luns, transitions, 7-mode, isls, tdm/wdm, fabric-attached, iod, ood, encryption, devices, unmirrored, aggregates, maintenance, requiring, power, shutdown, firewall, hardware, racking, cabling, setup, checklist, all san array, asa 
+summary: 'Durante la preparazione all"installazione di MetroCluster, è necessario conoscere l"architettura hardware di MetroCluster e i componenti richiesti.' 
+---
+= Peering dei cluster
+:allow-uri-read: 
+
+
+[role="lead"]
+Ogni sito MetroCluster viene configurato come peer del sito del partner. È necessario conoscere i prerequisiti e le linee guida per la configurazione delle relazioni di peering. Ciò è importante quando si decide se utilizzare porte condivise o dedicate per tali relazioni.
+
+.Informazioni correlate
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-clus-peer/home.html["Configurazione rapida del peering di cluster e SVM"]
+
+
+
+== Prerequisiti per il peering del cluster
+
+Prima di configurare il peering del cluster, è necessario verificare che la connettività tra porta, indirizzo IP, subnet, firewall e i requisiti di denominazione del cluster siano soddisfatti.
+
+
+
+=== Requisiti di connettività
+
+Ogni LIF di intercluster sul cluster locale deve essere in grado di comunicare con ogni LIF di intercluster sul cluster remoto.
+
+Sebbene non sia necessario, è in genere più semplice configurare gli indirizzi IP utilizzati per le LIF di intercluster nella stessa subnet. Gli indirizzi IP possono risiedere nella stessa sottorete dei file LIF dei dati o in una sottorete diversa. La subnet utilizzata in ciascun cluster deve soddisfare i seguenti requisiti:
+
+* La subnet deve disporre di un numero sufficiente di indirizzi IP da allocare a un LIF intercluster per nodo.
++
+Ad esempio, in un cluster a quattro nodi, la subnet utilizzata per la comunicazione tra cluster deve avere quattro indirizzi IP disponibili.
+
+
+
+Ciascun nodo deve disporre di una LIF intercluster con un indirizzo IP sulla rete intercluster.
+
+Le LIF di intercluster possono avere un indirizzo IPv4 o IPv6.
+
+
+NOTE: ONTAP 9 consente di migrare le reti peering da IPv4 a IPv6, consentendo la presenza simultanea di entrambi i protocolli nelle LIF dell'intercluster. Nelle versioni precedenti, tutte le relazioni tra cluster per un intero cluster erano IPv4 o IPv6. Ciò significava che la modifica dei protocolli era un evento potenzialmente disgregativo.
+
+
+
+=== Requisiti delle porte
+
+È possibile utilizzare porte dedicate per la comunicazione tra cluster o condividere le porte utilizzate dalla rete dati. Le porte devono soddisfare i seguenti requisiti:
+
+* Tutte le porte utilizzate per comunicare con un determinato cluster remoto devono trovarsi nello stesso IPSpace.
++
+È possibile utilizzare più IPspaces per eseguire il peer con più cluster. La connettività full-mesh a coppie è necessaria solo all'interno di un IPSpace.
+
+* Il dominio di broadcast utilizzato per la comunicazione tra cluster deve includere almeno due porte per nodo in modo che la comunicazione tra cluster possa eseguire il failover da una porta a un'altra.
++
+Le porte aggiunte a un dominio di broadcast possono essere porte di rete fisiche, VLAN o gruppi di interfacce (ifgrps).
+
+* Tutte le porte devono essere cablate.
+* Tutte le porte devono essere in buono stato.
+* Le impostazioni MTU delle porte devono essere coerenti.
+
+
+
+
+=== Requisiti del firewall
+
+I firewall e i criteri di firewall tra cluster devono consentire i seguenti protocolli:
+
+* Servizio ICMP
+* TCP agli indirizzi IP di tutte le LIF dell'intercluster sulle porte 10000, 11104 e 11105
+* HTTPS bidirezionale tra le LIF dell'intercluster
+
+
+Il criterio predefinito del firewall tra cluster consente l'accesso tramite il protocollo HTTPS e da tutti gli indirizzi IP (0.0.0.0/0). Se necessario, è possibile modificare o sostituire la policy.
+
+
+
+== Considerazioni sull'utilizzo di porte dedicate
+
+Quando si determina se l'utilizzo di una porta dedicata per la replica tra cluster è la soluzione di rete tra cluster corretta, è necessario prendere in considerazione configurazioni e requisiti quali tipo di LAN, larghezza di banda WAN disponibile, intervallo di replica, velocità di modifica e numero di porte.
+
+Considerare i seguenti aspetti della rete per determinare se l'utilizzo di una porta dedicata è la migliore soluzione di rete tra cluster:
+
+* Se la quantità di larghezza di banda WAN disponibile è simile a quella delle porte LAN e l'intervallo di replica è tale che la replica si verifica quando esiste un'attività client regolare, è necessario dedicare le porte Ethernet alla replica tra cluster per evitare conflitti tra la replica e i protocolli dati.
+* Se l'utilizzo della rete generato dai protocolli dati (CIFS, NFS e iSCSI) è tale che l'utilizzo della rete è superiore al 50%, dedicare le porte per la replica per consentire prestazioni non degradate in caso di failover di un nodo.
+* Quando si utilizzano porte fisiche da 10 GbE o superiori per i dati e la replica, è possibile creare porte VLAN per la replica e dedicare le porte logiche per la replica tra cluster.
++
+La larghezza di banda della porta è condivisa tra tutte le VLAN e la porta base.
+
+* Considerare il tasso di cambiamento dei dati e l'intervallo di replica e se la quantità di dati, che devono essere replicati in ciascun intervallo, richiede una larghezza di banda sufficiente. Questo potrebbe causare conflitti con i protocolli dati se si condividono le porte dati.
+
+
+
+
+== Considerazioni sulla condivisione delle porte dati
+
+Quando si determina se la condivisione di una porta dati per la replica tra cluster è la soluzione di rete tra cluster corretta, è necessario prendere in considerazione configurazioni e requisiti quali tipo di LAN, larghezza di banda WAN disponibile, intervallo di replica, tasso di cambiamento e numero di porte.
+
+Considerare i seguenti aspetti della rete per determinare se la condivisione delle porte dati è la migliore soluzione di connettività tra cluster:
+
+* Per una rete ad alta velocità, ad esempio una rete 40-Gigabit Ethernet (40-GbE), potrebbe essere disponibile una quantità sufficiente di larghezza di banda LAN locale per eseguire la replica sulle stesse porte 40-GbE utilizzate per l'accesso ai dati.
++
+In molti casi, la larghezza di banda WAN disponibile è di gran lunga inferiore alla larghezza di banda LAN a 10 GbE.
+
+* Tutti i nodi del cluster potrebbero dover replicare i dati e condividere la larghezza di banda WAN disponibile, rendendo più accettabile la condivisione della porta dati.
+* La condivisione delle porte per i dati e la replica elimina il numero di porte aggiuntive necessario per dedicare le porte alla replica.
+* Le dimensioni massime dell'unità di trasmissione (MTU) della rete di replica saranno le stesse di quelle utilizzate sulla rete dati.
+* Considerare il tasso di cambiamento dei dati e l'intervallo di replica e se la quantità di dati, che devono essere replicati in ciascun intervallo, richiede una larghezza di banda sufficiente. Questo potrebbe causare conflitti con i protocolli dati se si condividono le porte dati.
+* Quando le porte dati per la replica tra cluster sono condivise, le LIF tra cluster possono essere migrate su qualsiasi altra porta compatibile con gli intercluster sullo stesso nodo per controllare la porta dati specifica utilizzata per la replica.
+

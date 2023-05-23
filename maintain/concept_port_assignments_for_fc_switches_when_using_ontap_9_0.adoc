@@ -1,0 +1,1109 @@
+---
+permalink: maintain/concept_port_assignments_for_fc_switches_when_using_ontap_9_0.html 
+sidebar: sidebar 
+keywords: MetroCluster configurations running ONTAP 9.0 
+summary: Quando si cablano gli switch FC, verificare di utilizzare le assegnazioni delle porte specificate. Le assegnazioni delle porte sono diverse tra ONTAP 9.0 e le versioni successive di ONTAP. 
+---
+= Assegnazioni delle porte per switch FC quando si utilizza ONTAP 9.0
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Quando si cablano gli switch FC, verificare di utilizzare le assegnazioni delle porte specificate. Le assegnazioni delle porte sono diverse tra ONTAP 9.0 e le versioni successive di ONTAP.
+
+È possibile riconfigurare le porte non utilizzate per il collegamento di porte initiator, porte FC-VI o ISL in modo da fungere da porte di storage. Tuttavia, se vengono utilizzati gli RCF supportati, la zoning deve essere modificata di conseguenza.
+
+Se vengono utilizzati i file RCF supportati, le porte ISL potrebbero non essere collegate alle stesse porte qui mostrate e potrebbe essere necessario riconfigurarle manualmente.
+
+
+
+== Linee guida generali per il cablaggio
+
+Quando si utilizzano le tabelle di cablaggio, è necessario conoscere le seguenti linee guida:
+
+* Gli switch Brocade e Cisco utilizzano diverse numerazioni delle porte:
++
+** Negli switch Brocade, la prima porta è numerata 0.
+** Sugli switch Cisco, la prima porta è numerata 1.
+
+
+* Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch.
+* I sistemi storage AFF A300 e FAS8200 possono essere ordinati con una delle due opzioni per la connettività FC-VI:
++
+** Porte integrate 0e e 0f configurate in modalità FC-VI.
+** Porte 1a e 1b su una scheda FC-VI nello slot 1.
+
+
+
+
+
+
+== Utilizzo della porta Brocade per le connessioni dei controller in una configurazione MetroCluster a otto nodi con ONTAP 9.0
+
+Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch.
+
+La tabella seguente mostra l'utilizzo delle porte del controller sui modelli Brocade 6505, 6510 o DCX 8510-8:
+
+|===
+| Componente | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| controller_x_3 | Porta FC-VI A. | 6 | - 
+
+
+| controller_x_3 | Porta FC-VI b | - | 6 
+
+
+| controller_x_3 | Porta HBA a | 7 | - 
+
+
+| controller_x_3 | Porta HBA b | - | 7 
+
+
+| controller_x_3 | Porta HBA c | 8 | - 
+
+
+| controller_x_3 | Porta HBA d | - | 8 
+
+
+| controller_x_4 | Porta FC-VI A. | 9 | - 
+
+
+| controller_x_4 | Porta FC-VI b | - | 9 
+
+
+| controller_x_4 | Porta HBA a | 10 | - 
+
+
+| controller_x_4 | Porta HBA b | - | 10 
+
+
+| controller_x_4 | Porta HBA c | 11 | - 
+
+
+| controller_x_4 | Porta HBA d | - | 11 
+|===
+
+
+== Utilizzo della porta Brocade per connessioni bridge FC-SAS in una configurazione MetroCluster a otto nodi con ONTAP 9.0
+
+La seguente tabella mostra l'utilizzo della porta bridge quando si utilizzano bridge FibreBridge 7500:
+
+|===
+| Ponte | Porta Bridge | FC_switch_x_1 | FC_switch_x_2 
+
+
+| bridge_x_1a | FC1 | 12 | - 
+
+
+| bridge_x_1a | FC2 | - | 12 
+
+
+| bridge_x_1b | FC1 | 13 | - 
+
+
+| bridge_x_1b | FC2 | - | 13 
+
+
+| bridge_x_2a | FC1 | 14 | - 
+
+
+| bridge_x_2a | FC2 | - | 14 
+
+
+| bridge_x_2b | FC1 | 15 | - 
+
+
+| bridge_x_2b | FC2 | - | 15 
+
+
+| bridge_x_3a | FC1 | 16 | - 
+
+
+| bridge_x_3a | FC2 | - | 16 
+
+
+| bridge_x_3b | FC1 | 17 | - 
+
+
+| bridge_x_3b | FC2 | - | 17 
+
+
+| bridge_x_4a | FC1 | 18 | - 
+
+
+| bridge_x_4a | FC2 | - | 18 
+
+
+| bridge_x_4b | FC1 | 19 | - 
+
+
+| bridge_x_4b | FC2 | - | 19 
+|===
+La seguente tabella mostra l'utilizzo della porta bridge quando si utilizzano bridge FibreBridge 6500 con switch Brocade 6505, 6510 o DCX 8510-8:
+
+|===
+| Ponte | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| bridge_x_1a | FC1 | 12 | - 
+
+
+| bridge_x_1b | FC1 | - | 12 
+
+
+| bridge_x_2a | FC1 | 13 | - 
+
+
+| bridge_x_2b | FC1 | - | 13 
+
+
+| bridge_x_3a | FC1 | 14 | - 
+
+
+| bridge_x_3b | FC1 | - | 14 
+
+
+| bridge_x_4a | FC1 | 15 | - 
+
+
+| bridge_x_4b | FC1 | - | 15 
+
+
+| bridge_x_5a | FC1 | 16 | - 
+
+
+| bridge_x_5b | FC1 | - | 16 
+
+
+| bridge_x_6a | FC1 | 17 | - 
+
+
+| bridge_x_6b | FC1 | - | 17 
+
+
+| bridge_x_7a | FC1 | 18 | - 
+
+
+| bridge_x_7b | FC1 | - | 18 
+
+
+| bridge_x_8a | FC1 | 19 | - 
+
+
+| bridge_x_8b | FC1 | - | 19 
+|===
+
+
+== Utilizzo della porta Brocade per gli ISL in una configurazione MetroCluster a otto nodi con ONTAP 9.0
+
+La seguente tabella mostra l'utilizzo della porta ISL per gli switch Brocade 6505, 6510 o DCX 8510-8:
+
+|===
+| Porta ISL | FC_switch_x_1 | FC_switch_x_2 
+
+
+| Porta ISL 1 | 20 | 20 
+
+
+| Porta ISL 2 | 21 | 21 
+
+
+| Porta ISL 3 | 22 | 22 
+
+
+| Porta ISL 4 | 23 | 23 
+|===
+
+
+== Utilizzo della porta Brocade per i controller in una configurazione MetroCluster a quattro nodi con ONTAP 9.0
+
+Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch. La seguente tabella mostra l'utilizzo degli switch Brocade 6505, 6510 e DCX 8510-8.
+
+|===
+| Componente | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| controller_x_1 | Porta FC-VI A. | 0 | - 
+
+
+| controller_x_1 | Porta FC-VI b | - | 0 
+
+
+| controller_x_1 | Porta HBA a | 1 | - 
+
+
+| controller_x_1 | Porta HBA b | - | 1 
+
+
+| controller_x_1 | Porta HBA c | 2 | - 
+
+
+| controller_x_1 | Porta HBA d | - | 2 
+
+
+| controller_x_2 | Porta FC-VI A. | 3 | - 
+
+
+| controller_x_2 | Porta FC-VI b | - | 3 
+
+
+| controller_x_2 | Porta HBA a | 4 | - 
+
+
+| controller_x_2 | Porta HBA b | - | 4 
+
+
+| controller_x_2 | Porta HBA c | 5 | - 
+
+
+| controller_x_2 | Porta HBA d | - | 5 
+|===
+
+
+== Utilizzo della porta Brocade per bridge in una configurazione MetroCluster a quattro nodi con ONTAP 9.0
+
+Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch.
+
+La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 17 quando si utilizzano bridge FibreBridge 7500. È possibile cablare altri bridge alle porte da 18 a 23.
+
+|===
+| Bridge FibreBridge 7500 | Porta | FC_switch_x_1 (6510 o DCX 8510-8) | FC_switch_x_2 (6510 o DCX 8510-8) | FC_switch_x_1 (6505) | FC_switch_x_2 (6505) 
+
+
+| bridge_x_1a | FC1 | 6 | - | 6 | - 
+
+
+| bridge_x_1a | FC2 | - | 6 | - | 6 
+
+
+| bridge_x_1b | FC1 | 7 | - | 7 | - 
+
+
+| bridge_x_1b | FC2 | - | 7 | - | 7 
+
+
+| bridge_x_2a | FC1 | 8 | - | 12 | - 
+
+
+| bridge_x_2a | FC2 | - | 8 | - | 12 
+
+
+| bridge_x_2b | FC1 | 9 | - | 13 | - 
+
+
+| bridge_x_2b | FC2 | - | 9 | - | 13 
+
+
+| bridge_x_3a | FC1 | 10 | - | 14 | - 
+
+
+| bridge_x_3a | FC2 | - | 10 | - | 14 
+
+
+| bridge_x_3b | FC1 | 11 | - | 15 | - 
+
+
+| bridge_x_3b | FC2 | - | 11 | - | 15 
+
+
+| bridge_x_4a | FC1 | 12 | - | 16 | - 
+
+
+| bridge_x_4a | FC2 | - | 12 | - | 16 
+
+
+| bridge_x_4b | FC1 | 13 | - | 17 | - 
+
+
+| bridge_x_4b | FC2 | - | 13 | - | 17 
+
+
+|  |  | è possibile cablare altri bridge attraverso la porta 19, quindi le porte da 24 a 47 |  |  |  
+|===
+La seguente tabella mostra l'utilizzo della porta bridge quando si utilizzano bridge FibreBridge 6500:
+
+|===
+|  | Porta bridge 6500N | FC_switch_x_1 (6510 o DCX 8510-8) | FC_switch_x_2 (6510 o DCX 8510-8) | FC_switch_x_1 (6505) | FC_switch_x_2 (6505) 
+
+
+| bridge_x_1a | FC1 | 6 | - | 6 | - 
+
+
+| bridge_x_1b | FC1 | - | 6 | - | 6 
+
+
+| bridge_x_2a | FC1 | 7 | - | 7 | - 
+
+
+| bridge_x_2b | FC1 | - | 7 | - | 7 
+
+
+| bridge_x_3a | FC1 | 8 | - | 12 | - 
+
+
+| bridge_x_3b | FC1 | - | 8 | - | 12 
+
+
+| bridge_x_4a | FC1 | 9 | - | 13 | - 
+
+
+| bridge_x_4b | FC1 | - | 9 | - | 13 
+
+
+| bridge_x_5a | FC1 | 10 | - | 14 | - 
+
+
+| bridge_x_5b | FC1 | - | 10 | - | 14 
+
+
+| bridge_x_6a | FC1 | 11 | - | 15 | - 
+
+
+| bridge_x_6b | FC1 | - | 11 | - | 15 
+
+
+| bridge_x_7a | FC1 | 12 | - | 16 | - 
+
+
+| bridge_x_7b | FC1 | - | 12 | - | 16 
+
+
+| bridge_x_8a | FC1 | 13 | - | 17 | - 
+
+
+| bridge_x_8b | FC1 | - | 13 | - | 17 
+
+
+|  |  | è possibile cablare altri bridge attraverso la porta 19, quindi le porte da 24 a 47 |  | è possibile cablare altri bridge tramite la porta 23 |  
+|===
+
+
+== Utilizzo della porta Brocade per gli ISL in una configurazione MetroCluster a quattro nodi con ONTAP 9.0
+
+La seguente tabella mostra l'utilizzo della porta ISL:
+
+|===
+| Porta ISL | FC_switch_x_1 (6510 o DCX 8510-8) | FC_switch_x_2 (6510 o DCX 8510-8) | FC_switch_x_1 (6505) | FC_switch_x_2 (6505) 
+
+
+| Porta ISL 1 | 20 | 20 | 8 | 8 
+
+
+| Porta ISL 2 | 21 | 21 | 9 | 9 
+
+
+| Porta ISL 3 | 22 | 22 | 10 | 10 
+
+
+| Porta ISL 4 | 23 | 23 | 11 | 11 
+|===
+
+
+== Utilizzo della porta Brocade per i controller in una configurazione MetroCluster a due nodi con ONTAP 9.0
+
+Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch. La seguente tabella mostra i cavi per gli switch Brocade 6505, 6510 e DCX 8510-8.
+
+|===
+| Componente | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| controller_x_1 | Porta FC-VI A. | 0 | - 
+
+
+| controller_x_1 | Porta FC-VI b | - | 0 
+
+
+| controller_x_1 | Porta HBA a | 1 | - 
+
+
+| controller_x_1 | Porta HBA b | - | 1 
+
+
+| controller_x_1 | Porta HBA c | 2 | - 
+
+
+| controller_x_1 | Porta HBA d | - | 2 
+|===
+
+
+== Utilizzo della porta Brocade per bridge in una configurazione MetroCluster a due nodi con ONTAP 9.0
+
+Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch.
+
+La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 17 quando si utilizzano bridge FibreBridge 7500 con switch Brocade 6505, 6510 e DCX 8510-8. È possibile cablare altri bridge alle porte da 18 a 23.
+
+|===
+| Bridge FibreBridge 7500 | Porta | FC_switch_x_1 (6510 o DCX 8510-8) | FC_switch_x_2 (6510 o DCX 8510-8) | FC_switch_x_1 (6505) | FC_switch_x_2 (6505) 
+
+
+| bridge_x_1a | FC1 | 6 | - | 6 | - 
+
+
+| bridge_x_1a | FC2 | - | 6 | - | 6 
+
+
+| bridge_x_1b | FC1 | 7 | - | 7 | - 
+
+
+| bridge_x_1b | FC2 | - | 7 | - | 7 
+
+
+| bridge_x_2a | FC1 | 8 | - | 12 | - 
+
+
+| bridge_x_2a | FC2 | - | 8 | - | 12 
+
+
+| bridge_x_2b | FC1 | 9 | - | 13 | - 
+
+
+| bridge_x_2b | FC2 | - | 9 | - | 13 
+
+
+| bridge_x_3a | FC1 | 10 | - | 14 | - 
+
+
+| bridge_x_3a | FC2 | - | 10 | - | 14 
+
+
+| bridge_x_3a | FC1 | 11 | - | 15 | - 
+
+
+| bridge_x_3a | FC2 | - | 11 | - | 15 
+
+
+| bridge_x_4a | FC1 | 12 | - | 16 | - 
+
+
+| bridge_x_4a | FC2 | - | 12 | - | 16 
+
+
+| bridge_x_4b | FC1 | 13 | - | 17 | - 
+
+
+| bridge_x_4b | FC2 | - | 13 | - | 17 
+
+
+|  |  | è possibile cablare altri bridge attraverso la porta 19, quindi le porte da 24 a 47 |  | è possibile cablare altri bridge tramite la porta 23 |  
+|===
+La seguente tabella mostra l'utilizzo della porta bridge quando si utilizzano bridge FibreBridge 6500 con switch Brocade 6505, 6510 e DCX 8510-8:
+
+|===
+| Bridge FibreBridge 6500 | Porta | FC_switch_x_1 (6510 o DCX 8510-8) | FC_switch_x_2 (6510 o DCX 8510-8) | FC_switch_x_1 (6505) | FC_switch_x_2 (6505) 
+
+
+| bridge_x_1a | FC1 | 6 | - | 6 | - 
+
+
+| bridge_x_1b | FC1 | - | 6 | - | 6 
+
+
+| bridge_x_2a | FC1 | 7 | - | 7 | - 
+
+
+| bridge_x_2b | FC1 | - | 7 | - | 7 
+
+
+| bridge_x_3a | FC1 | 8 | - | 12 | - 
+
+
+| bridge_x_3b | FC1 | - | 8 | - | 12 
+
+
+| bridge_x_4a | FC1 | 9 | - | 13 | - 
+
+
+| bridge_x_4b | FC1 | - | 9 | - | 13 
+
+
+| bridge_x_5a | FC1 | 10 | - | 14 | - 
+
+
+| bridge_x_5b | FC1 | - | 10 | - | 14 
+
+
+| bridge_x_6a | FC1 | 11 | - | 15 | - 
+
+
+| bridge_x_6b | FC1 | - | 11 | - | 15 
+
+
+| bridge_x_7a | FC1 | 12 | - | 16 | - 
+
+
+| bridge_x_7b | FC1 | - | 12 | - | 16 
+
+
+| bridge_x_8a | FC1 | 13 | - | 17 | - 
+
+
+| bridge_x_8b | FC1 | - | 13 | - | 17 
+
+
+|  |  | è possibile cablare altri bridge attraverso la porta 19, quindi le porte da 24 a 47 |  | è possibile cablare altri bridge tramite la porta 23 |  
+|===
+
+
+== Utilizzo della porta Brocade per gli ISL in una configurazione MetroCluster a due nodi con ONTAP 9.0
+
+La seguente tabella mostra l'utilizzo delle porte ISL per gli switch Brocade 6505, 6510 e DCX 8510-8:
+
+|===
+| Porta ISL | FC_switch_x_1 (6510 o DCX 8510-8) | FC_switch_x_2 (6510 o DCX 8510-8) | FC_switch_x_1 (6505) | FC_switch_x_2 (6505) 
+
+
+| Porta ISL 1 | 20 | 20 | 8 | 8 
+
+
+| Porta ISL 2 | 21 | 21 | 9 | 9 
+
+
+| Porta ISL 3 | 22 | 22 | 10 | 10 
+
+
+| Porta ISL 4 | 23 | 23 | 11 | 11 
+|===
+
+
+== Utilizzo delle porte Cisco per controller in una configurazione MetroCluster a otto nodi con ONTAP 9.0
+
+La seguente tabella mostra l'utilizzo della porta del controller sugli switch Cisco 9148 e 9148S:
+
+|===
+| Componente | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| controller_x_3 | Porta FC-VI A. | 7 | - 
+
+
+| controller_x_3 | Porta FC-VI b | - | 7 
+
+
+| controller_x_3 | Porta HBA a | 8 | - 
+
+
+| controller_x_3 | Porta HBA b | - | 8 
+
+
+| controller_x_3 | Porta HBA c | 9 | - 
+
+
+| controller_x_3 | Porta HBA d | - | 9 
+
+
+| controller_x_4 | Porta FC-VI A. | 10 | - 
+
+
+| controller_x_4 | Porta FC-VI b | - | 10 
+
+
+| controller_x_4 | Porta HBA a | 11 | - 
+
+
+| controller_x_4 | Porta HBA b | - | 11 
+
+
+| controller_x_4 | Porta HBA c | 13 | - 
+
+
+| controller_x_4 | Porta HBA d | - | 13 
+|===
+
+
+== Utilizzo della porta Cisco per bridge FC-SAS in una configurazione MetroCluster a otto nodi con ONTAP 9.0
+
+La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 23 quando si utilizzano bridge FibreBridge 7500 quando si utilizzano switch Cisco 9148 o 9148S. È possibile collegare altri bridge utilizzando le porte da 25 a 48.
+
+|===
+| Bridge FibreBridge 7500 | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| bridge_x_1a | FC1 | 14 | 14 
+
+
+| bridge_x_1a | FC2 | - | - 
+
+
+| bridge_x_1b | FC1 | 15 | 15 
+
+
+| bridge_x_1b | FC2 | - | - 
+
+
+| bridge_x_2a | FC1 | 17 | 17 
+
+
+| bridge_x_2a | FC2 | - | - 
+
+
+| bridge_x_2b | FC1 | 18 | 18 
+
+
+| bridge_x_2b | FC2 | - | - 
+
+
+| bridge_x_3a | FC1 | 19 | 19 
+
+
+| bridge_x_3a | FC2 | - | - 
+
+
+| bridge_x_3b | FC1 | 21 | 21 
+
+
+| bridge_x_3b | FC2 | - | - 
+
+
+| bridge_x_4a | FC1 | 22 | 22 
+
+
+| bridge_x_4a | FC2 | - | - 
+
+
+| bridge_x_4b | FC1 | 23 | 23 
+
+
+| bridge_x_4b | FC2 | - | - 
+|===
+È possibile collegare altri bridge utilizzando le porte da 25 a 48 seguendo lo stesso schema.
+
+La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 23 quando si utilizzano bridge FibreBridge 6500 con switch Cisco 9148 o 9148S. È possibile collegare altri bridge utilizzando le porte 25-48.
+
+|===
+| Bridge FibreBridge 6500 | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| bridge_x_1a | FC1 | 14 | - 
+
+
+| bridge_x_1b | FC1 | - | 14 
+
+
+| bridge_x_2a | FC1 | 15 | - 
+
+
+| bridge_x_2b | FC1 | - | 15 
+
+
+| bridge_x_3a | FC1 | 17 | - 
+
+
+| bridge_x_3b | FC1 | - | 17 
+
+
+| bridge_x_4a | FC1 | 18 | - 
+
+
+| bridge_x_4b | FC1 | - | 18 
+
+
+| bridge_x_5a | FC1 | 19 | - 
+
+
+| bridge_x_5b | FC1 | - | 19 
+
+
+| bridge_x_6a | FC1 | 21 | - 
+
+
+| bridge_x_6b | FC1 | - | 21 
+
+
+| bridge_x_7a | FC1 | 22 | - 
+
+
+| bridge_x_7b | FC1 | - | 22 
+
+
+| bridge_x_8a | FC1 | 23 | - 
+
+
+| bridge_x_8b | FC1 | - | 23 
+|===
+È possibile collegare altri bridge utilizzando le porte da 25 a 48 seguendo lo stesso schema.
+
+
+
+== Utilizzo delle porte Cisco per gli ISL in una configurazione MetroCluster a otto nodi con ONTAP 9.0
+
+La seguente tabella mostra l'utilizzo della porta ISL per gli switch Cisco 9148 e 9148S:
+
+|===
+| Porte ISL | FC_switch_x_1 | FC_switch_x_2 
+
+
+| Porta ISL 1 | 12 | 12 
+
+
+| Porta ISL 2 | 16 | 16 
+
+
+| Porta ISL 3 | 20 | 20 
+
+
+| Porta ISL 4 | 24 | 24 
+|===
+
+
+== Utilizzo della porta Cisco per controller in una configurazione MetroCluster a quattro nodi
+
+Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch.
+
+La seguente tabella mostra l'utilizzo della porta del controller sugli switch Cisco 9148, 9148S e 9250i:
+
+|===
+| Componente | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| controller_x_1 | Porta FC-VI A. | 1 | - 
+
+
+| controller_x_1 | Porta FC-VI b | - | 1 
+
+
+| controller_x_1 | Porta HBA a | 2 | - 
+
+
+| controller_x_1 | Porta HBA b | - | 2 
+
+
+| controller_x_1 | Porta HBA c | 3 | - 
+
+
+| controller_x_1 | Porta HBA d | - | 3 
+
+
+| controller_x_2 | Porta FC-VI A. | 4 | - 
+
+
+| controller_x_2 | Porta FC-VI b | - | 4 
+
+
+| controller_x_2 | Porta HBA a | 5 | - 
+
+
+| controller_x_2 | Porta HBA b | - | 5 
+
+
+| controller_x_2 | Porta HBA c | 6 | - 
+
+
+| controller_x_2 | Porta HBA d | - | 6 
+|===
+
+
+== Utilizzo della porta Cisco per bridge FC-SAS in una configurazione MetroCluster a quattro nodi con ONTAP 9.0
+
+La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 14 quando si utilizzano bridge FibreBridge 7500 con switch Cisco 9148, 9148S o 9250i. È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
+
+|===
+| Bridge FibreBridge 7500 | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| bridge_x_1a | FC1 | 7 | - 
+
+
+| bridge_x_1a | FC2 | - | 7 
+
+
+| bridge_x_1b | FC1 | 8 | - 
+
+
+| bridge_x_1b | FC2 | - | 8 
+
+
+| bridge_x_2a | FC1 | 9 | - 
+
+
+| bridge_x_2a | FC2 | - | 9 
+
+
+| bridge_x_2b | FC1 | 10 | - 
+
+
+| bridge_x_2b | FC2 | - | 10 
+
+
+| bridge_x_3a | FC1 | 11 | - 
+
+
+| bridge_x_3a | FC2 | - | 11 
+
+
+| bridge_x_3b | FC1 | 12 | - 
+
+
+| bridge_x_3b | FC2 | - | 12 
+
+
+| bridge_x_4a | FC1 | 13 | - 
+
+
+| bridge_x_4a | FC2 | - | 13 
+
+
+| bridge_x_4b | FC1 | 14 | - 
+
+
+| bridge_x_4b | FC2 | - | 14 
+|===
+La seguente tabella mostra l'utilizzo della porta bridge quando si utilizza il bridge FibreBridge 6500 fino alla porta 14 su switch Cisco 9148, 9148S o 9250i. È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
+
+|===
+| Bridge FibreBridge 6500 | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| bridge_x_1a | FC1 | 7 | - 
+
+
+| bridge_x_1b | FC1 | - | 7 
+
+
+| bridge_x_2a | FC1 | 8 | - 
+
+
+| bridge_x_2b | FC1 | - | 8 
+
+
+| bridge_x_3a | FC1 | 9 | - 
+
+
+| bridge_x_3b | FC1 | - | 9 
+
+
+| bridge_x_4a | FC1 | 10 | - 
+
+
+| bridge_x_4b | FC1 | - | 10 
+
+
+| bridge_x_5a | FC1 | 11 | - 
+
+
+| bridge_x_5b | FC1 | - | 11 
+
+
+| bridge_x_6a | FC1 | 12 | - 
+
+
+| bridge_x_6b | FC1 | - | 12 
+
+
+| bridge_x_7a | FC1 | 13 | - 
+
+
+| bridge_x_7b | FC1 | - | 13 
+
+
+| bridge_x_8a | FC1 | 14 | - 
+
+
+| bridge_x_8b | FC1 | - | 14 
+|===
+È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
+
+
+
+== Utilizzo delle porte Cisco 9148 e 9148S per gli ISL in una configurazione MetroCluster a quattro nodi con ONTAP 9.0
+
+Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch.
+
+La seguente tabella mostra l'utilizzo della porta ISL per gli switch Cisco 9148 e 9148S:
+
+|===
+| Porta ISL | FC_switch_x_1 | FC_switch_x_2 
+
+
+| Porta ISL 1 | 36 | 36 
+
+
+| Porta ISL 2 | 40 | 40 
+
+
+| Porta ISL 3 | 44 | 44 
+
+
+| Porta ISL 4 | 48 | 48 
+|===
+
+
+== Utilizzo della porta Cisco 9250i per gli ISL in una configurazione MetroCluster a quattro nodi con ONTAP 9.0
+
+Lo switch Cisco 9250i utilizza le porte FCIP per ISL.
+
+Le porte da 40 a 48 sono porte da 10 GbE e non vengono utilizzate nella configurazione MetroCluster.
+
+
+
+== Utilizzo della porta Cisco per i controller in una configurazione MetroCluster a due nodi
+
+Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch.
+
+La seguente tabella mostra l'utilizzo della porta del controller sugli switch Cisco 9148, 9148S e 9250i:
+
+|===
+| Componente | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| controller_x_1 | Porta FC-VI A. | 1 | - 
+
+
+| controller_x_1 | Porta FC-VI b | - | 1 
+
+
+| controller_x_1 | Porta HBA a | 2 | - 
+
+
+| controller_x_1 | Porta HBA b | - | 2 
+
+
+| controller_x_1 | Porta HBA c | 3 | - 
+
+
+| controller_x_1 | Porta HBA d | - | 3 
+|===
+
+
+== Utilizzo della porta Cisco per bridge FC-SAS in una configurazione MetroCluster a due nodi con ONTAP 9.0
+
+La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 14 quando si utilizzano bridge FibreBridge 7500 con switch Cisco 9148, 9148S e 9250i. È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
+
+|===
+| Bridge FibreBridge 7500 | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| bridge_x_1a | FC1 | 7 | - 
+
+
+| bridge_x_1a | FC2 | - | 7 
+
+
+| bridge_x_1b | FC1 | 8 | - 
+
+
+| bridge_x_1b | FC2 | - | 8 
+
+
+| bridge_x_2a | FC1 | 9 | - 
+
+
+| bridge_x_2a | FC2 | - | 9 
+
+
+| bridge_x_2b | FC1 | 10 | - 
+
+
+| bridge_x_2b | FC2 | - | 10 
+
+
+| bridge_x_3a | FC1 | 11 | - 
+
+
+| bridge_x_3a | FC2 | - | 11 
+
+
+| bridge_x_3b | FC1 | 12 | - 
+
+
+| bridge_x_3b | FC2 | - | 12 
+
+
+| bridge_x_4a | FC1 | 13 | - 
+
+
+| bridge_x_4a | FC2 | - | 13 
+
+
+| bridge_x_4b | FC1 | 14 | - 
+
+
+| bridge_x_4b | FC2 | - | 14 
+|===
+La seguente tabella mostra l'utilizzo della porta bridge quando si utilizza il bridge FibreBridge 6500 fino alla porta 14 su switch Cisco 9148, 9148S o 9250i. È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
+
+|===
+| Bridge FibreBridge 6500 | Porta | FC_switch_x_1 | FC_switch_x_2 
+
+
+| bridge_x_1a | FC1 | 7 | - 
+
+
+| bridge_x_1b | FC1 | - | 7 
+
+
+| bridge_x_2a | FC1 | 8 | - 
+
+
+| bridge_x_2b | FC1 | - | 8 
+
+
+| bridge_x_3a | FC1 | 9 | - 
+
+
+| bridge_x_3b | FC1 | - | 9 
+
+
+| bridge_x_4a | FC1 | 10 | - 
+
+
+| bridge_x_4b | FC1 | - | 10 
+
+
+| bridge_x_5a | FC1 | 11 | - 
+
+
+| bridge_x_5b | FC1 | - | 11 
+
+
+| bridge_x_6a | FC1 | 12 | - 
+
+
+| bridge_x_6b | FC1 | - | 12 
+
+
+| bridge_x_7a | FC1 | 13 | - 
+
+
+| bridge_x_7b | FC1 | - | 13 
+
+
+| bridge_x_8a | FC1 | 14 | - 
+
+
+| bridge_x_8b | FC1 | - | 14 
+|===
+È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
+
+
+
+== Utilizzo delle porte Cisco 9148 o 9148S per gli ISL in una configurazione MetroCluster a due nodi con ONTAP 9.0
+
+Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch.
+
+La seguente tabella mostra l'utilizzo della porta ISL per gli switch Cisco 9148 o 9148S:
+
+|===
+| Porta ISL | FC_switch_x_1 | FC_switch_x_2 
+
+
+| Porta ISL 1 | 36 | 36 
+
+
+| Porta ISL 2 | 40 | 40 
+
+
+| Porta ISL 3 | 44 | 44 
+
+
+| Porta ISL 4 | 48 | 48 
+|===
+
+
+== Utilizzo della porta Cisco 9250i per gli ISL in una configurazione MetroCluster a due nodi con ONTAP 9.0
+
+Lo switch Cisco 9250i utilizza le porte FCIP per ISL.
+
+Le porte da 40 a 48 sono porte da 10 GbE e non vengono utilizzate nella configurazione MetroCluster.

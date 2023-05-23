@@ -1,0 +1,118 @@
+---
+permalink: install-fc/concept_parts_of_a_fabric_mcc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, configuration 
+summary: Durante la pianificazione della configurazione MetroCluster, è necessario comprendere i componenti hardware e il modo in cui si collegano. 
+---
+= Parti di una configurazione Fabric MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durante la pianificazione della configurazione MetroCluster, è necessario comprendere i componenti hardware e il modo in cui si collegano.
+
+
+
+== Gruppi di disaster recovery (DR)
+
+Una configurazione Fabric MetroCluster è costituita da uno o due gruppi DR, a seconda del numero di nodi nella configurazione MetroCluster. Ciascun gruppo di DR è costituito da quattro nodi.
+
+* Una configurazione MetroCluster a otto nodi è costituita da due gruppi DR.
+* Una configurazione MetroCluster a quattro nodi è costituita da un gruppo DR.
+
+
+La figura seguente mostra l'organizzazione dei nodi in una configurazione MetroCluster a otto nodi:
+
+image::../media/mcc_dr_groups_8_node.gif[mcc dr raggruppa 8 nodi]
+
+La figura seguente mostra l'organizzazione dei nodi in una configurazione MetroCluster a quattro nodi:
+
+image::../media/mcc_dr_groups_4_node.gif[mcc dr raggruppa 4 nodi]
+
+
+
+== Elementi hardware chiave
+
+Una configurazione MetroCluster include i seguenti elementi hardware principali:
+
+* Controller di storage
++
+I controller storage non sono collegati direttamente allo storage, ma si collegano a due fabric switch FC ridondanti.
+
+* Bridge FC-SAS
++
+I bridge FC-SAS collegano gli stack di storage SAS agli switch FC, fornendo un bridging tra i due protocolli.
+
+* Switch FC
++
+Gli switch FC forniscono il backbone ISL a lungo raggio tra i due siti. Gli switch FC forniscono i due fabric di storage che consentono il mirroring dei dati nei pool di storage remoti.
+
+* Rete di peering del cluster
++
+La rete di peering del cluster fornisce la connettività per il mirroring della configurazione del cluster, che include la configurazione di SVM (Storage Virtual Machine). La configurazione di tutte le SVM su un cluster viene sottoposta a mirroring sul cluster partner.
+
+
+
+
+
+== Configurazione Fabric MetroCluster a otto nodi
+
+Una configurazione a otto nodi è costituita da due cluster, uno per ciascun sito geograficamente separato. Cluster_A si trova nel primo sito MetroCluster. Cluster_B si trova nel secondo sito MetroCluster. Ogni sito dispone di uno stack di storage SAS. Sono supportati ulteriori stack di storage, ma ne viene mostrato solo uno per ciascun sito. Le coppie ha sono configurate come cluster senza switch, senza switch di interconnessione del cluster. Una configurazione commutata è supportata, ma non viene visualizzata.
+
+Una configurazione a otto nodi include le seguenti connessioni:
+
+* Connessioni FC da HBA e adattatori FC-VI di ciascun controller a ciascuno switch FC
+* Una connessione FC da ciascun bridge FC-SAS a uno switch FC
+* Connessioni SAS tra ogni shelf SAS e dalla parte superiore e inferiore di ogni stack a un bridge FC-SAS
+* Un'interconnessione ha tra ciascun controller della coppia ha locale
++
+Se i controller supportano una coppia ha a chassis singolo, l'interconnessione ha è interna, che si verifica attraverso la scheda madre, il che significa che non è necessaria un'interconnessione esterna.
+
+* Connessioni Ethernet dai controller alla rete fornita dal cliente utilizzata per il peering del cluster
++
+La configurazione SVM viene replicata sulla rete di peering del cluster.
+
+* Un'interconnessione del cluster tra ciascun controller del cluster locale
+
+
+
+
+== Configurazione Fabric MetroCluster a quattro nodi
+
+La figura seguente mostra una vista semplificata di una configurazione Fabric MetroCluster a quattro nodi. Per alcune connessioni, una singola linea rappresenta connessioni multiple e ridondanti tra i componenti. Le connessioni di rete per dati e gestione non vengono visualizzate.
+
+image::../media/mcc_hardware_architecture_both_clusters.gif[architettura hardware mcc per entrambi i cluster]
+
+La seguente illustrazione mostra una vista più dettagliata della connettività in un singolo cluster MetroCluster (entrambi i cluster hanno la stessa configurazione):
+
+image::../media/mcc_hardware_architecture_cluster_a_with_7500n.gif[cluster a con architettura hardware mcc con 7500n]
+
+
+
+== Configurazione Fabric MetroCluster a due nodi
+
+La figura seguente mostra una vista semplificata di una configurazione MetroCluster fabric a due nodi. Per alcune connessioni, una singola linea rappresenta connessioni multiple e ridondanti tra i componenti. Le connessioni di rete per dati e gestione non vengono visualizzate.
+
+image::../media/mcc_hardware_architecture_both_clusters_2_node_fabric.gif[architettura hardware mcc entrambi i cluster fabric a 2 nodi]
+
+Una configurazione a due nodi è costituita da due cluster, uno per ogni sito separato geograficamente. Cluster_A si trova nel primo sito MetroCluster. Cluster_B si trova nel secondo sito MetroCluster. Ogni sito dispone di uno stack di storage SAS. Sono supportati ulteriori stack di storage, ma ne viene mostrato solo uno per ciascun sito.
+
+
+NOTE: In una configurazione a due nodi, i nodi non sono configurati come coppia ha.
+
+La seguente illustrazione mostra una vista più dettagliata della connettività in un singolo cluster MetroCluster (entrambi i cluster hanno la stessa configurazione):
+
+image::../media/mcc_hardware_architecture_cluster_a_2_node_with_7500n.gif[architettura hardware mcc cluster a 2 nodi con 7500n]
+
+Una configurazione a due nodi include le seguenti connessioni:
+
+* Connessioni FC tra l'adattatore FC-VI su ciascun modulo controller
+* Connessioni FC dagli HBA di ciascun modulo controller al bridge FC-SAS per ogni shelf stack SAS
+* Connessioni SAS tra ogni shelf SAS e dalla parte superiore e inferiore di ogni stack a un bridge FC-SAS
+* Connessioni Ethernet dai controller alla rete fornita dal cliente utilizzata per il peering del cluster
++
+La configurazione SVM viene replicata sulla rete di peering del cluster.
+
+

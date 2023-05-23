@@ -1,0 +1,36 @@
+---
+permalink: disaster-recovery/task_recover_from_a_multi_controller_and_or_storage_failure.html 
+sidebar: sidebar 
+keywords: controller, failure, extend, module, side, dr, group, metrocluster, configuration, single, controller, two-node, replace, equipment, reassign, equipment, ownership, drive, disaster, recover, multi-controller, storage 
+summary: 'Se il guasto del controller si estende a tutti i moduli controller su un lato di un gruppo di DR in una configurazione MetroCluster (incluso un singolo controller in una configurazione MetroCluster a due nodi) o se lo storage è stato sostituito, è necessario sostituire l"apparecchiatura e riassegnare la proprietà dei dischi per il ripristino dal disastro.' 
+---
+= Ripristino in seguito a un errore di storage o multi-controller
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se il guasto del controller si estende a tutti i moduli controller su un lato di un gruppo DR in una configurazione MetroCluster (incluso un singolo controller in una configurazione MetroCluster a due nodi) o se lo storage è stato sostituito, è necessario sostituire l'apparecchiatura e riassegnare la proprietà dei dischi per il ripristino dal disastro.
+
+* Prima di decidere di utilizzare questa procedura, esaminare le procedure di ripristino disponibili.
++
+link:concept_choosing_the_correct_recovery_procedure_parent_concept.html["Scelta della procedura di ripristino corretta"]
+
+* Il sito di disastro deve essere recintato.
++
+link:task_perform_a_forced_switchover_after_a_disaster.html#fencing-off-the-disaster-site["Recinzione fuori dal sito di disastro"].
+
+* Lo switchover deve essere stato eseguito.
++
+link:task_perform_a_forced_switchover_after_a_disaster.html#performing-a-forced-switchover["Esecuzione di uno switchover forzato"].
+
+* Le unità sostitutive e i moduli controller devono essere nuovi e non devono essere stati assegnati in precedenza.
+* Gli esempi di questa procedura mostrano configurazioni a due o quattro nodi. Se si dispone di una configurazione a otto nodi (due gruppi di DR), è necessario prendere in considerazione eventuali errori ed eseguire l'attività di ripristino richiesta sui moduli controller aggiuntivi.
+
+
+Questa procedura utilizza il seguente flusso di lavoro:
+
+image::../media/workflow_smoking_crater_recovery.png[workflow di smoking crater recovery]
+
+Questa procedura può essere utilizzata quando si esegue il ripristino su un sistema che si trovava a metà della transizione quando si è verificato il guasto. In tal caso, è necessario eseguire le fasi appropriate durante la preparazione per lo switchback, come indicato nella procedura.

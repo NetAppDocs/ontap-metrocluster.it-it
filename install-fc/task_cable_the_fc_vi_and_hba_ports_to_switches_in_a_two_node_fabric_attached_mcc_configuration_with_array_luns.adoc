@@ -1,0 +1,84 @@
+---
+permalink: install-fc/task_cable_the_fc_vi_and_hba_ports_to_switches_in_a_two_node_fabric_attached_mcc_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, cable, fc, vi, hba, ports, two, node, array, luns 
+summary: Se si sta configurando una configurazione Fabric-Attached MetroCluster a due nodi con LUN array, è necessario collegare le porte FC-VI e HBA alle porte dello switch. 
+---
+= Cablaggio delle porte FC-VI e HBA in una configurazione Fabric-Attached MetroCluster a due nodi con LUN array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se si sta configurando una configurazione Fabric-Attached MetroCluster a due nodi con LUN array, è necessario collegare le porte FC-VI e HBA alle porte dello switch.
+
+.A proposito di questa attività
+* È necessario ripetere questa attività per ciascun controller in entrambi i siti MetroCluster.
+* Se si prevede di utilizzare dischi in aggiunta alle LUN degli array nella configurazione MetroCluster, è necessario utilizzare le porte HBA e le porte dello switch specificate per la configurazione con i dischi.
++
+** link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.1 e versioni successive"]
+** link:concept_port_assignments_for_fc_switches_when_using_ontap_9_0.html["Assegnazioni delle porte per switch FC quando si utilizza ONTAP 9.0"]
+
+
+
+
+.Fasi
+. Collegare le porte FC-VI dal controller alle porte switch alternative.
+. Eseguire il cablaggio controller-switch su entrambi i siti MetroCluster.
++
+È necessario garantire la ridondanza nelle connessioni dal controller agli switch. Pertanto, per ciascun controller di un sito, è necessario assicurarsi che entrambe le porte HBA della stessa coppia di porte siano collegate a switch FC alternativi.
+
++
+L'esempio seguente mostra le connessioni tra le porte HBA sul controller A e le porte su FC_switch_A_1 e FC_switch_A_2:
+
++
+image::../media/two_node_mcc_hba_connections.gif[connessioni hba mcc a due nodi]
+
++
+La seguente tabella elenca le connessioni tra le porte HBA e le porte dello switch FC nell'illustrazione:
+
++
+|===
+
+
+| Porte HBA | Porte dello switch 
+
+
+2+| *Coppia di porte* 
+
+
+ a| 
+Porta A.
+ a| 
+FC_switch_A_1, porta 2
+
+
+
+ a| 
+Porta d
+ a| 
+FC_switch_A_2, porta 3
+
+
+
+2+| *Coppia di porte* 
+
+
+ a| 
+Porta b
+ a| 
+FC_switch_A_2, porta 2
+
+
+
+ a| 
+Porta c
+ a| 
+FC_switch_A_1, porta 3
+
+|===
+
+
+.Al termine
+È necessario collegare gli ISL tra gli switch FC nei siti MetroCluster.

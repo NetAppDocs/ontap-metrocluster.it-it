@@ -1,0 +1,39 @@
+= 
+:allow-uri-read: 
+
+
+[role="lead"]
+Prima di utilizzare un nuovo modulo controller nella configurazione MetroCluster, è necessario cancellare la configurazione esistente.
+
+.Fasi
+. Se necessario, arrestare il nodo per visualizzare il prompt DEL CARICATORE:
++
+`halt`
+
+. Al prompt DEL CARICATORE, impostare le variabili ambientali sui valori predefiniti:
++
+`set-defaults`
+
+. Salvare l'ambiente:
++
+`saveenv`
+
+. Al prompt DEL CARICATORE, avviare il menu di avvio:
++
+`boot_ontap menu`
+
+. Al prompt del menu di avvio, cancellare la configurazione:
++
+`wipeconfig`
+
++
+Rispondere `yes` al prompt di conferma.
+
++
+Il nodo si riavvia e viene visualizzato di nuovo il menu di avvio.
+
+. Nel menu di avvio, selezionare l'opzione *5* per avviare il sistema in modalità di manutenzione.
++
+Rispondere `yes` al prompt di conferma.
+
+

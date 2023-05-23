@@ -1,0 +1,108 @@
+---
+permalink: install-fc/task_fmc_mcc_transition_configure_zone_and_qos.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, delete, ti, zoning, tod, settings 
+summary: 'È necessario eliminare lo zoning ti esistente e riconfigurare le impostazioni di erogazione in-order (IOD) sul fabric dello switch.' 
+---
+= Eliminazione dello zoning ti e configurazione delle impostazioni IOD
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario eliminare lo zoning ti esistente e riconfigurare le impostazioni IOD (in-order-delivery) sul fabric dello switch.
+
+.Fasi
+. Identificare le zone ti configurate sul fabric:
++
+`zone --show`
+
++
+L'esempio seguente mostra la zona FCVI_ti_FAB_2.
+
++
+[listing]
+----
+Brocade-6510:admin> zone --show
+   Defined TI zone configuration:
+   TI Zone Name:   FCVI_TI_FAB_2
+   Port List:      1,0; 1,3; 2,0; 2,3
+   configured Status: Activated / Failover-Disabled
+   Enabled Status: Activated / Failover-Disabled
+----
+. Eliminare le zone ti:
++
+`zone --delete _zone-name_`
+
++
+L'esempio seguente mostra l'eliminazione della zona FCVI_ti_FAB_2.
+
++
+[listing]
+----
+Brocade-6510:admin> zone --delete FCVI_TI_FAB_2
+----
+. Verificare che le zone siano state eliminate:
++
+`zone --show`
+
++
+L'output dovrebbe essere simile a quanto segue:
+
++
+[listing]
+----
+Brocade-6510:admin> zone -–show
+
+    Defined TI zone configuration:
+    no TI zone configuration defined
+----
+. Salvare la configurazione:
++
+`cfgsave`
+
+. Abilitare la consegna in-order:
++
+`iodset`
+
+. Selezionare Advanced Performance Tuning (APT) policy 1, quindi Port Based Routing Policy (criterio di routing basato su porta):
++
+`aptpolicy 1`
+
+. Disattiva Dynamic Load Sharing (DLS):
++
+`dlsreset`
+
+. Verificare le impostazioni IOD:
++
+`iodshow`
+
++
+`aptpolicy`
+
++
+`dlsshow`
+
++
+L'output dovrebbe essere simile a quanto segue:
+
++
+[listing]
+----
+Brocade-6510:admin> iodshow
+
+IOD is set
+
+Brocade-6510:admin> aptpolicy
+ Current Policy: 1
+
+ 3 : Default Policy
+ 1: Port Based Routing Policy
+ 2: Device Based Routing Policy (FICON support only)
+ 3: Exchange Based Routing Policy
+Brocade-6510:admin> dlsshow
+
+DLS is not set
+----
+

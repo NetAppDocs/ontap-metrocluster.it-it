@@ -1,0 +1,47 @@
+---
+permalink: install-fc/concept_AFF_A900_cisco_ISLs.html 
+sidebar: sidebar 
+keywords: AFF, A900, ONTAP, FAS, Cisco, ISL, metrocluster 
+summary: 'La seguente tabella mostra l"utilizzo della porta ISL.' 
+---
+= AFF A900 o FAS9500 - utilizzo della porta Cisco per gli ISL in una configurazione a otto nodi in una configurazione MetroCluster con ONTAP 9.10.1 o versione successiva
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+La seguente tabella mostra l'utilizzo della porta ISL. L'utilizzo della porta ISL è lo stesso su tutti gli switch della configurazione.
+
+|===
+| Modello di switch | Porta ISL | Porta dello switch 
+
+
+.2+| Cisco 9132T con 1 LEM | ISL1 | LEM1-15 
+
+
+| ISL2 | LEM1-16 
+
+
+.8+| Cisco 9132T con 2 LEM | ISL1 | LEM2-9 
+
+
+| ISL2 | LEM2-10 
+
+
+| ISL3 | LEM2-11 
+
+
+| ISL4 | LEM2-12 
+
+
+| ISL5 | LEM2-13 
+
+
+| ISL6 | LEM2-14 
+
+
+| ISL7 | LEM2-15 
+
+
+| ISL8 | LEM2-16 
+|===

@@ -1,0 +1,64 @@
+---
+permalink: install-fc/task_fmc_mcc_transition_reenable_the_switch_fabric_and_verify_operation.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, reenable, switch, fabric, verify, operation 
+summary: È necessario attivare il fabric dello switch FC e assicurarsi che gli switch e i dispositivi funzionino correttamente. 
+---
+= Riabilitare il fabric dello switch e verificarne il funzionamento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario attivare il fabric dello switch FC e assicurarsi che gli switch e i dispositivi funzionino correttamente.
+
+.Fasi
+. Abilitare gli switch:
++
+`switchCfgPersistentEnable`
+
++
+Se questo comando non è disponibile, lo switch deve trovarsi nello stato abilitato dopo `fastBoot` viene emesso il comando.
+
++
+** L'esempio seguente mostra il comando emesso su FC_switch_A_1:
++
+[listing]
+----
+FC_switch_A_1:admin> switchCfgPersistentEnable
+----
+** L'esempio seguente mostra il comando emesso su FC_switch_B_1:
++
+[listing]
+----
+FC_switch_B_1:admin> switchCfgPersistentEnable
+----
+
+
+. Verificare che gli switch siano in linea e che tutti i dispositivi siano collegati correttamente:
++
+`switchShow`
+
++
+L'esempio seguente mostra il comando emesso su FC_switch_A_1:
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchShow
+----
++
+L'esempio seguente mostra il comando emesso su FC_switch_B_1:
+
++
+[listing]
+----
+FC_switch_B_1:admin> switchShow
+----
+. Eseguire l'utility fmc_DC per assicurarsi che 7-Mode Fabric MetroCluster funzioni correttamente.
++
+È possibile ignorare gli errori relativi allo zoning e al trunking dell'isolamento del traffico (ti).
+
+. Ripetere le operazioni per il secondo fabric dello switch.
+

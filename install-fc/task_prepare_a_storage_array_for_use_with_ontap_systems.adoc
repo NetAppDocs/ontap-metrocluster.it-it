@@ -1,0 +1,40 @@
+---
+permalink: install-fc/task_prepare_a_storage_array_for_use_with_ontap_systems.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, prepare, storage, array, systems 
+summary: 'Prima di iniziare a configurare i sistemi ONTAP in una configurazione MetroCluster con LUN array, l"amministratore dello storage array deve preparare lo storage per l"utilizzo con ONTAP.' 
+---
+= Preparazione di uno storage array per l'utilizzo con i sistemi ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Prima di iniziare a configurare i sistemi ONTAP in una configurazione MetroCluster con LUN array, l'amministratore dello storage array deve preparare lo storage per l'utilizzo con ONTAP.
+
+.Prima di iniziare
+Gli array di storage, il firmware e gli switch che si intende utilizzare nella configurazione devono essere supportati dalla versione specifica di ONTAP.
+
+* https://mysupport.netapp.com/NOW/products/interoperability["Interoperabilità NetApp (IMT)"]
++
+In IMT, è possibile utilizzare il campo soluzione storage per selezionare la soluzione MetroCluster. Utilizzare *Esplora componenti* per selezionare i componenti e la versione di ONTAP per perfezionare la ricerca. È possibile fare clic su *Mostra risultati* per visualizzare l'elenco delle configurazioni supportate che corrispondono ai criteri.
+
+* https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+.A proposito di questa attività
+Per eseguire questa attività sull'array di storage, è necessario coordinarsi con l'amministratore dell'array di storage.
+
+.Fasi
+. Creare LUN sull'array di storage in base al numero di nodi nella configurazione MetroCluster.
++
+Ogni nodo della configurazione MetroCluster richiede LUN array per l'aggregato root, l'aggregato di dati e le parti di ricambio.
+
+. Configurare i parametri sull'array di storage necessari per lavorare con ONTAP.
++
+** https://docs.netapp.com/ontap-9/topic/com.netapp.doc.vs-ig-third/home.html["Implementazione della virtualizzazione FlexArray per storage di terze parti"]
+** https://docs.netapp.com/ontap-9/topic/com.netapp.doc.vs-ig-es/home.html["Implementazione della virtualizzazione FlexArray per lo storage NetApp e-Series"]
+
+
+

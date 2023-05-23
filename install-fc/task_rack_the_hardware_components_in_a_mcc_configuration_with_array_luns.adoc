@@ -1,0 +1,34 @@
+---
+permalink: install-fc/task_rack_the_hardware_components_in_a_mcc_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, rack, hardware, components, array, luns 
+summary: È necessario assicurarsi che i componenti hardware necessari per configurare una configurazione MetroCluster con i LUN degli array siano montati in rack correttamente. 
+---
+= Montaggio in rack dei componenti hardware in una configurazione MetroCluster con LUN array
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario assicurarsi che i componenti hardware necessari per configurare una configurazione MetroCluster con i LUN degli array siano montati in rack correttamente.
+
+.A proposito di questa attività
+È necessario eseguire questa attività su entrambi i siti MetroCluster.
+
+.Fasi
+. Pianificare il posizionamento dei componenti di MetroCluster.
++
+Lo spazio rack dipende dal modello di piattaforma dei controller di storage, dai tipi di switch e dal numero di stack di shelf di dischi nella configurazione.
+
+. Mettere a terra l'utente.
+. Installare i controller di storage nel rack o nell'armadietto.
++
+
+NOTE: I sistemi AFF non sono supportati con i LUN degli array.
+
++
+https://docs.netapp.com/us-en/ontap-systems/["Procedure di installazione per il sistema AFF o FAS"]
+
+. Installare gli switch FC nel rack o nell'armadietto.
+

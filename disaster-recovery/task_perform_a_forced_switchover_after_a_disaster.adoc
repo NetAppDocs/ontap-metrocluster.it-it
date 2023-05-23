@@ -1,0 +1,122 @@
+---
+permalink: disaster-recovery/task_perform_a_forced_switchover_after_a_disaster.html 
+sidebar: sidebar 
+keywords: disaster, occur, perform, surviving, cluster, survive, switchover, ensure, safe, data, service, force, fence, fencing, off, site, access, volume, nvfail, state, output, storage, aggregate, plex, show, command, indeterminate, metroxluster 
+summary: In caso di disastro, è necessario eseguire le operazioni sul cluster di emergenza e sul cluster sopravvissuto dopo lo switchover per garantire un servizio dati sicuro e continuo. 
+---
+= Eseguire uno switchover forzato dopo un disastro
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+In caso di disastro, è necessario eseguire le operazioni sul cluster di emergenza e sul cluster sopravvissuto dopo lo switchover per garantire un servizio dati sicuro e continuo.
+
+Per determinare se si è verificato un disastro, procedere come segue:
+
+* Un amministratore
+* Il software MetroCluster Tiebreaker, se configurato
+* Il software del mediatore ONTAP, se configurato
+
+
+
+
+== Recinzione fuori dal sito di disastro
+
+Dopo il disastro, se i nodi del sito di emergenza devono essere sostituiti, è necessario arrestarli per evitare che il sito riprenda il servizio. In caso contrario, si rischia di danneggiare i dati se i client iniziano ad accedere ai nodi prima del completamento della procedura di sostituzione.
+
+.Fase
+. Arrestare i nodi nel sito di disastro e mantenerli spenti o al prompt DEL CARICATORE fino a quando non viene richiesto di avviare ONTAP:
++
+`system node halt -node disaster-site-node-name`
+
++
+Se i nodi del sito di emergenza sono stati distrutti o non possono essere arrestati, spegnere i nodi e non avviare i nodi sostitutivi fino a quando non viene indicato nella procedura di ripristino.
+
+
+
+
+
+== Esecuzione di uno switchover forzato
+
+Il processo di switchover, oltre a fornire operazioni senza interruzioni durante i test e la manutenzione, consente di eseguire il ripristino da un guasto del sito con un singolo comando.
+
+.Prima di iniziare
+* Almeno uno dei nodi del sito sopravvissuti deve essere attivo e in esecuzione prima di eseguire lo switchover.
+* Prima di eseguire un'operazione di switchback, è necessario completare tutte le modifiche di configurazione precedenti.
++
+In questo modo si evita la concorrenza con lo switchover negoziato o con l'operazione di switchback.
+
+
+
+
+NOTE: Le configurazioni SnapMirror e SnapVault vengono eliminate automaticamente.
+
+.A proposito di questa attività
+Il `metrocluster switchover` Command consente di passare dai nodi di tutti i gruppi di DR nella configurazione MetroCluster. Ad esempio, in una configurazione MetroCluster a otto nodi, viene eseguita la commutazione dei nodi in entrambi i gruppi di DR.
+
+.Fasi
+. Eseguire lo switchover eseguendo il seguente comando nel sito sopravvissuto:
++
+`metrocluster switchover -forced-on-disaster true`
+
++
+
+NOTE: Il completamento dell'operazione può richiedere alcuni minuti. È possibile verificare l'avanzamento utilizzando `metrocluster operation show` comando.
+
+. Risposta `y` quando viene richiesto di continuare con lo switchover.
+. Verificare che lo switchover sia stato completato correttamente eseguendo il `metrocluster operation show` comando.
++
+....
+mcc1A::> metrocluster operation show
+  Operation: switchover
+ Start time: 10/4/2012 19:04:13
+      State: in-progress
+   End time: -
+     Errors:
+
+mcc1A::> metrocluster operation show
+  Operation: switchover
+ Start time: 10/4/2012 19:04:13
+      State: successful
+   End time: 10/4/2012 19:04:22
+     Errors: -
+....
++
+Se lo switchover è vetoed, è possibile emettere nuovamente il `metrocluster switchover-forced-on-disaster true` con il `--override-vetoes` opzione. Se si utilizza questo parametro opzionale, il sistema sovrascrive qualsiasi soft veto che impediva lo switchover.
+
+
+
+.Al termine
+Le relazioni di SnapMirror devono essere ristabilita dopo lo switchover.
+
+
+
+== L'output per il comando di visualizzazione plesso dell'aggregato di storage è indeterminato dopo uno switchover MetroCluster
+
+Quando si esegue `storage aggregate plex show` Comando dopo uno switchover MetroCluster, lo stato di plex0 dell'aggregato root commutato è indeterminato e viene visualizzato come failed (non riuscito). Durante questo periodo, la root commutata non viene aggiornata. Lo stato effettivo di questo plex può essere determinato solo dopo la fase di riparazione MetroCluster.
+
+
+
+== Accesso ai volumi in stato NVFAIL dopo uno switchover
+
+Dopo uno switchover, è necessario cancellare lo stato NVFAIL ripristinando `-in-nvfailed-state` del parametro `volume modify` comando per rimuovere la restrizione di accesso dei client ai dati.
+
+.Prima di iniziare
+Il database o il file system non deve essere in esecuzione o non deve tentare di accedere al volume interessato.
+
+.A proposito di questa attività
+Impostazione di `-in-nvfailed-state` il parametro richiede privilegi di livello avanzato.
+
+.Fase
+. Ripristinare il volume utilizzando `volume modify` con il `-in-nvfailed-state` parametro impostato su false.
+
+
+.Al termine
+Per istruzioni sull'esame della validità del file di database, consultare la documentazione relativa al software di database specifico.
+
+Se il database utilizza LUN, rivedere la procedura per rendere le LUN accessibili all'host dopo un errore della NVRAM.
+
+.Informazioni correlate
+link:../manage/concept_monitoring_and_protecting_database_validity_by_using_nvfail.html["Monitoraggio e protezione della validità del database mediante NVFAIL"]

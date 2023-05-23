@@ -1,0 +1,131 @@
+---
+permalink: install-ip/task_modify_ip_netmask_gateway_properties.html 
+sidebar: sidebar 
+keywords: vlan, ip, gateway,netmask, address, network, interface, subnet 
+summary: 'È possibile modificare le seguenti proprietà di un"interfaccia IP MetroCluster, indirizzo IP e maschera e gateway. È possibile utilizzare qualsiasi combinazione di parametri per l"aggiornamento.' 
+---
+= Modifica di indirizzo, netmask e gateway in un IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A partire da ONTAP 9.10.1, è possibile modificare le seguenti proprietà di un'interfaccia IP MetroCluster: Indirizzo IP, maschera e gateway. È possibile utilizzare qualsiasi combinazione di parametri per l'aggiornamento.
+
+Potrebbe essere necessario aggiornare queste proprietà, ad esempio, se viene rilevato un indirizzo IP duplicato o se un gateway deve essere modificato in caso di rete di livello 3 a causa di modifiche alla configurazione del router.
+
+È possibile modificare solo un'interfaccia alla volta. L'interfaccia verrà rallentata fino a quando le altre interfacce non saranno aggiornate e le connessioni non verranno ristabilita.
+
+Utilizzare `metrocluster configuration-settings interface modify` Per modificare qualsiasi proprietà dell'interfaccia IP di MetroCluster.
+
+
+NOTE: Questi comandi modificano la configurazione di un nodo specifico per una determinata porta. Per ripristinare la connettività di rete completa, sono necessari comandi simili su altre porte. Analogamente, anche gli switch di rete devono aggiornare la configurazione. Ad esempio, se il gateway viene aggiornato, idealmente viene modificato su entrambi i nodi di una coppia ha, poiché sono identici. Inoltre, anche lo switch connesso a tali nodi deve aggiornare il gateway.
+
+Utilizzare `metrocluster configuration-settings interface show`, `metrocluster connection` controllare e. `metrocluster connection show` comandi per verificare che tutta la connettività funzioni in tutte le interfacce.
+
+
+
+== Modificare l'indirizzo IP, la netmask e il gateway
+
+. Aggiornare l'indirizzo IP, la netmask e il gateway per un singolo nodo e interfaccia:
+`metrocluster configuration-settings interface modify`
+
+
+Il comando seguente mostra come aggiornare l'indirizzo IP, la netmask e il gateway:
+
+[listing]
+----
+cluster_A::* metrocluster configuration-settings interface modify -cluster-name cluster_A -home-node node_A_1 -home-port e0a-10 -address 192.168.12.101 -gateway 192.168.12.1 -netmask 255.255.254.0
+(metrocluster configuration-settings interface modify)
+
+Warning: This operation will disconnect and reconnect iSCSI and RDMA connections used for DR protection through port “e0a-10”. Partner nodes may need modifications for port “e0a-10” in order to completely establish network connectivity.
+Do you want to continue?" yes
+
+[Job 28] Setting up iSCSI target configuration. (pass2:iscsi13:0:-1:0): xpt_action_default: CCB type 0xe XPT_DEV_ADVINFO not supported
+[Job 28] Establishing iSCSI initiator connections.
+(pass6:iscsi14:0:-1:0): xpt_action_default: CCB type 0xe XPT_DEV_ADVINFO not supported
+(pass8:iscsi15:0:-1:0): xpt_action_default: CCB type 0xe XPT_DEV_ADVINFO not supported
+(pass9:iscsi16:0:-1:0): xpt_action_default: CCB type 0xe XPT_DEV_ADVINFO not supported
+[Job 28] Job succeeded: Interface Modify is successful.
+
+cluster_A::*> metrocluster configuration-settings interface modify -cluster-name cluster_A -home-node node_A_2 -home-port e0a-10 -address 192.168.12.201 -gateway 192.168.12.1 -netmask 255.255.254.0
+(metrocluster configuration-settings interface modify)
+Warning: This operation will disconnect and reconnect iSCSI and RDMA connections used for DR protection through port “e0a-10”. Partner nodes may need modifications for port “e0a-10” in order to completely establish network connectivity.
+Do you want to continue?" yes
+[Job 28] Job succeeded: Interface Modify is successful
+----
+. [[step2]]verificare che la connettività funzioni per tutte le interfacce:
+`metrocluster configuration-settings interface show`
+
+
+Il seguente comando mostra come verificare che tutte le connessioni funzionino per tutte le interfacce:
+
+[listing]
+----
+cluster_A::*> metrocluster configuration-settings interface show
+(metrocluster configuration-settings interface show)                                                 DR              Config
+Group Cluster Node    Network Address Netmask         Gateway         State
+----- ------- ------- --------------- --------------- --------------- ---------
+1     cluster_A node_A_2
+                 Home Port: e0a-10
+                      192.168.12.201  255.255.254.0   192.168.12.1    completed
+                 Home Port: e0b-20
+                      192.168.20.200  255.255.255.0   192.168.20.1    completed
+                node_A_1
+                 Home Port: e0a-10
+                      192.168.12.101  255.255.254.0   192.168.12.1    completed
+                 Home Port: e0b-20
+                      192.168.20.101  255.255.255.0   192.168.20.1    completed
+      cluster_B node_B_1
+                 Home Port: e0a-10
+                      192.168.11.151  255.255.255.0   192.168.11.1    completed
+                 Home Port: e0b-20
+                      192.168.21.150  255.255.255.0   192.168.21.1    completed
+                node_B_2
+                 Home Port: e0a-10
+                      192.168.11.250  255.255.255.0   192.168.11.1    completed
+                 Home Port: e0b-20
+                      192.168.21.250  255.255.255.0   192.168.21.1    completed
+8 entries were displayed.
+----
+. [[step3]]verificare che tutte le connessioni funzionino:
+`metrocluster configuration-settings connection show`
+
+
+Il seguente comando mostra come verificare che tutte le connessioni funzionino:
+
+[listing]
+----
+cluster_A::*> metrocluster configuration-settings connection show
+  (metrocluster configuration-settings connection show)
+DR                    Source          Destination
+Group Cluster Node    Network Address Network Address Partner Type Config State
+----- ------- ------- --------------- --------------- ------------ ------------
+1     cluster_A node_A_2
+                 Home Port: e0a-10
+                      192.168.10.200  192.168.10.101  HA Partner   completed
+                 Home Port: e0a-10
+                      192.168.10.200  192.168.11.250  DR Partner   completed
+                 Home Port: e0a-10
+                      192.168.10.200  192.168.11.151  DR Auxiliary completed
+                 Home Port: e0b-20
+                      192.168.20.200  192.168.20.100  HA Partner   completed
+                 Home Port: e0b-20
+                      192.168.20.200  192.168.21.250  DR Partner   completed
+                 Home Port: e0b-20
+                      192.168.20.200  192.168.21.150  DR Auxiliary completed
+                node_A_1
+                 Home Port: e0a-10
+                      192.168.10.101  192.168.10.200  HA Partner   completed
+                 Home Port: e0a-10
+                      192.168.10.101  192.168.11.151  DR Partner   completed
+                 Home Port: e0a-10
+                      192.168.10.101  192.168.11.250  DR Auxiliary completed
+                 Home Port: e0b-20
+                      192.168.20.100  192.168.20.200  HA Partner   completed
+                 Home Port: e0b-20
+                      192.168.20.100  192.168.21.150  DR Partner   completed
+                 Home Port: e0b-20
+                      192.168.20.100  192.168.21.250  DR Auxiliary completed
+----

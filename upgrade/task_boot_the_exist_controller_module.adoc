@@ -1,0 +1,21 @@
+---
+permalink: upgrade/task_boot_the_exist_controller_module.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, boot, existing, controller, module 
+summary: È necessario avviare il modulo controller esistente in ONTAP. 
+---
+= Avvio del modulo controller esistente
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario avviare il modulo controller esistente in ONTAP.
+
+.Fasi
+. Al prompt DEL CARICATORE, avviare il modulo controller esistente in ONTAP:
++
+`boot_ontap`
+
+

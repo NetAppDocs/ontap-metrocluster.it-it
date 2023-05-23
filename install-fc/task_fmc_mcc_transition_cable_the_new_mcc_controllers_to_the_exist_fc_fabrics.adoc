@@ -1,0 +1,163 @@
+---
+permalink: install-fc/task_fmc_mcc_transition_cable_the_new_mcc_controllers_to_the_exist_fc_fabrics.html 
+sidebar: sidebar 
+keywords: cabling, metrocluster, fabric, installation, fc, controllers 
+summary: 'Su ciascun controller nella configurazione Clustered ONTAP MetroCluster, l"adattatore FC-VI e gli HBA devono essere cablati a porte specifiche sugli switch FC esistenti.' 
+---
+= Collegamento dei nuovi controller MetroCluster ai fabric FC esistenti
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Su ciascun controller nella configurazione Clustered ONTAP MetroCluster, l'adattatore FC-VI e gli HBA devono essere cablati a porte specifiche sugli switch FC esistenti.
+
+.Fasi
+. Collegare le porte FC-VI e HBA in base alla seguente tabella:
++
+|===
+
+
+2+| Sito A 2+| Sito B 
+
+
+| Collegare il sito A un componente e una porta... | Porta FC_switch_A_1... | Collegare il componente e la porta del sito B... | Porta FC_switch_B_1... 
+
+
+ a| 
+Controller_A_1 porta FC-VI 1
+ a| 
+32
+ a| 
+Controller_B_1 porta FC-VI 1
+ a| 
+32
+
+
+
+ a| 
+Controller_A_1 porta HBA 1
+ a| 
+33
+ a| 
+Controller_B_1 porta HBA 1
+ a| 
+33
+
+
+
+ a| 
+Controller_A_1 porta HBA 2
+ a| 
+34
+ a| 
+Controller_B_1 porta HBA 2
+ a| 
+34
+
+
+
+ a| 
+Controller_A_2 porta FC-VI 1
+ a| 
+35
+ a| 
+Controller_B_2 porta FC-VI 1
+ a| 
+35
+
+
+
+ a| 
+Controller_A_2 HBA 1
+ a| 
+36
+ a| 
+Controller_B_2 HBA 1
+ a| 
+36
+
+
+
+ a| 
+Controller_A_2 HBA 2
+ a| 
+37
+ a| 
+Controller_B_2 HBA 2
+ a| 
+37
+
+|===
+. Collegare ciascun bridge FC-SAS nel primo fabric switch agli switch FC.
++
+Il numero di bridge varia in base al numero di stack di storage SAS.
+
++
+|===
+
+
+2+| Sito A 2+| Sito B 
+
+
+| Collegare questo sito A un ponte... | Porta FC_switch_A_1... | Collegare il bridge del sito B... | Porta FC_switch_B_1... 
+
+
+ a| 
+bridge_A_1_38
+ a| 
+38
+ a| 
+bridge_B_1_38
+ a| 
+38
+
+
+
+ a| 
+bridge_A_1_39
+ a| 
+39
+ a| 
+bridge_B_1_39
+ a| 
+39
+
+|===
+. Collegare ciascun bridge nel secondo fabric switch agli switch FC.
++
+Il numero di bridge varia in base al numero di stack di storage SAS.
+
++
+|===
+
+
+2+| Sito A 2+| Sito B 
+
+
+| Collegare questo sito A un ponte... | Porta FC_switch_A_2... | Collegare il bridge del sito B... | Porta FC_switch_B_2... 
+
+
+ a| 
+bridge_A_2_38
+ a| 
+38
+ a| 
+bridge_B_2_38
+ a| 
+38
+
+
+
+ a| 
+bridge_A_2_39
+ a| 
+39
+ a| 
+bridge_B_2_39
+ a| 
+39
+
+|===
+

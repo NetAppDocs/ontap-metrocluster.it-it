@@ -1,0 +1,91 @@
+---
+permalink: upgrade/task_create_unmirrored_data_aggregates_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, create, unmirrored, data, aggregates 
+summary: È possibile creare aggregati di dati senza mirroring per i dati che non richiedono il mirroring ridondante fornito dalle configurazioni MetroCluster. 
+---
+= Creazione di aggregati di dati senza mirror
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile creare aggregati di dati senza mirroring per i dati che non richiedono il mirroring ridondante fornito dalle configurazioni MetroCluster.
+
+.A proposito di questa attività
+* È necessario sapere quali dischi o LUN di array verranno utilizzati nel nuovo aggregato.
+* Se nel sistema sono presenti più tipi di dischi (storage eterogeneo), è necessario comprendere come verificare che sia selezionato il tipo di disco corretto.
+
+
+
+IMPORTANT: Nelle configurazioni MetroCluster IP, gli aggregati remoti senza mirror non sono accessibili dopo uno switchover
+
+
+NOTE: Gli aggregati senza mirror devono essere locali rispetto al nodo che li possiede.
+
+* I dischi e le LUN degli array sono di proprietà di un nodo specifico; quando si crea un aggregato, tutti i dischi dell'aggregato devono essere di proprietà dello stesso nodo, che diventa il nodo principale dell'aggregato.
+* I nomi degli aggregati devono essere conformi allo schema di denominazione stabilito al momento della pianificazione della configurazione MetroCluster.
+* _Gestione di dischi e aggregati_ contiene ulteriori informazioni sugli aggregati di mirroring.
+
+
+.Fasi
+. Installare e cablare gli shelf di dischi che conterranno gli aggregati senza mirror.
++
+È possibile utilizzare le procedure descritte nella documentazione di _installazione e configurazione_ per la piattaforma e gli shelf di dischi.
+
++
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"]
+
+. Assegnare manualmente tutti i dischi sul nuovo shelf al nodo appropriato:
++
+`disk assign -disk _disk-id_ -owner _owner-node-name_`
+
+. Creare l'aggregato:
++
+`storage aggregate create`
+
++
+Se si è connessi al cluster nell'interfaccia di gestione del cluster, è possibile creare un aggregato su qualsiasi nodo del cluster. Per verificare che l'aggregato sia creato su un nodo specifico, utilizzare `-node` o specificare i dischi di proprietà di quel nodo.
+
++
+È inoltre necessario assicurarsi di includere nell'aggregato solo i dischi sullo shelf senza mirror.
+
++
+È possibile specificare le seguenti opzioni:
+
++
+** Nodo principale dell'aggregato (ovvero, il nodo proprietario dell'aggregato durante il normale funzionamento)
+** Elenco di unità o LUN di array specifici da aggiungere all'aggregato
+** Numero di dischi da includere
+** Stile checksum da utilizzare per l'aggregato
+** Tipo di dischi da utilizzare
+** Dimensioni delle unità da utilizzare
+** Velocità del disco da utilizzare
+** Tipo RAID per i gruppi RAID sull'aggregato
+** Numero massimo di unità o LUN di array che possono essere inclusi in un gruppo RAID
+** Se sono consentiti dischi con diversi RPM
++
+Per ulteriori informazioni su queste opzioni, consultare `storage aggregate create` pagina man.
+
++
+Il seguente comando crea un aggregato senza mirror con 10 dischi:
+
++
+[listing]
+----
+controller_A_1::> storage aggregate create aggr1_controller_A_1 -diskcount 10 -node controller_A_1
+[Job 15] Job is queued: Create aggr1_controller_A_1.
+[Job 15] The job is starting.
+[Job 15] Job succeeded: DONE
+----
+
+
+. Verificare il gruppo RAID e i dischi del nuovo aggregato:
++
+`storage aggregate show-status -aggregate _aggregate-name_`
+
+
+
+.Informazioni correlate
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"]

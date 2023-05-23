@@ -1,0 +1,1756 @@
+---
+permalink: maintain/task_fb_hot_add_stack_of_shelves_and_bridges.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, hot, add, stack, sas, disk, shelves, bridges, system 
+summary:  
+---
+= Aggiunta a caldo di uno stack di shelf di dischi SAS e bridge a un sistema MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile aggiungere a caldo (senza interruzioni) un intero stack, inclusi i bridge, al sistema MetroCluster. Gli switch FC devono disporre di porte disponibili ed è necessario aggiornare lo zoning dello switch per riflettere le modifiche.
+
+.A proposito di questa attività
+* Questa procedura può essere utilizzata per aggiungere uno stack utilizzando i bridge FibreBridge 7500N o 6500N.
+* Questa procedura si basa sul presupposto che si stiano utilizzando le interfacce di gestione del bridge consigliate: L'interfaccia grafica di ATTO ExpressNAV e l'utility di barra di navigazione atto.
++
+** L'interfaccia grafica di ATTO ExpressNAV consente di configurare e gestire un bridge e di aggiornare il firmware del bridge. Utilizzare l'utility barra di navigazione atto per configurare la porta di gestione Ethernet del bridge 1.
+** Se necessario, è possibile utilizzare altre interfacce di gestione. Queste opzioni includono l'utilizzo di una porta seriale o Telnet per configurare e gestire un bridge, la configurazione della porta di gestione Ethernet 1 e l'utilizzo di FTP per aggiornare il firmware del bridge. Se si sceglie una di queste interfacce di gestione, il sistema deve soddisfare i requisiti applicabili in link:reference_requirements_for_using_other_interfaces_to_configure_and_manage_fibrebridge_bridges.html["Altre interfacce di gestione del bridge"]
+
+
+
+
+
+
+== Preparazione all'aggiunta a caldo di uno stack di shelf e bridge di dischi SAS
+
+La preparazione all'aggiunta a caldo di uno stack di shelf di dischi SAS e di una coppia di bridge implica il download di documenti, nonché del firmware del disco e dello shelf di dischi.
+
+.Prima di iniziare
+* Il sistema deve essere una configurazione supportata e deve essere in esecuzione una versione supportata di ONTAP.
++
+https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp"^]
+
+* Tutti i dischi e gli shelf di dischi del sistema devono disporre della versione più recente del firmware.
++
+Prima di aggiungere shelf, è possibile aggiornare il firmware del disco e dello shelf nella configurazione MetroCluster.
+
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ug-rdg/home.html["Upgrade, revert o downgrade"^]
+
+* Ogni switch FC deve disporre di una porta FC per il collegamento di un bridge.
++
+
+NOTE: Potrebbe essere necessario aggiornare lo switch FC in base alla compatibilità dello switch FC.
+
+* Per utilizzare l'interfaccia grafica di ATTO ExpressNAV: Internet Explorer 8 o 9 o Mozilla Firefox 3, il computer utilizzato per configurare i bridge deve disporre di un browser Web supportato da atto.
++
+Le _note di rilascio dei prodotti atto_ dispongono di un elenco aggiornato dei browser Web supportati. È possibile accedere a questo documento utilizzando le informazioni riportate nella procedura.
+
+
+
+.Fasi
+. Scarica o visualizza i seguenti documenti dal sito di supporto NetApp:
++
+** https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp"^]
+** La _Guida all'installazione e al servizio_ per il modello di shelf di dischi.
+
+
+. Scaricare i contenuti dal sito Web atto e dal sito Web di NetApp:
++
+.. Accedere alla pagina ATTO FibreBridge Description (Descrizione di ATTO FibreBridge).
+.. Utilizzando il collegamento nella pagina ATTO FibreBridge Description, accedere al sito Web atto e scaricare quanto segue:
++
+*** _ATTO FibreBridge Installation and Operation Manual_ per il tuo modello di bridge.
+*** ATTO barra di navigazione (sul computer in uso per la configurazione).
+
+
+.. Accedere alla pagina di download del firmware ATTO FibreBridge facendo clic su *Continue* (continua) alla fine della pagina ATTO FibreBridge Description (Descrizione di ATTO FibreBridge), quindi procedere come segue:
++
+*** Scaricare il file del firmware del bridge come indicato nella pagina di download.
++
+In questa fase, si sta completando solo la parte di download delle istruzioni fornite nei collegamenti. Il firmware di ciascun bridge viene aggiornato in un secondo momento, quando richiesto in link:task_fb_hot_add_stack_of_shelves_and_bridges.html["Aggiunta a caldo della pila di shelf"] sezione.
+
+*** Fare una copia della pagina di download del firmware ATTO FibreBridge e delle note sulla versione per riferimento in seguito.
+
+
+
+
+. Scaricare il firmware più recente per lo shelf di dischi e dischi ed eseguire una copia della parte di installazione delle istruzioni per riferimento in seguito.
++
+Tutti gli shelf di dischi nella configurazione MetroCluster (sia i nuovi shelf che gli shelf esistenti) devono eseguire la stessa versione del firmware.
+
++
+
+NOTE: In questa fase, si sta completando solo la parte di download delle istruzioni fornite nei collegamenti e si sta creando una copia delle istruzioni di installazione. Il firmware viene aggiornato su ciascun disco e shelf di dischi in un secondo momento, quando richiesto nella link:task_fb_hot_add_stack_of_shelves_and_bridges.html["Aggiunta a caldo della pila di shelf"] sezione.
+
++
+.. Scaricare il firmware del disco ed eseguire una copia delle istruzioni del firmware del disco per riferimento in seguito.
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Download NetApp: Firmware del disco"^]
+
+.. Scaricare il firmware dello shelf di dischi ed eseguire una copia delle istruzioni del firmware dello shelf di dischi per riferimento in seguito.
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Download NetApp: Firmware shelf di dischi"^]
+
+
+
+. Raccogliere l'hardware e le informazioni necessarie per utilizzare le interfacce di gestione del bridge consigliate: GUI ExpressNAV atto e utility barra di navigazione atto:
++
+.. Procurarsi un cavo Ethernet standard per il collegamento dalla porta di gestione Ethernet del bridge 1 alla rete.
+.. Determinare un nome utente e una password non predefiniti per l'accesso ai bridge.
++
+Si consiglia di modificare il nome utente e la password predefiniti.
+
+.. Ottenere un indirizzo IP, una subnet mask e informazioni sul gateway per la porta di gestione Ethernet 1 su ciascun bridge.
+.. Disattivare i client VPN sul computer in uso per la configurazione.
++
+I client VPN attivi causano un errore nella ricerca di bridge nella barra di navigazione.
+
+
+
+. Procurarsi quattro viti per ciascun bridge per montare saldamente le staffe "`L`" del bridge sulla parte anteriore del rack.
++
+Le aperture delle staffe "`L`" del ponte sono conformi allo standard ETA-310-X per rack da 19" (482.6 mm).
+
+. Se necessario, aggiornare lo zoning dello switch FC per ospitare i nuovi bridge aggiunti alla configurazione.
++
+Se si utilizzano i file di configurazione di riferimento forniti da NetApp, le zone sono state create per tutte le porte, quindi non è necessario effettuare aggiornamenti di zoning. Per ciascuna porta dello switch che si collega alle porte FC del bridge deve essere presente una zona di storage.
+
+
+
+
+
+== Aggiunta a caldo di uno stack di shelf e bridge di dischi SAS
+
+È possibile aggiungere a caldo uno stack di shelf di dischi SAS e bridge per aumentare la capacità dei bridge.
+
+Il sistema deve soddisfare tutti i requisiti per aggiungere a caldo uno stack di shelf e bridge di dischi SAS.
+
+link:task_fb_hot_add_stack_of_shelves_and_bridges.html["Preparazione all'aggiunta a caldo di uno stack di shelf e bridge di dischi SAS"]
+
+* L'aggiunta a caldo di uno stack di shelf e bridge di dischi SAS è una procedura senza interruzioni se vengono soddisfatti tutti i requisiti di interoperabilità.
++
+https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp"^]
+
++
+link:concept_using_the_interoperability_matrix_tool_to_find_mcc_information.html["Utilizzo dello strumento matrice di interoperabilità per trovare le informazioni MetroCluster"]
+
+* Multipath ha è l'unica configurazione supportata per i sistemi MetroCluster che utilizzano bridge.
++
+Entrambi i moduli controller devono avere accesso attraverso i bridge agli shelf di dischi in ogni stack.
+
+* È necessario aggiungere a caldo un numero uguale di shelf di dischi in ogni sito.
+* Se si utilizza la gestione in-band del bridge piuttosto che la gestione IP, è possibile saltare i passaggi per la configurazione della porta Ethernet e delle impostazioni IP, come indicato nei relativi passaggi.
+
+
+
+NOTE: A partire da ONTAP 9.8, la `storage bridge` il comando viene sostituito con `system bridge`. La procedura riportata di seguito mostra `storage bridge` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `system bridge` è preferibile utilizzare il comando.
+
+
+IMPORTANT: Se si inserisce un cavo SAS nella porta errata, quando si rimuove il cavo da una porta SAS, è necessario attendere almeno 120 secondi prima di collegarlo a una porta SAS diversa. In caso contrario, il sistema non riconosce che il cavo è stato spostato su un'altra porta.
+
+.Fasi
+. Mettere a terra l'utente.
+. Dalla console di uno dei moduli controller, verificare se l'assegnazione automatica dei dischi nel sistema è abilitata:
++
+`storage disk option show`
+
++
+La colonna Auto Assign (assegnazione automatica) indica se l'assegnazione automatica del disco è attivata.
+
++
+[listing]
+----
+
+Node        BKg. FW. Upd.  Auto Copy   Auto Assign  Auto Assign Policy
+----------  -------------  ----------  -----------  ------------------
+node_A_1             on           on           on           default
+node_A_2             on           on           on           default
+2 entries were displayed.
+----
+. Disattivare le porte dello switch per il nuovo stack.
+. Se si esegue la configurazione per la gestione in banda, collegare un cavo dalla porta seriale RS-232 di FibreBridge alla porta seriale (COM) di un personal computer.
++
+La connessione seriale viene utilizzata per la configurazione iniziale, quindi la gestione in-band tramite ONTAP e le porte FC possono essere utilizzate per monitorare e gestire il bridge.
+
+. Se si esegue la configurazione per la gestione IP, configurare la porta di gestione Ethernet 1 per ciascun bridge seguendo la procedura descritta nella sezione 2.0 del _ATTO FibreBridge Installation and Operation Manual_ per il modello di bridge in uso.
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
++
+Quando si esegue la barra di navigazione per configurare una porta di gestione Ethernet, viene configurata solo la porta di gestione Ethernet collegata tramite il cavo Ethernet. Ad esempio, se si desidera configurare anche la porta di gestione Ethernet 2, è necessario collegare il cavo Ethernet alla porta 2 ed eseguire la barra di navigazione.
+
+. Configurare il bridge.
++
+Se le informazioni di configurazione sono state recuperate dal vecchio bridge, utilizzare le informazioni per configurare il nuovo bridge.
+
++
+Annotare il nome utente e la password designati.
+
++
+Il _Manuale d'installazione e funzionamento di FibreBridge atto_ per il tuo modello di bridge contiene le informazioni più aggiornate sui comandi disponibili e su come utilizzarli.
+
++
+
+NOTE: Non configurare la sincronizzazione dell'ora su ATTO FibreBridge 7600N o 7500N. La sincronizzazione temporale per ATTO FibreBridge 7600N o 7500N viene impostata sul tempo del cluster dopo il rilevamento del bridge da parte di ONTAP. Viene inoltre sincronizzato periodicamente una volta al giorno. Il fuso orario utilizzato è GMT e non è modificabile.
+
++
+.. Se si esegue la configurazione per la gestione IP, configurare le impostazioni IP del bridge.
++
+Per impostare l'indirizzo IP senza l'utilità barra di navigazione, è necessario disporre di una connessione seriale a FibreBridge.
+
++
+Se si utilizza l'interfaccia CLI, è necessario eseguire i seguenti comandi:
+
++
+`set ipaddress mp1 _ip-address_`
+
++
+`set ipsubnetmask mp1 _subnet-mask_`
+
++
+`set ipgateway mp1 x.x.x.x`
+
++
+`set ipdhcp mp1 disabled`
+
++
+`set ethernetspeed mp1 1000`
+
+.. Configurare il nome del bridge.
++
+I bridge devono avere un nome univoco all'interno della configurazione MetroCluster.
+
++
+Esempi di nomi di bridge per un gruppo di stack su ciascun sito:
+
++
+*** bridge_A_1a
+*** bridge_A_1b
+*** bridge_B_1a
+*** bridge_B_1b se si utilizza l'interfaccia CLI, è necessario eseguire il seguente comando:
++
+`set bridgename _bridgename_`
+
+
+
+.. Se si esegue ONTAP 9.4 o versioni precedenti, attivare SNMP sul bridge: +
+`set SNMP enabled`
++
+Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzare la gestione in-band per accedere al bridge tramite le porte FC anziché la porta Ethernet. A partire da ONTAP 9.8, è supportata solo la gestione in-band e la gestione SNMP è obsoleta.
+
+
+
+. Configurare le porte FC del bridge.
++
+.. Configurare la velocità/velocità dei dati delle porte FC del bridge.
++
+La velocità di trasferimento dati FC supportata dipende dal modello di bridge in uso.
+
++
+*** Il bridge FibreBridge 7600 supporta fino a 32, 16 o 8 Gbps.
+*** Il bridge FibreBridge 7500 supporta fino a 16, 8 o 4 Gbps.
+*** Il bridge FibreBridge 6500 supporta fino a 8, 4 o 2 Gbps.
++
+
+NOTE: La velocità FCDataRate selezionata è limitata alla velocità massima supportata sia dal bridge che dallo switch a cui si connette la porta bridge. Le distanze di cablaggio non devono superare i limiti degli SFP e di altri hardware.
+
++
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
++
+`set FCDataRate _port-number port-speed_`
+
+
+
+.. Se si sta configurando un bridge FibreBridge 7500N o 6500N, configurare la modalità di connessione utilizzata dalla porta per ptp.
++
+
+NOTE: L'impostazione FCConnMode non è richiesta quando si configura un bridge FibreBridge 7600N.
+
++
+Se si utilizza la CLI, è necessario eseguire il seguente comando:
+
++
+`set FCConnMode _port-number_ ptp`
+
+.. Se si sta configurando un bridge FibreBridge 7600N o 7500N, è necessario configurare o disattivare la porta FC2.
++
+*** Se si utilizza la seconda porta, è necessario ripetere i passaggi precedenti per la porta FC2.
+*** Se non si utilizza la seconda porta, è necessario disattivare la porta: +
+`FCPortDisable _port-number_`
+
+
+.. Se si sta configurando un bridge FibreBridge 7600N o 7500N, disattivare le porte SAS inutilizzate: +
+`SASPortDisable _sas-port_`
++
+
+NOTE: Le porte SAS Da A a D sono attivate per impostazione predefinita. È necessario disattivare le porte SAS non utilizzate. Se si utilizza solo la porta SAS A, è necessario disattivare le porte SAS B, C e D.
+
+
+
+. Accesso sicuro al bridge e salvataggio della configurazione del bridge.
++
+.. Dal prompt del controller, controllare lo stato dei bridge:
++
+`storage bridge show`
+
++
+L'output mostra quale bridge non è protetto.
+
+.. Verificare lo stato delle porte del bridge non protetto: +
+`info`
++
+L'output mostra lo stato delle porte Ethernet MP1 e MP2.
+
+.. Se la porta Ethernet MP1 è abilitata, eseguire il comando seguente: +
+`set EthernetPort mp1 disabled`
++
+
+NOTE: Se è attivata anche la porta Ethernet MP2, ripetere il passaggio precedente per la porta MP2.
+
+.. Salvare la configurazione del bridge.
++
+È necessario eseguire i seguenti comandi:
+
++
+`SaveConfiguration`
+
++
+`FirmwareRestart`
+
++
+Viene richiesto di riavviare il bridge.
+
+
+
+. Aggiornare il firmware FibreBridge su ciascun bridge.
++
+Se il nuovo bridge è dello stesso tipo del bridge partner, eseguire l'aggiornamento allo stesso firmware del bridge partner. Se il nuovo bridge è di tipo diverso da quello del bridge partner, eseguire l'aggiornamento al firmware più recente supportato dal bridge e dalla versione di ONTAP. Consultare la sezione "aggiornamento del firmware su un bridge FibreBridge" in _manutenzione MetroCluster_.
+
+. [[step10-cable-shelf-bridge]]collega gli shelf di dischi ai bridge:
++
+.. Collegare a margherita gli shelf di dischi in ogni stack.
++
+La _Guida all'installazione_ per il modello di shelf di dischi fornisce informazioni dettagliate sugli shelf di dischi con concatenamento a margherita.
+
+.. Per ogni stack di shelf di dischi, collegare IOM A del primo shelf alla porta SAS A su FibreBridge A, quindi collegare IOM B dell'ultimo shelf alla porta SAS A su FibreBridge B.
++
+link:../install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"]
+
++
+link:../install-stretch/concept_considerations_differences.html["Estensione dell'installazione e della configurazione di MetroCluster"]
+
++
+Ogni bridge ha un percorso per la propria pila di shelf di dischi; il bridge A si collega al lato A dello stack attraverso il primo shelf e il bridge B si collega al lato B dello stack attraverso l'ultimo shelf.
+
++
+
+NOTE: La porta SAS bridge B è disattivata.
+
+
+
+. [[step11-verify-each-bridge-detect]]verificare che ciascun bridge sia in grado di rilevare tutti i dischi e gli shelf di dischi a cui è collegato il bridge.
++
+[cols="30,70"]
+|===
+
+
+| Se si utilizza... | Quindi... 
+
+
+ a| 
+GUI ExpressNAV
+ a| 
+.. In un browser Web supportato, inserire l'indirizzo IP di un bridge nella casella del browser.
++
+Viene visualizzata la home page di ATTO FibreBridge, che contiene un link.
+
+.. Fare clic sul collegamento, quindi immettere il nome utente e la password designati al momento della configurazione del bridge.
++
+Viene visualizzata la pagina di stato di atto FibreBridge con un menu a sinistra.
+
+.. Fare clic su *Avanzate* nel menu.
+.. Visualizzare i dispositivi collegati: +
+`sastargets`
+.. Fare clic su *Invia*.
+
+
+
+
+ a| 
+Connessione alla porta seriale
+ a| 
+Visualizzare i dispositivi connessi:
+
+`sastargets`
+
+|===
++
+L'output mostra i dispositivi (dischi e shelf di dischi) a cui è collegato il bridge. Le linee di output sono numerate in sequenza in modo da poter contare rapidamente i dispositivi.
+
++
+
+NOTE: Se la risposta di testo troncata viene visualizzata all'inizio dell'output, è possibile utilizzare Telnet per connettersi al bridge e visualizzare l'output utilizzando `sastargets` comando.
+
++
+Il seguente output indica che sono collegati 10 dischi:
+
++
+[listing]
+----
+Tgt VendorID ProductID        Type        SerialNumber
+  0 NETAPP   X410_S15K6288A15 DISK        3QP1CLE300009940UHJV
+  1 NETAPP   X410_S15K6288A15 DISK        3QP1ELF600009940V1BV
+  2 NETAPP   X410_S15K6288A15 DISK        3QP1G3EW00009940U2M0
+  3 NETAPP   X410_S15K6288A15 DISK        3QP1EWMP00009940U1X5
+  4 NETAPP   X410_S15K6288A15 DISK        3QP1FZLE00009940G8YU
+  5 NETAPP   X410_S15K6288A15 DISK        3QP1FZLF00009940TZKZ
+  6 NETAPP   X410_S15K6288A15 DISK        3QP1CEB400009939MGXL
+  7 NETAPP   X410_S15K6288A15 DISK        3QP1G7A900009939FNTT
+  8 NETAPP   X410_S15K6288A15 DISK        3QP1FY0T00009940G8PA
+  9 NETAPP   X410_S15K6288A15 DISK        3QP1FXW600009940VERQ
+----
+. Verificare che l'output del comando indichi che il bridge è collegato a tutti i dischi e gli shelf di dischi appropriati nello stack.
++
+[cols="30,70"]
+|===
+
+
+| Se l'output è... | Quindi... 
+
+
+ a| 
+Esatto
+ a| 
+Ripetere <<step11-verify-each-bridge-detect,Fase 11>> per ogni bridge rimanente.
+
+
+
+ a| 
+Non corretto
+ a| 
+.. Verificare l'eventuale presenza di cavi SAS allentati o correggere il cablaggio SAS ripetendo le operazioni <<step10-cable-shelves-bridges,Fase 10>>.
+.. Ripetere <<step11-verify-each-bridge-detect,Fase 11>>.
+
+
+|===
+. Se si sta configurando una configurazione Fabric-Attached MetroCluster, collegare ciascun bridge agli switch FC locali utilizzando i cavi mostrati nella tabella per la configurazione, il modello di switch e il modello di bridge FC-SAS:
++
+
+NOTE: Gli switch Brocade e Cisco utilizzano una diversa numerazione delle porte, come illustrato nelle tabelle seguenti.
+
++
+** Sugli switch Brocade, la prima porta è numerata "`0`".
+** Sugli switch Cisco, la prima porta è numerata "`1`".
++
+|===
+
+
+13+| Configurazioni che utilizzano FibreBridge 7500N o 7600N utilizzando entrambe le porte FC (FC1 e FC2) 
+
+
+13+| GRUPPO DR 1 
+
+
+3+|  2+| Brocade 6505 2+| Brocade 6510, Brocade DCX 8510-8 2+| Brocade 6520 2+| Brocade G620, Brocade G620-1, Brocade G630, Brocade G630-1 2+| Brocade G720 
+
+
+2+| Componente | Porta | Interruttore 1 | Interruttore 2 | Interruttore 1 | Interruttore 2 | Interruttore 1 | Interruttore 2 | Interruttore 1 | Interruttore 2 | Interruttore 1 | Interruttore 2 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+8
+ a| 
+ a| 
+8
+ a| 
+ a| 
+8
+ a| 
+ a| 
+8
+ a| 
+ a| 
+10
+ a| 
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+8
+ a| 
+-
+ a| 
+8
+ a| 
+-
+ a| 
+8
+ a| 
+-
+ a| 
+8
+ a| 
+-
+ a| 
+10
+
+
+
+ a| 
+bridge_x_1B
+ a| 
+FC1
+ a| 
+9
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+11
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+11
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+10
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+14
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+14
+
+
+
+ a| 
+bridge_x_2B
+ a| 
+FC1
+ a| 
+11
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+17
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+17
+
+
+
+ a| 
+Stack 3
+ a| 
+bridge_x_3a
+ a| 
+FC1
+ a| 
+12
+ a| 
+-
+ a| 
+12
+ a| 
+-
+ a| 
+12
+ a| 
+-
+ a| 
+12
+ a| 
+-
+ a| 
+18
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+12
+ a| 
+-
+ a| 
+12
+ a| 
+-
+ a| 
+12
+ a| 
+-
+ a| 
+12
+ a| 
+-
+ a| 
+18
+
+
+
+ a| 
+bridge_x_3B
+ a| 
+FC1
+ a| 
+13
+ a| 
+-
+ a| 
+13
+ a| 
+-
+ a| 
+13
+ a| 
+-
+ a| 
+13
+ a| 
+-
+ a| 
+19
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+13
+ a| 
+-
+ a| 
+13
+ a| 
+-
+ a| 
+13
+ a| 
+-
+ a| 
+13
+ a| 
+-
+ a| 
+19
+
+
+
+ a| 
+Stack y
+ a| 
+bridge_x_ya
+ a| 
+FC1
+ a| 
+14
+ a| 
+-
+ a| 
+14
+ a| 
+-
+ a| 
+14
+ a| 
+-
+ a| 
+14
+ a| 
+-
+ a| 
+20
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+14
+ a| 
+-
+ a| 
+14
+ a| 
+-
+ a| 
+14
+ a| 
+-
+ a| 
+14
+ a| 
+-
+ a| 
+20
+
+
+
+ a| 
+bridge_x_yb
+ a| 
+FC1
+ a| 
+15
+ a| 
+-
+ a| 
+15
+ a| 
+-
+ a| 
+15
+ a| 
+-
+ a| 
+15
+ a| 
+-
+ a| 
+21
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+--
+
+-- a| 
+15
+ a| 
+--
+
+-- a| 
+15
+ a| 
+--
+
+-- a| 
+15
+ a| 
+-
+ a| 
+15
+ a| 
+-
+ a| 
+21
+
+
+
+ a| 
+
+NOTE: È possibile collegare altri bridge alle porte 16, 17, 20 e 21 negli switch G620, G630, G620-1 e G630-1.
+
+|===
++
+|===
+
+
+11+| Configurazioni che utilizzano FibreBridge 7500N o 7600N utilizzando entrambe le porte FC (FC1 e FC2) 
+
+
+11+| GRUPPO DR 2 
+
+
+3+|  2+| Brocade G620, Brocade G620-1, Brocade G630, Brocade G630-1 2+| Brocade 6510, Brocade DCX 8510-8 2+| Brocade 6520 2+| Brocade G720 
+
+
+2+| Componente | Porta | Interruttore 1 | Interruttore 2 | Interruttore 1 | Interruttore 2 | Interruttore 1 | Interruttore 2 | Interruttore 1 | interruttore 2 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_51a
+ a| 
+FC1
+ a| 
+26
+ a| 
+-
+ a| 
+32
+ a| 
+-
+ a| 
+56
+ a| 
+-
+ a| 
+32
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+26
+ a| 
+-
+ a| 
+32
+ a| 
+-
+ a| 
+56
+ a| 
+-
+ a| 
+32
+
+
+
+ a| 
+bridge_x_51b
+ a| 
+FC1
+ a| 
+27
+ a| 
+-
+ a| 
+33
+ a| 
+-
+ a| 
+57
+ a| 
+-
+ a| 
+33
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+27
+ a| 
+-
+ a| 
+33
+ a| 
+-
+ a| 
+57
+ a| 
+-
+ a| 
+33
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_52a
+ a| 
+FC1
+ a| 
+30
+ a| 
+-
+ a| 
+34
+ a| 
+-
+ a| 
+58
+ a| 
+-
+ a| 
+34
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+30
+ a| 
+-
+ a| 
+34
+ a| 
+-
+ a| 
+58
+ a| 
+-
+ a| 
+34
+
+
+
+ a| 
+bridge_x_52b
+ a| 
+FC1
+ a| 
+31
+ a| 
+-
+ a| 
+35
+ a| 
+-
+ a| 
+59
+ a| 
+-
+ a| 
+35
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+31
+ a| 
+-
+ a| 
+35
+ a| 
+-
+ a| 
+59
+ a| 
+-
+ a| 
+35
+
+
+
+ a| 
+Stack 3
+ a| 
+bridge_x_53a
+ a| 
+FC1
+ a| 
+32
+ a| 
+-
+ a| 
+36
+ a| 
+-
+ a| 
+60
+ a| 
+-
+ a| 
+36
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+32
+ a| 
+-
+ a| 
+36
+ a| 
+-
+ a| 
+60
+ a| 
+-
+ a| 
+36
+
+
+
+ a| 
+bridge_x_53b
+ a| 
+FC1
+ a| 
+33
+ a| 
+-
+ a| 
+37
+ a| 
+-
+ a| 
+61
+ a| 
+-
+ a| 
+37
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+33
+ a| 
+-
+ a| 
+37
+ a| 
+-
+ a| 
+61
+ a| 
+-
+ a| 
+37
+
+
+
+ a| 
+Stack y
+ a| 
+bridge_x_5ya
+ a| 
+FC1
+ a| 
+34
+ a| 
+-
+ a| 
+38
+ a| 
+-
+ a| 
+62
+ a| 
+-
+ a| 
+38
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+34
+ a| 
+-
+ a| 
+38
+ a| 
+-
+ a| 
+62
+ a| 
+-
+ a| 
+38
+
+
+
+ a| 
+bridge_x_5yb
+ a| 
+FC1
+ a| 
+35
+ a| 
+-
+ a| 
+39
+ a| 
+-
+ a| 
+63
+ a| 
+-
+ a| 
+39
+ a| 
+-
+
+
+
+ a| 
+FC2
+ a| 
+-
+ a| 
+35
+ a| 
+-
+ a| 
+39
+ a| 
+-
+ a| 
+63
+ a| 
+-
+ a| 
+39
+
+
+
+ a| 
+
+NOTE: È possibile collegare altri bridge alle porte 36 - 39 degli switch G620, G630, G620-1 e G-630-1.
+
+|===
++
+|===
+
+
+12+| Configurazioni che utilizzano bridge FibreBridge 6500N o FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2) 
+
+
+12+| GRUPPO DR 1 
+
+
+2+|  2+| Brocade 6505 2+| Brocade 6510, Brocade DCX 8510-8 2+| Brocade 6520 2+| Brocade G620, Brocade G620-1, Brocade G630, Brocade G630-1 2+| Brocade G720 
+
+
+| Componente | Porta | Interruttore 1 | Interruttore 2 | Interruttore 1 | Interruttore 2 | Interruttore 1 | Interruttore 2 | Interruttore 1 | Interruttore 2 | Interruttore 1 | Interruttore 2 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+8
+ a| 
+ a| 
+8
+ a| 
+ a| 
+8
+ a| 
+ a| 
+8
+ a| 
+ a| 
+10
+ a| 
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+-
+ a| 
+8
+ a| 
+-
+ a| 
+8
+ a| 
+-
+ a| 
+8
+ a| 
+-
+ a| 
+8
+ a| 
+-
+ a| 
+10
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+9
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+11
+ a| 
+-
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+9
+ a| 
+-
+ a| 
+11
+
+
+
+ a| 
+Stack 3
+ a| 
+bridge_x_3a
+ a| 
+10
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+14
+ a| 
+-
+
+
+
+ a| 
+bridge_x_4b
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+10
+ a| 
+-
+ a| 
+14
+
+
+
+ a| 
+Stack y
+ a| 
+bridge_x_ya
+ a| 
+11
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+15
+ a| 
+-
+
+
+
+ a| 
+bridge_x_yb
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+11
+ a| 
+-
+ a| 
+15
+
+
+
+ a| 
+
+NOTE: È possibile collegare altri bridge alle porte 12 - 17, 20 e 21 negli switch G620, G630, G620-1 e G630-1. È possibile collegare altri bridge alle porte 16 - 17, 20 e 21 switch G720.
+
+|===
++
+|===
+
+
+10+| Configurazioni che utilizzano bridge FibreBridge 6500N o FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2) 
+
+
+10+| GRUPPO DR 2 
+
+
+2+|  2+| Brocade G720 2+| Brocade G620, Brocade G620-1, Brocade G630, Brocade G630-1 2+| Brocade 6510, Brocade DCX 8510-8 2+| Brocade 6520 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_51a
+ a| 
+32
+ a| 
+-
+ a| 
+26
+ a| 
+-
+ a| 
+32
+ a| 
+-
+ a| 
+56
+ a| 
+-
+
+
+
+ a| 
+bridge_x_51b
+ a| 
+-
+ a| 
+32
+ a| 
+-
+ a| 
+26
+ a| 
+-
+ a| 
+32
+ a| 
+-
+ a| 
+56
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_52a
+ a| 
+33
+ a| 
+-
+ a| 
+27
+ a| 
+-
+ a| 
+33
+ a| 
+-
+ a| 
+57
+ a| 
+-
+
+
+
+ a| 
+bridge_x_52b
+ a| 
+-
+ a| 
+33
+ a| 
+-
+ a| 
+27
+ a| 
+-
+ a| 
+33
+ a| 
+-
+ a| 
+57
+
+
+
+ a| 
+Stack 3
+ a| 
+bridge_x_53a
+ a| 
+34
+ a| 
+-
+ a| 
+30
+ a| 
+-
+ a| 
+34
+ a| 
+-
+ a| 
+58
+ a| 
+-
+
+
+
+ a| 
+bridge_x_54b
+ a| 
+-
+ a| 
+34
+ a| 
+-
+ a| 
+30
+ a| 
+-
+ a| 
+34
+ a| 
+-
+ a| 
+58
+
+
+
+ a| 
+Stack y
+ a| 
+bridge_x_ya
+ a| 
+35
+ a| 
+-
+ a| 
+31
+ a| 
+-
+ a| 
+35
+ a| 
+-
+ a| 
+59
+ a| 
+-
+
+
+
+ a| 
+bridge_x_yb
+ a| 
+-
+ a| 
+35
+ a| 
+-
+ a| 
+31
+ a| 
+-
+ a| 
+35
+ a| 
+-
+ a| 
+59
+
+
+
+ a| 
+
+NOTE: È possibile collegare altri bridge alle porte da 32 a 39 negli switch G620, G630, G620-1 e G630-1. È possibile collegare altri bridge alle porte da 36 a 39 negli switch G720.
+
+|===
+
+
+. Se si sta configurando un sistema MetroCluster collegato tramite bridge, collegare ciascun bridge ai moduli controller:
++
+.. Collegare la porta FC 1 del bridge a una porta FC da 16 GB o 8 GB sul modulo controller in cluster_A.
+.. Collegare la porta FC 2 del bridge alla porta FC della stessa velocità del modulo controller in cluster_A.
+.. Ripetere questi passaggi secondari sugli altri bridge successivi fino a quando tutti i bridge non sono stati cablati.
+
+
+. Aggiornare il firmware del disco alla versione più recente dalla console di sistema:
++
+`disk_fw_update`
+
++
+Eseguire questo comando su entrambi i moduli controller.
+
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Download NetApp: Firmware del disco"^]
+
+. Aggiornare il firmware dello shelf di dischi alla versione più recente utilizzando le istruzioni per il firmware scaricato.
++
+È possibile eseguire i comandi della procedura dalla console di sistema di uno dei moduli controller.
+
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Download NetApp: Firmware shelf di dischi"^]
+
+. Se il sistema non dispone dell'assegnazione automatica dei dischi attivata, assegnare la proprietà dei dischi.
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"^]
+
++
+
+NOTE: Se si suddivide la proprietà di un singolo stack di shelf di dischi tra più moduli controller, è necessario disattivare l'assegnazione automatica dei dischi su entrambi i nodi del cluster (`storage disk option modify -autoassign off *`) prima di assegnare la proprietà del disco; in caso contrario, quando si assegna un disco singolo, i dischi rimanenti potrebbero essere assegnati automaticamente allo stesso modulo controller e pool.
+
++
+
+NOTE: Non è necessario aggiungere dischi ad aggregati o volumi fino a quando il firmware del disco e del firmware dello shelf di dischi non sono stati aggiornati e le fasi di verifica di questa attività non sono state completate.
+
+. Abilitare le porte dello switch per il nuovo stack.
+. Verificare il funzionamento della configurazione MetroCluster in ONTAP:
++
+.. Verificare che il sistema sia multipercorso: +
+`node run -node _node-name_ sysconfig -a`
+.. Verificare la presenza di eventuali avvisi sullo stato di salute su entrambi i cluster: +
+`system health alert show`
+.. Confermare la configurazione MetroCluster e verificare che la modalità operativa sia normale: +
+`metrocluster show`
+.. Eseguire un controllo MetroCluster: +
+`metrocluster check run`
+.. Visualizzare i risultati del controllo MetroCluster: +
+`metrocluster check show`
+.. Verificare la presenza di eventuali avvisi sullo stato di salute sugli interruttori (se presenti): +
+`storage switch show`
+.. Eseguire Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Download NetApp: Config Advisor"^]
+
+.. Dopo aver eseguito Config Advisor, esaminare l'output dello strumento e seguire le raccomandazioni nell'output per risolvere eventuali problemi rilevati.
+
+
+. Se applicabile, ripetere questa procedura per il sito del partner.
+
+
+.Informazioni correlate
+link:concept_in_band_management_of_the_fc_to_sas_bridges.html["Gestione in-band dei bridge FC-SAS"]

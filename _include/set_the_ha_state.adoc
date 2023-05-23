@@ -1,0 +1,32 @@
+= 
+:allow-uri-read: 
+
+
+È necessario verificare lo stato ha dei controller e dello chassis e, se necessario, aggiornarlo in modo che corrisponda alla configurazione del sistema.
+
+.Fasi
+. In modalità Maintenance (manutenzione), visualizzare lo stato ha del modulo controller e dello chassis:
++
+`ha-config show`
+
++
+Lo stato ha per tutti i componenti deve essere `mccip`.
+
+. Se lo stato di sistema visualizzato del controller o dello chassis non è corretto, impostare lo stato ha:
++
+`ha-config modify controller mccip`
+
++
+`ha-config modify chassis mccip`
+
+. Arrestare il nodo: `halt`
++
+Il nodo deve arrestarsi su `LOADER>` prompt.
+
+. Su ciascun nodo, controllare la data, l'ora e il fuso orario del sistema: `show date`
+. Se necessario, impostare la data in UTC o GMT: `set date <mm/dd/yyyy>`
+. Controllare l'ora utilizzando il seguente comando al prompt dell'ambiente di boot: `show time`
+. Se necessario, impostare l'ora in UTC o GMT: `set time <hh:mm:ss>`
+. Salvare le impostazioni: `saveenv`
+. Raccogliere le variabili di ambiente: `printenv`
+

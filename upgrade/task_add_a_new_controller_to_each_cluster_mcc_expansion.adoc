@@ -1,0 +1,44 @@
+---
+permalink: upgrade/task_add_a_new_controller_to_each_cluster_mcc_expansion.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, add, new, controller, module, cluster 
+summary: 'È necessario aggiungere un nuovo modulo controller a ciascun sito, creando una coppia ha in ciascun sito. Si tratta di un processo a più fasi che prevede modifiche hardware e software che devono essere eseguite nell"ordine corretto in ogni sito.' 
+---
+= Aggiunta di un nuovo modulo controller a ciascun cluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario aggiungere un nuovo modulo controller a ciascun sito, creando una coppia ha in ciascun sito. Si tratta di un processo a più fasi che prevede modifiche hardware e software che devono essere eseguite nell'ordine corretto in ogni sito.
+
+.A proposito di questa attività
+* Il nuovo modulo controller deve essere ricevuto da NetApp come parte del kit di aggiornamento.
++
+Verificare che le schede PCIe nel nuovo modulo controller siano compatibili e supportate dal nuovo modulo controller.
+
++
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+* Il sistema deve disporre di uno slot vuoto per il nuovo modulo controller quando si esegue l'aggiornamento a una coppia ha a chassis singolo (una coppia ha in cui entrambi i moduli controller risiedono nello stesso chassis).
++
+
+NOTE: Questa configurazione non è supportata su tutti i sistemi. Le piattaforme con configurazioni a chassis singolo supportate in ONTAP 9 sono AFF A300, FAS8200, FAS8300, AFF A400, AFF80xx, FAS8020, FAS8060, FAS8080 E FAS9000.
+
+* È necessario disporre di spazio rack e cavi per il nuovo modulo controller quando si esegue l'aggiornamento a una coppia ha a doppio chassis (una coppia ha in cui i moduli controller risiedono in uno chassis separato).
++
+
+NOTE: Questa configurazione non è supportata su tutti i sistemi.
+
+* È necessario collegare ciascun modulo controller alla rete di gestione tramite la relativa porta e0a oppure, se il sistema ne dispone, è possibile connettersi alla porta e0M come porta di gestione.
+* Queste attività devono essere ripetute in ogni sito.
+* I moduli controller preesistenti sono indicati come moduli controller _esistenti_.
++
+Gli esempi di questa procedura presentano il prompt della console `existing_ctlr>`.
+
+* I moduli controller aggiunti sono denominati _nuovi_ moduli controller; gli esempi di questa procedura hanno il prompt della console `new_ctlr>`.
+* Questa attività utilizza il seguente flusso di lavoro:
+
+
+image::../media/workflow_mcc_2_to_4_node_expansion_adding_nodes.gif[workflow mcc espansione da 2 a 4 nodi aggiunta di nodi]

@@ -1,0 +1,36 @@
+---
+permalink: install-stretch/task_rack_the_hardware_components_2_node_stretch_sas.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, rack, hardware, components 
+summary: 'Se l"apparecchiatura non è già stata installata negli armadi, è necessario installarli in rack.' 
+---
+= Scaffalatura dei componenti hardware
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se l'apparecchiatura non è già stata installata negli armadi, è necessario installarli in rack.
+
+Questa attività deve essere eseguita su entrambi i siti MetroCluster.
+
+.Fasi
+. Pianificare il posizionamento dei componenti di MetroCluster.
++
+La quantità di spazio rack necessaria dipende dal modello di piattaforma dei controller di storage, dai tipi di switch e dal numero di stack di shelf di dischi nella configurazione.
+
+. Utilizzando le procedure di officina standard per lavorare con le apparecchiature elettriche, assicurati di essere messo a terra correttamente.
+. Installare i controller di storage nel rack o nell'armadietto.
++
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"]
+
+. Installare gli shelf di dischi, collegare a margherita gli shelf di dischi in ogni stack, accenderli e impostare gli ID dello shelf.
++
+Consultare la guida appropriata per il modello di shelf di dischi per informazioni sugli shelf di dischi a margherita e sull'impostazione degli shelf ID.
+
++
+
+NOTE: Gli shelf ID devono essere univoci per ogni shelf di dischi SAS all'interno di ciascun gruppo di DR MetroCluster (inclusi entrambi i siti). Quando si impostano manualmente gli shelf ID, è necessario spegnere e riaccendere lo shelf di dischi.
+
+

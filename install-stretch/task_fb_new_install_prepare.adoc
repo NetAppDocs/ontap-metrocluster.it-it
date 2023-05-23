@@ -1,0 +1,64 @@
+---
+permalink: install-stretch/task_fb_new_install_prepare.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, prepare 
+summary: 'Durante la preparazione all"installazione dei bridge come parte del nuovo sistema MetroCluster, è necessario assicurarsi che il sistema soddisfi determinati requisiti. Ciò include il rispetto dei requisiti di configurazione e configurazione per i bridge. Altri requisiti includono il download dei documenti necessari, l"utility barra di navigazione atto e il firmware bridge.' 
+---
+= Preparazione per l'installazione
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durante la preparazione all'installazione dei bridge come parte del nuovo sistema MetroCluster, è necessario assicurarsi che il sistema soddisfi determinati requisiti. Ciò include il rispetto dei requisiti di configurazione e configurazione per i bridge. Altri requisiti includono il download dei documenti necessari, l'utility barra di navigazione atto e il firmware bridge.
+
+
+
+== Prima di iniziare
+
+* Il sistema deve essere già installato in un rack se non è stato spedito in un cabinet di sistema.
+* La configurazione deve utilizzare modelli hardware e versioni software supportati.
++
+https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp"]
+
++
+In IMT, è possibile utilizzare il campo soluzione storage per selezionare la soluzione MetroCluster. Utilizzare *Esplora componenti* per selezionare i componenti e la versione di ONTAP per perfezionare la ricerca. È possibile fare clic su *Mostra risultati* per visualizzare l'elenco delle configurazioni supportate che corrispondono ai criteri.
+
+* Ogni switch FC deve disporre di una porta FC per il collegamento di un bridge.
+* È necessario aver acquisito dimestichezza con la gestione dei cavi SAS e con le considerazioni e le Best practice per l'installazione e il cablaggio degli shelf di dischi.
++
+La _Guida all'installazione e al servizio_ per il modello di shelf di dischi descrive le considerazioni e le Best practice.
+
+* Per utilizzare l'interfaccia grafica di ATTO ExpressNAV, il computer utilizzato per configurare i bridge deve disporre di un browser Web supportato da atto.
++
+Le _note di rilascio dei prodotti atto_ dispongono di un elenco aggiornato dei browser Web supportati. È possibile accedere a questo documento dal sito Web di atto come descritto nella seguente procedura.
+
+
+
+.Fasi
+. Scarica la _Guida all'installazione e al servizio_ per il tuo modello di shelf di dischi:
+. Accedere al sito Web atto utilizzando il collegamento fornito per il modello FibreBridge e scaricare il manuale e l'utility barra di navigazione.
++
+[NOTE]
+====
+Il _Manuale d'installazione e di funzionamento di FibreBridge atto_ per il tuo modello bridge contiene ulteriori informazioni sulle interfacce di gestione.
+
+Puoi accedere a questo e ad altri contenuti sul sito web di atto utilizzando il link fornito nella pagina ATTO Fibrebridge Description.
+
+====
+. Raccogliere l'hardware e le informazioni necessarie per utilizzare le interfacce di gestione del bridge consigliate, l'interfaccia grafica di ATTO ExpressNAV e l'utility di navigazione atto:
++
+.. Determinare un nome utente e una password non predefiniti (per l'accesso ai bridge).
++
+Modificare il nome utente e la password predefiniti.
+
+.. Per la configurazione della gestione IP dei bridge, è necessario il cavo Ethernet schermato fornito con i bridge (che collega la porta di gestione Ethernet del bridge 1 alla rete).
+.. Se si configura per la gestione IP dei bridge, è necessario disporre di un indirizzo IP, di una subnet mask e di informazioni sul gateway per la porta di gestione Ethernet 1 su ciascun bridge.
+.. Disattivare i client VPN sul computer in uso per la configurazione.
++
+I client VPN attivi causano un errore nella ricerca di bridge nella barra di navigazione.
+
+
+
+

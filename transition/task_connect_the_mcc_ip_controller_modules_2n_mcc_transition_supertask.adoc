@@ -1,0 +1,814 @@
+---
+permalink: transition/task_connect_the_mcc_ip_controller_modules_2n_mcc_transition_supertask.html 
+sidebar: sidebar 
+keywords: add, four, controller, module, additional, storage, shelves, shelf, configuration, two-at-a-time, connect, metrocluster, ip, boot, bring, up 
+summary: È necessario aggiungere alla configurazione i quattro nuovi moduli controller ed eventuali shelf di storage aggiuntivi. I nuovi moduli controller vengono aggiunti due alla volta. 
+---
+= Collegamento dei moduli del controller IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario aggiungere alla configurazione i quattro nuovi moduli controller ed eventuali shelf di storage aggiuntivi. I nuovi moduli controller vengono aggiunti due alla volta.
+
+
+
+== Configurazione dei nuovi controller
+
+È necessario inserire in rack e collegare i nuovi controller IP MetroCluster agli shelf di storage precedentemente collegati ai controller FC MetroCluster.
+
+.A proposito di questa attività
+Questi passaggi devono essere eseguiti su ciascuno dei nodi IP di MetroCluster.
+
+* Node_A_1-IP
+* Node_A_2-IP
+* Node_B_1-IP
+* Node_B_2-IP
+
+
+Nell'esempio seguente, vengono aggiunti due shelf di storage aggiuntivi in ogni sito per fornire storage per ospitare i nuovi moduli controller.
+
+image::../media/transition_2n_4_new_ip_nodes_and_shelves.png[transizione 2n 4 nuovi nodi ip e shelf]
+
+.Fasi
+. Pianificare il posizionamento dei nuovi moduli controller e degli shelf di storage in base alle necessità.
++
+Lo spazio rack dipende dal modello di piattaforma dei moduli controller, dai tipi di switch e dal numero di shelf di storage nella configurazione.
+
+. Mettere a terra l'utente.
+. Rack delle nuove apparecchiature: Controller, shelf di storage e switch IP.
++
+Non collegare i shelf di storage o gli switch IP in questo momento.
+
+. Collegare i cavi di alimentazione e la console di gestione ai controller.
+. Verificare che tutti gli shelf di storage siano spenti.
+. Verificare che non vi siano dischi collegati eseguendo la seguente procedura su tutti e quattro i nodi:
++
+.. Al prompt DEL CARICATORE, avviare il menu di avvio:
++
+`boot_ontap maint`
+
+.. Verificare che non siano collegate unità:
++
+`disk show -v`
+
++
+L'output non dovrebbe mostrare dischi.
+
+.. Arrestare il nodo:
++
+`halt`
+
+
+
+. Avviare tutti e quattro i nodi utilizzando l'opzione 9a del menu di boot.
++
+.. Al prompt DEL CARICATORE, avviare il menu di avvio:
++
+`boot_ontap menu`
+
+.. Nel menu di avvio, selezionare l'opzione "`9a`" per riavviare il controller.
+.. Attendere che il modulo controller completi l'avvio prima di passare al modulo controller successivo.
+
+
++
+Una volta completato "`9a`", i nodi tornano automaticamente al menu di boot.
+
+. Cablare gli scaffali di stoccaggio.
++
+Per informazioni sul cablaggio, consultare le procedure di installazione e configurazione del controller per il modello in uso.
+
++
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+
+. Collegare i controller agli switch IP come descritto in link:../install-ip/using_rcf_generator.html["Cablaggio degli switch IP"].
+. Preparare gli switch IP per l'applicazione dei nuovi file RCF.
++
+Seguire la procedura per il fornitore dello switch:
+
++
+** link:../install-ip/task_switch_config_broadcom.html["Ripristino delle impostazioni predefinite dello switch IP Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Ripristino delle impostazioni predefinite dello switch IP Cisco"]
+
+
+. Scaricare e installare i file RCF.
++
+Seguire la procedura per il fornitore dello switch:
+
++
+** link:../install-ip/task_switch_config_broadcom.html["Download e installazione dei file RCF Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Download e installazione dei file Cisco IP RCF"]
+
+
+. Accendere il primo nuovo controller (Node_A_1-IP) e premere Ctrl-C per interrompere il processo di avvio e visualizzare il prompt DEL CARICATORE.
+. Avviare il controller in modalità di manutenzione:
++
+`boot_ontap_maint`
+
+. Visualizzare l'ID di sistema del controller:
++
+`sysconfig -v`
+
+. Verificare che gli shelf della configurazione esistente siano visibili dal nuovo nodo IP MetroCluster:
++
+`storage show shelf``disk show -v`
+
+. Arrestare il nodo:
++
+`halt`
+
+. Ripetere i passaggi precedenti sull'altro nodo del sito del partner (Site_B).
+
+
+
+
+== Connessione e avvio di Node_A_1-IP e Node_B_1-IP
+
+Dopo aver collegato i controller IP MetroCluster e gli switch IP, si passa a Node_A_1-IP e Node_B_1-IP e si avvia.
+
+
+
+=== Creazione di Node_A_1-IP
+
+È necessario avviare il nodo con l'opzione di transizione corretta.
+
+.Fasi
+. Boot node_A_1-IP al menu di boot:
++
+`boot_ontap menu`
+
+. Immettere il seguente comando al prompt del menu di avvio per avviare la transizione:
++
+`boot_after_mcc_transition`
+
++
+** Questo comando riassegna tutti i dischi di proprietà di Node_A_1-FC a Node_A_1-IP.
++
+*** I dischi Node_A_1-FC sono assegnati al Node_A_1-IP
+*** I dischi Node_B_1-FC sono assegnati al nodo_B_1-IP
+
+
+** Il comando esegue inoltre automaticamente altre riassegnazioni di ID di sistema necessarie in modo che i nodi IP MetroCluster possano avviarsi al prompt di ONTAP.
+** Se il comando boot_after_mcc_Transition non riesce per qualsiasi motivo, dovrebbe essere rieseguito dal menu di boot.
++
+[NOTE]
+====
+*** Se viene visualizzato il seguente prompt, immettere Ctrl-C per continuare. Verifica stato DR MCC in corso... [Enter Ctrl-C(resume), S(status), L(link)]_
+*** Se il volume root è stato crittografato, il nodo si arresta con il seguente messaggio. Arresto del sistema, perché il volume root è crittografato (NetApp Volume Encryption) e l'importazione della chiave non è riuscita. Se questo cluster è configurato con un gestore di chiavi esterno (KMIP), controllare lo stato dei server di chiavi.
+
+
+====
++
+[listing]
+----
+
+Please choose one of the following:
+(1) Normal Boot.
+(2) Boot without /etc/rc.
+(3) Change password.
+(4) Clean configuration and initialize all disks.
+(5) Maintenance mode boot.
+(6) Update flash from backup config.
+(7) Install new software first.
+(8) Reboot node.
+(9) Configure Advanced Drive Partitioning. Selection (1-9)? `boot_after_mcc_transition`
+This will replace all flash-based configuration with the last backup to disks. Are you sure you want to continue?: yes
+
+MetroCluster Transition: Name of the MetroCluster FC node: `node_A_1-FC`
+MetroCluster Transition: Please confirm if this is the correct value [yes|no]:? y
+MetroCluster Transition: Disaster Recovery partner sysid of MetroCluster FC node node_A_1-FC: `systemID-of-node_B_1-FC`
+MetroCluster Transition: Please confirm if this is the correct value [yes|no]:? y
+MetroCluster Transition: Disaster Recovery partner sysid of local MetroCluster IP node: `systemID-of-node_B_1-IP`
+MetroCluster Transition: Please confirm if this is the correct value [yes|no]:? y
+----
+
+
+. Se i volumi di dati sono crittografati, ripristinare le chiavi utilizzando il comando corretto per la configurazione di gestione delle chiavi.
++
+[cols="1,2"]
+|===
+
+
+| Se si utilizza... | Utilizzare questo comando... 
+
+
+ a| 
+*Gestione delle chiavi integrata*
+ a| 
+`security key-manager onboard sync`
+
+Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-E4AB2ED4-9227-4974-A311-13036EB43A3D.html["Ripristino delle chiavi di crittografia integrate per la gestione delle chiavi"^].
+
+
+
+ a| 
+*Gestione esterna delle chiavi*
+ a| 
+`security key-manager key query -node node-name`
+
+Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-32DA96C3-9B04-4401-92B8-EAF323C3C863.html["Ripristino delle chiavi di crittografia esterne per la gestione delle chiavi"^].
+
+|===
+. Se il volume root è crittografato, seguire la procedura descritta in link:../transition/task_connect_the_mcc_ip_controller_modules_2n_mcc_transition_supertask.html#recovering-key-management-if-the-root-volume-is-encrypted["Ripristino della gestione delle chiavi se il volume root è crittografato"].
+
+
+
+
+=== Ripristino della gestione delle chiavi se il volume root è crittografato
+
+Se il volume root è crittografato, è necessario utilizzare speciali comandi di boot per ripristinare la gestione delle chiavi.
+
+.Prima di iniziare
+Le passphrase devono essere raccolte in precedenza.
+
+.Fasi
+. Se si utilizza la gestione delle chiavi integrata, eseguire i seguenti passaggi secondari per ripristinare la configurazione.
++
+.. Dal prompt DEL CARICATORE, visualizzare il menu di avvio:
++
+`boot_ontap menu`
+
+.. Selezionare l'opzione "`(10) set onboard key management recovery secrets`" dal menu di avvio.
++
+Rispondere alle richieste in base alle esigenze:
+
++
+[listing]
+----
+This option must be used only in disaster recovery procedures. Are you sure? (y or n): y
+Enter the passphrase for onboard key management: passphrase
+Enter the passphrase again to confirm: passphrase
+
+Enter the backup data: backup-key
+----
++
+Il sistema viene avviato dal menu di avvio.
+
+.. Immettere l'opzione "`6`" nel menu di avvio.
++
+Rispondere alle richieste in base alle esigenze:
+
++
+[listing]
+----
+This will replace all flash-based configuration with the last backup to
+disks. Are you sure you want to continue?: y
+
+Following this, the system will reboot a few times and the following prompt will be available continue by saying y
+
+WARNING: System ID mismatch. This usually occurs when replacing a boot device or NVRAM cards!
+Override system ID? {y|n} y
+----
++
+Dopo il riavvio, il sistema viene visualizzato al prompt DEL CARICATORE.
+
+.. Dal prompt DEL CARICATORE, visualizzare il menu di avvio:
++
+`boot_ontap menu`
+
+.. Selezionare nuovamente l'opzione "`(10) set onboard key management recovery secrets`" (Imposta segreti di ripristino gestione delle chiavi integrate) dal menu di avvio.
++
+Rispondere alle richieste in base alle esigenze:
+
++
+[listing]
+----
+This option must be used only in disaster recovery procedures. Are you sure? (y or n): `y`
+Enter the passphrase for onboard key management: `passphrase`
+Enter the passphrase again to confirm:`passphrase`
+
+Enter the backup data:`backup-key`
+----
++
+Il sistema viene avviato dal menu di avvio.
+
+.. Immettere l'opzione "`1`" nel menu di avvio.
++
+Se viene visualizzato il seguente prompt, premere Ctrl+C per riprendere il processo.
+
++
+....
+ Checking MCC DR state... [enter Ctrl-C(resume), S(status), L(link)]
+....
++
+Il sistema viene avviato dal prompt ONTAP.
+
+.. Ripristinare la gestione delle chiavi integrata:
++
+`security key-manager onboard sync`
+
++
+Rispondere alle richieste, utilizzando la passphrase precedentemente raccolta:
+
++
+[listing]
+----
+cluster_A::> security key-manager onboard sync
+Enter the cluster-wide passphrase for onboard key management in Vserver "cluster_A":: passphrase
+----
+
+
+. Se si utilizza la gestione esterna delle chiavi, eseguire le seguenti procedure secondarie per ripristinare la configurazione.
++
+.. Impostare i bootargs richiesti:
++
+`setenv bootarg.kmip.init.ipaddr ip-address`
+
++
+`setenv bootarg.kmip.init.netmask netmask`
+
++
+`setenv bootarg.kmip.init.gateway gateway-address`
+
++
+`setenv bootarg.kmip.init.interface interface-id`
+
+.. Dal prompt DEL CARICATORE, visualizzare il menu di avvio:
++
+`boot_ontap menu`
+
+.. Selezionare l'opzione "`(11) Configure node for external key management`" (Configura nodo per la gestione delle chiavi esterne) dal menu di avvio.
++
+Il sistema viene avviato dal menu di avvio.
+
+.. Immettere l'opzione "`6`" nel menu di avvio.
++
+Il sistema si avvia più volte. Quando viene richiesto di continuare il processo di avvio, è possibile rispondere affermativamente.
+
++
+Dopo il riavvio, il sistema viene visualizzato al prompt DEL CARICATORE.
+
+.. Impostare i bootargs richiesti:
++
+`setenv bootarg.kmip.init.ipaddr ip-address`
+
++
+`setenv bootarg.kmip.init.netmask netmask`
+
++
+`setenv bootarg.kmip.init.gateway gateway-address`
+
++
+`setenv bootarg.kmip.init.interface interface-id`
+
+.. Dal prompt DEL CARICATORE, visualizzare il menu di avvio:
++
+`boot_ontap menu`
+
+.. Selezionare di nuovo l'opzione "`(11) Configure node for external key management`" (Configura nodo per la gestione delle chiavi esterne) dal menu di avvio e rispondere alle richieste secondo necessità.
++
+Il sistema viene avviato dal menu di avvio.
+
+.. Ripristinare la gestione esterna delle chiavi:
++
+`security key-manager external restore`
+
+
+
+
+
+
+
+=== Creazione della configurazione di rete
+
+È necessario creare una configurazione di rete che corrisponda alla configurazione sui nodi FC. Questo perché il nodo IP MetroCluster riproduce la stessa configurazione all'avvio, il che significa che quando si avvia Node_A_1-IP e Node_B_1-IP, ONTAP tenta di ospitare i file LIF sulle stesse porte utilizzate rispettivamente su Node_A_1-FC e Node_B_1-FC.
+
+.A proposito di questa attività
+Durante la creazione della configurazione di rete, utilizzare il piano creato in link:concept_requirements_for_fc_to_ip_transition_2n_mcc_transition.html["Mappatura delle porte dai nodi FC MetroCluster ai nodi IP MetroCluster"] per assisterti.
+
+
+NOTE: Una volta configurati i nodi IP MetroCluster, potrebbe essere necessaria un'ulteriore configurazione per attivare le LIF dei dati.
+
+.Fasi
+. Verificare che tutte le porte del cluster si trovino nel dominio di trasmissione appropriato:
++
+L'IPSpace del cluster e il dominio di broadcast del cluster sono necessari per creare le LIF del cluster
+
++
+.. Visualizzare gli spazi IP:
++
+`network ipspace show`
+
+.. Creare spazi IP e assegnare le porte del cluster in base alle esigenze.
++
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-69120CF0-F188-434F-913E-33ACB8751A5D.html["Configurazione di IPspaces (solo amministratori del cluster)"^]
+
+.. Visualizzare i domini di trasmissione:
++
+`network port broadcast-domain show`
+
+.. Aggiungere eventuali porte del cluster a un dominio di broadcast in base alle esigenze.
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-003BDFCD-58A3-46C9-BF0C-BA1D1D1475F9.html["Aggiunta o rimozione di porte da un dominio di broadcast"^]
+
+.. Ricreare VLAN e gruppi di interfacce in base alle esigenze.
++
+L'appartenenza alla VLAN e al gruppo di interfacce potrebbe essere diversa da quella del nodo precedente.
+
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-8929FCE2-5888-4051-B8C0-E27CAF3F2A63.html["Creazione di una VLAN"^]
+
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-DBC9DEE2-EAB7-430A-A773-4E3420EE2AA1.html["Combinazione di porte fisiche per creare gruppi di interfacce"^]
+
+
+
+. Verificare che le impostazioni MTU siano impostate correttamente per le porte e il dominio di trasmissione e apportare le modifiche utilizzando i seguenti comandi:
++
+`network port broadcast-domain show`
+
++
+`network port broadcast-domain modify -broadcast-domain _bcastdomainname_ -mtu _mtu-value_`
+
+
+
+
+
+=== Impostazione delle porte del cluster e delle LIF del cluster
+
+È necessario configurare le porte del cluster e i LIF. I seguenti passaggi devono essere eseguiti sui nodi del sito A che sono stati avviati con aggregati root.
+
+.Fasi
+. Identificare l'elenco di LIF utilizzando la porta del cluster desiderata:
++
+`network interface show -curr-port portname`
+
++
+`network interface show -home-port portname`
+
+. Per ciascuna porta del cluster, modificare la porta home di una delle LIF di tale porta con un'altra,
++
+.. Immettere Advanced Privilege mode e digitare "`y`" quando viene richiesto di continuare:
++
+`set priv advanced`
+
+.. Se la LIF da modificare è una LIF dati:
++
+`vserver config override -command "network interface modify -lif _lifname_ -vserver _vservername_ -home-port _new-datahomeport_"`
+
+.. Se la LIF non è una LIF dati:
++
+`network interface modify -lif _lifname_ -vserver _vservername_ -home-port _new-datahomeport_`
+
+.. Ripristinare le LIF modificate alla porta home:
++
+`network interface revert * -vserver _vserver_name_`
+
+.. Verificare che non vi siano LIF sulla porta del cluster:
++
+`network interface show -curr-port _portname_`
+
++
+`network interface show -home-port _portname_`
+
+.. Rimuovere la porta dal dominio di trasmissione corrente:
++
+`network port broadcast-domain remove-ports -ipspace _ipspacename_ -broadcast-domain _bcastdomainname_ -ports _node_name:port_name_`
+
+.. Aggiungere la porta all'IPSpace del cluster e al dominio di trasmissione:
++
+`network port broadcast-domain add-ports -ipspace Cluster -broadcast-domain Cluster -ports _node_name:port_name_`
+
+.. Verificare che il ruolo della porta sia stato modificato: `network port show`
+.. Ripetere questi passaggi secondari per ciascuna porta del cluster.
+.. Tornare alla modalità admin:
++
+`set priv admin`
+
+
+
+. Creare le LIF del cluster sulle nuove porte del cluster:
++
+.. Per la configurazione automatica utilizzando l'indirizzo link-local per la LIF del cluster, utilizzare il seguente comando:
++
+`network interface create -vserver Cluster -lif _cluster_lifname_ -service-policy _default-cluster_ -home-node _a1name_ -home-port clusterport -auto true`
+
+.. Per assegnare un indirizzo IP statico alla LIF del cluster, utilizzare il seguente comando:
++
+`network interface create -vserver Cluster -lif _cluster_lifname_ -service-policy default-cluster -home-node _a1name_ -home-port _clusterport_ -address _ip-address_ -netmask _netmask_ -status-admin up`
+
+
+
+
+
+
+
+=== Verifica della configurazione LIF in corso
+
+La LIF di gestione dei nodi, la LIF di gestione dei cluster e la LIF di intercluster saranno ancora presenti dopo lo spostamento dello storage dal vecchio controller. Se necessario, è necessario spostare i file LIF nelle porte appropriate.
+
+.Fasi
+. Verificare se la LIF di gestione e la LIF di gestione del cluster si trovano già sulla porta desiderata:
++
+`network interface show -service-policy default-management`
+
++
+`network interface show -service-policy default-intercluster`
+
++
+Se le LIF si trovano sulle porte desiderate, è possibile saltare il resto delle fasi di questa attività e passare all'attività successiva.
+
+. Per ogni nodo, gestione del cluster o LIF di intercluster che non si trovano sulla porta desiderata, modificare la porta home di una delle LIF di tale porta in un'altra porta.
++
+.. Cambiare destinazione della porta desiderata spostando i file LIF ospitati sulla porta desiderata su un'altra porta:
++
+`vserver config override -command "network interface modify -lif _lifname_ -vserver _vservername_ -home-port _new-datahomeport_"`
+
+.. Ripristinare le LIF modificate alla nuova porta home:
++
+`vserver config override -command "network interface revert -lif _lifname_ -vserver _vservername"`
+
+.. Se la porta desiderata non si trova nel dominio IPSpace e broadcast corretto, rimuovere la porta dal dominio IPSpace e broadcast corrente:
++
+`network port broadcast-domain remove-ports -ipspace _current-ipspace_ -broadcast-domain _current-broadcast-domain_ -ports _controller-name:current-port_`
+
+.. Spostare la porta desiderata sul dominio IPSpace e broadcast di destra:
++
+`network port broadcast-domain add-ports -ipspace _new-ipspace_ -broadcast-domain _new-broadcast-domain_ -ports _controller-name:new-port_`
+
+.. Verificare che il ruolo della porta sia stato modificato:
++
+`network port show`
+
+.. Ripetere questi passaggi secondari per ciascuna porta.
+
+
+. Spostare nodi, LIF di gestione cluster e LIF di intercluster sulla porta desiderata:
++
+.. Modificare la porta home di LIF:
++
+`network interface modify -vserver _vserver_ -lif _node_mgmt_ -home-port _port_ -home-node _homenode_`
+
+.. Ripristinare la nuova porta home di LIF:
++
+`network interface revert -lif _node_mgmt_ -vserver _vservername_`
+
+.. Modificare la porta home della LIF di gestione del cluster:
++
+`network interface modify -vserver _vserver_ -lif _cluster-mgmt-LIF-name_ -home-port _port_ -home-node _homenode_`
+
+.. Riportare la LIF di gestione del cluster alla nuova porta home:
++
+`network interface revert -lif _cluster-mgmt-LIF-name_ -vserver _vservername_`
+
+.. Modificare la porta home della LIF dell'intercluster:
++
+`network interface modify -vserver _vserver_ -lif _intercluster-lif-name_ -home-node _nodename_ -home-port _port_`
+
+.. Riportare la LIF dell'intercluster alla nuova porta home:
++
+`network interface revert -lif _intercluster-lif-name_ -vserver _vservername_`
+
+
+
+
+
+
+
+== Portando Node_A_2-IP e Node_B_2-IP
+
+È necessario attivare e configurare il nuovo nodo IP MetroCluster in ogni sito, creando una coppia ha in ogni sito.
+
+
+
+=== Portando Node_A_2-IP e Node_B_2-IP
+
+È necessario avviare i nuovi moduli controller uno alla volta utilizzando l'opzione corretta nel menu di avvio.
+
+.A proposito di questa attività
+In questi passaggi, si avviano i due nuovi nodi, espandendo quella che era stata una configurazione a due nodi in una configurazione a quattro nodi.
+
+Questi passaggi vengono eseguiti sui seguenti nodi:
+
+* Node_A_2-IP
+* Node_B_2-IP
+
+
+image::../media/transition_2n_booting_a_2_and_b_2.png[transizione 2n avvio di 2 e b 2]
+
+.Fasi
+. Avviare i nuovi nodi usando l'opzione di boot "`9c`".
++
+[listing]
+----
+Please choose one of the following:
+(1) Normal Boot.
+(2) Boot without /etc/rc.
+(3) Change password.
+(4) Clean configuration and initialize all disks.
+(5) Maintenance mode boot.
+(6) Update flash from backup config.
+(7) Install new software first.
+(8) Reboot node.
+(9) Configure Advanced Drive Partitioning. Selection (1-9)? 9c
+----
++
+Il nodo viene inizializzato e avviato con l'installazione guidata del nodo, come descritto di seguito.
+
++
+[listing]
+----
+Welcome to node setup
+You can enter the following commands at any time:
+"help" or "?" - if you want to have a question clarified,
+"back" - if you want to change previously answered questions, and
+"exit" or "quit" - if you want to quit the setup wizard.
+Any changes you made before quitting will be saved.
+To accept a default or omit a question, do not enter a value. .
+.
+.
+----
++
+Se l'opzione "`9c`" non riesce, attenersi alla seguente procedura per evitare la possibile perdita di dati:
+
++
+** Non tentare di eseguire l'opzione 9a.
+** Scollegare fisicamente gli shelf esistenti che contengono dati dalla configurazione FC MetroCluster originale (shelf_A_1, shelf_A_2, shelf_B_1, shelf_B_2).
+** Contattare il supporto tecnico, facendo riferimento all'articolo della Knowledge base https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/MetroCluster_FC_to_IP_transition_-_Option_9c_Failing["Transizione MetroCluster da FC a IP - opzione 9c non riuscita"^].
++
+https://mysupport.netapp.com/site/global/dashboard["Supporto NetApp"^]
+
+
+
+. Attivare lo strumento AutoSupport seguendo le istruzioni fornite dalla procedura guidata.
+. Rispondere alle richieste per configurare l'interfaccia di gestione dei nodi.
++
+[listing]
+----
+Enter the node management interface port: [e0M]:
+Enter the node management interface IP address: 10.228.160.229
+Enter the node management interface netmask: 225.225.252.0
+Enter the node management interface default gateway: 10.228.160.1
+----
+. Verificare che la modalità di failover dello storage sia impostata su ha:
++
+`storage failover show -fields mode`
+
++
+Se la modalità non è ha, impostarla:
+
++
+`storage failover modify -mode ha -node _localhost_`
+
++
+Riavviare il nodo per rendere effettiva la modifica.
+
+. Elencare le porte nel cluster:
++
+`network port show`
+
++
+Per la sintassi completa dei comandi, vedere la pagina man.
+
++
+L'esempio seguente mostra le porte di rete nel cluster01:
+
++
+[listing]
+----
+
+cluster01::> network port show
+                                                             Speed (Mbps)
+Node   Port      IPspace      Broadcast Domain Link   MTU    Admin/Oper
+------ --------- ------------ ---------------- ----- ------- ------------
+cluster01-01
+       e0a       Cluster      Cluster          up     1500   auto/1000
+       e0b       Cluster      Cluster          up     1500   auto/1000
+       e0c       Default      Default          up     1500   auto/1000
+       e0d       Default      Default          up     1500   auto/1000
+       e0e       Default      Default          up     1500   auto/1000
+       e0f       Default      Default          up     1500   auto/1000
+cluster01-02
+       e0a       Cluster      Cluster          up     1500   auto/1000
+       e0b       Cluster      Cluster          up     1500   auto/1000
+       e0c       Default      Default          up     1500   auto/1000
+       e0d       Default      Default          up     1500   auto/1000
+       e0e       Default      Default          up     1500   auto/1000
+       e0f       Default      Default          up     1500   auto/1000
+----
+. Uscire dalla procedura guidata Node Setup (Configurazione nodo):
++
+`exit`
+
+. Accedere all'account admin utilizzando il nome utente admin.
+. Unirsi al cluster esistente utilizzando la procedura guidata di installazione del cluster.
++
+[listing]
+----
+:> cluster setup
+Welcome to the cluster setup wizard.
+You can enter the following commands at any time:
+"help" or "?" - if you want to have a question clarified,
+"back" - if you want to change previously answered questions, and "exit" or "quit" - if you want to quit the cluster setup wizard.
+Any changes you made before quitting will be saved.
+You can return to cluster setup at any time by typing "cluster setup". To accept a default or omit a question, do not enter a value.
+Do you want to create a new cluster or join an existing cluster?
+{create, join}:
+join
+----
+. Dopo aver completato l'installazione guidata del cluster e averlo chiuso, verificare che il cluster sia attivo e che il nodo funzioni correttamente:
++
+`cluster show`
+
+. Disattiva assegnazione automatica del disco:
++
+`storage disk option modify -autoassign off -node node_A_2-IP`
+
+. Se viene utilizzata la crittografia, ripristinare le chiavi utilizzando il comando corretto per la configurazione di gestione delle chiavi.
++
+[cols="1,2"]
+|===
+
+
+| Se si utilizza... | Utilizzare questo comando... 
+
+
+ a| 
+*Gestione delle chiavi integrata*
+ a| 
+`security key-manager onboard sync`
+
+Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-E4AB2ED4-9227-4974-A311-13036EB43A3D.html["Ripristino delle chiavi di crittografia integrate per la gestione delle chiavi"].
+
+
+
+ a| 
+*Gestione esterna delle chiavi*
+ a| 
+`security key-manager key query -node _node-name_`
+
+Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-32DA96C3-9B04-4401-92B8-EAF323C3C863.html["Ripristino delle chiavi di crittografia esterne per la gestione delle chiavi"^].
+
+|===
+. Ripetere i passaggi precedenti sul secondo nuovo modulo controller (Node_B_2-IP).
+
+
+
+
+=== Verifica delle impostazioni MTU in corso
+
+Verificare che le impostazioni MTU siano impostate correttamente per le porte e il dominio di trasmissione e apportare modifiche.
+
+.Fasi
+. Controllare le dimensioni MTU utilizzate nel dominio di trasmissione del cluster:
++
+`network port broadcast-domain show`
+
+. Se necessario, aggiornare le dimensioni MTU in base alle necessità:
++
+`network port broadcast-domain modify -broadcast-domain _bcast-domain-name_ -mtu _mtu-size_`
+
+
+
+
+
+=== Configurazione delle LIF tra cluster
+
+Configurare le LIF intercluster richieste per il peering del cluster.
+
+Questa attività deve essere eseguita su entrambi i nuovi nodi, Node_A_2-IP e Node_B_2-IP.
+
+.Fase
+. Configurare le LIF dell'intercluster. Vedere link:../install-ip/task_sw_config_configure_clusters.html#configuring-intercluster-lifs-for-cluster-peering["Configurazione delle LIF tra cluster"]
+
+
+
+
+=== Verifica del peering del cluster
+
+Verificare che cluster_A e cluster_B siano peering e che i nodi di ciascun cluster possano comunicare tra loro.
+
+.Fasi
+. Verificare la relazione di peering del cluster:
++
+`cluster peer health show`
+
++
+[listing]
+----
+cluster01::> cluster peer health show
+Node       cluster-Name                Node-Name
+             Ping-Status               RDB-Health Cluster-Health  Avail…
+---------- --------------------------- ---------  --------------- --------
+node_A_1-IP
+           cluster_B                   node_B_1-IP
+             Data: interface_reachable
+             ICMP: interface_reachable true       true            true
+                                       node_B_2-IP
+             Data: interface_reachable
+             ICMP: interface_reachable true       true            true
+node_A_2-IP
+           cluster_B                   node_B_1-IP
+             Data: interface_reachable
+             ICMP: interface_reachable true       true            true
+                                       node_B_2-IP
+             Data: interface_reachable
+             ICMP: interface_reachable true       true            true
+----
+. Ping per verificare che gli indirizzi peer siano raggiungibili:
++
+`cluster peer ping -originating-node _local-node_ -destination-cluster _remote-cluster-name_`
+
+

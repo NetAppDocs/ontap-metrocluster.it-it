@@ -1,0 +1,366 @@
+---
+permalink: maintain/task_upgrade_or_downgrad_the_firmware_on_a_cisco_fc_switch_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, upgrade, downgrade, firmware, cisco, fc, switch 
+summary: 'Per aggiornare o eseguire il downgrade del firmware su uno switch FC Cisco, è necessario utilizzare i comandi specifici di Cisco per disattivare lo switch, eseguire e verificare l"aggiornamento, riavviare e riabilitare lo switch.' 
+---
+= Aggiornamento o downgrade del firmware su uno switch FC Cisco
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Per aggiornare o eseguire il downgrade del firmware su uno switch FC Cisco, è necessario utilizzare i comandi specifici di Cisco per disattivare lo switch, eseguire e verificare l'aggiornamento, riavviare e riabilitare lo switch.
+
+* Il sistema deve essere collegato correttamente.
+* Tutti i percorsi verso gli shelf di storage devono essere disponibili.
+* Gli stack degli shelf di dischi devono essere stabili.
+* Il fabric dello switch FC deve essere integro.
+* Tutti i componenti del sistema devono essere integri.
+* Il sistema deve funzionare normalmente.
+* È necessaria la password admin e l'accesso a un server FTP o SCP.
+
+
+Il fabric dello switch viene disattivato durante l'aggiornamento o il downgrade del firmware e la configurazione MetroCluster si basa sul secondo fabric per continuare a funzionare.
+
+È necessario ripetere questa attività su ciascuno switch fabric in successione per assicurarsi che tutti gli switch eseguano la stessa versione del firmware.
+
+È necessario disporre dei file del firmware.
+
+
+NOTE: Questa procedura è senza interruzioni e richiede circa un'ora per essere completata.
+
+.Fasi
+. Accedere a ciascuno switch del fabric.
++
+Negli esempi, gli switch sono chiamati FC_switch_A_1 e FC_switch_B_1.
+
+. Determinare se nella directory bootflash su ogni switch è presente spazio sufficiente:
++
+`*dir bootflash*`
+
++
+In caso contrario, eliminare i file del firmware indesiderati utilizzando `delete bootflash:file_name` comando.
+
+. Copiare i file di sistema e kickstart sugli switch:
++
+`*copy _source_filetarget_file_*`
+
++
+Nell'esempio seguente, il file kickstart (`m9200-s2ek9-kickstart-mz.5.2.1.bin`) e il file di sistema (`m9200-s2ek9-mz.5.2.1.bin`) Si trovano sul server FTP 10.10.10.55 in `/firmware/` percorso.
+
++
+L'esempio seguente mostra i comandi emessi su FC_switch_A_1:
+
++
+[listing]
+----
+FC_switch_A_1# copy ftp://10.10.10.55/firmware/m9200-s2ek9-kickstart-mz.5.2.1.bin bootflash:m9200-s2ek9-kickstart-mz.5.2.1.bin
+FC_switch_A_1# copy ftp://10.10.10.55/firmware/m9200-s2ek9-mz.5.2.1.bin bootflash:m9200-s2ek9-mz.5.2.1.bin
+----
+. Disattivare tutte le VSAN su entrambi gli switch in questo fabric.
++
+Per disattivare le reti VSAN, attenersi alla seguente procedura:
+
++
+.. Aprire il terminale di configurazione:
++
+`*config t*`
+
+.. Inserire: `*vsan database*`
+.. Controllare lo stato delle reti VSAN:
++
+`*show vsan*`
+
++
+Tutte le reti VSAN devono essere attive.
+
+.. Sospendere le VSAN:
++
+`*vsan _vsan-num_ suspend*`
+
++
+*Esempio:* `vsan 10 suspend`
+
+.. Controllare nuovamente lo stato delle reti VSAN:
++
+`*show vsan*`+ tutti i VSAN devono essere sospesi.
+
+.. Uscire dal terminale di configurazione:
++
+`*end*`
+
+.. Salvare la configurazione.
++
+`*copy running-config startup-config*`
+
++
+Nell'esempio seguente viene visualizzato l'output per FC_switch_A_1:
+
++
+[listing]
+----
+FC_switch_A_1# config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+FC_switch_A_1(config)# vsan database
+FC_switch_A_1(config-vsan-db)# show vsan
+vsan 1 information
+         name:VSAN0001  state:active
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:up
+
+vsan 30 information
+         name:MC1_FCVI_2_30  state:active
+         interoperability mode:default
+         loadbalancing:src-id/dst-id
+         operational state:up
+
+vsan 40 information
+         name:MC1_STOR_2_40  state:active
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:up
+
+vsan 70 information
+         name:MC2_FCVI_2_70  state:active
+         interoperability mode:default
+         loadbalancing:src-id/dst-id
+         operational state:up
+
+vsan 80 information
+         name:MC2_STOR_2_80  state:active
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:up
+
+vsan 4079:evfp_isolated_vsan
+
+vsan 4094:isolated_vsan
+
+FC_switch_A_1(config-vsan-db)# vsan 1 suspend
+FC_switch_A_1(config-vsan-db)# vsan 30 suspend
+FC_switch_A_1(config-vsan-db)# vsan 40 suspend
+FC_switch_A_1(config-vsan-db)# vsan 70 suspend
+FC_switch_A_1(config-vsan-db)# vsan 80 suspend
+FC_switch_A_1(config-vsan-db)# end
+FC_switch_A_1#
+FC_switch_A_1# show vsan
+vsan 1 information
+         name:VSAN0001  state:suspended
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:down
+
+vsan 30 information
+         name:MC1_FCVI_2_30  state:suspended
+         interoperability mode:default
+         loadbalancing:src-id/dst-id
+         operational state:down
+
+vsan 40 information
+         name:MC1_STOR_2_40  state:suspended
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:down
+
+vsan 70 information
+         name:MC2_FCVI_2_70  state:suspended
+         interoperability mode:default
+         loadbalancing:src-id/dst-id
+         operational state:down
+
+vsan 80 information
+         name:MC2_STOR_2_80  state:suspended
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:down
+
+vsan 4079:evfp_isolated_vsan
+
+vsan 4094:isolated_vsan
+----
+
+
+. Installare il firmware desiderato sugli switch:
++
+`*install all system bootflash:__systemfile_name__ kickstart bootflash:__kickstartfile_name__*`
+
++
+L'esempio seguente mostra i comandi emessi su FC_switch_A_1:
+
++
+[listing]
+----
+FC_switch_A_1# install all system bootflash:m9200-s2ek9-mz.5.2.1.bin kickstart bootflash:m9200-s2ek9-kickstart-mz.5.2.1.bin
+Enter Yes to confirm the installation.
+----
+. Verificare la versione del firmware su ciascun switch per assicurarsi che sia stata installata la versione corretta:
++
+`*show version*`
+
+. Abilitare tutte le VSAN su entrambi gli switch in questo fabric.
++
+Utilizzare la seguente procedura per attivare le reti VSAN:
+
++
+.. Aprire il terminale di configurazione:
++
+`*config t*`
+
+.. Inserire: `*vsan database*`
+.. Controllare lo stato delle reti VSAN:
++
+`*show vsan*`
+
++
+Le VSAN devono essere sospese.
+
+.. Attivare le VSAN:
++
+`*no vsan _vsan-num_ suspend*`
+
++
+*Esempio:* `no vsan 10 suspend`
+
+.. Controllare nuovamente lo stato delle reti VSAN:
++
+`*show vsan*`
+
++
+Tutte le reti VSAN devono essere attive.
+
+.. Uscire dal terminale di configurazione:
++
+`*end*`
+
+.. Salvare la configurazione:
++
+`*copy running-config startup-config*`
+
++
+Nell'esempio seguente viene visualizzato l'output per FC_switch_A_1:
+
++
+[listing]
+----
+FC_switch_A_1# config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+FC_switch_A_1(config)# vsan database
+FC_switch_A_1(config-vsan-db)# show vsan
+vsan 1 information
+         name:VSAN0001  state:suspended
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:down
+
+vsan 30 information
+         name:MC1_FCVI_2_30  state:suspended
+         interoperability mode:default
+         loadbalancing:src-id/dst-id
+         operational state:down
+
+vsan 40 information
+         name:MC1_STOR_2_40  state:suspended
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:down
+
+vsan 70 information
+         name:MC2_FCVI_2_70  state:suspended
+         interoperability mode:default
+         loadbalancing:src-id/dst-id
+         operational state:down
+
+vsan 80 information
+         name:MC2_STOR_2_80  state:suspended
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:down
+
+vsan 4079:evfp_isolated_vsan
+
+vsan 4094:isolated_vsan
+
+FC_switch_A_1(config-vsan-db)# no vsan 1 suspend
+FC_switch_A_1(config-vsan-db)# no vsan 30 suspend
+FC_switch_A_1(config-vsan-db)# no vsan 40 suspend
+FC_switch_A_1(config-vsan-db)# no vsan 70 suspend
+FC_switch_A_1(config-vsan-db)# no vsan 80 suspend
+FC_switch_A_1(config-vsan-db)#
+FC_switch_A_1(config-vsan-db)# show vsan
+vsan 1 information
+         name:VSAN0001  state:active
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:up
+
+vsan 30 information
+         name:MC1_FCVI_2_30  state:active
+         interoperability mode:default
+         loadbalancing:src-id/dst-id
+         operational state:up
+
+vsan 40 information
+         name:MC1_STOR_2_40  state:active
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:up
+
+vsan 70 information
+         name:MC2_FCVI_2_70  state:active
+         interoperability mode:default
+         loadbalancing:src-id/dst-id
+         operational state:up
+
+vsan 80 information
+         name:MC2_STOR_2_80  state:active
+         interoperability mode:default
+         loadbalancing:src-id/dst-id/oxid
+         operational state:up
+
+vsan 4079:evfp_isolated_vsan
+
+vsan 4094:isolated_vsan
+
+FC_switch_A_1(config-vsan-db)# end
+FC_switch_A_1#
+----
+
+
+. Verificare il funzionamento della configurazione MetroCluster in ONTAP:
++
+.. Verificare che il sistema sia multipercorso:
++
+`*node run -node _node-name_ sysconfig -a*`
+
+.. Verificare la presenza di eventuali avvisi sullo stato di salute su entrambi i cluster:
++
+`*system health alert show*`
+
+.. Verificare la configurazione MetroCluster e che la modalità operativa sia normale:
++
+`*metrocluster show*`
+
+.. Eseguire un controllo MetroCluster:
++
+`*metrocluster check run*`
+
+.. Visualizzare i risultati del controllo MetroCluster:
++
+`*metrocluster check show*`
+
+.. Verificare la presenza di eventuali avvisi sullo stato di salute sugli switch (se presenti):
++
+`*storage switch show*`
+
+.. Eseguire Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Download NetApp: Config Advisor"]
+
+.. Dopo aver eseguito Config Advisor, esaminare l'output dello strumento e seguire le raccomandazioni nell'output per risolvere eventuali problemi rilevati.
+
+
+. Ripetere questa procedura per il secondo fabric switch.
+

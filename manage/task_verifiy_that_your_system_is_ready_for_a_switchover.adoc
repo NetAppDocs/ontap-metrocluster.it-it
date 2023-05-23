@@ -1,0 +1,44 @@
+---
+permalink: manage/task_verifiy_that_your_system_is_ready_for_a_switchover.html 
+sidebar: sidebar 
+keywords: simulate, option, preview, result, switchover, operation, verification, check, precondition, succesful, verify, ready, example 
+summary: 'È possibile utilizzare l"opzione -simulate per visualizzare in anteprima i risultati di un"operazione di switchover. Un controllo di verifica consente di verificare che la maggior parte delle condizioni preliminari per un"esecuzione corretta siano soddisfatte prima di iniziare l"operazione.' 
+---
+= Verificare che il sistema sia pronto per lo switchover
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile utilizzare `-simulate` opzione per visualizzare in anteprima i risultati di un'operazione di switchover. Un controllo di verifica consente di verificare che la maggior parte delle condizioni preliminari per un'esecuzione corretta siano soddisfatte prima di iniziare l'operazione. Eseguire questi comandi dal sito che rimarranno attivi e operativi:
+
+. Impostare il livello di privilegio su Advanced (avanzato): `set -privilege advanced`
+. Dal sito che rimarrà attivo e operativo, simulare un'operazione di switchover: `metrocluster switchover -simulate`
+. Esaminare l'output restituito.
++
+L'output mostra se eventuali veti impedirebbero un'operazione di switchover. Ogni volta che si esegue un'operazione MetroCluster, è necessario verificare una serie di criteri per la riuscita dell'operazione. Un "`veto`" è un meccanismo che impedisce l'operazione se uno o più dei criteri non sono soddisfatti. Esistono due tipi di veto: Un veto "`soft`" e un veto "`hard`". È possibile ignorare un veto morbido, ma non un veto difficile. Ad esempio, per eseguire uno switchover negoziato in una configurazione MetroCluster a quattro nodi, un criterio è che tutti i nodi sono attivi e funzionanti. Supponiamo che un nodo sia inattivo e sia stato sostituito dal partner ha. L'operazione di switchover sarà difficile da veto perché è un criterio difficile che tutti i nodi devono essere attivi e sani. Poiché si tratta di un veto difficile, non è possibile ignorare il veto.
+
++
+
+IMPORTANT: Si consiglia di non ignorare alcun veto.
+
+
+
+
+
+== Esempio: Risultati della verifica
+
+L'esempio seguente mostra gli errori riscontrati in una simulazione di un'operazione di switchover:
+
+[listing]
+----
+cluster4::*> metrocluster switchover -simulate
+
+[Job 126] Preparing the cluster for the switchover operation...
+[Job 126] Job failed: Failed to prepare the cluster for the switchover
+operation. Use the "metrocluster operation show" command to view detailed error
+information. Resolve the errors, then try the command again.
+----
+
+NOTE: Lo switchover e lo switchback negoziati non avranno esito positivo fino a quando non verranno sostituiti tutti i dischi guasti. È possibile eseguire il disaster recovery dopo aver sostituito i dischi guasti. Se si desidera ignorare l'avviso relativo ai dischi guasti, è possibile aggiungere un veto soft per lo switchover e lo switchback negoziati.

@@ -1,0 +1,31 @@
+= 
+:allow-uri-read: 
+
+
+[role="lead"]
+Se necessario, è possibile ripristinare boot_recovery e rdb_corrotto_bootargs
+
+.Fasi
+. Arrestare nuovamente il nodo al prompt DEL CARICATORE:
++
+[listing]
+----
+node_A_1::*> halt -node _node-name_
+----
+. Controllare se sono stati impostati i seguenti bootargs:
++
+[listing]
+----
+LOADER> printenv bootarg.init.boot_recovery
+LOADER> printenv bootarg.rdb_corrupt
+----
+. Se uno dei due bootarg è stato impostato su un valore, disimpostarlo e avviare ONTAP:
++
+[listing]
+----
+LOADER> unsetenv bootarg.init.boot_recovery
+LOADER> unsetenv bootarg.rdb_corrupt
+LOADER> saveenv
+LOADER> bye
+----
+

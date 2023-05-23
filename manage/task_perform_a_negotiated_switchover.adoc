@@ -1,0 +1,95 @@
+---
+permalink: manage/task_perform_a_negotiated_switchover.html 
+sidebar: sidebar 
+keywords: negotiate, switchover, clean, shut, down, partner, site, operation, metrocluster, perform 
+summary: Uno switchover negoziato arresta in modo pulito i processi sul sito del partner, quindi passa alle operazioni dal sito del partner. È possibile utilizzare uno switchover negoziato per eseguire la manutenzione su un sito MetroCluster o per testare la funzionalità di switchover. 
+---
+= Esecuzione di uno switchover negoziato
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Uno switchover negoziato arresta in modo pulito i processi sul sito del partner, quindi passa alle operazioni dal sito del partner. È possibile utilizzare uno switchover negoziato per eseguire la manutenzione su un sito MetroCluster o per testare la funzionalità di switchover.
+
+* Tutte le modifiche di configurazione precedenti devono essere completate prima di eseguire un'operazione di switchback.
++
+In questo modo si evita la concorrenza con lo switchover negoziato o con l'operazione di switchback.
+
+* Tutti i nodi precedentemente non attivi devono essere avviati e in base al quorum del cluster.
++
+Nella sezione "`informazioni sul quorum e sull'epsilon`" del documento _System Administration Reference_ sono disponibili ulteriori informazioni sul quorum dei cluster.
+
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Amministrazione del sistema"]
+
+* La rete di peering del cluster deve essere disponibile da entrambi i siti.
+* Tutti i nodi nella configurazione MetroCluster devono eseguire la stessa versione del software ONTAP.
+* L'opzione Replication.create_data_Protection_rels.enable deve essere impostata SU ON su entrambi i siti in una configurazione MetroCluster prima di creare una nuova relazione SnapMirror.
+* Per una configurazione MetroCluster a due nodi, non è necessario creare una nuova relazione SnapMirror durante un aggiornamento in caso di versioni di ONTAP non corrispondenti tra i siti.
+* Per una configurazione MetroCluster a quattro nodi, le versioni di ONTAP non corrispondenti tra i siti non sono supportate.
+
+
+Il sito di ripristino può richiedere alcune ore per poter eseguire l'operazione di switchback.
+
+Il comando MetroCluster switchover consente di passare ai nodi di tutti i gruppi di DR nella configurazione MetroCluster. Ad esempio, in una configurazione MetroCluster a otto nodi, viene eseguita la commutazione dei nodi in entrambi i gruppi di DR.
+
+Durante la preparazione e l'esecuzione di uno switchover negoziato, non è necessario apportare modifiche alla configurazione del cluster o eseguire operazioni di Takeover o giveback.
+
+Per le configurazioni MetroCluster FC:
+
+* Gli aggregati mirrorati rimarranno in stato normale se lo storage remoto è accessibile.
+* In caso di perdita dell'accesso allo storage remoto, gli aggregati mirrorati diventeranno degradati dopo lo switchover negoziato.
+* Gli aggregati senza mirror che si trovano nel sito di disastro non saranno più disponibili in caso di perdita dell'accesso allo storage remoto. Questo potrebbe causare un'interruzione del controller.
+
+
+Per le configurazioni MetroCluster IP:
+
+
+NOTE: Prima di eseguire le attività di manutenzione, è necessario rimuovere il monitoraggio se la configurazione MetroCluster viene monitorata con l'utilità Tiebreaker o Mediator.link:../maintain/concept_remove_mediator_or_tiebreaker_when_performing_maintenance_tasks.html["Prima di eseguire le attività di manutenzione, rimuovere il mediatore ONTAP o il monitoraggio di spareggio"]
+
+* Per ONTAP 9.4 e versioni precedenti:
++
+** Gli aggregati mirrorati diventeranno degradati dopo lo switchover negoziato.
+
+
+* Per ONTAP 9.5 e versioni successive:
++
+** Gli aggregati mirrorati rimarranno in stato normale se lo storage remoto è accessibile.
+** In caso di perdita dell'accesso allo storage remoto, gli aggregati mirrorati diventeranno degradati dopo lo switchover negoziato.
+
+
+* Per ONTAP 9.8 e versioni successive:
++
+** Gli aggregati senza mirror che si trovano nel sito di disastro non saranno più disponibili in caso di perdita dell'accesso allo storage remoto. Questo potrebbe causare un'interruzione del controller.
++
+... Utilizzare i comandi MetroCluster check run, MetroCluster check show e MetroCluster check config-Replication show per assicurarsi che non siano in corso aggiornamenti di configurazione o in sospeso. Eseguire questi comandi dal sito che rimarranno attivi e operativi.
+... Dal sito che rimarrà attivo e operativo, implementare lo switchover: `metrocluster switchover`
++
+Il completamento dell'operazione può richiedere alcuni minuti.
+
+... Monitorare il completamento dello switchover: `metrocluster operation show`
++
+[listing]
+----
+cluster_A::*> metrocluster operation show
+  Operation: Switchover
+ Start time: 10/4/2012 19:04:13
+      State: in-progress
+   End time: -
+     Errors:
+
+cluster_A::*> metrocluster operation show
+  Operation: Switchover
+ Start time: 10/4/2012 19:04:13
+      State: successful
+   End time: 10/4/2012 19:04:22
+     Errors: -
+----
+... Ripristinare le configurazioni SnapMirror o SnapVault.
+
+
+
+
+

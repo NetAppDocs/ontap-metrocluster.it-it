@@ -1,0 +1,50 @@
+---
+permalink: manage/task_heal_the_root_aggregates_after_negotiated_switchover.html 
+sidebar: sidebar 
+keywords: data, aggregate, heal, root, preparation, switchback, operation, negotiate, switchover 
+summary: 'Una volta guariti gli aggregati di dati, è necessario riparare gli aggregati root in preparazione dell"operazione di switchback.' 
+---
+= Riparazione degli aggregati root dopo lo switchover negoziato
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Una volta guariti gli aggregati di dati, è necessario riparare gli aggregati root in preparazione dell'operazione di switchback.
+
+La fase di aggregazione dei dati del processo di riparazione MetroCluster deve essere stata completata correttamente.
+
+.Fasi
+. Ripristinare gli aggregati mirrorati eseguendo il comando MetroCluster Heal -Phase root-aggregates.
++
+[listing]
+----
+cluster_A::> metrocluster heal -phase root-aggregates
+[Job 137] Job succeeded: Heal Root Aggregates is successful
+----
++
+Se la riparazione è vetoed, è possibile emettere nuovamente il comando MetroCluster Heal con il parametro --override-vetoes. Se si utilizza questo parametro opzionale, il sistema sovrascrive qualsiasi veto soft che impedisca l'operazione di riparazione.
+
+. Verificare che l'operazione di riparazione sia completa eseguendo il comando MetroCluster Operation show sul cluster integro:
++
+[listing]
+----
+
+cluster_A::> metrocluster operation show
+  Operation: heal-root-aggregates
+      State: successful
+ Start Time: 7/29/2014 20:54:41
+   End Time: 7/29/2014 20:54:42
+     Errors: -
+----
+. Controllare e rimuovere eventuali dischi guasti appartenenti al sito di disastro eseguendo il seguente comando sul sito di integrità: `disk show -broken`
+. Accendere o avviare ciascun modulo controller nel sito di emergenza.
++
+Se il sistema visualizza il prompt DEL CARICATORE, eseguire `boot_ontap` comando.
+
+. Dopo l'avvio dei nodi, verificare che gli aggregati root siano mirrorati.
++
+Se entrambi i plessi sono presenti, la risincronizzazione viene eseguita automaticamente se i plessi non sono sincronizzati. In caso di errore di un plex, tale plex deve essere distrutto e il mirror deve essere ricreato utilizzando il comando storage aggregate mirror -aggregateaggregate-name per ristabilire la relazione mirror.
+
+

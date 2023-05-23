@@ -1,0 +1,125 @@
+---
+permalink: upgrade/task_refresh_the_mcc_configuration_mcc_configure_refresh.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, refresh, configuration, new, controller 
+summary: È necessario aggiornare la configurazione MetroCluster quando si espande da una configurazione a due nodi a una a quattro nodi. 
+---
+= Aggiornamento della configurazione MetroCluster con nuovi controller
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario aggiornare la configurazione MetroCluster quando si espande da una configurazione a due nodi a una a quattro nodi.
+
+.Fasi
+. Aggiornare la configurazione MetroCluster:
++
+.. Accedere alla modalità avanzata dei privilegi: +
+`set -privilege advanced`
+.. Aggiornare la configurazione MetroCluster: +
+`metrocluster configure -refresh true -allow-with-one-aggregate true`
++
+Il seguente comando aggiorna la configurazione MetroCluster su tutti i nodi del gruppo DR che contiene controller_A_1:
+
++
+[listing]
+----
+controller_A_1::*> metrocluster configure -refresh true -allow-with-one-aggregate true
+
+[Job 726] Job succeeded: Configure is successful.
+----
+.. Tornare alla modalità privilegi di amministratore:
++
+`set -privilege admin`
+
+
+
+. Verificare lo stato della rete sul sito A:
++
+`network port show`
+
++
+L'esempio seguente mostra l'utilizzo della porta di rete in una configurazione MetroCluster a quattro nodi:
+
++
+[listing]
+----
+cluster_A::> network port show
+                                                          Speed (Mbps)
+Node   Port      IPspace   Broadcast Domain Link   MTU    Admin/Oper
+------ --------- --------- ---------------- ----- ------- ------------
+controller_A_1
+       e0a       Cluster   Cluster          up     9000  auto/1000
+       e0b       Cluster   Cluster          up     9000  auto/1000
+       e0c       Default   Default          up     1500  auto/1000
+       e0d       Default   Default          up     1500  auto/1000
+       e0e       Default   Default          up     1500  auto/1000
+       e0f       Default   Default          up     1500  auto/1000
+       e0g       Default   Default          up     1500  auto/1000
+controller_A_2
+       e0a       Cluster   Cluster          up     9000  auto/1000
+       e0b       Cluster   Cluster          up     9000  auto/1000
+       e0c       Default   Default          up     1500  auto/1000
+       e0d       Default   Default          up     1500  auto/1000
+       e0e       Default   Default          up     1500  auto/1000
+       e0f       Default   Default          up     1500  auto/1000
+       e0g       Default   Default          up     1500  auto/1000
+14 entries were displayed.
+----
+. Verificare la configurazione MetroCluster da entrambi i siti nella configurazione MetroCluster.
++
+.. Verificare la configurazione dal sito A:
++
+`metrocluster show`
+
++
+[listing]
+----
+cluster_A::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+Remote: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+----
+.. Verificare la configurazione dal sito B:
++
+`metrocluster show`
+
++
+[listing]
+----
+cluster_B::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+Remote: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+----
+.. Verificare che le relazioni di DR siano state create correttamente:
++
+`metrocluster node show -fields dr-cluster,dr-auxiliary,node-object-limit,automatic-uso,ha-partner,dr-partner`
+
++
+[listing]
+----
+metrocluster node show -fields dr-cluster,dr-auxiliary,node-object-limit,automatic-uso,ha-partner,dr-partner
+dr-group-id cluster     node    ha-partner dr-cluster  dr-partner   dr-auxiliary  node-object-limit automatic-uso
+----------- ---------   ----    ---------- ----------  ----------   ------------  ----------------- -------------
+2           cluster_A   node_A_1 node_A_2    cluster_B  node_B_1     node_B_2      on                true
+2           cluster_A   node_A_2 node_A_1    cluster_B  node_B_2     node_B_1      on                true
+2           cluster_B   node_B_1 node_B_2    cluster_A  node_A_1     node_A_2      on                true
+2           cluster_B   node_B_2 node_B_1    cluster_A  node_A_2     node_A_1      on                true
+4 entries were displayed.
+----
+
+
+

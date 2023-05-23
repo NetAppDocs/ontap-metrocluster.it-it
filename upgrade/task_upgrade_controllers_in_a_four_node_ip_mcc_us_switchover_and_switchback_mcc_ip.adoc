@@ -1,0 +1,1828 @@
+---
+permalink: upgrade/task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controller, ip, configuration, switchover, switchback, workflow, nodes, tiebreaker, verify, bootrage, root, aggregate, disks 
+summary: 'A partire da ONTAP 9.8, è possibile utilizzare l"operazione di switchover MetroCluster per fornire un servizio senza interruzioni ai client mentre i moduli controller del cluster partner vengono aggiornati. Altri componenti (ad esempio shelf di storage o switch) non possono essere aggiornati come parte di questa procedura.' 
+---
+= Aggiornamento dei controller in una configurazione MetroCluster IP mediante switchover e switchback (ONTAP 9.8 e versioni successive)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A partire da ONTAP 9.8, è possibile utilizzare l'operazione di switchover MetroCluster per fornire un servizio senza interruzioni ai client mentre i moduli controller del cluster partner vengono aggiornati. Altri componenti (ad esempio shelf di storage o switch) non possono essere aggiornati come parte di questa procedura.
+
+
+
+== Piattaforme supportate da questa procedura
+
+* Sulle piattaforme deve essere in esecuzione ONTAP 9.8 o versione successiva.
+* La piattaforma di destinazione (nuova) deve essere un modello diverso rispetto alla piattaforma originale.
+* I modelli di piattaforma con shelf interni non sono supportati.
+* È possibile aggiornare solo modelli di piattaforma specifici utilizzando questa procedura in una configurazione MetroCluster IP.
++
+** Per informazioni sulle combinazioni di upgrade della piattaforma supportate, consultare la tabella di aggiornamento IP di MetroCluster in link:concept_choosing_controller_upgrade_mcc.html["Scegliere una procedura di aggiornamento del controller"].
++
+Fare riferimento a. https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_controller_upgrade_mcc.html#choosing-a-procedure-that-uses-the-switchover-and-switchback-process["Scelta di un metodo di aggiornamento o refresh"] per ulteriori procedure.
+
+
+
+
+
+
+
+== A proposito di questa attività
+
+* Questa procedura si applica ai moduli controller in una configurazione MetroCluster IP.
+* Tutti i controller della configurazione devono essere aggiornati durante lo stesso periodo di manutenzione.
++
+L'utilizzo della configurazione MetroCluster con diversi tipi di controller non è supportato al di fuori di questa attività di manutenzione.
+
+* Gli switch IP devono disporre di una versione firmware supportata.
+* Se la nuova piattaforma ha meno slot rispetto al sistema originale o se ha un numero inferiore o diversi tipi di porte, potrebbe essere necessario aggiungere un adattatore al nuovo sistema.
++
+Per ulteriori informazioni, consultare https://hwu.netapp.com/["NetApp Hardware Universe"].
+
+* Gli indirizzi IP, le netmask e i gateway delle piattaforme originali verranno riutilizzati sulle nuove piattaforme.
+* In questa procedura vengono utilizzati i seguenti nomi di esempio:
++
+** Sito_A.
++
+*** Prima dell'aggiornamento:
++
+**** Node_A_1-old
+**** Node_A_2-old
+
+
+*** Dopo l'aggiornamento:
++
+**** Node_A_1-new
+**** Node_A_2-new
+
+
+
+
+** Sito_B
++
+*** Prima dell'aggiornamento:
++
+**** Node_B_1-old
+**** Node_B_2-old
+
+
+*** Dopo l'aggiornamento:
++
+**** Node_B_1-new
+**** Node_B_2-new
+
+
+
+
+
+
+
+
+
+
+== Workflow per l'aggiornamento dei controller in una configurazione MetroCluster IP
+
+È possibile utilizzare il diagramma del flusso di lavoro per pianificare le attività di aggiornamento.
+
+image::../media/workflow_ip_upgrade.png[aggiornamento ip del workflow]
+
+
+
+== Preparazione per l'aggiornamento
+
+Prima di apportare modifiche alla configurazione MetroCluster esistente, è necessario controllare lo stato della configurazione, preparare le nuove piattaforme ed eseguire altre attività varie.
+
+
+
+=== Aggiornamento dei file RCF dello switch MetroCluster prima dell'aggiornamento dei controller
+
+A seconda dei vecchi modelli di piattaforma, se la configurazione dello switch non è sulla versione minima o se si desidera modificare gli ID VLAN utilizzati dalle connessioni MetroCluster back-end, è necessario aggiornare i file RCF dello switch prima di iniziare la procedura di aggiornamento della piattaforma.
+
+.A proposito di questa attività
+È necessario aggiornare il file RCF nei seguenti scenari:
+
+* Per alcuni modelli di piattaforma, gli switch devono utilizzare un ID VLAN supportato per le connessioni IP MetroCluster back-end. Se i modelli di piattaforma vecchi o nuovi sono riportati nella tabella seguente, *e non* utilizzando un ID VLAN supportato, è necessario aggiornare i file RCF dello switch.
++
+
+NOTE: Le connessioni del cluster locale possono utilizzare qualsiasi VLAN, non devono necessariamente trovarsi nell'intervallo specificato.
+
++
+|===
+
+
+| Modello di piattaforma (vecchio o nuovo) | ID VLAN supportati 
+
+
+ a| 
+** AFF A400
+
+ a| 
+** 10
+** 20
+** Qualsiasi valore compreso tra 101 e 4096 inclusi.
+
+
+|===
+* La configurazione dello switch non è stata configurata con la versione RCF minima supportata:
++
+|===
+
+
+| Modello di switch | Versione del file RCF richiesta 
+
+
+ a| 
+Cisco 3132Q-V.
+ a| 
+1.7 o versione successiva
+
+
+
+ a| 
+Cisco 3232C
+ a| 
+1.7 o versione successiva
+
+
+
+ a| 
+Broadcom BES-53248
+ a| 
+1.3 o versione successiva
+
+|===
+* Si desidera modificare la configurazione della VLAN.
++
+L'intervallo di ID VLAN è compreso tra 101 e 4096.
+
+
+
+Gli switch del sito_A verranno aggiornati quando i controller del sito_A verranno aggiornati.
+
+.Fasi
+. Preparare gli switch IP per l'applicazione dei nuovi file RCF.
++
+Seguire i passaggi descritti nella sezione relativa al fornitore dello switch di link:../install-ip/concept_considerations_differences.html["Installazione e configurazione di MetroCluster IP"].
+
++
+** link:../install-ip/task_switch_config_broadcom.html["Ripristino delle impostazioni predefinite dello switch IP Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Ripristino delle impostazioni predefinite dello switch IP Cisco"]
+
+
+. Scaricare e installare i file RCF.
++
+Seguire la procedura descritta in link:../install-ip/concept_considerations_differences.html["Installazione e configurazione di MetroCluster IP"].
+
++
+** link:../install-ip/task_switch_config_broadcom.html["Download e installazione dei file RCF Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Download e installazione dei file Cisco IP RCF"]
+
+
+
+
+
+
+=== Mappatura delle porte dai vecchi nodi ai nuovi nodi
+
+È necessario verificare che le porte fisiche sul nodo_A_1-old si mappino correttamente alle porte fisiche sul nodo_A_1-new, che consentirà al nodo_A_1-new di comunicare con altri nodi nel cluster e con la rete dopo l'aggiornamento.
+
+.A proposito di questa attività
+Quando il nuovo nodo viene avviato per la prima volta durante il processo di aggiornamento, riproduce la configurazione più recente del vecchio nodo che sta sostituendo. Quando si avvia Node_A_1-new, ONTAP tenta di ospitare le LIF sulle stesse porte utilizzate su Node_A_1-old. Pertanto, come parte dell'aggiornamento, è necessario regolare la configurazione della porta e della LIF in modo che sia compatibile con quella del vecchio nodo. Durante la procedura di aggiornamento, verranno eseguiti i passaggi sul vecchio e sul nuovo nodo per garantire la corretta configurazione LIF di cluster, gestione e dati.
+
+La seguente tabella mostra esempi di modifiche alla configurazione relative ai requisiti di porta dei nuovi nodi.
+
+|===
+
+
+3+| Porte fisiche di interconnessione cluster 
+
+
+| Vecchio controller | Nuovo controller | Azione richiesta 
+
+
+ a| 
+e0a, e0b
+ a| 
+e3a, e3b
+ a| 
+Nessuna porta corrispondente. Dopo l'aggiornamento, è necessario ricreare le porte del cluster.
+
+
+
+ a| 
+e0c, e0d
+ a| 
+e0a,e0b,e0c,e0d
+ a| 
+e0c e e0d corrispondono alle porte. Non è necessario modificare la configurazione, ma dopo l'aggiornamento è possibile distribuire le LIF del cluster tra le porte del cluster disponibili.
+
+|===
+.Fasi
+. Determinare quali porte fisiche sono disponibili sui nuovi controller e quali LIF possono essere ospitate sulle porte.
++
+L'utilizzo della porta del controller dipende dal modulo della piattaforma e dagli switch che verranno utilizzati nella configurazione IP di MetroCluster. È possibile ottenere l'utilizzo delle porte delle nuove piattaforme da link:https://hwu.netapp.com["NetApp Hardware Universe"].
+
+. Pianificare l'utilizzo delle porte e compilare le seguenti tabelle come riferimento per ciascuno dei nuovi nodi.
++
+Durante l'esecuzione della procedura di aggiornamento, fare riferimento alla tabella.
+
++
+|===
+
+
+|  3+| Node_A_1-old 3+| Node_A_1-new 
+
+
+| LIF | Porte | IPspaces | Domini di broadcast | Porte | IPspaces | Domini di broadcast 
+
+
+ a| 
+Cluster 1
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Cluster 2
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Cluster 3
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Cluster 4
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Gestione dei nodi
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Gestione del cluster
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Dati 1
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Dati 2
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Dati 3
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Dati 4
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+SAN
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Porta intercluster
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+
+
+
+
+=== Avvio in rete dei nuovi controller
+
+Dopo aver installato i nuovi nodi, è necessario eseguire il netboot per assicurarsi che i nuovi nodi eseguano la stessa versione di ONTAP dei nodi originali. Il termine netboot indica che si sta eseguendo l'avvio da un'immagine ONTAP memorizzata su un server remoto. Durante la preparazione per il netboot, è necessario inserire una copia dell'immagine di boot di ONTAP 9 su un server Web a cui il sistema può accedere.
+
+.Fasi
+. NetBoot i nuovi controller:
++
+.. Accedere a. https://mysupport.netapp.com/site/["Sito di supporto NetApp"] per scaricare i file utilizzati per eseguire il netboot del sistema.
+.. Scaricare il software ONTAP appropriato dalla sezione di download del software del sito di supporto NetApp e memorizzare il `ontap-version_image.tgz` file in una directory accessibile dal web.
+.. Passare alla directory accessibile dal Web e verificare che i file necessari siano disponibili.
++
+[cols="1,3"]
+|===
+
+
+| Se il modello di piattaforma è... | Quindi... 
+
+
+ a| 
+sistemi della serie 8000
+ a| 
+Estrarre il contenuto di `__ontap-version___image.tgz` file nella directory di destinazione:
+
+`tar -zxvf __ontap-version___image.tgz`
+
+
+NOTE: Se si sta estraendo il contenuto su Windows, utilizzare 7-zip o WinRAR per estrarre l'immagine di netboot. L'elenco delle directory deve contenere una cartella netboot con un file kernel:netboot/kernel
+
+L'elenco delle directory deve contenere una cartella netboot con un file kernel:
+
+`netboot/kernel`
+
+
+
+ a| 
+Tutti gli altri sistemi
+ a| 
+L'elenco delle directory deve contenere una cartella netboot con un file kernel:
+
+`_ontap-version_image.tgz`
+
+Non è necessario estrarre `_ontap-version_image.tgz` file.
+
+|===
+.. Al prompt DEL CARICATORE, configurare la connessione netboot per una LIF di gestione:
++
+|===
+
+
+| Se l'indirizzo IP è... | Quindi... 
+
+
+ a| 
+DHCP
+ a| 
+Configurare la connessione automatica:
+
+`ifconfig e0M -auto`
+
+
+
+ a| 
+Statico
+ a| 
+Configurare la connessione manuale:
+
+`ifconfig e0M -addr=_ip_addr_ -mask=_netmask_ -gw=_gateway_`
+
+|===
+.. Eseguire il netboot.
++
+|===
+
+
+| Se il modello di piattaforma è... | Quindi... 
+
+
+ a| 
+Sistemi della serie FAS/AFF8000
+ a| 
+`netboot http://_web_server_ip/path_to_web-accessible_directory_/netboot/kernel`
+
+
+
+ a| 
+Tutti gli altri sistemi
+ a| 
+`netboot \http://_web_server_ip/path_to_web-accessible_directory/ontap-version_image.tgz`
+
+|===
+.. Dal menu di avvio, selezionare l'opzione **(7) installare prima il nuovo software** per scaricare e installare la nuova immagine software sul dispositivo di avvio.
++
+Ignorare il seguente messaggio:
+
++
+`"This procedure is not supported for Non-Disruptive Upgrade on an HA pair"`. Si applica agli aggiornamenti software senza interruzioni e non agli aggiornamenti dei controller.
+
+.. Se viene richiesto di continuare la procedura, immettere `y`E quando viene richiesto il pacchetto, inserire l'URL del file immagine:
++
+`http://__web_server_ip/path_to_web-accessible_directory/ontap-version___image.tgz`
+
+.. Immettere il nome utente e la password, se applicabile, oppure premere Invio per continuare.
+.. Assicurarsi di entrare `n` per ignorare il ripristino del backup quando viene visualizzato un prompt simile a quanto segue:
++
+[listing]
+----
+Do you want to restore the backup configuration now? {y|n} **n**
+----
+.. Riavviare immettendo `*y*` quando viene visualizzato un prompt simile a quanto segue:
++
+[listing]
+----
+The node must be rebooted to start using the newly installed software. Do you want to reboot now? {y|n}
+----
+
+
+
+
+
+
+=== Cancellazione della configurazione su un modulo controller
+
+[role="lead"]
+Prima di utilizzare un nuovo modulo controller nella configurazione MetroCluster, è necessario cancellare la configurazione esistente.
+
+.Fasi
+. Se necessario, arrestare il nodo per visualizzare il prompt DEL CARICATORE:
++
+`halt`
+
+. Al prompt DEL CARICATORE, impostare le variabili ambientali sui valori predefiniti:
++
+`set-defaults`
+
+. Salvare l'ambiente:
++
+`saveenv`
+
+. Al prompt DEL CARICATORE, avviare il menu di avvio:
++
+`boot_ontap menu`
+
+. Al prompt del menu di avvio, cancellare la configurazione:
++
+`wipeconfig`
+
++
+Rispondere `yes` al prompt di conferma.
+
++
+Il nodo si riavvia e viene visualizzato di nuovo il menu di avvio.
+
+. Nel menu di avvio, selezionare l'opzione *5* per avviare il sistema in modalità di manutenzione.
++
+Rispondere `yes` al prompt di conferma.
+
+
+
+
+
+=== Verifica dello stato di salute di MetroCluster prima dell'aggiornamento del sito
+
+Prima di eseguire l'aggiornamento, è necessario verificare lo stato e la connettività della configurazione di MetroCluster.
+
+.Fasi
+. Verificare il funzionamento della configurazione MetroCluster in ONTAP:
++
+.. Verificare che i nodi siano multipathing: +
+`node run -node _node-name_ sysconfig -a`
++
+Eseguire questo comando per ogni nodo della configurazione MetroCluster.
+
+.. Verificare che non vi siano dischi rotti nella configurazione: +
+`storage disk show -broken`
++
+Eseguire questo comando su ciascun nodo della configurazione MetroCluster.
+
+.. Verificare la presenza di eventuali avvisi sullo stato di salute:
++
+`system health alert show`
+
++
+Eseguire questo comando su ciascun cluster.
+
+.. Verificare le licenze sui cluster:
++
+`system license show`
+
++
+Eseguire questo comando su ciascun cluster.
+
+.. Verificare i dispositivi collegati ai nodi:
++
+`network device-discovery show`
+
++
+Eseguire questo comando su ciascun cluster.
+
+.. Verificare che il fuso orario e l'ora siano impostati correttamente su entrambi i siti:
++
+`cluster date show`
+
++
+Eseguire questo comando su ciascun cluster. È possibile utilizzare `cluster date` comandi per configurare l'ora e il fuso orario.
+
+
+
+. Confermare la modalità operativa della configurazione MetroCluster ed eseguire un controllo MetroCluster.
++
+.. Confermare la configurazione MetroCluster e che la modalità operativa è `normal`: +
+`metrocluster show`
+.. Verificare che siano visualizzati tutti i nodi previsti: +
+`metrocluster node show`
+.. Immettere il seguente comando:
++
+`metrocluster check run`
+
+.. Visualizzare i risultati del controllo MetroCluster:
++
+`metrocluster check show`
+
+
+
+. Controllare il cablaggio MetroCluster con lo strumento Config Advisor.
++
+.. Scaricare ed eseguire Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Download NetApp: Config Advisor"]
+
+.. Dopo aver eseguito Config Advisor, esaminare l'output dello strumento e seguire le raccomandazioni nell'output per risolvere eventuali problemi rilevati.
+
+
+
+
+
+
+=== Raccolta di informazioni prima dell'aggiornamento
+
+Prima di eseguire l'aggiornamento, è necessario raccogliere informazioni per ciascuno dei nodi e, se necessario, regolare i domini di broadcast di rete, rimuovere eventuali VLAN e gruppi di interfacce e raccogliere informazioni sulla crittografia.
+
+.Fasi
+. Registrare il cablaggio fisico di ciascun nodo, etichettando i cavi secondo necessità per consentire il cablaggio corretto dei nuovi nodi.
+. Raccogliere informazioni su interconnessione, porta e LIF per ciascun nodo.
++
+Per ciascun nodo, è necessario raccogliere l'output dei seguenti comandi:
+
++
+** `metrocluster interconnect show`
+** `metrocluster configuration-settings connection show`
+** `network interface show -role cluster,node-mgmt`
+** `network port show -node node_name -type physical`
+** `network port vlan show -node _node-name_`
+** `network port ifgrp show -node _node_name_ -instance`
+** `network port broadcast-domain show`
+** `network port reachability show -detail`
+** `network ipspace show`
+** `volume show`
+** `storage aggregate show`
+** `system node run -node _node-name_ sysconfig -a`
+** `vserver fcp initiator show`
+** `storage disk show`
+** `metrocluster configuration-settings interface show`
+
+
+. Raccogliere gli UUID per il sito_B (il sito le cui piattaforme sono attualmente in fase di aggiornamento):
++
+`metrocluster node show -fields node-cluster-uuid, node-uuid`
+
++
+Questi valori devono essere configurati con precisione sui nuovi moduli controller Site_B per garantire un aggiornamento corretto. Copiare i valori in un file in modo da poterli copiare nei comandi appropriati in un secondo momento del processo di aggiornamento.
+
++
+L'esempio seguente mostra l'output del comando con gli UUID:
+
++
+[listing]
+----
+cluster_B::> metrocluster node show -fields node-cluster-uuid, node-uuid
+  (metrocluster node show)
+dr-group-id cluster     node   node-uuid                            node-cluster-uuid
+----------- --------- -------- ------------------------------------ ------------------------------
+1           cluster_A node_A_1 f03cb63c-9a7e-11e7-b68b-00a098908039 ee7db9d5-9a82-11e7-b68b-00a098908039
+1           cluster_A node_A_2 aa9a7a7a-9a81-11e7-a4e9-00a098908c35 ee7db9d5-9a82-11e7-b68b-00a098908039
+1           cluster_B node_B_1 f37b240b-9ac1-11e7-9b42-00a098c9e55d 07958819-9ac6-11e7-9b42-00a098c9e55d
+1           cluster_B node_B_2 bf8e3f8f-9ac4-11e7-bd4e-00a098ca379f 07958819-9ac6-11e7-9b42-00a098c9e55d
+4 entries were displayed.
+cluster_B::*
+----
++
+Si consiglia di registrare gli UUID in una tabella simile alla seguente.
+
++
+|===
+
+
+| Cluster o nodo | UUID 
+
+
+ a| 
+Cluster_B
+ a| 
+07958819-9ac6-11e7-9b42-00a098c9e55d
+
+
+
+ a| 
+Node_B_1
+ a| 
+f37b240b-9ac1-11e7-9b42-00a098c9e55d
+
+
+
+ a| 
+Node_B_2
+ a| 
+bf8e3f8f-9ac4-11e7-bd4e-00a098ca379f
+
+
+
+ a| 
+Cluster_A.
+ a| 
+ee7db9d5-9a82-11e7-b68b-00a098908039
+
+
+
+ a| 
+Node_A_1
+ a| 
+f03cb63c-9a7e-11e7-b68b-00a098908039
+
+
+
+ a| 
+Node_A_2
+ a| 
+aa9a7a7a-9a81-11e7-a4e9-00a098908c35
+
+|===
+. Se i nodi MetroCluster si trovano in una configurazione SAN, raccogliere le informazioni pertinenti.
++
+Si dovrebbe ottenere l'output dei seguenti comandi:
+
++
+** `fcp adapter show -instance`
+** `fcp interface show -instance`
+** `iscsi interface show`
+** `ucadmin show`
+
+
+. Se il volume root è crittografato, raccogliere e salvare la passphrase utilizzata per il gestore delle chiavi:
++
+`security key-manager backup show`
+
+. Se i nodi MetroCluster utilizzano la crittografia per volumi o aggregati, copiare le informazioni relative alle chiavi e alle passphrase.
++
+Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-1677AE0A-FEF7-45FA-8616-885AA3283BCF.html["Backup manuale delle informazioni di gestione delle chiavi integrate"].
+
++
+.. Se Onboard Key Manager è configurato: +
+`security key-manager onboard show-backup`
++
+La passphrase sarà necessaria più avanti nella procedura di aggiornamento.
+
+.. Se la gestione delle chiavi aziendali (KMIP) è configurata, eseguire i seguenti comandi:
++
+`security key-manager external show -instance`
+`security key-manager key query`
+
+
+
+. Raccogliere gli ID di sistema dei nodi esistenti:
++
+`metrocluster node show -fields node-systemid,ha-partner-systemid,dr-partner-systemid,dr-auxiliary-systemid`
+
++
+Il seguente output mostra i dischi riassegnati.
+
++
+[listing]
+----
+::> metrocluster node show -fields node-systemid,ha-partner-systemid,dr-partner-systemid,dr-auxiliary-systemid
+
+dr-group-id cluster     node     node-systemid ha-partner-systemid dr-partner-systemid dr-auxiliary-systemid
+----------- ----------- -------- ------------- ------------------- ------------------- ---------------------
+1           cluster_A node_A_1   537403324     537403323           537403321           537403322
+1           cluster_A node_A_2   537403323     537403324           537403322           537403321
+1           cluster_B node_B_1   537403322     537403321           537403323           537403324
+1           cluster_B node_B_2   537403321     537403322           537403324           537403323
+4 entries were displayed.
+----
+
+
+
+
+=== Rimozione del monitoraggio di Mediator o Tiebreaker
+
+Prima di aggiornare le piattaforme, è necessario rimuovere il monitoraggio se la configurazione MetroCluster viene monitorata con l'utility Tiebreaker o Mediator.
+
+.Fasi
+. Raccogliere l'output per il seguente comando:
++
+`storage iscsi-initiator show`
+
+. Rimuovere la configurazione MetroCluster esistente da Tiebreaker, Mediator o altro software in grado di avviare lo switchover.
++
+|===
+
+
+| Se si utilizza... | Utilizzare questa procedura... 
+
+
+ a| 
+Spareggio
+ a| 
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-34C97A45-0BFF-46DD-B104-2AB2805A983D.html["Rimozione delle configurazioni MetroCluster"] Nella _Guida all'installazione e alla configurazione di MetroCluster Tiebreaker_
+
+
+
+ a| 
+Mediatore
+ a| 
+Immettere il seguente comando dal prompt di ONTAP:
+
+`metrocluster configuration-settings mediator remove`
+
+
+
+ a| 
+Applicazioni di terze parti
+ a| 
+Consultare la documentazione del prodotto.
+
+|===
+
+
+
+
+=== Invio di un messaggio AutoSupport personalizzato prima della manutenzione
+
+Prima di eseguire la manutenzione, devi inviare un messaggio AutoSupport per informare il supporto tecnico NetApp che la manutenzione è in corso. Informare il supporto tecnico che la manutenzione è in corso impedisce loro di aprire un caso partendo dal presupposto che si sia verificata un'interruzione.
+
+.A proposito di questa attività
+Questa attività deve essere eseguita su ciascun sito MetroCluster.
+
+.Fasi
+. Accedere al cluster.
+. Richiamare un messaggio AutoSupport che indica l'inizio della manutenzione:
++
+`system node autosupport invoke -node * -type all -message MAINT=__maintenance-window-in-hours__`
+
++
+Il `maintenance-window-in-hours` parametro specifica la lunghezza della finestra di manutenzione, con un massimo di 72 ore. Se la manutenzione viene completata prima che sia trascorso il tempo, è possibile richiamare un messaggio AutoSupport che indica la fine del periodo di manutenzione:
+
++
+`system node autosupport invoke -node * -type all -message MAINT=end`
+
+. Ripetere questi passaggi sul sito del partner.
+
+
+
+
+== Passaggio alla configurazione MetroCluster
+
+È necessario passare alla configurazione Site_A in modo che le piattaforme sul sito_B possano essere aggiornate.
+
+.A proposito di questa attività
+Questa attività deve essere eseguita sul sito_A.
+
+Al termine di questa attività, cluster_A è attivo e fornisce dati per entrambi i siti. Cluster_B è inattivo e pronto per iniziare il processo di aggiornamento.
+
+image::../media/mcc_upgrade_cluster_a_in_switchover.png[aggiornamento mcc del cluster a nello switchover]
+
+.Fasi
+. Passare alla configurazione MetroCluster del sito_A in modo che i nodi del sito_B possano essere aggiornati:
++
+.. Eseguire il seguente comando sul cluster_A:
++
+`metrocluster switchover -controller-replacement true`
+
++
+Il completamento dell'operazione può richiedere alcuni minuti.
+
+.. Monitorare il funzionamento dello switchover:
++
+`metrocluster operation show`
+
+.. Al termine dell'operazione, verificare che i nodi siano in stato di switchover:
++
+`metrocluster show`
+
+.. Controllare lo stato dei nodi MetroCluster:
++
+`metrocluster node show`
+
++
+La riparazione automatica degli aggregati dopo lo switchover negoziato viene disattivata durante l'aggiornamento del controller.
+
+
+
+
+
+
+
+== Rimozione delle configurazioni dell'interfaccia e disinstallazione dei vecchi controller
+
+È necessario spostare i file LIF dei dati su una porta comune, rimuovere le VLAN e i gruppi di interfacce sui vecchi controller, quindi disinstallare fisicamente i controller.
+
+.A proposito di questa attività
+* Questi passaggi vengono eseguiti sui vecchi controller (node_B_1-old, node_B_2-old).
+* Consultare le informazioni raccolte in link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html["Mappatura delle porte dai vecchi nodi ai nuovi nodi"].
+
+
+.Fasi
+. Avviare i vecchi nodi e accedere ai nodi:
++
+`boot_ontap`
+
+. Assegnare la porta home di tutti i file LIF di dati sul vecchio controller a una porta comune identica sia sul vecchio che sul nuovo modulo controller.
++
+.. Visualizzare le LIF:
++
+`network interface show`
+
++
+Tutti i dati LIFS, inclusi SAN e NAS, verranno gestiti e non verranno gestiti dal sistema operativo poiché sono attivi nel sito di switchover (cluster_A).
+
+.. Esaminare l'output per trovare una porta di rete fisica comune che sia la stessa sui controller vecchi e nuovi che non sia utilizzata come porta del cluster.
++
+Ad esempio, e0d è una porta fisica sui vecchi controller ed è presente anche sui nuovi controller. e0d non viene utilizzato come porta del cluster o in altro modo sui nuovi controller.
+
++
+Per informazioni sull'utilizzo delle porte per i modelli di piattaforma, consultare https://hwu.netapp.com/["NetApp Hardware Universe"]
+
+.. Modificare tutti i dati LIFS per utilizzare la porta comune come porta home: +
+`network interface modify -vserver _svm-name_ -lif _data-lif_ -home-port _port-id_`
++
+Nell'esempio seguente, questo è "e0d".
+
++
+Ad esempio:
+
++
+[listing]
+----
+network interface modify -vserver vs0 -lif datalif1 -home-port e0d
+----
+
+
+. Rimuovere tutte le porte VLAN utilizzando le porte del cluster come porte membro e ifgrps utilizzando le porte del cluster come porte membro.
++
+.. Eliminare le porte VLAN: +
+`network port vlan delete -node _node-name_ -vlan-name _portid-vlandid_`
++
+Ad esempio:
+
++
+[listing]
+----
+network port vlan delete -node node1 -vlan-name e1c-80
+----
+.. Rimuovere le porte fisiche dai gruppi di interfacce:
++
+`network port ifgrp remove-port -node _node-name_ -ifgrp _interface-group-name_ -port _portid_`
+
++
+Ad esempio:
+
++
+[listing]
+----
+network port ifgrp remove-port -node node1 -ifgrp a1a -port e0d
+----
+.. Rimuovere le porte della VLAN e del gruppo di interfacce dal dominio di broadcast:
++
+`network port broadcast-domain remove-ports -ipspace _ipspace_ -broadcast-domain _broadcast-domain-name_ -ports _nodename:portname,nodename:portname_,..`
+
+.. Modificare le porte del gruppo di interfacce per utilizzare altre porte fisiche come membro in base alle necessità.:
++
+`ifgrp add-port -node _node-name_ -ifgrp _interface-group-name_ -port _port-id_`
+
+
+
+. Arrestare i nodi al prompt DEL CARICATORE:
++
+`halt -inhibit-takeover true`
+
+. Connettersi alla console seriale dei vecchi controller (Node_B_1-old e Node_B_2-old) nel sito_B e verificare che venga visualizzato il prompt DEL CARICATORE.
+. Raccogliere i valori di bootarg:
++
+`printenv`
+
+. Scollegare le connessioni di storage e di rete su Node_B_1-old e Node_B_2-old ed etichettare i cavi in modo che possano essere ricollegati ai nuovi nodi.
+. Scollegare i cavi di alimentazione da Node_B_1-old e Node_B_2-old.
+. Rimuovere i controller Node_B_1-old e Node_B_2-old dal rack.
+
+
+
+
+== Aggiornamento degli RCF dello switch per adattarsi alle nuove piattaforme
+
+È necessario aggiornare gli switch a una configurazione che supporti i nuovi modelli di piattaforma.
+
+.A proposito di questa attività
+Questa attività viene eseguita nel sito contenente i controller attualmente in fase di aggiornamento. Negli esempi illustrati in questa procedura, si esegue prima l'aggiornamento di Site_B.
+
+Gli switch del sito_A verranno aggiornati quando i controller del sito_A verranno aggiornati.
+
+.Fasi
+. Preparare gli switch IP per l'applicazione dei nuovi file RCF.
++
+Seguire i passaggi della procedura per il fornitore dello switch:
+
++
+link:../install-ip/concept_considerations_differences.html["Installazione e configurazione di MetroCluster IP"]
+
++
+** link:../install-ip/task_switch_config_broadcom.html["Ripristino delle impostazioni predefinite dello switch IP Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Ripristino delle impostazioni predefinite dello switch IP Cisco"]
+
+
+. Scaricare e installare i file RCF.
++
+Seguire i passaggi descritti nella sezione relativa al fornitore dello switch di link:../install-ip/concept_considerations_differences.html["Installazione e configurazione di MetroCluster IP"].
+
++
+** link:../install-ip/task_switch_config_broadcom.html["Download e installazione dei file RCF Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Download e installazione dei file Cisco IP RCF"]
+
+
+
+
+
+
+== Configurazione dei nuovi controller
+
+È necessario eseguire il rack e installare i controller, eseguire la configurazione richiesta in modalità manutenzione, quindi avviare i controller e verificare la configurazione LIF sui controller.
+
+
+
+=== Configurazione dei nuovi controller
+
+I nuovi controller devono essere montati in rack e cablati.
+
+.Fasi
+. Pianificare il posizionamento dei nuovi moduli controller e degli shelf di storage in base alle necessità.
++
+Lo spazio rack dipende dal modello di piattaforma dei moduli controller, dai tipi di switch e dal numero di shelf di storage nella configurazione.
+
+. Mettere a terra l'utente.
+. Installare i moduli controller nel rack o nell'armadietto.
++
+https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"]
+
+. Collegare i controller agli switch IP come descritto in link:../install-ip/concept_considerations_differences.html["Installazione e configurazione di MetroCluster IP"].
++
+** link:["Cablaggio degli switch IP"]
+
+
+. Accendere i nuovi nodi e avviarli in modalità manutenzione.
+
+
+
+
+=== Ripristino della configurazione HBA
+
+A seconda della presenza e della configurazione delle schede HBA nel modulo controller, è necessario configurarle correttamente per l'utilizzo da parte del sito.
+
+.Fasi
+. In modalità Maintenance (manutenzione), configurare le impostazioni per gli HBA presenti nel sistema:
++
+.. Verificare le impostazioni correnti delle porte:
++
+`ucadmin show`
+
+.. Aggiornare le impostazioni della porta secondo necessità.
+
+
++
+|===
+
+
+| Se si dispone di questo tipo di HBA e della modalità desiderata... | Utilizzare questo comando... 
+
+
+ a| 
+FC CNA
+ a| 
+`ucadmin modify -m fc -t initiator _adapter-name_`
+
+
+
+ a| 
+Ethernet CNA
+ a| 
+`ucadmin modify -mode cna _adapter-name_`
+
+
+
+ a| 
+Destinazione FC
+ a| 
+`fcadmin config -t target _adapter-name_`
+
+
+
+ a| 
+Iniziatore FC
+ a| 
+`fcadmin config -t initiator _adapter-name_`
+
+|===
+. Uscire dalla modalità di manutenzione:
++
+`halt`
+
++
+Dopo aver eseguito il comando, attendere che il nodo si arresti al prompt DEL CARICATORE.
+
+. Riavviare il nodo in modalità Maintenance per rendere effettive le modifiche di configurazione:
++
+`boot_ontap maint`
+
+. Verificare le modifiche apportate:
++
+|===
+
+
+| Se si dispone di questo tipo di HBA... | Utilizzare questo comando... 
+
+
+ a| 
+CNA
+ a| 
+`ucadmin show`
+
+
+
+ a| 
+FC
+ a| 
+`fcadmin show`
+
+|===
+
+
+
+
+=== Impostazione dello stato ha sui nuovi controller e chassis
+
+È necessario verificare lo stato ha dei controller e dello chassis e, se necessario, aggiornarlo in modo che corrisponda alla configurazione del sistema.
+
+.Fasi
+. In modalità Maintenance (manutenzione), visualizzare lo stato ha del modulo controller e dello chassis:
++
+`ha-config show`
+
++
+Lo stato ha per tutti i componenti deve essere "`mccip`".
+
+. Se lo stato di sistema visualizzato del controller o dello chassis non è corretto, impostare lo stato ha:
++
+`ha-config modify controller mccip`
+
++
+`ha-config modify chassis mccip`
+
+
+
+
+
+=== Impostazione delle variabili di boot MetroCluster IP
+
+Alcuni valori di boot MetroCluster IP devono essere configurati sui nuovi moduli controller. I valori devono corrispondere a quelli configurati sui vecchi moduli controller.
+
+.A proposito di questa attività
+In questa attività, verranno utilizzati gli UUID e gli ID di sistema identificati in precedenza nella procedura di aggiornamento in link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html["Raccolta di informazioni prima dell'aggiornamento"].
+
+.Fasi
+. Se i nodi da aggiornare sono i modelli AFF A400, FAS8300 o FAS8700, impostare i seguenti bootargs al prompt DEL CARICATORE:
++
+`setenv bootarg.mcc.port_a_ip_config _local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id_`
+
++
+`setenv bootarg.mcc.port_b_ip_config _local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id_`
+
++
+
+NOTE: Se le interfacce utilizzano le VLAN predefinite, l'id vlan non è necessario.
+
++
+I seguenti comandi impostano i valori per Node_B_1-New utilizzando VLAN 120 per la prima rete e VLAN 130 per la seconda rete:
+
++
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,172.17.26.11,172.17.26.13,172.17.26.12,120
+setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,172.17.27.11,172.17.27.13,172.17.27.12,130
+----
++
+I seguenti comandi impostano i valori per Node_B_2-New utilizzando VLAN 120 per la prima rete e VLAN 130 per la seconda rete:
+
++
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config 172.17.26.11/23,0,172.17.26.10,172.17.26.12,172.17.26.13,120
+setenv bootarg.mcc.port_b_ip_config 172.17.27.11/23,0,172.17.27.10,172.17.27.12,172.17.27.13,130
+----
++
+L'esempio seguente mostra i comandi per node_B_1-new quando viene utilizzata la VLAN predefinita:
+
++
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,172.17.26.11,172.17.26.13,172.17.26.12
+setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,172.17.27.11,172.17.27.13,172.17.27.12
+----
++
+L'esempio seguente mostra i comandi per node_B_2-new quando viene utilizzata la VLAN predefinita:
+
++
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config 172.17.26.11/23,0,172.17.26.10,172.17.26.12,172.17.26.13
+setenv bootarg.mcc.port_b_ip_config 172.17.27.11/23,0,172.17.27.10,172.17.27.12,172.17.27.13
+----
+. Se i nodi da aggiornare non sono sistemi elencati nella fase precedente, al prompt DEL CARICATORE per ciascuno dei nodi sopravvissuti, impostare i seguenti bootargs con local_IP/mask:
++
+`setenv bootarg.mcc.port_a_ip_config _local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address_`
+
++
+`setenv bootarg.mcc.port_b_ip_config _local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address_`
+
++
+I seguenti comandi impostano i valori per node_B_1-new:
+
++
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,172.17.26.11,172.17.26.13,172.17.26.12
+setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,172.17.27.11,172.17.27.13,172.17.27.12
+----
++
+I seguenti comandi impostano i valori per node_B_2-new:
+
++
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config 172.17.26.11/23,0,172.17.26.10,172.17.26.12,172.17.26.13
+setenv bootarg.mcc.port_b_ip_config 172.17.27.11/23,0,172.17.27.10,172.17.27.12,172.17.27.13
+----
+. Al prompt DEL CARICATORE dei nuovi nodi, impostare gli UUID:
++
+`setenv bootarg.mgwd.partner_cluster_uuid _partner-cluster-UUID_`
+
++
+`setenv bootarg.mgwd.cluster_uuid _local-cluster-UUID_`
+
++
+`setenv bootarg.mcc.pri_partner_uuid _DR-partner-node-UUID_`
+
++
+`setenv bootarg.mcc.aux_partner_uuid _DR-aux-partner-node-UUID_`
+
++
+`setenv bootarg.mcc_iscsi.node_uuid _local-node-UUID_`
+
++
+.. Impostare gli UUID su Node_B_1-New.
++
+L'esempio seguente mostra i comandi per impostare gli UUID su Node_B_1-New:
+
++
+[listing]
+----
+setenv bootarg.mgwd.cluster_uuid ee7db9d5-9a82-11e7-b68b-00a098908039
+setenv bootarg.mgwd.partner_cluster_uuid 07958819-9ac6-11e7-9b42-00a098c9e55d
+setenv bootarg.mcc.pri_partner_uuid f37b240b-9ac1-11e7-9b42-00a098c9e55d
+setenv bootarg.mcc.aux_partner_uuid bf8e3f8f-9ac4-11e7-bd4e-00a098ca379f
+setenv bootarg.mcc_iscsi.node_uuid f03cb63c-9a7e-11e7-b68b-00a098908039
+----
+.. Impostare gli UUID su Node_B_2-New:
++
+L'esempio seguente mostra i comandi per impostare gli UUID su Node_B_2-New:
+
++
+[listing]
+----
+setenv bootarg.mgwd.cluster_uuid ee7db9d5-9a82-11e7-b68b-00a098908039
+setenv bootarg.mgwd.partner_cluster_uuid 07958819-9ac6-11e7-9b42-00a098c9e55d
+setenv bootarg.mcc.pri_partner_uuid bf8e3f8f-9ac4-11e7-bd4e-00a098ca379f
+setenv bootarg.mcc.aux_partner_uuid f37b240b-9ac1-11e7-9b42-00a098c9e55d
+setenv bootarg.mcc_iscsi.node_uuid aa9a7a7a-9a81-11e7-a4e9-00a098908c35
+----
+
+
+. Se i sistemi originali sono stati configurati per ADP, al prompt DEL CARICATORE di ciascun nodo sostitutivo, abilitare ADP:
++
+`setenv bootarg.mcc.adp_enabled true`
+
+. Impostare le seguenti variabili:
++
+`setenv bootarg.mcc.local_config_id _original-sys-id_`
+
++
+`setenv bootarg.mcc.dr_partner _dr-partner-sys-id_`
+
++
+
+NOTE: Il `setenv bootarg.mcc.local_config_id` Variable deve essere impostato sul sys-id del modulo controller *original*, node_B_1-old.
+
++
+.. Impostare le variabili su Node_B_1-New.
++
+L'esempio seguente mostra i comandi per impostare i valori su Node_B_1-New:
+
++
+[listing]
+----
+setenv bootarg.mcc.local_config_id 537403322
+setenv bootarg.mcc.dr_partner 537403324
+----
+.. Impostare le variabili su Node_B_2-new.
++
+L'esempio seguente mostra i comandi per impostare i valori su Node_B_2-New:
+
++
+[listing]
+----
+setenv bootarg.mcc.local_config_id 537403321
+setenv bootarg.mcc.dr_partner 537403323
+----
+
+
+. Se si utilizza la crittografia con il gestore delle chiavi esterno, impostare i bootargs richiesti:
++
+`setenv bootarg.kmip.init.ipaddr`
+
++
+`setenv bootarg.kmip.kmip.init.netmask`
+
++
+`setenv bootarg.kmip.kmip.init.gateway`
+
++
+`setenv bootarg.kmip.kmip.init.interface`
+
+
+
+
+
+=== Riassegnazione dei dischi aggregati root
+
+Riassegnare i dischi aggregati root al nuovo modulo controller, utilizzando i sistemi raccolti in precedenza.
+
+.A proposito di questa attività
+Questi passaggi vengono eseguiti in modalità manutenzione.
+
+.Fasi
+. Avviare il sistema in modalità di manutenzione:
++
+`boot_ontap maint`
+
+. Visualizzare i dischi su Node_B_1-New dal prompt della modalità di manutenzione:
++
+`disk show -a`
+
++
+L'output del comando mostra l'ID di sistema del nuovo modulo controller (1574774970). Tuttavia, i dischi aggregati root sono ancora di proprietà del vecchio ID di sistema (537403322). Questo esempio non mostra i dischi di proprietà di altri nodi nella configurazione MetroCluster.
+
++
+[listing]
+----
+*> disk show -a
+Local System ID: 1574774970
+DISK                  OWNER                 POOL   SERIAL NUMBER   HOME                  DR HOME
+------------          ---------             -----  -------------   -------------         -------------
+prod3-rk18:9.126L44   node_B_1-old(537403322)  Pool1  PZHYN0MD     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod4-rk18:9.126L49   node_B_1-old(537403322)  Pool1  PPG3J5HA     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod4-rk18:8.126L21   node_B_1-old(537403322)  Pool1  PZHTDSZD     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod2-rk18:8.126L2    node_B_1-old(537403322)  Pool0  S0M1J2CF     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod2-rk18:8.126L3    node_B_1-old(537403322)  Pool0  S0M0CQM5     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod1-rk18:9.126L27   node_B_1-old(537403322)  Pool0  S0M1PSDW     node_B_1-old(537403322)  node_B_1-old(537403322)
+.
+.
+.
+----
+. Riassegnare i dischi aggregati root sugli shelf di dischi ai nuovi controller.
++
+|===
+
+
+| Se si utilizza ADP... | Quindi utilizzare questo comando... 
+
+
+ a| 
+Sì
+ a| 
+`disk reassign -s _old-sysid_ -d _new-sysid_ -r _dr-partner-sysid_`
+
+
+
+ a| 
+No
+ a| 
+`disk reassign -s _old-sysid_ -d _new-sysid_`
+
+|===
+. Riassegnare i dischi aggregati root sugli shelf di dischi ai nuovi controller:
++
+`disk reassign -s old-sysid -d new-sysid`
+
++
+L'esempio seguente mostra la riassegnazione dei dischi in una configurazione non ADP:
+
++
+[listing]
+----
+*> disk reassign -s 537403322 -d 1574774970
+Partner node must not be in Takeover mode during disk reassignment from maintenance mode.
+Serious problems could result!!
+Do not proceed with reassignment if the partner is in takeover mode. Abort reassignment (y/n)? n
+
+After the node becomes operational, you must perform a takeover and giveback of the HA partner node to ensure disk reassignment is successful.
+Do you want to continue (y/n)? y
+Disk ownership will be updated on all disks previously belonging to Filer with sysid 537403322.
+Do you want to continue (y/n)? y
+----
+. Verificare che i dischi dell'aggregato root siano riassegnati correttamente in modalità vecchia rimozione:
++
+`disk show`
+
++
+`storage aggr status`
+
++
+[listing]
+----
+
+*> disk show
+Local System ID: 537097247
+
+  DISK                    OWNER                    POOL   SERIAL NUMBER   HOME                     DR HOME
+------------              -------------            -----  -------------   -------------            -------------
+prod03-rk18:8.126L18 node_B_1-new(537097247)  Pool1  PZHYN0MD        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod04-rk18:9.126L49 node_B_1-new(537097247)  Pool1  PPG3J5HA        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod04-rk18:8.126L21 node_B_1-new(537097247)  Pool1  PZHTDSZD        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod02-rk18:8.126L2  node_B_1-new(537097247)  Pool0  S0M1J2CF        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod02-rk18:9.126L29 node_B_1-new(537097247)  Pool0  S0M0CQM5        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod01-rk18:8.126L1  node_B_1-new(537097247)  Pool0  S0M1PSDW        node_B_1-new(537097247)   node_B_1-new(537097247)
+::>
+::> aggr status
+           Aggr          State           Status                Options
+aggr0_node_B_1           online          raid_dp, aggr         root, nosnap=on,
+                                         mirrored              mirror_resync_priority=high(fixed)
+                                         fast zeroed
+                                         64-bit
+----
+
+
+
+
+=== Avviare i nuovi controller
+
+È necessario avviare i nuovi controller, assicurandosi che le variabili di boot siano corrette e, se necessario, eseguire le operazioni di ripristino della crittografia.
+
+.Fasi
+. Arrestare i nuovi nodi:
++
+`halt`
+
+. Se è configurato un gestore di chiavi esterno, impostare i relativi bootargs:
++
+`setenv bootarg.kmip.init.ipaddr _ip-address_`
+
++
+`setenv bootarg.kmip.init.netmask _netmask_`
+
++
+`setenv bootarg.kmip.init.gateway _gateway-address_`
+
++
+`setenv bootarg.kmip.init.interface _interface-id_`
+
+. Verificare se il sistema partner è quello corrente:
++
+`printenv partner-sysid`
+
++
+Se il partner-sysid non è corretto, impostarlo:
+
++
+`setenv partner-sysid _partner-sysID_`
+
+. Visualizzare il menu di avvio di ONTAP:
++
+`boot_ontap menu`
+
+. Se viene utilizzata la crittografia root, selezionare l'opzione del menu di avvio per la configurazione della gestione delle chiavi.
++
+|===
+
+
+| Se si utilizza... | Selezionare questa opzione del menu di avvio... 
+
+
+ a| 
+Gestione delle chiavi integrata
+ a| 
+Opzione `10`
+
+Seguire le istruzioni per fornire gli input necessari per ripristinare la configurazione di gestione delle chiavi.
+
+
+
+ a| 
+Gestione esterna delle chiavi
+ a| 
+Opzione `11`
+
+Seguire le istruzioni per fornire gli input necessari per ripristinare la configurazione di gestione delle chiavi.
+
+|===
+. Dal menu di avvio, selezionare "`(6) Update flash from backup config`".
++
+
+NOTE: L'opzione 6 riavvia il nodo due volte prima del completamento.
+
++
+Rispondere "`y`" alle richieste di modifica dell'id di sistema. Attendere i secondi messaggi di riavvio:
+
++
+[listing]
+----
+Successfully restored env file from boot media...
+
+Rebooting to load the restored env file...
+----
+. Sul CARICATORE, controllare due volte i valori di bootarg e aggiornarli secondo necessità.
++
+Attenersi alla procedura descritta in link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html["Impostazione delle variabili di boot MetroCluster IP"].
+
+. Verificare che il sistema partner sia corretto:
++
+`printenv partner-sysid`
+
++
+Se il partner-sysid non è corretto, impostarlo:
+
++
+`setenv partner-sysid _partner-sysID_`
+
+. Se viene utilizzata la crittografia root, selezionare nuovamente l'opzione del menu di avvio per la configurazione della gestione delle chiavi.
++
+|===
+
+
+| Se si utilizza... | Selezionare questa opzione del menu di avvio... 
+
+
+ a| 
+Gestione delle chiavi integrata
+ a| 
+Opzione `10`
+
+Seguire le istruzioni per fornire gli input necessari per ripristinare la configurazione di gestione delle chiavi.
+
+
+
+ a| 
+Gestione esterna delle chiavi
+ a| 
+Opzione "`11`"
+
+Seguire le istruzioni per fornire gli input necessari per ripristinare la configurazione di gestione delle chiavi.
+
+|===
++
+A seconda dell'impostazione del gestore delle chiavi, eseguire la procedura di ripristino selezionando l'opzione "`10`" o l'opzione "`11`", quindi l'opzione `6` al primo prompt del menu di avvio. Per avviare completamente i nodi, potrebbe essere necessario ripetere la procedura di ripristino, continua con l'opzione "`1`" (boot normale).
+
+. Attendere l'avvio dei nodi sostituiti.
++
+Se uno dei nodi è in modalità Takeover, eseguire un giveback utilizzando `storage failover giveback` comando.
+
+. Se viene utilizzata la crittografia, ripristinare le chiavi utilizzando il comando corretto per la configurazione di gestione delle chiavi.
++
+|===
+
+
+| Se si utilizza... | Utilizzare questo comando... 
+
+
+ a| 
+Gestione delle chiavi integrata
+ a| 
+`security key-manager onboard sync`
+
+Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-E4AB2ED4-9227-4974-A311-13036EB43A3D.html["Ripristino delle chiavi di crittografia integrate per la gestione delle chiavi"].
+
+
+
+ a| 
+Gestione esterna delle chiavi
+ a| 
+`security key-manager external restore -vserver _SVM_ -node _node_ -key-server _host_name|IP_address:port_ -key-id key_id -key-tag key_tag _node-name_`
+
+Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-32DA96C3-9B04-4401-92B8-EAF323C3C863.html["Ripristino delle chiavi di crittografia esterne per la gestione delle chiavi"].
+
+|===
+. Verificare che tutte le porte si trovino in un dominio di trasmissione:
++
+.. Visualizzare i domini di trasmissione:
++
+`network port broadcast-domain show`
+
+.. Aggiungere eventuali porte a un dominio di broadcast in base alle esigenze.
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-003BDFCD-58A3-46C9-BF0C-BA1D1D1475F9.html["Aggiunta o rimozione di porte da un dominio di broadcast"]
+
+.. Ricreare VLAN e gruppi di interfacce in base alle esigenze.
++
+L'appartenenza alla VLAN e al gruppo di interfacce potrebbe essere diversa da quella del nodo precedente.
+
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-8929FCE2-5888-4051-B8C0-E27CAF3F2A63.html["Creazione di una VLAN"]
+
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-DBC9DEE2-EAB7-430A-A773-4E3420EE2AA1.html["Combinazione di porte fisiche per creare gruppi di interfacce"]
+
+
+
+
+
+
+
+=== Verifica e ripristino della configurazione LIF
+
+Verificare che i file LIF siano ospitati su nodi e porte appropriati, come mappati all'inizio della procedura di aggiornamento.
+
+.A proposito di questo tsak
+* Questa attività viene eseguita sul sito_B.
+* Vedere il piano di mappatura delle porte creato in link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html["Mappatura delle porte dai vecchi nodi ai nuovi nodi"].
+
+
+.Fasi
+. Verificare che i file LIF siano ospitati sul nodo e sulle porte appropriati prima di passare al switchback.
++
+.. Passare al livello di privilegio avanzato:
++
+`set -privilege advanced`
+
+.. Eseguire l'override della configurazione della porta per garantire il corretto posizionamento di LIF:
++
+`vserver config override -command "network interface modify -vserver _vserver_name_ -home-port _active_port_after_upgrade_ -lif _lif_name_ -home-node _new_node_name_"`
+
++
+Quando si immette il comando di modifica dell'interfaccia di rete in `vserver config override` non è possibile utilizzare la funzione di completamento automatico della scheda. È possibile creare la rete `interface modify` utilizzando il completamento automatico e quindi racchiuderlo in `vserver config override` comando.
+
+.. Tornare al livello di privilegio admin:
++
+`set -privilege admin`
+
+
+
+. Ripristinare le interfacce nel nodo principale:
++
+`network interface revert * -vserver _vserver-name_`
+
++
+Eseguire questo passaggio su tutte le SVM secondo necessità.
+
+
+
+
+
+== Tornare indietro alla configurazione MetroCluster
+
+In questa attività, viene eseguita l'operazione di switchback e la configurazione MetroCluster torna al funzionamento normale. I nodi sul sito_A sono ancora in attesa di aggiornamento.
+
+image::../media/mcc_upgrade_cluster_a_switchback.png[switchback del cluster di aggiornamento mcc a.]
+
+.Fasi
+. Eseguire il `metrocluster node show` Su Site_B e controllare l'output.
++
+.. Verificare che i nuovi nodi siano rappresentati correttamente.
+.. Verificare che i nuovi nodi siano nello stato "in attesa di switchback".
+
+
+. Eseguire la riparazione e lo switchback eseguendo i comandi richiesti da qualsiasi nodo del cluster attivo (il cluster che non è in fase di aggiornamento).
++
+.. Riparare gli aggregati di dati: +
+`metrocluster heal aggregates`
+.. Riparare gli aggregati root:
++
+`metrocluster heal root`
+
+.. Switchback del cluster:
++
+`metrocluster switchback`
+
+
+
+. Controllare l'avanzamento dell'operazione di switchback:
++
+`metrocluster show`
+
++
+L'operazione di switchback è ancora in corso quando viene visualizzato l'output `waiting-for-switchback`:
+
++
+[listing]
+----
+cluster_B::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_B         Configuration state configured
+                          Mode                switchover
+                          AUSO Failure Domain -
+Remote: cluster_A         Configuration state configured
+                          Mode                waiting-for-switchback
+                          AUSO Failure Domain -
+----
++
+L'operazione di switchback è completa quando l'output visualizza normale:
+
++
+[listing]
+----
+cluster_B::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain -
+Remote: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain -
+----
++
+Se il completamento di uno switchback richiede molto tempo, è possibile verificare lo stato delle linee di base in corso utilizzando `metrocluster config-replication resync-status show` comando. Questo comando si trova al livello di privilegio avanzato.
+
+
+
+
+
+== Verifica dello stato della configurazione di MetroCluster
+
+Dopo aver aggiornato i moduli controller, è necessario verificare lo stato della configurazione MetroCluster.
+
+.A proposito di questa attività
+Questa attività può essere eseguita su qualsiasi nodo della configurazione MetroCluster.
+
+.Fasi
+. Verificare il funzionamento della configurazione MetroCluster:
++
+.. Confermare la configurazione MetroCluster e verificare che la modalità operativa sia normale: +
+`metrocluster show`
+.. Eseguire un controllo MetroCluster: +
+`metrocluster check run`
+.. Visualizzare i risultati del controllo MetroCluster:
++
+`metrocluster check show`
+
+
+
+. Verificare lo stato e la connettività MetroCluster.
++
+.. Verificare le connessioni IP MetroCluster:
++
+`storage iscsi-initiator show`
+
+.. Verificare che i nodi funzionino:
++
+`metrocluster node show`
+
+.. Verificare che le interfacce IP di MetroCluster siano disponibili:
++
+`metrocluster configuration-settings interface show`
+
+.. Verificare che il failover locale sia attivato:
++
+`storage failover show`
+
+
+
+
+
+
+
+== Aggiornamento dei nodi sul cluster_A.
+
+È necessario ripetere le attività di aggiornamento su cluster_A.
+
+.Fasi
+. Ripetere i passaggi per aggiornare i nodi sul cluster_A, iniziando da link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html["Preparazione per l'aggiornamento"].
++
+Durante l'esecuzione delle attività, tutti i riferimenti di esempio ai cluster e ai nodi vengono invertiti. Ad esempio, quando l'esempio viene dato allo switchover da cluster_A, si passa da cluster_B.
+
+
+
+
+
+== Ripristino del monitoraggio di Tiebreaker o Mediator
+
+Dopo aver completato l'aggiornamento della configurazione MetroCluster, è possibile riprendere il monitoraggio con l'utility Tiebreaker o Mediator.
+
+.Fasi
+. Ripristinare il monitoraggio, se necessario, utilizzando la procedura per la configurazione.
++
+|===
+| Se si utilizza... | Utilizzare questa procedura 
+
+
+ a| 
+Spareggio
+ a| 
+link:../tiebreaker/concept_configuring_the_tiebreaker_software.html#adding-metrocluster-configurations["Aggiunta di configurazioni MetroCluster"].
+
+
+
+ a| 
+Mediatore
+ a| 
+Link:../install-ip/concept_mediator_requirements.html [Configurazione del servizio ONTAP Mediator da una configurazione IP MetroCluster].
+
+
+
+ a| 
+Applicazioni di terze parti
+ a| 
+Consultare la documentazione del prodotto.
+
+|===
+
+
+
+
+== Invio di un messaggio AutoSupport personalizzato dopo la manutenzione
+
+Una volta completato l'aggiornamento, inviare un messaggio AutoSupport che indica la fine della manutenzione, in modo da poter riprendere la creazione automatica del caso.
+
+.Fasi
+. Per riprendere la generazione automatica del caso di supporto, inviare un messaggio AutoSupport per indicare che la manutenzione è stata completata.
++
+.. Eseguire il seguente comando: +
+`system node autosupport invoke -node * -type all -message MAINT=end`
+.. Ripetere il comando sul cluster partner.
+
+
+

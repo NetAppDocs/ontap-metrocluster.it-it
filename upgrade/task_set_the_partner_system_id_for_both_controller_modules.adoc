@@ -1,0 +1,28 @@
+---
+permalink: upgrade/task_set_the_partner_system_id_for_both_controller_modules.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, set, up, partner, system, id, controller, module 
+summary: 'È necessario impostare l"ID del sistema partner su entrambi i moduli controller in modo che possano formare una coppia ha.' 
+---
+= Impostazione dell'ID del sistema partner per entrambi i moduli controller
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario impostare l'ID del sistema partner su entrambi i moduli controller in modo che possano formare una coppia ha.
+
+.A proposito di questa attività
+Questa attività viene eseguita con entrambi i moduli controller al prompt DEL CARICATORE.
+
+.Fasi
+. Sul modulo controller esistente, impostare l'ID del sistema partner su quello del nuovo modulo controller:
++
+`setenv partner-sysid _sysID_of_new_controller_`
+
+. Sul nuovo modulo controller, impostare l'ID del sistema partner su quello del modulo controller esistente:
++
+`setenv partner-sysid _sysID_of_existing_controller_`
+
+

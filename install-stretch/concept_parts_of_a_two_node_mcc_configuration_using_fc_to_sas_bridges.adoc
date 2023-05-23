@@ -1,0 +1,48 @@
+---
+permalink: install-stretch/concept_parts_of_a_two_node_mcc_configuration_using_fc_to_sas_bridges.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, parts, two, node, bridge, stretch, configuration 
+summary: Durante la pianificazione della configurazione MetroCluster, è necessario comprendere le parti della configurazione e il modo in cui funzionano insieme. 
+---
+= Parti di una configurazione Stretch MetroCluster con collegamento a ponte a due nodi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durante la pianificazione della configurazione MetroCluster, è necessario comprendere le parti della configurazione e il modo in cui funzionano insieme.
+
+La configurazione MetroCluster include i seguenti elementi hardware principali:
+
+* Controller di storage
++
+I controller di storage non sono collegati direttamente allo storage ma a bridge FC-SAS. I controller storage sono collegati tra loro tramite cavi FC tra gli adattatori FC-VI di ciascun controller.
+
++
+Ogni controller di storage è configurato come partner di DR per uno storage controller sul sito del partner.
+
+* Bridge FC-SAS
++
+I bridge FC-SAS collegano gli stack di storage SAS alle porte initiator FC dei controller, fornendo un bridging tra i due protocolli.
+
+* Rete di peering del cluster
++
+La rete di peering del cluster fornisce la connettività per il mirroring della configurazione SVM (Storage Virtual Machine). La configurazione di tutte le SVM su un cluster viene sottoposta a mirroring nel cluster partner.
+
+
+
+La figura seguente mostra una vista semplificata della configurazione MetroCluster. Per alcune connessioni, una singola linea rappresenta connessioni multiple e ridondanti tra i componenti. Le connessioni di rete per dati e gestione non vengono visualizzate.
+
+image::../media/mcc_hardware_architecture_both_clusters_2_node_atto.gif[architettura hardware mcc entrambi i cluster a 2 nodi atto]
+
+* La configurazione è costituita da due cluster a nodo singolo.
+* Ogni sito dispone di uno o più stack di storage SAS.
++
+
+NOTE: Gli shelf SAS nelle configurazioni MetroCluster non sono supportati con il cablaggio ACP.
+
++
+Sono supportati ulteriori stack di storage, ma ne viene mostrato solo uno per ciascun sito.
+
+

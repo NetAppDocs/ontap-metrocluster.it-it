@@ -1,0 +1,47 @@
+---
+permalink: install-stretch/concept_choosing_the_correct_installation_procedure_for_your_configuration_mcc_install.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, correct, procedure, configuration 
+summary: 'È necessario scegliere la procedura di installazione corretta in base all"utilizzo delle LUN FlexArray e alla modalità di connessione dei controller di storage agli shelf di storage.' 
+---
+= Scelta della procedura di installazione corretta per la configurazione
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario scegliere la procedura di installazione corretta in base all'utilizzo delle LUN FlexArray e alla modalità di connessione dei controller di storage agli shelf di storage.
+
+image::../media/workflow_select_your_metrocluster_configuration_stretch.gif[workflow selezionare la configurazione MetroCluster]
+
+|===
+
+
+| Per questo tipo di installazione... | Utilizzare queste procedure... 
+
+
+ a| 
+Configurazione stretch a due nodi con bridge FC-SAS
+ a| 
+. link:task_configure_the_mcc_hardware_components_2_node_stretch_atto.html["Cablaggio di una configurazione Stretch MetroCluster con collegamento a ponte a due nodi"]
+. link:concept_configuring_the_mcc_software_in_ontap.html["Configurazione del software MetroCluster in ONTAP"]
+
+
+
+
+ a| 
+Configurazione stretch a due nodi con cablaggio SAS a collegamento diretto
+ a| 
+. link:task_configure_the_mcc_hardware_components_2_node_stretch_sas.html["Collegamento di una configurazione MetroCluster stretch con collegamento SAS a due nodi"]
+. link:concept_configuring_the_mcc_software_in_ontap.html["Configurazione del software MetroCluster in ONTAP"]
+
+
+
+
+ a| 
+Installazione con LUN array
+ a| 
+link:concept_stretch_mcc_configuration_with_array_luns.html["Connessioni in configurazioni MetroCluster stretch con LUN array"]
+
+|===

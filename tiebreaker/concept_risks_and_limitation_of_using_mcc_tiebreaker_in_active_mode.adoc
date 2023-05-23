@@ -1,0 +1,26 @@
+---
+permalink: tiebreaker/concept_risks_and_limitation_of_using_mcc_tiebreaker_in_active_mode.html 
+sidebar: sidebar 
+keywords: switchover, upon, detection, site, failure, automatic, metrocluster, tiebreaker, active, mode, supplement, ontap, fas, capability, risk, limitation 
+summary: Lo switchover al rilevamento di un guasto di un sito avviene automaticamente, con MetroCluster Tiebreaker in modalità attiva. Questa modalità può essere utilizzata per integrare la funzionalità di switchover automatico di ONTAP/FAS. 
+---
+= Rischi e limitazioni dell'utilizzo di MetroCluster Tiebreaker in modalità attiva
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lo switchover al rilevamento di un guasto di un sito avviene automaticamente, con MetroCluster Tiebreaker in modalità attiva. Questa modalità può essere utilizzata per integrare la funzionalità di switchover automatico di ONTAP/FAS.
+
+Quando si implementa MetroCluster Tiebreaker in modalità attiva, i seguenti problemi noti possono causare la perdita di dati:
+
+* In caso di errore del collegamento tra siti, i controller di ciascun sito continuano a servire i client. Tuttavia, i controller non verranno sottoposti a mirroring. Il guasto di un controller in un sito viene identificato come un guasto del sito e il Tiebreaker MetroCluster avvia uno switchover. I dati che non vengono mirrorati dopo un errore di collegamento tra siti con il sito remoto andranno persi.
+* Si verifica uno switchover quando gli aggregati nel sito remoto sono in stato degradato. I dati non verranno replicati se lo switchover si è verificato prima della risincronizzazione dell'aggregato.
+* Si verifica un errore dello storage remoto durante lo switchover.
+* La memoria non volatile (NVRAM o NVMEM, a seconda del modello di piattaforma) nei controller di storage non viene sottoposta a mirroring con il partner di disaster recovery remoto (DR) sul sito del partner.
+* I metadati vengono persi se la rete di peering del cluster rimane inattiva per un periodo prolungato e i volumi di metadati non sono online dopo uno switchover.
+
+
+
+NOTE: Potrebbero verificarsi scenari non menzionati. NetApp non è responsabile per eventuali danni derivanti dall'utilizzo di MetroCluster Tiebreaker in modalità attiva. Non utilizzare MetroCluster Tiebreaker in modalità attiva se i rischi e le limitazioni non sono accettabili per l'utente.

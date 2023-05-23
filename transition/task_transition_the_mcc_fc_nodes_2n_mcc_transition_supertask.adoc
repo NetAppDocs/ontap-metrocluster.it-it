@@ -1,0 +1,222 @@
+---
+permalink: transition/task_transition_the_mcc_fc_nodes_2n_mcc_transition_supertask.html 
+sidebar: sidebar 
+keywords: information, exist, metrocluster, fc, node, autosupport, message, announcing, announce, maintenance, transition, node, gather, controller, module, send, custom, message, prior, shut, down, removing, remove 
+summary: 'È necessario raccogliere informazioni dai nodi FC MetroCluster esistenti, inviare un messaggio AutoSupport che annuncia l"inizio della manutenzione e trasferire i nodi.' 
+---
+= Transizione dei nodi FC MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario raccogliere informazioni dai nodi FC MetroCluster esistenti, inviare un messaggio AutoSupport che annuncia l'inizio della manutenzione e trasferire i nodi.
+
+
+
+== Raccolta di informazioni dai moduli controller esistenti prima della transizione
+
+[role="lead"]
+Prima di effettuare la transizione, è necessario raccogliere informazioni per ciascuno dei nodi.
+
+Questa attività viene eseguita sui nodi esistenti:
+
+* Node_A_1-FC
+* Node_B_1-FC
++
+.. Raccogliere l'output dei comandi nella tabella seguente.
+
+
+
+
+|===
+| Categoria | Comandi | Note 
+
+
+| Licenza | licenza di sistema |  
+
+
+| Shelf e numero di dischi in ogni shelf, dettagli di storage flash e memoria e NVRAM e schede di rete | nodo di sistema run -node node_name sysconfig |  
+
+
+| LIF di gestione di nodi e reti cluster | system node run -node node_name sysconfig network interface show -role "cluster,node-mgmt,data" |  
+
+
+| Informazioni SVM | show di vserver |  
+
+
+| Informazioni sul protocollo | nfs mostra iscsi mostra cifs show |  
+
+
+| Porte fisiche | porta di rete mostra -node node_name -type porta di rete fisica mostra |  
+
+
+| Gruppi di failover | i gruppi di failover dell'interfaccia di rete mostrano -vserver vserver_name | Registrare i nomi e le porte dei gruppi di failover che non sono a livello di cluster. 
+
+
+| Configurazione della VLAN | porta di rete vlan show -node node_name | Registrare ogni coppia di porte di rete e ID VLAN. 
+
+
+| Configurazione del gruppo di interfacce | porta di rete ifgrp show -node node_name -instance | Annotare i nomi dei gruppi di interfacce e le porte ad essi assegnate. 
+
+
+| Domini di broadcast | visualizzazione del dominio di broadcast della porta di rete |  
+
+
+| IPSpace | visualizzazione di network ipspace |  
+
+
+| Info volume | visualizzazione volume e visualizzazione volume - crittografia dei campi |  
+
+
+| Info aggregate | show di storage aggregato e storage aggr crittografia show eshow storage aggregato object-store |  
+
+
+| Informazioni sulla proprietà del disco | show di storage aggregato e storage aggr crittografia show eshow storage aggregato object-store |  
+
+
+| Crittografia | show di backup di storage failover mailbox-disk e security key-manager | Conservare anche la passphrase utilizzata per attivare il gestore delle chiavi. Nel caso di un gestore di chiavi esterno, sono necessarie le informazioni di autenticazione per il client e il server. 
+
+
+| Crittografia | show security key-manager |  
+
+
+| Crittografia | programma esterno security key-manager |  
+
+
+| Crittografia | systemshell local kenv kmip.init.ipaddr ip-address |  
+
+
+| Crittografia | netmask kenv kmip.init.netmask locale di systemshell |  
+
+
+| Crittografia | gateway kenv kmip.init.gateway locale di systemshell |  
+
+
+| Crittografia | interfaccia systemshell locale kenv kmip.init.interface |  
+|===
+
+
+== Invio di un messaggio AutoSupport personalizzato prima della manutenzione
+
+[role="lead"]
+Prima di eseguire la manutenzione, devi inviare un messaggio AutoSupport per informare il supporto tecnico NetApp che la manutenzione è in corso. Ciò impedisce loro di aprire un caso partendo dal presupposto che si sia verificata un'interruzione.
+
+Questa attività deve essere eseguita su ciascun sito MetroCluster.
+
+. Per impedire la generazione automatica del caso di supporto, inviare un messaggio AutoSupport per indicare che la manutenzione è in corso.
++
+.. Immettere il seguente comando: `system node autosupport invoke -node * -type all -message MAINT=maintenance-window-in-hours`
++
+intervallo di manutenzione in ore specifica la durata della finestra di manutenzione, con un massimo di 72 ore. Se la manutenzione viene completata prima che sia trascorso il tempo, è possibile richiamare un messaggio AutoSupport che indica la fine del periodo di manutenzione:``system node autosupport invoke -node * -type all -message MAINT=end``
+
+.. Ripetere il comando sul cluster partner.
+
+
+
+
+
+
+== Transizione, arresto e rimozione dei nodi FC MetroCluster
+
+[role="lead"]
+Oltre all'emissione di comandi sui nodi FC MetroCluster, questa attività include l'apertura fisica e la rimozione dei moduli controller in ogni sito.
+
+Questa attività deve essere eseguita su ciascuno dei vecchi nodi:
+
+* Node_A_1-FC
+* Node_B_1-FC
++
+.. Arrestare tutto il traffico client.
+.. Su uno dei nodi FC MetroCluster, ad esempio Node_A_1-FC, abilitare la transizione.
++
+... Impostare il livello di privilegio avanzato: `set -priv advanced`
+... Attiva transizione: `metrocluster transition enable -transition-mode disruptive`
+... Tornare alla modalità admin: `set -priv admin`
+
+
+.. Eseguire il mirroring dell'aggregato root eliminando il plesso remoto degli aggregati root.
++
+... Identificare gli aggregati root: `storage aggregate show -root true`
+... Visualizzare gli aggregati pool1: `storage aggregate plex show -pool 1`
+... Eliminare il plex locale dell'aggregato root: `aggr plex delete aggr-name -plex plex-name`
+... Offline il plesso remoto dell'aggregato root: `aggr plex offline root-aggregate -plex remote-plex-for-root-aggregate`
++
+Ad esempio:
+
++
+[listing]
+----
+ # aggr plex offline aggr0_node_A_1-FC_01 -plex plex4
+----
+
+
+.. Confermare il numero di caselle postali, l'assegnazione automatica del disco e la modalità di transizione prima di procedere con i seguenti comandi su ciascun controller:
++
+... Impostare il livello di privilegio avanzato: `set -priv advanced`
+... Verificare che per ciascun modulo controller siano visualizzate solo tre unità mailbox: `storage failover mailbox-disk show`
+... Tornare alla modalità admin: `set -priv admin`
+... Verificare che la modalità di transizione sia disgregativa: Mostra MetroCluster Transition
+
+
+.. Verificare la presenza di eventuali dischi rotti: `disk show -broken`
+.. Rimuovere o sostituire eventuali dischi rotti
+.. Verificare che gli aggregati siano integri utilizzando i seguenti comandi su Node_A_1-FC e Node_B_1-FC:``storage aggregate show``/
++
+Il comando show dell'aggregato di storage indica che l'aggregato root è senza mirror.
+
+.. Verificare la presenza di VLAN o gruppi di interfacce: `network port ifgrp show``network port vlan show`
++
+Se non sono presenti componenti, saltare i due passi seguenti.
+
+.. Visualizzare l'elenco delle LIF utilizzando VLAN o ifgrps: `network interface show -fields home-port,curr-port``network port show -type if-group | vlan`
+.. Rimuovere eventuali VLAN e gruppi di interfacce.
++
+È necessario eseguire questi passaggi per tutti i file LIF in tutte le SVM, incluse quelle con il suffisso -mc.
+
++
+... Spostare le LIF utilizzando le VLAN o i gruppi di interfacce su una porta disponibile: `network interface modify -vserver vserver-name -lif lif_name -home- port port`
+... Visualizzare le LIF che non si trovano sulle porte home: `network interface show -is-home false`
+... Ripristinare tutte le LIF alle rispettive porte home: `network interface revert -vserver vserver_name -lif lif_name`
+... Verificare che tutte le LIF siano presenti sulle porte home: `network interface show -is-home false`
++
+Nell'output non dovrebbe essere visualizzato alcun LIF.
+
+... Rimuovere le porte VLAN e ifgrp dal dominio di broadcast: `network port broadcast-domain remove-ports -ipspace ipspace -broadcast-domain broadcast-domain-name -ports nodename:portname,nodename:portname,..`
+... Verificare che tutte le porte vlan e ifgrp non siano assegnate a un dominio di trasmissione: `network port show -type if-group | vlan`
+... Elimina tutte le VLAN: `network port vlan delete -node nodename -vlan-name vlan-name`
+... Elimina gruppi di interfacce: `network port ifgrp delete -node nodename -ifgrp ifgrp-name`
+
+
+.. Spostare le eventuali LIF necessarie per risolvere i conflitti con le porte dell'interfaccia IP di MetroCluster.
++
+È necessario spostare i LIF identificati al punto 1 di link:concept_requirements_for_fc_to_ip_transition_2n_mcc_transition.html["Mappatura delle porte dai nodi FC MetroCluster ai nodi IP MetroCluster"].
+
++
+... Spostare le LIF ospitate sulla porta desiderata su un'altra porta: `network interface modify -lif lifname -vserver vserver-name -home-port new-homeport``network interface revert -lif lifname -vserver vservername`
+... Se necessario, spostare la porta di destinazione in un dominio IPSpace e broadcast appropriato. `network port broadcast-domain remove-ports -ipspace current-ipspace -broadcast-domain current-broadcast-domain -ports controller-name:current-port``network port broadcast-domain add-ports -ipspace new-ipspace -broadcast-domain new-broadcast-domain -ports controller-name:new-port`
+
+
+.. Arrestare i controller FC MetroCluster (Node_A_1-FC e Node_B_1-FC): `system node halt`
+.. Al prompt DEL CARICATORE, sincronizzare i clock hardware tra i moduli controller FC e IP.
++
+... Sul vecchio nodo MetroCluster FC (Node_A_1-FC), visualizzare la data: `show date`
+... Sui nuovi controller IP MetroCluster (Node_A_1-IP e Node_B_1-IP), impostare la data visualizzata sul controller originale: `set date mm/dd/yy`
+... Sui nuovi controller IP MetroCluster (Node_A_1-IP e Node_B_1-IP), verificare la data: `show date`
+
+
+.. Arrestare e spegnere i moduli controller FC MetroCluster (Node_A_1-FC e Node_B_1-FC), i bridge FC-SAS (se presenti), gli switch FC (se presenti) e ogni shelf di storage collegato a questi nodi.
+.. Scollega gli shelf dai controller FC MetroCluster e documenta quali shelf sono storage locale per ciascun cluster.
++
+Se la configurazione utilizza bridge FC-SAS o switch back-end FC, scollegarli e rimuoverli.
+
+.. In modalità di manutenzione sui nodi FC MetroCluster (Node_A_1-FC e Node_B_1-FC), verificare che non siano collegati dischi: `disk show -v`
+.. Spegnere e rimuovere i nodi MetroCluster FC.
+
+
+
+
+A questo punto, i controller FC MetroCluster sono stati rimossi e gli shelf sono scollegati da tutti i controller.
+
+image::../media/transition_2n_remove_fc_nodes.png[transizione 2n rimuovere i nodi fc]

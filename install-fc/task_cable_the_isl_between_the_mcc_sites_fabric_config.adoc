@@ -1,0 +1,29 @@
+---
+permalink: install-fc/task_cable_the_isl_between_the_mcc_sites_fabric_config.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, cable, isl, sites 
+summary: 'È necessario collegare gli switch FC in ogni sito attraverso i collegamenti interswitch in fibra ottica (ISL) per formare i fabric switch che collegano i componenti MetroCluster.' 
+---
+= Collegamento degli ISL tra siti MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È necessario collegare gli switch FC in ogni sito attraverso i collegamenti interswitch in fibra ottica (ISL) per formare i fabric switch che collegano i componenti MetroCluster.
+
+.A proposito di questa attività
+Questa operazione deve essere eseguita per entrambi i fabric switch.
+
+.Fasi
+. Collegare gli switch FC di ogni sito a tutti gli ISL, utilizzando il cablaggio nella tabella corrispondente alla configurazione e al modello di switch in uso.
++
+** link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.1 e versioni successive"]
+** link:concept_port_assignments_for_fc_switches_when_using_ontap_9_0.html["Assegnazioni delle porte per switch FC quando si utilizza ONTAP 9.0"]
+
+
+
+
+.Informazioni correlate
+link:concept_considerations_isls_mcfc.html["Considerazioni per gli ISL"]

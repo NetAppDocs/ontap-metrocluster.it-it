@@ -1,0 +1,105 @@
+---
+permalink: install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, required, hardware, components, naming, guidelines, two, node, sas, configuration 
+summary: 'La configurazione MetroCluster richiede una vasta gamma di componenti hardware. Per comodità e chiarezza, i nomi standard dei componenti vengono utilizzati nella documentazione di MetroCluster. Un sito viene indicato come Sito A e l"altro come Sito B.' 
+---
+= Componenti hardware MetroCluster richiesti e linee guida di denominazione per le configurazioni con collegamento SAS a due nodi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La configurazione MetroCluster richiede una vasta gamma di componenti hardware. Per comodità e chiarezza, i nomi standard dei componenti vengono utilizzati nella documentazione di MetroCluster. Un sito viene indicato come Sito A e l'altro come Sito B.
+
+
+
+== Software e hardware supportati
+
+L'hardware e il software devono essere supportati per la configurazione MetroCluster FC.
+
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+Quando si utilizzano sistemi AFF, tutti i moduli controller nella configurazione MetroCluster devono essere configurati come sistemi AFF.
+
+
+
+== Ridondanza dell'hardware nella configurazione MetroCluster
+
+A causa della ridondanza hardware nella configurazione MetroCluster, sono presenti due componenti per ogni sito. Ai siti vengono assegnate arbitrariamente le lettere A e B e ai singoli componenti vengono assegnati arbitrariamente i numeri 1 e 2.
+
+
+
+== Due cluster ONTAP a nodo singolo
+
+La configurazione di Stretch MetroCluster SAS-attached richiede due cluster ONTAP a nodo singolo.
+
+La denominazione deve essere univoca all'interno della configurazione MetroCluster.
+
+Nomi di esempio:
+
+* Sito A: Cluster_A
+* Sito B: Cluster_B
+
+
+
+
+== Due moduli controller storage
+
+La configurazione di Stretch MetroCluster SAS-attached richiede due moduli controller storage.
+
+* La denominazione deve essere univoca all'interno della configurazione MetroCluster.
+* Tutti i moduli controller nella configurazione MetroCluster devono eseguire la stessa versione di ONTAP.
+* Tutti i moduli controller di un gruppo DR devono essere dello stesso modello.
+* Tutti i moduli controller di un gruppo DR devono utilizzare la stessa configurazione FC-VI.
++
+Alcuni moduli controller supportano due opzioni per la connettività FC-VI:
+
++
+** Porte FC-VI integrate
+** Una scheda FC-VI nello slot 1
++
+Non è supportata la combinazione di un modulo controller che utilizza porte FC-VI integrate e un altro che utilizza una scheda FC-VI aggiuntiva. Ad esempio, se un nodo utilizza una configurazione FC-VI integrata, tutti gli altri nodi del gruppo DR devono utilizzare anche la configurazione FC-VI integrata.
+
+
+
+
+
+Nomi di esempio:
+
+* Sito A: Controller_A_1
+* Sito B: Controller_B_1
+
+
+
+
+== Almeno quattro shelf di dischi SAS (consigliato)
+
+La configurazione Smagliature MetroCluster con connessione SAS richiede almeno due shelf di dischi SAS. Si consigliano quattro shelf di dischi SAS.
+
+Si consiglia di utilizzare due shelf in ogni sito per consentire la proprietà dei dischi in base allo shelf. È supportato un minimo di uno shelf in ogni sito.
+
+Nomi di esempio:
+
+* Sito A:
++
+** Shelf_A_1_1
+** Shelf_A_1_2
+
+
+* Sito B:
++
+** Shelf_B_1_1
+** Shelf_B_1_2
+
+
+
+
+
+
+== Combinazione di moduli IOM12 e IOM 6 in uno stack
+
+La tua versione di ONTAP deve supportare la combinazione di shelf. Fare riferimento allo strumento matrice di interoperabilità (IMT) per verificare se la versione di ONTAP in uso supporta la combinazione di shelf. https://mysupport.netapp.com/NOW/products/interoperability["Interoperabilità NetApp"]
+
+Per ulteriori dettagli sulla miscelazione degli scaffali, consulta: https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-ds-mix-hotadd/home.html["Shelf hot-adding con moduli IOM12 a uno stack di shelf con moduli IOM6"]

@@ -1,0 +1,34 @@
+= 
+:allow-uri-read: 
+
+
+È necessario aggiornare gli switch a una configurazione che supporti i nuovi modelli di piattaforma.
+
+.A proposito di questa attività
+Questa attività viene eseguita nel sito contenente i controller attualmente in fase di aggiornamento. Negli esempi illustrati in questa procedura, si esegue prima l'aggiornamento di Site_B.
+
+Gli switch del sito_A verranno aggiornati quando i controller del sito_A verranno aggiornati.
+
+.Fasi
+. Preparare gli switch IP per l'applicazione dei nuovi file RCF.
++
+Seguire le istruzioni della sezione relativa al fornitore dello switch nella sezione _Installazione e configurazione IP MetroCluster_.
+
++
+link:../install-ip/index.html["Installazione e configurazione di MetroCluster IP"]
+
++
+** link:../install-ip/task_switch_config_broadcom.html#resetting-the-broadcom-ip-switch-to-factory-defaults["Ripristino delle impostazioni predefinite dello switch IP Broadcom"]
+** link:../install-ip/task_switch_config_broadcom.html#resetting-the-cisco-ip-switch-to-factory-defaults["Ripristino delle impostazioni predefinite dello switch IP Cisco"]
+
+
+. Scaricare e installare i file RCF.
++
+Seguire i passaggi descritti nella sezione relativa al fornitore dello switch di link:../install-ip/index.html["Installazione e configurazione di MetroCluster IP"].
+
++
+** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-rcf-files["Download e installazione dei file RCF Broadcom"]
+** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-cisco-ip-rcf-files["Download e installazione dei file Cisco IP RCF"]
+
+
+

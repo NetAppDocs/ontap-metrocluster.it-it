@@ -1,0 +1,715 @@
+---
+permalink: install-ip/concept_considerations_drive_assignment.html 
+sidebar: sidebar 
+keywords: drive auto-assignment, drive, adp, advanced disk partitioning, root disk, unmirrored root, data partition, root partition, shelf-by-shelf, AFF A320, AFF A220, AFF A250, C250, AFF A300, AFF A400, C400, AFF A700, AFF A800, FAS2750, FAS8200, FAS500f, FAS9000 
+summary: 'A partire da ONTAP 9.4, le configurazioni IP di MetroCluster supportano nuove installazioni con sistemi AFF che utilizzano ADP (partizione avanzata dei dischi).' 
+---
+= Considerazioni sull'assegnazione automatica dei dischi e sui sistemi ADP in ONTAP 9.4 e versioni successive
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A partire da ONTAP 9.4, le configurazioni IP di MetroCluster supportano nuove installazioni con sistemi AFF che utilizzano ADP (partizione avanzata dei dischi). Nella maggior parte delle configurazioni, il partizionamento e l'assegnazione dei dischi vengono eseguiti automaticamente durante la configurazione iniziale dei siti MetroCluster.
+
+ONTAP 9.4 e versioni successive includono le seguenti modifiche per il supporto ADP:
+
+* Le assegnazioni dei dischi pool 0 vengono eseguite in fabbrica.
+* La root senza mirror viene creata in fabbrica.
+* L'assegnazione della partizione dei dati viene eseguita presso la sede del cliente durante la procedura di configurazione.
+* Nella maggior parte dei casi, l'assegnazione e il partizionamento dei dischi vengono eseguiti automaticamente durante le procedure di installazione.
+* Un disco e tutte le sue partizioni devono essere di proprietà dei nodi nella stessa coppia di ha (High Availability). La proprietà di partizioni o dischi all'interno di un singolo disco non può essere combinata tra la coppia ha locale e il partner di disaster recovery (DR) o il partner ausiliario di DR.
++
+Esempio di configurazione supportata:
+
++
+|===
+
+
+| Disco/partizione | Proprietario 
+
+
+| Disco: | `ClusterA-Node01` 
+
+
+| Partizione 1: | `ClusterA-Node01` 
+
+
+| Partizione 2: | `ClusterA-Node02` 
+
+
+| Partizione 3: | `ClusterA-Node01` 
+|===
+
+
+
+NOTE: Quando si esegue l'aggiornamento da ONTAP 9.4 a 9.5, il sistema riconosce le assegnazioni dei dischi esistenti.
+
+
+
+== Partizione automatica
+
+ADP viene eseguito automaticamente durante la configurazione iniziale della piattaforma.
+
+
+NOTE: A partire da ONTAP 9.5, l'assegnazione automatica dei dischi deve essere attivata con `storage disk option modify -autoassign on` comando.
+
+Impostare lo stato ha-config su `mccip` prima del provisioning automatico, per assicurarsi che siano selezionate le dimensioni corrette delle partizioni per consentire le dimensioni appropriate del volume root. Per ulteriori informazioni, vedere link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_sw_config_verify_haconfig.html["Verifica dello stato ha-config dei componenti"].
+
+Durante l'installazione è possibile partizionare automaticamente un massimo di 96 dischi. È possibile aggiungere dischi aggiuntivi dopo l'installazione iniziale.
+
+
+
+== Come funziona l'assegnazione automatica shelf-by-shelf
+
+Se sono presenti quattro shelf esterni per sito, ogni shelf viene assegnato a un nodo diverso e a un pool diverso, come illustrato nell'esempio seguente:
+
+* Tutti i dischi sul sito_A-shelf_1 vengono assegnati automaticamente al pool 0 del nodo_A_1
+* Tutti i dischi sul sito_A-shelf_3 vengono assegnati automaticamente al pool 0 del nodo_A_2
+* Tutti i dischi sul sito_B-shelf_1 vengono assegnati automaticamente al pool 0 del nodo_B_1
+* Tutti i dischi sul sito_B-shelf_3 vengono assegnati automaticamente al pool 0 del nodo_B_2
+* Tutti i dischi sul sito_B-shelf_2 vengono assegnati automaticamente al pool 1 del nodo_A_1
+* Tutti i dischi sul sito_B-shelf_4 vengono assegnati automaticamente al pool 1 del nodo_A_2
+* Tutti i dischi sul sito_A-shelf_2 vengono assegnati automaticamente al pool 1 del nodo_B_1
+* Tutti i dischi sul sito_A-shelf_4 vengono assegnati automaticamente al pool 1 del nodo_B_2
+
+
+
+
+== Come popolare gli shelf parzialmente completi
+
+Se la configurazione utilizza shelf non completamente popolati (con alloggiamenti per dischi vuoti), è necessario distribuire i dischi in modo uniforme in tutto lo shelf, a seconda della policy di assegnazione dei dischi. La policy di assegnazione dei dischi dipende dal numero di shelf presenti in ciascun sito MetroCluster.
+
+Se si utilizza un singolo shelf in ogni sito (o solo lo shelf interno in un sistema AFF A800), i dischi vengono assegnati utilizzando una policy di un quarto di shelf. Se lo shelf non è completamente popolato, installare i dischi in parti uguali su tutti i quarter.
+
+La seguente tabella mostra un esempio di come inserire 24 dischi in uno shelf interno da 48 dischi. Viene inoltre mostrata la proprietà dei dischi.
+
+|===
+
+
+| I 48 alloggiamenti per unità sono suddivisi in quattro quarti: | Installare sei dischi nei primi sei alloggiamenti di ogni trimestre... 
+
+
+ a| 
+Quarto 1: Alloggiamenti 0-11
+ a| 
+Alloggiamenti 0-5
+
+
+
+ a| 
+Secondo trimestre: Alloggiamenti 12-23
+ a| 
+Alloggiamenti 12-17
+
+
+
+ a| 
+Terzo trimestre: Alloggiamenti 24-35
+ a| 
+Alloggiamenti 24-29
+
+
+
+ a| 
+Quarto trimestre: Alloggiamenti 36-48
+ a| 
+Alloggiamenti 36-41
+
+|===
+Se si utilizzano due shelf in ogni sito, i dischi vengono assegnati utilizzando una policy half-shelf. Se gli shelf non sono completamente popolati, installare i dischi in parti uguali da entrambe le estremità dello shelf.
+
+Ad esempio, se si installano 12 dischi in uno shelf da 24 dischi, installare i dischi negli alloggiamenti 0-5 e 18-23.
+
+
+
+== Assegnazione manuale del disco (ONTAP 9.5)
+
+In ONTAP 9.5, l'assegnazione manuale dei dischi è necessaria sui sistemi con le seguenti configurazioni di shelf:
+
+* Tre shelf esterni per sito.
++
+Due shelf vengono assegnati automaticamente utilizzando una policy di assegnazione a metà shelf, ma il terzo shelf deve essere assegnato manualmente.
+
+* Più di quattro shelf per sito e il numero totale di shelf esterni non è un multiplo di quattro.
++
+Gli shelf extra sopra il multiplo più vicino di quattro vengono lasciati non assegnati e i dischi devono essere assegnati manualmente. Ad esempio, se nel sito sono presenti cinque shelf esterni, è necessario assegnarli manualmente.
+
+
+
+È sufficiente assegnare manualmente un singolo disco su ogni shelf non assegnato. Gli altri dischi sullo shelf vengono quindi assegnati automaticamente.
+
+
+
+== Assegnazione manuale del disco (ONTAP 9.4)
+
+In ONTAP 9.4, l'assegnazione manuale dei dischi è necessaria sui sistemi con le seguenti configurazioni di shelf:
+
+* Meno di quattro shelf esterni per sito.
++
+I dischi devono essere assegnati manualmente per garantire un'assegnazione simmetrica dei dischi, con ciascun pool che ha un numero uguale di dischi.
+
+* Più di quattro shelf esterni per sito e il numero totale di shelf esterni non è un multiplo di quattro.
++
+Gli shelf extra sopra il multiplo più vicino di quattro vengono lasciati non assegnati e i dischi devono essere assegnati manualmente.
+
+
+
+Quando si assegnano manualmente i dischi, è necessario assegnarli simmetricamente, con un numero uguale di dischi assegnati a ciascun pool. Ad esempio, se la configurazione dispone di due shelf di storage in ogni sito, è necessario uno shelf per la coppia ha locale e uno shelf per la coppia ha remota:
+
+* Assegnare metà dei dischi sul sito_A-shelf_1 al pool 0 del nodo_A_1.
+* Assegnare metà dei dischi sul sito_A-shelf_1 al pool 0 del nodo_A_2.
+* Assegnare metà dei dischi sul sito_A-shelf_2 al pool 1 del nodo_B_1.
+* Assegnare metà dei dischi sul sito_A-shelf_2 al pool 1 del nodo_B_2.
+* Assegnare metà dei dischi sul sito_B-shelf_1 al pool 0 del nodo_B_1.
+* Assegnare metà dei dischi sul sito_B-shelf_1 al pool 0 del nodo_B_2.
+* Assegnare metà dei dischi sul sito_B-shelf_2 al pool 1 del nodo_A_1.
+* Assegnare metà dei dischi sul sito_B-shelf_2 al pool 1 del nodo_A_2.
+
+
+
+
+== Aggiunta di shelf a una configurazione esistente
+
+L'assegnazione automatica dei dischi supporta l'aggiunta simmetrica di shelf a una configurazione esistente.
+
+Quando vengono aggiunti nuovi shelf, il sistema applica la stessa policy di assegnazione ai nuovi shelf aggiunti. Ad esempio, con un singolo shelf per sito, se viene aggiunto uno shelf aggiuntivo, i sistemi applicano le regole di assegnazione di un quarto di shelf al nuovo shelf.
+
+.Informazioni correlate
+link:concept_required_mcc_ip_components_and_naming_guidelines_mcc_ip.html["Componenti IP MetroCluster richiesti e convenzioni di denominazione"]
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"^]
+
+
+
+== Differenze di assegnazione dei dischi e ADP in base al sistema nelle configurazioni IP MetroCluster
+
+Il funzionamento della partizione avanzata dei dischi (ADP) e dell'assegnazione automatica dei dischi nelle configurazioni MetroCluster IP varia a seconda del modello di sistema.
+
+
+NOTE: Nei sistemi che utilizzano ADP, gli aggregati vengono creati utilizzando partizioni in cui ciascun disco viene partizionato nelle partizioni P1, P2 e P3. L'aggregato root viene creato utilizzando partizioni P3.
+
+È necessario rispettare i limiti MetroCluster per il numero massimo di dischi supportati e altre linee guida.
+
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+=== Assegnazione di ADP e dischi sui sistemi AFF A320
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+48 dischi
+ a| 
+I dischi su ogni shelf esterno sono divisi in due gruppi uguali (metà). Ogni half-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Una shelf viene utilizzata dalla coppia ha locale. Il secondo shelf viene utilizzato dalla coppia ha remota.
+
+Le partizioni su ogni shelf vengono utilizzate per creare l'aggregato root. Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni::
++
+--
+* Otto partizioni per i dati
+* Due partizioni di parità
+* Due partizioni di riserva
+
+
+--
+
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+24 dischi
+ a| 
+I dischi sono divisi in quattro gruppi uguali. Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
+
+* Tre partizioni per i dati
+* Due partizioni di parità
+* Una partizione di riserva
+
+
+|===
+
+
+=== Assegnazione di ADP e dischi sui sistemi AFF A150 e AFF A220
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+Solo dischi interni
+ a| 
+I dischi interni sono divisi in quattro gruppi uguali. Ciascun gruppo viene assegnato automaticamente a un pool separato e ciascun pool viene assegnato a un controller separato nella configurazione.
+
+
+NOTE: Metà delle unità interne rimane non assegnata prima della configurazione di MetroCluster.
+ a| 
+Due quarti sono utilizzati dalla coppia ha locale. Gli altri due quarti vengono utilizzati dalla coppia ha remota.
+
+L'aggregato root include le seguenti partizioni in ogni plex:
+
+* Tre partizioni per i dati
+* Due partizioni di parità
+* Una partizione di riserva
+
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+16 dischi interni
+ a| 
+I dischi sono divisi in quattro gruppi uguali. Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
+
+Due quarti su uno shelf possono avere lo stesso pool. Il pool viene scelto in base al nodo proprietario del trimestre:
+
+* Se di proprietà del nodo locale, viene utilizzato pool0.
+* Se di proprietà del nodo remoto, viene utilizzato pool1.
+
+
+Ad esempio: Uno shelf con trimestri da Q1 a Q4 può avere le seguenti assegnazioni:
+
+* Q1: Pool Node_A_1 0
+* Q2: Pool Node_A_2 0
+* D3: Pool Node_B_1
+* D4:pool Node_B_2 1
+
+
+
+NOTE: Metà delle unità interne rimane non assegnata prima della configurazione di MetroCluster.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
+
+* Due partizioni per i dati
+* Due partizioni di parità
+* Nessun ricambio
+
+
+|===
+
+
+=== Assegnazione di ADP e dischi sui sistemi AFF C250 e AFF A250
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+48 dischi
+ a| 
+I dischi su ogni shelf esterno sono divisi in due gruppi uguali (metà). Ogni half-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Una shelf viene utilizzata dalla coppia ha locale. Il secondo shelf viene utilizzato dalla coppia ha remota.
+
+Le partizioni su ogni shelf vengono utilizzate per creare l'aggregato root. L'aggregato root include le seguenti partizioni in ogni plex:
+
+* Otto partizioni per i dati
+* Due partizioni di parità
+* Due partizioni di riserva
+
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+solo 16 dischi interni
+ a| 
+I dischi sono divisi in quattro gruppi uguali. Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
+
+* Due partizioni per i dati
+* Due partizioni di parità
+* Nessuna partizione di riserva
+
+
+|===
+
+
+=== Assegnazione di ADP e dischi sui sistemi AFF A300
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+48 dischi
+ a| 
+I dischi su ogni shelf esterno sono divisi in due gruppi uguali (metà). Ogni half-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Una shelf viene utilizzata dalla coppia ha locale. Il secondo shelf viene utilizzato dalla coppia ha remota.
+
+Le partizioni su ogni shelf vengono utilizzate per creare l'aggregato root. L'aggregato root include le seguenti partizioni in ogni plex:
+
+* Otto partizioni per i dati
+* Due partizioni di parità
+* Due partizioni di riserva
+
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+24 dischi
+ a| 
+I dischi sono divisi in quattro gruppi uguali. Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
+
+* Tre partizioni per i dati
+* Due partizioni di parità
+* Una partizione di riserva
+
+
+|===
+
+
+=== Assegnazione di ADP e dischi sui sistemi AFF C400 e AFF A400
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+96 dischi
+ a| 
+I dischi vengono assegnati automaticamente shelf-by-shelf.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include:
+
+* 20 partizioni per i dati
+* Due partizioni di parità
+* Due partizioni di riserva
+
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+24 dischi
+ a| 
+I dischi sono divisi in quattro gruppi uguali (quarti). Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include:
+
+* Tre partizioni per i dati
+* Due partizioni di parità
+* Una partizione di riserva
+
+
+|===
+
+
+=== Assegnazione di ADP e dischi sui sistemi AFF A700
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+96 dischi
+ a| 
+I dischi vengono assegnati automaticamente shelf-by-shelf.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include:
+
+* 20 partizioni per i dati
+* Due partizioni di parità
+* Due partizioni di riserva
+
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+24 dischi
+ a| 
+I dischi sono divisi in quattro gruppi uguali (quarti). Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include:
+
+* Tre partizioni per i dati
+* Due partizioni di parità
+* Una partizione di riserva
+
+
+|===
+
+
+=== Assegnazione di dischi e ADP sui sistemi AFF C800 e AFF A800
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per aggregato root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+Dischi interni e 96 dischi esterni
+ a| 
+Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato. I dischi sugli shelf esterni vengono assegnati automaticamente shelf-by-shelf, con tutti i dischi su ogni shelf assegnati a uno dei quattro nodi nella configurazione MetroCluster.
+ a| 
+L'aggregato root viene creato con 12 partizioni root sullo shelf interno.
+
+Ciascuno dei due plessi nell'aggregato root include:
+
+* Otto partizioni per i dati
+* Due partizioni di parità
+* Due partizioni di riserva
+
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+solo 24 dischi interni
+ a| 
+Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato.
+ a| 
+L'aggregato root viene creato con 12 partizioni root sullo shelf interno.
+
+Ciascuno dei due plessi nell'aggregato root include:
+
+* Tre partizioni per i dati
+* Due partizioni di parità
+* Una partizione di riserva
+
+
+|===
+
+
+=== Assegnazione di ADP e dischi sui sistemi AFF A900
+
+|===
+
+
+| Linee guida | Shelf per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+96 dischi
+ a| 
+I dischi vengono assegnati automaticamente shelf-by-shelf.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include:
+
+* 20 partizioni per i dati
+* Due partizioni di parità
+* Due partizioni di riserva
+
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+24 dischi
+ a| 
+I dischi sono divisi in quattro gruppi uguali (quarti). Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include:
+
+* Tre partizioni per i dati
+* Due partizioni di parità
+* Una partizione di riserva
+
+
+|===
+
+
+=== Assegnazione dei dischi sui sistemi FAS2750
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+24 dischi interni e 24 dischi esterni
+ a| 
+Gli shelf interni ed esterni sono divisi in due metà uguali. Ogni metà viene assegnata automaticamente a un pool diverso
+ a| 
+Non applicabile
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito) (configurazione ha attiva/passiva)
+ a| 
+Solo dischi interni
+ a| 
+Assegnazione manuale richiesta
+ a| 
+Non applicabile
+
+|===
+
+
+=== Assegnazione dei dischi sui sistemi FAS8200
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+48 dischi
+ a| 
+I dischi sugli shelf esterni sono divisi in due gruppi uguali (metà). Ogni half-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Non applicabile
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito) (configurazione ha attiva/passiva)
+ a| 
+24 dischi
+ a| 
+Assegnazione manuale richiesta.
+ a| 
+Non applicabile
+
+|===
+
+
+=== Assegnazione dei dischi sui sistemi FAS500f
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+48 dischi
+ a| 
+I dischi vengono assegnati automaticamente shelf-by-shelf.
+ a| 
+Non applicabile
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+24 dischi
+ a| 
+I dischi sono divisi in quattro gruppi uguali. Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Non applicabile
+
+|===
+
+
+=== Assegnazione dei dischi sui sistemi FAS9000
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+96 dischi
+ a| 
+I dischi vengono assegnati automaticamente shelf-by-shelf.
+ a| 
+Non applicabile
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+48 dischi
+ a| 
+I dischi sugli shelf sono divisi in due gruppi uguali (metà). Ogni half-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Numero minimo di dischi supportati (per sito) (configurazione ha attiva/passiva)
+
+|===
+
+
+=== Assegnazione dei dischi sui sistemi FAS9500
+
+|===
+
+
+| Linee guida | Shelf per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+96 dischi
+ a| 
+I dischi vengono assegnati automaticamente shelf-by-shelf.
+ a| 
+Non applicabile
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+24 dischi
+ a| 
+I dischi sono divisi in quattro gruppi uguali (quarti). Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Numero minimo di dischi supportati (per sito) (configurazione ha attiva/passiva)
+
+|===
