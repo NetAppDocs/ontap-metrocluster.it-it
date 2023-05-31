@@ -364,5 +364,11 @@ OLD: Host: scsi5 Channel: 00 Id: 00 Lun: 09
 .
 .
 ----
-. Sull'host iSCSI, verificare che siano visibili solo i percorsi dai nodi IP MetroCluster: `sanlun lun show -p``multipath -ll -d`
+. Sull'host iSCSI, verificare che siano visibili solo i percorsi dai nodi IP MetroCluster:
++
+`sanlun lun show -p`
+
++
+`multipath -ll -d`
+
 
