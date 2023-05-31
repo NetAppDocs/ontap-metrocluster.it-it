@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="it">
   <head class="at-element-marker">
-  <title>Componenti hardware MetroCluster richiesti e linee guida di denominazione per le configurazioni con collegamento SAS a due nodi</title>
+  <title>Modificare l&#8217;indirizzo IP di uno switch o di un bridge atto per il monitoraggio dello stato di salute</title>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
   <meta http-equiv="language" content="en">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="Componenti hardware MetroCluster richiesti e linee guida di denominazione per le configurazioni con collegamento SAS a due nodi" />
+  <meta property="og:title" content="Modificare l&#8217;indirizzo IP di uno switch o di un bridge atto per il monitoraggio dello stato di salute" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://docs.netapp.com/it-it/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" />
-	<meta property="og:description" content="La configurazione MetroCluster richiede una vasta gamma di componenti hardware. Per comodità e chiarezza, i nomi standard dei componenti vengono utilizzati n..." />
+	<meta property="og:url" content="https://docs.netapp.com/it-it/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" />
+	<meta property="og:description" content="Sostituire i vecchi indirizzi IP per il monitoraggio dello stato di salute dopo aver modificato gli indirizzi IP degli switch back-end FC MetroCluster o dei ..." />
   <meta property="og:image" content="https://docs.netapp.com/it-it/ontap-metrocluster/images/logo-tophat-social.png" />
   <meta property="og:image:alt" content="NetApp Logo" />
   <meta name="format-detection" content="telephone=no">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="encoding" content="utf-8">
   <meta http-equiv="nss-type" content="Product Documentation"/>
-  <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="La configurazione MetroCluster richiede una vasta gamma di componenti hardware. Per comodità e chiarezza, i nomi standard dei componenti vengono utilizzati n...">
-  <meta name="keywords" content=" metrocluster, stretch, installation, required, hardware, components, naming, guidelines, two, node, sas, configuration"><!-- Icons -->
+  <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="Sostituire i vecchi indirizzi IP per il monitoraggio dello stato di salute dopo aver modificato gli indirizzi IP degli switch back-end FC MetroCluster o dei ...">
+  <meta name="keywords" content=" metrocluster, atto, fc, switches, bridges, modify, IP, address"><!-- Icons -->
   <link rel="icon" href="/it-it/ontap-metrocluster/images/favicon.ico" type="image/x-icon">
 
   <!-- RSS Feed --><!-- CSS Definitions: NetApp CSS should be defined after generic css -->
@@ -32,17 +32,17 @@
   <link rel="stylesheet" href="/it-it/ontap-metrocluster/css/landing-page.css" type="text/css">
   <link rel="stylesheet" href="/it-it/ontap-metrocluster/css/tabbed-blocks.css" type="text/css">
   <!-- Canonical url -->
-  <link rel="canonical" href="https://docs.netapp.com/it-it/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" />
-  <link rel="alternate" hreflang="x-default" href="https://docs.netapp.com/us-en/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" />
-  <link rel="alternate" hreflang="it" href="https://docs.netapp.com/it-it/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" />
-  <link rel="alternate" hreflang="en" href="https://docs.netapp.com/us-en/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" />
-  <link rel="alternate" hreflang="ja" href="https://docs.netapp.com/ja-jp/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" />
-  <link rel="alternate" hreflang="ko" href="https://docs.netapp.com/ko-kr/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" />
-  <link rel="alternate" hreflang="zh-Hans" href="https://docs.netapp.com/zh-cn/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" />
-  <link rel="alternate" hreflang="zh-Hant" href="https://docs.netapp.com/zh-tw/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" />
-  <link rel="alternate" hreflang="de" href="https://docs.netapp.com/de-de/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" />
-  <link rel="alternate" hreflang="es" href="https://docs.netapp.com/es-es/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" />
-  <link rel="alternate" hreflang="fr" href="https://docs.netapp.com/fr-fr/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" />
+  <link rel="canonical" href="https://docs.netapp.com/it-it/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" />
+  <link rel="alternate" hreflang="x-default" href="https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" />
+  <link rel="alternate" hreflang="it" href="https://docs.netapp.com/it-it/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" />
+  <link rel="alternate" hreflang="en" href="https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" />
+  <link rel="alternate" hreflang="ja" href="https://docs.netapp.com/ja-jp/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" />
+  <link rel="alternate" hreflang="ko" href="https://docs.netapp.com/ko-kr/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://docs.netapp.com/zh-cn/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://docs.netapp.com/zh-tw/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" />
+  <link rel="alternate" hreflang="de" href="https://docs.netapp.com/de-de/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" />
+  <link rel="alternate" hreflang="es" href="https://docs.netapp.com/es-es/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" />
+  <link rel="alternate" hreflang="fr" href="https://docs.netapp.com/fr-fr/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" />
   <link rel='stylesheet' href='/it-it/ontap-metrocluster/css/na-feature.css' type='text/css'><!-- Top level site integrations --><script>
     function addAdobeLaunch(adobeId) {
       var head = document.getElementsByTagName('head')[0];
@@ -177,7 +177,7 @@
   
   <!-- Start Page Toolbar -->
   
-  <div class="page-nav-toolbar"><div class="page-nav-contribute"><a target="_blank" href="https://github.com/NetAppDocs/ontap-metrocluster.it-it/issues/new?template=new-from-page.yml&page-url=https://docs.netapp.com/it-it/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html&page-title=Componenti hardware MetroCluster richiesti e linee guida di denominazione per le configurazioni con collegamento SAS a due nodi" class="page-nav-contribute-link" role="button"><img src="/it-it/ontap-metrocluster/images/discuss-sm.svg" alt="" class="github-icon" />Richiedi modifiche alla documentazione</a><a target="_blank" href="https://github.com/NetAppDocs/ontap-metrocluster/blob/main/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.adoc" class="page-nav-contribute-link" role="button"><img src="/it-it/ontap-metrocluster/images/edit-sm.svg" alt="" class="github-icon" />Modifica questa pagina</a><a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  ><img src="/it-it/ontap-metrocluster/images/article-sm.svg" alt="" class="github-icon" />Scopri come collaborare</a></div>
+  <div class="page-nav-toolbar"><div class="page-nav-contribute"><a target="_blank" href="https://github.com/NetAppDocs/ontap-metrocluster.it-it/issues/new?template=new-from-page.yml&page-url=https://docs.netapp.com/it-it/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html&page-title=Modificare l&#8217;indirizzo IP di uno switch o di un bridge atto per il monitoraggio dello stato di salute" class="page-nav-contribute-link" role="button"><img src="/it-it/ontap-metrocluster/images/discuss-sm.svg" alt="" class="github-icon" />Richiedi modifiche alla documentazione</a><a target="_blank" href="https://github.com/NetAppDocs/ontap-metrocluster/blob/main/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.adoc" class="page-nav-contribute-link" role="button"><img src="/it-it/ontap-metrocluster/images/edit-sm.svg" alt="" class="github-icon" />Modifica questa pagina</a><a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  ><img src="/it-it/ontap-metrocluster/images/article-sm.svg" alt="" class="github-icon" />Scopri come collaborare</a></div>
     <div class="page-nav-container">
       <nav class="page-nav-fixed">
         <div class="page-nav-title">IN QUESTA PAGINA</div>
@@ -297,23 +297,23 @@
       </div>
 
       <ul class="custom-dropdown-menu"><li>
-          <a href="https://docs.netapp.com/it-it/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" target="_self"><span translate="no" class="notranslate">Italiano</span></a>
+          <a href="https://docs.netapp.com/it-it/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" target="_self"><span translate="no" class="notranslate">Italiano</span></a>
         </li><li>
-          <a href="https://docs.netapp.com/us-en/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" target="_self"><span translate="no" class="notranslate">English</span></a>
+          <a href="https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" target="_self"><span translate="no" class="notranslate">English</span></a>
         </li><li>
-          <a href="https://docs.netapp.com/ja-jp/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" target="_self"><span translate="no" class="notranslate">日本語</span></a>
+          <a href="https://docs.netapp.com/ja-jp/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" target="_self"><span translate="no" class="notranslate">日本語</span></a>
         </li><li>
-          <a href="https://docs.netapp.com/ko-kr/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" target="_self"><span translate="no" class="notranslate">한국어</span></a>
+          <a href="https://docs.netapp.com/ko-kr/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" target="_self"><span translate="no" class="notranslate">한국어</span></a>
         </li><li>
-          <a href="https://docs.netapp.com/zh-cn/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" target="_self"><span translate="no" class="notranslate">简体中文</span></a>
+          <a href="https://docs.netapp.com/zh-cn/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" target="_self"><span translate="no" class="notranslate">简体中文</span></a>
         </li><li>
-          <a href="https://docs.netapp.com/zh-tw/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" target="_self"><span translate="no" class="notranslate">繁體中文</span></a>
+          <a href="https://docs.netapp.com/zh-tw/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" target="_self"><span translate="no" class="notranslate">繁體中文</span></a>
         </li><li>
-          <a href="https://docs.netapp.com/de-de/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" target="_self"><span translate="no" class="notranslate">Deutsch</span></a>
+          <a href="https://docs.netapp.com/de-de/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" target="_self"><span translate="no" class="notranslate">Deutsch</span></a>
         </li><li>
-          <a href="https://docs.netapp.com/es-es/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" target="_self"><span translate="no" class="notranslate">Español</span></a>
+          <a href="https://docs.netapp.com/es-es/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" target="_self"><span translate="no" class="notranslate">Español</span></a>
         </li><li>
-          <a href="https://docs.netapp.com/fr-fr/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html" target="_self"><span translate="no" class="notranslate">Français</span></a>
+          <a href="https://docs.netapp.com/fr-fr/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html" target="_self"><span translate="no" class="notranslate">Français</span></a>
         </li></ul>
     </div>
     <!-- End Language Selector -->
@@ -1343,8 +1343,6 @@
 
 
 
-    <ul class="subfolders" id="pdf-remove" style="display:none;"><li class="active"></li></ul>
-  
 
 
 
@@ -1861,6 +1859,8 @@
   
 
 
+    <ul class="subfolders" id="pdf-remove" style="display:none;"><li class="active"></li></ul>
+  
 
 
 
@@ -4103,7 +4103,7 @@
       data-pdf-exists="true" 
       data-pdf-filename="Componenti hardware MetroCluster richiesti e linee guida di denominazione per le configurazioni con collegamento SAS a due nodi"
       data-li-level="3#" 
-      class="  active "
+      class=" "
     ><a class="na-navbar-padding" href="/it-it/ontap-metrocluster/install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html">
         Componenti hardware MetroCluster richiesti e linee guida di denominazione per le configurazioni con collegamento SAS a due nodi
       </a></li><li 
@@ -4812,7 +4812,7 @@
       data-pdf-exists="true" 
       data-pdf-filename="Modificare l'indirizzo IP di uno switch o di un bridge atto per il monitoraggio dello stato di salute"
       data-li-level="2#" 
-      class=" "
+      class="  active "
     ><a class="na-navbar-padding" href="/it-it/ontap-metrocluster/maintain/task_modify_switch_or_bridge_ip_address_for_health_monitoring.html">
         Modificare l'indirizzo IP di uno switch o di un bridge atto per il monitoraggio dello stato di salute
       </a></li><li 
@@ -6176,14 +6176,14 @@
     </div>
   </span>
 </div><div class="n-doc__component-detail-heading-wrap">
-  <h1 class="n-doc__component-detail-heading">Componenti hardware MetroCluster richiesti e linee guida di denominazione per le configurazioni con collegamento SAS a due nodi</h1>
+  <h1 class="n-doc__component-detail-heading">Modificare l&#8217;indirizzo IP di uno switch o di un bridge atto per il monitoraggio dello stato di salute</h1>
 </div>
 
 
 <p class="page-details">
   
     
-    <time datetime="2023-05-23 16:55:28 +0000">05/23/2023</time>
+    <time datetime="2023-05-31 10:55:42 +0000">05/31/2023</time>
     
   
 
@@ -6196,161 +6196,113 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph lead">
-<p>La configurazione MetroCluster richiede una vasta gamma di componenti hardware. Per comodità e chiarezza, i nomi standard dei componenti vengono utilizzati nella documentazione di MetroCluster. Un sito viene indicato come Sito A e l&#8217;altro come Sito B.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="software-e-hardware-supportati">Software e hardware supportati</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>L&#8217;hardware e il software devono essere supportati per la configurazione MetroCluster FC.</p>
-</div>
-<div class="paragraph">
-<p><a href="https://hwu.netapp.com">"NetApp Hardware Universe"</a></p>
-</div>
-<div class="paragraph">
-<p>Quando si utilizzano sistemi AFF, tutti i moduli controller nella configurazione MetroCluster devono essere configurati come sistemi AFF.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="ridondanza-dellhardware-nella-configurazione-metrocluster">Ridondanza dell&#8217;hardware nella configurazione MetroCluster</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A causa della ridondanza hardware nella configurazione MetroCluster, sono presenti due componenti per ogni sito. Ai siti vengono assegnate arbitrariamente le lettere A e B e ai singoli componenti vengono assegnati arbitrariamente i numeri 1 e 2.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="due-cluster-ontap-a-nodo-singolo">Due cluster ONTAP a nodo singolo</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>La configurazione di Stretch MetroCluster SAS-attached richiede due cluster ONTAP a nodo singolo.</p>
-</div>
-<div class="paragraph">
-<p>La denominazione deve essere univoca all&#8217;interno della configurazione MetroCluster.</p>
-</div>
-<div class="paragraph">
-<p>Nomi di esempio:</p>
+<p>Dopo aver modificato gli indirizzi IP degli switch back-end FC MetroCluster e dei bridge ATTO, è necessario sostituire i vecchi indirizzi IP per il monitoraggio dello stato di salute con i nuovi valori.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Sito A: Cluster_A</p>
+<p><a href="#modificare-lindirizzo-ip-di-uno-switch">Modificare l&#8217;indirizzo IP di uno switch</a></p>
 </li>
 <li>
-<p>Sito B: Cluster_B</p>
+<p><a href="#modificare-un-indirizzo-ip-del-bridge-atto">Modificare un indirizzo IP del bridge atto</a></p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="due-moduli-controller-storage">Due moduli controller storage</h2>
+<h2 id="modificare-lindirizzo-ip-di-uno-switch">Modificare l&#8217;indirizzo IP di uno switch</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>La configurazione di Stretch MetroCluster SAS-attached richiede due moduli controller storage.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>La denominazione deve essere univoca all&#8217;interno della configurazione MetroCluster.</p>
-</li>
-<li>
-<p>Tutti i moduli controller nella configurazione MetroCluster devono eseguire la stessa versione di ONTAP.</p>
-</li>
-<li>
-<p>Tutti i moduli controller di un gruppo DR devono essere dello stesso modello.</p>
-</li>
-<li>
-<p>Tutti i moduli controller di un gruppo DR devono utilizzare la stessa configurazione FC-VI.</p>
-<div class="paragraph">
-<p>Alcuni moduli controller supportano due opzioni per la connettività FC-VI:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Porte FC-VI integrate</p>
-</li>
-<li>
-<p>Una scheda FC-VI nello slot 1</p>
-<div class="paragraph">
-<p>Non è supportata la combinazione di un modulo controller che utilizza porte FC-VI integrate e un altro che utilizza una scheda FC-VI aggiuntiva. Ad esempio, se un nodo utilizza una configurazione FC-VI integrata, tutti gli altri nodi del gruppo DR devono utilizzare anche la configurazione FC-VI integrata.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<p>Sostituire il vecchio indirizzo IP di monitoraggio dello stato di uno switch back-end FC MetroCluster.</p>
 </div>
 <div class="paragraph">
-<p>Nomi di esempio:</p>
+<div class="title">Prima di iniziare</div>
+<p>Fare riferimento alla documentazione del fornitore dello switch per il modello di switch in uso per modificare l&#8217;indirizzo IP dello switch prima di modificare l&#8217;indirizzo IP per il monitoraggio dello stato di salute.</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<div class="title">Fasi</div>
+<ol class="arabic">
 <li>
-<p>Sito A: Controller_A_1</p>
+<p>Eseguire <code>::&gt; storage switch show</code> e nell&#8217;output, annotare gli switch che segnalano gli errori.</p>
 </li>
 <li>
-<p>Sito B: Controller_B_1</p>
+<p>Rimuovere le voci dello switch con i vecchi indirizzi IP:</p>
+<div class="paragraph">
+<p><code>::&gt; storage switch remove -name <em>switch_name</em></code></p>
+</div>
 </li>
-</ul>
+<li>
+<p>Aggiungere gli switch con nuovi indirizzi IP:</p>
+<div class="paragraph">
+<p><code>::&gt; storage switch add -name <em>switch_name</em> -address <em>new_IP_address</em> -managed-by in-band</code></p>
+</div>
+</li>
+<li>
+<p>Verificare i nuovi indirizzi IP e verificare che non vi siano errori:</p>
+<div class="paragraph">
+<p><code>::&gt; storage switch show</code></p>
+</div>
+</li>
+<li>
+<p>Se necessario, aggiornare le voci:</p>
+<div class="paragraph">
+<p><code>::&gt; set advanced</code></p>
+</div>
+<div class="paragraph">
+<p><code>::*&gt; storage switch refresh</code></p>
+</div>
+<div class="paragraph">
+<p><code>::*&gt; set admin</code></p>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="almeno-quattro-shelf-di-dischi-sas-consigliato">Almeno quattro shelf di dischi SAS (consigliato)</h2>
+<h2 id="modificare-un-indirizzo-ip-del-bridge-atto">Modificare un indirizzo IP del bridge atto</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>La configurazione Smagliature MetroCluster con connessione SAS richiede almeno due shelf di dischi SAS. Si consigliano quattro shelf di dischi SAS.</p>
+<p>Sostituire il vecchio indirizzo IP per il monitoraggio dello stato di salute di un bridge ATTO.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Fasi</div>
+<ol class="arabic">
+<li>
+<p>Eseguire <code>::&gt; storage bridge show</code> E nell&#8217;output, annotare i bridge ATTO che segnalano gli errori.</p>
+</li>
+<li>
+<p>Rimuovere le voci del bridge ATTO con i vecchi indirizzi IP:</p>
+<div class="paragraph">
+<p><code>::&gt; storage bridge remove -name <em>ATTO_bridge_name</em></code></p>
+</div>
+</li>
+<li>
+<p>Aggiungere i bridge ATTO con i nuovi indirizzi IP:</p>
+<div class="paragraph">
+<p><code>::&gt; storage bridge add -name <em>ATTO_bridge_name</em> -address <em>new_IP_address</em> -managed-by in-band</code></p>
+</div>
+</li>
+<li>
+<p>Verificare i nuovi indirizzi IP e verificare che non vi siano errori:</p>
+<div class="paragraph">
+<p><code>::&gt; storage bridge show</code></p>
+</div>
+</li>
+<li>
+<p>Se necessario, aggiornare le voci:</p>
+<div class="paragraph">
+<p><code>::&gt; set advanced</code></p>
 </div>
 <div class="paragraph">
-<p>Si consiglia di utilizzare due shelf in ogni sito per consentire la proprietà dei dischi in base allo shelf. È supportato un minimo di uno shelf in ogni sito.</p>
+<p><code>::*&gt; storage bridge refresh</code></p>
 </div>
 <div class="paragraph">
-<p>Nomi di esempio:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Sito A:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Shelf_A_1_1</p>
-</li>
-<li>
-<p>Shelf_A_1_2</p>
-</li>
-</ul>
+<p><code>::*&gt; set admin</code></p>
 </div>
 </li>
-<li>
-<p>Sito B:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Shelf_B_1_1</p>
-</li>
-<li>
-<p>Shelf_B_1_2</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="combinazione-di-moduli-iom12-e-iom-6-in-uno-stack">Combinazione di moduli IOM12 e IOM 6 in uno stack</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>La tua versione di ONTAP deve supportare la combinazione di shelf. Fare riferimento allo strumento matrice di interoperabilità (IMT) per verificare se la versione di ONTAP in uso supporta la combinazione di shelf. <a href="https://mysupport.netapp.com/NOW/products/interoperability">"Interoperabilità NetApp"</a></p>
-</div>
-<div class="paragraph">
-<p>Per ulteriori dettagli sulla miscelazione degli scaffali, consulta: <a href="https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-ds-mix-hotadd/home.html">"Shelf hot-adding con moduli IOM12 a uno stack di shelf con moduli IOM6"</a></p>
+</ol>
 </div>
 </div>
 </div>
