@@ -120,12 +120,23 @@ NOTE: Per le versioni Brocade Fabric OS precedenti alla 8.0, eseguire i seguenti
 +
 .. Eseguire il comando License:
 +
-`licenseport --show`
+[role="tabbed-block"]
+====
+.Per Fabric OS 8.2.x e versioni precedenti
+--
+Eseguire il comando `licenseport --show`.
 
+--
+.Per Fabric OS 9.0 e versioni successive
+--
+Eseguire il comando `license --show -port`.
+
+--
+====
 +
 [listing]
 ----
-FC_switch_A_1:admin> licenseport -show
+FC_switch_A_1:admin> license --show -port
 24 ports are available in this switch
 Full POD license is installed
 Dynamic POD method is in use
@@ -139,23 +150,30 @@ FC_switch_A_1:admin> rootaccess --set consoleonly
 ----
 .. Eseguire il comando License:
 +
-`licenseport --show`
+[role="tabbed-block"]
+====
+.Per Fabric OS 8.2.x e versioni precedenti
+--
+Eseguire il comando `licenseport --show`.
 
+--
+.Per Fabric OS 9.0 e versioni successive
+--
+Eseguire il comando `license --show -port`.
+
+--
+====
 +
 [listing]
 ----
-FC_switch_A_1:root> licenseport -show
+FC_switch_A_1:root> license --show -port
 24 ports are available in this switch
 Full POD license is installed
 Dynamic POD method is in use
 ----
-.. Impostare il metodo di licenza su dinamico:
+.. Se si utilizza Fabric OS 8.2.x e versioni precedenti, è necessario modificare il metodo di licenza in dinamico:
 +
 `licenseport --method dynamic`
-
-+
-
-NOTE: Se il metodo POD dinamico non è in uso (se il metodo POD è statico), è necessario impostare il metodo di assegnazione della licenza su dinamico. Saltare questo passaggio se è in uso il metodo POD dinamico.
 
 +
 [listing]
@@ -164,6 +182,10 @@ FC_switch_A_1:admin> licenseport --method dynamic
 The POD method has been changed to dynamic.
 Please reboot the switch now for this change to take effect
 ----
++
+
+NOTE: In Fabric OS 9.0 e versioni successive, il metodo di licenza è dinamico per impostazione predefinita. Il metodo di licenza statico non è supportato.
+
 
 
 . Riavviare lo switch:

@@ -23,4 +23,19 @@ La licenza Enterprise include Brocade Network Advisor e tutte le licenze, ad ecc
 
 
 
-È possibile verificare che le licenze siano installate utilizzando `licenseshow` comando. Se non si dispone di queste licenze, contattare il rappresentante commerciale prima di procedere.
+È possibile verificare che le licenze siano installate utilizzando il comando "licenza".
+
+[role="tabbed-block"]
+====
+.Per Fabric OS 8.2.x e versioni precedenti
+--
+Eseguire il comando `licenseshow`.
+
+--
+.Per Fabric OS 9.0 e versioni successive
+--
+Eseguire il comando `license --show`.
+
+--
+====
+Se non si dispone di queste licenze, contattare il rappresentante commerciale prima di procedere.
