@@ -83,7 +83,7 @@
       head.appendChild(onetrustScript);
     }addConsent("72570c5c-fe30-465f-b0e0-b77f7fb4ae34");
     addAdobeLaunch("launch-e9ff3acac59f");
-    addGoogleAnalytics("UA-81697994-3");function OptanonWrapper() { }
+    addGoogleAnalytics("G-KYN6T440WN");function OptanonWrapper() { }
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -6183,7 +6183,7 @@
 <p class="page-details">
   
     
-    <time datetime="2023-05-23 16:55:28 +0000">05/23/2023</time>
+    <time datetime="2023-06-29 16:42:58 +0000">06/29/2023</time>
     
   
 
@@ -6334,12 +6334,29 @@ Per le versioni Brocade Fabric OS precedenti alla 8.0, eseguire i seguenti coman
 <ol class="loweralpha" type="a">
 <li>
 <p>Eseguire il comando License:</p>
+<div class="exampleblock tabbed-block">
+<div class="content">
+<div class="openblock">
+<div class="title">Per Fabric OS 8.2.x e versioni precedenti</div>
+<div class="content">
 <div class="paragraph">
-<p><code>licenseport --show</code></p>
+<p>Eseguire il comando <code>licenseport --show</code>.</p>
+</div>
+</div>
+</div>
+<div class="openblock">
+<div class="title">Per Fabric OS 9.0 e versioni successive</div>
+<div class="content">
+<div class="paragraph">
+<p>Eseguire il comando <code>license --show -port</code>.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>FC_switch_A_1:admin&gt; licenseport -show
+<pre>FC_switch_A_1:admin&gt; license --show -port
 24 ports are available in this switch
 Full POD license is installed
 Dynamic POD method is in use</pre>
@@ -6357,12 +6374,29 @@ FC_switch_A_1:admin&gt; rootaccess --set consoleonly</pre>
 </li>
 <li>
 <p>Eseguire il comando License:</p>
+<div class="exampleblock tabbed-block">
+<div class="content">
+<div class="openblock">
+<div class="title">Per Fabric OS 8.2.x e versioni precedenti</div>
+<div class="content">
 <div class="paragraph">
-<p><code>licenseport --show</code></p>
+<p>Eseguire il comando <code>licenseport --show</code>.</p>
+</div>
+</div>
+</div>
+<div class="openblock">
+<div class="title">Per Fabric OS 9.0 e versioni successive</div>
+<div class="content">
+<div class="paragraph">
+<p>Eseguire il comando <code>license --show -port</code>.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>FC_switch_A_1:root&gt; licenseport -show
+<pre>FC_switch_A_1:root&gt; license --show -port
 24 ports are available in this switch
 Full POD license is installed
 Dynamic POD method is in use</pre>
@@ -6370,21 +6404,9 @@ Dynamic POD method is in use</pre>
 </div>
 </li>
 <li>
-<p>Impostare il metodo di licenza su dinamico:</p>
+<p>Se si utilizza Fabric OS 8.2.x e versioni precedenti, è necessario modificare il metodo di licenza in dinamico:</p>
 <div class="paragraph">
 <p><code>licenseport --method dynamic</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="/us-en/ontap-metrocluster/images/note.svg" alt="Nota">
-</td>
-<td class="content">
-Se il metodo POD dinamico non è in uso (se il metodo POD è statico), è necessario impostare il metodo di assegnazione della licenza su dinamico. Saltare questo passaggio se è in uso il metodo POD dinamico.
-</td>
-</tr>
-</table>
 </div>
 </li>
 </ol>
@@ -6395,6 +6417,21 @@ Se il metodo POD dinamico non è in uso (se il metodo POD è statico), è necess
 The POD method has been changed to dynamic.
 Please reboot the switch now for this change to take effect</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/ontap-metrocluster/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+In Fabric OS 9.0 e versioni successive, il metodo di licenza è dinamico per impostazione predefinita. Il metodo di licenza statico non è supportato.
+</td>
+</tr>
+</table>
 </div>
 </li>
 <li>
