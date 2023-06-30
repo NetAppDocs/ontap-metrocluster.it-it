@@ -20,7 +20,7 @@ Dopo la sostituzione dell'hardware e l'assegnazione dei dischi, è possibile ese
 ----
 cluster_B::> metrocluster heal -phase aggregates
 
-cluster_B::> metrocluster heal -phase root aggregates
+cluster_B::> metrocluster heal -phase root-aggregates
 ----
 . Monitorare la riparazione e verificare che gli aggregati siano in stato di risyncing o mirrorato:
 +

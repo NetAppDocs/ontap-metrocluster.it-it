@@ -13,9 +13,13 @@ summary: 'Prima di iniziare la manutenzione o il trasferimento del sito, è nece
 [role="lead"]
 Prima di iniziare la manutenzione o il trasferimento del sito, è necessario spegnere l'intera configurazione MetroCluster FC e tutte le apparecchiature.
 
+.A proposito di questa attività
+È necessario eseguire le fasi di questa procedura da entrambi i siti, contemporaneamente.
+
 
 NOTE: A partire da ONTAP 9.8, la `*storage switch*` il comando viene sostituito con `*system switch*`. La procedura riportata di seguito mostra `*storage switch*` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `*system switch*` è preferibile utilizzare il comando.
 
+.Fasi
 . Verificare la configurazione MetroCluster da entrambi i siti nella configurazione MetroCluster.
 +
 .. Confermare la configurazione MetroCluster e verificare che la modalità operativa sia normale. +
@@ -63,12 +67,11 @@ cluster_A_site_A::*>metrocluster modify -auto-switchover-failure-domain auso-dis
 . Arrestare i nodi utilizzando il seguente comando:
 `*halt*`
 +
-** Per una configurazione MetroCluster a quattro o otto nodi, utilizzare il parametro:
-`*inhibit-takeover*`
+** Per una configurazione MetroCluster a quattro o otto nodi, utilizzare `*inhibit-takeover*` e. `*skip-lif-migration-before-shutdown*` parametri:
 +
 [listing]
 ----
-system node halt -node node1_SiteA -inhibit-takeover true -ignore-quorum-warnings true
+system node halt -node node1_SiteA -inhibit-takeover true -ignore-quorum-warnings true -skip-lif-migration-before-shutdown true
 ----
 ** Per una configurazione MetroCluster a due nodi, utilizzare il comando:
 +

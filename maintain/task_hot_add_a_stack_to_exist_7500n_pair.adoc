@@ -2,16 +2,16 @@
 permalink: maintain/task_hot_add_a_stack_to_exist_7500n_pair.html 
 sidebar: sidebar 
 keywords: metrocluster, maintain, service, hot, add, stack, sas, disk, shelves, existing, pair, fibrebridge, bridge 
-summary: È possibile aggiungere a caldo uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7500N dotati di porte disponibili. 
+summary: È possibile aggiungere a caldo uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7600N o 7500N dotati di porte disponibili. 
 ---
-= Aggiunta a caldo di uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7500N
+= Aggiunta a caldo di uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7600N o 7500N
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-È possibile aggiungere a caldo uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7500N dotati di porte disponibili.
+È possibile aggiungere a caldo uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7600N o 7500N dotati di porte disponibili.
 
 .Prima di iniziare
 * È necessario aver scaricato l'ultima versione del firmware dello shelf di dischi e dischi.
@@ -22,7 +22,7 @@ https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Downlo
 +
 https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Download NetApp: Firmware shelf di dischi"^]
 
-* I bridge FibreBridge 7500N devono essere collegati e disporre di porte SAS disponibili.
+* I bridge FibreBridge 7600N o 7500N devono essere collegati e disporre di porte SAS disponibili.
 
 
 .A proposito di questa attività
@@ -54,11 +54,6 @@ node_A_1             on           on           on           default
 node_A_2             on           on           on           default
 2 entries were displayed.
 ----
-. Disattivare le porte dello switch per il nuovo stack.
-. Aggiornare il firmware FibreBridge su ciascun bridge.
-+
-Se il nuovo bridge è dello stesso tipo del bridge partner, eseguire l'aggiornamento allo stesso firmware del bridge partner. Se il nuovo bridge è di tipo diverso da quello del bridge partner, eseguire l'aggiornamento al firmware più recente supportato dal bridge e dalla versione di ONTAP. Consultare la sezione "aggiornamento del firmware su un bridge FibreBridge" nella _Guida alla manutenzione di MetroCluster_.
-
 . Su ciascun bridge della coppia, attivare la porta SAS che si connette al nuovo stack:
 +
 `SASPortEnable _port-letter_`
@@ -208,7 +203,6 @@ NOTE: Se si suddivide la proprietà di un singolo stack di shelf di dischi tra p
 
 NOTE: Non è necessario aggiungere dischi ad aggregati o volumi fino a quando il firmware del disco e del firmware dello shelf di dischi non sono stati aggiornati e le fasi di verifica di questa attività non sono state completate.
 
-. Abilitare le porte dello switch per il nuovo stack.
 . Verificare il funzionamento della configurazione MetroCluster in ONTAP:
 +
 .. Verificare che il sistema sia multipercorso:
@@ -231,9 +225,9 @@ NOTE: Non è necessario aggiungere dischi ad aggregati o volumi fino a quando il
 +
 `metrocluster check show`
 
-.. Verificare la presenza di eventuali avvisi sullo stato di salute sugli switch (se presenti):
+.. Verificare la presenza di eventuali avvisi sullo stato di salute sui bridge dopo l'aggiunta dei nuovi stack:
 +
-`storage switch show`
+`storage bridge show`
 
 .. Eseguire Config Advisor.
 +

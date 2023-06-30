@@ -1167,7 +1167,6 @@
   <block id="2021d03f97e8529efb1b76bbd7c4a674" category="list-text">Verificare la modifica utilizzando il comando</block>
   <block id="183cbc2c0b8779013e355a482aba5c4d" category="paragraph"><block ref="12ff466e31106ead3e1afcdd8bb79114" prefix="" category="inline-code"></block></block>
   <block id="17a482b02d43109c8b8a1497839ff0b4" category="list-text">Arrestare i nodi utilizzando il seguente comando:<block ref="64741aee0c87a08ef7b37e6ec6fee1b9" prefix=" " category="inline-code"></block></block>
-  <block id="fad9503a100b92ad7c54437a9309f256" category="list-text">Per una configurazione MetroCluster a quattro o otto nodi, utilizzare il parametro:<block ref="1f019d491fcfc3956d780ccfd54601ba" prefix=" " category="inline-code"></block></block>
   <block id="93081236e78e8a13aff59ffaa04927e9" category="list-text">Per una configurazione MetroCluster a due nodi, utilizzare il comando:</block>
   <block id="a58d52a12cc22d2e3c3b60974ce27273" category="list-text">Spegnere le seguenti apparecchiature presso il sito:</block>
   <block id="63e64e288714d32cded7a6ed8dfec32c" category="list-text">Switch FC MetroCluster (se in uso e la configurazione non è una configurazione stretch a due nodi)</block>
@@ -2247,11 +2246,9 @@
   <block id="c03d8e302da8a2fa8d938c2ea1c177fa" category="paragraph">Quando si utilizza FTP per aggiornare il firmware del bridge, il sistema deve soddisfare i seguenti requisiti:</block>
   <block id="57bb5f91fe772f3f48d0cfa17e0c7e7d" category="list-text">Un cavo Ethernet standard (che collega la porta di gestione Ethernet del bridge 1 alla rete)</block>
   <block id="aa9dd1542ced8b74553b49591df08b7f" category="summary">Copyright per la manutenzione dei componenti MetroCluster.</block>
-  <block id="0ddbccff2e33cdad7e25875f8ed5047b" category="summary">È possibile aggiungere a caldo uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7500N dotati di porte disponibili.</block>
   <block id="df54bbed28c805d5ed5ce92b8e5ce3ee" category="doc">Aggiunta a caldo di uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7500N</block>
   <block id="695e87d61d65625619e3a56919865a2c" category="list-text">È necessario aver scaricato l'ultima versione del firmware dello shelf di dischi e dischi.</block>
   <block id="8b82688b3d28b8ce8fbcbb8c09b13ce3" category="list-text">Tutti gli shelf di dischi nella configurazione MetroCluster (shelf esistenti) devono eseguire la stessa versione del firmware. Se uno o più dischi o shelf non utilizzano la versione più recente del firmware, aggiornare il firmware prima di collegare i nuovi dischi o shelf.</block>
-  <block id="86c77fb0de5bbd53bda91b1946b5e7d6" category="list-text">I bridge FibreBridge 7500N devono essere collegati e disporre di porte SAS disponibili.</block>
   <block id="8d372617f83f8c0b84203a0c342601a0" category="paragraph">È possibile utilizzare l'interfaccia grafica di ATTO ExpressNAV per configurare e gestire un bridge e per aggiornare il firmware del bridge. È possibile utilizzare l'utility barra di navigazione atto per configurare la porta di gestione Ethernet del bridge 1.</block>
   <block id="a2a09f3d137021820b6b1b04c4a12e84" category="paragraph">Se necessario, è possibile utilizzare altre interfacce di gestione. Queste opzioni includono l'utilizzo di una porta seriale o Telnet per configurare e gestire un bridge e per configurare la porta di gestione Ethernet 1 e l'utilizzo di FTP per aggiornare il firmware del bridge. Se si sceglie una di queste interfacce di gestione, è necessario soddisfare i requisiti applicabili in <block ref="7ab0568f22b62ca0e98b3c0cd29a60a1" category="inline-link-macro-rx"></block>.</block>
   <block id="0162c27051eec554a97d6a3f03a4a746" category="list-text">Dalla console di uno dei controller, verificare che l'assegnazione automatica dei dischi sia abilitata nel sistema:</block>
@@ -4937,7 +4934,6 @@
   <block id="b8910962b1d031cc1eb8e8ad588c4c48" category="paragraph">Senza interruzioni</block>
   <block id="b1967383562a98a66ed0eff3ea640595" category="paragraph">I nuovi shelf di storage sono supportati sulle nuove piattaforme.</block>
   <block id="6e2ee39d0f9ccdad593782674a048e67" category="inline-link-macro">Collegamento alla procedura</block>
-  <block id="7fcdce91feb430306391667c0a012cd7" category="paragraph"><block ref="7fcdce91feb430306391667c0a012cd7" category="inline-link-macro-rx"></block></block>
   <block id="5c85f685c62c106f7c5565f5f9efa724" category="paragraph">Due nodi</block>
   <block id="fb36a3d5cdf2e3b5ecef9b3c9fbab504" category="paragraph">Disgregativo</block>
   <block id="8377dec7f2f76b3e412145b87daa08da" category="paragraph">I nuovi shelf di storage sono supportati sia sulle piattaforme originali che su quelle nuove.</block>
@@ -13240,4 +13236,12 @@
   <block id="1ad5a70ead9bdd722df6000495e21c24" category="list-text">Se si utilizza Fabric OS 8.2.x e versioni precedenti, è necessario modificare il metodo di licenza in dinamico:</block>
   <block id="7fafa568d6f3c9a0ee98323f64b1c01c" category="admonition">In Fabric OS 9.0 e versioni successive, il metodo di licenza è dinamico per impostazione predefinita. Il metodo di licenza statico non è supportato.</block>
   <block id="0b6c4085e3a8dba280dd11e4bbbbeee1" category="paragraph">È possibile verificare che le licenze siano installate utilizzando il comando "licenza".</block>
+  <block id="6c05b41ac12af301a1c1201b16997220" category="paragraph">È necessario eseguire le fasi di questa procedura da entrambi i siti, contemporaneamente.</block>
+  <block id="a934aebb7868eacad4999d15212ac85f" category="list-text">Per una configurazione MetroCluster a quattro o otto nodi, utilizzare<block ref="1f019d491fcfc3956d780ccfd54601ba" prefix=" " category="inline-code"></block> e.<block ref="6c99881ddd2f188436900ed8d41d99ba" prefix=" " category="inline-code"></block> parametri:</block>
+  <block id="28289de886d4bf23487d962fb6a696a3" category="summary">È possibile aggiungere a caldo uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7600N o 7500N dotati di porte disponibili.</block>
+  <block id="2e53212ba8ca8b35cbf4ed2b9eb52b0c" category="doc">Aggiunta a caldo di uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7600N o 7500N</block>
+  <block id="e3e17f353727a0bf80bc5f781fadd978" category="list-text">I bridge FibreBridge 7600N o 7500N devono essere collegati e disporre di porte SAS disponibili.</block>
+  <block id="7ec840edd23c7b1a5bd3b9167d726942" category="list-text">Verificare la presenza di eventuali avvisi sullo stato di salute sui bridge dopo l'aggiunta dei nuovi stack:</block>
+  <block id="4aa202a3c65f2813f56a71404d4e0d9f" category="paragraph">Otto nodi</block>
+  <block id="74c873abf18bb043c43561d25adce539" category="paragraph"><block ref="74c873abf18bb043c43561d25adce539" category="inline-link-macro-rx"></block></block>
 </blocks>
