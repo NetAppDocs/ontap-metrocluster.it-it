@@ -6183,7 +6183,7 @@
 <p class="page-details">
   
     
-    <time datetime="2023-05-23 16:55:28 +0000">05/23/2023</time>
+    <time datetime="2023-06-30 17:35:48 +0000">06/30/2023</time>
     
   
 
@@ -6195,6 +6195,10 @@
 
 <div class="paragraph lead">
 <p>Prima di iniziare la manutenzione o il trasferimento del sito, è necessario spegnere l&#8217;intera configurazione MetroCluster FC e tutte le apparecchiature.</p>
+</div>
+<div class="paragraph">
+<div class="title">A proposito di questa attività</div>
+<p>È necessario eseguire le fasi di questa procedura da entrambi i siti, contemporaneamente.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -6209,6 +6213,7 @@ A partire da ONTAP 9.8, la <code><strong>storage switch</strong></code> il coman
 </table>
 </div>
 <div class="olist arabic">
+<div class="title">Fasi</div>
 <ol class="arabic">
 <li>
 <p>Verificare la configurazione MetroCluster da entrambi i siti nella configurazione MetroCluster.</p>
@@ -6282,11 +6287,10 @@ A partire da ONTAP 9.8, la <code><strong>storage switch</strong></code> il coman
 <div class="ulist">
 <ul>
 <li>
-<p>Per una configurazione MetroCluster a quattro o otto nodi, utilizzare il parametro:
-<code><strong>inhibit-takeover</strong></code></p>
+<p>Per una configurazione MetroCluster a quattro o otto nodi, utilizzare <code><strong>inhibit-takeover</strong></code> e. <code><strong>skip-lif-migration-before-shutdown</strong></code> parametri:</p>
 <div class="listingblock">
 <div class="content">
-<pre>system node halt -node node1_SiteA -inhibit-takeover true -ignore-quorum-warnings true</pre>
+<pre>system node halt -node node1_SiteA -inhibit-takeover true -ignore-quorum-warnings true -skip-lif-migration-before-shutdown true</pre>
 </div>
 </div>
 </li>
