@@ -389,7 +389,7 @@ Porta intercluster
 
 === Raccolta di informazioni prima dell'aggiornamento
 
-Prima di eseguire l'aggiornamento, è necessario raccogliere informazioni per ciascuno dei nodi e, se necessario, regolare i domini di broadcast di rete, rimuovere eventuali VLAN e gruppi di interfacce e raccogliere informazioni sulla crittografia.
+Prima di eseguire l'aggiornamento, è necessario raccogliere informazioni per ciascuno dei vecchi nodi e, se necessario, regolare i domini di broadcast di rete, rimuovere eventuali VLAN e gruppi di interfacce e raccogliere informazioni sulla crittografia.
 
 .A proposito di questa attività
 Questa attività viene eseguita sulla configurazione MetroCluster FC esistente.
@@ -401,7 +401,7 @@ Questa attività viene eseguita sulla configurazione MetroCluster FC esistente.
 `metrocluster node show -fields node-systemid,dr-partner-systemid`
 
 +
-Durante la procedura di sostituzione, sostituisci questi ID di sistema con gli ID di sistema dei nuovi moduli controller.
+Durante la procedura di aggiornamento, sostituisci questi vecchi ID di sistema con gli ID di sistema dei nuovi moduli controller.
 
 +
 In questo esempio, per una configurazione MetroCluster FC a quattro nodi, vengono recuperati i seguenti vecchi ID di sistema:
@@ -441,7 +441,7 @@ dr-group-id cluster    node      node-systemid dr-partner-systemid
 1           Cluster_B  node_B_1-old  -             -
 2 entries were displayed.
 ----
-. Raccogliere informazioni su porta e LIF per ciascun nodo.
+. Raccogliere informazioni su porta e LIF per ciascun nodo precedente.
 +
 Per ciascun nodo, è necessario raccogliere l'output dei seguenti comandi:
 
@@ -1182,8 +1182,12 @@ Questa attività deve essere eseguita su tutti i nuovi controller.
 
 . Se viene utilizzata la crittografia root, a seconda della versione di ONTAP in uso, selezionare l'opzione del menu di avvio o immettere il comando del menu di avvio per la configurazione della gestione delle chiavi.
 +
-** A partire da ONTAP 9.8, selezionare l'opzione del menu di avvio.
-+
+[role="tabbed-block"]
+====
+.ONTAP 9.8 e versioni successive
+--
+A partire da ONTAP 9.8, selezionare l'opzione del menu di avvio.
+
 |===
 
 
@@ -1207,8 +1211,11 @@ Opzione "`11`"
 Seguire le istruzioni per fornire gli input necessari per ripristinare la configurazione di gestione delle chiavi.
 
 |===
-** In ONTAP 9.7 e versioni precedenti, eseguire il comando del menu di avvio.
-+
+--
+.ONTAP 9.7 e versioni precedenti
+--
+Per ONTAP 9.7 e versioni precedenti, eseguire il comando del menu di avvio.
+
 |===
 
 
@@ -1228,8 +1235,8 @@ Gestione esterna delle chiavi
 `recover_external_keymanager`
 
 |===
-
-
+--
+====
 . Se l'autoboot è attivato, interrompere l'autoboot premendo CTRL-C.
 . Dal menu di boot, eseguire l'opzione "`6`".
 +
@@ -1258,8 +1265,12 @@ Se il partner-sysid non è corretto, impostarlo:
 
 . Se viene utilizzata la crittografia root, a seconda della versione di ONTAP in uso, selezionare l'opzione del menu di avvio oppure eseguire nuovamente il comando del menu di avvio per la configurazione della gestione delle chiavi.
 +
-** A partire da ONTAP 9.8, selezionare l'opzione del menu di avvio.
-+
+[role="tabbed-block"]
+====
+.ONTAP 9.8 e versioni successive
+--
+A partire da ONTAP 9.8, selezionare l'opzione del menu di avvio.
+
 |===
 
 
@@ -1283,11 +1294,13 @@ Opzione "`11`"
 Seguire le istruzioni per fornire gli input necessari per ripristinare la configurazione di gestione delle chiavi.
 
 |===
-+
 A seconda dell'impostazione del gestore delle chiavi, eseguire la procedura di ripristino selezionando l'opzione "`10`" o l'opzione "`11`", quindi l'opzione "`6`" al primo prompt del menu di avvio. Per avviare completamente i nodi, potrebbe essere necessario ripetere la procedura di ripristino, continua con l'opzione "`1`" (boot normale).
 
-** In ONTAP 9.7 e versioni precedenti, eseguire il comando del menu di avvio.
-+
+--
+.ONTAP 9.7 e versioni precedenti
+--
+Per ONTAP 9.7 e versioni precedenti, eseguire il comando del menu di avvio.
+
 |===
 
 
@@ -1307,11 +1320,10 @@ Gestione esterna delle chiavi
 `recover_external_keymanager`
 
 |===
-+
 Potrebbe essere necessario eseguire il `recover_xxxxxxxx_keymanager` al prompt del menu di boot più volte fino a quando i nodi non si avviano completamente.
 
-
-
+--
+====
 . Avviare i nodi:
 +
 `boot_ontap`

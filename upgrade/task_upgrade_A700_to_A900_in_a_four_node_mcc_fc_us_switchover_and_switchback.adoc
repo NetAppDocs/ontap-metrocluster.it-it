@@ -35,8 +35,7 @@ https://hwu.netapp.com/["NetApp Hardware Universe"^]
 +
 La tabella seguente mostra la matrice dei modelli supportata per l'aggiornamento del controller.
 
-
-
++
 |===
 
 
@@ -44,19 +43,19 @@ La tabella seguente mostra la matrice dei modelli supportata per l'aggiornamento
 
 
  a| 
-* AFF A700
+** AFF A700
 
  a| 
-* AFF A900
+** AFF A900
 
 
 
 
  a| 
-* FAS9000
+** FAS9000
 
  a| 
-* FAS9500
+** FAS9500
 
 
 |===
@@ -336,7 +335,7 @@ Se i controller AFF A700 o FAS9000 dispongono di una scheda nello slot 7, sposta
 
 === Raccogliere informazioni prima dell'aggiornamento
 
-Prima di eseguire l'aggiornamento, è necessario raccogliere informazioni per ciascuno dei nodi e, se necessario, regolare i domini di broadcast di rete, rimuovere eventuali VLAN e gruppi di interfacce e raccogliere informazioni sulla crittografia.
+Prima di eseguire l'aggiornamento, è necessario raccogliere informazioni per ciascuno dei vecchi nodi e, se necessario, regolare i domini di broadcast di rete, rimuovere eventuali VLAN e gruppi di interfacce e raccogliere informazioni sulla crittografia.
 
 .A proposito di questa attività
 Questa attività viene eseguita sulla configurazione MetroCluster FC esistente.
@@ -347,7 +346,7 @@ Questa attività viene eseguita sulla configurazione MetroCluster FC esistente.
 `metrocluster node show -fields node-systemid,dr-partner-systemid`
 
 +
-Durante la procedura di sostituzione, sostituisci questi ID di sistema con gli ID di sistema dei moduli controller.
+Durante la procedura di aggiornamento, sostituisci questi vecchi ID di sistema con gli ID di sistema dei moduli controller.
 
 +
 In questo esempio, per una configurazione MetroCluster FC a quattro nodi, vengono recuperati i seguenti vecchi ID di sistema:
@@ -372,7 +371,7 @@ dr-group-id cluster    node           node-systemid ha-partner-systemid dr-partn
 
 4 entries were displayed.
 ----
-. Raccogliere informazioni su porta e LIF per ciascun nodo.
+. Raccogliere informazioni su porta e LIF per ciascun nodo precedente.
 +
 Per ciascun nodo, è necessario raccogliere l'output dei seguenti comandi:
 

@@ -137,7 +137,7 @@ Eseguire i comandi elencati sotto `show` dal cluster partner.
 --
 `metrocluster node show -fields node-systemid,dr-partner-systemid`
 
-Durante la procedura di sostituzione, sostituisci questi ID di sistema con gli ID di sistema dei nuovi moduli controller.
+Durante la procedura di aggiornamento, sostituisci questi vecchi ID di sistema con gli ID di sistema dei nuovi moduli controller.
 
 In questo esempio, per una configurazione MetroCluster FC a quattro nodi, vengono recuperati i seguenti vecchi ID di sistema:
 
@@ -175,7 +175,7 @@ dr-group-id cluster    node          node-systemid dr-partner-systemid
 2 entries were displayed.
 ----
 --
-. Raccogliere informazioni su porta e LIF per ciascun nodo.
+. Raccogliere informazioni su porta e LIF per ciascun nodo precedente.
 +
 Per ciascun nodo, è necessario raccogliere l'output dei seguenti comandi:
 

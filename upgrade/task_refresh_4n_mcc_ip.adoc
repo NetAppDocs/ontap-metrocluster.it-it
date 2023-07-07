@@ -132,6 +132,22 @@ image::../media/mcc_dr_group_b.png[mcc dr gruppo b]
 .Configurazione temporanea a dodici nodi
 image::../media/mcc_dr_group_c4.png[gruppo dr mcc c4]
 
+. Verificare che sia possibile il Takeover e che i nodi siano connessi eseguendo il seguente comando su entrambi i cluster:
++
+`storage failover show`
+
++
+[listing]
+----
+cluster_A::> storage failover show
+                                    Takeover
+Node           Partner              Possible    State Description
+-------------- -------------------- ---------   ------------------
+Node_FC_1      Node_FC_2              true      Connected to Node_FC_2
+Node_FC_2      Node_FC_1              true      Connected to Node_FC_1
+Node_IP_1      Node_IP_2              true      Connected to Node_IP_2
+Node_IP_2      Node_IP_1              true      Connected to Node_IP_1
+----
 . Spostare i volumi CRS.
 +
 Eseguire le operazioni descritte in link:../maintain/task_move_a_metadata_volume_in_mcc_configurations.html["Spostamento di un volume di metadati nelle configurazioni MetroCluster"].

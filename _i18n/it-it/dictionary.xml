@@ -403,7 +403,6 @@
   <block id="a0e8bd8a19cc4080f31b71bf720b5cea" category="paragraph">Eseguire i comandi elencati sotto<block ref="a7dd12b1dab17d25467b0b0a4c8d4a92" prefix=" " category="inline-code"></block> dal cluster partner.</block>
   <block id="41658c9a662bf36d1d1079b0d7e61f18" category="paragraph">Il<block ref="a7dd12b1dab17d25467b0b0a4c8d4a92" prefix=" " category="inline-code"></block> L'output del comando visualizza tre tabelle contenenti gli IP dell'interfaccia MetroCluster, gli ID di sistema e gli UID di sistema. Queste informazioni sono necessarie più avanti nella procedura per impostare i bootargs quando si avvia il nuovo nodo.</block>
   <block id="3894726aa348d9a18ddd016a54497034" category="list-text">Raccogliere gli ID di sistema dei nodi nella configurazione MetroCluster:</block>
-  <block id="3cd530184990375ba5ce23dfb543233c" category="paragraph">Durante la procedura di sostituzione, sostituisci questi ID di sistema con gli ID di sistema dei nuovi moduli controller.</block>
   <block id="103e238a461bced8a19653fadfc6b06f" category="paragraph">In questo esempio, per una configurazione IP MetroCluster a quattro nodi, vengono recuperati i seguenti vecchi ID di sistema:</block>
   <block id="1cd4744ff6d97a425af9a0e34512335b" category="list-text">Node_A_1-old: 4068741258</block>
   <block id="58091da607d7ce6b90f5b3bdc5df9969" category="list-text">Node_A_2-old: 4068741260</block>
@@ -772,7 +771,6 @@
   <block id="b4c1503dedd04ac2f19bda6b60200205" category="section-title">Impostazione dello stato ha sui nuovi controller e chassis</block>
   <block id="9cf18883abd310f0e24341194095b229" category="list-text">Se viene utilizzata la crittografia root, a seconda della versione di ONTAP in uso, selezionare l'opzione del menu di avvio o immettere il comando del menu di avvio per la configurazione della gestione delle chiavi.</block>
   <block id="716a92112769d0f62895dc8c3a9fe47f" category="list-text">A partire da ONTAP 9.8, selezionare l'opzione del menu di avvio.</block>
-  <block id="52b1f5429bdd6813cde83cf7eb1f6838" category="list-text">In ONTAP 9.7 e versioni precedenti, eseguire il comando del menu di avvio.</block>
   <block id="8cb7388f916ea57692be4e2442a4bb6e" category="cell">Eseguire questo comando al prompt del menu di avvio...</block>
   <block id="945a7facca1121e7c5b6eed95ea1b03a" category="paragraph"><block ref="7191584fa52473c1df15d3c03b065c0b" prefix="" category="inline-code"></block></block>
   <block id="e606299b52f4f296d9e1024342b77a75" category="paragraph"><block ref="7c1eea87f821ce315a7a85c3c85f59e5" prefix="" category="inline-code"></block></block>
@@ -12077,7 +12075,6 @@
   <block id="cab91f7159880630a5bee29aa55d9f8a" category="section-title">Assegnazione di ADP e dischi sui sistemi AFF C250 e AFF A250</block>
   <block id="3e0a52646b307379f47860044c088d60" category="paragraph">I dischi su ogni shelf esterno sono divisi in due gruppi uguali (metà). Ogni half-shelf viene assegnato automaticamente a un pool separato.</block>
   <block id="f3a88820bdb6aec9f587dc31d6c8d2a5" category="paragraph">Le partizioni su ogni shelf vengono utilizzate per creare l'aggregato root. L'aggregato root include le seguenti partizioni in ogni plex:</block>
-  <block id="cf5928613cf8b77d8355882cdec38712" category="paragraph">solo 16 dischi interni</block>
   <block id="203589fdbad6f6dc48cf251ed51e812a" category="list-text">Nessuna partizione di riserva</block>
   <block id="5f09ad28ed34c8a5a9d9a71b6cfab3ac" category="section-title">Assegnazione di ADP e dischi sui sistemi AFF A300</block>
   <block id="b244c220ca2f00fdc24e97de45456f82" category="section-title">Assegnazione di ADP e dischi sui sistemi AFF C400 e AFF A400</block>
@@ -12092,7 +12089,6 @@
   <block id="4cc79bf7b84548df7d6cedf892dab8d3" category="paragraph">Dischi interni e 96 dischi esterni</block>
   <block id="05fce716b1daba00f41c2bed56cc5f77" category="paragraph">Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato. I dischi sugli shelf esterni vengono assegnati automaticamente shelf-by-shelf, con tutti i dischi su ogni shelf assegnati a uno dei quattro nodi nella configurazione MetroCluster.</block>
   <block id="6f53d85533c3e60dad3733efac10ae04" category="paragraph">L'aggregato root viene creato con 12 partizioni root sullo shelf interno.</block>
-  <block id="ebc41c749d217e4e33d72e9e61f637ae" category="paragraph">solo 24 dischi interni</block>
   <block id="982a2e1944b422fa6826f45f24630643" category="paragraph">Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato.</block>
   <block id="f674c4dddbf3c8f5d8282775b8f64dfc" category="list-text">Una partizione di riserva</block>
   <block id="ef312d32820f8cc7d4f38a6f5049b24d" category="section-title">Assegnazione di ADP e dischi sui sistemi AFF A900</block>
@@ -12770,13 +12766,11 @@
   <block id="3545d6bfcbf822da47d2253b1d36541e" category="paragraph">Prima di eseguire l'aggiornamento, è necessario raccogliere informazioni per ciascuno dei nodi e, se necessario, regolare i domini di broadcast di rete, rimuovere eventuali VLAN e gruppi di interfacce e raccogliere informazioni sulla crittografia.</block>
   <block id="bd644239cebf0eee7e6c7d4b4e3a0c40" category="paragraph">Questa attività viene eseguita sulla configurazione MetroCluster FC esistente.</block>
   <block id="e8b2b31f6129e480376a3948b9b9d73c" category="list-text">Raccogliere gli ID di sistema del nodo di configurazione MetroCluster:</block>
-  <block id="3c0b6cb420c455a5a165c08c7cd7af73" category="paragraph">Durante la procedura di sostituzione, sostituisci questi ID di sistema con gli ID di sistema dei moduli controller.</block>
   <block id="783c0ee630587e0a74bf53bfb650c2e7" category="paragraph">In questo esempio, per una configurazione MetroCluster FC a quattro nodi, vengono recuperati i seguenti vecchi ID di sistema:</block>
   <block id="52d83d7ca0d0ff43bc0929d376512989" category="list-text">Node_A_1-A700: 537037649</block>
   <block id="a0efecab010293ebd247221cd9cca871" category="list-text">Node_A_2-A700: 537407030</block>
   <block id="c5c663e6628e19ffabcbcb01ecaa23e3" category="list-text">Node_B_1-A700: 0537407114</block>
   <block id="447b7bdefc8e750f8d7dab18bb9172ea" category="list-text">Node_B_2-A700: 537035354</block>
-  <block id="3401f9f19dd2ad33d88a3a8363ed6c9b" category="list-text">Raccogliere informazioni su porta e LIF per ciascun nodo.</block>
   <block id="cb06300d68318f6a2b2782f2f09beaf8" category="paragraph">Per ciascun nodo, è necessario raccogliere l'output dei seguenti comandi:</block>
   <block id="b789920aa34a06ff52a0a140eb8211ba" category="list-text"><block ref="2dbf5ccf96c836c492c97a4ad3c3fb9c" prefix="" category="inline-code"></block></block>
   <block id="4fb12e23a9f5fb90c604b2b0c7dbf88a" category="list-text"><block ref="72452e9827bb858400e6b9e72c5245fc" prefix="" category="inline-code"></block></block>
@@ -13157,7 +13151,6 @@
   <block id="28d9d9e03b64356e498c630e744a9cdf" category="paragraph"><block ref="28d9d9e03b64356e498c630e744a9cdf" category="inline-link-macro-rx"></block></block>
   <block id="da72e287071989d880a84bc9f714faf6" category="section-title">Scelta di una procedura che utilizzi il trasferimento di aggregati</block>
   <block id="0feef50dfeaf08303a2284d2c2ff6eb4" category="cell">Ricollocazione di aggregati</block>
-  <block id="5c6fc64fa41aef579f27097f378325cb" category="paragraph">Utilizzo di<block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> Comandi e sostituzione del modulo controller e della NVM (solo aggiornamento da AFF A700 a AFF A900)</block>
   <block id="38a031e8dad2eab70ea05c570be3935e" category="paragraph"><block ref="38a031e8dad2eab70ea05c570be3935e" category="inline-link-rx"></block></block>
   <block id="b9e53a247da3982cb706e33287d2a8fd" category="paragraph">Utilizzo di<block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> comandi</block>
   <block id="b80a36d83825959bd2fd92ffd36709e2" category="paragraph"><block ref="b80a36d83825959bd2fd92ffd36709e2" category="inline-link-rx"></block></block>
@@ -13244,4 +13237,14 @@
   <block id="7ec840edd23c7b1a5bd3b9167d726942" category="list-text">Verificare la presenza di eventuali avvisi sullo stato di salute sui bridge dopo l'aggiunta dei nuovi stack:</block>
   <block id="4aa202a3c65f2813f56a71404d4e0d9f" category="paragraph">Otto nodi</block>
   <block id="74c873abf18bb043c43561d25adce539" category="paragraph"><block ref="74c873abf18bb043c43561d25adce539" category="inline-link-macro-rx"></block></block>
+  <block id="0159b80d745d9b405520a30a29416d2d" category="paragraph">Prima di eseguire l'aggiornamento, è necessario raccogliere informazioni per ciascuno dei vecchi nodi e, se necessario, regolare i domini di broadcast di rete, rimuovere eventuali VLAN e gruppi di interfacce e raccogliere informazioni sulla crittografia.</block>
+  <block id="3b2740b2f65f79e770509c9b837df2de" category="paragraph">Durante la procedura di aggiornamento, sostituisci questi vecchi ID di sistema con gli ID di sistema dei moduli controller.</block>
+  <block id="22891a1da512f437a0d8620852295bd7" category="list-text">Raccogliere informazioni su porta e LIF per ciascun nodo precedente.</block>
+  <block id="30872b2ff811f5e5d51bcf20468c730a" category="paragraph">Utilizzo dei comandi "System controller replace" per aggiornare i modelli di controller nello stesso chassis</block>
+  <block id="e5fb04e9be2a470a838a8ae287e6100a" category="paragraph">Durante la procedura di aggiornamento, sostituisci questi vecchi ID di sistema con gli ID di sistema dei nuovi moduli controller.</block>
+  <block id="9e25219bfef39dc2d94805b599244f8d" category="open-title">ONTAP 9.8 e versioni successive</block>
+  <block id="5a830b76ff5a71db59759b13f383410c" category="open-title">ONTAP 9.7 e versioni precedenti</block>
+  <block id="5227f75c6a1f77d9623c7a089f1e3ea7" category="paragraph">Per ONTAP 9.7 e versioni precedenti, eseguire il comando del menu di avvio.</block>
+  <block id="3e3df3be76a18ca2c89904765d97f078" category="list-text">Verificare che sia possibile il Takeover e che i nodi siano connessi eseguendo il seguente comando su entrambi i cluster:</block>
+  <block id="3963205d7c5d1cb2f000d61f16c10f1d" category="paragraph">24 dischi interni</block>
 </blocks>
