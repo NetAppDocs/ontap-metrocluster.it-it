@@ -6161,21 +6161,21 @@
   </div>
 </div>
 
-      <div class="ie-nmt-disclaimer">
-  <span>
-    <div class="ie-nmt-disclaimer-container">
-      <div class="ie-nmt-disclaimer-icon">
-        <svg class="luci-icon" aria-hidden="true">
-          <use xlink:href="/it-it/ontap-metrocluster/images/sprite.svg#circle-info">
-        </svg>
+      <div class="ie-info-disclaimer">
+    <span>
+      <div class="ie-info-disclaimer-container">
+        <div class="ie-info-disclaimer-icon">
+          <svg class="luci-icon" aria-hidden="true">
+            <use xlink:href="/it-it/ontap-metrocluster/images/sprite.svg#circle-info">
+          </svg>
+        </div>
+        <div class="ie-info-disclaimer-content">
+          <span> La versione in lingua italiana fornita proviene da una traduzione automatica. Per eventuali incoerenze, fare riferimento alla versione in lingua inglese. </span>
+        </div>
+        <div style="clear:both;"></div>
       </div>
-      <div class="ie-nmt-disclaimer-content">
-        <span> La versione in lingua italiana fornita proviene da una traduzione automatica. Per eventuali incoerenze, fare riferimento alla versione in lingua inglese. </span>
-      </div>
-      <div style="clear:both;"></div>
-    </div>
-  </span>
-</div><div class="n-doc__component-detail-heading-wrap">
+    </span>
+  </div><div class="n-doc__component-detail-heading-wrap">
   <h1 class="n-doc__component-detail-heading">Aggiornamento dei controller in una configurazione MetroCluster FC mediante switchover e switchback</h1>
 </div>
 
@@ -6183,7 +6183,7 @@
 <p class="page-details">
   
     
-    <time datetime="2023-05-23 16:55:28 +0000">05/23/2023</time>
+    <time datetime="2023-07-07 06:59:02 +0000">07/07/2023</time>
     
   
 
@@ -6723,7 +6723,7 @@ Se le piattaforme originali o nuove sono sistemi FAS8020 o AFF8020 che utilizzan
 <div class="sect2">
 <h3 id="raccolta-di-informazioni-prima-dellaggiornamento">Raccolta di informazioni prima dell&#8217;aggiornamento</h3>
 <div class="paragraph">
-<p>Prima di eseguire l&#8217;aggiornamento, è necessario raccogliere informazioni per ciascuno dei nodi e, se necessario, regolare i domini di broadcast di rete, rimuovere eventuali VLAN e gruppi di interfacce e raccogliere informazioni sulla crittografia.</p>
+<p>Prima di eseguire l&#8217;aggiornamento, è necessario raccogliere informazioni per ciascuno dei vecchi nodi e, se necessario, regolare i domini di broadcast di rete, rimuovere eventuali VLAN e gruppi di interfacce e raccogliere informazioni sulla crittografia.</p>
 </div>
 <div class="paragraph">
 <div class="title">A proposito di questa attività</div>
@@ -6741,7 +6741,7 @@ Se le piattaforme originali o nuove sono sistemi FAS8020 o AFF8020 che utilizzan
 <p><code>metrocluster node show -fields node-systemid,dr-partner-systemid</code></p>
 </div>
 <div class="paragraph">
-<p>Durante la procedura di sostituzione, sostituisci questi ID di sistema con gli ID di sistema dei nuovi moduli controller.</p>
+<p>Durante la procedura di aggiornamento, sostituisci questi vecchi ID di sistema con gli ID di sistema dei nuovi moduli controller.</p>
 </div>
 <div class="paragraph">
 <p>In questo esempio, per una configurazione MetroCluster FC a quattro nodi, vengono recuperati i seguenti vecchi ID di sistema:</p>
@@ -6796,7 +6796,7 @@ dr-group-id cluster    node      node-systemid dr-partner-systemid
 </div>
 </li>
 <li>
-<p>Raccogliere informazioni su porta e LIF per ciascun nodo.</p>
+<p>Raccogliere informazioni su porta e LIF per ciascun nodo precedente.</p>
 <div class="paragraph">
 <p>Per ciascun nodo, è necessario raccogliere l&#8217;output dei seguenti comandi:</p>
 </div>
@@ -7857,10 +7857,14 @@ aggr0_node_b_1-root    online      raid_dp, aggr    root, nosnap=on,
 </li>
 <li>
 <p>Se viene utilizzata la crittografia root, a seconda della versione di ONTAP in uso, selezionare l&#8217;opzione del menu di avvio o immettere il comando del menu di avvio per la configurazione della gestione delle chiavi.</p>
-<div class="ulist">
-<ul>
-<li>
+<div class="exampleblock tabbed-block">
+<div class="content">
+<div class="openblock">
+<div class="title">ONTAP 9.8 e versioni successive</div>
+<div class="content">
+<div class="paragraph">
 <p>A partire da ONTAP 9.8, selezionare l&#8217;opzione del menu di avvio.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -7895,9 +7899,14 @@ aggr0_node_b_1-root    online      raid_dp, aggr    root, nosnap=on,
 </tr>
 </tbody>
 </table>
-</li>
-<li>
-<p>In ONTAP 9.7 e versioni precedenti, eseguire il comando del menu di avvio.</p>
+</div>
+</div>
+<div class="openblock">
+<div class="title">ONTAP 9.7 e versioni precedenti</div>
+<div class="content">
+<div class="paragraph">
+<p>Per ONTAP 9.7 e versioni precedenti, eseguire il comando del menu di avvio.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -7926,8 +7935,9 @@ aggr0_node_b_1-root    online      raid_dp, aggr    root, nosnap=on,
 </tr>
 </tbody>
 </table>
-</li>
-</ul>
+</div>
+</div>
+</div>
 </div>
 </li>
 <li>
@@ -7972,10 +7982,14 @@ Rebooting to load the restored env file...</pre>
 </li>
 <li>
 <p>Se viene utilizzata la crittografia root, a seconda della versione di ONTAP in uso, selezionare l&#8217;opzione del menu di avvio oppure eseguire nuovamente il comando del menu di avvio per la configurazione della gestione delle chiavi.</p>
-<div class="ulist">
-<ul>
-<li>
+<div class="exampleblock tabbed-block">
+<div class="content">
+<div class="openblock">
+<div class="title">ONTAP 9.8 e versioni successive</div>
+<div class="content">
+<div class="paragraph">
 <p>A partire da ONTAP 9.8, selezionare l&#8217;opzione del menu di avvio.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -8013,9 +8027,14 @@ Rebooting to load the restored env file...</pre>
 <div class="paragraph">
 <p>A seconda dell&#8217;impostazione del gestore delle chiavi, eseguire la procedura di ripristino selezionando l&#8217;opzione &#8220;10&#8221; o l&#8217;opzione &#8220;11&#8221;, quindi l&#8217;opzione &#8220;6&#8221; al primo prompt del menu di avvio. Per avviare completamente i nodi, potrebbe essere necessario ripetere la procedura di ripristino, continua con l&#8217;opzione &#8220;1&#8221; (boot normale).</p>
 </div>
-</li>
-<li>
-<p>In ONTAP 9.7 e versioni precedenti, eseguire il comando del menu di avvio.</p>
+</div>
+</div>
+<div class="openblock">
+<div class="title">ONTAP 9.7 e versioni precedenti</div>
+<div class="content">
+<div class="paragraph">
+<p>Per ONTAP 9.7 e versioni precedenti, eseguire il comando del menu di avvio.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -8047,8 +8066,9 @@ Rebooting to load the restored env file...</pre>
 <div class="paragraph">
 <p>Potrebbe essere necessario eseguire il <code>recover_xxxxxxxx_keymanager</code> al prompt del menu di boot più volte fino a quando i nodi non si avviano completamente.</p>
 </div>
-</li>
-</ul>
+</div>
+</div>
+</div>
 </div>
 </li>
 <li>
