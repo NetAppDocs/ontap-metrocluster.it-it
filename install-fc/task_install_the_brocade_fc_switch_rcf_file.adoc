@@ -42,18 +42,6 @@ Password: <user input>
 +
 Una volta immessa la password, lo switch scarica ed esegue il file di configurazione.
 
-. Abilitare costantemente lo switch:
-+
-`switchcfgpersistentenable`
-
-+
-L'esempio mostra come abilitare in modo permanente lo switch FC_A_1.
-
-+
-[listing]
-----
-FC_switch_A_1:admin> switchcfgpersistentenable
-----
 . Verificare che il file di configurazione abbia impostato il dominio dello switch:
 +
 `switchShow`
@@ -161,6 +149,18 @@ Esempio: LE
 [listing]
 ----
 FC_switch_A_1:admin> portcfglongdistance 21 LE 1
+----
+. Abilitare costantemente lo switch:
++
+`switchcfgpersistentenable`
+
++
+L'esempio mostra come abilitare in modo permanente lo switch FC_A_1.
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchcfgpersistentenable
 ----
 . Verificare che l'indirizzo IP sia impostato correttamente:
 +
