@@ -12666,7 +12666,6 @@
   <block id="01fd5a7c3bb1009fa8251ff0e9f26de3" category="paragraph"><block ref="01fd5a7c3bb1009fa8251ff0e9f26de3" category="inline-link-macro-rx"></block></block>
   <block id="0c6db123ffc5dea85a5d6efa7537d50b" category="paragraph"><block ref="0c6db123ffc5dea85a5d6efa7537d50b" category="inline-link-macro-rx"></block></block>
   <block id="0dd39f853425a9e387372f6c79ab0533" category="list-text">Verificare che il gruppo DR sia stato creato.</block>
-  <block id="d201d18b165e21d1a9986863a5788d3c" category="admonition">È possibile configurare le interfacce IP di MetroCluster da entrambi i cluster. Inoltre, a partire da ONTAP 9.1.1, se si utilizza una configurazione Layer 3, è necessario specificare anche<block ref="50e57debf79bf52aa078c6e993f8969f" prefix=" " category="inline-code"></block> Parametro per creare interfacce IP MetroCluster. Fare riferimento a. <block ref="babfc343bda1ae07500c981be392a72d" category="inline-link-macro-rx"></block>.</block>
   <block id="5dc920411c59b1b9f32058239fb24330" category="list-text">Verificare che le connessioni siano state stabilite correttamente:<block ref="e7acb1ae14be0e5233d619851263fdae" prefix=" " category="inline-code"></block></block>
   <block id="2dccf53d6ed326f889d8e764529b9794" category="list-text">Verificare l'assegnazione automatica e il partizionamento del disco:</block>
   <block id="3f95b2ea711d433e26a8b5eb63bbd17a" category="paragraph"><block ref="02b924a96c72679822883a70dfe48211" prefix="" category="inline-code"></block></block>
@@ -13266,4 +13265,5 @@
   <block id="3d371ae53e0538b3e0a7ddbfb529f302" category="paragraph"><block ref="3d371ae53e0538b3e0a7ddbfb529f302" category="inline-link-macro-rx"></block></block>
   <block id="d9d6b58e57305b9866d95c493eb0aa7a" category="paragraph"><block ref="d9d6b58e57305b9866d95c493eb0aa7a" category="inline-link-macro-rx"></block></block>
   <block id="2d27e76da02804de2afe9d209e5cbb1c" category="admonition">Si consiglia di mantenere almeno il 20% di spazio libero per gli aggregati con mirroring, per performance e disponibilità dello storage ottimali. Sebbene il suggerimento sia del 10% per gli aggregati non speculari, il 10% di spazio aggiuntivo può essere utilizzato dal filesystem per assorbire le modifiche incrementali. I cambiamenti incrementali aumentano l'utilizzo dello spazio per gli aggregati con mirroring grazie all'architettura copy-on-write basata su Snapshot di ONTAP. Il mancato rispetto di queste Best practice può avere un impatto negativo sulle prestazioni.</block>
+  <block id="0e5e2d82a1039e41c19d2248f3b64787" category="admonition">È possibile configurare le interfacce IP di MetroCluster da entrambi i cluster.</block>
 </blocks>
