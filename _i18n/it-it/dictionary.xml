@@ -367,7 +367,6 @@
   <block id="be2a104272635035d829d9eb66247a6e" category="doc">Aggiornare i controller in una configurazione MetroCluster IP a quattro nodi utilizzando lo switchover e lo switchback con i comandi "system controller replace" (ONTAP 9.13.1 e versioni successive)</block>
   <block id="7644562e2fb618084cb09ad85c576c00" category="paragraph">È possibile utilizzare questa operazione di switchover MetroCluster automatizzato e guidato per eseguire un aggiornamento del controller senza interruzioni su una configurazione IP MetroCluster a quattro nodi. Altri componenti (ad esempio shelf di storage o switch) non possono essere aggiornati come parte di questa procedura.</block>
   <block id="344184862169747549deee4b87dc1cf2" category="section-title">Combinazioni di piattaforme supportate</block>
-  <block id="fd069f5f1b9ec4fce867ea78d80b2049" category="paragraph">Questa procedura supporta solo gli aggiornamenti dei controller da AFF A300 a AFF A900.</block>
   <block id="db8b16f8a162b64f9227ab0fe83ffe4c" category="paragraph">Per ulteriori informazioni sulle combinazioni di upgrade della piattaforma, consultare la tabella di aggiornamento IP di MetroCluster in <block ref="2a99f679e02927fd36d8e489a7ee9535" category="inline-link-macro-rx"></block>.</block>
   <block id="96235e4cabe659a051590175116c1e60" category="paragraph">Fare riferimento a.<block ref="2c4f45f6db308a425e052afade2ba656" category="inline-link-rx"></block> per ulteriori procedure.</block>
   <block id="9b7868adf853e7eebe0da1408c6ccd24" category="paragraph">Gli altri componenti della configurazione, come gli shelf di storage o gli switch, non possono essere aggiornati contemporaneamente.</block>
@@ -13266,4 +13265,11 @@
   <block id="d9d6b58e57305b9866d95c493eb0aa7a" category="paragraph"><block ref="d9d6b58e57305b9866d95c493eb0aa7a" category="inline-link-macro-rx"></block></block>
   <block id="2d27e76da02804de2afe9d209e5cbb1c" category="admonition">Si consiglia di mantenere almeno il 20% di spazio libero per gli aggregati con mirroring, per performance e disponibilità dello storage ottimali. Sebbene il suggerimento sia del 10% per gli aggregati non speculari, il 10% di spazio aggiuntivo può essere utilizzato dal filesystem per assorbire le modifiche incrementali. I cambiamenti incrementali aumentano l'utilizzo dello spazio per gli aggregati con mirroring grazie all'architettura copy-on-write basata su Snapshot di ONTAP. Il mancato rispetto di queste Best practice può avere un impatto negativo sulle prestazioni.</block>
   <block id="0e5e2d82a1039e41c19d2248f3b64787" category="admonition">È possibile configurare le interfacce IP di MetroCluster da entrambi i cluster.</block>
+  <block id="6212a1ad66c5ad9d3c50380aa91aab6a" category="list-text">Nessun guasto hardware</block>
+  <block id="8a1d06fd27bf0bfc6535b6a49185e591" category="paragraph">AFF A150</block>
+  <block id="36cbaf4511461b23b06f56ad7754e17d" category="paragraph">Questa procedura supporta i seguenti upgrade dei controller su sistemi con ONTAP 9.13.1 e versioni successive.</block>
+  <block id="cfdade9e474e805958704ec0836f18ac" category="cell">Controller sostitutivo</block>
+  <block id="6c92285fa6d3e827b198d120ea3ac674" category="inline-link-macro">qui</block>
+  <block id="4992f0045a6913a2fb77a09884c4e55c" category="admonition">È possibile eseguire gli aggiornamenti dei controller elencati nella tabella riportata sopra su sistemi che eseguono ONTAP 9.12.1 o 9.11.1 utilizzando la procedura di aggiornamento manuale descritta <block ref="4254cdc4ef28ceba663ec4031c88c9dd" category="inline-link-macro-rx"></block>.</block>
+  <block id="050dafe962829ef847f34f7607e36eb3" category="list-text"><block ref="050dafe962829ef847f34f7607e36eb3" category="inline-link-macro-rx"></block></block>
 </blocks>
