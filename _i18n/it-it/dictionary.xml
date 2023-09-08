@@ -2376,7 +2376,6 @@
   <block id="502351f7672bedb2e8f4f7aedd01b7bd" category="list-text">Ripetere la procedura per il fabric 2.</block>
   <block id="c58436ceeffb789114ef5d94d2e81161" category="summary">Se si utilizza una versione di ONTAP precedente alla 9.5 o si intende utilizzare un accesso out-of-band al bridge FibreBridge 7600N utilizzando telnet o altri protocolli e servizi di porta IP (FTP, ExpressNAV, ICMP o barra di navigazione), è possibile abilitare i servizi di accesso tramite la porta della console.</block>
   <block id="a0afad98dfd82382cc1bf2c361c3df76" category="paragraph"><block ref="aaabf0d39951f3e6c3e8a7911df524c2" prefix="" category="inline-code"></block> può specificare una delle seguenti opzioni:</block>
-  <block id="0e9f0a250a9d56072ce7737a3cd51f63" category="list-text">telnet è possibile verificare se un protocollo specifico è attivato o disattivato utilizzando<block ref="78ffae24f50d1763051c5834f1e24a95" prefix=" " category="inline-code"></block> comando.</block>
   <block id="04b973e3b5c8e23139d9de9d11958a32" category="summary">Per ulteriori informazioni sulla configurazione, il funzionamento e il monitoraggio di una configurazione MetroCluster, consultare la documentazione completa di NetApp.</block>
   <block id="9e77fd3a877778fdac1dfea74896fc50" category="paragraph">Ulteriori informazioni sulla configurazione, il funzionamento e il monitoraggio di una configurazione MetroCluster sono disponibili nella documentazione completa di NetApp.</block>
   <block id="119be031ef4485d20c7683d291d0e9f6" category="inline-link-macro">Documentazione MetroCluster</block>
@@ -3736,21 +3735,17 @@
   <block id="aba0064857c6ce89cc764da8d55ce5c1" category="doc">Spostamento di un carico di lavoro SAN FC da MetroCluster FC a nodi IP MetroCluster</block>
   <block id="73f9743e086ef8ac735d8d9a5a299535" category="list-text">Impostare nuove interfacce FC (LIFS) sui nodi IP MetroCluster:</block>
   <block id="e050f35561c7894ee0a0e945c979a806" category="list-text">Se necessario, sui nodi IP MetroCluster, modificare le porte FC da utilizzare per la connettività del client al linguaggio di destinazione FC.</block>
-  <block id="4dbd9443241248d896c42809416cff33" category="paragraph">Questo potrebbe richiedere un riavvio dei nodi.</block>
-  <block id="24bdd4e6fd63a2598d59b77c5076d636" category="list-text">Creare interfacce/LIFS FC sui nodi IP per tutti i vserver SAN. Se si desidera, verificare che le WWPN delle nuove LIF FC siano registrate nello switch FC SAN</block>
   <block id="2ea8e9b085e6487dc8f8677dad1b2007" category="list-text">Aggiornare la configurazione dello zoning SAN per le nuove LIF FC aggiunte sui nodi IP MetroCluster.</block>
   <block id="46be4a0b4ce48ea62086efafc65dbbab" category="paragraph">Per facilitare lo spostamento di volumi che contengono LUN che forniscono attivamente i dati ai client FC SAN, aggiornare le zone switch FC esistenti per consentire ai client FC SAN di accedere alle LUN sui nodi IP MetroCluster.</block>
   <block id="7cbcf73edeac7dc26492a2312ceba51d" category="list-text">Sullo switch FC SAN (Cisco o Brocade), aggiungere alla zona le WWPN delle nuove LIF FC SAN aggiunte.</block>
   <block id="4c3d801187dd3bd83498ab4cc39962cb" category="list-text">Aggiornare, salvare e confermare le modifiche di zoning.</block>
   <block id="780d54d0c3dcaee808b6d845b2755068" category="list-text">Dal client, verificare la presenza di accessi FC Initiator alle nuove LIF SAN sui nodi IP MetroCluster:<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block></block>
   <block id="7ff219f4bc061d194735ac6928a7e661" category="paragraph">A questo punto, il client dovrebbe visualizzare ed essere connesso alle interfacce FC su entrambi i nodi MetroCluster FC e MetroCluster IP. LUN e volumi sono ancora fisicamente ospitati sui nodi FC MetroCluster.</block>
-  <block id="047884ddcb740bc854ce7ccb563642b2" category="paragraph">Poiché i LUN sono riportati solo sulle interfacce dei nodi FC MetroCluster, il client mostra solo i percorsi sui nodi FC. Questo è visibile nell'output dei comandi sanlun lun show -p e multipath -ll -d.</block>
   <block id="7903e3004ba7d039fbd00c128bd855bf" category="list-text">Modificare i nodi di reporting per aggiungere i nodi IP MetroCluster</block>
   <block id="b37c9b18c1fffc0a2c04176485cc32aa" category="list-text">Elencare i nodi di reporting per LUN su SVM:<block ref="386542018c34f7eb9e58067fc17981fa" prefix=" " category="inline-code"></block></block>
   <block id="a8ac1b93cf5cb550949dfea97a05b60a" category="paragraph">I nodi di reporting mostrati sono nodi locali in quanto i LUN sono fisicamente presenti sui nodi FC A_1 e A_2.</block>
   <block id="ed464784c3f6c07bdf64a809c105429b" category="list-text">Aggiungere nodi di reporting per includere nodi IP MetroCluster.</block>
   <block id="c74a06acbdafccea854827ab3c1389ac" category="list-text">Elencare i nodi di reporting e verificare la presenza dei nuovi nodi:</block>
-  <block id="7cb622a0ff86a1bb88637f6d85cf9f43" category="list-text">Eseguire nuovamente la scansione del bus scsi sull'host per rilevare i percorsi aggiunti di recente:<block ref="9e65638d5d13acb691c4bec2ede5a483" prefix=" " category="inline-code"></block></block>
   <block id="e1ee3a062911dfd9a5f37daadbab5edb" category="list-text">Visualizzare i percorsi aggiunti di recente:<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block></block>
   <block id="05eafc0806ed7438ec13d238537264c7" category="paragraph">Ogni LUN avrà quattro percorsi.</block>
   <block id="42d2c72ed1b78cf2ef6ae94126ea459b" category="list-text">Sui controller, spostare i volumi contenenti LUN dal MetroCluster FC ai nodi MetroCluster IP.</block>
@@ -3762,7 +3757,6 @@
   <block id="3412078ebeec5a57c10057087d69f64e" category="list-text">Rimuovere i nodi di reporting e i percorsi di nuova scansione dal client.</block>
   <block id="4bb7a2cf16de0e88533fe09d20e8cacf" category="list-text">Rimuovere i nodi di reporting remoti (i nodi FC MetroCluster) per le LUN linux:<block ref="cd628f5257abfae28b6969563f236136" prefix=" " category="inline-code"></block></block>
   <block id="f2eed01c29702a10f9291aaa3e13f368" category="list-text">Controllare i nodi di reporting per le LUN:<block ref="44e0b47a6df5bd39730c8ec6359013d7" prefix=" " category="inline-code"></block></block>
-  <block id="cb35b692ef8bc5399820e0ba83b8cb35" category="list-text">Eseguire nuovamente la scansione del bus scsi sul client:<block ref="06653a48f6165608045bd55ec32d95fb" prefix=" " category="inline-code"></block></block>
   <block id="8f8c9a65b706c1177309d44848cd6abe" category="paragraph">I percorsi dai nodi MetroCluster FC vengono rimossi:</block>
   <block id="9dbd28fb326c06062ade74756b1829ab" category="list-text">Verificare che dall'host siano visibili solo i percorsi dei nodi IP MetroCluster:<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block></block>
   <block id="0dcfa974a402a3458da069a245602792" category="list-text">Se necessario, rimuovere le LIF iSCSI dai nodi FC MetroCluster.</block>
@@ -5054,7 +5048,6 @@
   <block id="0dc491dada4885353b9e96030fce6bd3" category="paragraph">Tutte le interfacce iSCSI della SVM devono essere raggiungibili dal client iSCSI.</block>
   <block id="acb0e987f9b29d1eab50c31f4f95aa9a" category="list-text">Sull'host o sul client iSCSI, identificare le connessioni iSCSI esistenti dall'host al nodo FC MetroCluster:<block ref="0d3f69bc64054f4afeca7380b613ea30" prefix=" " category="inline-code"></block></block>
   <block id="d163a1c94db271251417ac64b011f503" category="list-text">Verificare le connessioni dal nodo IP MetroCluster:<block ref="4b94292925d93bdf713ed83d6122558d" prefix=" " category="inline-code"></block></block>
-  <block id="47e1989be910f2a95cba13df244916de" category="list-text">Elencare le interfacce iscsi in ONTAP per la SVM che contiene le interfacce:<block ref="3c78b9e1a9fef2eea89905b0233c19ad" prefix=" " category="inline-code"></block></block>
   <block id="a36d68710357482d2ab6a01760a3ed96" category="list-text">Sul client iSCSI, eseguire il rilevamento su uno qualsiasi degli indirizzi IP iSCSI sulla SVM per rilevare le nuove destinazioni:<block ref="efdc22f1b447b9fcadae70bd704444db" prefix=" " category="inline-code"></block></block>
   <block id="6d5e653b42496cb611cacbd3f1622d89" category="paragraph">Il rilevamento può essere eseguito su qualsiasi indirizzo IP della SVM, incluse le interfacce non iSCSI.</block>
   <block id="a461f22b707612a699bc8af021961c83" category="list-text">Sul client iSCSI, accedere a tutti gli indirizzi rilevati:<block ref="29c5c7c7978be336e2ffc1d38827fe90" prefix=" " category="inline-code"></block></block>
@@ -5068,7 +5061,6 @@
   <block id="ca3831196a5922b44d1bd6c3f098a76e" category="paragraph">I seguenti nodi di reporting sono nodi locali in quanto i LUN sono fisicamente presenti sui nodi FC Node_A_1-FC e Node_A_2-FC.</block>
   <block id="ada767f49af9e4d84ffa661e5dca75c7" category="list-text">Nel nodo MetroCluster, aggiungere i nodi di reporting:<block ref="818a482f6636e38f181e03045c2175a6" prefix=" " category="inline-code"></block></block>
   <block id="7b0a84102a195b8e0f8d8953620707ba" category="list-text">Sul nodo MetroCluster, verificare che siano presenti i nodi appena aggiunti:<block ref="9e5febcddcd4002e96c0e9bd6fd2aefb" prefix=" " category="inline-code"></block></block>
-  <block id="33a3004b4b08a0f2ce598422f5d7b5f6" category="list-text">Sull'host, immettere il seguente comando per eseguire nuovamente la scansione del bus scsi sull'host e individuare i percorsi aggiunti di recente:<block ref="9e65638d5d13acb691c4bec2ede5a483" prefix="" category="inline-code"></block></block>
   <block id="897e36e6985e9d4eb2bed54f3762a125" category="list-text">Sull'host, immettere il seguente comando per elencare i percorsi aggiunti di recente:<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block></block>
   <block id="2a12888d763445436f29b56694f714b2" category="paragraph">Per ogni LUN vengono visualizzati quattro percorsi.</block>
   <block id="2511d667d00c1cb6eba362bc0093b244" category="list-text">In MetroCluster, spostare i volumi contenenti LUN dai nodi FC a quelli IP.</block>
@@ -5080,7 +5072,6 @@
   <block id="8ab7ca6cd6e1f79872ab4f322117ca76" category="list-text">Dal nodo IP di MetroCluster, rimuovere i nodi di reporting remoti (i nodi IP di MetroCluster) per le LUN Linux:<block ref="cd628f5257abfae28b6969563f236136" prefix=" " category="inline-code"></block></block>
   <block id="05048e4fdd078ddd77168cd8270fe3f4" category="paragraph">In questo caso, i nodi remoti sono nodi FC.</block>
   <block id="e90434592ed415a541e2a6f03284ae2d" category="list-text">Dal nodo IP di MetroCluster, controllare i nodi di reporting per le LUN:<block ref="44e0b47a6df5bd39730c8ec6359013d7" prefix=" " category="inline-code"></block></block>
-  <block id="1e7ae3480577387e1ba55438a03a4513" category="list-text">Sull'host iSCSI, eseguire nuovamente la scansione del bus scsi:<block ref="06653a48f6165608045bd55ec32d95fb" prefix=" " category="inline-code"></block></block>
   <block id="d535eedec31c0a58f698132001cbc9bb" category="paragraph">I percorsi rimossi sono i percorsi dei nodi FC.</block>
   <block id="a3100bf3334206028c894a5568ddcf09" category="summary">Descrive nuove funzionalità, note sull'aggiornamento, problemi risolti, limitazioni note e problemi noti.</block>
   <block id="1749d12df3df2319d3eee218a277ff83" category="doc">MetroCluster</block>
@@ -6450,7 +6441,6 @@
   <block id="1249ce19ef6180e143506b5287be8a7a" category="list-text">icmp</block>
   <block id="19928e39d24e38d1c9928b94667fa5d5" category="list-text">barra di navigazione</block>
   <block id="96f9963e25520a9011c82401920794f0" category="list-text">snmp</block>
-  <block id="40e7c640678c064d478e2a07e47eb68a" category="list-text">telnet + è possibile verificare se un protocollo specifico è attivato o disattivato utilizzando<block ref="78ffae24f50d1763051c5834f1e24a95" prefix=" " category="inline-code"></block> comando.</block>
   <block id="9d05079a491a98497153e953bbaddaa4" category="list-text">Se si attiva SNMP, è necessario eseguire anche il comando Set SNMP Enabled (Imposta SNMP attivato):</block>
   <block id="944957367bcbba5f885d8dc885354148" category="paragraph"><block ref="27009b25568d408f9f05d4ea68455493" prefix="" category="inline-code"></block></block>
   <block id="2773e82b500feb0530b8577db9c276d7" category="paragraph">SNMP è l'unico protocollo che richiede un comando di abilitazione separato.</block>
@@ -6903,7 +6893,6 @@
   <block id="b29b8c83f7d8c55b39ae87067330f426" category="list-text">[[step3-cable-each-bridge]]collegare ciascun bridge ai moduli controller:</block>
   <block id="4422c879aa9ea654583488de1d4d4e82" category="list-text">Collegare la porta FC 1 del bridge a una porta FC sul modulo controller in cluster_A.</block>
   <block id="db0e7a22facf5e7460258a2022b5e9d5" category="list-text">Collegare la porta FC 2 del bridge a una porta FC sul modulo controller in cluster_B.</block>
-  <block id="b952b3eddebea29b6169cd5bd56a3bc5" category="paragraph">Se il modulo controller è configurato con un adattatore FC a quattro porte, assicurarsi che gli stack di storage siano collegati a due porte FC sullo stesso ASIC. Le porte a e b condividono lo stesso ASIC, mentre le porte c e d condividono lo stesso ASIC. Non collegare uno stack di shelf alla porta a e alla porta b. Utilizzare invece la porta a e la porta c oppure la porta b e la porta d per evitare un singolo punto di errore in caso di guasto di un ASIC.</block>
   <block id="48dda5bb7b1f8b58b068fa47d9879c67" category="paragraph">Se il modulo controller è configurato con più adattatori FC, non collegare entrambe le porte bridge allo stesso adattatore. È necessario distribuire la porta FC 1 all'adattatore A e la porta FC 2 all'adattatore B per evitare un singolo punto di errore.</block>
   <block id="67d7a49e616a0e579f0506ada050a36b" category="image-alt">rete di peering del cluster</block>
   <block id="2d5ce426423eeeead4f35769cd8b1b27" category="inline-xref">Fase 3</block>
@@ -13272,4 +13261,14 @@
   <block id="6c92285fa6d3e827b198d120ea3ac674" category="inline-link-macro">qui</block>
   <block id="4992f0045a6913a2fb77a09884c4e55c" category="admonition">È possibile eseguire gli aggiornamenti dei controller elencati nella tabella riportata sopra su sistemi che eseguono ONTAP 9.12.1 o 9.11.1 utilizzando la procedura di aggiornamento manuale descritta <block ref="4254cdc4ef28ceba663ec4031c88c9dd" category="inline-link-macro-rx"></block>.</block>
   <block id="050dafe962829ef847f34f7607e36eb3" category="list-text"><block ref="050dafe962829ef847f34f7607e36eb3" category="inline-link-macro-rx"></block></block>
+  <block id="96011b4dbcd722924f3c53c7252522f8" category="list-text">Elenca le interfacce iSCSI in ONTAP per la SVM che contiene le interfacce:<block ref="3c78b9e1a9fef2eea89905b0233c19ad" prefix=" " category="inline-code"></block></block>
+  <block id="2af958a8143c65676390b5e251abe90a" category="list-text">Verificare che il<block ref="a78608714add699f555f2a66df0ee249" prefix=" " category="inline-code"></block> Il pacchetto è installato sull'host Linux. In questo modo si evita un<block ref="b0c94f1494e22d963244e235719a2582" prefix=" " category="inline-code"></block> Errore quando si esegue nuovamente la scansione dell'host Linux per i LUN appena mappati utilizzando<block ref="685ca42026debec2f3691cc5faae67d5" prefix=" " category="inline-code"></block> comando.</block>
+  <block id="f4b770b44b57fa84a8b8fc29d6c6c8bb" category="list-text">Sull'host, immettere il seguente comando per eseguire nuovamente la scansione del bus SCSI sull'host e rilevare i percorsi appena aggiunti:<block ref="9e65638d5d13acb691c4bec2ede5a483" prefix=" " category="inline-code"></block></block>
+  <block id="d1b38e9b356895decf6917b400433e15" category="list-text">Sull'host iSCSI, eseguire nuovamente la scansione del bus SCSI:<block ref="06653a48f6165608045bd55ec32d95fb" prefix=" " category="inline-code"></block></block>
+  <block id="1f52bd2314f9805b0a0098b0f56a0dc4" category="paragraph">Potrebbe essere necessario riavviare i nodi.</block>
+  <block id="ab85fd4f549c390675df901a8ef3f78e" category="list-text">Creazione di interfacce FC LIFS/su nodi IP per tutte le SVM SAN. In alternativa, verificare che i WWPN delle LIF FC appena create siano registrati nello switch FC SAN</block>
+  <block id="cbabd53b8268cb963ad7b2c67de0b634" category="paragraph">Poiché i LUN sono riportati solo sulle interfacce dei nodi FC MetroCluster, il client mostra solo i percorsi sui nodi FC. Ciò è visibile nell'output di<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block> e.<block ref="2fbf63deae0938cf669e6ca451f1eb2c" prefix=" " category="inline-code"></block> comandi.</block>
+  <block id="7162464dfaefdef75b18029dcb1bb1f1" category="list-text">Eseguire nuovamente la scansione del bus SCSI sull'host per rilevare i percorsi appena aggiunti:<block ref="9e65638d5d13acb691c4bec2ede5a483" prefix=" " category="inline-code"></block></block>
+  <block id="9b3bd2afae038f8967e9373560a3b6d2" category="list-text">Eseguire nuovamente la scansione del bus SCSI sul client:<block ref="06653a48f6165608045bd55ec32d95fb" prefix=" " category="inline-code"></block></block>
+  <block id="77139d079fd912afd88e4ca7f5623393" category="paragraph">Se il modulo controller è configurato con un adattatore FC a quattro porte, verificare che gli stack di storage non siano collegati a due porte FC sullo stesso ASIC. Le porte a e b condividono lo stesso ASIC, mentre le porte c e d condividono lo stesso ASIC. Non collegare uno stack di shelf alla porta a e alla porta b. Utilizzare invece la porta a e la porta c oppure la porta b e la porta d per evitare un singolo punto di errore in caso di guasto di un ASIC.</block>
 </blocks>

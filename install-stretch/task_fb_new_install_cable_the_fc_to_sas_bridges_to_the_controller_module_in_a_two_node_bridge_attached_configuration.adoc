@@ -105,7 +105,7 @@ link:task_fb_new_install_cabl.html["Collegamento degli shelf di dischi ai bridge
 .. Collegare la porta FC 1 del bridge a una porta FC sul modulo controller in cluster_A.
 .. Collegare la porta FC 2 del bridge a una porta FC sul modulo controller in cluster_B.
 +
-Se il modulo controller è configurato con un adattatore FC a quattro porte, assicurarsi che gli stack di storage siano collegati a due porte FC sullo stesso ASIC. Le porte a e b condividono lo stesso ASIC, mentre le porte c e d condividono lo stesso ASIC. Non collegare uno stack di shelf alla porta a e alla porta b. Utilizzare invece la porta a e la porta c oppure la porta b e la porta d per evitare un singolo punto di errore in caso di guasto di un ASIC.
+Se il modulo controller è configurato con un adattatore FC a quattro porte, verificare che gli stack di storage non siano collegati a due porte FC sullo stesso ASIC. Le porte a e b condividono lo stesso ASIC, mentre le porte c e d condividono lo stesso ASIC. Non collegare uno stack di shelf alla porta a e alla porta b. Utilizzare invece la porta a e la porta c oppure la porta b e la porta d per evitare un singolo punto di errore in caso di guasto di un ASIC.
 
 +
 Se il modulo controller è configurato con più adattatori FC, non collegare entrambe le porte bridge allo stesso adattatore. È necessario distribuire la porta FC 1 all'adattatore A e la porta FC 2 all'adattatore B per evitare un singolo punto di errore.

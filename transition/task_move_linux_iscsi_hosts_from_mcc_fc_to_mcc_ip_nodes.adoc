@@ -56,7 +56,7 @@ vsa_1 iscsi_lf__n2_p1_ 4 iqn.2020-01.com.netapp.englab.gdl:scspr1789621001 00:02
 
 2 entries were displayed.
 ----
-. Elencare le interfacce iscsi in ONTAP per la SVM che contiene le interfacce: `iscsi interface show -vserver svm-name`
+. Elenca le interfacce iSCSI in ONTAP per la SVM che contiene le interfacce: `iscsi interface show -vserver svm-name`
 +
 [listing]
 ----
@@ -210,7 +210,8 @@ vsa_1 /vol/vsa_1_vol1/lun_linux_3 igroup_linux node_A_1-FC,node_A_2-FC,node_A_1-
 
 12 entries were displayed.
 ----
-. Sull'host, immettere il seguente comando per eseguire nuovamente la scansione del bus scsi sull'host e individuare i percorsi aggiunti di recente:``/usr/bin/rescan-scsi-bus.sh -a``
+. Verificare che il `sg3-utils` Il pacchetto è installato sull'host Linux. In questo modo si evita un `rescan-scsi-bus.sh utility not found` Errore quando si esegue nuovamente la scansione dell'host Linux per i LUN appena mappati utilizzando `rescan-scsi-bus` comando.
+. Sull'host, immettere il seguente comando per eseguire nuovamente la scansione del bus SCSI sull'host e rilevare i percorsi appena aggiunti: `/usr/bin/rescan-scsi-bus.sh -a`
 +
 [listing]
 ----
@@ -331,7 +332,8 @@ vsa_1 /vol/vsa_1_vol2/lun_linux_4   group_linux   node_A_1-IP,node_A_2-IP
 
 12 entries were displayed.
 ----
-. Sull'host iSCSI, eseguire nuovamente la scansione del bus scsi: `/usr/bin/rescan-scsi-bus.sh -r`
+. Verificare che il `sg3-utils` Il pacchetto è installato sull'host Linux. In questo modo si evita un `rescan-scsi-bus.sh utility not found` Errore quando si esegue nuovamente la scansione dell'host Linux per i LUN appena mappati utilizzando `rescan-scsi-bus` comando.
+. Sull'host iSCSI, eseguire nuovamente la scansione del bus SCSI: `/usr/bin/rescan-scsi-bus.sh -r`
 +
 I percorsi rimossi sono i percorsi dei nodi FC.
 

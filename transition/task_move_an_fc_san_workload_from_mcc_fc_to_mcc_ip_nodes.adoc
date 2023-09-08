@@ -17,9 +17,9 @@ Durante la transizione senza interruzioni da MetroCluster FC a nodi IP, è neces
 +
 .. Se necessario, sui nodi IP MetroCluster, modificare le porte FC da utilizzare per la connettività del client al linguaggio di destinazione FC.
 +
-Questo potrebbe richiedere un riavvio dei nodi.
+Potrebbe essere necessario riavviare i nodi.
 
-.. Creare interfacce/LIFS FC sui nodi IP per tutti i vserver SAN. Se si desidera, verificare che le WWPN delle nuove LIF FC siano registrate nello switch FC SAN
+.. Creazione di interfacce FC LIFS/su nodi IP per tutte le SVM SAN. In alternativa, verificare che i WWPN delle LIF FC appena create siano registrati nello switch FC SAN
 
 
 . Aggiornare la configurazione dello zoning SAN per le nuove LIF FC aggiunte sui nodi IP MetroCluster.
@@ -34,7 +34,7 @@ Per facilitare lo spostamento di volumi che contengono LUN che forniscono attiva
 A questo punto, il client dovrebbe visualizzare ed essere connesso alle interfacce FC su entrambi i nodi MetroCluster FC e MetroCluster IP. LUN e volumi sono ancora fisicamente ospitati sui nodi FC MetroCluster.
 
 +
-Poiché i LUN sono riportati solo sulle interfacce dei nodi FC MetroCluster, il client mostra solo i percorsi sui nodi FC. Questo è visibile nell'output dei comandi sanlun lun show -p e multipath -ll -d.
+Poiché i LUN sono riportati solo sulle interfacce dei nodi FC MetroCluster, il client mostra solo i percorsi sui nodi FC. Ciò è visibile nell'output di `sanlun lun show -p` e. `multipath -ll -d` comandi.
 
 +
 [listing]
@@ -117,7 +117,8 @@ vsa_1   /vol/vsa_1_vol3/lun_linux_7   igroup_linux    A_1,A_2,B_1,B_2
 
 12 entries were displayed.
 ----
-.. Eseguire nuovamente la scansione del bus scsi sull'host per rilevare i percorsi aggiunti di recente: `/usr/bin/rescan-scsi-bus.sh -a`
+.. Verificare che il `sg3-utils` Il pacchetto è installato sull'host Linux. In questo modo si evita un `rescan-scsi-bus.sh utility not found` Errore quando si esegue nuovamente la scansione dell'host Linux per i LUN appena mappati utilizzando `rescan-scsi-bus` comando.
+.. Eseguire nuovamente la scansione del bus SCSI sull'host per rilevare i percorsi appena aggiunti: `/usr/bin/rescan-scsi-bus.sh -a`
 +
 [listing]
 ----
@@ -234,7 +235,7 @@ vsa_1 /vol/vsa_1_vol2/lun_linux_4 igroup_linux B_1,B_2
 
 12 entries were displayed.
 ----
-.. Eseguire nuovamente la scansione del bus scsi sul client: `/usr/bin/rescan-scsi-bus.sh -r`
+.. Eseguire nuovamente la scansione del bus SCSI sul client: `/usr/bin/rescan-scsi-bus.sh -r`
 +
 I percorsi dai nodi MetroCluster FC vengono rimossi:
 
