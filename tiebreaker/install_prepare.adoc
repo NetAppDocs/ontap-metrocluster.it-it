@@ -1,0 +1,89 @@
+---
+permalink: tiebreaker/install_prepare.html 
+sidebar: sidebar 
+keywords: install, tiebreaker, software, monitor, capabilities, capability, cluster, storage, environment, snmp, notification, event, node, connectivity, issue, site, disaster, system, install, upgrade, upgrading, software, dependencies, dependency, package, ntp, requirements, requirements for tiebreaker, tiebreaker requirements, mysql, mariadb, autostart, database 
+summary: Il software Tiebreaker offre funzionalità di monitoraggio per un ambiente di storage in cluster. Inoltre, invia notifiche SNMP in caso di problemi di connettività del nodo e di disastri del sito. 
+---
+= Verifica dei requisiti
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il software Tiebreaker offre funzionalità di monitoraggio per un ambiente di storage in cluster. Inoltre, invia notifiche SNMP in caso di problemi di connettività del nodo e di disastri del sito.
+
+Il software Tiebreaker deve essere installato e configurato.
+
+
+
+== Requisiti software
+
+È necessario soddisfare i seguenti requisiti software, a seconda della versione di tiebreaker che si sta installando.
+
+[cols="1,1,1,2"]
+|===
+
+
+| Versione Tiebreaker ONTAP | Versioni di ONTAP supportate | Versioni Linux supportate | Requisiti Java/MariaDB 
+
+
+ a| 
+1.5
+ a| 
+ONTAP 9.8 e versioni successive
+ a| 
+* Red Hat Enterprise Linux dal 8.1 al 8.7
+
+ a| 
+Con Red Hat Enterprise Linux da 8,1 a 8,7:
+
+* MariaDB 10.x (utilizzare la versione predefinita installata utilizzando "yum install mariadb-server.x86_64")
+* OpenJDK 17, 18 o 19
+
+
+
+
+ a| 
+1,4
+ a| 
+ONTAP 9,2 e versioni successive
+ a| 
+* Red Hat Enterprise Linux dal 8.1 al 8.7
+* Red Hat Enterprise Linux da 7 a 7,9
+* CentOS da 7 a 7,9 64 bit
+
+ a| 
+Con CentOS:
+
+* MariaDB 5.5.52.x/MySQL Server 5.6x
+* 4 GB DI RAM
+* Aprire JRE 8
+
+
+Con Red Hat Enterprise Linux da 8,1 a 8,7:
+
+*MariaDB 10.x (usare la versione predefinita installata usando "yum install mariadb-server.x86_64")
+*JRE 8
+
+|===
+
+
+== Requisiti aggiuntivi
+
+È necessario essere a conoscenza dei seguenti requisiti aggiuntivi:
+
+* Il software Tiebreaker viene installato su un terzo sito, consentendo al software di distinguere tra un errore di collegamento interswitch (ISL) (quando i collegamenti tra siti sono inattivi) e un guasto del sito. Il sistema host deve soddisfare determinati requisiti prima di poter installare o aggiornare il software Tiebreaker sul computer locale per monitorare la configurazione di MetroCluster.
+* Per installare il software MetroCluster Tiebreaker e i pacchetti dipendenti, è necessario disporre dei privilegi "root".
+* È possibile utilizzare un solo monitor MetroCluster Tiebreaker per ogni configurazione MetroCluster per evitare qualsiasi conflitto con più monitor Tiebreaker.
+* Quando si seleziona l'origine NTP (Network Time Protocol) per il software Tiebreaker, è necessario utilizzare un'origine NTP locale. Il software Tiebreaker non deve utilizzare la stessa fonte dei siti MetroCluster monitorati dal software Tiebreaker.
+
+
+* Capacità del disco: 8 GB
+* Firewall:
++
+** Accesso diretto per la configurazione dei messaggi AutoSupport
+** SSH (porta 22/TCP), HTTPS (porta 443/TCP) e ping (ICMP)
+
+
+

@@ -88,14 +88,42 @@ NOTE: Verranno richiesti nome utente e password per l'account utente amministrat
       mailbox
            mediator 1.1.1.1       iqn.2012-05.local:mailbox.target.6616cd3f-9ef1-11e9-aada-00a098ccf5d8:a05e1ffb-9ef1-11e9-8f68-00a098cbca9e:1 up/up
 ....
-
-
-. Se si desidera configurare lo switchover forzato automatico di MetroCluster, eseguire il seguente comando: `metrocluster modify -allow-automatic-forced-switchover true`
+.. Verificare lo stato del dominio dell'errore di switchover non pianificato automatico (AURO):
 +
-Prima di attivare questa funzione, consultare link:concept-risks-limitations-automatic-switchover.html["Rischi e limitazioni dell'utilizzo dello switchover forzato automatico di MetroCluster"].
+`metrocluster show`
+
++
+
+NOTE: L'output di esempio riportato di seguito è valido per ONTAP 9.13.1 e versioni successive. Per ONTAP 9.12.1 e versioni precedenti, lo stato del dominio di errore AUSO dovrebbe essere `auso-on-cluster-disaster`.
+
++
+[listing]
+----
+cluster_A::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+Local: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-dr-group-disaster
+Remote: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-dr-group-disaster
+----
+
+
+. In alternativa, configurare lo switchover forzato automatico MetroCluster.
++
+È possibile utilizzare il seguente comando solo a livello di privilegi avanzati.
+
++
+
+IMPORTANT: Prima di utilizzare questo comando, rivedere la link:concept-risks-limitations-automatic-switchover.html["Rischi e limitazioni dell'utilizzo dello switchover forzato automatico di MetroCluster"].
+
++
+`metrocluster modify -allow-auto-forced-switchover true`
 
 +
 ....
-cluster_A::*> metrocluster modify -allow-automatic-forced-switchover true
+cluster_A::*> metrocluster modify -allow-auto-forced-switchover true
 ....
 

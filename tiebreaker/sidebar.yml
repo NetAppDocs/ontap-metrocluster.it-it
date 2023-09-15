@@ -2,12 +2,24 @@
 section: tiebreaker
 title: Installare e configurare MetroCluster Tiebreaker
 entries:
+- title: Novità
+  url: "/tiebreaker/whats_new.html"
 - title: Panoramica del software Tiebreaker
   url: "/tiebreaker/concept_overview_of_the_tiebreaker_software.html"
-- title: Configurare l'accesso admin a ONTAPI e SSH
-  url: "/tiebreaker/task_configure_ssh_ontapi.html"
 - title: Installare il software Tiebreaker
-  url: "/tiebreaker/task_install_the_tiebreaker_software.html"
+  entries:
+  - title: Preparazione all'installazione
+    url: "/tiebreaker/install_prepare.html"
+  - title: Configurare l'accesso admin a ONTAPI e SSH
+    url: "/tiebreaker/task_configure_ssh_ontapi.html"
+  - title: Dipendenze dell'installazione
+    url: "/tiebreaker/install_dependencies.html"
+  - title: Fissare l'installazione
+    url: "/tiebreaker/install_security.html"
+  - title: Installare il pacchetto software
+    url: "/tiebreaker/install_tiebreaker_package.html"
+  - title: Aggiornare l'host
+    url: "/tiebreaker/upgrade_host.html"
 - title: Configurare il software Tiebreaker
   url: "/tiebreaker/concept_configuring_the_tiebreaker_software.html"
 - title: Configurare le impostazioni SNMP per il software Tiebreaker
