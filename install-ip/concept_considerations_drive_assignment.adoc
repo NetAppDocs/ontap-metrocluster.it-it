@@ -11,7 +11,7 @@ summary: 'A partire da ONTAP 9.4, le configurazioni IP di MetroCluster supportan
 
 
 [role="lead"]
-A partire da ONTAP 9.4, le configurazioni IP di MetroCluster supportano nuove installazioni con sistemi AFF che utilizzano ADP (partizione avanzata dei dischi). Nella maggior parte delle configurazioni, il partizionamento e l'assegnazione dei dischi vengono eseguiti automaticamente durante la configurazione iniziale dei siti MetroCluster.
+A partire da ONTAP 9,4, le configurazioni IP di MetroCluster supportano nuove installazioni con ADP (partizione avanzata dei dischi). Nella maggior parte delle configurazioni, il partizionamento e l'assegnazione dei dischi vengono eseguiti automaticamente durante la configurazione iniziale dei siti MetroCluster.
 
 ONTAP 9.4 e versioni successive includono le seguenti modifiche per il supporto ADP:
 
@@ -306,7 +306,7 @@ Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
 |===
 
 
-=== Assegnazione di ADP e dischi sui sistemi AFF C250 e AFF A250
+=== ADP e assegnazione dei dischi su sistemi AFF C250, AFF A250 e FAS500f
 
 |===
 
@@ -624,33 +624,8 @@ Non applicabile
 
 === Assegnazione dei dischi sui sistemi FAS500f
 
-|===
+Le stesse linee guida e regole per l'assegnazione dei dischi per i sistemi AFF C250 e AFF A250 si applicano ai sistemi FAS500f. Per l'assegnazione dei dischi nei sistemi FAS500f, fare riferimento alla <<ADP_FAS500f>> tabella.
 
-
-| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
-
-
- a| 
-Numero minimo di dischi consigliati (per sito)
- a| 
-48 dischi
- a| 
-I dischi vengono assegnati automaticamente shelf-by-shelf.
- a| 
-Non applicabile
-
-
-
- a| 
-Numero minimo di dischi supportati (per sito)
- a| 
-24 dischi
- a| 
-I dischi sono divisi in quattro gruppi uguali. Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
- a| 
-Non applicabile
-
-|===
 
 
 === Assegnazione dei dischi sui sistemi FAS9000

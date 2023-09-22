@@ -11883,7 +11883,6 @@
   <block id="7507e31e7c001014454813d7b49c44bb" category="paragraph">L'aggregato interessato deve avere uno stato RAID di "risyncing", come mostrato nell'esempio seguente:</block>
   <block id="ec88ce5186c357a0bc7a0b6036c98881" category="paragraph">L'aggregato interessato deve avere uno stato RAID "normale", come mostrato nell'esempio seguente:</block>
   <block id="8bcabb3e778663882c95082b775c75b8" category="summary">A partire da ONTAP 9.4, le configurazioni IP di MetroCluster supportano nuove installazioni con sistemi AFF che utilizzano ADP (partizione avanzata dei dischi).</block>
-  <block id="3299ba9863a06ef7650cf2bb56d8651c" category="paragraph">A partire da ONTAP 9.4, le configurazioni IP di MetroCluster supportano nuove installazioni con sistemi AFF che utilizzano ADP (partizione avanzata dei dischi). Nella maggior parte delle configurazioni, il partizionamento e l'assegnazione dei dischi vengono eseguiti automaticamente durante la configurazione iniziale dei siti MetroCluster.</block>
   <block id="6789cbf331ef2c9b50d45082c81e74cb" category="paragraph">ONTAP 9.4 e versioni successive includono le seguenti modifiche per il supporto ADP:</block>
   <block id="a4a9824ba125eba903fb3d347f4f5eb6" category="list-text">Le assegnazioni dei dischi pool 0 vengono eseguite in fabbrica.</block>
   <block id="a1fbd6da7a08fa8c0a2a6b92a3b0a9c5" category="list-text">La root senza mirror viene creata in fabbrica.</block>
@@ -11996,7 +11995,6 @@
   <block id="36a6b2d82f1c99925006210a57878b24" category="list-text">D4:pool Node_B_2 1</block>
   <block id="6ecbc3bbbc5acac0e3a1eaa928b0ef3a" category="list-text">Due partizioni per i dati</block>
   <block id="f85af53e3d7c278ec6cd756cf3365359" category="list-text">Nessun ricambio</block>
-  <block id="cab91f7159880630a5bee29aa55d9f8a" category="section-title">Assegnazione di ADP e dischi sui sistemi AFF C250 e AFF A250</block>
   <block id="3e0a52646b307379f47860044c088d60" category="paragraph">I dischi su ogni shelf esterno sono divisi in due gruppi uguali (metà). Ogni half-shelf viene assegnato automaticamente a un pool separato.</block>
   <block id="f3a88820bdb6aec9f587dc31d6c8d2a5" category="paragraph">Le partizioni su ogni shelf vengono utilizzate per creare l'aggregato root. L'aggregato root include le seguenti partizioni in ogni plex:</block>
   <block id="203589fdbad6f6dc48cf251ed51e812a" category="list-text">Nessuna partizione di riserva</block>
@@ -13292,7 +13290,6 @@
   <block id="4b0a6058e6a6f2eafcc1db1a3a9573fb" category="paragraph">È necessario essere a conoscenza dei seguenti requisiti aggiuntivi:</block>
   <block id="64f896c377dcdc9e0d5ae4809d1c3a73" category="list-text">Quando si seleziona l'origine NTP (Network Time Protocol) per il software Tiebreaker, è necessario utilizzare un'origine NTP locale. Il software Tiebreaker non deve utilizzare la stessa fonte dei siti MetroCluster monitorati dal software Tiebreaker.</block>
   <block id="490414e0366b091220802d406e52c076" category="doc">Novità</block>
-  <block id="f68e01d366d2b521019205564511ae77" category="paragraph">Ogni release include miglioramenti al Tiebreaker MetroCluster. Ecco le novità delle ultime versioni di MetroCluster Tiebreaker.</block>
   <block id="c1748037d10cffabb8e95e4ccf77c613" category="section-title">Miglioramenti</block>
   <block id="6a2fab1a92eaec5f3c3d9b2d28d580c4" category="list-text">Aggiornamento delle librerie di supporto</block>
   <block id="5f6c185eb38c56187fc699dfbe62654b" category="list-text">Miglioramenti della sicurezza</block>
@@ -13318,4 +13315,8 @@
   <block id="9adb8eb34f7ed5a25405fe6af3b01c0a" category="sidebar">Fissare l'installazione</block>
   <block id="357559d73c5bb22e54ab3aeafca1013b" category="sidebar">Installare il pacchetto software</block>
   <block id="3689ab983cde586722e4881cdbf1822a" category="sidebar">Aggiornare l'host</block>
+  <block id="3a234e68f5d62ce2d6b3d068c61605c3" category="paragraph">Ogni versione include miglioramenti al software MetroCluster Tiebreaker. Ecco le novità delle ultime versioni di MetroCluster Tiebreaker.</block>
+  <block id="5801d3e28a980df8d84e60a3eea8469c" category="paragraph">A partire da ONTAP 9,4, le configurazioni IP di MetroCluster supportano nuove installazioni con ADP (partizione avanzata dei dischi). Nella maggior parte delle configurazioni, il partizionamento e l'assegnazione dei dischi vengono eseguiti automaticamente durante la configurazione iniziale dei siti MetroCluster.</block>
+  <block id="e6ca378bbb6d15fd110961cea50b2eb0" category="section-title">ADP e assegnazione dei dischi su sistemi AFF C250, AFF A250 e FAS500f</block>
+  <block id="91d96627fcbee13a9d474587060d13f8" category="paragraph">Le stesse linee guida e regole per l'assegnazione dei dischi per i sistemi AFF C250 e AFF A250 si applicano ai sistemi FAS500f. Per l'assegnazione dei dischi nei sistemi FAS500f, fare riferimento alla <block ref="62481755a241b3efc5c68e4e7dd00bb5" category="inline-xref-macro-rx"></block> tabella.</block>
 </blocks>
