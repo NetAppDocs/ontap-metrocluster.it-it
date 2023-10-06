@@ -866,3 +866,44 @@ IP_switch_A_1# reload
 ----
 . Ripetere i passaggi precedenti sugli altri tre switch nella configurazione IP MetroCluster.
 
+
+
+
+== Disattivare le porte e i canali delle porte ISL non utilizzati
+
+NetApp consiglia di disattivare le porte ISL e i canali delle porte inutilizzati per evitare avvisi di integrità non necessari.
+
+. Identificare le porte ISL e i canali delle porte non utilizzati utilizzando il banner del file RCF:
++
+
+NOTE: Se la porta è in modalità breakout, il nome della porta specificato nel comando potrebbe essere diverso dal nome indicato nell'intestazione RCF. È inoltre possibile utilizzare i file di cablaggio RCF per individuare il nome della porta.
+
++
+[role="tabbed-block"]
+====
+.Per informazioni dettagliate sulla porta ISL
+--
+Eseguire il comando `show port all`.
+
+--
+.Per i dettagli del canale della porta
+--
+Eseguire il comando `show port-channel all`.
+
+--
+====
+. Disattivare le porte ISL e i canali delle porte non utilizzati.
++
+È necessario eseguire i seguenti comandi per ogni porta o canale di porta non utilizzato identificato.
+
++
+[listing]
+----
+(SwtichA_1)> enable
+(SwtichA_1)# configure
+(SwtichA_1)(Config)# <port_name>
+(SwtichA_1)(Interface 0/15)# shutdown
+(SwtichA_1)(Interface 0/15)# end
+(SwtichA_1)# write memory
+----
+

@@ -1,0 +1,110 @@
+---
+permalink: maintain/task_change_an_fc_switch.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, change, fc, switch 
+summary: 'Potrebbe essere necessario cambiare il vendor di uno switch FC (da Cisco a Brocade o viceversa), cambiare il modello dello switch o entrambe le cose.' 
+---
+= Modificare il vendor o il modello di uno switch FC
+:allow-uri-read: 
+
+
+[role="lead"]
+Potrebbe essere necessario cambiare il vendor di uno switch FC da Cisco a Brocade o viceversa, modificare il modello dello switch o entrambi.
+
+.A proposito di questa attività
+* Questa procedura si applica quando si utilizzano interruttori convalidati NetApp.
+* È necessario eseguire i passaggi di questa procedura su un tessuto alla volta, per entrambi i fabric nella configurazione.
+
+
+.Fasi
+. [[step_1,Step 1]]controllare lo stato della configurazione.
++
+.. Verificare che MetroCluster sia configurato e in modalità normale su ciascun cluster: `*metrocluster show*`
++
+[listing]
+----
+cluster_A::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+Remote: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+----
+.. Verificare che il mirroring sia attivato su ciascun nodo: `*metrocluster node show*`
++
+[listing]
+----
+cluster_A::> metrocluster node show
+DR                           Configuration  DR
+Group Cluster Node           State          Mirroring Mode
+----- ------- -------------- -------------- --------- --------------------
+1     cluster_A
+              node_A_1       configured     enabled   normal
+      cluster_B
+              node_B_1       configured     enabled   normal
+2 entries were displayed.
+----
+.. Verificare che i componenti di MetroCluster siano in buone condizioni: `*metrocluster check run*`
++
+[listing]
+----
+cluster_A::> metrocluster check run
+
+Last Checked On: 10/1/2014 16:03:37
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          ok
+4 entries were displayed.
+
+Command completed. Use the "metrocluster check show -instance" command or sub-commands in "metrocluster check" directory for detailed results.
+To check if the nodes are ready to do a switchover or switchback operation, run "metrocluster switchover -simulate" or "metrocluster switchback -simulate", respectively.
+----
+.. Verificare che non siano presenti avvisi sullo stato di salute: `*system health alert show*`
+
+
+. Configurare il nuovo switch prima dell'installazione.
++
+Seguire la procedura descritta in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/task_reset_the_brocade_fc_switch_to_factory_defaults.html["Configurare gli switch FC"].
+
+. Scollegare i collegamenti dal vecchio interruttore staccando i collegamenti nell'ordine seguente:
++
+.. Se le interfacce del cluster locale sono collegate a uno switch:
++
+... Scollegare le interfacce del cluster locale
+... Disconnettere gli ISL del cluster locale
+
+
+.. Scollegare le interfacce IP di MetroCluster.
+.. Scollegare gli ISL MetroCluster.
+
+
+. Spegnere il vecchio interruttore, rimuovere i cavi e sostituire fisicamente il vecchio interruttore con il nuovo.
+. Collegare gli interruttori nel seguente ordine:
++
+È necessario seguire la procedura descritta in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/task_rack_the_hardware_components_mcc_fabric_and_ip.html["Installare e cablare i componenti dell'MetroCluster"].
+
++
+.. Collegare gli ISL al sito remoto.
+.. Collegare le interfacce IP di MetroCluster.
+.. Collegare le interfacce del cluster locale.
++
+Se le interfacce del cluster locale sono collegate a uno switch:
+
++
+... Collegare le interfacce del cluster locale.
+... Collegare via cavo gli ISL del cluster locale.
+
+
+
+
+. Accendere l'interruttore.
+. Verificare che la configurazione di MetroCluster sia corretta ripetendo la configurazione <<Fase 1>>.
+. Ripetere i passaggi da 1 a 7 per il secondo fabric nella configurazione.
+

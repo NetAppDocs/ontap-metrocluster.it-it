@@ -586,3 +586,32 @@ IP_switch_A_1# copy running-config startup-config
 
 . Ripetere il passaggio precedente sugli altri tre switch della configurazione IP MetroCluster.
 
+
+
+
+== Disattivare le porte e i canali delle porte ISL non utilizzati
+
+NetApp consiglia di disattivare le porte ISL e i canali delle porte inutilizzati per evitare avvisi di integrità non necessari.
+
+. Identificare le porte ISL e i canali delle porte non utilizzati:
++
+`show interface brief`
+
+. Disattivare le porte ISL e i canali delle porte non utilizzati.
++
+È necessario eseguire i seguenti comandi per ogni porta o canale di porta non utilizzato identificato.
+
++
+[listing]
+----
+SwitchA_1# config t
+Enter configuration commands, one per line. End with CNTL/Z.
+SwitchA_1(config)# int Eth1/14
+SwitchA_1(config-if)# shutdown
+SwitchA_12(config-if)# exit
+SwitchA_1(config-if)# copy running-config startup-config
+[########################################] 100%
+Copy complete, now saving to disk (please wait)...
+Copy complete.
+----
+
