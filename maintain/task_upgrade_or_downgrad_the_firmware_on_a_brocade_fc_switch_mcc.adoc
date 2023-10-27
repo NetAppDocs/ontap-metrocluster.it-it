@@ -25,6 +25,8 @@ Per aggiornare o eseguire il downgrade del firmware su uno switch Brocade FC, è
 
 Il fabric dello switch viene disattivato durante un aggiornamento o un downgrade del firmware e la configurazione MetroCluster si basa sul secondo fabric per continuare a funzionare.
 
+A partire da Fabric OS 9,0.1, SNMPv2 non è supportato dagli switch Brocade. Se esegui l'upgrade a Fabric OS 9.0.1 o versione successiva, devi utilizzare SNMPv3 per il monitoraggio dello stato di salute. Per ulteriori informazioni, vedere link:../install-fc/concept_configure_the_mcc_software_in_ontap.html#configuring-snmpv3-in-a-metrocluster-configuration["Configurazione di SNMPv3 in una configurazione MetroCluster"].
+
 Questa attività deve essere eseguita su ciascuno switch fabric in successione in modo che tutti gli switch eseguano la stessa versione del firmware.
 
 
