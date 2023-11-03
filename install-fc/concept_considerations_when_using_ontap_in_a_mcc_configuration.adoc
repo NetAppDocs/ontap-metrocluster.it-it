@@ -24,19 +24,6 @@ Quando si utilizza ONTAP in una configurazione MetroCluster, è necessario tener
 
 
 
-== Operazioni MetroCluster in Gestore di sistema ONTAP
-
-A seconda della versione di ONTAP in uso, è possibile eseguire alcune operazioni specifiche di MetroCluster utilizzando Gestione di sistema di ONTAP.
-
-* Switchover e switchback nelle configurazioni MetroCluster IP (a partire da ONTAP 9.7).
-* Provisioning e crescita degli aggregati mirrorati nelle configurazioni IP di MetroCluster (a partire da ONTAP 9.8).
-+
-Gli aggregati senza mirror non sono supportati in System Manager.
-
-
-
-
-
 == Supporto di FlexCache in una configurazione MetroCluster
 
 A partire da ONTAP 9.7, i volumi FlexCache sono supportati nelle configurazioni MetroCluster. È necessario conoscere i requisiti per l'abrogazione manuale dopo le operazioni di switchover o switchback.
