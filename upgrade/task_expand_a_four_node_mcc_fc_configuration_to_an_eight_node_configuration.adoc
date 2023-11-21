@@ -44,10 +44,11 @@ La seguente tabella mostra le combinazioni di piattaforme supportate per le conf
 
 [IMPORTANT]
 ====
+* Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, se si dispone di una configurazione a otto nodi, tutti e otto i nodi devono utilizzare la stessa versione di ONTAP.
 * Le combinazioni di questa tabella si applicano solo alle configurazioni a otto nodi regolari o permanenti.
 * Le combinazioni di piattaforme in questa tabella *non* si applicano se si utilizzano le procedure di transizione o aggiornamento.
 * Tutti i nodi di un gruppo di DR devono essere dello stesso tipo e configurazione.
 
 
 ====
-image::../media/8node_comb_fc.png[Combinazioni di piattaforme per configurazioni a 8 nodi]
+image::../media/8node_comb_fc_914.png[Combinazioni di piattaforme per configurazioni a 8 nodi]

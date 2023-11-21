@@ -1334,6 +1334,9 @@ Riassegnare i dischi aggregati root al nuovo modulo controller, utilizzando i si
 .A proposito di questa attività
 Questi passaggi vengono eseguiti in modalità manutenzione.
 
+
+NOTE: I dischi aggregati root sono gli unici dischi che devono essere riassegnati durante il processo di upgrade dei controller. La proprietà del disco degli aggregati di dati viene gestita come parte dell'operazione di switchover/switchback.
+
 .Fasi
 . Avviare il sistema in modalità di manutenzione:
 +

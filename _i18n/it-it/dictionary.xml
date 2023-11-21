@@ -833,7 +833,6 @@
   <block id="af90c7c33f97cc152b46f35af11f2720" category="summary">La procedura di refresh utilizzata dipende dal modello di piattaforma, dall'ambito dell'aggiornamento e dal tipo di configurazione MetroCluster.</block>
   <block id="3cdc2ade26b9bc4adc9df14235e19c7e" category="paragraph">La procedura di refresh del sistema utilizzata dipende dal modello di piattaforma e dal tipo di configurazione MetroCluster. Le procedure di refresh si applicano ai controller e agli shelf di storage. Nelle procedure di refresh, nuovi controller e shelf vengono aggiunti alla configurazione di MetroCluster, creando un secondo gruppo di DR e quindi i dati vengono migrati senza interruzioni nei nuovi nodi. I controller originali vengono quindi ritirati.</block>
   <block id="d0b28fd083b63a9e12330f486ca47625" category="section-title">Combinazioni di aggiornamento tecnico FC MetroCluster supportate</block>
-  <block id="88ea8505ba0420be98c64dcb7f91e23c" category="image-alt">aggiornamento tecnico di MetroCluster fc</block>
   <block id="338b3842cbe6f0ae991509f38e7d0cca" category="list-text">È necessario completare la procedura di aggiornamento tecnico prima di aggiungere un nuovo carico.</block>
   <block id="cfd1300cd3db131e8f69dc38177b5658" category="section-title">Combinazioni di aggiornamento tecnico MetroCluster IP supportate</block>
   <block id="0fa55a9001a26a5414307fd992cd4661" category="image-alt">Combinazioni di aggiornamento tecnico IP di MetroCluster</block>
@@ -4821,7 +4820,6 @@
   <block id="2687b88898e3642fcc69aaef6be8e73c" category="paragraph">Quando si passa a una configurazione MetroCluster IP, è necessario disporre di una combinazione di modelli di piattaforma supportati. È inoltre necessario assicurarsi che la piattaforma IP di MetroCluster sia delle dimensioni appropriate per il carico che si sta passando dalla configurazione FC di MetroCluster alla configurazione IP di MetroCluster.</block>
   <block id="d9599a6265b31306f6c79d760a47a9aa" category="paragraph">La seguente tabella mostra le combinazioni di piattaforme supportate. È possibile passare da piattaforme nella colonna di sinistra a piattaforme elencate come supportate nelle colonne a destra, come indicato dalle celle colorate della tabella.</block>
   <block id="1799408ec992ed3e5561f7b04ccef0fe" category="paragraph">Ad esempio, è supportata la transizione da una configurazione MetroCluster FC costituita da moduli controller AFF8060 a una configurazione IP costituita da moduli controller AFF A400.</block>
-  <block id="6dc537d2cf87cd236dd75c2694edbea6" category="image-alt">matrice di transizione MetroCluster fc ip yellowdogp1</block>
   <block id="421c8863e1f7223f216aacf99393b7dd" category="list-text">Nota 1: Questa combinazione di piattaforme richiede ONTAP 9.11.1 o versione successiva.</block>
   <block id="cbfda5b02caeddc103ebee1baa66d92c" category="list-text">Nota 2: È necessario disporre di un'interfaccia da 40 GbE per le interfacce cluster locali sui nodi FC. Questa combinazione di piattaforme richiede ONTAP 9.12.1 o versione successiva.</block>
   <block id="55b44ccf6250ba590ce25f63cea8e958" category="list-text">Nota 3: È necessario disporre di un'interfaccia 100GbE per le interfacce cluster locali sui nodi FC. Questa combinazione di piattaforme richiede ONTAP 9.12.1 o versione successiva.</block>
@@ -4848,9 +4846,6 @@
   <block id="8435af9be97e0c50b0d730d64b42f198" category="paragraph"><block ref="8435af9be97e0c50b0d730d64b42f198" category="inline-link-macro-rx"></block></block>
   <block id="4bc2f58697bbe4a9e2718e615c7c46b8" category="paragraph">I vecchi shelf di storage non sono supportati sulle nuove piattaforme. I vecchi shelf di storage devono essere ritirati.</block>
   <block id="f7080628c8d078c209fb6b6b18f03a3a" category="paragraph"><block ref="f7080628c8d078c209fb6b6b18f03a3a" category="inline-link-macro-rx"></block></block>
-  <block id="2abcc8e487f56251cd49b5a74738c4c4" category="section-title">Passa a una configurazione di switch condiviso Cisco 9336C-FX2</block>
-  <block id="f8e0758b3af85da8f282b95e41204586" category="paragraph">La transizione a una configurazione di switch condivisa Cisco 9336C-FX2 non è supportata. Una _configurazione dello switch condiviso_ è una configurazione in cui gli switch forniscono sia le connessioni MetroCluster che le connessioni dello shelf di storage.</block>
-  <block id="1a0ece25400c2d4c0b3a063a4d9d1aad" category="paragraph">Sono supportate le configurazioni in cui lo switch Cisco 9336C-FX2 fornisce solo le connessioni MetroCluster.</block>
   <block id="80161bd3062933aab7f174ce293237dc" category="summary">Dopo aver esaminato tutti i requisiti e aver preparato la transizione, esegui la procedura di transizione. È necessario eseguire ciascuna attività in ordine, completando tutte le fasi di ciascuna attività prima di passare alla successiva. Non collegare i nuovi controller o shelf di storage alla configurazione esistente fino a quando non viene richiesto.</block>
   <block id="96ff13f92c4ce7113cad61adcc09704f" category="doc">Spostare le connessioni del cluster locale</block>
   <block id="68ca4c8699281e1858977752c796cd45" category="paragraph">È necessario spostare le interfacce del cluster della configurazione MetroCluster FC sugli switch IP.</block>
@@ -10931,25 +10926,13 @@
   <block id="54744df94a6fdb7104348dee41697c48" category="summary">L'utilizzo della porta in una configurazione IP MetroCluster dipende dal modello dello switch e dal tipo di piattaforma.</block>
   <block id="91fda6ec6c364088ae4a9e6553b26f99" category="doc">Assegnazioni delle porte della piattaforma per gli switch IP SN2100 supportati da NVIDIA</block>
   <block id="1f0b82560627b660c6c6958a1df834b8" category="section-title">Configurazioni supportate</block>
-  <block id="5b7679ef32240286811b416ba05c54c1" category="paragraph">Attualmente sono supportate le seguenti piattaforme:</block>
-  <block id="c977cafedb40d70c2be8514107ee4747" category="list-text">FAS500f / AFF C250 / AFF A250</block>
-  <block id="fc6e488d651b33ef6c6b35c501a7495f" category="list-text">FAS8300/AFF C400/AFF A400</block>
-  <block id="4c744d90883c4aab83c5469643da24c7" category="list-text">FAS9000/AFF A700</block>
-  <block id="297b6e0ce5945c15596f1be2b7ce0585" category="list-text">AFF C800/AFF A800</block>
-  <block id="0434950fcf46c88299084ad712ed62cc" category="list-text">FAS9500/AFF A900</block>
-  <block id="b6db688996a59c9dcd63d8adb538f928" category="paragraph">Le seguenti piattaforme e configurazioni non sono attualmente supportate:</block>
   <block id="570a8334b13f037157ca46f8cbbf662b" category="list-text">Transizione MetroCluster FC-IP</block>
-  <block id="67ce3d63d94102f7ff725a6564099821" category="list-text">Una configurazione MetroCluster a otto nodi</block>
   <block id="c938b5cfd075c2f653372f886805b37a" category="paragraph-title">Esaminare queste considerazioni prima di utilizzare le tabelle di configurazione</block>
   <block id="5aa692c4552b821f69bb151f7aa0f216" category="paragraph">Se si utilizzano più configurazioni MetroCluster, seguire la tabella corrispondente. Ad esempio:</block>
   <block id="8e65b308ba381d7e7d885330e749b55d" category="list-text">Se si utilizzano due configurazioni MetroCluster a quattro nodi di tipo AFF A700, collegare il primo MetroCluster indicato come "MetroCluster 1" e il secondo MetroCluster indicato come "MetroCluster 2" nella tabella AFF A700.</block>
   <block id="e5c3d25338f9cf52b0644af8df5dd491" category="admonition">Le porte 13 e 14 possono essere utilizzate in modalità di velocità nativa che supporta 40 Gbps e 100 Gbps o in modalità breakout per supportare 4 × 25 Gbps o 4 × 10 Gbps. Se utilizzano la modalità di velocità nativa, vengono rappresentate come porte 13 e 14. Se utilizzano la modalità breakout, 4 × 25 Gbps o 4 × 10 Gbps, vengono rappresentate come porte 13s0-3 e 14s0-3.</block>
   <block id="0322de073946db807daed13f93e7bba6" category="inline-link">RcfFileGenerator</block>
   <block id="10fe94c98083f4e751ef035d96910a62" category="paragraph">Le sezioni seguenti descrivono il cablaggio fisico. Fare riferimento anche alla<block ref="c52b4d12f68853a25c52576697c6b2b5" category="inline-link-rx"></block> per informazioni dettagliate sul cablaggio.</block>
-  <block id="1ad95d38a718a40f57a452228a018366" category="section-title">Utilizzo della porta dello switch per FAS500f, AFF C250 o AFF A250</block>
-  <block id="32749c9f2fe889b20a4f9ed309297f2b" category="image-alt">mcc ip Cabining A250 C250 MSN2100</block>
-  <block id="bf63be372af426fed8556dc915b7ccb6" category="section-title">Utilizzo della porta dello switch per AFF C400, AFF A400, AFF A700, FAS9000, FAS8300, FAS8700, AFF A800, FAS9500 o AFF A900</block>
-  <block id="6f71608a9b02340c422ff3d643b4afd7" category="image-alt">mcc ip Cabining aff250 400 700 800 cseriMSN2100</block>
   <block id="fdf0e783eca74a7abe3d6795a4f8efc9" category="doc">Considerazioni per gli aggregati senza mirror</block>
   <block id="8e1b87e111c6a25dd28266989f14eb98" category="paragraph">Il volume di metadati del servizio di replica della configurazione (CRS) e i volumi radice SVM dei dati devono trovarsi su un aggregato mirrorato. Non è possibile spostare questi volumi in aggregato senza mirror. Se si trovano su aggregato senza mirror, le operazioni di switchover e switchback negoziate vengono vetoed. In questo caso, il comando` MetroCluster check` visualizza un avviso.</block>
   <block id="a63e8da5ab0d323dfa2d8c1590db4fed" category="paragraph">A seconda della versione di ONTAP in uso, è necessario configurare le LIF di peering BGP nel nodo SVM, non nel sistema o nei dati SVM. Nel 9.8, le LIF BGP sono visibili nella SVM del cluster (sistema) e le SVM del nodo non sono più presenti.</block>
@@ -11025,19 +11008,13 @@
   <block id="bbea4b02ce438e1ae0146e4c5cabb671" category="list-text">Le seguenti tabelle mostrano l'utilizzo della porta per il sito A. Lo stesso cablaggio viene utilizzato per il sito B.</block>
   <block id="f57f407b5a71435a3bd46aac8befd7b8" category="list-text">Gli switch non possono essere configurati con porte di velocità diverse (ad esempio, una combinazione di porte da 100 Gbps e porte da 40 Gbps).</block>
   <block id="c57a7dcc596f78ac23d59a9297d99a56" category="list-text">Se si configura un singolo MetroCluster con gli switch, utilizzare il gruppo di porte *MetroCluster 1*.</block>
-  <block id="33fe8d1e8f8aa1d0b52b4b3a25fc436c" category="paragraph">Tenere traccia del gruppo di porte MetroCluster (MetroCluster 1, MetroCluster 2 o MetroCluster 3). Sarà necessario quando si utilizza lo strumento RcfFileGenerator come descritto più avanti in questa procedura di configurazione.</block>
   <block id="240c641ec7d44f443373981bb513fa5c" category="list-text">RcfFileGenerator per MetroCluster IP fornisce anche una panoramica del cablaggio per porta per ogni switch.</block>
   <block id="e13e5f806fc6cae09bcb9fed7eecf125" category="paragraph">Utilizzare questa panoramica dei cavi per verificare il cablaggio.</block>
   <block id="9ae436c3a98ee403124b8482b69c2296" category="section-title">Collegamento di due configurazioni MetroCluster agli switch</block>
   <block id="0995dd589b8b5229e4b9e28862db9b91" category="paragraph">Quando si collegano più configurazioni MetroCluster a uno switch Cisco 3132Q-V, è necessario collegare ciascun MetroCluster in base alla tabella appropriata. Ad esempio, se si collegano FAS2750 e AFF A700 allo stesso switch Cisco 3132Q-V. Quindi, collegare il cavo FAS2750 come da "MetroCluster 1" nella Tabella 1 e il cavo AFF A700 come da "MetroCluster 2" o "MetroCluster 3" nella Tabella 2. Non è possibile collegare fisicamente FAS2750 e AFF A700 come "MetroCluster 1".</block>
-  <block id="014322233c716b51b659a375ee0b236f" category="section-title">Collegamento di un AFF A150, FAS2750, AFF A220, FAS500f, AFF C250 o AFF A250 a uno switch Cisco 3232C o Cisco 9336-FX2C</block>
   <block id="b1ae03d0492f9071184bcc685e4d9008" category="image-alt">cablaggio ip mcc a150 a220 a250 a uno switch cisco 3232c o cisco 9336c</block>
-  <block id="f4a4caf899825065a94a65355e7134d1" category="section-title">Collegamento di un FAS8200 o un AFF A300 a uno switch Cisco 3232C o Cisco 9336C</block>
   <block id="08c525f5d86974627253ff3c6ab1498f" category="image-alt">mcc ip che consente di collegare un AFF a300 o fas8200 a uno switch cisco 3232c o cisco 9336c</block>
-  <block id="03a4a17b1eab01f0b74373b2d602b107" category="section-title">Cablaggio di AFF A320, FAS8300, AFF C400, AFF A400, FAS8700, FAS9000, AFF A700, AFF C800, AFF A800, FAS9500 o AFF A900</block>
   <block id="cf6033c90446afb2f2e4bf0a87384e97" category="image-alt">mcc ip Cabing a320 a400 a700 a800 a900 switch cisco 3232C o 9336c</block>
-  <block id="354182992aa934a6b659ad8284efa43c" category="section-title">Cablaggio di AFF A320, AFF C400, AFF A400, AFF A700, AFF C800, Oppure AFF A800 a uno switch condiviso Cisco 9336C-FX2</block>
-  <block id="c6e46da968a03eccf97571ae7315a6ce" category="image-alt">cablaggio ip mcc da AFF a320 c400 a400 a700 c800 a800 a switch condiviso cisco 9336c rivisto</block>
   <block id="e52e46b2e9a285a92c4fb276c84c544e" category="summary">È necessario configurare gli switch IP NVIDIA per l'utilizzo come interconnessione del cluster e per la connettività IP MetroCluster back-end.</block>
   <block id="12dfda519b07b8627c017865df4388a6" category="doc">Configurare lo switch NVIDIA IP SN2100</block>
   <block id="056bd4ccfa99eecc32b7151072832cb7" category="paragraph">È necessario configurare gli switch IP NVIDIA SN2100 per l'utilizzo come interconnessione del cluster e per la connettività IP MetroCluster back-end.</block>
@@ -11095,32 +11072,14 @@
   <block id="59c778d760eb930375b77337b3ee45b9" category="list-text">Eseguire il file RCF. Il file RCF richiede un'opzione per applicare uno o più passaggi. Se non richiesto dal supporto tecnico, eseguire il file RCF senza l'opzione della riga di comando. Per verificare lo stato di completamento delle varie fasi del file RCF, utilizzare l'opzione '-1' o 'all' per applicare tutte le fasi (in sospeso).</block>
   <block id="3e7d7088000e9b3208b36b1397763f5e" category="doc">Assegnazioni delle porte della piattaforma per gli switch IP BES-53248 supportati da Broadcom</block>
   <block id="70797c25b23e4d3313107866a946ef86" category="paragraph">Gli switch non possono essere utilizzati con porte ISL remote di velocità diverse (ad esempio, una porta da 25 Gbps collegata a una porta ISL da 10 Gbps).</block>
-  <block id="1ea1224e95806d38188ac2833eef5d68" category="list-title">Note per le tabelle seguenti:</block>
-  <block id="84d5df4bc00912b5bf41517f871849dc" category="list-text">Per alcune piattaforme, è possibile utilizzare le porte 49 - 54 per le connessioni di interfaccia MetroCluster o MetroCluster.</block>
-  <block id="141c241c09745923a907fa0b44d6fdc2" category="paragraph">Queste porte richiedono una licenza aggiuntiva.</block>
-  <block id="bf9729690d4b6a4daedabf36c5b5ec8c" category="list-text">È possibile collegare allo switch solo un singolo MetroCluster a quattro nodi con sistemi AFF A320.</block>
-  <block id="c7ecc9ce844e9f4491596826d0847864" category="paragraph">Le funzionalità che richiedono un cluster con switch non sono supportate in questa configurazione, incluse le procedure di transizione da MetroCluster FC a IP e di aggiornamento tecnico.</block>
   <block id="101ffe4f466417c1ce75564d3cc0a3b6" category="list-text">I sistemi AFF A320 configurati con switch Broadcom BES-53248 potrebbero non supportare tutte le funzioni.</block>
   <block id="cc1b37b4c1dcf92c7509c109eb4c4d7d" category="paragraph">Qualsiasi configurazione o funzione che richieda la connessione delle connessioni cluster locali a uno switch non è supportata. Ad esempio, le seguenti configurazioni e procedure non sono supportate:</block>
   <block id="9998da0c6596ccc4b44b68b91eee576b" category="list-text">Configurazioni MetroCluster a otto nodi</block>
   <block id="68ce13809f636bb102d35b897931709c" category="list-text">Transizione da configurazioni MetroCluster FC a MetroCluster IP</block>
   <block id="541a17569d4a90ee94a9fd4035349deb" category="list-text">Aggiornamento di una configurazione MetroCluster IP a quattro nodi (ONTAP 9.8 e versioni successive)</block>
-  <block id="11956e846be834740959ad71d40b9547" category="list-text">Se si collegano due configurazioni MetroCluster e entrambe utilizzano lo stesso tipo di controller, è necessario utilizzare i gruppi di porte MetroCluster 3 e 4. Se i controller sono diversi, è necessario utilizzare i gruppi di porte MetroCluster 3 e 4 per un tipo e i gruppi di porte MetroCluster 1 e 2 per l'altro.</block>
-  <block id="691efed68d0449f254968b0811d65b71" category="list-text">Ad esempio, se ci si connette:</block>
-  <block id="2ad4e214daf4f2fbe760328984025270" category="list-text">Due configurazioni MetroCluster costituite solo da FAS2750/AFF A220 o solo da FAS500f/AFF A250, è necessario selezionare i gruppi di porte MetroCluster 3 e 4.</block>
   <block id="673f5a3eeb8366a43231216d5889b9fc" category="inline-link-macro">Utilizzo delle tabelle delle porte con lo strumento RcfFileGenerator o di più configurazioni MetroCluster</block>
-  <block id="1c4e028af9d72f4e84ad919004a88581" category="list-text">Due configurazioni MetroCluster in cui una MetroCluster è di tipo FAS2750/AFF A220 e l'altra è FAS500f/AFF A250, è necessario selezionare i gruppi di porte 3 e 4 per uno e i gruppi di porte 1 e 2 per l'altro. In<block ref="166489b3c340ece1eccb5706fda90624" category="inline-link-rx"></block>i campi a discesa 1 e 2 vengono compilati solo con la piattaforma supportata dopo aver selezionato le piattaforme nei campi a discesa 3 e 4. Fare riferimento a. <block ref="4dfd72a31c74d2e269d1ca49dcbd7291" category="inline-link-macro-rx"></block> per ulteriori informazioni sull'utilizzo delle tabelle delle porte.</block>
-  <block id="9b7cca2be0457a3d0c492f8e904df901" category="section-title">Utilizzo della porta dello switch per i sistemi FAS2750, AFF 150 o AFF A220</block>
-  <block id="8ee408688016c0cb16c82686873a5d8e" category="image-alt">mcc ip che consente di collegare un AFF a150 a220 o fas2750 a uno switch broadcom bes 53248</block>
-  <block id="58f2f8e1f41f44915c0a9dd64bc2bb2d" category="section-title">Utilizzo della porta dello switch per i sistemi FAS500f, AFF C250 o AFF A250</block>
-  <block id="358099a0b111152a484a1e05b14c7c47" category="image-alt">mcc ip che consente di collegare un AFF c250 a250 o fas500f a uno switch broadcom bes 53248</block>
-  <block id="4dd9be0b315657693d8b4224514a84dd" category="section-title">Utilizzo della porta dello switch per l'utilizzo combinato di AFF A150, FAS2750, AFF A220 e FAS500f o AFF C250, O sistemi AFF A250</block>
-  <block id="eab2b22490c89198b6c41f5b7c6e6104" category="image-alt">mcc ip cabling AFF a250 e a220 a uno switch broadcom bes 53248</block>
-  <block id="e4bf5275812c1279d2db37ca9929225f" category="section-title">Utilizzo della porta dello switch per i sistemi FAS8200 o AFF A300</block>
   <block id="dea9eb47178beaeb21ad431dae613392" category="image-alt">mcc ip che consente di collegare un AFF a300 o fas8200 a uno switch broadcom bes 53248</block>
   <block id="99abcc4b4e656e7c9d684acf6c9c05d8" category="image-alt">mcc ip che consente di collegare un AFF a320 a uno switch broadcom bes 53248</block>
-  <block id="3e2cc26117df5be817591b49f77f1480" category="section-title">Utilizzo della porta dello switch per i sistemi FAS8300, AFF C400, AFF A400 o FAS8700</block>
-  <block id="d13ba1eac1605fed2f8d4e769d4a477e" category="image-alt">mcc ip che consente di collegare un a400 fas8300 o fas8700 a uno switch broadcom bes 53248</block>
   <block id="c2cd808fc4b0d9e71ea89cc518cef164" category="summary">È necessario configurare la crittografia MACsec solo sulle porte ISL WAN in esecuzione tra i siti. È necessario configurare MACsec dopo aver applicato il file RCF corretto.</block>
   <block id="175313fe612a432e5a51082817a697f1" category="doc">Configurare la crittografia MACsec sugli switch Cisco 9336C</block>
   <block id="3ff849ca07e8d8a0986114f9a8f37362" category="paragraph">Se lo si desidera, è possibile configurare la crittografia MACsec sulle porte ISL WAN che vengono eseguite tra i siti. È necessario configurare MACsec dopo aver applicato il file RCF corretto.</block>
@@ -12259,9 +12218,7 @@
   <block id="14681192c7f80e2d7631c3a070df9619" category="doc">Assegnazioni delle porte della piattaforma per switch Cisco 3132Q-V.</block>
   <block id="3b83c4ddd89aceae283e372313711a0d" category="section-title">Utilizzo delle porte per i sistemi FAS2750 o AFF A220 e uno switch Cisco 3132Q-V.</block>
   <block id="0d1dedffee468c654fc7737c161a5ef6" category="image-alt">mcc ip che consente di collegare un fas2750 o a220 a uno switch cisco 3132q v</block>
-  <block id="017a22ca0ee5bf776874da5739566129" category="section-title">Utilizzo delle porte per FAS9000, AFF A700 e uno switch Cisco 3132Q-V.</block>
   <block id="f300420ccf8e917fff4dcf018758ab75" category="image-alt">mcc ip che consente di collegare uno switch fas9000 o AFF a700 a uno switch cisco 3132q v.</block>
-  <block id="e029b19b88949b46b1b71209d9728ce5" category="section-title">Utilizzo delle porte per AFF A800 e uno switch Cisco 3132Q-V.</block>
   <block id="4ab951cbcd9d68b32f922b0a2d6e39c2" category="image-alt">collegamento di un AFF a800 a uno switch cisco 3132q v</block>
   <block id="09cb6984bdf1b82c9749906ba1a69331" category="summary">È possibile modificare le seguenti proprietà di un'interfaccia IP MetroCluster, indirizzo IP e maschera e gateway. È possibile utilizzare qualsiasi combinazione di parametri per l'aggiornamento.</block>
   <block id="bacf5875940eb96c091917a5d1b9e1ad" category="doc">Modifica di indirizzo, netmask e gateway in un IP MetroCluster</block>
@@ -12961,25 +12918,20 @@
   <block id="ebc2ca8d2c7ef918abcfff80809d9aab" category="summary">La procedura di aggiornamento utilizzata dipende dal modello di piattaforma.</block>
   <block id="f51d3678c201a622cf18e8f30b08f3de" category="doc">Scegliere una procedura di aggiornamento del controller</block>
   <block id="959c17d1eadff13225c68a5578c6da93" category="paragraph">La procedura di aggiornamento del controller utilizzata dipende dal modello di piattaforma e dal tipo di configurazione MetroCluster.</block>
-  <block id="822ff8bdadd23c839b2a13dbdf0af776" category="paragraph">In una procedura di aggiornamento, i controller vengono sostituiti con un nuovo modello di controller. I modelli di shelf storage non vengono aggiornati.</block>
-  <block id="8ddc003a58eb9422a54e43b4cfe03f2e" category="list-text">Nelle procedure di switchover e switchback, l'operazione di switchover MetroCluster viene utilizzata per fornire un servizio senza interruzioni ai client mentre i moduli controller sul cluster partner vengono aggiornati.</block>
   <block id="789c52582d523f3977d636da81e92dc0" category="list-text">In una procedura di upgrade del controller basata su ARL, le operazioni di trasferimento aggregato vengono utilizzate per spostare i dati senza interruzioni dalla vecchia configurazione alla nuova configurazione aggiornata.</block>
   <block id="316cc41a2ded57b927048db5915a847f" category="section-title">Scelta di una procedura che utilizzi il processo di switchover e switchback</block>
   <block id="310848f15048cc78b3cbee9c61235054" category="paragraph">Selezionare la piattaforma corrente dalla tabella FC o IP riportata di seguito. Se l'intersezione tra la riga della piattaforma corrente e la colonna della piattaforma di destinazione è vuota, l'aggiornamento non è supportato.</block>
   <block id="569cf9bf2c0f655af1cc3b1657f11706" category="section-title">Aggiornamenti del controller IP MetroCluster supportati</block>
   <block id="d64734f1819a8d6339e74ffe37dc5430" category="paragraph">Se la piattaforma non è elencata, non è disponibile alcuna combinazione di upgrade del controller supportata.</block>
-  <block id="9cc4e1f05676227146cf00108c59fa28" category="image-alt">tabella di aggiornamento ip di MetroCluster 9 13 1</block>
   <block id="17327179cc24e43223407ad31775b347" category="inline-link-macro">Upgrade dei controller da AFF A700/FAS9000 a AFF A900/FAS9500 in una configurazione MetroCluster IP utilizzando switchover e switchback (ONTAP 9.10.1 o versione successiva)</block>
   <block id="871aaccc4c0a59b618736750595955e7" category="list-text">Nota 1: Per questo aggiornamento, utilizzare la procedura <block ref="f668bd1de55e6e087edcf0e6120e96e3" category="inline-link-macro-rx"></block></block>
   <block id="183ffd679adb1c9e843df285f2b91466" category="list-text">Nota 2: Gli aggiornamenti dei controller sono supportati nei sistemi che eseguono ONTAP 9.13.1 o versioni successive.</block>
   <block id="59710baa552439a5c3866c2907720be7" category="section-title">Aggiornamenti del controller FC MetroCluster supportati</block>
-  <block id="565b432bf0dbccb436556aa228477fc4" category="image-alt">tabella di aggiornamento MetroCluster fc p 13 1</block>
   <block id="9ae1fbeadb6e0efc4e024384fb8a4f8d" category="inline-link">Articolo della Knowledge base</block>
   <block id="6bd20d1a4e5bd1d6bed1627ed32e934c" category="list-text">Nota 1: Per l'aggiornamento dei controller quando le connessioni FCVI su nodi FAS8020 o AFF8020 esistenti utilizzano le porte 1c e 1d, vedere quanto segue<block ref="058c6692589b3956d6bd485ac9c6cea6" category="inline-link-rx"></block>.</block>
   <block id="80a030e3352fb989821aa7c6d15bcfad" category="inline-link-macro">Report pubblico</block>
   <block id="67be5a03851a4b6d9deae18ad49f328e" category="list-text">Nota 2: Gli aggiornamenti dei controller dalle piattaforme AFF A300 o FAS8200 che utilizzano le porte onboard 0e e 0f come connessioni FC-VI sono supportati solo sui sistemi che eseguono ONTAP 9.9.1. o prima. Per ulteriori informazioni, consultare <block ref="54dac02f94a6488bb50eb2223b2531dc" category="inline-link-macro-rx"></block>.</block>
   <block id="24e0de0a456339a0645a68e87b1bd30e" category="list-text">Nota 3: Per questo aggiornamento, fare riferimento a. <block ref="d4055a630aa0f5dfe07651f60a376ff8" category="inline-link-macro-rx"></block></block>
-  <block id="ef7e86617c6692f308d834d239d77e9e" category="list-text">Nota 4: Gli aggiornamenti dei controller sono supportati nei sistemi che eseguono ONTAP 9.13.1 o versioni successive.</block>
   <block id="75f7d2bcde6cf0fe3c3db259a2547dbc" category="cell">Tipo di MetroCluster</block>
   <block id="2a4d011a1daa1baf70a0642eaa186c4b" category="cell">Metodo di aggiornamento</block>
   <block id="a12a3079e14ced46e69ba52b8a90b21a" category="paragraph">IP</block>
@@ -13340,4 +13292,73 @@
   <block id="ebbf46e9806730b0f0c4ca0133de2d34" category="open-title">Aggiungere uno switch utilizzando SNMPv2:</block>
   <block id="10982c02dbedeb50373ef205f82ca3c8" category="inline-link-macro">Gestire i siti MetroCluster con Gestione di sistema</block>
   <block id="53eaf367aa3b61105b8ddce45278ab85" category="paragraph">Per ulteriori informazioni, fare riferimento alla <block ref="eef6283454e42ed2d47fdb00a9ff3e0c" category="inline-link-macro-rx"></block> documentazione.</block>
+  <block id="e896a08242f1b8600bd891680083c89c" category="paragraph">Prima di utilizzare le tabelle, rivedere le seguenti linee guida:</block>
+  <block id="11b0a2bdfcd224ea773788cafe8f7027" category="list-text">Se si configura lo switch per la transizione da FC MetroCluster a IP, è possibile utilizzare la porta 5, la porta 6, la porta 13 o la porta 14 per connettere le interfacce del cluster locale del nodo FC MetroCluster. Fare riferimento a. <block ref="46a459674905c476821f71bc8486a4ba" category="inline-link-macro-rx"></block> e i file di cablaggio generati per ulteriori dettagli sul cablaggio di questa configurazione. Per tutte le altre connessioni, è possibile utilizzare le assegnazioni di utilizzo delle porte elencate nelle tabelle.</block>
+  <block id="96072cdace8aeeb7214cc70597039994" category="section-title">Utilizzo delle porte per sistemi FAS9000 o AFF A700 e switch Cisco 3132Q-V.</block>
+  <block id="e0bf993f0bc1586df5f9dfb72954e8da" category="section-title">Utilizzo delle porte per i sistemi AFF A800 o ASA A800 e uno switch Cisco 3132Q-V.</block>
+  <block id="91166ddb2661684df8dbc56e903ec043" category="paragraph">Le seguenti configurazioni non sono attualmente supportate:</block>
+  <block id="ffbf0166c7ab0c630d8081caba93b8ff" category="list-text">La connessione di una configurazione MetroCluster a otto o due nodi richiede ONTAP 9.14.1 o versione successiva e il file RCF versione 2,00 o successiva.</block>
+  <block id="df1cd5b519ca6d9ac61c3fcdeed5dbc5" category="section-title">Collegamento di un AFF A150, ASA A150, FAS500f, AFF C250, ASA C250, da sistema AFF A250 o ASA A250 a switch NVIDIA SN2100</block>
+  <block id="b65df01fa47ee7a17ae4ac22e4f80fe1" category="image-alt">Cablaggio ip mcc AFF ASA A150 fas500f A250 C250 MSN2100</block>
+  <block id="600e74c5a86bfaafeac18b9626b2b791" category="section-title">Cablaggio a FAS8300, AFF C400, ASA C400, AFF A400, ASA A400, FAS8700, FAS9000, AFF A700, AFF C800, ASA C800, da sistema AFF A800, ASA A800, FAS9500, AFF A900 o ASA A900 a uno switch NVIDIA SN2100</block>
+  <block id="52447c97a913b0a7009beba2a860f2f1" category="image-alt">Cablaggio ip mcc fas8300 AFF ASA C400 A400 fas8700 fas9000 A700 A800 A900 fas9500 MSN2100</block>
+  <block id="2f37bf7d3a80ef892a37b5867710dc5e" category="paragraph">*Nota 1*: Se si utilizza un adattatore X91440A (40Gbps), utilizzare le porte e4a e E4E o e4a e E8a. Se si utilizza un adattatore X91153A (100Gbps), utilizzare le porte e4a e e4b o e4a e E8a.</block>
+  <block id="8232ac4b6380b290738aa1ce5cc7cff3" category="paragraph">Tenere traccia del gruppo di porte MetroCluster (MetroCluster 1, MetroCluster 2, MetroCluster 3 o MetroCluster 4). Sarà necessario quando si utilizza lo strumento RcfFileGenerator come descritto più avanti in questa procedura di configurazione.</block>
+  <block id="554d0ed2f8464fefa6da872d6dbcf5c5" category="list-text">Il file RCF versione v2,10 o successiva è richiesto per la modalità breakout 25g per gli ISL MetroCluster.</block>
+  <block id="5b43fcab432560bae73db4e0c9e34232" category="list-text">Per utilizzare una piattaforma diversa da FAS8200 o AFF 9.13.1 nel gruppo "MetroCluster 2,00" sono necessari ONTAP A300 o versioni successive e il file RCF versione 4.</block>
+  <block id="3c2d958a2069bca526b0229b6a1b15d8" category="section-title">Collegamento di un AFF A150, ASA A150, FAS2750, AFF A220, FAS500f, sistema AFF C250, ASA C250, AFF A250 o ASA A250 a uno switch Cisco 3232C o Cisco 9336-FX2C</block>
+  <block id="0c52a66510db282f2898b1934e18c757" category="section-title">Collegamento di un sistema FAS8200 o AFF A300 a uno switch Cisco 3232C o Cisco 9336C</block>
+  <block id="959103b0e0798459de77e2b5d8985ab3" category="paragraph">Se si esegue l'aggiornamento da file RCF meno recenti, la configurazione del cablaggio potrebbe utilizzare porte nel gruppo "MetroCluster 4" (porte 25/26 e 29/30).</block>
+  <block id="dbbcebd42c4edb43711e86d3bbc61485" category="section-title">Collegamento di un AFF A320, FAS8300, AFF C400, ASA C400, AFF A400, ASA A400, FAS8700, FAS9000, AFF A700, AFF C800, ASA C800, AFF A800, ASA A800, FAS9500, AFF A900, o dal sistema ASA A900 a uno switch Cisco 3232C o Cisco 9336C-FX2</block>
+  <block id="905eeaf0eb85efa82c94d09cf33bd250" category="admonition">L'uso delle porte nel gruppo "MetroCluster 4" richiede ONTAP 9.13.1 o versione successiva.</block>
+  <block id="57434776bd5888e009d9e57f22c69e23" category="doc">Assegnazione delle porte della piattaforma per uno switch condiviso Cisco 9336C-FX2</block>
+  <block id="732d615839cca3ffb6814dbae606c495" category="list-text">Almeno una configurazione MetroCluster o un gruppo di DR deve supportare gli shelf NS224 collegati con switch.</block>
+  <block id="3209e9c123d4238593063149c7f8b0e2" category="list-text">Le piattaforme che non supportano shelf NS224 con switch possono essere connesse solo come una seconda configurazione MetroCluster o come un secondo gruppo di DR.</block>
+  <block id="dae9a493a0381746910b46f271097afc" category="list-text">RcfFileGenerator mostra solo le piattaforme idonee quando viene selezionata la prima piattaforma.</block>
+  <block id="dfaaea754370da30cfd269ee856da3a9" category="list-text">La connessione di una configurazione MetroCluster a otto o due nodi richiede ONTAP 9.14.1 o versione successiva.</block>
+  <block id="b03c615d318e9480b137520def0c0019" category="section-title">Collegamento di un AFF A320, AFF C400, ASA C400, AFF A400, ASA A400, AFF A700, AFF C800, ASA C800, AFF A800, AFF A900, o dal sistema ASA A900 a uno switch condiviso Cisco 9336C-FX2</block>
+  <block id="6bb6a0936af73cac3f2bdbf32254d719" category="image-alt">cablaggio ip da mcc a320 c400 a400 a700 c800 a800 a900 a switch condiviso cisco 9336c</block>
+  <block id="bf136b704de578c59a07363b76151378" category="section-title">Collegamento di un sistema AFF A150, ASA A150, FAS2750 o AFF A220 a uno switch condiviso Cisco 9336C-FX2</block>
+  <block id="dcbe5e1c651d61678fa6f79f5f231f44" category="image-alt">cablaggio ip mcc da AFF a150 ASA a150 fas27500 AFF a220 a uno switch condiviso cisco 9336c</block>
+  <block id="e5d9d3d0d01df5d39a8698af57def92a" category="section-title">Collegamento di un sistema FAS500f, AFF C250, ASA C250, AFF A250 o ASA A250 a uno switch condiviso Cisco 9336C-FX2</block>
+  <block id="76df3d556d3a4275629b963054352251" category="image-alt">cablaggio ip mcc c250 ASA c250 a250 ASA a250 a switch condiviso cisco 9336c</block>
+  <block id="3fdaa78573cae6b8e4c297b899acfe37" category="section-title">Collegamento di un sistema FAS8200 o AFF A300 a uno switch condiviso Cisco 9336C-FX2</block>
+  <block id="89d6082264fd0fa3fcf9fe31279df2a7" category="image-alt">cablaggio ip da mcc fas8200 affa300 a switch condiviso cisco 9336c</block>
+  <block id="7cbcd9b9ad1f63a9723831b696a1d54d" category="section-title">Collegamento di un sistema FAS8300, FAS8700, FAS9000 o FAS9500 a uno switch condiviso Cisco 9336C-FX2</block>
+  <block id="ae163524dd2fe8e287d9f71b5de5920f" category="image-alt">cablaggio ip da mcc fas8300 fas8700 fas9000 fas9500 a switch condiviso cisco 9336c</block>
+  <block id="82e2d7798ab15559f8ebbae8125f55c3" category="list-title">Leggere queste informazioni prima di utilizzare le tabelle:</block>
+  <block id="a5d0cab9bff9a930a5eb4ad5c7bce183" category="list-text">Se si configura lo switch per la transizione da FC MetroCluster a IP, vengono utilizzate le seguenti porte a seconda della piattaforma di destinazione scelta:</block>
+  <block id="f2a26c5fb823530f83a5b4d6bf512eb9" category="cell">Piattaforma di destinazione</block>
+  <block id="c2a1880d9ec21424185dc32c708f7c2f" category="cell">FAS500f, AFF C250, ASA C250, AFF A250, ASA A250, FAS8300, AFF C400, ASA C400, AFF A400, ASA A400, o FAS8700</block>
+  <block id="a346e4e54905b86ccf19d436cac4f72d" category="cell">Porte 1 - 6, 10Gbps</block>
+  <block id="520f683aecf042eb1afbf14be7588551" category="cell">Piattaforme FAS8200 o AFF A300</block>
+  <block id="81d990a756b6f5e5f14a9df8a16bbe34" category="cell">Porte 3 - 4 e 9 - 12, 10Gbps</block>
+  <block id="2df5ca4f8a203d43ca2d6ee0dcd3ffc5" category="list-title">Note a cui si fa riferimento nelle tabelle:</block>
+  <block id="afc53d7c7e597c30acb18fa3ed38cc86" category="list-text">*Nota 1*: L'utilizzo di queste porte richiede una licenza aggiuntiva.</block>
+  <block id="87b750ce6fbbe87d62cbc08d2dc73e1f" category="list-text">*Nota 2*: È possibile collegare allo switch solo un singolo MetroCluster a quattro nodi che utilizza sistemi AFF A320.</block>
+  <block id="5e32839c7226a47e6623ae1f3ffc146d" category="paragraph">Funzionalità che richiedono uno switch cluster non sono supportate in questa configurazione, incluse la transizione da FC a IP MetroCluster e le procedure di tech refresh.</block>
+  <block id="01ee52aecc80516ef9b51d0a149683a6" category="list-text">*Nota 3*: Lo switch BES-53248 richiede che tutte le porte di un gruppo a quattro porte funzionino alla stessa velocità. Per collegare una combinazione di piattaforme AFF 150, ASA A150, FAS2750, AFF A220 e FAS500f, AFF C250, ASA C250, AFF A250 e ASA A250, è necessario utilizzare le porte degli switch situate in gruppi separati a quattro porte. Se si richiede questo tipo di configurazione, si applica quanto segue:</block>
+  <block id="23b8a1af268a574d717d9ea3d20d1b88" category="list-text">In<block ref="166489b3c340ece1eccb5706fda90624" category="inline-link-rx"></block>, I campi a discesa per "MetroCluster 1" e "MetroCluster 2" vengono compilati solo dopo aver selezionato una piattaforma per MetroCluster 3 o "MetroCluster 4".  Fare riferimento a. <block ref="4dfd72a31c74d2e269d1ca49dcbd7291" category="inline-link-macro-rx"></block> per ulteriori informazioni sull'utilizzo delle tabelle delle porte.</block>
+  <block id="f94a1422b62d10932fbf032c0b5f1c48" category="list-text">Se entrambe le configurazioni MetroCluster utilizzano la stessa piattaforma, NetApp consiglia di selezionare il gruppo "MetroCluster 3" per una configurazione e il gruppo "MetroCluster 4" per l'altra configurazione. Se le piattaforme sono diverse, selezionare "MetroCluster 3" o "MetroCluster 4" per la prima configurazione e selezionare "MetroCluster 1" o "MetroCluster 2" per la seconda configurazione.</block>
+  <block id="67515cf8b1cb1eb3a194348da0494b5a" category="section-title">Collegamento di un AFF A150, ASA A150, FAS2750, AFF A220, FAS500f, AFF C250, ASA C250, AFF A250 o ASA A250 a uno switch Broadcom BES-53248</block>
+  <block id="c1362aea3362cced26c169c7f2579830" category="image-alt">cablaggio ip mcc da AFF ASA a150 a220 c250 a250 fas2750 a uno switch broadcom bes 53248</block>
+  <block id="ae988cdaab88cda23ac7eae94e718156" category="section-title">Collegamento di un sistema FAS8200, AFF A300 o AFF A320 a uno switch Broadcom BES-53248</block>
+  <block id="5c48415a3384935ba5be90eee889bb15" category="section-title">Collegamento di un sistema FAS8300, AFF C400, ASA C400, AFF A400, ASA A400 o FAS8700 a uno switch Broadcom BES-53248</block>
+  <block id="f9e62124423900674e7c280534c2b0d1" category="image-alt">cablaggio ip mcc da fas8300 a400 c400 o fas8700 a uno switch broadcom bes 53248</block>
+  <block id="5b5bc0c2a68a3a5df60e045184c265e7" category="paragraph">Fare riferimento alla sezione *interruttori* della <block ref="41f66f34b3a905f864500c9319fdff8f" category="inline-link-macro-rx"></block> per verificare i ricetrasmettitori supportati.</block>
+  <block id="30ec0ec381148de730ef6f636244409c" category="paragraph">A partire da ONTAP 9.13.1, questa procedura è supportata nelle configurazioni IP di MetroCluster in cui MetroCluster e gli shelf di dischi sono connessi agli stessi switch IP (configurazione di uno storage condiviso).</block>
+  <block id="63d08c3cedf8143a5b62917cdffc9a26" category="image-alt">matrice di transizione ip fc MetroCluster 914</block>
+  <block id="7411369ee6af7c3b06eeb0cb088ed313" category="list-text">Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, se si dispone di una configurazione a otto nodi, tutti e otto i nodi devono utilizzare la stessa versione di ONTAP.</block>
+  <block id="af03c8177e63c13156d2341adae52d1d" category="paragraph">In una procedura di aggiornamento, i controller vengono sostituiti con un nuovo modello di controller. I modelli di shelf storage non vengono aggiornati.</block>
+  <block id="a42deea73d6695bcde6da0ac8925f0f8" category="paragraph">Quando si esegue un aggiornamento del controller, il vecchio e il nuovo tipo di piattaforma *devono* corrispondere.</block>
+  <block id="5fd3c01d6ba82ebe581c794d9a655304" category="list-text">Puoi aggiornare un sistema FAS ad un sistema FAS o AFF A-Series ad un AFF a-Series.</block>
+  <block id="f4dbbbaca7fd3336a645956878f8c04c" category="list-text">Non è possibile aggiornare un sistema FAS ad un AFF A-Series o AFF A-Series a un AFF C-Series.</block>
+  <block id="9d437f50da0d309aac4a2fd5117cc07f" category="paragraph">Ad esempio, se la piattaforma che si desidera aggiornare è FAS8200, è possibile eseguire l'aggiornamento a FAS9000. Non è possibile aggiornare un sistema FAS8200 a un sistema AFF A700.</block>
+  <block id="78dd72417c3e7e39a5c94c9fe04d72d2" category="image-alt">tabella di aggiornamento ip di MetroCluster 914</block>
+  <block id="7e895ffe56c2c22085a060323bcc3b91" category="list-text">Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, i nuovi controller devono eseguire la stessa versione di ONTAP dei vecchi controller.</block>
+  <block id="4bdc0ece89d77527b0c94aa60d045b78" category="image-alt">MetroCluster fc tabella di aggiornamento 914</block>
+  <block id="613e72a9b729773a1554cb0002fc99e8" category="list-text">Nota 4: Gli upgrade dei controller sono supportati sui sistemi con ONTAP 9.13.1 o versione successiva.</block>
+  <block id="825d65b3b18d444d8008136946a33a99" category="list-text">Nota 5: Gli upgrade dei controller sono supportati sui sistemi con ONTAP 9.14.1 o versione successiva.</block>
+  <block id="50338c34cfec6d9e54eae1256352e18d" category="image-alt">aggiornamento tecnologico MetroCluster fc 914</block>
+  <block id="94487339ee219de4122a1e81d3919b34" category="admonition">I dischi aggregati root sono gli unici dischi che devono essere riassegnati durante il processo di upgrade dei controller. La proprietà del disco degli aggregati di dati viene gestita come parte dell'operazione di switchover/switchback.</block>
 </blocks>

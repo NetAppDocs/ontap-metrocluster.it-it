@@ -13,6 +13,8 @@ summary: A partire da ONTAP 9.13.1, è possibile eseguire una transizione senza 
 [role="lead"]
 È possibile eseguire transizioni senza interruzioni di carichi di lavoro e dati da una configurazione MetroCluster FC esistente a una nuova configurazione MetroCluster IP.
 
+A partire da ONTAP 9.13.1, questa procedura è supportata nelle configurazioni IP di MetroCluster in cui MetroCluster e gli shelf di dischi sono connessi agli stessi switch IP (configurazione di uno storage condiviso).
+
 A partire da ONTAP 9.13.1, è possibile eseguire una transizione senza interruzioni di carichi di lavoro e dati da una configurazione MetroCluster FC a otto nodi esistente a una nuova configurazione MetroCluster IP.
 
 A partire da ONTAP 9.8, è possibile eseguire una transizione senza interruzioni di carichi di lavoro e dati da una configurazione MetroCluster FC a quattro nodi esistente a una nuova configurazione MetroCluster IP.

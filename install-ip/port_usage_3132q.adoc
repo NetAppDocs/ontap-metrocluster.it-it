@@ -13,6 +13,11 @@ summary: 'L"utilizzo della porta in una configurazione IP MetroCluster dipende d
 [role="lead"]
 L'utilizzo della porta in una configurazione IP MetroCluster dipende dal modello dello switch e dal tipo di piattaforma.
 
+Prima di utilizzare le tabelle, rivedere le seguenti linee guida:
+
+* Se si configura lo switch per la transizione da FC MetroCluster a IP, è possibile utilizzare la porta 5, la porta 6, la porta 13 o la porta 14 per connettere le interfacce del cluster locale del nodo FC MetroCluster. Fare riferimento a. link:https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator"^] e i file di cablaggio generati per ulteriori dettagli sul cablaggio di questa configurazione. Per tutte le altre connessioni, è possibile utilizzare le assegnazioni di utilizzo delle porte elencate nelle tabelle.
+
+
 
 
 == Utilizzo delle porte per i sistemi FAS2750 o AFF A220 e uno switch Cisco 3132Q-V.
@@ -21,12 +26,12 @@ image::../media/mcc_ip_cabling_a_fas2750_or_a220_to_a_cisco_3132q_v_switch.png[m
 
 
 
-== Utilizzo delle porte per FAS9000, AFF A700 e uno switch Cisco 3132Q-V.
+== Utilizzo delle porte per sistemi FAS9000 o AFF A700 e switch Cisco 3132Q-V.
 
 image::../media/mcc_ip_cabling_a_fas9000_or_aff_a700_to_a_cisco_3132q_v_switch.png[mcc ip che consente di collegare uno switch fas9000 o AFF a700 a uno switch cisco 3132q v.]
 
 
 
-== Utilizzo delle porte per AFF A800 e uno switch Cisco 3132Q-V.
+== Utilizzo delle porte per i sistemi AFF A800 o ASA A800 e uno switch Cisco 3132Q-V.
 
 image::../media/cabling_an_aff_a800_to_a_cisco_3132q_v_switch.png[collegamento di un AFF a800 a uno switch cisco 3132q v]

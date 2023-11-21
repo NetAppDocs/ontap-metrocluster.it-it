@@ -20,6 +20,9 @@ Per garantire la connettività ISL, è necessario completare tutti i passaggi su
 
 La seguente procedura presuppone la sostituzione di un ISL da 10 GB collegato alla porta dello switch eth1/24/1 con due ISL da 100 GB collegati alle porte dello switch 17 e 18.
 
+.Prima di iniziare
+Fare riferimento alla sezione *interruttori* della link:https://hwu.netapp.com/["NetApp Hardware Universe"^] per verificare i ricetrasmettitori supportati.
+
 .Fasi
 . Disattivare le porte ISL degli ISL su entrambi gli switch del fabric che si desidera modificare.
 +
