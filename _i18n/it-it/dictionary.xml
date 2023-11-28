@@ -12395,8 +12395,6 @@
   <block id="a8307b4c5fa271005a1338d5b405ca1f" category="paragraph">A partire da ONTAP 9.9.1, è possibile aggiungere quattro nuovi nodi alla configurazione IP di MetroCluster come secondo gruppo di DR. In questo modo viene creata una configurazione MetroCluster a otto nodi.</block>
   <block id="44e7e75e628cd7549a2dac175d45b418" category="list-text">I nodi vecchi e nuovi devono eseguire la stessa versione di ONTAP.</block>
   <block id="1b9d79df22b9bc1c5dc1b1baa6f53e05" category="list-text">Questa procedura descrive i passaggi necessari per espandere un gruppo DR a quattro nodi. Se si dispone di una configurazione a otto nodi (due gruppi DR), è necessario ripetere l'intera procedura per ciascun gruppo DR.</block>
-  <block id="8af994ab1dc202d685a253237ad12acd" category="list-text">È necessario assicurarsi che i modelli di piattaforma vecchi e nuovi siano supportati per la combinazione di piattaforme.</block>
-  <block id="b721d4593513d27cdfc55ebe6ceb044f" category="list-text">È necessario assicurarsi che i modelli di piattaforma vecchi e nuovi siano entrambi supportati dagli switch IP.</block>
   <block id="2ee2465217913ae7b455ab4ef5e995e6" category="list-text">I nuovi nodi devono disporre di storage sufficiente per ospitare i dati dei vecchi nodi, insieme a dischi adeguati per gli aggregati root e i dischi spare.</block>
   <block id="83ea901534b27c16af49cdec25309a81" category="paragraph">dr_group_1-old</block>
   <block id="4964adde77a48b7ff0a1301a093aa1c8" category="list-text">Node_A_1-old</block>
@@ -13361,4 +13359,9 @@
   <block id="825d65b3b18d444d8008136946a33a99" category="list-text">Nota 5: Gli upgrade dei controller sono supportati sui sistemi con ONTAP 9.14.1 o versione successiva.</block>
   <block id="50338c34cfec6d9e54eae1256352e18d" category="image-alt">aggiornamento tecnologico MetroCluster fc 914</block>
   <block id="94487339ee219de4122a1e81d3919b34" category="admonition">I dischi aggregati root sono gli unici dischi che devono essere riassegnati durante il processo di upgrade dei controller. La proprietà del disco degli aggregati di dati viene gestita come parte dell'operazione di switchover/switchback.</block>
+  <block id="67c0d618a712fed303dbbf2eaf09695a" category="list-text">Verificare di disporre di un dominio di broadcast predefinito creato sui vecchi nodi.</block>
+  <block id="4fff770200a5d089fd8db4325afa94fc" category="inline-link">LIF di gestione nodi su nodi appena aggiunti generati con nomi UUID</block>
+  <block id="fdf5e2eb479f201de0c9c62e9a32e769" category="paragraph">Quando si aggiungono nuovi nodi a un cluster esistente senza un dominio di broadcast predefinito, le LIF di gestione nodi vengono create per i nuovi nodi utilizzando gli UUID (Universal Unique Identifier) e non i nomi previsti. Per ulteriori informazioni, consultare l'articolo della Knowledge base<block ref="4808e3ddae1b3b2c14dc148b67bd36ea" category="inline-link-rx"></block>.</block>
+  <block id="f6410291c32fa961402f5a821c332f6c" category="list-text">Verificare che i modelli di piattaforma vecchi e nuovi siano supportati per la combinazione di piattaforme.</block>
+  <block id="e220a628f1c5f8fb65824aaeb387520e" category="list-text">Verificare che i modelli di piattaforma vecchi e nuovi siano entrambi supportati dagli switch IP.</block>
 </blocks>
