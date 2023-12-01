@@ -22,6 +22,13 @@ summary: È possibile rimuovere il servizio ONTAP mediator dalla configurazione 
 `metrocluster configuration-settings mediator remove`
 
 +
+Vengono richiesti il nome utente e la password per l'account utente admin di ONTAP Mediator.
+
++
+
+NOTE: Se il mediatore ONTAP non è attivo, il `metrocluster configuration-settings mediator remove` Il comando richiede comunque di inserire il nome utente e la password per l'account utente amministratore di ONTAP Mediator e rimuove il servizio ONTAP Mediator dalla configurazione MetroCluster.
+
++
 .. Controllare se sono presenti dischi rotti utilizzando il seguente comando:
 +
 `disk show -broken`
