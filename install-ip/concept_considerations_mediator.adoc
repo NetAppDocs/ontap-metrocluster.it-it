@@ -55,8 +55,14 @@ Un MAUSO viene avviato solo nei seguenti scenari:
 * Il mirroring SyncMirror e il mirroring DR della cache non volatile di ciascun nodo sono in funzione e le cache e i mirror vengono sincronizzati al momento dell'errore.
 * Nessuno dei nodi nel sito sopravvissuto è in stato di Takeover.
 * In caso di disastro del sito. Un disastro del sito è un guasto di *tutti* nodi nello stesso sito.
++
+
+NOTE: A partire da ONTAP 9.13.1, è possibile modificare il comportamento per avviare un MAUSO in caso di guasto del cluster *o* di una coppia ha. Per una coppia ha, entrambi i nodi devono guastarsi allo stesso tempo.
+
 * A partire da ONTAP 9.13.1, se si verificano le condizioni sopra indicate e un guasto alla ventola o all'hardware avvia un arresto ambientale, ad esempio un guasto all'unità di alimentazione, alla batteria NVRAM o al battito cardiaco del processore di servizio, oppure una temperatura elevata o bassa.
 
+
+È possibile avviare un MAUSO per scenari aggiuntivi non elencati in precedenza. Per ulteriori informazioni, vedere link:concept-risks-limitations-automatic-switchover.html["Rischi e limitazioni dell'utilizzo dello switchover forzato automatico di MetroCluster"].
 
 Un MAUSO viene *not* avviato nei seguenti scenari di arresto:
 
@@ -70,6 +76,4 @@ Un MAUSO viene *not* avviato nei seguenti scenari di arresto:
 
 *Informazioni correlate*
 
-* link:concept-risks-limitations-automatic-switchover.html["Scopri i rischi e le limitazioni dell'utilizzo dello switchover automatico forzato di MetroCluster"]
-* link:../manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html#mediator-assisted-automatic-unplanned-switchover-in-metrocluster-ip-configurations["Informazioni sulla gestione di MAUSO nelle configurazioni IP di MetroCluster"]
-
+link:../manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html#mediator-assisted-automatic-unplanned-switchover-in-metrocluster-ip-configurations["Ulteriori informazioni su MAUSO nelle configurazioni IP di MetroCluster"].

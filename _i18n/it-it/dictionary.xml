@@ -2311,8 +2311,6 @@
   <block id="6479a6c19128ccb1ed55ac097ef1e1e7" category="list-text">Utilizzare il layout di cablaggio generato dallo strumento **RcfFileGenerator** per collegare lo shelf alle porte appropriate.</block>
   <block id="3dc0d5b9eac0c50a790964bb3a643fa3" category="paragraph">Una volta collegato correttamente il nuovo shelf, ONTAP lo rileva automaticamente sulla rete.</block>
   <block id="e0b252916154b49ca991301bb62d8e77" category="summary">Potrebbe essere necessario aggiornare un file RCF su uno switch IP MetroCluster. Ad esempio, un aggiornamento ONTAP o un aggiornamento del firmware dello switch richiedono un nuovo file RCF.</block>
-  <block id="442c1b0de388e5078bf1b6c0bee713d7" category="section-title">Assicurarsi che il file RCF sia supportato</block>
-  <block id="c5578900d835092e78f37c68ccc1b2ea" category="paragraph">Se si modifica la versione di ONTAP in esecuzione sugli switch, assicurarsi di disporre di un file RCF supportato per tale versione. Se si utilizza il generatore RCF, viene generato il file RCF corretto.</block>
   <block id="bdff20b545d5f7f451d6cc86cddcd9d5" category="list-text">Utilizzare i seguenti comandi degli switch per verificare la versione del file RCF:</block>
   <block id="cb1e716ab831d1ef2a5741deabd44bd7" category="cell">Da questo switch...</block>
   <block id="80f6a6e12e6ca0304707e7a67581f248" category="paragraph">Switch Broadcom</block>
@@ -5723,7 +5721,6 @@
   <block id="93eb81c5bb51f5c82069014d257d73f7" category="section-title">Prima di iniziare qualsiasi procedura descritta in questo documento</block>
   <block id="14192cce75fd2280d57cd86b8457d1e8" category="paragraph">Prima di completare questa attività, è necessario soddisfare i seguenti requisiti generali:</block>
   <block id="eec9a69f383dc26376611c0311190048" category="list-text">Prima dell'installazione, è necessario acquisire familiarità con le considerazioni e le Best practice per l'installazione e il cablaggio degli shelf di dischi per il modello di shelf di dischi.</block>
-  <block id="ae8995edf717de497e60100989504ef0" category="list-text">Tutti i componenti di MictoCluster devono essere supportati.</block>
   <block id="9ed4a475dd3705157a9fed8811f63ce2" category="inline-link">Tool di matrice di interoperabilità NetApp</block>
   <block id="687d97208bee730c33801be1d460abf6" category="paragraph"><block ref="687d97208bee730c33801be1d460abf6" category="inline-link-rx"></block></block>
   <block id="46afce358fde8f707e4d3d83045d922c" category="paragraph">In IMT, è possibile utilizzare il campo soluzione storage per selezionare la soluzione MetroCluster. Utilizzare *Esplora componenti* per selezionare i componenti e la versione di ONTAP per perfezionare la ricerca. È possibile fare clic su *Mostra risultati* per visualizzare l'elenco delle configurazioni supportate che corrispondono ai criteri.</block>
@@ -11771,7 +11768,6 @@
   <block id="7507e31e7c001014454813d7b49c44bb" category="paragraph">L'aggregato interessato deve avere uno stato RAID di "risyncing", come mostrato nell'esempio seguente:</block>
   <block id="ec88ce5186c357a0bc7a0b6036c98881" category="paragraph">L'aggregato interessato deve avere uno stato RAID "normale", come mostrato nell'esempio seguente:</block>
   <block id="8bcabb3e778663882c95082b775c75b8" category="summary">A partire da ONTAP 9.4, le configurazioni IP di MetroCluster supportano nuove installazioni con sistemi AFF che utilizzano ADP (partizione avanzata dei dischi).</block>
-  <block id="6789cbf331ef2c9b50d45082c81e74cb" category="paragraph">ONTAP 9.4 e versioni successive includono le seguenti modifiche per il supporto ADP:</block>
   <block id="a4a9824ba125eba903fb3d347f4f5eb6" category="list-text">Le assegnazioni dei dischi pool 0 vengono eseguite in fabbrica.</block>
   <block id="a1fbd6da7a08fa8c0a2a6b92a3b0a9c5" category="list-text">La root senza mirror viene creata in fabbrica.</block>
   <block id="c60c48f30552c5ad7630dd7b31eb4943" category="list-text">L'assegnazione della partizione dei dati viene eseguita presso la sede del cliente durante la procedura di configurazione.</block>
@@ -11787,7 +11783,6 @@
   <block id="7794a024d3134acafeb3b112e36c9a3f" category="cell">Partizione 3:</block>
   <block id="bf17ab05d95b3cfd56763e2ed2c9c07d" category="admonition">Quando si esegue l'aggiornamento da ONTAP 9.4 a 9.5, il sistema riconosce le assegnazioni dei dischi esistenti.</block>
   <block id="5fafb49cc9fb9a65d03134ac546c84c0" category="section-title">Partizione automatica</block>
-  <block id="bd7fdcf8e3958a26cae80f44fe7019eb" category="paragraph">ADP viene eseguito automaticamente durante la configurazione iniziale della piattaforma.</block>
   <block id="6129d8bcf6f4ed452d528f954ce79ee6" category="admonition">A partire da ONTAP 9.5, l'assegnazione automatica dei dischi deve essere attivata con<block ref="9518ee5351ea31dd67cceada18bfcfd6" prefix=" " category="inline-code"></block> comando.</block>
   <block id="00427bfa7d8d8bd516409a3466e96821" category="paragraph">Impostare lo stato ha-config su<block ref="32b858596eeb9351eca27c2906a21da4" prefix=" " category="inline-code"></block> prima del provisioning automatico, per assicurarsi che siano selezionate le dimensioni corrette delle partizioni per consentire le dimensioni appropriate del volume root. Per ulteriori informazioni, vedere <block ref="ee9beb37ef6441cda28497e9b5b08a94" category="inline-link-macro-rx"></block>.</block>
   <block id="d80db6731d8005aabd1dad8b4bd740b7" category="paragraph">Durante l'installazione è possibile partizionare automaticamente un massimo di 96 dischi. È possibile aggiungere dischi aggiuntivi dopo l'installazione iniziale.</block>
@@ -13041,10 +13036,6 @@
   <block id="3e3df3be76a18ca2c89904765d97f078" category="list-text">Verificare che sia possibile il Takeover e che i nodi siano connessi eseguendo il seguente comando su entrambi i cluster:</block>
   <block id="3963205d7c5d1cb2f000d61f16c10f1d" category="paragraph">24 dischi interni</block>
   <block id="d33f2a600ba4fe43084a26e95e4908c0" category="paragraph">*Informazioni correlate*</block>
-  <block id="33677e980c1bb7a6aad1c55805e512b3" category="inline-link-macro">Scopri i rischi e le limitazioni dell'utilizzo dello switchover automatico forzato di MetroCluster</block>
-  <block id="8358918e22c23bbc5881522d821dd13e" category="list-text"><block ref="8358918e22c23bbc5881522d821dd13e" category="inline-link-macro-rx"></block></block>
-  <block id="e3aa563f27ef718a2d0767e57ad2f0c2" category="inline-link-macro">Informazioni sulla gestione di MAUSO nelle configurazioni IP di MetroCluster</block>
-  <block id="b1a9c412046cbd6accefdfa3f6f94916" category="list-text"><block ref="b1a9c412046cbd6accefdfa3f6f94916" category="inline-link-macro-rx"></block></block>
   <block id="7632b8724806890acaf96c668d641251" category="inline-link-macro">Scopri l'assegnazione automatica dei dischi e i sistemi ADP nelle configurazioni IP di MetroCluster</block>
   <block id="85488d881ebf03beb1eca3be4b5fda44" category="paragraph">La tua versione di ONTAP deve supportare la combinazione di shelf. Fare riferimento a.<block ref="e78382cc6f841e7f00c97b18a2e30f41" category="inline-link-rx"></block> Per verificare se la versione di ONTAP in uso supporta la combinazione di shelf.</block>
   <block id="5fdc7ff67ace146413ecd7d44157aca4" category="paragraph">Per ulteriori dettagli sulla miscelazione degli scaffali, vedere<block ref="532c1f47a9370f9e21538610051f3830" category="inline-link-rx"></block></block>
@@ -13187,7 +13178,6 @@
   <block id="357559d73c5bb22e54ab3aeafca1013b" category="sidebar">Installare il pacchetto software</block>
   <block id="3689ab983cde586722e4881cdbf1822a" category="sidebar">Aggiornare l'host</block>
   <block id="3a234e68f5d62ce2d6b3d068c61605c3" category="paragraph">Ogni versione include miglioramenti al software MetroCluster Tiebreaker. Ecco le novità delle ultime versioni di MetroCluster Tiebreaker.</block>
-  <block id="5801d3e28a980df8d84e60a3eea8469c" category="paragraph">A partire da ONTAP 9,4, le configurazioni IP di MetroCluster supportano nuove installazioni con ADP (partizione avanzata dei dischi). Nella maggior parte delle configurazioni, il partizionamento e l'assegnazione dei dischi vengono eseguiti automaticamente durante la configurazione iniziale dei siti MetroCluster.</block>
   <block id="e6ca378bbb6d15fd110961cea50b2eb0" category="section-title">ADP e assegnazione dei dischi su sistemi AFF C250, AFF A250 e FAS500f</block>
   <block id="91d96627fcbee13a9d474587060d13f8" category="paragraph">Le stesse linee guida e regole per l'assegnazione dei dischi per i sistemi AFF C250 e AFF A250 si applicano ai sistemi FAS500f. Per l'assegnazione dei dischi nei sistemi FAS500f, fare riferimento alla <block ref="62481755a241b3efc5c68e4e7dd00bb5" category="inline-xref-macro-rx"></block> tabella.</block>
   <block id="d39fc122b5bc72857d3bc1cb28b2528b" category="summary">Potrebbe essere necessario cambiare il vendor di uno switch FC (da Cisco a Brocade o viceversa), cambiare il modello dello switch o entrambe le cose.</block>
@@ -13364,4 +13354,19 @@
   <block id="fdf5e2eb479f201de0c9c62e9a32e769" category="paragraph">Quando si aggiungono nuovi nodi a un cluster esistente senza un dominio di broadcast predefinito, le LIF di gestione nodi vengono create per i nuovi nodi utilizzando gli UUID (Universal Unique Identifier) e non i nomi previsti. Per ulteriori informazioni, consultare l'articolo della Knowledge base<block ref="4808e3ddae1b3b2c14dc148b67bd36ea" category="inline-link-rx"></block>.</block>
   <block id="f6410291c32fa961402f5a821c332f6c" category="list-text">Verificare che i modelli di piattaforma vecchi e nuovi siano supportati per la combinazione di piattaforme.</block>
   <block id="e220a628f1c5f8fb65824aaeb387520e" category="list-text">Verificare che i modelli di piattaforma vecchi e nuovi siano entrambi supportati dagli switch IP.</block>
+  <block id="56f1ca12910041b73ea6fcc9bc18a954" category="paragraph">A partire da ONTAP 9,4, le configurazioni IP di MetroCluster supportano nuove installazioni con ADP (partizione avanzata dei dischi).</block>
+  <block id="72a38a5af8be1c706e478add3356ba90" category="paragraph">Quando si utilizza ADP con le configurazioni IP MetroCluster, è necessario tenere presenti le seguenti considerazioni:</block>
+  <block id="3cae0a231aac97485961fb33cea76ca2" category="list-text">Per utilizzare ADP con le configurazioni IP di MetroCluster, è necessario ONTAP 9,4 e versioni successive.</block>
+  <block id="959bb45d9851a2b3efaeb05db74e0a80" category="list-text">ADPv2 è supportato nelle configurazioni IP di MetroCluster.</block>
+  <block id="a393732e5defe7b7a921a586e53ec51d" category="list-text">L'aggregato root deve trovarsi nella partizione 3 per tutti i nodi in entrambi i siti.</block>
+  <block id="9ef6aecb7d030435d81fe80cacca477e" category="list-text">Il partizionamento e l'assegnazione dei dischi vengono eseguiti automaticamente durante la configurazione iniziale dei siti MetroCluster.</block>
+  <block id="82d98fe86a7b6dbc49abc0913b83f2ac" category="paragraph">L'ADP viene eseguito automaticamente durante la configurazione iniziale del sistema.</block>
+  <block id="2785e39cd183c09c66a74a7aad221542" category="admonition">A partire da ONTAP 9.13.1, è possibile modificare il comportamento per avviare un MAUSO in caso di guasto del cluster *o* di una coppia ha. Per una coppia ha, entrambi i nodi devono guastarsi allo stesso tempo.</block>
+  <block id="3ea08f3e8da19255d966a6ac28c7c9cf" category="paragraph">È possibile avviare un MAUSO per scenari aggiuntivi non elencati in precedenza. Per ulteriori informazioni, vedere <block ref="a3a7e72ce1f5f993a44ac5e44397056b" category="inline-link-macro-rx"></block>.</block>
+  <block id="e0907a528c832799b0d1ad87758c5f86" category="inline-link-macro">Ulteriori informazioni su MAUSO nelle configurazioni IP di MetroCluster</block>
+  <block id="b5a3168b79ae5368d7ec0db231f9a1fc" category="paragraph"><block ref="715b35e54e91f145a6041ef6c0fd6dbb" category="inline-link-macro-rx"></block>.</block>
+  <block id="2d183ed725bd043df73111a219fb4c10" category="list-text">Tutti i componenti MetroCluster devono essere supportati.</block>
+  <block id="a6ab1915ab3c895c47d4e04f54324428" category="paragraph">Potrebbe essere necessario aggiornare un file RCF su uno switch IP MetroCluster. Ad esempio, se la versione del file RCF in esecuzione sugli switch non è supportata dalla versione ONTAP, dalla versione firmware dello switch o da entrambe.</block>
+  <block id="3c895cdeb8d2489a220d797e54ab8b6f" category="section-title">Verificare che il file RCF sia supportato</block>
+  <block id="aa71e3dcbe0cdabbe4cce28385ab2fd6" category="paragraph">Se si sta modificando la versione di ONTAP o la versione del firmware dello switch, è necessario verificare di disporre di un file RCF supportato per tale versione. Se si utilizza il generatore RCF, viene generato il file RCF corretto.</block>
 </blocks>
