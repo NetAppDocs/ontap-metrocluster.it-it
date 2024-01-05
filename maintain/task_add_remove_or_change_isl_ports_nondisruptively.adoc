@@ -4,14 +4,14 @@ sidebar: sidebar
 keywords: metrocluster, maintain, service, add, remove, change, isl, ports, nondisruptively 
 summary: 'Potrebbe essere necessario aggiungere, rimuovere o modificare le porte ISL. È possibile convertire le porte ISL dedicate in porte ISL condivise o modificare la velocità delle porte ISL su uno switch. Gli ISL che viaggiano su distanze maggiori potrebbero richiedere velocità inferiori per migliorare la qualità. Potrebbe essere inoltre necessario aumentare la velocità delle porte ISL per sfruttare gli aggiornamenti del sistema e aggiungere gli ISL a uno switch IP Cisco se si aggiunge o si aggiorna l"hardware.' 
 ---
-= Aggiunta, rimozione o modifica delle porte ISL senza interruzioni
+= Aggiunta, rimozione o modifica delle porte ISL senza interruzioni sugli switch IP Cisco
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Potrebbe essere necessario aggiungere, rimuovere o modificare le porte ISL. È possibile convertire le porte ISL dedicate in porte ISL condivise o modificare la velocità delle porte ISL su uno switch. Gli ISL che viaggiano su distanze maggiori potrebbero richiedere velocità inferiori per migliorare la qualità. Potrebbe essere inoltre necessario aumentare la velocità delle porte ISL per sfruttare gli aggiornamenti del sistema e aggiungere gli ISL a uno switch IP Cisco se si aggiunge o si aggiorna l'hardware.
+Potrebbe essere necessario aggiungere, rimuovere o modificare le porte ISL sugli switch IP Cisco. È possibile convertire porte ISL dedicate in porte ISL condivise o modificare la velocità delle porte ISL su uno switch IP Cisco. Gli ISL che viaggiano su distanze maggiori potrebbero richiedere velocità inferiori per migliorare la qualità. Se si aggiunge o si aggiorna l'hardware, potrebbe essere necessario aumentare la velocità delle porte ISL per sfruttare gli aggiornamenti del sistema e aggiungere ISL a uno switch IP Cisco.
 
 .A proposito di questa attività
 Se si stanno convertendo porte ISL dedicate in porte ISL condivise, assicurarsi che le nuove porte soddisfino il link:../install-ip/concept_considerations_layer_2.html["Requisiti per le porte ISL condivise"].

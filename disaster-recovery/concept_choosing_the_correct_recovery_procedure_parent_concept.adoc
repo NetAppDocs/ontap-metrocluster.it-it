@@ -47,7 +47,7 @@ Se un guasto è limitato a un singolo modulo controller, è necessario utilizzar
 
 *Nota:* la procedura di sostituzione FRU del modulo controller può essere utilizzata in una configurazione MetroCluster a due nodi se non si verificano guasti al disco o ad altri hardware.
 
-https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"]
+https://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardware ONTAP"^]
 
 
 
@@ -122,7 +122,7 @@ In questo caso il guasto è limitato a una coppia ha.
 
 * Se non è necessario sostituire lo storage, è possibile utilizzare la procedura di sostituzione FRU del modulo controller per il modello di piattaforma.
 +
-https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+https://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardware ONTAP"^]
 
 * Se lo storage deve essere sostituito, è possibile utilizzare la procedura di ripristino del modulo multi-controller.
 +
@@ -159,7 +159,7 @@ In questo caso il guasto è limitato a coppie ha separate.
 La procedura di sostituzione della FRU viene eseguita due volte, una per ogni modulo controller guasto.
 
 +
-https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+https://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardware ONTAP"^]
 
 * Se lo storage deve essere sostituito, è possibile utilizzare la procedura di ripristino del modulo multi-controller.
 +
@@ -179,7 +179,7 @@ link:task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristin
 
 È possibile utilizzare la procedura di sostituzione FRU del modulo controller specifico della piattaforma per DR Gruppo due.
 
-https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+https://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardware ONTAP"^]
 
 image::../media/mcc_dr_groups_8_node_with_a_3_controller_failure.gif[mcc dr raggruppa 8 nodi con un guasto a 3 controller]
 
@@ -191,7 +191,7 @@ La procedura utilizzata dipende dall'entità del guasto.
 
 * Se non è necessario sostituire lo storage, è possibile utilizzare la procedura di sostituzione FRU del modulo controller per il modello di piattaforma.
 +
-https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+https://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardware ONTAP"^]
 
 * Se lo storage deve essere sostituito, è possibile utilizzare la procedura di ripristino del modulo multi-controller.
 +

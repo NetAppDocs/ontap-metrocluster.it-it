@@ -29,7 +29,7 @@ Viene attivato un failover.
  a| 
 La configurazione viene ripristinata attraverso un Takeover locale. Il RAID non viene influenzato. Rivedere i messaggi di sistema e sostituire le FRU guaste secondo necessità.
 
-https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+https://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardware ONTAP"^]
 
 
 
@@ -40,7 +40,7 @@ Due nodi si guastano solo se è abilitato lo switchover automatico nel software 
  a| 
 Unplanned switchover manuale (USO) se il switchover automatico nel software MetroCluster Tiebreaker non è abilitato.
 
-https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+https://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardware ONTAP"^]
 
 
 
@@ -51,7 +51,7 @@ Il sistema è degradato. Un errore di porta aggiuntivo influisce sul mirroring h
  a| 
 Viene utilizzata la seconda porta. Health Monitor genera un avviso in caso di interruzione del collegamento fisico alla porta. Rivedere i messaggi di sistema e sostituire le FRU guaste secondo necessità.
 
-https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+https://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardware ONTAP"^]
 
 
 
@@ -62,7 +62,7 @@ La funzionalità HA è interessata. RAID SyncMirror del nodo interrompe la sincr
  a| 
 È necessario un recupero manuale immediato in quanto non è previsto un Takeover in ha. Rivedere i messaggi di sistema e sostituire le FRU guaste secondo necessità.
 
-https://docs.netapp.com/platstor/index.jsp["Centro di documentazione AFF e FAS"^]
+https://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardware ONTAP"^]
 
 
 
