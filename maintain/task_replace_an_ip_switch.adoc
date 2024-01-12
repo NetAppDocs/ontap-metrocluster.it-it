@@ -146,14 +146,16 @@ NOTE: Si scollegano solo le connessioni che non utilizzano la stessa porta nelle
 Rimuovere i collegamenti nel seguente ordine:
 
 +
-** Se le interfacce del cluster locale sono collegate a uno switch:
+.. Modifica tutte le LIF del cluster per disattivare l'indirizzamento automatico:
 +
-*** Scollegare le interfacce del cluster locale
-*** Disconnettere gli ISL del cluster locale
-
-
-** Scollegare le interfacce IP di MetroCluster
-** Disconnettere gli ISL MetroCluster
+[source, asciidoc]
+----
+net int modify -vserver <vserver_name> -lif <lif_name> -auto-revert false
+----
+.. Scollegare le interfacce del cluster locale
+.. Disconnettere gli ISL del cluster locale
+.. Scollegare le interfacce IP di MetroCluster
+.. Disconnettere gli ISL MetroCluster
 +
 Nell'esempio <<port_usage_worksheet>>, gli switch non cambiano. Gli ISL MetroCluster vengono ricollocati e devono essere disconnessi. Non è necessario scollegare le connessioni contrassegnate in verde sul foglio di lavoro.
 
