@@ -120,13 +120,15 @@ La seguente tabella mostra lo stato (online o offline) di un aggregato senza mir
 |===
 
 
-| Tipo di switchover | Stato 
+| Tipo di switchover | Stato di configurazione di MetroCluster FC | Stato di configurazione dell'IP MetroCluster 
 
 
  a| 
 Switchover negoziato (NSO)
  a| 
 Online
+ a| 
+Offline (Nota 1)
 
 
 
@@ -134,6 +136,8 @@ Online
 Switchover automatico non pianificato (AUSO)
  a| 
 Online
+ a| 
+Offline (Nota 1)
 
 
 
@@ -143,8 +147,14 @@ Switchover non pianificato (USO)
 * Se lo storage non è disponibile: Offline
 * Se lo storage è disponibile: Online
 
+ a| 
+Offline (Nota 1)
 
 |===
+*Nota 1*: Nelle configurazioni IP di MetroCluster, una volta completato lo switchover, è possibile portare online manualmente gli aggregati senza mirror.
+
+Scopri di più <<Differenze nello switchover tra le configurazioni MetroCluster FC e IP>>.
+
 
 NOTE: Dopo uno switchover, se l'aggregato senza mirror si trova nel nodo partner DR e si verifica un errore di collegamento interswitch (ISL), il nodo locale potrebbe non funzionare.
 

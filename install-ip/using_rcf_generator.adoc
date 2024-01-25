@@ -26,7 +26,7 @@ Esaminare queste considerazioni prima di utilizzare le tabelle:
 
 == Cablaggio di configurazioni MetroCluster a otto nodi
 
-Per la configurazione di MetroCluster con ONTAP 9.8 e versioni precedenti, alcune procedure eseguite per la transizione di un aggiornamento richiedono l'aggiunta di un secondo gruppo di DR a quattro nodi alla configurazione per creare una configurazione temporanea a otto nodi. A partire da ONTAP 9.9.1, sono supportate le configurazioni MetroCluster permanenti a 8 nodi.
+Per la configurazione di MetroCluster con ONTAP 9.8 e versioni precedenti, alcune procedure eseguite per la transizione di un aggiornamento richiedono l'aggiunta di un secondo gruppo di DR a quattro nodi alla configurazione per creare una configurazione temporanea a otto nodi.  A partire da ONTAP 9,9.1, sono supportate le configurazioni permanenti di MetroCluster a otto nodi.
 
 .A proposito di questa attività
 Per tali configurazioni, si utilizza lo stesso metodo descritto in precedenza. Invece di un secondo MetroCluster, si sta cablando un gruppo DR aggiuntivo a quattro nodi.

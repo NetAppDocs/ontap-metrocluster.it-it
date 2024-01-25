@@ -613,7 +613,7 @@ Aggregati di dati multipli
  a| 
 Dal prompt di qualsiasi nodo, configurare MetroCluster:
 
-`metrocluster configure _node-name_`
+`metrocluster configure <node-name>`
 
 
 NOTE: Devi eseguire `metrocluster configure` e *non* `metrocluster configure -refresh true`
@@ -632,7 +632,7 @@ Devi rispondere con `y` quando viene richiesto di passare alla modalità avanzat
 
 .. Configurare MetroCluster con `-allow-with-one-aggregate true` parametro:
 +
-`metrocluster configure -allow-with-one-aggregate true _node-name_`
+`metrocluster configure -allow-with-one-aggregate true -node-name <node-name>`
 
 .. Tornare al livello di privilegio admin:
 +
@@ -720,6 +720,13 @@ Do you want to continue? {y|n}: y
 
 cluster_A::>
 ....
+. Verificare che tutti i nodi nel cluster siano integri:
++
+`cluster show`
+
++
+L'output dovrebbe essere visualizzato `true` per `health` campo per tutti i nodi.
+
 . Verificare che sia possibile il Takeover e che i nodi siano connessi eseguendo il seguente comando su entrambi i cluster:
 +
 `storage failover show`
@@ -736,6 +743,18 @@ Node_FC_2      Node_FC_1              true      Connected to Node_FC_1
 Node_IP_1      Node_IP_2              true      Connected to Node_IP_2
 Node_IP_2      Node_IP_1              true      Connected to Node_IP_1
 ----
+. Verificare che tutti i dischi collegati ai nodi IP MetroCluster appena aggiunti siano presenti:
++
+`disk show`
+
+. Verificare l'integrità della configurazione di MetroCluster eseguendo i seguenti comandi:
++
+.. `metrocluster check run`
+.. `metrocluster check show`
+.. `metrocluster interconnect mirror show`
+.. `metrocluster interconnect adapter show`
+
+
 . Spostare i volumi MDV_CRS dai vecchi nodi ai nuovi nodi con privilegi avanzati.
 +
 .. Visualizzare i volumi per identificare i volumi MDV:

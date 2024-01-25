@@ -13,13 +13,13 @@ summary: È possibile aggiungere quattro nuovi nodi alla configurazione IP di Me
 [role="lead"]
 A seconda della versione di ONTAP, è possibile espandere la configurazione IP di MetroCluster aggiungendo quattro nuovi nodi come nuovo gruppo di DR.
 
-A partire da ONTAP 9.13.1, è possibile aggiungere quattro nuovi nodi alla configurazione IP di MetroCluster come terzo gruppo di DR. In questo modo viene creata una configurazione MetroCluster a dodici nodi.
+A partire da ONTAP 9.13.1, puoi espandere temporaneamente una configurazione MetroCluster a otto nodi per fare un refresh dei controller e dello storage. Vedere link:https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_refresh_4n_mcc_ip.html["Aggiornamento di una configurazione MetroCluster IP a quattro o otto nodi (ONTAP 9.8 e versioni successive)"] per ulteriori informazioni.
 
 A partire da ONTAP 9.9.1, è possibile aggiungere quattro nuovi nodi alla configurazione IP di MetroCluster come secondo gruppo di DR. In questo modo viene creata una configurazione MetroCluster a otto nodi.
 
 .Prima di iniziare
 * I nodi vecchi e nuovi devono eseguire la stessa versione di ONTAP.
-* Questa procedura descrive i passaggi necessari per espandere un gruppo DR a quattro nodi. Se si dispone di una configurazione a otto nodi (due gruppi DR), è necessario ripetere l'intera procedura per ciascun gruppo DR.
+* Questa procedura descrive i passaggi necessari per aggiungere un gruppo DR a quattro nodi a una configurazione IP MetroCluster esistente. Se si aggiorna una configurazione a otto nodi, è necessario ripetere l'intera procedura per ciascun gruppo di DR, aggiungendone uno alla volta.
 * Verificare che i modelli di piattaforma vecchi e nuovi siano supportati per la combinazione di piattaforme.
 +
 https://hwu.netapp.com["NetApp Hardware Universe"^]
