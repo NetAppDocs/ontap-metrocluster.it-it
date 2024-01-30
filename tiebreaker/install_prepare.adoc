@@ -2,30 +2,39 @@
 permalink: tiebreaker/install_prepare.html 
 sidebar: sidebar 
 keywords: install, tiebreaker, software, monitor, capabilities, capability, cluster, storage, environment, snmp, notification, event, node, connectivity, issue, site, disaster, system, install, upgrade, upgrading, software, dependencies, dependency, package, ntp, requirements, requirements for tiebreaker, tiebreaker requirements, mysql, mariadb, autostart, database 
-summary: Il software Tiebreaker offre funzionalità di monitoraggio per un ambiente di storage in cluster. Inoltre, invia notifiche SNMP in caso di problemi di connettività del nodo e di disastri del sito. 
+summary: Prima di installare e configurare il software Tiebreaker, è necessario verificare che il sistema soddisfi determinati requisiti. 
 ---
-= Verifica dei requisiti
+= Preparare l'installazione del software Tiebreaker
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Il software Tiebreaker offre funzionalità di monitoraggio per un ambiente di storage in cluster. Inoltre, invia notifiche SNMP in caso di problemi di connettività del nodo e di disastri del sito.
-
-Il software Tiebreaker deve essere installato e configurato.
+Prima di installare e configurare il software Tiebreaker, è necessario verificare che il sistema soddisfi determinati requisiti.
 
 
 
 == Requisiti software
 
-È necessario soddisfare i seguenti requisiti software, a seconda della versione di tiebreaker che si sta installando.
+È necessario soddisfare i seguenti requisiti software a seconda della versione di Tiebreaker che si sta installando.
 
 [cols="1,1,1,2"]
 |===
 
 
 | Versione Tiebreaker ONTAP | Versioni di ONTAP supportate | Versioni Linux supportate | Requisiti Java/MariaDB 
+
+
+ a| 
+1.6
+ a| 
+ONTAP 9.12.1 e versioni successive
+ a| 
+Fare riferimento a. link:whats_new.html#os-support-matrix["Matrice di supporto del sistema operativo"] per ulteriori informazioni.
+ a| 
+Nessuno. Le dipendenze vengono fornite in bundle con l'installazione.
+
 
 
  a| 
