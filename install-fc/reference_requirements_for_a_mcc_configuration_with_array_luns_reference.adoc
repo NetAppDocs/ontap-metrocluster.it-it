@@ -66,11 +66,14 @@ https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp
 * Ogni fabric deve disporre di due switch FC.
 * Ogni sistema ONTAP deve essere collegato allo storage utilizzando componenti ridondanti in modo da garantire la ridondanza in caso di guasti al dispositivo e al percorso.
 * I sistemi storage AFF A700, FAS9000, AFF A900 e FAS9500 supportano fino a otto ISL per fabric. Altri modelli di sistemi storage supportano fino a quattro ISL per fabric.
+* Gli switch devono utilizzare la configurazione di base dello switch MetroCluster, le impostazioni ISL e le configurazioni FC-VI.
++
+link:task_fcsw_cisco_configure_a_cisco_switch_supertask.html["Configurare manualmente gli switch Cisco FC"]
+
++
+link:ask_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Configurare manualmente gli switch FC Brocade"]
 
 
-Gli switch devono utilizzare la configurazione di base dello switch MetroCluster, le impostazioni ISL e le configurazioni FC-VI.
-
-link:task_fcsw_configure_the_cisco_or_brocade_fc_switches_manually.html["Configurazione manuale degli switch FC Cisco o Brocade"]
 
 
 
