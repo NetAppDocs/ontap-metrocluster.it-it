@@ -113,13 +113,7 @@ FC_switch_B_1:admin> switchshow
 +
 `firmwareShow`
 
-.. Configurare il nuovo switch come descritto in _Installazione e configurazione di MetroCluster_, ma saltare la procedura "`Configurazione dello zoning su switch FC Brocade'".
-+
-https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"]
-
-+
-La configurazione dello zoning viene eseguita più avanti in questa procedura.
-
+.. Configurare il nuovo switch seguendo i passaggi indicati nella sezione link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Configurare manualmente gli switch Brocade FC"].
 +
 
 NOTE: A questo punto, il nuovo switch non viene collegato alla configurazione MetroCluster.
@@ -173,6 +167,10 @@ Se si attiva la crittografia ISL, è necessario completare le seguenti attività
 FC_switch_B_1:admin> portcfgpersistentenable 10
 FC_switch_B_1:admin> portcfgpersistentenable 11
 ----
+.. Verificare la configurazione dello zoning:
++
+`cfg show`
+
 .. Sullo switch sostitutivo (FC_switch_B_1 nell'esempio), verificare che gli ISL siano in linea:
 +
 `switchshow`

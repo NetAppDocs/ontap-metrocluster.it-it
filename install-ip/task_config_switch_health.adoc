@@ -1,0 +1,111 @@
+---
+permalink: install-ip/task_config_switch_health.html 
+sidebar: sidebar 
+keywords: ip, switch, connection, configuring, configure, broadcom, snmp, health, monitoring 
+summary: È possibile configurare gli switch IP in modo che utilizzino SNMPv3 per il monitoraggio dello stato. 
+---
+= Configurare gli switch IP MetroCluster per il monitoraggio dello stato
+:allow-uri-read: 
+
+
+[role="lead"]
+Nelle configurazioni IP di MetroCluster, è possibile configurare SNMPv3 per monitorare lo stato degli switch IP.
+
+
+
+== Passaggio 1: Configurare l'utente SNMPv3 sugli switch IP MetroCluster
+
+Per configurare l'utente SNMPv3 sugli switch IP MetroCluster, procedere come segue.
+
+
+IMPORTANT: Nei comandi è necessario utilizzare sia i protocolli di autenticazione che quelli di privacy. L'utilizzo dell'autenticazione senza privacy non è supportato.
+
+[role="tabbed-block"]
+====
+.Per gli switch IP Broadcom
+--
+.Fasi
+. Se il gruppo utenti 'network-admin' non esiste già, crearlo:
++
+`(IP_switch_1) (Config)# snmp-server group network-admin v3 auth read "Default"`
+
+. Confermare che il gruppo "network-admin" è stato creato:
++
+`(IP_switch_1) (Config)# show snmp group`
+
+. Configurare l'utente SNMPv3 sugli switch IP Broadcom:
++
+[listing]
+----
+(IP_switch_1)# config
+(IP_switch_1) (Config)# snmp-server user <user_name> network-admin [auth-md5/auth-sha/noauth] "<auth_password>" [priv-aes128/priv-des] "<priv_password>"
+----
++
+È necessario utilizzare le virgolette intorno alle password di autenticazione e privacy, come illustrato nell'esempio seguente:
+
++
+[listing]
+----
+snmp-server user admin1 network-admin auth-md5 "password" priv-des "password"
+----
+
+
+--
+.Per gli switch IP Cisco
+--
+.Fasi
+. Eseguire i seguenti comandi per configurare l'utente SNMPv3 su uno switch IP Cisco:
++
+[listing]
+----
+IP_switch_A_1 # configure terminal
+IP_switch_A_1 (config) # snmp-server user <user_name>  auth [md5/sha/sha-256] <auth_password> priv (aes-128) <priv_password>
+----
+. Verificare che l'utente SNMPv3 sia configurato sullo switch:
++
+`IP_switch_A_1(config) # show snmp user <user_name>`
+
++
+L'output di esempio riportato di seguito mostra che l'utente `admin` È configurato per SNMPv3:
+
++
+[listing]
+----
+IP_switch_A_1(config)# show snmp user admin
+User                Auth      Priv(enforce) Groups              acl_filter
+
+____                ____      _____________ ______              __________
+
+admin               md5       aes-128(no)   network-admin
+----
+
+
+--
+====
+
+
+== Passaggio 2: Configurare l'utente SNMPv3 in ONTAP
+
+Per configurare l'utente SNMPv3 in ONTAP, procedere come segue.
+
+. Configurare l'utente SNMPv3 in ONTAP:
++
+`security login create -user-or-group-name <user_name> -application snmp -authentication-method usm -remote-switch-ipaddress <ip_address>`
+
+. Configurare il monitoraggio dello stato dello switch per monitorare lo switch utilizzando il nuovo utente SNMPv3:
++
+`system switch ethernet modify -device <device_id> -snmp-version SNMPv3 -community-or-username <user_name>`
+
+. Verificare che il numero di serie della periferica che verrà monitorato con l'utente SNMPv3 appena creato sia corretto:
++
+.. Visualizzare il periodo di tempo di polling del monitoraggio dello stato dello switch:
++
+`system switch ethernet polling-interval show`
+
+.. Eseguire il comando seguente dopo aver esaurito il tempo di polling:
++
+`system switch ethernet show-all -instance -device <device_serial_number>`
+
+
+
+
