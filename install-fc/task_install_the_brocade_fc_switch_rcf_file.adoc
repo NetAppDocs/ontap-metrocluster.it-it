@@ -14,7 +14,9 @@ summary: Quando si configura uno switch FC Brocade, è possibile installare i fi
 Quando si configura uno switch FC Brocade, è possibile installare i file di configurazione dello switch che forniscono le impostazioni complete per determinate configurazioni.
 
 .A proposito di questa attività
-Questi passaggi devono essere ripetuti su ciascuno switch FC Brocade nella configurazione MetroCluster Fabric.
+* Ripetere questa procedura su ciascuno switch FC Brocade nella configurazione MetroCluster Fabric.
+* Se si utilizza una configurazione xWDM, potrebbero essere necessarie impostazioni aggiuntive sugli ISL. Per ulteriori informazioni, consultare la documentazione del fornitore di xWDM.
+
 
 .Fasi
 . Avviare il processo di download e configurazione:

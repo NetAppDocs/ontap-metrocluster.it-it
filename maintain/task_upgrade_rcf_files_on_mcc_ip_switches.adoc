@@ -65,7 +65,9 @@ Filename : NX3232_v1.80_Switch-A2.txt
 Se si sta installando un nuovo firmware dello switch, è necessario installare il firmware dello switch prima di aggiornare il file RCF.
 
 .A proposito di questa attività
-Questa procedura interrompe il traffico sullo switch in cui viene aggiornato il file RCF. Il traffico riprenderà una volta applicato il nuovo file RCF.
+* Questa procedura interrompe il traffico sullo switch in cui viene aggiornato il file RCF. Il traffico riprenderà una volta applicato il nuovo file RCF.
+* Eseguire le operazioni su un interruttore alla volta, nell'ordine seguente: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2.
+
 
 .Fasi
 . Verificare lo stato della configurazione.
@@ -96,8 +98,6 @@ Dopo circa cinque minuti, vengono visualizzati i seguenti risultati:
 -----------
 ::*> metrocluster check show
 
-Last Checked On: 4/7/2019 21:15:05
-
 Component           Result
 ------------------- ---------
 nodes               ok
@@ -126,16 +126,14 @@ Seguire la procedura per il fornitore dello switch:
 +
 ** link:../install-ip/task_switch_config_broadcom.html["Ripristino delle impostazioni predefinite dello switch IP Broadcom"]
 ** link:../install-ip/task_switch_config_cisco.html["Ripristino delle impostazioni predefinite dello switch IP Cisco"]
+** link:../install-ip/task_switch_config_nvidia.html["Ripristino delle impostazioni predefinite dello switch NVIDIA IP SN2100"]
 
 
 . Scaricare e installare il file RCF IP, a seconda del fornitore dello switch.
 +
-
-NOTE: Aggiornare gli switch nel seguente ordine: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2
-
-+
 ** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-rcf-files["Download e installazione dei file Broadcom IP RCF"]
 ** link:../install-ip/task_switch_config_cisco.html#downloading-and-installing-the-cisco-ip-rcf-files["Download e installazione dei file Cisco IP RCF"]
+** link:../install-ip/task_switch_config_nvidia.html#download-and-install-the-nvidia-rcf-files["Download e installazione dei file RCF NVIDIA IP"]
 +
 
 NOTE: Se si dispone di una configurazione di rete L2 condivisa o L3, potrebbe essere necessario regolare le porte ISL sugli switch intermedi/clienti. La modalità switchport potrebbe passare dalla modalità 'access' alla modalità 'trunk'. Procedere all'aggiornamento della seconda coppia di switch (A_2, B_2) solo se la connettività di rete tra gli switch A_1 e B_1 è completamente operativa e la rete funziona correttamente.

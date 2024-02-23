@@ -13,7 +13,7 @@ summary: È possibile aggiungere quattro nuovi nodi alla configurazione IP di Me
 [role="lead"]
 A seconda della versione di ONTAP, è possibile espandere la configurazione IP di MetroCluster aggiungendo quattro nuovi nodi come nuovo gruppo di DR.
 
-A partire da ONTAP 9.13.1, puoi espandere temporaneamente una configurazione MetroCluster a otto nodi per fare un refresh dei controller e dello storage. Vedere link:https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_refresh_4n_mcc_ip.html["Aggiornamento di una configurazione MetroCluster IP a quattro o otto nodi (ONTAP 9.8 e versioni successive)"] per ulteriori informazioni.
+A partire da ONTAP 9.13.1, puoi espandere temporaneamente una configurazione MetroCluster a otto nodi per fare un refresh dei controller e dello storage. Vedere link:task_refresh_4n_mcc_ip.html["Aggiornamento di una configurazione MetroCluster IP a quattro o otto nodi (ONTAP 9.8 e versioni successive)"] per ulteriori informazioni.
 
 A partire da ONTAP 9.9.1, è possibile aggiungere quattro nuovi nodi alla configurazione IP di MetroCluster come secondo gruppo di DR. In questo modo viene creata una configurazione MetroCluster a otto nodi.
 
@@ -28,7 +28,7 @@ https://hwu.netapp.com["NetApp Hardware Universe"^]
 +
 https://hwu.netapp.com["NetApp Hardware Universe"^]
 
-* I nuovi nodi devono disporre di storage sufficiente per ospitare i dati dei vecchi nodi, insieme a dischi adeguati per gli aggregati root e i dischi spare.
+* Se lo sei link:task_refresh_4n_mcc_ip.html["Aggiornamento di una configurazione IP MetroCluster a quattro o otto nodi"], i nuovi nodi devono disporre di spazio di archiviazione sufficiente per ospitare i dati dei vecchi nodi, insieme a dischi adeguati per gli aggregati root e i dischi di riserva.
 * Verificare di disporre di un dominio di broadcast predefinito creato sui vecchi nodi.
 +
 Quando si aggiungono nuovi nodi a un cluster esistente senza un dominio di broadcast predefinito, le LIF di gestione nodi vengono create per i nuovi nodi utilizzando gli UUID (Universal Unique Identifier) e non i nomi previsti. Per ulteriori informazioni, consultare l'articolo della Knowledge base https://kb.netapp.com/onprem/ontap/os/Node_management_LIFs_on_newly-added_nodes_generated_with_UUID_names["LIF di gestione nodi su nodi appena aggiunti generati con nomi UUID"^].
@@ -380,8 +380,6 @@ Dopo circa cinque minuti, vengono visualizzati i seguenti risultati:
 ----
 -----------
 ::*> metrocluster check show
-
-Last Checked On: 4/7/2019 21:15:05
 
 Component           Result
 ------------------- ---------

@@ -8766,7 +8766,6 @@
   <block id="c51ce410c124a10e0db5e4b97fc2af39" category="paragraph">13</block>
   <block id="5482b27fb601c9d5069a7533e0dd1b02" category="summary">Quando si configura uno switch FC Brocade, è possibile installare i file di configurazione dello switch che forniscono le impostazioni complete per determinate configurazioni.</block>
   <block id="c2a1b1aaf420fd5fc4e694faa94de89f" category="doc">Installazione del file RCF dello switch FC Brocade</block>
-  <block id="40a501dacb79ddf4f770555994a4dbe9" category="paragraph">Questi passaggi devono essere ripetuti su ciascuno switch FC Brocade nella configurazione MetroCluster Fabric.</block>
   <block id="2d6424f21b7898ba895ef0e70f5c13c8" category="list-text">Avviare il processo di download e configurazione:</block>
   <block id="3ef73a7a519c5b4a03c363a138b097eb" category="paragraph"><block ref="087055abbdd65f4791f9e6ce913c7cc4" prefix="" category="inline-code"></block></block>
   <block id="d304e0e1a0c74d4f29c7bf97c9e6c845" category="paragraph">Rispondere alle richieste come mostrato nell'esempio seguente.</block>
@@ -12309,7 +12308,6 @@
   <block id="f7ebd0c3919ed1a579352a95f757a9e6" category="paragraph">A seconda della versione di ONTAP, è possibile espandere la configurazione IP di MetroCluster aggiungendo quattro nuovi nodi come nuovo gruppo di DR.</block>
   <block id="a8307b4c5fa271005a1338d5b405ca1f" category="paragraph">A partire da ONTAP 9.9.1, è possibile aggiungere quattro nuovi nodi alla configurazione IP di MetroCluster come secondo gruppo di DR. In questo modo viene creata una configurazione MetroCluster a otto nodi.</block>
   <block id="44e7e75e628cd7549a2dac175d45b418" category="list-text">I nodi vecchi e nuovi devono eseguire la stessa versione di ONTAP.</block>
-  <block id="2ee2465217913ae7b455ab4ef5e995e6" category="list-text">I nuovi nodi devono disporre di storage sufficiente per ospitare i dati dei vecchi nodi, insieme a dischi adeguati per gli aggregati root e i dischi spare.</block>
   <block id="83ea901534b27c16af49cdec25309a81" category="paragraph">dr_group_1-old</block>
   <block id="4964adde77a48b7ff0a1301a093aa1c8" category="list-text">Node_A_1-old</block>
   <block id="2bdbc2b61afb773655de11b134614ec5" category="list-text">Node_A_2-old</block>
@@ -13297,7 +13295,6 @@
   <block id="44f3e9b14f204b411afdea78f7b0391c" category="doc">Note di rilascio di MetroCluster</block>
   <block id="af8a69aa12393a4d9b6992e884f1c919" category="sidebar">Documenti MetroCluster</block>
   <block id="b8b5370c063dd2b4ce4021558a49ac07" category="paragraph">Per la configurazione di MetroCluster con ONTAP 9.8 e versioni precedenti, alcune procedure eseguite per la transizione di un aggiornamento richiedono l'aggiunta di un secondo gruppo di DR a quattro nodi alla configurazione per creare una configurazione temporanea a otto nodi.  A partire da ONTAP 9,9.1, sono supportate le configurazioni permanenti di MetroCluster a otto nodi.</block>
-  <block id="ff66d22d6ddbc0a6a59188599728f8d1" category="paragraph">A partire da ONTAP 9.13.1, puoi espandere temporaneamente una configurazione MetroCluster a otto nodi per fare un refresh dei controller e dello storage. Vedere <block ref="6e6fb56321b906b7bb3a671d5fc5dfc7" category="inline-link-macro-rx"></block> per ulteriori informazioni.</block>
   <block id="0abe9117fda19697d2dbf1bd1d754e02" category="list-text">Questa procedura descrive i passaggi necessari per aggiungere un gruppo DR a quattro nodi a una configurazione IP MetroCluster esistente. Se si aggiorna una configurazione a otto nodi, è necessario ripetere l'intera procedura per ciascun gruppo di DR, aggiungendone uno alla volta.</block>
   <block id="84d04e0c7f711ba6800f8d3bd5bc0847" category="inline-xref">Utilizzo delle porte Cisco 9132T in una configurazione MetroCluster che esegue ONTAP 9,4 o versione successiva</block>
   <block id="ccdfc130a534c248f558d6495323cb02" category="admonition">Per Cisco 9132T, vedere <block ref="3db7a367aafc64164b814f36e8341eaa" category="inline-xref-macro-rx"></block>.</block>
@@ -13418,4 +13415,15 @@
   <block id="4e8c2092c0a2bb40fde077763873c66c" category="paragraph"><block ref="c9e6cd6140c9d8677df821c7cce2aac1" prefix="" category="inline-code"></block></block>
   <block id="b9035c5f27542cbf7fb14fced8e330ba" category="list-text">Eseguire il comando seguente dopo aver esaurito il tempo di polling:</block>
   <block id="20c4c39b07a94d810605541c0137f531" category="paragraph"><block ref="9214d4fe696fff6386a131ecee126bc4" prefix="" category="inline-code"></block></block>
+  <block id="0ca1a0fce29aa8b27d10b5cf276a5a5c" category="list-text">Se si utilizza una configurazione xWDM, potrebbero essere necessarie impostazioni aggiuntive sugli ISL. Per ulteriori informazioni, consultare la documentazione del fornitore di xWDM.</block>
+  <block id="e389e5759cd93883cfbee1a000ab0c47" category="list-text">Ripetere questa procedura su ciascuno switch FC Brocade nella configurazione MetroCluster Fabric.</block>
+  <block id="9dc72cfc812a43dbca6ba4e6357b2b04" category="paragraph">A partire da ONTAP 9.13.1, puoi espandere temporaneamente una configurazione MetroCluster a otto nodi per fare un refresh dei controller e dello storage. Vedere <block ref="df5e6373f54c9330727709bb1055a079" category="inline-link-macro-rx"></block> per ulteriori informazioni.</block>
+  <block id="e6f19b92e0e69fc5d74e94088b442a26" category="inline-link-macro">Aggiornamento di una configurazione IP MetroCluster a quattro o otto nodi</block>
+  <block id="ae236ebe2cd05ce4da7fe73d504f4946" category="list-text">Se lo sei <block ref="54f4a86aff0fc5aba4d6e37b225734c0" category="inline-link-macro-rx"></block>, i nuovi nodi devono disporre di spazio di archiviazione sufficiente per ospitare i dati dei vecchi nodi, insieme a dischi adeguati per gli aggregati root e i dischi di riserva.</block>
+  <block id="30db39dffca5d3a3ab759b48303153b1" category="list-text">Se il gruppo DR da rimuovere contiene volumi mirror per la condivisione del carico, non è possibile spostarli.  Ricreare tutti i volumi mirror di condivisione del carico in un altro gruppo DR, quindi eliminare i volumi mirror di condivisione del carico nel gruppo DR da rimuovere.</block>
+  <block id="0108924065f583138162139c8d2325c4" category="list-text">Eseguire le operazioni su un interruttore alla volta, nell'ordine seguente: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2.</block>
+  <block id="4c73c980356e24dbc4b9bfa823ff3540" category="inline-link-macro">Ripristino delle impostazioni predefinite dello switch NVIDIA IP SN2100</block>
+  <block id="5ea045545da6545f166122f615c720c2" category="list-text"><block ref="5ea045545da6545f166122f615c720c2" category="inline-link-macro-rx"></block></block>
+  <block id="9d2a9152feb1a65b3472b15d2e557bca" category="inline-link-macro">Download e installazione dei file RCF NVIDIA IP</block>
+  <block id="3ebe02a815587b2ddedbada8c501d0ef" category="list-text"><block ref="3ebe02a815587b2ddedbada8c501d0ef" category="inline-link-macro-rx"></block></block>
 </blocks>
