@@ -124,7 +124,7 @@ Applicazioni di terze parti
 Consultare la documentazione del prodotto.
 
 |===
-. Eseguire tutte le operazioni descritte in link:../upgrade/task_expand_a_four_node_mcc_ip_configuration.html["Espansione di una configurazione IP MetroCluster"] per aggiungere i nuovi nodi e lo storage alla configurazione.
+. Eseguire tutte le operazioni descritte in link:../upgrade/task_expand_a_four_node_mcc_ip_configuration.html["Espansione di una configurazione IP MetroCluster"^] per aggiungere i nuovi nodi e lo storage alla configurazione.
 +
 Al termine della procedura di espansione, la configurazione temporanea viene visualizzata come mostrato nelle seguenti immagini:
 
@@ -154,16 +154,16 @@ Node_IP_2      Node_IP_1              true      Connected to Node_IP_1
 ----
 . Spostare i volumi CRS.
 +
-Eseguire le operazioni descritte in link:../maintain/task_move_a_metadata_volume_in_mcc_configurations.html["Spostamento di un volume di metadati nelle configurazioni MetroCluster"].
+Eseguire le operazioni descritte in link:../maintain/task_move_a_metadata_volume_in_mcc_configurations.html["Spostamento di un volume di metadati nelle configurazioni MetroCluster"^].
 
-. Spostare i dati dai vecchi nodi ai nuovi nodi seguendo le procedure descritte in link:https://docs.netapp.com/us-en/ontap-systems-upgrade/index.html["Documentazione dei sistemi hardware ONTAP"^]
+. Spostare i dati dai vecchi nodi ai nuovi nodi seguendo le seguenti procedure:
 +
-.. Eseguire tutte le operazioni descritte in http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-AFE432F6-60AD-4A79-86C0-C7D12957FA63.html["Creazione di un aggregato e spostamento dei volumi nei nuovi nodi"^].
+.. Eseguire tutte le operazioni descritte in https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade/upgrade-create-aggregate-move-volumes.html["Creare un aggregato e spostare i volumi nei nuovi nodi"^].
 +
 
 NOTE: È possibile scegliere di eseguire il mirroring dell'aggregato quando o dopo la sua creazione.
 
-.. Eseguire tutte le operazioni descritte in http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-95CA9262-327D-431D-81AA-C73DEFF3DEE2.html["Spostamento di LIF di dati non SAN e LIF di gestione del cluster nei nuovi nodi"].
+.. Eseguire tutte le operazioni descritte in https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade/upgrade-move-lifs-to-new-nodes.html["Spostamento delle LIF dati non SAN e delle LIF di gestione cluster nei nuovi nodi"^].
 
 
 . Modificare l'indirizzo IP per il peer del cluster dei nodi in transizione per ciascun cluster:

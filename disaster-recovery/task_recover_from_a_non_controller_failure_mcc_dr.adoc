@@ -21,9 +21,11 @@ Dopo che l'apparecchiatura nel sito di emergenza ha subito qualsiasi manutenzion
 
 
 
-== Riparazione della configurazione in una configurazione MetroCluster FC
+== Correzione della configurazione in una configurazione MetroCluster
 
-Dopo uno switchover, è necessario eseguire le operazioni di riparazione in ordine specifico per ripristinare la funzionalità MetroCluster.
+Nelle configurazioni FC di MetroCluster è possibile eseguire le operazioni di riparazione in un ordine specifico per ripristinare la funzionalità MetroCluster in seguito a uno switchover.
+
+Nelle configurazioni IP di MetroCluster, le operazioni di riparazione dovrebbero avviarsi automaticamente in seguito a uno switchover. In caso contrario, è possibile eseguire le operazioni di riparazione manualmente.
 
 .Prima di iniziare
 * Lo switchover deve essere stato eseguito e il sito sopravvissuto deve fornire i dati.
