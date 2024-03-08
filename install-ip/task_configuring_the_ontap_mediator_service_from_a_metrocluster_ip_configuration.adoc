@@ -24,7 +24,7 @@ link:https://docs.netapp.com/us-en/ontap/mediator/index.html["Installare o aggio
 
 
 
-CAUTION: A partire da ONTAP 9.12.1, è possibile attivare la funzione di switchover forzato automatico di MetroCluster in una configurazione IP di MetroCluster. Questa funzione è un'estensione dello switchover non pianificato assistito dal mediatore. Prima di attivare questa funzione, consultare link:concept-risks-limitations-automatic-switchover.html["Rischi e limitazioni dell'utilizzo dello switchover forzato automatico di MetroCluster"].
+CAUTION: A partire da ONTAP 9.12.1, è possibile attivare la funzione di switchover forzato automatico di MetroCluster in una configurazione IP di MetroCluster. Questa funzione è un'estensione dello switchover non pianificato assistito dal mediatore. Prima di attivare questa funzione, consultare la link:concept-ontap-mediator-supports-automatic-unplanned-switchover.html#mauso-9-12-1["Rischi e limitazioni dell'utilizzo dello switchover forzato automatico di MetroCluster"].
 
 .A proposito di questa attività
 * Questa attività attiva lo switchover automatico non pianificato per impostazione predefinita.
@@ -117,7 +117,7 @@ Remote: cluster_B         Configuration state configured
 
 +
 
-IMPORTANT: Prima di utilizzare questo comando, rivedere la link:concept-risks-limitations-automatic-switchover.html["Rischi e limitazioni dell'utilizzo dello switchover forzato automatico di MetroCluster"].
+IMPORTANT: Prima di utilizzare questo comando, rivedere la link:concept-ontap-mediator-supports-automatic-unplanned-switchover.html#mauso-9-12-1["Rischi e limitazioni dell'utilizzo dello switchover forzato automatico di MetroCluster"].
 
 +
 `metrocluster modify -allow-auto-forced-switchover true`

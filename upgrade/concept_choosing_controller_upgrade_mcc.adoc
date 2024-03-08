@@ -69,7 +69,18 @@ Ad esempio, se la piattaforma che si desidera aggiornare è FAS8200, è possibil
 image::../media/metrocluster_fc_upgrade_table_914.png[MetroCluster fc tabella di aggiornamento 914]
 
 * Nota 1: Per l'aggiornamento dei controller quando le connessioni FCVI su nodi FAS8020 o AFF8020 esistenti utilizzano le porte 1c e 1d, vedere quanto seguehttps://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/Upgrading_controllers_when_FCVI_connections_on_existing_FAS8020_or_AFF8020_nodes_use_ports_1c_and_1d["Articolo della Knowledge base"^].
-* Nota 2: Gli aggiornamenti dei controller dalle piattaforme AFF A300 o FAS8200 che utilizzano le porte onboard 0e e 0f come connessioni FC-VI sono supportati solo sui sistemi che eseguono ONTAP 9.9.1. o prima. Per ulteriori informazioni, consultare link:https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1507088["Report pubblico"^].
+* Nota 2: Gli upgrade dei controller da piattaforme AFF A300 o FAS8200 utilizzando le porte integrate 0e e 0f come connessioni FC-VI sono supportati solo sui seguenti sistemi:
++
+** ONTAP 9.9.1 e versioni precedenti
+** ONTAP 9.10.1P9
+** ONTAP 9.11.1P5
+** ONTAP 9.12.1GA
+** ONTAP 9.13.1 e versioni successive
++
+Per ulteriori informazioni, consultare link:https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1507088["Report pubblico"^].
+
+
+
 * Nota 3: Per questo aggiornamento, fare riferimento a. link:task_upgrade_A700_to_A900_in_a_four_node_mcc_fc_us_switchover_and_switchback.html["Upgrade dei controller da AFF A700/FAS9000 a AFF A900/FAS9500 in una configurazione MetroCluster FC utilizzando switchover e switchback (ONTAP 9.10.1 o versione successiva)"]
 * Nota 4: Gli upgrade dei controller sono supportati sui sistemi con ONTAP 9.13.1 o versione successiva.
 * Nota 5: Gli upgrade dei controller sono supportati sui sistemi con ONTAP 9.14.1 o versione successiva.

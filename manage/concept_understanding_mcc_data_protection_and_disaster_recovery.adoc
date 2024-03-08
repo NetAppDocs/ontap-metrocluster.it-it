@@ -736,18 +736,7 @@ link:task_perform_switchover_for_tests_or_maintenance.html["Esecuzione di uno sw
 
 === Switchover automatico non pianificato assistito dal mediatore nelle configurazioni MetroCluster IP
 
-Nelle configurazioni MetroCluster IP, il sistema può utilizzare il mediatore ONTAP per rilevare gli errori ed eseguire un MAUSO (Automatic Unplanned Switchover) assistito dal mediatore.
-
-A partire da ONTAP 9.13.1, il valore predefinito per lo stato AUSO è impostato su "auso-on-dr-group" in una configurazione IP MetroCluster. Per ONTAP 9.12.1 e versioni precedenti, il valore predefinito è "uso-su-cluster-disaster". In una configurazione MetroCluster IP a otto nodi, questa opzione attiva UN'OPZIONE AUSO se entrambi i nodi in una coppia ha hanno esito negativo.
-
-È possibile modificare il dominio AUSO in "auso-on-cluster-disaster" utilizzando `metrocluster modify -auto-switchover-failure-domain auso-on-cluster-disaster` comando.
-
-
-NOTE: MAUSO non è supportato nelle configurazioni MetroCluster FC.
-
-Il mediatore ONTAP fornisce i LUN delle caselle postali per i nodi IP MetroCluster. Queste LUN sono in co-location con il mediatore ONTAP, che viene eseguito su un host Linux fisicamente separato dai siti MetroCluster.
-
-I nodi MetroCluster utilizzano le informazioni della mailbox per determinare se è necessario un MAUSO. MAUSO non viene avviato se la memoria non volatile (NVRAM o NVMEM, a seconda del modello di piattaforma) nei controller di storage non viene sottoposta a mirroring con il partner di disaster recovery remoto (DR) sul sito del partner
+link:../install-ip/concept-ontap-mediator-supports-automatic-unplanned-switchover.html["Scoprite in che modo ONTAP Mediator supporta lo switchover automatico non pianificato nelle configurazioni IP di MetroCluster"].
 
 
 

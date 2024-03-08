@@ -81,7 +81,7 @@ Seguire la procedura descritta in link:https://docs.netapp.com/us-en/ontap-metro
 ... Disconnettere gli ISL del cluster locale
 
 
-.. Scollegare le interfacce IP di MetroCluster.
+.. Scollegare le interfacce FC MetroCluster.
 .. Scollegare gli ISL MetroCluster.
 
 
@@ -92,7 +92,7 @@ Seguire la procedura descritta in link:https://docs.netapp.com/us-en/ontap-metro
 
 +
 .. Collegare gli ISL al sito remoto.
-.. Collegare le interfacce IP di MetroCluster.
+.. Collegare le interfacce FC MetroCluster.
 .. Collegare le interfacce del cluster locale.
 +
 Se le interfacce del cluster locale sono collegate a uno switch:

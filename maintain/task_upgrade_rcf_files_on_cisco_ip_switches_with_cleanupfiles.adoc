@@ -14,7 +14,40 @@ summary: Potrebbe essere necessario aggiornare un file RCF su uno switch IP Cisc
 Potrebbe essere necessario aggiornare un file RCF su uno switch IP Cisco. Ad esempio, un aggiornamento ONTAP o un aggiornamento del firmware dello switch richiedono un nuovo file RCF.
 
 .A proposito di questa attività
-A partire dalla versione 1.4a di RcfFileGenerator, è disponibile una nuova opzione per modificare (aggiornare, eseguire il downgrade o sostituire) la configurazione dello switch sugli switch IP Cisco senza eseguire una "cancellazione in scrittura".
+* A partire dalla versione 1.4a di RcfFileGenerator, è disponibile una nuova opzione per modificare (aggiornare, eseguire il downgrade o sostituire) la configurazione dello switch sugli switch IP Cisco senza eseguire una "cancellazione in scrittura".
+* Lo switch Cisco 9336C-FX2 è dotato di due tipi di storage di switch diversi con nomi diversi nell'RCF. Utilizzare la tabella seguente per determinare il tipo di storage Cisco 9336C-FX2 corretto per la propria configurazione:
++
+[cols="3*"]
+|===
+| Se si sta collegando il seguente dispositivo di archiviazione... | Scegliere il tipo di storage Cisco 9336C-FX2... | Banner/MOTD file RCF di esempio 
+
+
+ a| 
+** Shelf SAS collegati direttamente
+** Shelf NVMe connessi direttamente
+** Shelf NVMe connessi a switch storage dedicati
+
+ a| 
+9336C-FX2 - solo archiviazione diretta
+ a| 
+`* Switch    : NX9336C (direct storage, L2 Networks, direct ISL)`
+
+
+
+ a| 
+** Shelf SAS collegati direttamente
+** Shelf NVMe connessi agli switch IP MetroCluster
+
+
+
+NOTE: È richiesto almeno uno shelf NVMe connesso a Ethernet
+ a| 
+9336C-FX2 – Storage SAS ed Ethernet
+ a| 
+`* Switch    : NX9336C (SAS and Ethernet storage, L2 Networks, direct ISL)`
+
+|===
+
 
 .Prima di iniziare
 È possibile utilizzare questo metodo se la configurazione soddisfa i seguenti requisiti:
@@ -140,10 +173,6 @@ Utilizzare questa procedura se la configurazione soddisfa i requisiti.
 +
 
 NOTE: È necessario utilizzare CleanUpFiles della stessa versione del file RCF e per la stessa configurazione. L'utilizzo di CleanUpFile non funziona e potrebbe richiedere un ripristino completo dello switch.
-
-+
-
-NOTE: Il tipo di storage potrebbe essere diverso: Storage SAS o storage diretto.
 
 +
 

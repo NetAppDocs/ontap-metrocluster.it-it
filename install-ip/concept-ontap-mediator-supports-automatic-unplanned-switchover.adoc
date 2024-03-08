@@ -1,0 +1,74 @@
+---
+permalink: install-ip/concept-ontap-mediator-supports-automatic-unplanned-switchover.html 
+sidebar: sidebar 
+keywords: ontap, mediator, service, assist, metrocluster, ip, configuration, perform, automatic, unplan, switchover, physical, repository, status, information, configuring, configure, install, configuring, configure, forced 
+summary:  
+---
+= In che modo il mediatore ONTAP supporta lo switchover automatico non pianificato
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP Mediator fornisce i LUN delle cassette postali per memorizzare le informazioni sullo stato dei nodi IP di MetroCluster. Queste LUN sono in co-location con il mediatore ONTAP, che viene eseguito su un host Linux fisicamente separato dai siti MetroCluster. I nodi IP di MetroCluster possono utilizzare le informazioni della cassetta postale per monitorare lo stato dei partner di disaster recovery (DR) e implementare uno switchover non pianificato assistito da Mediator (MAUSO) in caso di emergenza.
+
+
+NOTE: MAUSO non è supportato nelle configurazioni MetroCluster FC.
+
+Quando un nodo rileva un guasto di un sito che richiede uno switchover, prende le misure necessarie per confermare che lo switchover è appropriato e, in tal caso, esegue lo switchover. Per impostazione predefinita, viene avviato un MAUSO per i seguenti scenari:
+
+* Il mirroring SyncMirror e il mirroring DR della cache non volatile di ciascun nodo sono in funzione e le cache e i mirror vengono sincronizzati al momento dell'errore.
+* Nessuno dei nodi nel sito sopravvissuto è in stato di Takeover.
+* In caso di disastro del sito. Un disastro del sito è un errore di _tutti_ nodi nello stesso sito.
+
+
+Un MAUSO viene _non_ avviato nei seguenti scenari di arresto:
+
+* Si avvia un arresto. Ad esempio, quando:
++
+** Arrestare i nodi
+** Riavviare i nodi
+
+
+
+
+Informazioni sulle funzioni MAUSO disponibili in ogni versione di ONTAP 9.
+
+[cols="1a,5a"]
+|===
+| A partire da... | Descrizione 
+
+
+ a| 
+ONTAP 9.13.1
+ a| 
+* Un MAUSO viene avviato se un <<default_scenarios,scenario predefinito>> si verifica e un guasto della ventola o dell'hardware avvia un arresto ambientale. Esempi di guasti hardware includono una temperatura alta o bassa, o un'unità di alimentazione, una batteria NVRAM o un guasto heartbeat del Service Processor.
+* Il valore predefinito per il dominio di errore è impostato su "auso-on-dr-group" in una configurazione IP di MetroCluster. Per ONTAP 9.12.1 e versioni precedenti, il valore predefinito è impostato su "auso-on-cluster-disaster".
++
+In una configurazione IP MetroCluster a otto nodi, "auso-on-dr-group" attiva un MAUSO in caso di errore del cluster o di coppia ha in un gruppo di DR. Per una coppia ha, entrambi i nodi devono guastarsi allo stesso tempo.
+
++
+In alternativa, è possibile modificare l'impostazione del dominio di errore nel dominio "auso-on-cluster-disaster" utilizzando `metrocluster modify -auto-switchover-failure-domain auso-on-cluster-disaster` Comando che attiva un MAUSO solo in presenza di errori nella coppia di nodi ha in entrambi i gruppi di DR.
+
+* È possibile modificare il comportamento per forzare un MAUSO anche se la NVRAM non è sincronizzata al momento dell'errore.
+
+
+
+
+ a| 
+[[mauso-9-12-1]] ONTAP 9.12.1
+ a| 
+È possibile attivare la funzione di switchover forzato automatico di MetroCluster in una configurazione IP di MetroCluster utilizzando il `metrocluster modify -allow-auto-forced-switchover true` comando.
+
+Lo switchover al rilevamento di un guasto di un sito avviene automaticamente quando si attiva la funzione di switchover forzato automatico di MetroCluster. È possibile utilizzare questa funzione per integrare la funzionalità di switchover automatico di MetroCluster IP.
+
+.Rischi e limitazioni dell'utilizzo dello switchover forzato automatico di MetroCluster
+Quando si consente a una configurazione IP di MetroCluster di funzionare in modalità di switchover forzato automatico, il seguente problema noto potrebbe causare la perdita di dati:
+
+* La memoria non volatile negli storage controller non viene mirrorati sul partner di DR remoto sul sito partner,
+
+
+*Attenzione*: Si potrebbero incontrare scenari non menzionati. NetApp non è responsabile di eventuali danneggiamenti dei dati, perdite di dati o altri danni che potrebbero derivare dall'attivazione della funzione di switchover automatico forzato di MetroCluster. Non utilizzare la funzione di switchover forzato automatico di MetroCluster se i rischi e le limitazioni non sono accettabili per l'utente.
+
+|===

@@ -312,8 +312,4 @@ Il software di spareggio attiva un avviso, ma ONTAP veto tale avviso. In questa 
 
 === In che modo il mediatore ONTAP supporta lo switchover automatico non pianificato
 
-Il mediatore ONTAP memorizza le informazioni di stato relative ai nodi MetroCluster nelle cassette postali situate sull'host del mediatore. I nodi MetroCluster possono utilizzare queste informazioni per monitorare lo stato dei propri partner DR e implementare un MAUSO (Automatic Unplanned Switchover) assistito da un mediatore in caso di disastro.
-
-Quando un nodo rileva un guasto di un sito che richiede uno switchover, prende le misure necessarie per confermare che lo switchover è appropriato e, in tal caso, esegue lo switchover.
-
-MAUSO viene avviato solo se sono operativi sia il mirroring SyncMirror che il mirroring DR della cache non volatile di ciascun nodo e le cache e i mirror vengono sincronizzati al momento dell'errore.
+link:../install-ip/concept-ontap-mediator-supports-automatic-unplanned-switchover.html["Scoprite in che modo ONTAP Mediator supporta lo switchover automatico non pianificato nelle configurazioni IP di MetroCluster"].
