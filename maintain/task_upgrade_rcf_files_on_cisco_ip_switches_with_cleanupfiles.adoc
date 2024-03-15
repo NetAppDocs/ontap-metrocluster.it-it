@@ -305,7 +305,7 @@ IP_switch_A_1# copy bootflash:NX9336_v1.90-X2_Switch-A1.txt running-config
 ----
 +
 
-NOTE: Durante l'applicazione della configurazione vengono visualizzati alcuni messaggi di avviso. Messaggi di errore non previsti.
+NOTE: Durante l'applicazione della configurazione vengono visualizzati alcuni messaggi di avviso. I messaggi di errore generalmente non sono previsti. Tuttavia, se si è connessi con SSH, potrebbe essere visualizzato il seguente errore: `Error: Can't disable/re-enable ssh:Current user is logged in through ssh`
 
 .. Una volta applicata la configurazione, verificare che il cluster e le porte MetroCluster siano in linea con uno dei seguenti comandi: `show interface brief`, `show cdp neighbors`, o. `show lldp neighbors`
 +
