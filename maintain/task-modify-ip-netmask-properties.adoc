@@ -1,10 +1,10 @@
 ---
-permalink: install-ip/task_modify_ip_netmask_gateway_properties.html 
+permalink: maintain/task-modify-ip-netmask-properties.html 
 sidebar: sidebar 
 keywords: vlan, ip, gateway,netmask, address, network, interface, subnet 
 summary: 'È possibile modificare le seguenti proprietà di un"interfaccia IP MetroCluster, indirizzo IP e maschera e gateway. È possibile utilizzare qualsiasi combinazione di parametri per l"aggiornamento.' 
 ---
-= Modifica di indirizzo, netmask e gateway in un IP MetroCluster
+= Modificare indirizzo, maschera di rete e gateway in una configurazione IP MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -30,25 +30,22 @@ Utilizzare `metrocluster configuration-settings interface show`, `metrocluster c
 
 . Aggiornare l'indirizzo IP, la netmask e il gateway per un singolo nodo e interfaccia:
 `metrocluster configuration-settings interface modify`
-
-
++
 Il comando seguente mostra come aggiornare l'indirizzo IP, la netmask e il gateway:
 
++
 [listing]
 ----
 cluster_A::* metrocluster configuration-settings interface modify -cluster-name cluster_A -home-node node_A_1 -home-port e0a-10 -address 192.168.12.101 -gateway 192.168.12.1 -netmask 255.255.254.0
 (metrocluster configuration-settings interface modify)
-
 Warning: This operation will disconnect and reconnect iSCSI and RDMA connections used for DR protection through port “e0a-10”. Partner nodes may need modifications for port “e0a-10” in order to completely establish network connectivity.
 Do you want to continue?" yes
-
 [Job 28] Setting up iSCSI target configuration. (pass2:iscsi13:0:-1:0): xpt_action_default: CCB type 0xe XPT_DEV_ADVINFO not supported
 [Job 28] Establishing iSCSI initiator connections.
 (pass6:iscsi14:0:-1:0): xpt_action_default: CCB type 0xe XPT_DEV_ADVINFO not supported
 (pass8:iscsi15:0:-1:0): xpt_action_default: CCB type 0xe XPT_DEV_ADVINFO not supported
 (pass9:iscsi16:0:-1:0): xpt_action_default: CCB type 0xe XPT_DEV_ADVINFO not supported
 [Job 28] Job succeeded: Interface Modify is successful.
-
 cluster_A::*> metrocluster configuration-settings interface modify -cluster-name cluster_A -home-node node_A_2 -home-port e0a-10 -address 192.168.12.201 -gateway 192.168.12.1 -netmask 255.255.254.0
 (metrocluster configuration-settings interface modify)
 Warning: This operation will disconnect and reconnect iSCSI and RDMA connections used for DR protection through port “e0a-10”. Partner nodes may need modifications for port “e0a-10” in order to completely establish network connectivity.
@@ -57,10 +54,10 @@ Do you want to continue?" yes
 ----
 . [[step2]]verificare che la connettività funzioni per tutte le interfacce:
 `metrocluster configuration-settings interface show`
-
-
++
 Il seguente comando mostra come verificare che tutte le connessioni funzionino per tutte le interfacce:
 
++
 [listing]
 ----
 cluster_A::*> metrocluster configuration-settings interface show
@@ -89,12 +86,16 @@ Group Cluster Node    Network Address Netmask         Gateway         State
                       192.168.21.250  255.255.255.0   192.168.21.1    completed
 8 entries were displayed.
 ----
+
+
 . [[step3]]verificare che tutte le connessioni funzionino:
++
 `metrocluster configuration-settings connection show`
 
-
++
 Il seguente comando mostra come verificare che tutte le connessioni funzionino:
 
++
 [listing]
 ----
 cluster_A::*> metrocluster configuration-settings connection show
@@ -129,3 +130,4 @@ Group Cluster Node    Network Address Network Address Partner Type Config State
                  Home Port: e0b-20
                       192.168.20.100  192.168.21.250  DR Auxiliary completed
 ----
+

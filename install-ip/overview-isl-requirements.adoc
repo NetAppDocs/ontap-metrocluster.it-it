@@ -1,0 +1,43 @@
+---
+permalink: install-ip/overview-isl-requirements.html 
+sidebar: sidebar 
+keywords: isls, ip, layer 2, layer 3, shared switch 
+summary: Informazioni sulle informazioni richieste per verificare che la configurazione di MetroCluster e la rete soddisfino tutti i requisiti ISL. 
+---
+= Panoramica dei requisiti ISL
+:allow-uri-read: 
+
+
+È necessario verificare che la configurazione IP MetroCluster e la rete soddisfino tutti i requisiti ISL (Inter-Switch link). Sebbene alcuni requisiti potrebbero non essere applicabili alla configurazione in uso, è comunque necessario essere consapevoli di tutti i requisiti ISL per ottenere una migliore comprensione della configurazione complessiva.
+
+La tabella seguente fornisce una panoramica degli argomenti trattati in questa sezione.
+
+[cols="25,75"]
+|===
+| Titolo | Descrizione 
+
+
+| link:mcc-compliant-netapp-validated-switches.html["Switch NetApp validati e conformi a MetroCluster"] | Descrive i requisiti dello switch.
+
+Si applica a tutti gli switch utilizzati nelle configurazioni MetroCluster, compresi gli switch backend. 
+
+
+| link:concept-requirements-isls.html["Considerazioni per gli ISL"] | Descrive i requisiti ISL.
+
+Si applica a tutte le configurazioni MetroCluster, a prescindere dalla topologia di rete e dall'utilizzo di switch validati NetApp o switch conformi a MetroCluster. 
+
+
+| link:concept-considerations-layer-2-layer-3.html["Considerazioni sulla distribuzione di MetroCluster in reti condivise a livello 2 o 3"] | Vengono descritti i requisiti per le reti condivise di livello 2 o 3.
+
+Valido per tutte le configurazioni, ad eccezione delle configurazioni MetroCluster che utilizzano switch validati NetApp e ISL connessi direttamente. 
+
+
+| link:concept-requirement-and-limitations-mcc-compliant-switches.html["Considerazioni sull'utilizzo di switch compatibili MetroCluster"] | Descrive i requisiti per gli switch compatibili con MetroCluster.
+
+Valido per tutte le configurazioni MetroCluster che non utilizzano switch validati NetApp. 
+
+
+| link:concept-example-network-topologies.html["Esempi di topologie di rete MetroCluster"] | Vengono forniti esempi di diverse topologie di rete MetroCluster.
+
+Si applica a tutte le configurazioni MetroCluster. 
+|===

@@ -15,14 +15,6 @@ Se la configurazione include aggregati senza mirror, è necessario essere consap
 
 
 
-== Considerazioni per gli aggregati senza mirror quando si eseguono interventi di manutenzione che richiedono lo spegnimento dell'alimentazione
-
-Se si esegue uno switchover negoziato per motivi di manutenzione che richiedono uno spegnimento dell'alimentazione a livello di sito, è necessario prima portare manualmente offline qualsiasi aggregato senza mirror di proprietà del sito di disastro.
-
-In caso contrario, i nodi del sito sopravvissuto potrebbero andare in stato di inattività a causa della panica su più dischi. Questo potrebbe verificarsi se gli aggregati senza mirror con switch-over non sono in linea o mancano a causa della perdita di connettività allo storage nel sito di emergenza a causa dell'interruzione dell'alimentazione o di una perdita degli ISL.
-
-
-
 == Considerazioni per gli aggregati senza mirror e gli spazi dei nomi gerarchici
 
 Se si utilizzano spazi dei nomi gerarchici, è necessario configurare il percorso di giunzione in modo che tutti i volumi in quel percorso siano solo su aggregati mirrorati o solo su aggregati senza mirror. La configurazione di una combinazione di aggregati senza mirror e mirrorati nel percorso di giunzione potrebbe impedire l'accesso agli aggregati senza mirror dopo l'operazione di switchover.

@@ -18,19 +18,27 @@ entries:
   - title: Peering dei cluster
     url: "/install-ip/concept_considerations_peering.html"
   - title: Requisiti ISL
-    url: "/install-ip/concept_considerations_isls.html"
-  - title: Come utilizzare le reti wide-area Layer 3
-    url: "/install-ip/concept_considerations_layer_3.html"
     entries:
-    - title: Modifica di indirizzo, netmask e gateway in un IP MetroCluster
-      url: "/install-ip/task_modify_ip_netmask_gateway_properties.html"
-  - title: Condivisione di reti private Layer 2
-    url: "/install-ip/concept_considerations_layer_2.html"
-  - title: Come utilizzare gli switch compatibili con MetroCluster
-    url: "/install-ip/concept_considerations_mc_compliant_switches.html"
-  - title: Come utilizzare TDM/xWDM e apparecchiature di crittografia con configurazioni
-      IP MetroCluster
-    url: "/install-ip/concept_considerations_tdm_encryption.html"
+    - title: Panoramica dei requisiti ISL
+      url: "/install-ip/overview-isl-requirements.html"
+    - title: Switch NetApp validati e conformi a MetroCluster
+      url: "/install-ip/mcc-compliant-netapp-validated-switches.html"
+    - title: Considerazioni per gli ISL
+      url: "/install-ip/concept-requirements-isls.html"
+    - title: Considerazioni sulla distribuzione di MetroCluster in reti condivise
+        di livello 2 o 3
+      url: "/install-ip/concept-considerations-layer-2-layer-3.html"
+    - title: Considerazioni sull'utilizzo di switch compatibili con MetroCluster
+      entries:
+      - title: Requisiti e limitazioni degli switch conformi a MetroCluster
+        url: "/install-ip/concept-requirement-and-limitations-mcc-compliant-switches.html"
+      - title: Velocità di rete e modalità di porte switch per switch compatibili
+          con MetroCluster
+        url: "/install-ip/concept-network-speeds-and-switchport-modes.html"
+      - title: Esempi di configurazione delle porte dello switch
+        url: "/install-ip/concept-configure-mcc-compliant-switches.html"
+    - title: Esempi di topologie di rete MetroCluster
+      url: "/install-ip/concept-example-network-topologies.html"
   - title: Aggregati senza mirror in una configurazione MetroCluster IP
     url: "/install-ip/concept_considerations_unmirrored_aggrs.html"
   - title: Utilizzo del firewall nei siti MetroCluster

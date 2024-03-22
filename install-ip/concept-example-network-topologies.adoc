@@ -1,0 +1,54 @@
+---
+permalink: install-ip/concept-example-network-topologies.html 
+sidebar: sidebar 
+keywords: metrocluster ip, metrocluster-compliant switches, metrocluster-compliant, requirements, compliant, configuration 
+summary: A partire da ONTAP 9,6, sono supportate alcune configurazioni di rete aggiuntive per le configurazioni IP di MetroCluster. 
+---
+= Esempi di topologie di rete MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+A partire da ONTAP 9,6, sono supportate alcune configurazioni di rete aggiuntive per le configurazioni IP di MetroCluster. In questa sezione vengono forniti alcuni esempi delle configurazioni di rete supportate. Non sono elencate tutte le topologie supportate.
+
+In queste topologie, si ipotizza che la rete ISL e intermedia sia configurata secondo i requisiti indicati nella link:concept-requirements-isls.html["Considerazioni per gli ISL"].
+
+
+NOTE: Se si condivide un ISL con traffico non MetroCluster, è necessario verificare che MetroCluster disponga sempre della larghezza di banda minima richiesta.
+
+
+
+== Configurazione di rete condivisa con collegamenti diretti
+
+In questa topologia, due siti distinti sono collegati da collegamenti diretti. Questi collegamenti possono essere tra dispositivi o switch xWDM e TDM. La capacità degli ISL non è dedicata al traffico MetroCluster, ma è condivisa con altro traffico non MetroCluster.
+
+image::../media/mcc_ip_networking_with_shared_isls.gif[rete ip mcc con isl condivisi]
+
+
+
+== Infrastruttura condivisa con reti intermedie
+
+In questa topologia, i siti MetroCluster non sono collegati direttamente, ma MetroCluster e il traffico host viaggiano attraverso una rete.
+La rete può essere costituita da una serie di xWDM e TDM e switch, ma a differenza della configurazione condivisa con ISL diretti, i collegamenti non sono diretti tra i siti. A seconda dell'infrastruttura tra i siti, è possibile utilizzare qualsiasi combinazione di configurazioni di rete.
+
+image::../media/mcc_ip_networking_with_intermediate_private_networks.gif[rete ip mcc con reti private intermedie]
+
+
+
+== Configurazioni MetroCluster multiple che condividono una rete intermedia
+
+In questa topologia, due configurazioni MetroCluster separate condividono la stessa rete intermedia. Nell'esempio, MetroCluster ONE switch_A_1 e MetroCluster Two switch_A_1, entrambi si collegano allo stesso interruttore intermedio.
+
+
+NOTE: Sia "MetroCluster One" che "MetroCluster Two" possono essere una configurazione MetroCluster a otto nodi o due configurazioni MetroCluster a quattro nodi.
+
+image::../media/mcc_ip_two_mccs_sharing_the_same_shared_network_sx.gif[mcc ip due mcc che condividono la stessa rete condivisa sx]
+
+
+
+== Combinazione di una configurazione MetroCluster con switch validati NetApp e una configurazione con switch compatibili MetroCluster
+
+Due configurazioni MetroCluster separate condividono lo stesso switch intermedio, dove una MetroCluster viene configurata con switch validati NetApp in una configurazione Layer 2 condivisa (MetroCluster uno) e l'altra MetroCluster con switch compatibili MetroCluster che si collegano direttamente agli switch intermedi (MetroCluster due).
+
+image::../media/mcc_ip_unsupported_two_mccs_direct_to_shared_switches.png[ip mcc non supportato due mcc diretti agli switch condivisi]
