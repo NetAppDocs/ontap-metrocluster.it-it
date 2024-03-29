@@ -1767,7 +1767,6 @@
   <block id="a8d2847903c576898fb0a7f696b03aa1" category="paragraph">Per modificare la distanza di una porta ISL...</block>
   <block id="ad6e34d4719cd2f503bdb298311a85e4" category="paragraph">Utilizzare<block ref="cf8e239c84d2505f0fed7f26ad6f540a" prefix=" " category="inline-code"></block> comando su entrambi gli switch nel fabric.</block>
   <block id="43a533d4a7711d238594840dabecdae9" category="paragraph">Per rimuovere un ISL...</block>
-  <block id="0251accfd0a01d6b6678e4acc31b0511" category="paragraph">Scollegare il collegamento (cavo).</block>
   <block id="31e0f1d7c104cf71dda69e0e141d7dfa" category="paragraph">Per aggiungere un ISL...</block>
   <block id="3ab25d5f5087226e9601e9405341d073" category="inline-link-macro">Installare un MetroCluster collegato al fabric</block>
   <block id="0fcee5126250d77f3f33a330fd9c5a17" category="paragraph">Inserire gli SFP nelle porte che si stanno aggiungendo come porte ISL. Assicurarsi che queste porte siano elencate nella <block ref="5488151483f7e2bfe24758bbbb4d6f40" category="inline-link-macro-rx"></block> per lo switch a cui si desidera aggiungerli.</block>
@@ -13240,7 +13239,6 @@
   <block id="baf55d93093b54950152b6be3f9bfec2" category="list-text">Gli ISL su un fabric devono essere tutti della stessa velocità e lunghezza.</block>
   <block id="4b00dc01ca120693f1539bf736f11069" category="list-text">Gli ISL in entrambi i fabric devono essere della stessa velocità e lunghezza.</block>
   <block id="ef6ab3e28db1093c7315b30edeb84730" category="list-text">La differenza massima supportata di distanza tra il tessuto 1 e il tessuto 2 è 20km o 0,2ms.</block>
-  <block id="1b6ceb9b8db71407a3be0617e754101e" category="list-text">Gli ISL su un fabric devono avere la stessa topologia. Ad esempio, dovrebbero essere tutti collegamenti diretti, o se la configurazione utilizza WDM, devono tutti utilizzare WDM.</block>
   <block id="ddf41f2636c98d00a2698837f55a3f74" category="list-text">La velocità dell'ISL deve essere di almeno 10Gbps.</block>
   <block id="cb806a9b25dfb1d4470413a3c2dd9944" category="list-text">Deve essere presente almeno una porta ISL 10Gbps per fabric.</block>
   <block id="25b13aa97e6e9eb228478bfddbcc84e9" category="paragraph">Quanto segue si applica al traffico di andata e ritorno tra gli switch IP MetroCluster presso il sito_A e il sito_B, con la configurazione MetroCluster in funzionamento stazionario:</block>
@@ -13501,4 +13499,20 @@ Valido per tutte le configurazioni MetroCluster che non utilizzano switch valida
 Si applica a tutte le configurazioni MetroCluster.</block>
   <block id="20f7078fb96bd6060a10b9fed9306941" category="sidebar">Requisiti e limitazioni degli switch conformi a MetroCluster</block>
   <block id="3c24829f69028dca3ac0aa982abad68d" category="sidebar">Velocità di rete e modalità di porte switch per switch compatibili con MetroCluster</block>
+  <block id="61a6d655671eebbd633c1d84fae09e17" category="cell">Se...</block>
+  <block id="9bb5e66f509f87b2056c49d88c3c1ad3" category="cell">Utilizzare la procedura...</block>
+  <block id="585259c85fa7332b7408c2bdbdccbd7e" category="cell">Disporre di un RCF che soddisfi i requisiti dell'utente</block>
+  <block id="6cd8985ef1c9ac5bb3c5ba019968286f" category="list-text"><block ref="6cd8985ef1c9ac5bb3c5ba019968286f" category="inline-link-macro-rx"></block></block>
+  <block id="876679dae881403e2f232efc9dd0bb3f" category="inline-link-macro">Configurare gli switch FC Cisco con i file RCF</block>
+  <block id="eb93031c42594d52b52dea4aa8c60cc7" category="list-text"><block ref="eb93031c42594d52b52dea4aa8c60cc7" category="inline-link-macro-rx"></block></block>
+  <block id="f95c75e9e3d1a3f06e2b3b15e304cf53" category="cell">Non disporre di un RCF o di un RCF che non soddisfi i requisiti dell'utente</block>
+  <block id="a7479abd1216b38814805eeb38bdbc15" category="list-text"><block ref="a7479abd1216b38814805eeb38bdbc15" category="inline-link-macro-rx"></block></block>
+  <block id="36d1363cb78273718bac11302a6ed445" category="paragraph">Scollegare il tirante.</block>
+  <block id="cde774a461b1ae0ea7e1a404c874f2a4" category="admonition">Quando si apportano modifiche alle porte ISL, potrebbe essere necessario applicare ulteriori impostazioni consigliate dal fornitore di WDM. Fare riferimento alla documentazione del fornitore WDM per le indicazioni.</block>
+  <block id="05ad4e95aa7945d2b5bc1c7c8a6eb220" category="list-text">Configurare il Service Processor (SP):</block>
+  <block id="0e74984a18b6236a912a70cd78328256" category="inline-link-macro">Configurare la rete SP/BMC</block>
+  <block id="1aea5f30cf555d730902505e498f4fd0" category="paragraph"><block ref="1aea5f30cf555d730902505e498f4fd0" category="inline-link-macro-rx"></block></block>
+  <block id="4010f2b8e90ddf85f94ac358d78075c1" category="inline-link-macro">Utilizza un Service Processor con Gestione di sistema - ONTAP 9.7 e versioni precedenti</block>
+  <block id="eaa2669881cbe475b9e0b278420a4005" category="paragraph"><block ref="eaa2669881cbe475b9e0b278420a4005" category="inline-link-macro-rx"></block></block>
+  <block id="adf442d82428813618df31b5f35c8c5d" category="list-text">Gli ISL devono avere la stessa topologia. Ad esempio, dovrebbero essere tutti collegamenti diretti, o se la configurazione utilizza WDM, devono tutti utilizzare WDM.</block>
 </blocks>

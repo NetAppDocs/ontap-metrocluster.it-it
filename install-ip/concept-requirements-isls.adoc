@@ -22,7 +22,7 @@ Quanto segue si applica agli ISL in tutte le configurazioni IP di MetroCluster:
 * Gli ISL su un fabric devono essere tutti della stessa velocità e lunghezza.
 * Gli ISL in entrambi i fabric devono essere della stessa velocità e lunghezza.
 * La differenza massima supportata di distanza tra il tessuto 1 e il tessuto 2 è 20km o 0,2ms.
-* Gli ISL su un fabric devono avere la stessa topologia. Ad esempio, dovrebbero essere tutti collegamenti diretti, o se la configurazione utilizza WDM, devono tutti utilizzare WDM.
+* Gli ISL devono avere la stessa topologia. Ad esempio, dovrebbero essere tutti collegamenti diretti, o se la configurazione utilizza WDM, devono tutti utilizzare WDM.
 * La velocità dell'ISL deve essere di almeno 10Gbps.
 * Deve essere presente almeno una porta ISL 10Gbps per fabric.
 

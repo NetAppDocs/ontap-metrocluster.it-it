@@ -80,7 +80,7 @@ Utilizzare `portcfglongdistance _port number port distance_` comando su entrambi
  a| 
 Per rimuovere un ISL...
  a| 
-Scollegare il collegamento (cavo).
+Scollegare il tirante.
 
 
 
@@ -97,6 +97,10 @@ Per spostare un ISL...
 Il trasferimento di un ISL equivale alla rimozione e all'aggiunta di un ISL. Innanzitutto, rimuovere l'ISL scollegando il collegamento, quindi inserire gli SFP nelle porte che si stanno aggiungendo come porte ISL.
 
 |===
++
+
+NOTE: Quando si apportano modifiche alle porte ISL, potrebbe essere necessario applicare ulteriori impostazioni consigliate dal fornitore di WDM. Fare riferimento alla documentazione del fornitore WDM per le indicazioni.
+
 . Riconfigurare per la consegna fuori ordine (OOD) o la consegna in-order (IOD).
 +
 
