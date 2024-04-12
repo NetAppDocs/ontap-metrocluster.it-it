@@ -86,7 +86,6 @@ Questi bridge collegano gli shelf di dischi SAS ai moduli controller.
 NOTE: I bridge FibreBridge 6500N non sono supportati nelle configurazioni con ONTAP 9.8 e versioni successive.
 
 * I bridge FibreBridge 7600N e 7500N supportano fino a quattro stack SAS.
-* I bridge FibreBridge 6500N supportano un solo stack SAS.
 * Ogni stack può utilizzare diversi modelli di IOM, ma tutti gli shelf all'interno di uno stack devono utilizzare lo stesso modello.
 +
 I modelli di IOM supportati dipendono dalla versione di ONTAP in esecuzione.

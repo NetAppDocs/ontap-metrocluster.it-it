@@ -17,7 +17,6 @@ summary: 'È necessario raccogliere informazioni dai nodi FC MetroCluster esiste
 
 == Raccolta di informazioni dai moduli controller esistenti prima della transizione
 
-[role="lead"]
 Prima di effettuare la transizione, è necessario raccogliere informazioni per ciascuno dei nodi.
 
 Questa attività viene eseguita sui nodi esistenti:
@@ -100,7 +99,6 @@ Questa attività viene eseguita sui nodi esistenti:
 
 == Invio di un messaggio AutoSupport personalizzato prima della manutenzione
 
-[role="lead"]
 Prima di eseguire la manutenzione, devi inviare un messaggio AutoSupport per informare il supporto tecnico NetApp che la manutenzione è in corso. Ciò impedisce loro di aprire un caso partendo dal presupposto che si sia verificata un'interruzione.
 
 Questa attività deve essere eseguita su ciascun sito MetroCluster.
@@ -120,7 +118,6 @@ intervallo di manutenzione in ore specifica la durata della finestra di manutenz
 
 == Transizione, arresto e rimozione dei nodi FC MetroCluster
 
-[role="lead"]
 Oltre all'emissione di comandi sui nodi FC MetroCluster, questa attività include l'apertura fisica e la rimozione dei moduli controller in ogni sito.
 
 Questa attività deve essere eseguita su ciascuno dei vecchi nodi:

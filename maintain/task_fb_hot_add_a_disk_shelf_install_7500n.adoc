@@ -17,8 +17,8 @@ summary: È possibile aggiungere a caldo uno shelf di dischi quando si desidera 
 * Per aggiungere a caldo uno shelf, l'ambiente deve soddisfare uno dei seguenti scenari:
 +
 ** Sono presenti due bridge FibreBridge 7500N collegati a uno stack di shelf di dischi SAS.
-** Si dispone di un bridge FibreBridge 7500N e di un bridge FibreBridge 6500N collegati a uno stack di shelf di dischi SAS.
-** Sono presenti due bridge FibreBridge 6500N collegati a uno stack di shelf di dischi SAS.
+** Sono presenti due bridge FibreBridge 7600N collegati a uno stack di shelf di dischi SAS.
+** Si dispone di un bridge FibreBridge 7500N e di un bridge FibreBridge 7600N collegati a uno stack di shelf di dischi SAS.
 
 
 * Questa procedura consente di aggiungere a caldo uno shelf di dischi all'ultimo shelf di dischi in uno stack.
@@ -116,19 +116,11 @@ https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Downlo
 
 . Installare e cablare lo shelf di dischi:
 +
-Tenere presente le seguenti considerazioni:
+
+NOTE: Non forzare un connettore in una porta. I cavi mini-SAS sono inseriti; quando orientati correttamente in una porta SAS, il cavo SAS scatta in posizione e il LED LNK della porta SAS dello shelf di dischi si illumina di verde.per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso l'alto (sul lato superiore del connettore).
 
 +
-** Per i bridge FibreBridge 6500N:
-+
-Attendere almeno 10 secondi prima di collegare la porta. I connettori dei cavi SAS sono dotati di chiave; se orientati correttamente in una porta SAS, il connettore scatta in posizione e il LED LNK della porta SAS dello shelf di dischi si illumina di verde.per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso il basso (nella parte inferiore del connettore).
-
-** Per i bridge FibreBridge 7500N:
-+
-Non forzare un connettore in una porta. I cavi mini-SAS sono inseriti; quando orientati correttamente in una porta SAS, il cavo SAS scatta in posizione e il LED LNK della porta SAS dello shelf di dischi si illumina di verde.per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso l'alto (sul lato superiore del connettore).
-
-+
-... Installare lo shelf di dischi, accenderlo e impostare l'ID dello shelf.
+.. Installare lo shelf di dischi, accenderlo e impostare l'ID dello shelf.
 +
 La _Guida all'installazione_ per il modello di shelf di dischi fornisce informazioni dettagliate sull'installazione di shelf di dischi.
 
@@ -136,13 +128,11 @@ La _Guida all'installazione_ per il modello di shelf di dischi fornisce informaz
 
 NOTE: È necessario spegnere e riaccendere lo shelf di dischi e mantenere gli ID dello shelf univoci per ogni shelf di dischi SAS all'interno dell'intero sistema di storage.
 
-... Scollegare il cavo SAS dalla porta IOM B dell'ultimo shelf dello stack, quindi ricollegarlo alla stessa porta del nuovo shelf.
+.. Scollegare il cavo SAS dalla porta IOM B dell'ultimo shelf dello stack, quindi ricollegarlo alla stessa porta del nuovo shelf.
 +
 L'altra estremità del cavo rimane collegata al ponte B.
 
-... Collegare a margherita il nuovo shelf di dischi collegando le nuove porte IOM dello shelf (di IOM A e IOM B) alle ultime porte IOM dello shelf (di IOM A e IOM B).
-
-
+.. Collegare a margherita il nuovo shelf di dischi collegando le nuove porte IOM dello shelf (di IOM A e IOM B) alle ultime porte IOM dello shelf (di IOM A e IOM B).
 
 
 +

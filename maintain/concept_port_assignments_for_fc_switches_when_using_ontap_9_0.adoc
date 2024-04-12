@@ -89,7 +89,7 @@ La tabella seguente mostra l'utilizzo delle porte del controller sui modelli Bro
 
 == Utilizzo della porta Brocade per connessioni bridge FC-SAS in una configurazione MetroCluster a otto nodi con ONTAP 9.0
 
-La seguente tabella mostra l'utilizzo della porta bridge quando si utilizzano bridge FibreBridge 7500:
+La seguente tabella mostra l'utilizzo delle porte bridge quando si utilizzano i bridge FibreBridge 7500N o 7600N:
 
 |===
 | Ponte | Porta Bridge | FC_switch_x_1 | FC_switch_x_2 
@@ -141,59 +141,6 @@ La seguente tabella mostra l'utilizzo della porta bridge quando si utilizzano br
 
 
 | bridge_x_4b | FC2 | - | 19 
-|===
-La seguente tabella mostra l'utilizzo della porta bridge quando si utilizzano bridge FibreBridge 6500 con switch Brocade 6505, 6510 o DCX 8510-8:
-
-|===
-| Ponte | Porta | FC_switch_x_1 | FC_switch_x_2 
-
-
-| bridge_x_1a | FC1 | 12 | - 
-
-
-| bridge_x_1b | FC1 | - | 12 
-
-
-| bridge_x_2a | FC1 | 13 | - 
-
-
-| bridge_x_2b | FC1 | - | 13 
-
-
-| bridge_x_3a | FC1 | 14 | - 
-
-
-| bridge_x_3b | FC1 | - | 14 
-
-
-| bridge_x_4a | FC1 | 15 | - 
-
-
-| bridge_x_4b | FC1 | - | 15 
-
-
-| bridge_x_5a | FC1 | 16 | - 
-
-
-| bridge_x_5b | FC1 | - | 16 
-
-
-| bridge_x_6a | FC1 | 17 | - 
-
-
-| bridge_x_6b | FC1 | - | 17 
-
-
-| bridge_x_7a | FC1 | 18 | - 
-
-
-| bridge_x_7b | FC1 | - | 18 
-
-
-| bridge_x_8a | FC1 | 19 | - 
-
-
-| bridge_x_8b | FC1 | - | 19 
 |===
 
 
@@ -267,7 +214,7 @@ Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch. La seguent
 
 Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch.
 
-La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 17 quando si utilizzano bridge FibreBridge 7500. È possibile cablare altri bridge alle porte da 18 a 23.
+La tabella seguente mostra l'utilizzo delle porte bridge fino alla porta 17 quando si utilizzano i bridge FibreBridge 7500N o 7600N. È possibile cablare altri bridge alle porte da 18 a 23.
 
 |===
 | Bridge FibreBridge 7500 | Porta | FC_switch_x_1 (6510 o DCX 8510-8) | FC_switch_x_2 (6510 o DCX 8510-8) | FC_switch_x_1 (6505) | FC_switch_x_2 (6505) 
@@ -323,62 +270,6 @@ La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 17 quan
 
 |  |  | è possibile cablare altri bridge attraverso la porta 19, quindi le porte da 24 a 47 |  |  |  
 |===
-La seguente tabella mostra l'utilizzo della porta bridge quando si utilizzano bridge FibreBridge 6500:
-
-|===
-|  | Porta bridge 6500N | FC_switch_x_1 (6510 o DCX 8510-8) | FC_switch_x_2 (6510 o DCX 8510-8) | FC_switch_x_1 (6505) | FC_switch_x_2 (6505) 
-
-
-| bridge_x_1a | FC1 | 6 | - | 6 | - 
-
-
-| bridge_x_1b | FC1 | - | 6 | - | 6 
-
-
-| bridge_x_2a | FC1 | 7 | - | 7 | - 
-
-
-| bridge_x_2b | FC1 | - | 7 | - | 7 
-
-
-| bridge_x_3a | FC1 | 8 | - | 12 | - 
-
-
-| bridge_x_3b | FC1 | - | 8 | - | 12 
-
-
-| bridge_x_4a | FC1 | 9 | - | 13 | - 
-
-
-| bridge_x_4b | FC1 | - | 9 | - | 13 
-
-
-| bridge_x_5a | FC1 | 10 | - | 14 | - 
-
-
-| bridge_x_5b | FC1 | - | 10 | - | 14 
-
-
-| bridge_x_6a | FC1 | 11 | - | 15 | - 
-
-
-| bridge_x_6b | FC1 | - | 11 | - | 15 
-
-
-| bridge_x_7a | FC1 | 12 | - | 16 | - 
-
-
-| bridge_x_7b | FC1 | - | 12 | - | 16 
-
-
-| bridge_x_8a | FC1 | 13 | - | 17 | - 
-
-
-| bridge_x_8b | FC1 | - | 13 | - | 17 
-
-
-|  |  | è possibile cablare altri bridge attraverso la porta 19, quindi le porte da 24 a 47 |  | è possibile cablare altri bridge tramite la porta 23 |  
-|===
 
 
 == Utilizzo della porta Brocade per gli ISL in una configurazione MetroCluster a quattro nodi con ONTAP 9.0
@@ -433,7 +324,7 @@ Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch. La seguent
 
 Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch.
 
-La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 17 quando si utilizzano bridge FibreBridge 7500 con switch Brocade 6505, 6510 e DCX 8510-8. È possibile cablare altri bridge alle porte da 18 a 23.
+La tabella seguente mostra l'utilizzo delle porte bridge fino alla porta 17 quando si utilizzano bridge FibreBridge 7500N o 7600N con switch Brocade 6505, 6510 e DCX 8510-8. È possibile cablare altri bridge alle porte da 18 a 23.
 
 |===
 | Bridge FibreBridge 7500 | Porta | FC_switch_x_1 (6510 o DCX 8510-8) | FC_switch_x_2 (6510 o DCX 8510-8) | FC_switch_x_1 (6505) | FC_switch_x_2 (6505) 
@@ -485,62 +376,6 @@ La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 17 quan
 
 
 | bridge_x_4b | FC2 | - | 13 | - | 17 
-
-
-|  |  | è possibile cablare altri bridge attraverso la porta 19, quindi le porte da 24 a 47 |  | è possibile cablare altri bridge tramite la porta 23 |  
-|===
-La seguente tabella mostra l'utilizzo della porta bridge quando si utilizzano bridge FibreBridge 6500 con switch Brocade 6505, 6510 e DCX 8510-8:
-
-|===
-| Bridge FibreBridge 6500 | Porta | FC_switch_x_1 (6510 o DCX 8510-8) | FC_switch_x_2 (6510 o DCX 8510-8) | FC_switch_x_1 (6505) | FC_switch_x_2 (6505) 
-
-
-| bridge_x_1a | FC1 | 6 | - | 6 | - 
-
-
-| bridge_x_1b | FC1 | - | 6 | - | 6 
-
-
-| bridge_x_2a | FC1 | 7 | - | 7 | - 
-
-
-| bridge_x_2b | FC1 | - | 7 | - | 7 
-
-
-| bridge_x_3a | FC1 | 8 | - | 12 | - 
-
-
-| bridge_x_3b | FC1 | - | 8 | - | 12 
-
-
-| bridge_x_4a | FC1 | 9 | - | 13 | - 
-
-
-| bridge_x_4b | FC1 | - | 9 | - | 13 
-
-
-| bridge_x_5a | FC1 | 10 | - | 14 | - 
-
-
-| bridge_x_5b | FC1 | - | 10 | - | 14 
-
-
-| bridge_x_6a | FC1 | 11 | - | 15 | - 
-
-
-| bridge_x_6b | FC1 | - | 11 | - | 15 
-
-
-| bridge_x_7a | FC1 | 12 | - | 16 | - 
-
-
-| bridge_x_7b | FC1 | - | 12 | - | 16 
-
-
-| bridge_x_8a | FC1 | 13 | - | 17 | - 
-
-
-| bridge_x_8b | FC1 | - | 13 | - | 17 
 
 
 |  |  | è possibile cablare altri bridge attraverso la porta 19, quindi le porte da 24 a 47 |  | è possibile cablare altri bridge tramite la porta 23 |  
@@ -615,7 +450,7 @@ La seguente tabella mostra l'utilizzo della porta del controller sugli switch Ci
 
 == Utilizzo della porta Cisco per bridge FC-SAS in una configurazione MetroCluster a otto nodi con ONTAP 9.0
 
-La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 23 quando si utilizzano bridge FibreBridge 7500 quando si utilizzano switch Cisco 9148 o 9148S. È possibile collegare altri bridge utilizzando le porte da 25 a 48.
+La tabella seguente mostra l'utilizzo delle porte bridge fino alla porta 23 quando si utilizzano bridge FibreBridge 7500N o 7600N con switch Cisco 9148 o 9148S.
 
 |===
 | Bridge FibreBridge 7500 | Porta | FC_switch_x_1 | FC_switch_x_2 
@@ -667,61 +502,6 @@ La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 23 quan
 
 
 | bridge_x_4b | FC2 | - | - 
-|===
-È possibile collegare altri bridge utilizzando le porte da 25 a 48 seguendo lo stesso schema.
-
-La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 23 quando si utilizzano bridge FibreBridge 6500 con switch Cisco 9148 o 9148S. È possibile collegare altri bridge utilizzando le porte 25-48.
-
-|===
-| Bridge FibreBridge 6500 | Porta | FC_switch_x_1 | FC_switch_x_2 
-
-
-| bridge_x_1a | FC1 | 14 | - 
-
-
-| bridge_x_1b | FC1 | - | 14 
-
-
-| bridge_x_2a | FC1 | 15 | - 
-
-
-| bridge_x_2b | FC1 | - | 15 
-
-
-| bridge_x_3a | FC1 | 17 | - 
-
-
-| bridge_x_3b | FC1 | - | 17 
-
-
-| bridge_x_4a | FC1 | 18 | - 
-
-
-| bridge_x_4b | FC1 | - | 18 
-
-
-| bridge_x_5a | FC1 | 19 | - 
-
-
-| bridge_x_5b | FC1 | - | 19 
-
-
-| bridge_x_6a | FC1 | 21 | - 
-
-
-| bridge_x_6b | FC1 | - | 21 
-
-
-| bridge_x_7a | FC1 | 22 | - 
-
-
-| bridge_x_7b | FC1 | - | 22 
-
-
-| bridge_x_8a | FC1 | 23 | - 
-
-
-| bridge_x_8b | FC1 | - | 23 
 |===
 È possibile collegare altri bridge utilizzando le porte da 25 a 48 seguendo lo stesso schema.
 
@@ -797,7 +577,7 @@ La seguente tabella mostra l'utilizzo della porta del controller sugli switch Ci
 
 == Utilizzo della porta Cisco per bridge FC-SAS in una configurazione MetroCluster a quattro nodi con ONTAP 9.0
 
-La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 14 quando si utilizzano bridge FibreBridge 7500 con switch Cisco 9148, 9148S o 9250i. È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
+La tabella seguente mostra l'utilizzo delle porte bridge fino alla porta 14 quando si utilizzano bridge FibreBridge 7500N o 7600N con switch Cisco 9148, 9148S o 9250i. È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
 
 |===
 | Bridge FibreBridge 7500 | Porta | FC_switch_x_1 | FC_switch_x_2 
@@ -850,61 +630,6 @@ La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 14 quan
 
 | bridge_x_4b | FC2 | - | 14 
 |===
-La seguente tabella mostra l'utilizzo della porta bridge quando si utilizza il bridge FibreBridge 6500 fino alla porta 14 su switch Cisco 9148, 9148S o 9250i. È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
-
-|===
-| Bridge FibreBridge 6500 | Porta | FC_switch_x_1 | FC_switch_x_2 
-
-
-| bridge_x_1a | FC1 | 7 | - 
-
-
-| bridge_x_1b | FC1 | - | 7 
-
-
-| bridge_x_2a | FC1 | 8 | - 
-
-
-| bridge_x_2b | FC1 | - | 8 
-
-
-| bridge_x_3a | FC1 | 9 | - 
-
-
-| bridge_x_3b | FC1 | - | 9 
-
-
-| bridge_x_4a | FC1 | 10 | - 
-
-
-| bridge_x_4b | FC1 | - | 10 
-
-
-| bridge_x_5a | FC1 | 11 | - 
-
-
-| bridge_x_5b | FC1 | - | 11 
-
-
-| bridge_x_6a | FC1 | 12 | - 
-
-
-| bridge_x_6b | FC1 | - | 12 
-
-
-| bridge_x_7a | FC1 | 13 | - 
-
-
-| bridge_x_7b | FC1 | - | 13 
-
-
-| bridge_x_8a | FC1 | 14 | - 
-
-
-| bridge_x_8b | FC1 | - | 14 
-|===
-È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
-
 
 
 == Utilizzo delle porte Cisco 9148 e 9148S per gli ISL in una configurazione MetroCluster a quattro nodi con ONTAP 9.0
@@ -969,7 +694,7 @@ La seguente tabella mostra l'utilizzo della porta del controller sugli switch Ci
 
 == Utilizzo della porta Cisco per bridge FC-SAS in una configurazione MetroCluster a due nodi con ONTAP 9.0
 
-La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 14 quando si utilizzano bridge FibreBridge 7500 con switch Cisco 9148, 9148S e 9250i. È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
+La tabella seguente mostra l'utilizzo delle porte bridge fino alla porta 14 quando si utilizzano bridge FibreBridge 7500N o 7600N con switch Cisco 9148, 9148S e 9250i. È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
 
 |===
 | Bridge FibreBridge 7500 | Porta | FC_switch_x_1 | FC_switch_x_2 
@@ -1022,61 +747,6 @@ La seguente tabella mostra l'utilizzo della porta bridge fino alla porta 14 quan
 
 | bridge_x_4b | FC2 | - | 14 
 |===
-La seguente tabella mostra l'utilizzo della porta bridge quando si utilizza il bridge FibreBridge 6500 fino alla porta 14 su switch Cisco 9148, 9148S o 9250i. È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
-
-|===
-| Bridge FibreBridge 6500 | Porta | FC_switch_x_1 | FC_switch_x_2 
-
-
-| bridge_x_1a | FC1 | 7 | - 
-
-
-| bridge_x_1b | FC1 | - | 7 
-
-
-| bridge_x_2a | FC1 | 8 | - 
-
-
-| bridge_x_2b | FC1 | - | 8 
-
-
-| bridge_x_3a | FC1 | 9 | - 
-
-
-| bridge_x_3b | FC1 | - | 9 
-
-
-| bridge_x_4a | FC1 | 10 | - 
-
-
-| bridge_x_4b | FC1 | - | 10 
-
-
-| bridge_x_5a | FC1 | 11 | - 
-
-
-| bridge_x_5b | FC1 | - | 11 
-
-
-| bridge_x_6a | FC1 | 12 | - 
-
-
-| bridge_x_6b | FC1 | - | 12 
-
-
-| bridge_x_7a | FC1 | 13 | - 
-
-
-| bridge_x_7b | FC1 | - | 13 
-
-
-| bridge_x_8a | FC1 | 14 | - 
-
-
-| bridge_x_8b | FC1 | - | 14 
-|===
-È possibile collegare ulteriori bridge alle porte da 15 a 32 seguendo lo stesso schema.
-
 
 
 == Utilizzo delle porte Cisco 9148 o 9148S per gli ISL in una configurazione MetroCluster a due nodi con ONTAP 9.0

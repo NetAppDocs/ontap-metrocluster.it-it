@@ -1725,7 +1725,7 @@ Port   Configured    Active   Configured   Active  Speed
 
 == Configurazione dello zoning sugli switch Brocade FC
 
-È necessario assegnare le porte dello switch per separare le zone per separare il traffico del controller e dello storage. La procedura varia a seconda che si utilizzi un bridge FibreBridge 7500N o FibreBridge 6500N.
+È necessario assegnare le porte dello switch per separare le zone per separare il traffico del controller e dello storage.
 
 
 
@@ -1947,9 +1947,9 @@ QOSH2_MC1_FAB_2_FCVI (6520)
 |===
 
 
-=== Zoning per i bridge FibreBridge 6500N o FibreBridge 7500N o 7600N utilizzando una porta FC
+=== Zoning per i bridge 7500N o 7600N di FibreBridge attraverso una porta FC
 
-Se si utilizzano bridge FibreBridge 6500N o bridge FibreBridge 7500N o 7600N utilizzando solo una delle due porte FC, è necessario creare zone di storage per le porte bridge. Prima di configurare le zone, è necessario conoscere le zone e le porte associate.
+Se si utilizzano bridge FibreBridge 7500N o 7600N che utilizzano solo una delle due porte FC, è necessario creare zone di archiviazione per le porte bridge. Prima di configurare le zone, è necessario conoscere le zone e le porte associate.
 
 Gli esempi mostrano lo zoning solo per il gruppo DR 1. Se la configurazione include un secondo gruppo DR, configurare lo zoning per il secondo gruppo DR nello stesso modo, utilizzando le porte corrispondenti dei controller e dei bridge.
 
@@ -1999,7 +1999,6 @@ Numero del gruppo di stack a cui si connette la coppia di bridge.
 +
 Il gruppo di stack non può contenere più di 10 shelf di storage.
 
-* I bridge FibreBridge 6500N supportano solo un singolo stack nel gruppo di stack.
 
  a| 
 1, 2, ecc.
@@ -2443,7 +2442,6 @@ Numero del gruppo di stack a cui si connette la coppia di bridge.
 +
 Il gruppo di stack non può contenere più di 10 shelf di storage.
 
-* I bridge FibreBridge 6500N supportano solo un singolo stack nel gruppo di stack.
 
  a| 
 1, 2, ecc.
@@ -4294,7 +4292,7 @@ La seguente procedura utilizza lo zoning standard per la configurazione MetroClu
 
 link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Zoning per porte FC-VI"]
 
-link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Zoning per i bridge FibreBridge 6500N o FibreBridge 7500N o 7600N utilizzando una porta FC"]
+link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Zoning per i bridge 7500N o 7600N di FibreBridge attraverso una porta FC"]
 
 link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Zoning per i bridge FibreBridge 7500N che utilizzano entrambe le porte FC"]
 

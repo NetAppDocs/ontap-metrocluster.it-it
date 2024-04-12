@@ -104,10 +104,6 @@ FC_switch_A_2(config)# end
 ** Se i bridge collegano due o più stack SAS, disattivare le porte SAS che collegano i bridge allo shelf di destinazione: +
 `SASportDisable _port number_`
 +
-
-NOTE: Non applicabile ai bridge FibreBridge 6500.
-
-+
 L'esempio seguente mostra una coppia di bridge che collegano quattro stack SAS. Lo stack SAS 2 contiene lo shelf di destinazione:
 
 +
@@ -253,9 +249,6 @@ SASPortEnable A
 SAS Port A has been enabled.
 ----
 
-
-
-NOTE: Questo non è applicabile a ATTO 6500 FiberBridges.
 
 |===
 . Se in precedenza le porte dello switch sono state disattivate, verificare che siano attivate e in linea e che tutti i dispositivi siano collegati correttamente:

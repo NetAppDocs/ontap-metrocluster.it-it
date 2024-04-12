@@ -171,12 +171,12 @@ NOTE: Il file RCF disattiva il protocollo Telnet. Se non si configura il server 
 (Routing) #configure
 (Routing) (Config)#crypto key generate dsa
 ----
-.. Se si utilizza la versione conforme a FIPS di EFOS, generare le chiavi ECDSA. Nell'esempio seguente vengono create le chiavi con una lunghezza di 256. I valori validi sono 256, 384 o 521.
+.. Se si utilizza la versione conforme a FIPS di EFOS, generare le chiavi ECDSA. Nell'esempio seguente vengono create le chiavi con una lunghezza di 521. I valori validi sono 256, 384 o 521.
 +
 [listing]
 ----
 (Routing) #configure
-(Routing) (Config)#crypto key generate ecdsa 256
+(Routing) (Config)#crypto key generate ecdsa 521
 ----
 .. Abilitare il server SSH.
 +

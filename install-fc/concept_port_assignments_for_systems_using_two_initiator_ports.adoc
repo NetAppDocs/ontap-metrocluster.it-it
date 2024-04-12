@@ -13,20 +13,18 @@ summary: È possibile configurare i sistemi FAS8020, AFF8020, FAS8200 e AFF A300
 [role="lead"]
 È possibile configurare i sistemi FAS8020, AFF8020, FAS8200 e AFF A300 utilizzando una singola porta iniziatore per ciascun fabric e due porte iniziatore per ciascun controller.
 
-È possibile seguire il cablaggio del bridge FibreBridge 6500N o del bridge FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2). Invece di utilizzare quattro iniziatori, collegare solo due iniziatori e lasciare vuoti gli altri due collegati alla porta dello switch.
+È possibile seguire il cablaggio per il bridge FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2). Invece di utilizzare quattro iniziatori, collegare solo due iniziatori e lasciare vuoti gli altri due collegati alla porta dello switch.
 
-È necessario applicare il file RCF corretto per la configurazione del bridge FibreBridge 6500N.
+Se lo zoning viene eseguito manualmente, seguire lo zoning utilizzato per un bridge FibreBridge 7500N o 7600N utilizzando una porta FC (FC1 o FC2). In questo scenario, viene aggiunta una porta iniziatore anziché due a ciascun membro di zona per fabric.
 
-Se lo zoning viene eseguito manualmente, seguire la zoning utilizzata per un bridge FibreBridge 6500N o FibreBridge 7500N o 7600N utilizzando una porta FC (FC1 o FC2). In questo scenario, viene aggiunta una porta iniziatore anziché due a ciascun membro di zona per fabric.
-
-È possibile modificare lo zoning o eseguire un aggiornamento da FibreBridge 6500 a FibreBridge 7500 utilizzando la procedura _Hot-swapping di un bridge FibreBridge 6500N con un bridge FibreBridge 7500N o 7600N_ da https://docs.netapp.com/us-en/ontap-metrocluster/maintain/index.html["Gestire i componenti di MetroCluster"].
+È possibile modificare la suddivisione in zone o eseguire un aggiornamento da FibreBridge 6500N a FibreBridge 7500N utilizzando la procedura descritta in link:task_replace_a_sle_fc_to_sas_bridge.html#hot_swap_6500n["Scambio a caldo di un bridge FibreBridge 6500N con un bridge FibreBridge 7600N o 7500N"].
 
 La seguente tabella mostra le assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.1 e versioni successive.
 
 |===
 
 
-4+| Configurazioni che utilizzano bridge FibreBridge 6500N o FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2) 
+4+| Configurazioni che utilizzano FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2) 
 
 
 4+| *MetroCluster 1 o DR Group 1* 

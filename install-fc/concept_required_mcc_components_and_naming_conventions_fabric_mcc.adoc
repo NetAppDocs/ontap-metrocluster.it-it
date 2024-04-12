@@ -107,7 +107,6 @@ La configurazione MetroCluster FC con collegamento a fabric richiede una coppia 
 NOTE: I bridge FibreBridge 6500N non sono supportati nelle configurazioni con ONTAP 9.8 e versioni successive.
 
 * I bridge FibreBridge 7600N o 7500N supportano fino a quattro stack SAS.
-* I bridge FibreBridge 6500N supportano un solo stack SAS.
 * Ogni stack può utilizzare diversi modelli di IOM.
 +
 Una combinazione di moduli IOM12 e moduli IOM3 non è supportata nello stesso stack di storage. Una combinazione di moduli IOM12 e moduli IOM6 è supportata nello stesso stack di storage se il sistema esegue una versione supportata di ONTAP.
@@ -197,7 +196,6 @@ Numero del gruppo di stack a cui si connette la coppia di bridge.
 +
 Il gruppo di stack non può contenere più di 10 shelf di storage.
 
-* I bridge FibreBridge 6500N supportano solo un singolo stack nel gruppo di stack.
 
  a| 
 1, 2, ecc.

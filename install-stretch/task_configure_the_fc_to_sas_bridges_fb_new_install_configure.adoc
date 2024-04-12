@@ -108,9 +108,8 @@ Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzar
 La velocità di trasferimento dati FC supportata dipende dal modello di bridge in uso.
 
 +
-*** Il bridge FibreBridge 7600 supporta fino a 32, 16 o 8 Gbps.
-*** Il bridge FibreBridge 7500 supporta fino a 16, 8 o 4 Gbps.
-*** Il bridge FibreBridge 6500 supporta fino a 8, 4 o 2 Gbps.
+*** Il bridge FibreBridge 7600N supporta fino a 32, 16 o 8 Gbps.
+*** Il bridge FibreBridge 7500N supporta fino a 16, 8 o 4 Gbps.
 +
 
 NOTE: La velocità FCDataRate selezionata è limitata alla velocità massima supportata sia dal bridge che dalla porta FC del modulo controller a cui si connette la porta bridge. Le distanze di cablaggio non devono superare i limiti degli SFP e di altri hardware.
@@ -124,7 +123,7 @@ Se si utilizza la CLI, è necessario eseguire il seguente comando:
 --
 
 
-.. Se si sta configurando un bridge FibreBridge 7500N o 6500N, configurare la modalità di connessione utilizzata dalla porta per ptp.
+.. Se si sta configurando un bridge FibreBridge 7500N, configurare la modalità di connessione utilizzata dalla porta su "ptp".
 +
 
 NOTE: L'impostazione FCConnMode non è richiesta quando si configura un bridge FibreBridge 7600N.

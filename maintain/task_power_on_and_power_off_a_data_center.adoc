@@ -2,23 +2,20 @@
 permalink: maintain/task_power_on_and_power_off_a_data_center.html 
 sidebar: sidebar 
 keywords: metrocluster, maintain, service, power, off, on, data, center, relocate, reconfigure, maintenance 
-summary: 'È necessario sapere come spegnere e accendere un data center per la manutenzione del sito o per trasferire un sito in un"altra posizione.' 
+summary: Se è necessario eseguire la manutenzione del sito o spostare un singolo sito in una configurazione IP MetroCluster, è necessario sapere come spegnere e riaccendere il sito. 
 ---
-= Spegnere e accendere un data center
+= Spegnere e riaccendere un singolo sito in una configurazione IP di MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-È necessario sapere come spegnere e accendere un data center per la manutenzione del sito o per trasferire un sito in un'altra posizione.
+Se è necessario eseguire la manutenzione del sito o spostare un singolo sito in una configurazione IP MetroCluster, è necessario sapere come spegnere e riaccendere il sito.
 
-Se un sito deve essere rilocato e riconfigurato (ad esempio, se è necessario passare da un cluster a quattro nodi a un cluster a otto nodi), queste attività non possono essere completate contemporaneamente. Questa procedura descrive solo le fasi necessarie per eseguire la manutenzione del sito o per spostare un sito senza modificarne la configurazione.
+Per spostare e riconfigurare un sito (ad esempio per l'espansione da un cluster a quattro nodi a uno a otto nodi), non è possibile completare contemporaneamente le attività. Questa procedura descrive solo le fasi necessarie per eseguire la manutenzione del sito o per spostare un sito senza modificarne la configurazione.
 
 Il seguente diagramma mostra una configurazione MetroCluster. Il cluster_B è spento per la manutenzione.
-
-
-NOTE: Questa procedura è destinata all'uso in entrambe le configurazioni MetroCluster IP e FC.
 
 image::power-on-off-data-center.gif[spegnere il data center]
 
@@ -29,7 +26,7 @@ image::power-on-off-data-center.gif[spegnere il data center]
 È necessario spegnere un sito e tutte le apparecchiature prima di iniziare la manutenzione o il trasferimento del sito.
 
 .A proposito di questa attività
-Tutti i comandi descritti nei seguenti passaggi vengono emessi dal sito per rimanere accesi.
+Tutti i comandi dei seguenti passaggi vengono emessi dal sito che rimane acceso.
 
 .Fasi
 . Prima di iniziare, verificare che gli aggregati non mirrorati nel sito siano offline.
@@ -64,7 +61,7 @@ https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Downlo
 .. Dopo aver eseguito Config Advisor, esaminare l'output dello strumento e seguire le raccomandazioni nell'output per risolvere eventuali problemi rilevati.
 
 
-. Dal sito che si desidera rimanere in funzione implementare lo switchover:
+. Dal sito in cui si desidera rimanere attivi, implementare lo switchover:
 +
 `metrocluster switchover`
 
@@ -76,12 +73,6 @@ cluster_A::*> metrocluster switchover
 +
 Il completamento dell'operazione può richiedere alcuni minuti.
 
-+
-[]
-====
-Nelle configurazioni MetroCluster FC, gli aggregati senza mirror saranno online solo dopo uno switchover se i dischi remoti nell'aggregato sono accessibili. In caso di errore degli ISL, il nodo locale potrebbe non essere in grado di accedere ai dati dei dischi remoti senza mirror. Il guasto di un aggregato può causare il riavvio del nodo locale.
-
-====
 . Monitorare e verificare il completamento dello switchover:
 +
 `metrocluster operation show`
@@ -105,7 +96,7 @@ cluster_A::*> metrocluster operation show
 ----
 . Se si dispone di una configurazione MetroCluster IP con ONTAP 9.6 o versione successiva, attendere che i plex del sito di emergenza siano online e che le operazioni di riparazione vengano completate automaticamente.
 +
-Nelle configurazioni IP di MetroCluster che eseguono versioni precedenti di ONTAP, i nodi del sito di emergenza non si avviano automaticamente su ONTAP e i plex rimangono offline. Per le configurazioni MetroCluster FC, tutti i plex rimangono online e non è necessario online.
+Nelle configurazioni IP di MetroCluster che eseguono ONTAP 9,5 o versione precedente, i nodi del sito di disastro non si avviano automaticamente su ONTAP e i plex rimangono offline.
 
 . Spostare offline tutti i volumi e le LUN che appartengono agli aggregati senza mirror.
 +
@@ -131,23 +122,13 @@ cluster_A*::> storage aggregate offline -aggregate <aggregate-name>
 ----
 . A seconda della configurazione e della versione di ONTAP, identificare e spostare offline i plex interessati che si trovano nel sito di emergenza (Cluster_B).
 +
-[NOTE]
-====
-Questo passaggio è necessario nelle seguenti configurazioni:.
-
-** Tutte le configurazioni MetroCluster FC.
-** Configurazioni MetroCluster IP con ONTAP versione 9.6 o successiva.
-
-
-====
-+
 Devi spostare i seguenti plessi offline:
 
 +
 --
 ** Plessi non mirrorati che risiedono su dischi situati nel sito di disastro.
 +
-Se non si spostano offline i plessi non mirrorati nel sito di emergenza, potrebbe verificarsi un'interruzione quando il sito di emergenza viene spento in seguito.
+Se non si spostano offline i plex non di mirroring del sito di disastro, potrebbe verificarsi un'interruzione quando il sito di disastro viene successivamente spento.
 
 ** Plessi mirrorati che risiedono su dischi situati nel sito di disastro per il mirroring aggregato. Una volta spostati offline, i plex non sono accessibili.
 
@@ -264,107 +245,20 @@ storage aggregate plex offline -aggregate Node_B_1_aggr0 -plex plex0
 ----
 +
 
-NOTE: Eseguire questa operazione per tutti i plex che hanno dischi remoti a Cluster_A.
+NOTE: Eseguire questa operazione per tutti i plessi che hanno dischi remoti a Cluster_A.
 
 
 
-. Costantemente offline gli switchport in base al tipo di switch.
+. Le porte dello switch ISL sono costantemente offline in base al tipo di switch.
+. Arrestare i nodi eseguendo il seguente comando su ciascun nodo:
 +
+`node halt -inhibit-takeover true -skip-lif-migration true -node <node-name>`
 
-NOTE: Questo passaggio è necessario solo per le configurazioni MetroCluster FC. Saltare questo passaggio se la configurazione è una configurazione MetroCluster IP o una configurazione MetroCluster estesa con switch backend FC.
-
+. Spegnere l'apparecchiatura in caso di disastro.
 +
-[cols="25,75"]
-|===
-
-
-| Tipo di switch | Azione 
-
-
- a| 
-Se gli switch FC sono switch Brocade...
- a| 
-.. Utilizzare `portcfgpersistentdisable _port_` per disattivare in modo permanente le porte, come illustrato nell'esempio seguente. Questa operazione deve essere eseguita su entrambi gli switch del sito sopravvissuto.
-+
-[listing]
-----
-
- Switch_A_1:admin> portcfgpersistentdisable 14
- Switch_A_1:admin> portcfgpersistentdisable 15
- Switch_A_1:admin>
-----
-.. Verificare che le porte siano disattivate utilizzando `switchshow` comando mostrato nell'esempio seguente:
-+
-[listing]
-----
-
- Switch_A_1:admin> switchshow
- switchName:	Switch_A_1
- switchType:	109.1
- switchState:	Online
- switchMode:	Native
- switchRole:	Principal
- switchDomain:	2
- switchId:	fffc02
- switchWwn:	10:00:00:05:33:88:9c:68
- zoning:		ON (T5_T6)
- switchBeacon:	OFF
- FC Router:	OFF
- FC Router BB Fabric ID:	128
- Address Mode:	0
-
-  Index Port Address Media Speed State     Proto
-  ==============================================
-   ...
-   14  14   020e00   id    16G   No_Light    FC  Disabled (Persistent)
-   15  15   020f00   id    16G   No_Light    FC  Disabled (Persistent)
-   ...
- Switch_A_1:admin>
-----
-
-
-
-
- a| 
-Se gli switch FC sono switch Cisco...
- a| 
-.. Utilizzare `interface` per disattivare in modo persistente le porte. Nell'esempio seguente vengono mostrate le porte 14 e 15 disabilitate:
-+
-[listing]
-----
-
- Switch_A_1# conf t
- Switch_A_1(config)# interface fc1/14-15
- Switch_A_1(config)# shut
-
- Switch_A_1(config-if)# end
- Switch_A_1# copy running-config startup-config
-----
-.. Verificare che la porta dello switch sia disattivata utilizzando `show interface brief` come illustrato nell'esempio seguente:
-+
-[listing]
-----
-
- Switch_A_1# show interface brief
- Switch_A_1
-----
-
-
-|===
-. Spegnere il sito.
-+
-Le seguenti apparecchiature devono essere spente in nessun ordine specifico:
+È necessario spegnere le seguenti apparecchiature nell'ordine indicato:
 
 +
-|===
-
-
-| Tipo di configurazione | Apparecchiatura da spegnere 
-
-
- a| 
-In una configurazione MetroCluster IP, spegnere...
- a| 
 ** Switch IP MetroCluster
 ** Controller di storage
 ** Shelf di storage
@@ -372,23 +266,10 @@ In una configurazione MetroCluster IP, spegnere...
 
 
 
- a| 
-In una configurazione MetroCluster FC, spegnere...
- a| 
-** Switch FC MetroCluster
-** Controller di storage
-** Shelf di storage
-** Atto FibreBridges (se presente)
-
-
-|===
-
-
 
 
 == Spostamento del sito spento di MetroCluster
 
-[role="lead"]
 Una volta spento il sito, è possibile iniziare il lavoro di manutenzione. La procedura è la stessa sia che i componenti MetroCluster vengano ricollocati all'interno dello stesso data center sia che vengano ricollocati in un data center diverso.
 
 * Il cavo dell'hardware deve essere identico a quello del sito precedente.
@@ -396,108 +277,15 @@ Una volta spento il sito, è possibile iniziare il lavoro di manutenzione. La pr
 
 
 .Fasi
-. Assicurarsi che il cablaggio di tutti i componenti sia registrato con attenzione in modo da poterlo ricollocare correttamente nella nuova posizione.
-. Spostare fisicamente tutto l'hardware, i controller di storage, gli switch FC e IP, i FibreBridge e gli shelf di storage.
+. Verificare che il cablaggio di tutti i componenti sia registrato attentamente in modo che possa essere ricollegato correttamente nella nuova posizione.
+. Spostare fisicamente tutto l'hardware, i controller di storage, gli switch IP, i FibreBridge e gli shelf di storage.
 . Configurare le porte ISL e verificare la connettività tra siti.
 +
-.. Accendere gli switch FC e IP.
+.. Accendere gli switch IP.
 +
 
 NOTE: Non * accendere altre apparecchiature.
 
-.. Attivare le porte.
-+
-
-NOTE: Questo passaggio è necessario solo nelle configurazioni MetroCluster FC. È possibile saltare questo passaggio se la configurazione è una configurazione IP MetroCluster.
-
-+
-Abilitare le porte in base ai tipi di switch corretti nella seguente tabella:
-
-+
-[cols="35,65"]
-|===
-
-
-| Tipo di switch | Comando 
-
-
- a| 
-Se gli switch FC sono switch Brocade...
- a| 
-... Utilizzare `portcfgpersistentenable _port number_` per abilitare in modo permanente la porta. Questa operazione deve essere eseguita su entrambi gli switch del sito sopravvissuto.
-+
-L'esempio seguente mostra le porte 14 e 15 attivate sullo switch_A_1.
-
-+
-[listing]
-----
-switch_A_1:admin> portcfgpersistentenable 14
-switch_A_1:admin> portcfgpersistentenable 15
-switch_A_1:admin>
-----
-... Verificare che la porta dello switch sia abilitata: `switchshow`
-+
-L'esempio seguente mostra che le porte 14 e 15 sono attivate:
-
-+
-[listing]
-----
-switch_A_1:admin> switchshow
-switchName:	Switch_A_1
-switchType:	109.1
-
-switchState:	Online
-switchMode:	Native
-switchRole:	Principal
-switchDomain:	2
-switchId:	fffc02
-switchWwn:	10:00:00:05:33:88:9c:68
-zoning:		ON (T5_T6)
-switchBeacon:	OFF
-FC Router:	OFF
-FC Router BB Fabric ID:	128
-Address Mode:	0
-
-Index Port Address Media Speed State     Proto
-==============================================
- ...
- 14  14   020e00   id    16G   Online      FC  E-Port  10:00:00:05:33:86:89:cb "Switch_A_1"
- 15  15   020f00   id    16G   Online      FC  E-Port  10:00:00:05:33:86:89:cb "Switch_A_1" (downstream)
- ...
-switch_A_1:admin>
-----
-
-
-
-
- a| 
-Se gli switch FC sono switch Cisco...
- a| 
-... Inserire il `interface` per attivare la porta.
-+
-L'esempio seguente mostra le porte 14 e 15 attivate sullo switch_A_1.
-
-+
-[listing]
-----
-
- switch_A_1# conf t
- switch_A_1(config)# interface fc1/14-15
- switch_A_1(config)# no shut
- switch_A_1(config-if)# end
- switch_A_1# copy running-config startup-config
-----
-... Verificare che la porta dello switch sia abilitata: `show interface brief`
-+
-[listing]
-----
-
- switch_A_1# show interface brief
- switch_A_1#
-----
-
-
-|===
 
 
 . Utilizzare gli strumenti sugli switch (se disponibili) per verificare la connettività tra siti.
@@ -506,101 +294,12 @@ L'esempio seguente mostra le porte 14 e 15 attivate sullo switch_A_1.
 NOTE: Procedere solo se i collegamenti sono correttamente configurati e stabili.
 
 . Disattivare nuovamente i collegamenti se risultano stabili.
-+
-Disattivare le porte in base all'utilizzo di switch Brocade o Cisco, come illustrato nella tabella seguente:
-
-+
-[cols="35,65"]
-|===
-
-
-| Tipo di switch | Comando 
-
-
- a| 
-Se gli switch FC sono switch Brocade...
- a| 
-.. Inserire il `portcfgpersistentdisable _port number_` per disattivare in modo permanente la porta.
-+
-Questa operazione deve essere eseguita su entrambi gli switch del sito sopravvissuto. L'esempio seguente mostra le porte 14 e 15 disattivate sullo switch_A_1:
-
-+
-[listing]
-----
-
- switch_A_1:admin> portpersistentdisable 14
- switch_A_1:admin> portpersistentdisable 15
- switch_A_1:admin>
-----
-.. Verificare che la porta dello switch sia disattivata: `switchshow`
-+
-L'esempio seguente mostra che le porte 14 e 15 sono disattivate:
-
-+
-[listing]
-----
-switch_A_1:admin> switchshow
-switchName:	Switch_A_1
-switchType:	109.1
-switchState:	Online
-switchMode:	Native
-switchRole:	Principal
-switchDomain:	2
-switchId:	fffc02
-switchWwn:	10:00:00:05:33:88:9c:68
-zoning:		ON (T5_T6)
-switchBeacon:	OFF
-FC Router:	OFF
-FC Router BB Fabric ID:	128
-Address Mode:	0
-
- Index Port Address Media Speed State     Proto
- ==============================================
-  ...
-  14  14   020e00   id    16G   No_Light    FC  Disabled (Persistent)
-  15  15   020f00   id    16G   No_Light    FC  Disabled (Persistent)
-  ...
-switch_A_1:admin>
-----
-
-
-
-
- a| 
-Se gli switch FC sono switch Cisco...
- a| 
-.. Disattivare la porta utilizzando `interface` comando.
-+
-L'esempio seguente mostra le porte fc1/14 e fc1/15 disattivate sullo switch A_1:
-
-+
-[listing]
-----
-switch_A_1# conf t
-
-switch_A_1(config)# interface fc1/14-15
-switch_A_1(config)# shut
-switch_A_1(config-if)# end
-switch_A_1# copy running-config startup-config
-----
-.. Verificare che la porta dello switch sia disattivata utilizzando `show interface brief` comando.
-+
-[listing]
-----
-
-  switch_A_1# show interface brief
-  switch_A_1#
-----
-
-
-|===
 
 
 
 
 == Accensione della configurazione MetroCluster e ripristino del normale funzionamento
 
-[role="lead"]
 Una volta completata la manutenzione o spostato il sito, è necessario accendere il sito e ripristinare la configurazione MetroCluster.
 
 .A proposito di questa attività
@@ -609,7 +308,7 @@ Tutti i comandi descritti di seguito vengono emessi dal sito di accensione.
 .Fasi
 . Accendere gli interruttori.
 +
-Gli interruttori devono essere accesi per primi. Potrebbero essere stati accesi durante la fase precedente se il sito è stato trasferito.
+Accendere prima gli interruttori. Potrebbero essere stati accesi durante la fase precedente se il sito è stato trasferito.
 
 +
 .. Riconfigurare il collegamento interswitch (ISL) se necessario o se non è stato completato come parte del trasferimento.
@@ -617,141 +316,24 @@ Gli interruttori devono essere accesi per primi. Potrebbero essere stati accesi 
 .. Verificare l'ISL.
 
 
-. Accendere i controller storage.
-. Accendere gli shelf e attendere il tempo necessario per l'accensione completa.
-. Accendere i bridge FibreBridge.
+. Accendere i controller di archiviazione e attendere che venga visualizzato `LOADER` prompt. I controller non devono essere completamente avviati.
 +
+Se l'avvio automatico è attivato, premere `Ctrl+C` per interrompere l'avvio automatico dei controller.
 
-NOTE: È possibile saltare questo passaggio se la configurazione è una configurazione IP MetroCluster.
-
+. Accendere gli scaffali, lasciando abbastanza tempo per accenderli completamente.
 +
-.. Sugli switch FC, verificare che le porte che collegano i bridge siano in linea.
-+
-È possibile utilizzare un comando come `switchshow` Per switch Brocade, e. `show interface brief` Per switch Cisco.
-
 .. Verificare che gli shelf e i dischi sui bridge siano chiaramente visibili.
 +
-È possibile utilizzare un comando come `sastargets` Sull'interfaccia della riga di comando (CLI) atto.
+È possibile utilizzare un comando come `sastargets` Sulla CLI atto.
 
 
 
-. Abilitare gli ISL sugli switch FC.
+. Verificare che la memoria locale sia visibile dal nodo in modalità manutenzione:
 +
+`disk show -v`
 
-NOTE: Saltare questo passaggio se la configurazione è una configurazione IP MetroCluster.
-
-+
-Attivare le porte in base all'utilizzo di switch Brocade o Cisco, come mostrato nella tabella seguente:
-
-+
-[cols="25,75"]
-|===
-
-
-| Tipo di switch | Comando 
-
-
- a| 
-Se gli switch FC sono switch Brocade...
- a| 
-.. Inserire il `portcfgpersistentenable _port_` per abilitare in modo persistente le porte. Questa operazione deve essere eseguita su entrambi gli switch del sito sopravvissuto.
-+
-L'esempio seguente mostra le porte 14 e 15 attivate sullo switch_A_1:
-
-+
-[listing]
-----
-
- Switch_A_1:admin> portcfgpersistentenable 14
- Switch_A_1:admin> portcfgpersistentenable 15
- Switch_A_1:admin>
-----
-.. Verificare che la porta dello switch sia abilitata utilizzando il segno +
-`switchshow` comando:
-+
-[listing]
-----
-switch_A_1:admin> switchshow
- switchName:	Switch_A_1
- switchType:	109.1
- switchState:	Online
- switchMode:	Native
- switchRole:	Principal
- switchDomain:	2
- switchId:	fffc02
- switchWwn:	10:00:00:05:33:88:9c:68
- zoning:		ON (T5_T6)
- switchBeacon:	OFF
- FC Router:	OFF
- FC Router BB Fabric ID:	128
- Address Mode:	0
-
-  Index Port Address Media Speed State     Proto
-  ==============================================
-   ...
-   14  14   020e00   id    16G   Online      FC  E-Port  10:00:00:05:33:86:89:cb "Switch_A_1"
-   15  15   020f00   id    16G   Online      FC  E-Port  10:00:00:05:33:86:89:cb "Switch_A_1" (downstream)
-   ...
- switch_A_1:admin>
-----
-
-
-
-
- a| 
-Se gli switch FC sono switch Cisco...
- a| 
-.. Utilizzare `interface` per abilitare le porte.
-+
-L'esempio seguente mostra l'abilitazione della porta fc1/14 e fc1/15 sullo switch A_1:
-
-+
-[listing]
-----
-
- switch_A_1# conf t
- switch_A_1(config)# interface fc1/14-15
- switch_A_1(config)# no shut
- switch_A_1(config-if)# end
- switch_A_1# copy running-config startup-config
-----
-.. Verificare che la porta dello switch sia disattivata:
-+
-[listing]
-----
-switch_A_1# show interface brief
-switch_A_1#
-----
-
-
-|===
-. Verificare che lo storage sia visibile.
-+
-Selezionare il metodo appropriato per determinare se lo storage è visibile a seconda che si disponga di una configurazione MetroCluster IP o FC:
-
-+
-[cols="35,65"]
-|===
-
-
-| Se la configurazione è... | Quindi eseguire questo passaggio... 
-
-
- a| 
-Configurazione IP MetroCluster
- a| 
-Verificare che lo storage locale sia visibile dalla modalità Maintenance del nodo.
-
-
-
- a| 
-Configurazione MetroCluster FC
- a| 
-Verificare che lo storage sia visibile dal sito sopravvissuto. Rimette online i plex offline. In questo modo vengono rieseguite le operazioni di risync e viene ristabilita SyncMirror.
-
-|===
 . Ristabilire la configurazione MetroCluster.
 +
-Seguire le istruzioni riportate in link:https://docs.netapp.com/us-en/ontap-metrocluster/disaster-recovery/concept_dr_workflow.html["Gestione MetroCluster e disaster recovery"] Per eseguire operazioni di healing e switchback in base alla configurazione MetroCluster.
+Seguire le istruzioni riportate in link:../disaster-recovery/task_recover_from_a_non_controller_failure_mcc_dr.html#verifying-that-your-system-is-ready-for-a-switchback["Verificare che il sistema sia pronto per lo switchback"] Per eseguire operazioni di healing e switchback in base alla configurazione MetroCluster.
 
 

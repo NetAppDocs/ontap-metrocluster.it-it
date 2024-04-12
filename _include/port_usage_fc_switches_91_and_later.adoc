@@ -62,7 +62,7 @@ Le seguenti tabelle mostrano l'utilizzo delle porte sugli switch Brocade. Le tab
 |===
 
 
-5+| Configurazioni che utilizzano bridge FibreBridge 6500N o FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2) 
+5+| Configurazioni che utilizzano FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2) 
 
 
 5+| MetroCluster 1 o DR Group 1 
@@ -256,7 +256,7 @@ Porta HBA d
 |===
 
 
-5+| Configurazioni che utilizzano bridge FibreBridge 6500N o FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2) 
+5+| Configurazioni che utilizzano FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2) 
 
 
 5+| MetroCluster 1 o DR Group 1 
@@ -377,7 +377,7 @@ bridge_x_yb
 |===
 
 
-8+| Configurazioni che utilizzano bridge FibreBridge 6500N o FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2) 
+8+| Configurazioni che utilizzano FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2) 
 
 
 8+| MetroCluster 2 o DR Group 2 
@@ -2785,7 +2785,7 @@ Porta HBA d
 4+| Cisco 9396S 
 
 
-| FibreBridge 7500 con due porte FC | Porta | Interruttore 1 | Interruttore 2 
+| FibreBridge 7500N o 7600N utilizzando due porte FC | Porta | Interruttore 1 | Interruttore 2 
 
 
  a| 
@@ -2955,7 +2955,7 @@ FC2
 4+| Cisco 9148S 
 
 
-| FibreBridge 7500 con due porte FC | Porta | Interruttore 1 | Interruttore 2 
+| FibreBridge 7500N o 7600N utilizzando due porte FC | Porta | Interruttore 1 | Interruttore 2 
 
 
  a| 
@@ -3125,7 +3125,7 @@ FC2
 4+| Cisco 9250i 
 
 
-| FibreBridge 7500 con due porte FC | Porta | Interruttore 1 | Interruttore 2 
+| FibreBridge 7500N o 7600N utilizzando due porte FC | Porta | Interruttore 1 | Interruttore 2 
 
 
  a| 
@@ -3289,15 +3289,15 @@ FC2
 |===
 È possibile collegare ulteriori bridge per un secondo gruppo DR o una seconda configurazione MetroCluster utilizzando le porte da 25 a 48 seguendo lo stesso schema.
 
-Le seguenti tabelle mostrano l'utilizzo della porta bridge quando si utilizzano bridge FibreBridge 6500 o bridge FibreBridge 7500 utilizzando una sola porta FC (FC1 o FC2). Per i bridge FibreBridge 7500 che utilizzano una porta FC, è possibile collegare FC1 o FC2 alla porta indicata come FC1. È possibile collegare altri bridge utilizzando le porte 25-48.
+Le tabelle seguenti mostrano l'utilizzo delle porte bridge quando si utilizzano bridge FibreBridge 7500N o 7600N che utilizzano solo una porta FC (FC1 o FC2). Per i bridge FibreBridge 7500N o 7600N che utilizzano una porta FC, è possibile collegare via cavo FC1 o FC2 alla porta indicata come FC1. È possibile collegare altri bridge utilizzando le porte 25-48.
 
 |===
 
 
-4+| Bridge FibreBridge 6500 o bridge FibreBridge 7500 che utilizzano una porta FC 
+4+| Bridge 7500N o 7600N FibreBridge mediante una porta FC 
 
 
-.2+| Bridge FibreBridge 6500 o FibreBridge 7500 utilizzando una porta FC .2+| Porta 2+| Cisco 9396S 
+.2+| FibreBridge 7500N o 7600N utilizzando una porta FC .2+| Porta 2+| Cisco 9396S 
 
 
 | Interruttore 1 | Interruttore 2 
@@ -3483,7 +3483,7 @@ FC1
 |===
 
 
-4+| Bridge FibreBridge 6500 o bridge FibreBridge 7500 che utilizzano una porta FC 
+4+| Bridge 7500N o 7600N FibreBridge mediante una porta FC 
 
 
 .2+| Ponte .2+| Porta 2+| Cisco 9148S 
@@ -3675,7 +3675,7 @@ FC1
 4+| Cisco 9250i 
 
 
-| Bridge FibreBridge 6500 o FibreBridge 7500 utilizzando una porta FC | Porta | Interruttore 1 | Interruttore 2 
+| FibreBridge 7500N o 7600N utilizzando una porta FC | Porta | Interruttore 1 | Interruttore 2 
 
 
  a| 
@@ -4352,7 +4352,7 @@ LEM2-8
 4+|  2+| Quattro nodi | Otto nodi 
 
 
-2+| FibreBridge 7500 con due porte FC | Porta | Si connette a FC_switch... | 9132T (1 LEM) | 9132T (2 LEM) | 9132T (2 LEM) 
+2+| FibreBridge 7500N utilizzando due porte FC | Porta | Si connette a FC_switch... | 9132T (1 LEM) | 9132T (2 LEM) | 9132T (2 LEM) 
 
 
  a| 

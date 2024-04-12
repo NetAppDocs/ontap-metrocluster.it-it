@@ -17,7 +17,6 @@ summary: È necessario eseguire le fasi finali della configurazione e ripristina
 
 == Verifica del funzionamento di MetroCluster e assegnazione dei dischi dopo la transizione
 
-[role="lead"]
 Verificare che MetroCluster funzioni correttamente e assegnare le unità alla seconda coppia di nuovi nodi (Node_A_2-IP e Node_B_2-IP).
 
 . Verificare che il tipo di configurazione MetroCluster sia IP-fabric: `metrocluster show`
@@ -35,7 +34,6 @@ Verificare che MetroCluster funzioni correttamente e assegnare le unità alla se
 
 == Installazione delle licenze per il nuovo modulo controller
 
-[role="lead"]
 È necessario aggiungere le licenze per il nuovo modulo controller per tutti i servizi ONTAP che richiedono licenze standard (con blocco a nodo). Per le funzionalità con licenze standard, ogni nodo del cluster deve disporre di una propria chiave per la funzionalità.
 
 Per informazioni dettagliate sulle licenze, consultare l'articolo della Knowledge base 3013749: Panoramica e riferimenti sulle licenze di Data ONTAP 8.2 sul sito di supporto NetApp e il documento _riferimento per l'amministrazione del sistema_.
@@ -57,7 +55,6 @@ Ripetere questo passaggio per ogni licenza standard richiesta (bloccata da nodo)
 
 == Completamento della configurazione dei nodi
 
-[role="lead"]
 Prima di completare le procedure, è possibile eseguire varie fasi di configurazione. Alcuni di questi passaggi sono facoltativi.
 
 . Configurare il processore di servizio: `system service-processor network modify`
@@ -82,7 +79,6 @@ link:../tiebreaker/concept_overview_of_the_tiebreaker_software.html["Installazio
 
 == Invio di un messaggio AutoSupport personalizzato dopo la manutenzione
 
-[role="lead"]
 Una volta completata la transizione, devi inviare un messaggio AutoSupport che indica la fine della manutenzione, in modo da poter riprendere la creazione automatica del caso.
 
 . Per riprendere la generazione automatica del caso di supporto, inviare un messaggio AutoSupport per indicare che la manutenzione è stata completata.

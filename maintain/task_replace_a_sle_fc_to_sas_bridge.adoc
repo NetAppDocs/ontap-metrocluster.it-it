@@ -229,28 +229,7 @@ Device  D       4       Disabled        12Gb    5001086000a1c70c
 
 
 . Mettere a terra l'utente.
-. Spegnere il bridge atto.
-+
-[cols="35,65"]
-|===
-
-
-| Se si utilizza un... | Quindi... 
-
-
- a| 
-Bridge FibreBridge 7600N o 7500N
- a| 
-Rimuovere i cavi di alimentazione collegati al bridge.
-
-
-
- a| 
-Bridge FibreBridge 6500N
- a| 
-Spegnere l'interruttore di alimentazione del bridge.
-
-|===
+. Spegnere il bridge atto e rimuovere i cavi di alimentazione collegati al bridge.
 . Scollegare i cavi collegati al vecchio bridge.
 +
 Prendere nota della porta a cui ciascun cavo è stato collegato.
@@ -350,9 +329,8 @@ Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzar
 La velocità di trasferimento dati FC supportata dipende dal modello di bridge in uso.
 
 +
-*** Il bridge FibreBridge 7600 supporta fino a 32, 16 o 8 Gbps.
-*** Il bridge FibreBridge 7500 supporta fino a 16, 8 o 4 Gbps.
-*** Il bridge FibreBridge 6500 supporta fino a 8, 4 o 2 Gbps.
+*** Il bridge FibreBridge 7600N supporta fino a 32, 16 o 8 Gbps.
+*** Il bridge FibreBridge 7500N supporta fino a 16, 8 o 4 Gbps.
 +
 
 NOTE: La velocità FCDataRate selezionata è limitata alla velocità massima supportata sia dal bridge che dallo switch a cui si connette la porta bridge. Le distanze di cablaggio non devono superare i limiti degli SFP e di altri hardware.
@@ -365,7 +343,7 @@ Se si utilizza la CLI, è necessario eseguire il seguente comando:
 
 
 
-.. Se si sta configurando un bridge FibreBridge 7500N o 6500N, configurare la modalità di connessione utilizzata dalla porta per ptp.
+.. Se si sta configurando un FibreBridge 7500N, configurare la modalità di connessione che la porta utilizza su "ptp".
 +
 
 NOTE: L'impostazione FCConnMode non è richiesta quando si configura un bridge FibreBridge 7600N.
@@ -437,7 +415,7 @@ Se il nuovo bridge è dello stesso tipo del bridge partner, eseguire l'aggiornam
 
 . [[step17-Reconnect-newbridge]] ricollegare i cavi SAS e FC alle stesse porte del nuovo bridge.
 +
-Se il nuovo bridge è un FibreBridge 7600N o 7500N, è necessario sostituire i cavi che collegano il bridge alla parte superiore o inferiore dello shelf stack. Il bridge FibreBridge 6500N utilizza cavi SAS; i bridge FibreBridge 7600N e 7500N richiedono cavi mini-SAS per queste connessioni.
+È necessario sostituire i cavi che collegano il ponte alla parte superiore o inferiore della scaffalatura. I bridge FibreBridge 7600N e 7500N richiedono cavi mini-SAS per questi collegamenti.
 
 +
 
@@ -771,9 +749,8 @@ Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzar
 La velocità di trasferimento dati FC supportata dipende dal modello di bridge in uso.
 
 +
-*** Il bridge FibreBridge 7600 supporta fino a 32, 16 o 8 Gbps.
-*** Il bridge FibreBridge 7500 supporta fino a 16, 8 o 4 Gbps.
-*** Il bridge FibreBridge 6500 supporta fino a 8, 4 o 2 Gbps.
+*** Il bridge FibreBridge 7600N supporta fino a 32, 16 o 8 Gbps.
+*** Il bridge FibreBridge 7500N supporta fino a 16, 8 o 4 Gbps.
 +
 
 NOTE: La velocità FCDataRate selezionata è limitata alla velocità massima supportata dal bridge e dalla porta FC del modulo controller o dello switch a cui si connette la porta bridge. Le distanze di cablaggio non devono superare i limiti degli SFP e di altri hardware.
@@ -1180,9 +1157,9 @@ Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzar
 La velocità di trasferimento dati FC supportata dipende dal modello di bridge in uso.
 
 +
-*** Il bridge FibreBridge 7600 supporta fino a 32, 16 o 8 Gbps.
-*** Il bridge FibreBridge 7500 supporta fino a 16, 8 o 4 Gbps.
-*** Il bridge FibreBridge 6500 supporta fino a 8, 4 o 2 Gbps.
+*** Il bridge FibreBridge 7600N supporta fino a 32, 16 o 8 Gbps.
+*** Il bridge FibreBridge 7500N supporta fino a 16, 8 o 4 Gbps.
+*** Il bridge FibreBridge 6500N supporta fino a 8, 4 o 2 Gbps.
 +
 
 NOTE: La velocità FCDataRate selezionata è limitata alla velocità massima supportata sia dal bridge che dallo switch a cui si connette la porta bridge. Le distanze di cablaggio non devono superare i limiti degli SFP e di altri hardware.

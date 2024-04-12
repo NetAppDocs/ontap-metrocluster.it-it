@@ -1,5 +1,5 @@
 ---
-permalink: install-fc/task_fb_new_install.html 
+permalink: install-fc/task_install_fc_sas_bridges_shelves.html 
 sidebar: sidebar 
 keywords: install, installing, fc-to-sas, fc, sas, bridges, disk, shelves, atto, fibrebridge 
 summary: Quando si aggiunge nuovo storage alla configurazione, si installano e cablano i bridge RTO FibreBridge e gli shelf di dischi SAS. 
@@ -140,7 +140,7 @@ NOTE: Gli shelf SAS nelle configurazioni MetroCluster non supportano il cablaggi
 Se si utilizza una versione di ONTAP precedente alla 9.5 o si intende utilizzare un accesso out-of-band al bridge FibreBridge 7600N utilizzando telnet o altri protocolli e servizi di porta IP (FTP, ExpressNAV, ICMP o barra di navigazione), è possibile attivare i servizi di accesso tramite la porta della console.
 
 .A proposito di questa attività
-A differenza dei bridge ATTO FibreBridge 7500N e 6500N, il bridge FibreBridge 7600N viene fornito con tutti i protocolli e i servizi delle porte IP disattivati.
+A differenza dei bridge atto FibreBridge 7500N, il bridge FibreBridge 7600N viene fornito con tutti i protocolli e i servizi delle porte IP disattivati.
 
 A partire da ONTAP 9.5, è supportata la _gestione in-band_ dei bridge. Ciò significa che i bridge possono essere configurati e monitorati dall'interfaccia CLI ONTAP tramite la connessione FC al bridge. Non è richiesto l'accesso fisico al bridge tramite le porte Ethernet del bridge e non sono necessarie le interfacce utente del bridge.
 
@@ -311,9 +311,8 @@ Nei sistemi che eseguono ONTAP 9.5 o versioni successive, è possibile utilizzar
 --
 La velocità di trasferimento dati FC supportata dipende dal modello di bridge in uso.
 
-*** Il bridge FibreBridge 7600 supporta fino a 32, 16 o 8 Gbps.
-*** Il bridge FibreBridge 7500 supporta fino a 16, 8 o 4 Gbps.
-*** Il bridge FibreBridge 6500 supporta fino a 8, 4 o 2 Gbps.
+*** Il bridge FibreBridge 7600N supporta fino a 32, 16 o 8 Gbps.
+*** Il bridge FibreBridge 7500N supporta fino a 16, 8 o 4 Gbps.
 
 
 
@@ -324,7 +323,7 @@ Se si utilizza la CLI, è necessario eseguire il seguente comando:
 `set FCDataRate _port-number_ _port-speed_`
 
 --
-.. Se si sta configurando un bridge FibreBridge 7500N o 6500N, configurare la modalità di connessione utilizzata dalla porta per ptp.
+.. Se si sta configurando un bridge FibreBridge 7500N, configurare la modalità di connessione utilizzata dalla porta su "ptp".
 +
 
 NOTE: L'impostazione FCConnMode non è richiesta quando si configura un bridge FibreBridge 7600N.
@@ -459,7 +458,6 @@ Per il cablaggio degli shelf di dischi, è necessario utilizzare i bridge FC-SAS
 .Scelte
 * <<cabling_fb_7600N_7500N_with_iom12,Collegamento di un bridge FibreBridge 7600N o 7500N con shelf di dischi mediante moduli IOM12>>
 * <<cabling_fb_7600N_7500N_with_iom6_iom3,Collegamento di un bridge FibreBridge 7600N o 7500N con shelf di dischi utilizzando moduli IOM6 o IOM3>>
-* <<cabling_fb_6500N_with_iom6_iom3,Collegamento di un bridge FibreBridge 6500N con shelf di dischi utilizzando moduli IOM6 o IOM3>>
 
 
 
@@ -548,39 +546,6 @@ image::../media/mcc_cabling_bridge_and_sas_stack_with_7500n_four_stacks.gif[brid
 
 
 
-==== Collegamento di un bridge FibreBridge 6500N con shelf di dischi utilizzando moduli IOM6 o IOM3
-
-Dopo aver configurato il bridge, è possibile iniziare a cablare il nuovo sistema. Il bridge FibreBridge 6500N utilizza connettori QSFP.
-
-.A proposito di questa attività
-Attendere almeno 10 secondi prima di collegare la porta. I connettori dei cavi SAS sono dotati di chiave; se orientati correttamente in una porta SAS, il connettore scatta in posizione e il LED LNK della porta SAS dello shelf di dischi si illumina di verde. Per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso il basso (nella parte inferiore del connettore).
-
-Il bridge FibreBridge 6500N non supporta shelf di dischi che utilizzano IOM12.
-
-.Fasi
-. Collegare a margherita gli shelf di dischi in ogni stack.
-+
-Per informazioni sugli shelf di dischi con concatenamento a margherita, consultare la _Guida all'installazione e al servizio_ relativa al modello di shelf di dischi in uso.
-
-. Per ogni stack di shelf di dischi, collegare l'IOM A una porta quadrata del primo shelf alla porta SAS A su FibreBridge A.
-. Per ogni stack di shelf di dischi, collegare la porta circolare IOM B dell'ultimo shelf alla porta SAS A su FibreBridge B.
-+
-Ogni bridge ha un percorso per il proprio stack di shelf di dischi: il bridge A si collega al lato A dello stack attraverso il primo shelf e il bridge B si collega al lato B dello stack attraverso l'ultimo shelf.
-
-+
-
-NOTE: Il bridge della porta SAS B è disattivato.
-
-+
-La figura seguente mostra un set di bridge collegati a uno stack di quattro shelf di dischi:
-
-+
-image::../media/mcc_cabling_bridge_and_sas_stack.gif[bridge di cablaggio mcc e stack sas]
-
-
-
-
-
 === Verifica della connettività del bridge e cablaggio delle porte FC del bridge
 
 Verificare che ciascun bridge sia in grado di rilevare tutte le unità disco, quindi collegare ciascun bridge agli switch FC locali.
@@ -620,12 +585,10 @@ Visualizzare i dispositivi connessi:
 `sastargets`
 
 |===
-
-
++
 L'output mostra i dispositivi (dischi e shelf di dischi) a cui è collegato il bridge. Le linee di output sono numerate in sequenza in modo da poter contare rapidamente i dispositivi. Ad esempio, il seguente output mostra che sono collegati 10 dischi:
 
 +
-
 [listing]
 ----
 Tgt VendorID ProductID        Type        SerialNumber
@@ -640,7 +603,9 @@ Tgt VendorID ProductID        Type        SerialNumber
   8 NETAPP   X410_S15K6288A15 DISK        3QP1FY0T00009940G8PA
   9 NETAPP   X410_S15K6288A15 DISK        3QP1FXW600009940VERQ
 ----
-+ NOTA: Se all'inizio dell'output viene visualizzato il testo "`respesse tronced`", è possibile utilizzare Telnet per connettersi al bridge e immettere lo stesso comando per visualizzare l'output.
++
+
+NOTE: Se all'inizio dell'output viene visualizzato il testo "`response troncato'', è possibile utilizzare Telnet per connettersi al bridge e immettere lo stesso comando per visualizzare tutto l'output.
 
 . Verificare che l'output del comando indichi che il bridge è collegato a tutti i dischi e gli shelf di dischi nello stack a cui dovrebbe essere collegato.
 +
