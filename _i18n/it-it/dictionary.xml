@@ -1584,7 +1584,6 @@
   <block id="4a18eaea016103675a5da405a57fbed8" category="paragraph">È possibile utilizzare questa procedura anche se sono soddisfatte le seguenti condizioni:</block>
   <block id="49304b5a3e77f6b22f9f39b8cf0e1186" category="list-text">Si sta sostituendo una coppia di bridge FibreBridge 6500N collegati allo stesso stack di storage SAS.</block>
   <block id="520879137e3e1dd05fc10803bb01fbcd" category="list-text">In precedenza è stato sostituito un bridge FibreBridge 6500N nella coppia e lo stack di storage è configurato con un bridge FibreBridge 6500N e un bridge FibreBridge 7600N o 7500N.</block>
-  <block id="73152dad4acad3208bc063c3951344c5" category="paragraph">In questo caso, iniziare con il passaggio riportato di seguito per sostituire a caldo il bridge FibreBridge 6500N "`bottom`" con un bridge FibreBridge 7600N o 7500N.</block>
   <block id="f9c1933f3b94ffee14ef186b2709352c" category="paragraph">Il seguente diagramma mostra un esempio della configurazione iniziale, in cui quattro bridge FibreBridge 6500N collegano due stack di storage SAS:</block>
   <block id="3dcba5083263c26dc21f695136013a58" category="image-alt">consolidamento degli stack prima</block>
   <block id="dc876c7ff2512b544d84916000f3f0d0" category="list-text">Collegare la porta FC1 del bridge FibreBridge 7600N o 7500N allo switch o al controller.</block>
@@ -13430,8 +13429,6 @@ Si applica a tutte le configurazioni MetroCluster.</block>
   <block id="480cf83fd6c463ccef2ed2a9d0dce2c4" category="list-text">Inserire il<block ref="bedfcd4488b13f5b7062e121a6a8baa5" prefix=" " category="inline-code"></block> per abilitare in modo persistente le porte. Questa operazione deve essere eseguita su entrambi gli switch del sito sopravvissuto.</block>
   <block id="9d1a338762e03c980c82e8098eb03744" category="list-text">Verificare che lo storage sia visibile dal sito sopravvissuto. Riportare online i plesso offline. In questo modo vengono rieseguite le operazioni di risync e viene ristabilita SyncMirror.</block>
   <block id="9f6a23c1abc971d714730192ce961b96" category="paragraph">Seguire le istruzioni riportate in <block ref="9c0d52e0ce7a57d643217990aba10043" category="inline-link-macro-rx"></block> Per eseguire operazioni di healing e switchback in base alla configurazione MetroCluster.</block>
-  <block id="92833b015ed412068659d576a7df1599" category="list-text">Seguendo le seguenti linee guida, sostituire a caldo il bridge "`top`"FibreBridge 6500N con un bridge FibreBridge 7600N o 7500N seguendo la procedura descritta in <block ref="0b4bc6296d77be28e33d3b50e0ea0797" category="inline-link-macro-rx"></block>:</block>
-  <block id="3753c208918127350b444c3dc052115f" category="list-text">Seguendo le seguenti linee guida, sostituire a caldo il bridge "`bottom`" FibreBridge 6500N con un bridge FibreBridge 7600N o 7500N seguendo la procedura descritta in <block ref="0b4bc6296d77be28e33d3b50e0ea0797" category="inline-link-macro-rx"></block>:</block>
   <block id="0b4bc6296d77be28e33d3b50e0ea0797" category="paragraph"><block ref="0b4bc6296d77be28e33d3b50e0ea0797" category="inline-link-macro-rx"></block></block>
   <block id="e49bc35e0118f2b5a5904c13e1833761" category="section-title">Aggiornamento del firmware su FibreBridge 7500N nelle configurazioni che eseguono ONTAP 9,3.x e versioni precedenti</block>
   <block id="1a5e839afe7a716dd2640f7fdb69669a" category="paragraph">Potrebbe essere necessario aggiornare il firmware sui bridge FibreBridge per verificare di disporre delle funzioni più recenti o per risolvere eventuali problemi. Questa procedura deve essere utilizzata per FibreBridge 7500N nelle configurazioni che eseguono ONTAP 9,3.x</block>
@@ -13459,4 +13456,11 @@ Si applica a tutte le configurazioni MetroCluster.</block>
   <block id="ad1b97f0744b9c154b01cc69afb505d7" category="list-text">Due interfacce cluster locali</block>
   <block id="861e1910edbd7f3e677dab91f10869b0" category="sidebar">Spegnere e riaccendere un singolo sito MetroCluster</block>
   <block id="b54f4d527d126f4e54869800ed0e43ac" category="sidebar">Spegnere un'intera configurazione MetroCluster</block>
+  <block id="3918b9a89aceefd41e40355d1f97ba48" category="list-text">Riavviare ciascuno dei nuovi nodi:</block>
+  <block id="fedca74b48d819e0ff016411f2964078" category="paragraph"><block ref="d690f5fb4faed2f81ce54caed818eaf8" prefix="" category="inline-code"></block></block>
+  <block id="0266a1f477a71d63c95d6ad418f2a596" category="paragraph">È possibile modificare la suddivisione in zone o eseguire un aggiornamento da FibreBridge 6500N a FibreBridge 7500N utilizzando la procedura descritta in <block ref="7352d8244ff0bfad7d2b5214b0bb9616" category="inline-link-macro-rx"></block>.</block>
+  <block id="72a027f2830c7a189cc919fbbc72c98b" category="paragraph">In questo caso, si dovrebbe iniziare con il passaggio seguente per sostituire a caldo il ponte FibreBridge 6500N inferiore con un ponte FibreBridge 7600N o 7500N.</block>
+  <block id="5a74832dfdf0bb3064f1c60224b5cf2a" category="list-text">Utilizzando le seguenti linee guida, sostituire a caldo il ponte FibreBridge 6500N superiore con un ponte FibreBridge 7600N o 7500N utilizzando la procedura descritta nella <block ref="0b4bc6296d77be28e33d3b50e0ea0797" category="inline-link-macro-rx"></block>:</block>
+  <block id="ea8d3ee31ee0fcdd012de17493f6fb2c" category="list-text">Utilizzando le seguenti linee guida, sostituire a caldo il ponte FibreBridge 6500N inferiore con un ponte FibreBridge 7600N o 7500N utilizzando la procedura descritta nella <block ref="0b4bc6296d77be28e33d3b50e0ea0797" category="inline-link-macro-rx"></block>:</block>
+  <block id="16bdceed077292999c9190c699d66beb" category="list-text">Modifica tutte le LIF del cluster per riattivare l'indirizzamento automatico:</block>
 </blocks>

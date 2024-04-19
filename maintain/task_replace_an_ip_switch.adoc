@@ -137,6 +137,15 @@ Se si esegue l'aggiornamento o il downgrade di uno switch, applicare il file RCF
 +
 `*network port show*`
 
++
+.. Modifica tutte le LIF del cluster per disattivare l'indirizzamento automatico:
++
+[source, asciidoc]
+----
+network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert false
+----
+
+
 . [[existing_step4]]Disconnetti le connessioni dal vecchio switch.
 +
 
@@ -146,12 +155,6 @@ NOTE: Si scollegano solo le connessioni che non utilizzano la stessa porta nelle
 Rimuovere i collegamenti nel seguente ordine:
 
 +
-.. Modifica tutte le LIF del cluster per disattivare l'indirizzamento automatico:
-+
-[source, asciidoc]
-----
-net int modify -vserver <vserver_name> -lif <lif_name> -auto-revert false
-----
 .. Scollegare le interfacce del cluster locale
 .. Disconnettere gli ISL del cluster locale
 .. Scollegare le interfacce IP di MetroCluster
@@ -228,6 +231,12 @@ Se si aggiornano o si esegue il downgrade degli switch nella prima rete, potrebb
 
 NOTE: Se si esegue l'aggiornamento o il downgrade delle reti, ripetere tutti i passaggi per la seconda rete.
 
+. Modifica tutte le LIF del cluster per riattivare l'indirizzamento automatico:
++
+[source, asciidoc]
+----
+network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert true
+----
 . In alternativa, spostare gli shelf NS224.
 +
 Se si sta riconfigurando una configurazione IP MetroCluster che non collega gli shelf NS224 agli switch IP MetroCluster, utilizzare la procedura appropriata per aggiungere o spostare gli shelf NS224:

@@ -469,6 +469,7 @@ Dopo aver configurato il bridge, è possibile iniziare a cablare il nuovo sistem
 .A proposito di questa attività
 Per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso il basso (nella parte inferiore del connettore).
 
+.Fasi
 . Collegamento a margherita degli shelf di dischi in ogni stack:
 +
 .. A partire dal primo shelf logico nello stack, collegare la porta IOM A 3 alla porta IOM A 1 dello shelf successivo fino a collegare ciascun IOM A dello stack.
@@ -479,9 +480,6 @@ Per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta ri
 +
 La _Guida all'installazione e al servizio_ per il modello di shelf di dischi fornisce informazioni dettagliate sugli shelf di dischi con concatenamento a margherita.
 
-
-
-.Fasi
 . Accendere gli shelf di dischi, quindi impostare gli ID dello shelf.
 +
 ** È necessario spegnere e riaccendere ogni shelf di dischi.
