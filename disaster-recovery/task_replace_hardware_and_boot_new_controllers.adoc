@@ -10,11 +10,12 @@ summary: 'Se i componenti hardware devono essere sostituiti, sostituirli utilizz
 :imagesdir: ../media/
 
 
+[role="lead"]
+Se i componenti hardware devono essere sostituiti, sostituirli utilizzando le rispettive guide di installazione e sostituzione dell'hardware.
+
 
 
 == Sostituzione dell'hardware nel sito di disastro
-
-Se i componenti hardware devono essere sostituiti, sostituirli utilizzando le rispettive guide di installazione e sostituzione dell'hardware.
 
 .Prima di iniziare
 I controller di storage devono essere spenti o devono rimanere spenti (mostrando il prompt DEL CARICATORE).
@@ -419,7 +420,7 @@ https://mysupport.netapp.com/site/global/dashboard["Supporto NetApp"^]
 
 
 .Fasi
-. Accedere a. https://mysupport.netapp.com/site/["Sito di supporto NetApp"^] per scaricare i file utilizzati per eseguire il netboot del sistema.
+. Accedere a. link:https://mysupport.netapp.com/site/["Sito di supporto NetApp"^] per scaricare i file utilizzati per eseguire il netboot del sistema.
 . Scaricare il software ONTAP appropriato dalla sezione di download del software del sito di supporto NetApp e memorizzare il file ontap-version_image.tgz in una directory accessibile dal Web.
 . Accedere alla directory accessibile dal Web e verificare che i file necessari siano disponibili.
 +

@@ -59,10 +59,19 @@ L'ADP viene eseguito automaticamente durante la configurazione iniziale del sist
 
 NOTE: A partire da ONTAP 9.5, l'assegnazione automatica dei dischi deve essere attivata con `storage disk option modify -autoassign on` comando.
 
-Impostare lo stato ha-config su `mccip` prima del provisioning automatico, per assicurarsi che siano selezionate le dimensioni corrette delle partizioni per consentire le dimensioni appropriate del volume root. Per ulteriori informazioni, vedere link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_sw_config_verify_haconfig.html["Verifica dello stato ha-config dei componenti"].
+Impostare lo stato ha-config su `mccip` prima del provisioning automatico, per assicurarsi che siano selezionate le dimensioni corrette delle partizioni per consentire le dimensioni appropriate del volume root. Per ulteriori informazioni, vedere link:install-ip/task_sw_config_verify_haconfig.html["Verifica dello stato ha-config dei componenti"].
 
 Durante l'installazione è possibile partizionare automaticamente un massimo di 96 dischi. È possibile aggiungere dischi aggiuntivi dopo l'installazione iniziale.
 
+[NOTE]
+====
+Se si utilizzano unità interne ed esterne, è necessario innanzitutto inizializzare MetroCluster con le sole unità interne che utilizzano ADP. Dopo aver completato l'installazione o l'installazione, collegare manualmente lo shelf esterno.
+
+Devi assicurarti che gli shelf interni dispongano del numero minimo di dischi consigliato, come descritto in <<adp-disk-assign,Differenze tra ADP e assegnazione del disco per sistema>>.
+
+Per i dischi interni ed esterni, è necessario popolare gli shelf parzialmente pieni, come descritto in <<populate-partially-full-shelves,Come popolare gli shelf parzialmente completi>>.
+
+====
 
 
 == Come funziona l'assegnazione automatica shelf-by-shelf
@@ -122,7 +131,42 @@ Trimestre 4: Baie 36-47
 Alloggiamenti 36-41
 
 |===
-Se si utilizzano due shelf in ogni sito, i dischi vengono assegnati utilizzando una policy half-shelf. Se gli shelf non sono completamente popolati, installare i dischi in parti uguali da entrambe le estremità dello shelf.
+La tabella seguente mostra un esempio di come posizionare 16 dischi in uno shelf interno di 24 dischi.
+
+|===
+
+
+| Gli alloggiamenti per 24 unità sono divisi in quattro trimestri: | Installare quattro unità nei primi quattro alloggiamenti in ogni trimestre... 
+
+
+ a| 
+Trimestre 1: Baie 0-5
+ a| 
+Vani 0-3
+
+
+
+ a| 
+Trimestre 2: Baie 6-11
+ a| 
+Vani 6-9
+
+
+
+ a| 
+Trimestre 3: Baie 12-17
+ a| 
+Vani 12-15
+
+
+
+ a| 
+Trimestre 4: Baie 18-23
+ a| 
+Vani 18-21
+
+|===
+Se stai utilizzando due shelf esterni in ciascun sito, i dischi vengono assegnati usando una policy half-shelf. Se gli shelf non sono completamente popolati, installare i dischi in parti uguali da entrambe le estremità dello shelf.
 
 Ad esempio, se si installano 12 dischi in uno shelf da 24 dischi, installare i dischi negli alloggiamenti 0-5 e 18-23.
 

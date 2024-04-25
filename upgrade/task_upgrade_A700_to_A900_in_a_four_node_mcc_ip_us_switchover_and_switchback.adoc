@@ -651,7 +651,7 @@ Configurare manualmente la connessione utilizzando il seguente comando al prompt
 
 |===
 . Eseguire il netboot su Node_B_1:
-`netboot` `http://<web_server_ip/path_to_web_accessible_directory>/netboot/kernel`
+`netboot` `\http://<web_server_ip/path_to_web_accessible_directory>/netboot/kernel`
 +
 Il `<path_to_the_web-accessible_directory>` dovrebbe portare alla posizione in cui è stato scaricato `<ontap_version>\_image.tgz` poll <<step2-download-software,Fase 2>>.
 
@@ -683,7 +683,7 @@ Selection (1-11)?
 Utilizzare sempre netboot per aggiornare il nuovo nodo all'immagine desiderata. Se si utilizza un altro metodo per installare l'immagine sul nuovo controller, l'immagine potrebbe non essere corretta. Questo problema riguarda tutte le versioni di ONTAP.
 
 . Se viene richiesto di continuare la procedura, immettere `y`E quando viene richiesto il pacchetto, immettere l'URL:
-`http://<web_server_ip/path_to_web-accessible_directory>/<ontap_version>\_image.tgz`
+`\http://<web_server_ip/path_to_web-accessible_directory>/<ontap_version>\_image.tgz`
 . Completare i seguenti passaggi secondari per riavviare il modulo controller:
 +
 .. Invio `n` per ignorare il ripristino del backup quando viene visualizzato il seguente prompt:

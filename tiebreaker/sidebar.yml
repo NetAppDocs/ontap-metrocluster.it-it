@@ -20,7 +20,7 @@ entries:
       url: "/tiebreaker/install-choose-procedure.html"
     - title: Installare il Tiebreaker 1,6
       url: "/tiebreaker/tb-16-install.html"
-    - title: Installare il Tiebreaker 1,5 o 1,4
+    - title: Installare il Tiebreaker 1,5
       entries:
       - title: Configurare l'accesso admin a ONTAPI e SSH
         url: "/tiebreaker/task_configure_ssh_ontapi.html"
@@ -28,6 +28,12 @@ entries:
         url: "/tiebreaker/install_dependencies.html"
       - title: Installare il pacchetto software
         url: "/tiebreaker/install_tiebreaker_package.html"
+    - title: Installare il Tiebreaker 1,4
+      entries:
+      - title: Dipendenze dell'installazione
+        url: "/tiebreaker/install-dependencies-14.html"
+      - title: Installare il pacchetto software
+        url: "/tiebreaker/install-tiebreaker-package-14.html"
 - title: Aggiornare l'host
   url: "/tiebreaker/upgrade_host.html"
 - title: Configurare il software Tiebreaker

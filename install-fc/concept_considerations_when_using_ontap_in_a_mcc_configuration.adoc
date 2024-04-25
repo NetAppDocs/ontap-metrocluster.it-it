@@ -82,7 +82,7 @@ Può trattarsi dell'IPSpace predefinito o di un IPSpace creato da un amministrat
 === Configurazione di un aggregato per l'utilizzo in un FabricPool mirrorato
 
 
-NOTE: Prima di configurare l'aggregato, è necessario configurare gli archivi di oggetti come descritto in "impostazione degli archivi di oggetti per FabricPool in una configurazione MetroCluster" inhttps://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"]
+NOTE: Prima di configurare l'aggregato, è necessario impostare gli archivi di oggetti come descritto in link:https://docs.netapp.com/us-en/ontap/fabricpool/setup-object-stores-mcc-task.html["Impostare gli archivi di oggetti per FabricPool in una configurazione MetroCluster"^].
 
 .Fasi
 Per configurare un aggregato per l'utilizzo in un FabricPool:
@@ -116,7 +116,7 @@ A partire da ONTAP 9.6, le configurazioni MetroCluster supportano i volumi FlexG
 
 == Supporto dei gruppi di coerenza nelle configurazioni MetroCluster
 
-A partire da ONTAP 9.11.1, https://docs.netapp.com/us-en/ontap/consistency-groups/index.html["gruppi di coerenza"^] Sono supportati nelle configurazioni MetroCluster.
+A partire da ONTAP 9.11.1, link:https://docs.netapp.com/us-en/ontap/consistency-groups/index.html["gruppi di coerenza"^] Sono supportati nelle configurazioni MetroCluster.
 
 
 
@@ -148,7 +148,7 @@ Una configurazione del client LDAP creata su una macchina virtuale di storage (S
 È necessario conoscere le modalità di creazione e replica delle LIF in una configurazione MetroCluster. È inoltre necessario conoscere i requisiti di coerenza per poter prendere decisioni appropriate durante la configurazione della rete.
 
 .Informazioni correlate
-* https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/home.html["Gestione di rete e LIF"]
+* link:https://docs.netapp.com/us-en/ontap/network-management/index.html["Gestione di rete e LIF"^]
 * È necessario conoscere i requisiti per la replica degli oggetti IPSpace nel cluster partner e per la configurazione di subnet e IPv6 in una configurazione MetroCluster.
 +
 <<ipspace_obj_rep,Replica di oggetti IPSpace e requisiti di configurazione della subnet>>

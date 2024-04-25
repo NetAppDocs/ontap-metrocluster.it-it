@@ -17,10 +17,10 @@ summary: È possibile utilizzare questa operazione di switchover MetroCluster au
 
 == Combinazioni di piattaforme supportate
 
-* Per informazioni sulle combinazioni di upgrade della piattaforma supportate, consultare la tabella di aggiornamento MetroCluster FC in link:concept_choosing_controller_upgrade_mcc.html#metrocluster-fc-controller-upgrades["Scegliere una procedura di aggiornamento del controller"].
+* Per informazioni sulle combinazioni di upgrade della piattaforma supportate, consultare la tabella di aggiornamento MetroCluster FC in  link:concept_choosing_controller_upgrade_mcc.html#supported-metrocluster-fc-controller-upgrades["Scegliere una procedura di aggiornamento del controller"].
 
 
-Fare riferimento a. https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_an_upgrade_method_mcc.html["Scelta di un metodo di aggiornamento o refresh"] per ulteriori procedure.
+Fare riferimento a. link:concept_choosing_an_upgrade_method_mcc.html["Scelta di un metodo di aggiornamento o refresh"] per ulteriori procedure.
 
 
 
@@ -35,7 +35,7 @@ Gli altri componenti della configurazione, come gli shelf di storage o gli switc
 +
 https://hwu.netapp.com["NetApp Hardware Universe"^]
 
-* È possibile utilizzare questa procedura per aggiornare i controller in una configurazione MetroCluster FC a quattro nodi utilizzando switchover e switchback automatici basati su NSO. Se si desidera eseguire un aggiornamento del controller utilizzando il trasferimento aggregato (ARL), fare riferimento a. https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-auto-app/["Utilizzare i comandi "System controller replace" per aggiornare l'hardware del controller con ONTAP 9.8 o versione successiva"]. Si consiglia di utilizzare la procedura automatica basata su NSO.
+* È possibile utilizzare questa procedura per aggiornare i controller in una configurazione MetroCluster FC a quattro nodi utilizzando switchover e switchback automatici basati su NSO. Se si desidera eseguire un aggiornamento del controller utilizzando il trasferimento aggregato (ARL), fare riferimento a. link:https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-auto-app/["Utilizzare i comandi "System controller replace" per aggiornare l'hardware del controller con ONTAP 9.8 o versione successiva"]. Si consiglia di utilizzare la procedura automatica basata su NSO.
 * Se i siti MetroCluster si trovano fisicamente in due posizioni diverse, è necessario utilizzare la procedura di aggiornamento automatico del controller NSO per aggiornare i controller di entrambi i siti in sequenza.
 * Questa procedura di aggiornamento automatico del controller basata su NSO consente di avviare la sostituzione del controller in un sito di disaster recovery (DR) MetroCluster. È possibile avviare la sostituzione di un controller solo in un sito alla volta.
 * Per avviare una sostituzione del controller nel sito A, eseguire il comando di avvio per la sostituzione del controller dal sito B. L'operazione consente di sostituire i controller di entrambi i nodi solo nel sito A. Per sostituire i controller nel sito B, eseguire il comando di avvio per la sostituzione dei controller dal sito A. Viene visualizzato un messaggio che identifica il sito in cui vengono sostituiti i controller.
@@ -241,7 +241,7 @@ La passphrase sarà necessaria più avanti nella procedura di aggiornamento.
 Se la configurazione esistente viene monitorata con la configurazione di MetroCluster Tiebreaker o altre applicazioni di terze parti (ad esempio, ClusterLion) che possono avviare uno switchover, è necessario rimuovere la configurazione MetroCluster dal Tiebreaker o da un altro software prima di sostituire il vecchio controller.
 
 .Fasi
-. http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-34C97A45-0BFF-46DD-B104-2AB2805A983D.html["Rimuovere la configurazione MetroCluster esistente"^] Dal software Tiebreaker.
+. link:../tiebreaker/concept_configuring_the_tiebreaker_software.html#removing-metrocluster-configurations["Rimuovere la configurazione MetroCluster esistente"] Dal software Tiebreaker.
 . Rimuovere la configurazione MetroCluster esistente da qualsiasi applicazione di terze parti in grado di avviare lo switchover.
 +
 Consultare la documentazione dell'applicazione.
@@ -400,7 +400,7 @@ Dopo aver installato i nuovi nodi, è necessario eseguire il netboot per assicur
 Questa attività viene eseguita su ciascuno dei nuovi moduli controller.
 
 .Fasi
-. Accedere a. https://mysupport.netapp.com/site/["Sito di supporto NetApp"^] per scaricare i file utilizzati per eseguire il netboot del sistema.
+. Accedere a. link:https://mysupport.netapp.com/site/["Sito di supporto NetApp"^] per scaricare i file utilizzati per eseguire il netboot del sistema.
 . Scaricare il software ONTAP appropriato dalla sezione di download del software del sito di supporto NetApp e memorizzare il file ontap-version_image.tgz in una directory accessibile dal Web.
 . Accedere alla directory accessibile dal Web e verificare che i file necessari siano disponibili.
 +

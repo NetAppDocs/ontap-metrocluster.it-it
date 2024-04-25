@@ -6,8 +6,11 @@ summary: Quando si utilizzano ONTAP 9.1 e versioni successive, verificare di uti
 ---
 = Assegnazioni delle porte per switch FC quando si utilizza ONTAP 9.1 o versione successiva
 :allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
 
 
+[role="lead"]
 Verificare di utilizzare le assegnazioni delle porte specificate quando si cablano gli switch FC utilizzando ONTAP 9.1 e versioni successive.
 
 È possibile riconfigurare le porte non utilizzate per il collegamento di porte initiator, porte FC-VI o ISL in modo da fungere da porte di storage. Tuttavia, se vengono utilizzati gli RCF supportati, la zoning deve essere modificata di conseguenza.

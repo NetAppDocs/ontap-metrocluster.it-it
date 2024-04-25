@@ -395,11 +395,11 @@ Questa procedura deve essere ripetuta su ciascuno switch IP nella configurazione
 
 È necessario utilizzare la versione del software dello switch supportata.
 
-https://hwu.netapp.com["NetApp Hardware Universe"]
+link:https://hwu.netapp.com["NetApp Hardware Universe"^]
 
 . Scaricare il file software NX-OS supportato.
 +
-https://software.cisco.com/download/home["Download del software Cisco"]
+link:https://software.cisco.com/download/home["Download del software Cisco"^]
 
 . Copiare il software dello switch sullo switch: `+copy sftp://root@server-ip-address/tftpboot/NX-OS-file-name bootflash: vrf management+`
 +

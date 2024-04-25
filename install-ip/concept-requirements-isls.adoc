@@ -51,6 +51,11 @@ Tutti gli SFP o i QSFP supportati dal fornitore dell'apparecchiatura sono suppor
 
 Per il collegamento dei controller agli switch e agli ISL del cluster locale, è necessario utilizzare i ricetrasmettitori e i cavi forniti da NetApp con MetroCluster.
 
+Quando si utilizza un adattatore QSFP-SFP, la configurazione della porta in modalità breakout o nativa dipende dal modello e dal firmware dello switch. Ad esempio, l'utilizzo di un adattatore QSFP-SFP con switch Cisco 9336C che eseguono il firmware NX-OS 9.x o 10.x richiede la configurazione della porta in modalità di velocità nativa.
+
+
+NOTE: Se si configura un RCF, verificare di aver selezionato la modalità di velocità corretta o di utilizzare una porta con una modalità di velocità appropriata.
+
 
 
 == Utilizzando dispositivi di crittografia xWDM, TDM e esterni

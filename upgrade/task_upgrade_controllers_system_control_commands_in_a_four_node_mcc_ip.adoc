@@ -35,7 +35,7 @@ NOTE: È possibile eseguire gli aggiornamenti dei controller elencati nella tabe
 
 Per ulteriori informazioni sulle combinazioni di upgrade della piattaforma, consultare la tabella di aggiornamento IP di MetroCluster in link:concept_choosing_controller_upgrade_mcc.html#supported-metrocluster-ip-controller-upgrades["Scegliere una procedura di aggiornamento del controller"].
 
-Fare riferimento a. https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_an_upgrade_method_mcc.html["Scelta di un metodo di aggiornamento o refresh"] per ulteriori procedure.
+Fare riferimento a. link:https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_an_upgrade_method_mcc.html["Scelta di un metodo di aggiornamento o refresh"] per ulteriori procedure.
 
 
 
@@ -269,7 +269,7 @@ La passphrase sarà necessaria più avanti nella procedura di aggiornamento.
 Se la configurazione esistente viene monitorata con la configurazione di MetroCluster Tiebreaker o altre applicazioni di terze parti (ad esempio, ClusterLion) che possono avviare uno switchover, è necessario rimuovere la configurazione MetroCluster dal Tiebreaker o da un altro software prima di sostituire il vecchio controller.
 
 .Fasi
-. http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-34C97A45-0BFF-46DD-B104-2AB2805A983D.html["Rimuovere la configurazione MetroCluster esistente"^] Dal software Tiebreaker.
+. link:../tiebreaker/concept_configuring_the_tiebreaker_software.html#removing-metrocluster-configurations["Rimuovere la configurazione MetroCluster esistente"] Dal software Tiebreaker.
 . Rimuovere la configurazione MetroCluster esistente da qualsiasi applicazione di terze parti in grado di avviare lo switchover.
 +
 Consultare la documentazione dell'applicazione.
@@ -318,7 +318,7 @@ Tutti i dati LIFS, inclusi SAN e NAS, saranno admin "`up`" e operativi "`down`",
 Ad esempio, "`e0d`" è una porta fisica sui vecchi controller ed è presente anche sui nuovi controller. "`e0d`" non viene utilizzato come porta del cluster o in altro modo sui nuovi controller.
 
 +
-Per informazioni sull'utilizzo delle porte per i modelli di piattaforma, consultare https://hwu.netapp.com/["NetApp Hardware Universe"^]
+Per informazioni sull'utilizzo delle porte per i modelli di piattaforma, consultare link:https://hwu.netapp.com/["NetApp Hardware Universe"^]
 
 .. Modificare tutti i dati LIFS per utilizzare la porta comune come porta home:
 +
@@ -428,7 +428,7 @@ Dopo aver installato i nuovi nodi, è necessario eseguire il netboot per assicur
 Questa attività viene eseguita su ciascuno dei nuovi moduli controller.
 
 .Fasi
-. Accedere a. https://mysupport.netapp.com/site/["Sito di supporto NetApp"^] per scaricare i file utilizzati per eseguire il netboot del sistema.
+. Accedere a. link:https://mysupport.netapp.com/site/["Sito di supporto NetApp"^] per scaricare i file utilizzati per eseguire il netboot del sistema.
 . Scaricare il software ONTAP appropriato dalla sezione di download del software del sito di supporto NetApp e memorizzare il file ontap-version_image.tgz in una directory accessibile dal Web.
 . Accedere alla directory accessibile dal Web e verificare che i file necessari siano disponibili.
 +

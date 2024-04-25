@@ -773,7 +773,10 @@ Selection (1-11)?
 
 NOTE: Ignorare il seguente messaggio: `This procedure is not supported for Non-Disruptive Upgrade on an HA pair.` Questa nota si applica agli aggiornamenti software ONTAP senza interruzioni e non agli aggiornamenti del controller. Utilizzare sempre netboot per aggiornare il nuovo nodo all'immagine desiderata. Se si utilizza un altro metodo per installare l'immagine sul nuovo controller, potrebbe essere installata un'immagine errata. Questo problema riguarda tutte le versioni di ONTAP.
 
-. Se viene richiesto di continuare la procedura, immettere `y`E quando viene richiesto il pacchetto, immettere l'URL:http://<web_server_ip/path_to_web-accessible_directory>/<ontap_version>_image.tgz[]
+. Se viene richiesto di continuare la procedura, immettere `y`E quando viene richiesto il pacchetto, immettere l'URL:
++
+`\http://<web_server_ip/path_to_web-accessible_directory>/<ontap_version>_image.tgz`
+
 . Completare i seguenti passaggi secondari per riavviare il modulo controller:
 +
 .. Invio `n` per ignorare il ripristino del backup quando viene visualizzato il seguente prompt:

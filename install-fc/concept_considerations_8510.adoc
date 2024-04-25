@@ -6,7 +6,12 @@ summary: 'Durante la preparazione all"installazione di MetroCluster, è necessar
 ---
 = Requisiti per l'utilizzo di uno switch Brocade DCX 8510-8
 :allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
 
+
+[role="lead"]
+Durante la preparazione all'installazione di MetroCluster, è necessario conoscere l'architettura hardware di MetroCluster e i componenti richiesti.
 
 * Gli switch DCX 8510-8 utilizzati nelle configurazioni MetroCluster devono essere acquistati da NetApp.
 * Per la scalabilità, è necessario lasciare un blocco di porte tra le configurazioni MetroCluster se si collegano solo due MetroClusters in moduli a 4 porte. Ciò consente di espandere l'utilizzo delle porte nelle configurazioni MetroCluster senza doverlo riabilitare.
