@@ -57,7 +57,7 @@ NOTE: L'output può mostrare file di backup, file conservati o entrambi. Se i fi
 +
 [listing, subs="+quotes"]
 ----
-cumulus@IP_switch_A_1:mgmt:~$ sudo python3 MSN2100_v1.0_IP_switch_A_1.py
+cumulus@IP_switch_A_1:mgmt:~$ sudo python3 SN2100_v2.0.0_IP_switch_A_1.py
 [sudo] password for cumulus:
 >>> Opened RcfApplyLog
 *A RCF configuration has been successfully applied.*
@@ -96,7 +96,7 @@ cumulus@IP_switch_A_1:mgmt:~$
 +
 [listing]
 ----
-cumulus@IP_switch_A_1:mgmt:~$ sudo python3 MSN2100_v1.0_IP_switch_A_2.py restoreDefaults
+cumulus@IP_switch_A_1:mgmt:~$ sudo python3 SN2100_v2.0.0_IP_switch_A_2.py restoreDefaults
 [sudo] password for cumulus:
 >>> Opened RcfApplyLog
 Can restore from backup directory. Continuing.
@@ -112,7 +112,7 @@ Lo switch viene ripristinato e conserva la configurazione iniziale, ad esempio l
 
 
 
-=== [[Cumulus-install-option]]reimpostare lo switch utilizzando l'opzione di installazione di Cumulus
+=== [[Cumulus-install-option]] scaricare e installare il software Cumulus
 
 .A proposito di questa attività
 Seguire questa procedura se si desidera ripristinare completamente lo switch applicando l'immagine Cumulus.
@@ -130,14 +130,14 @@ NOTE: Per ulteriori informazioni sull'installazione di Cumulus Linux, vedere lin
 .Fasi
 . Dalla console di Cumulus scaricare e mettere in coda l'installazione del software dello switch con il comando `onie-install -a -i` seguito dal percorso del file per il software dello switch:
 +
-In questo esempio, il file del firmware `cumulus-linux-4.4.2-mlx-amd64.bin` Viene copiato dal server HTTP '50.50.50.50' allo switch locale.
+In questo esempio, il file del firmware `cumulus-linux-4.4.3-mlx-amd64.bin` Viene copiato dal server HTTP '50.50.50.50' allo switch locale.
 
 +
 [listing]
 ----
-cumulus@IP_switch_A_1:mgmt:~$ sudo onie-install -a -i http://50.50.50.50/switchsoftware/cumulus-linux-4.4.2-mlx-amd64.bin
-Fetching installer: http://50.50.50.50/switchsoftware/cumulus-linux-4.4.2-mlx-amd64.bin
-Downloading URL: http://50.50.50.50/switchsoftware/cumulus-linux-4.4.2-mlx-amd64.bin
+cumulus@IP_switch_A_1:mgmt:~$ sudo onie-install -a -i http://50.50.50.50/switchsoftware/cumulus-linux-4.4.3-mlx-amd64.bin
+Fetching installer: http://50.50.50.50/switchsoftware/cumulus-linux-4.4.3-mlx-amd64.bin
+Downloading URL: http://50.50.50.50/switchsoftware/cumulus-linux-4.4.3-mlx-amd64.bin
 ######################################################################### 100.0%
 Success: HTTP download complete.
 tar: ./sysroot.tar: time stamp 2021-01-30 17:00:58 is 53895092.604407122 s in the future
@@ -207,7 +207,7 @@ Changing password for cumulus.
 Current password:
 New password:
 Retype new password:
-Linux cumulus 4.19.0-cl-1-amd64 #1 SMP Cumulus 4.19.206-1+cl4.4.2u1 (2021-12-18) x86_64
+Linux cumulus 4.19.0-cl-1-amd64 #1 SMP Cumulus 4.19.206-1+cl4.4.3u1 (2021-12-18) x86_64
 
 Welcome to NVIDIA Cumulus (R) Linux (R)
 
@@ -222,13 +222,21 @@ cumulus@cumulus:mgmt:~$
 ----
 . Configurare l'interfaccia di rete di gestione.
 +
-
-NOTE: L'esempio seguente mostra come configurare il nome host (IP_switch_A_1), l'indirizzo IP (10.10.10.10), la netmask (255.255.255.0 (24)) e il gateway (10.10.10.1) utilizzando i comandi: `net add hostname <hostname>`, `net add interface eth0 ip address <IPAddress/mask>`, e. `net add interface eth0 ip gateway <Gateway>`.
+I comandi utilizzati dipendono dalla versione del firmware dello switch in uso.
 
 +
+
+NOTE: I seguenti comandi di esempio configurano il nome host come IP_switch_A_1, l'indirizzo IP come 10.10.10.10, la maschera di rete come 255.255.255.0 (24) e l'indirizzo del gateway come 10.10.10.1.
+
++
+[role="tabbed-block"]
+====
+.Cumulus 4,4.x
+--
+I seguenti comandi di esempio configurano il nome host, l'indirizzo IP, la maschera di rete e il gateway su uno switch che esegue Cumulus 4,4.x
+
 [listing]
 ----
-
 cumulus@cumulus:mgmt:~$ net add hostname IP_switch_A_1
 cumulus@cumulus:mgmt:~$ net add interface eth0 ip address 10.0.10.10/24
 cumulus@cumulus:mgmt:~$ net add interface eth0 ip gateway 10.10.10.1
@@ -257,6 +265,19 @@ cumulus 2021-05-17 22:21:57.635729 net add interface eth0 ip gateway 10.10.10.1
 
 cumulus@cumulus:mgmt:~$
 ----
+--
+.Cumulus 5,4.x e successivi
+--
+I seguenti comandi di esempio configurano il nome host, l'indirizzo IP, la maschera di rete e il gateway su uno switch che esegue Cumulus 5,4.x o versioni successive.
+
+[listing]
+----
+cumulus@cumulus:mgmt:~$ nv set system hostname IP_switch_A_1
+cumulus@cumulus:mgmt:~$ nv set interface eth0 ip address 10.0.10.10/24 cumulus@cumulus:mgmt:~$ nv set interface eth0 ip gateway 10.10.10.1 cumulus@cumulus:mgmt:~$ nv config apply
+cumulus@cumulus:mgmt:~$ nv config save
+----
+--
+====
 . Riavviare lo switch utilizzando `sudo reboot` comando.
 +
 [listing]
@@ -302,11 +323,12 @@ cumulus@IP_switch_A_1:mgmt:~$ pwd
 /home/cumulus
 cumulus@IP_switch_A_1:mgmt:~$
 ----
-.. Scaricare il file RCF in questa directory. L'esempio seguente mostra che si utilizza SCP per scaricare il file `MSN2100_v1.0_IP_switch_A_1.txt` dal server '50.50.50.50' alla home directory e salvarlo con nome `MSN2100_v1.0_IP_switch_A_1.py`:
+.. Scaricare il file RCF in questa directory.
+L'esempio seguente mostra che si utilizza SCP per scaricare il file `SN2100_v2.0.0_IP_switch_A_1.txt` dal server '50.50.50.50' alla home directory e salvarlo con nome `SN2100_v2.0.0_IP_switch_A_1.py`:
 +
 [listing]
 ----
-cumulus@Switch-A-1:mgmt:~$ scp username@50.50.50.50:/RcfFiles/MSN2100_v1.0_IP_switch_A_1.txt ./MSN2100_v1.0_IP_switch-A1.py
+cumulus@Switch-A-1:mgmt:~$ scp username@50.50.50.50:/RcfFiles/SN2100_v2.0.0_IP_switch_A_1.txt ./SN2100_v2.0.0_IP_switch-A1.py
 The authenticity of host '50.50.50.50 (50.50.50.50)' can't be established.
 RSA key fingerprint is SHA256:B5gBtOmNZvdKiY+dPhh8=ZK9DaKG7g6sv+2gFlGVF8E.
 Are you sure you want to continue connecting (yes/no)? yes
@@ -315,7 +337,7 @@ Warning: Permanently added '50.50.50.50' (RSA) to the list of known hosts.
 Banner of the SCP server
 ***********************************************************************
 username@50.50.50.50's password:
-MSN2100_v1.0-X2_IP_switch_A1.txt 100% 55KB 1.4MB/s 00:00
+SN2100_v2.0.0_IP_switch_A1.txt 100% 55KB 1.4MB/s 00:00
 cumulus@IP_switch_A_1:mgmt:~$
 ----
 
@@ -325,7 +347,7 @@ cumulus@IP_switch_A_1:mgmt:~$
 [listing]
 ----
 
-cumulus@IP_switch_A_1:mgmt:~$ sudo python3 MSN2100_v1.0_IP_switch_A_1.py
+cumulus@IP_switch_A_1:mgmt:~$ sudo python3 SN2100_v2.0.0_IP_switch_A_1.py
 all
 [sudo] password for cumulus:
 The switch will be rebooted after the step(s) have been run.
@@ -343,6 +365,35 @@ Running Step 24: Final reboot of the switch
 
 ... The switch will reboot if all steps applied successfully ...
 ----
+. Se la configurazione utilizza cavi DAC, attivare l'opzione DAC sulle porte dello switch:
++
+[listing]
+----
+cumulus@IP_switch_A_1:mgmt:~$ sudo python3 SN2100_v2.0.0-X10_Switch-A1.py runCmd <switchport> DacOption [enable | disable]
+----
++
+Nell'esempio seguente viene attivata l'opzione DAC per la porta `swp7`:
+
++
+[listing]
+----
+cumulus@IP_switch_A_1:mgmt:~$ sudo python3 SN2100_v2.00_Switch-A1.py runCmd swp7 DacOption enable
+    Running cumulus version  : 5.4.0
+    Running RCF file version : v2.00
+    Running command: Enabling the DacOption for port swp7
+    runCmd: 'nv set interface swp7 link fast-linkup on', ret: 0
+    runCmd: committed, ret: 0
+    Completion: SUCCESS
+cumulus@IP_switch_A_1:mgmt:~$
+----
+. Riavviare lo switch dopo aver attivato l'opzione DAC sulle porte dello switch:
++
+`sudo reboot`
+
++
+
+NOTE: Quando si imposta l'opzione DAC per più porte dello switch, è necessario riavviare lo switch una sola volta.
+
 
 
 

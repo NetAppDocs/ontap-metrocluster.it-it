@@ -86,11 +86,14 @@ To check if the nodes are ready to do a switchover or switchback operation, run 
 NOTE: È necessario installare il software dello switch sugli switch nel seguente ordine: Switch_A_1, switch_B_1, switch_A_2, switch_B_2.
 
 +
-Seguire i passaggi per l'installazione del software dello switch nell'argomento pertinente delle informazioni _Installazione e configurazione IP MetroCluster_ a seconda che il tipo di switch sia Broadcom o Cisco:
+Seguire la procedura per l'installazione del software switch nell'argomento pertinente delle informazioni _Installazione e configurazione IP MetroCluster_ a seconda che il tipo di switch sia Broadcom, Cisco o NVIDIA:
 
 +
-** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-switch-efos-software["Download e installazione del software EFOS dello switch Broadcom"]
-** link:../install-ip/task_switch_config_cisco.html#downloading-and-installing-the-cisco-switch-nx-os-software["Download e installazione del software NX-OS dello switch Cisco"]
+** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-switch-efos-software["Scaricare e installare il software Broadcom switch EFOS"]
+** link:../install-ip/task_switch_config_cisco.html#downloading-and-installing-the-cisco-switch-nx-os-software["Scaricare e installare il software Cisco switch NX-OS"]
+** link:../install-ip/task_switch_config_nvidia.html#download-and-install-the-cumulus-software["Scaricare e installare il software Cumulus switch NVIDIA SN2100"]
+
+
 
 
 . Ripetere il passaggio precedente per ciascuno degli switch.
