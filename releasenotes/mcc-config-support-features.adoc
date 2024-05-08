@@ -1,0 +1,113 @@
+---
+permalink: releasenotes/mcc-config-support-features.html 
+sidebar: sidebar 
+keywords: metrocluster, configuration, support for ontap features 
+summary:  
+---
+= Novità della configurazione MetroCluster per le funzionalità ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[cols="20,65,15"]
+|===
+| Funzioni supportate nella configurazione MetroCluster | Descrizione | Inizio disponibile 
+
+
+ a| 
+Supporto dello storage a oggetti S3 su aggregati con mirroring e senza mirror
+ a| 
+È possibile abilitare un server per lo storage a oggetti S3 su una SVM in un aggregato con mirroring o senza mirror nelle configurazioni IP e FC di MetroCluster.
+
+https://docs.netapp.com/us-en/ontap/s3-config/index.html["Panoramica della configurazione S3"]
+ a| 
+ONTAP 9.14.1
+
+
+
+ a| 
+Supporto per il provisioning di un bucket S3 su aggregati con mirroring e senza mirror in un cluster MetroCluster
+ a| 
+È possibile creare un bucket su un aggregato con mirroring o senza mirror nelle configurazioni di MetroCluster.
+
+https://docs.netapp.com/us-en/ontap/s3-config/create-bucket-mcc-task.html["Crea un bucket su un aggregato con mirroring o senza mirror in una configurazione MetroCluster"]
+ a| 
+ONTAP 9.14.1
+
+
+
+ a| 
+ONTAP Mediator 1,5 è supportato in una configurazione MetroCluster IP
+ a| 
+ONTAP Mediator 1,5 è disponibile per il monitoraggio delle configurazioni IP di MetroCluster.
+
+https://docs.netapp.com/us-en/ontap/mediator/index.html["Installare o aggiornare il servizio di supporto ONTAP"]
+ a| 
+ONTAP 9.12.1
+
+
+
+ a| 
+Supporto IPSec per il protocollo host front-end nelle configurazioni fabric-attached MetroCluster IP e MetroCluster
+ a| 
+Il supporto IPSec per il protocollo host front-end (ad esempio NFS e iSCSI) è disponibile nelle configurazioni MetroCluster IP e MetroCluster fabric-attached.
+
+https://docs.netapp.com/us-en/ontap/networking/configure_ip_security_@ipsec@_over_wire_encryption.html["Configurare la crittografia IP Security (IPsec) over wire"]
+ a| 
+ONTAP 9.12.1
+
+
+
+ a| 
+ONTAP mediatore 1,4
+ a| 
+Il software ONTAP Mediator versione 1,4 è supportato nelle configurazioni MetroCluster IP.
+
+https://docs.netapp.com/us-en/ontap/mediator/index.html["Installare o aggiornare il servizio di supporto ONTAP"]
+ a| 
+ONTAP 9.11.1
+
+
+
+ a| 
+Gruppi di coerenza
+ a| 
+I gruppi di coerenza sono supportati nelle configurazioni MetroCluster.
+
+https://docs.netapp.com/us-en/ontap/mediator/index.html["Installare o aggiornare il servizio di supporto ONTAP"]
+ a| 
+ONTAP 9.11.1
+
+
+
+ a| 
+ONTAP Mediator è supportato nelle configurazioni MetroCluster IP
+ a| 
+Il servizio ONTAP Mediator può assistere la configurazione IP di MetroCluster nell'esecuzione dello switchover non pianificato automatico fornendo un archivio fisicamente separato per le informazioni di stato.
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html["Configurazione del servizio ONTAP Mediator per lo switchover automatico non pianificato"]
+ a| 
+ONTAP 9,7
+
+
+
+ a| 
+Mirroring di FabricPool sulle configurazioni MetroCluster
+ a| 
+Puoi impostare configurazioni di FabricPool on MetroCluster con mirroring per il tiering dei dati cold su due diverse zone di errore.
+
+https://docs.netapp.com/us-en/ontap/fabricpool/setup-object-stores-mcc-task.html["Impostazione degli archivi di oggetti per FabricPool in una configurazione MetroCluster"]
+ a| 
+ONTAP 9,7
+
+
+
+ a| 
+Disaster recovery SVM
+ a| 
+Le Storage Virtual Machine (SVM) attive in una configurazione MetroCluster possono essere utilizzate come origini con la funzionalità di disaster recovery SVM di SnapMirror.
+ a| 
+ONTAP 9,5
+
+|===

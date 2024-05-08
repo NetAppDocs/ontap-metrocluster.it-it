@@ -1,0 +1,97 @@
+---
+permalink: releasenotes/mcc-ip-config-platform-support.html 
+sidebar: sidebar 
+keywords: metrocluster, ip configuration, platform, support 
+summary:  
+---
+= Novità del supporto della piattaforma IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Le configurazioni IP di MetroCluster non sono supportate con array LUN.
+
+[cols="2*"]
+|===
+| Piattaforme supportate nelle configurazioni IP di MetroCluster | Inizio disponibile 
+
+
+ a| 
+AFF A150
+ a| 
+ONTAP 9.13.1 e versioni successive di ONTAP
+
+ONTAP 9.12.1P1
+
+ONTAP 9.11.1P8
+
+ONTAP 9.10.1P12
+
+
+
+ a| 
+AFF C250, AFF C400, AFF C800
+ a| 
+ONTAP 9.12.1P1
+
+ONTAP 9.13.1 GA e versioni successive di ONTAP.
+
+[NOTE]
+====
+Queste piattaforme non sono supportate con ONTAP 9.13.1 RC1.
+
+====
+
+
+ a| 
+AFF A900
+ a| 
+ONTAP 9.10.1
+
+
+
+ a| 
+AFF A250
+ a| 
+ONTAP 9,8
+
+
+
+ a| 
+FAS500f
+ a| 
+ONTAP 9,8
+
+
+
+ a| 
+Piattaforme di array SAN all-flash
+
+Nella documentazione MetroCluster, le informazioni relative ai modelli AFF si applicano al sistema ASA corrispondente. Ad esempio, tutti i cavi e altre informazioni per il sistema AFF A400 si applicano anche al sistema ASA AFF A400.
+ a| 
+ONTAP 9,7
+
+
+
+ a| 
+AFF A320
+ a| 
+ONTAP 9.6P3
+
+
+
+ a| 
+AFF A220 e FAS2750
+ a| 
+ONTAP 9,6
+
+
+
+ a| 
+AFF A300 e FAS8200
+ a| 
+ONTAP 9,5
+
+|===
