@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blocks>
-  <block id="1f41258ab009387cbd7e42b144372d55" category="paragraph">Seguire i passaggi descritti nella sezione relativa al fornitore dello switch di <block ref="1a8a3204a30c37aed38d8cb8818b0107" category="inline-link-macro-rx"></block> contenuto.</block>
-  <block id="e886156cd00bbd9320ba94c39cce2772" category="paragraph">Seguire la procedura descritta in <block ref="1a8a3204a30c37aed38d8cb8818b0107" category="inline-link-macro-rx"></block> contenuto.</block>
   <block id="dadca3d57b191a678f23de76f79b283e" category="section-title">Mappare le porte dai vecchi nodi ai nuovi nodi</block>
   <block id="faab2cbd973ffc485dff6e74aeeab547" category="paragraph">Quando si esegue l'aggiornamento da AFF A700 a AFF A900 o da FAS9000 a FAS9500, non è necessario modificare le porte della rete dati, dell'adattatore SAN FCP e delle porte di storage SAS e NVMe. Le LIF dei dati rimangono dove si trovano durante e dopo l'aggiornamento. Pertanto, non è necessario mappare le porte di rete dai vecchi nodi ai nuovi nodi.</block>
   <block id="0c8985d7cfbb81f5f054993ed8285211" category="section-title">Verificare lo stato di salute di MetroCluster prima dell'aggiornamento del sito</block>
@@ -2420,7 +2418,6 @@
   <block id="a755a72f514254c41e2fe4747c117fd7" category="list-text">Installare il software sul primo switch.</block>
   <block id="8385ca59dee772c25d8029fd40151e4e" category="admonition">È necessario installare il software dello switch sugli switch nel seguente ordine: Switch_A_1, switch_B_1, switch_A_2, switch_B_2.</block>
   <block id="220d6c1bfe741784a72c631856e0b298" category="list-text">Ripetere il passaggio precedente per ciascuno degli switch.</block>
-  <block id="24b79d1109d169b3428eb16d56510160" category="list-text">Ripetere il passaggio 1 per verificare lo stato della configurazione.</block>
   <block id="b51ae922bb862c3daed086b031b039a1" category="summary">Per aggiornare o eseguire il downgrade del firmware su uno switch FC Cisco, è necessario utilizzare i comandi specifici di Cisco per disattivare lo switch, eseguire e verificare l'aggiornamento, riavviare e riabilitare lo switch.</block>
   <block id="7dd5dd10d7f07bdbe6967e7acfbcce32" category="doc">Aggiornamento o downgrade del firmware su uno switch FC Cisco</block>
   <block id="5288f12ee509f0c3b2cc280c5be85d44" category="list-text">Tutti i componenti del sistema devono essere integri.</block>
@@ -10699,8 +10696,6 @@
   <block id="7c3ceaca0865f6c6621d894d5c1f5274" category="paragraph">Per ripristinare le impostazioni predefinite di uno switch, è possibile scegliere tra i seguenti metodi.</block>
   <block id="61168c45da9c3d852ce200a8e6fe5441" category="inline-xref">Ripristinare lo switch utilizzando l'opzione del file RCF</block>
   <block id="f39c98e742374a832c3bc1976a82c99a" category="list-text"><block ref="4d1a1da583a14975a026f863f46efa9e" category="inline-xref-macro-rx"></block></block>
-  <block id="2905d1a656f6dd8b76df3793ca9d808a" category="inline-xref">Ripristinare lo switch utilizzando l'opzione di installazione di Cumulus</block>
-  <block id="07e63a61b44e7110afc73ee228b45e9f" category="list-text"><block ref="c5c4030964ab0fc53589e1f003b13a41" category="inline-xref-macro-rx"></block></block>
   <block id="841793e4a1e005b1b9596c374804395a" category="section-title">[[RCF-file-option]]ripristinare lo switch utilizzando l'opzione del file RCF</block>
   <block id="465c9065d10e2d00f4f4116734ac1084" category="paragraph">Prima di installare una nuova configurazione RCF, è necessario ripristinare le impostazioni dello switch NVIDIA.</block>
   <block id="4cc34c69d718b06fff00dea4b3e4a9d7" category="paragraph">Per ripristinare le impostazioni predefinite dello switch, eseguire il file RCF con<block ref="a15facaefa3f0debefbbecbd4671274e" prefix=" " category="inline-code"></block> opzione. Questa opzione copia i file di backup originali nella posizione originale e riavvia lo switch. Dopo il riavvio, lo switch viene fornito online con la configurazione originale esistente al momento della prima esecuzione del file RCF per configurare lo switch.</block>
@@ -12378,7 +12373,6 @@
   <block id="195ffc9776ee62387ded9a109c150447" category="doc">Invio di un messaggio AutoSupport personalizzato dopo l'aggiunta di nodi alla configurazione MetroCluster</block>
   <block id="049ca5eec54de1a662d5929abfae80b1" category="list-text">Richiamare un messaggio AutoSupport che indica la fine della manutenzione:</block>
   <block id="5a98349a16ef99aa33ddb5a7e72e858f" category="paragraph">Nell'esempio seguente vengono assegnate le porte "e0e" e "e0f" al gruppo di failover "cluster01" sul sistema SVM "cluster01":</block>
-  <block id="070a06c68e9e4e7cecc2e9719193b28c" category="summary">È possibile utilizzare l'operazione di switchover MetroCluster per fornire un servizio senza interruzioni ai client mentre i moduli controller sul cluster partner vengono aggiornati. Altri componenti (ad esempio shelf di storage o switch) non possono essere aggiornati come parte di questa procedura.</block>
   <block id="fa5bebfbd3b64c98d09c75db575bd11c" category="list-text">Per aggiornare i moduli controller AFF A700 a AFF A900, i controller devono eseguire ONTAP 9.10.1 o versione successiva.</block>
   <block id="b8c01685df64d764fee3ea66bb33411d" category="list-text">Per aggiornare i moduli controller FAS9000 a FAS9500, i controller devono eseguire ONTAP 9.10.1P3 o versione successiva.</block>
   <block id="ae4867e3d506833b86caef7b0885d0ba" category="paragraph">L'utilizzo della configurazione MetroCluster con un AFF A700 e un AFF A900 o con un FAS9000 e un controller FAS9500 non è supportato al di fuori di questa attività di manutenzione.</block>
@@ -12400,7 +12394,6 @@
   <block id="4805338ef95506460c3b178e1d80db0d" category="list-text">Qualsiasi valore compreso tra 101 e 4096 inclusi.</block>
   <block id="381666f515959bb42f36179e1ccf18b0" category="inline-link-macro">Tool RcfFileGenerator</block>
   <block id="01624fead9baaddc3669cdd47ad795ed" category="list-text">Se lo switch non è configurato con la versione minima supportata del file RCF, è necessario aggiornare il file RCF. Per la versione del file RCF corretta per il modello di switch in uso, fare riferimento a. <block ref="da64f60a95327a9651de90bff4a67cd3" category="inline-link-macro-rx"></block>. La procedura seguente riguarda l'applicazione file RCF.</block>
-  <block id="590efa3b2ef6486e61048a848e166d21" category="inline-link-macro">Installazione e configurazione di MetroCluster IP</block>
   <block id="5338d1a8478f350f9f873b7c89a98b0f" category="summary">Sostituire i vecchi indirizzi IP per il monitoraggio dello stato di salute dopo aver modificato gli indirizzi IP degli switch back-end FC MetroCluster o dei bridge ATTO.</block>
   <block id="ab82e5baf31743b1a6f1bdd378ba458b" category="doc">Modificare l'indirizzo IP di uno switch o di un bridge atto per il monitoraggio dello stato di salute</block>
   <block id="e3dbdae2799d2ed863a853d87ba77fd1" category="paragraph">Dopo aver modificato gli indirizzi IP degli switch back-end FC MetroCluster e dei bridge ATTO, è necessario sostituire i vecchi indirizzi IP per il monitoraggio dello stato di salute con i nuovi valori.</block>
@@ -13496,7 +13489,6 @@ Si applica a tutte le configurazioni MetroCluster.</block>
   <block id="43b42c26c42f7c6fe4ef77f9f2ed17ff" category="paragraph"><block ref="43b42c26c42f7c6fe4ef77f9f2ed17ff" category="inline-link-macro-rx"></block></block>
   <block id="2a35142a0e6eda28748cdf00899dc98b" category="paragraph">Il <block ref="0c7bf211a7cb9712977652add2e31f3e" category="inline-link-macro-rx"></block> descrivere nuove funzionalità, note sull'aggiornamento, problemi risolti, limitazioni note e problemi noti.</block>
   <block id="0f25553cdf8eb8de83ad715008d4617b" category="paragraph">Eseguire le attività richieste per completare il ripristino da un errore di controller multiplo o di storage.</block>
-  <block id="77252e9ff1622351efd32757cb7fd9a1" category="paragraph">Seguire la procedura per l'installazione del software switch nell'argomento pertinente delle informazioni _Installazione e configurazione IP MetroCluster_ a seconda che il tipo di switch sia Broadcom, Cisco o NVIDIA:</block>
   <block id="4b6132c87b7872df013c5b52ce9f608e" category="inline-link-macro">Scaricare e installare il software Broadcom switch EFOS</block>
   <block id="25fec8f604c77fe35ba611e08af94f79" category="list-text"><block ref="25fec8f604c77fe35ba611e08af94f79" category="inline-link-macro-rx"></block></block>
   <block id="fc5c2b5017628187d434fc142f96b244" category="inline-link-macro">Scaricare e installare il software Cisco switch NX-OS</block>
@@ -13523,7 +13515,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="a7684986aa13d220654f08fd150ba1b1" category="paragraph"><block ref="06d12c03aa485826b7f204affe755aa8" prefix="" category="inline-code"></block></block>
   <block id="2cd7949ba857b629dd50d21989a67ec7" category="admonition">Quando si imposta l'opzione DAC per più porte dello switch, è necessario riavviare lo switch una sola volta.</block>
   <block id="0b2bf1a9f2d59771c09560dc455e2f55" category="paragraph">Impostare lo stato ha-config su<block ref="32b858596eeb9351eca27c2906a21da4" prefix=" " category="inline-code"></block> prima del provisioning automatico, per assicurarsi che siano selezionate le dimensioni corrette delle partizioni per consentire le dimensioni appropriate del volume root. Per ulteriori informazioni, vedere <block ref="bcb6d9c56d14cbd4808073431b182e91" category="inline-link-macro-rx"></block>.</block>
-  <block id="b0ef37dfa15ebf32b4dbd0ae9b0d9954" category="doc">Novità del supporto FC MetroCluster per gli switch Brocade</block>
   <block id="b7cc806082929b5b8f498af052398f01" category="cell">Switch FC Brocade</block>
   <block id="198fc1af468509094e8d40e07916c836" category="cell">Inizio disponibile</block>
   <block id="2abfff2974f589f7a217325f304e0ec5" category="paragraph">ONTAP 9,8</block>
@@ -13531,7 +13522,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="b611d537ec3462ead9e641968d17d570" category="paragraph">G630</block>
   <block id="7dd2a92fd3f41a5334edf46f95d77e71" category="paragraph">ONTAP 9,6</block>
   <block id="2429e1917793f4046beb8fe2642382e4" category="doc">Novità del supporto della piattaforma IP MetroCluster</block>
-  <block id="1297db8be9c9c9dc4b4ddc3d4655b2a0" category="paragraph">Le configurazioni IP di MetroCluster non sono supportate con array LUN.</block>
   <block id="7616cb7bf661fe6377270c352ec2ff82" category="cell">Piattaforme supportate nelle configurazioni IP di MetroCluster</block>
   <block id="8a1d06fd27bf0bfc6535b6a49185e591" category="paragraph">AFF A150</block>
   <block id="f57f1967d5e316f5c38c14ea29884a9a" category="paragraph">ONTAP 9.13.1 e versioni successive di ONTAP</block>
@@ -13540,7 +13530,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="fc0954dc49e631cf41dcb343d7e02893" category="paragraph">ONTAP 9.10.1P12</block>
   <block id="7c3d41bb91a832b194d140ed72b101e7" category="paragraph">AFF C250, AFF C400, AFF C800</block>
   <block id="f2bdeb410b49732e0c1482361af1d1d5" category="paragraph">ONTAP 9.13.1 GA e versioni successive di ONTAP.</block>
-  <block id="839c501c003baf01642160068d3b89ee" category="paragraph">Queste piattaforme non sono supportate con ONTAP 9.13.1 RC1.</block>
   <block id="ab8296c5ef7a7b056b384680f89a9379" category="paragraph">ONTAP 9.10.1</block>
   <block id="e86c8b5cecd7918c55b2a357c7668d30" category="paragraph">Piattaforme di array SAN all-flash</block>
   <block id="2ba4f1a86eaaf58dbde1ea31ab19c1c5" category="paragraph">Nella documentazione MetroCluster, le informazioni relative ai modelli AFF si applicano al sistema ASA corrispondente. Ad esempio, tutti i cavi e altre informazioni per il sistema AFF A400 si applicano anche al sistema ASA AFF A400.</block>
@@ -13558,22 +13547,15 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="54c9cab829044acca6994285d3185409" category="paragraph">È possibile creare un bucket su un aggregato con mirroring o senza mirror nelle configurazioni di MetroCluster.</block>
   <block id="ea0c90724ad3d5959704fb91a048c28c" category="inline-link">Crea un bucket su un aggregato con mirroring o senza mirror in una configurazione MetroCluster</block>
   <block id="7a5d298867b0efc5adf88dfe965f7137" category="paragraph"><block ref="7a5d298867b0efc5adf88dfe965f7137" category="inline-link-rx"></block></block>
-  <block id="43b4c6f5c6770a1f4cd11cb10516ccf4" category="paragraph">ONTAP Mediator 1,5 è supportato in una configurazione MetroCluster IP</block>
-  <block id="8b81da9bca97d2bd0f5a62805a363707" category="paragraph">ONTAP Mediator 1,5 è disponibile per il monitoraggio delle configurazioni IP di MetroCluster.</block>
   <block id="cd18beb67ffb0ec95fecaca021fc2541" category="paragraph"><block ref="cd18beb67ffb0ec95fecaca021fc2541" category="inline-link-rx"></block></block>
   <block id="594e1ec3daa27e540baa061f731f028f" category="paragraph">ONTAP 9.12.1</block>
   <block id="6eaae443849a6746c6ace7f4204bd085" category="paragraph">Supporto IPSec per il protocollo host front-end nelle configurazioni fabric-attached MetroCluster IP e MetroCluster</block>
   <block id="d70d383ef18fafd59eb655545c1017bd" category="paragraph">Il supporto IPSec per il protocollo host front-end (ad esempio NFS e iSCSI) è disponibile nelle configurazioni MetroCluster IP e MetroCluster fabric-attached.</block>
   <block id="3d84ccfa2f8722220108717d5cfdc457" category="inline-link">Configurare la crittografia IP Security (IPsec) over wire</block>
   <block id="ad8910c15c5709955bf29783dc65c7b6" category="paragraph"><block ref="ad8910c15c5709955bf29783dc65c7b6" category="inline-link-rx"></block></block>
-  <block id="21b1af0acdaa98f7c573b54a229cef88" category="paragraph">ONTAP mediatore 1,4</block>
-  <block id="df3517bd826ee685104e3f6cbe1cdbf9" category="paragraph">Il software ONTAP Mediator versione 1,4 è supportato nelle configurazioni MetroCluster IP.</block>
   <block id="b59cced8914a5ae4b2997c54c8cfeb8d" category="paragraph">ONTAP 9.11.1</block>
   <block id="6165c4352e1504dbaeef34d0cc50c187" category="paragraph">Gruppi di coerenza</block>
   <block id="3fb697436dcc4f2ae2cdd29dc91fd043" category="paragraph">I gruppi di coerenza sono supportati nelle configurazioni MetroCluster.</block>
-  <block id="cbaad17e9e28a1ce42215011f9596b78" category="paragraph">ONTAP Mediator è supportato nelle configurazioni MetroCluster IP</block>
-  <block id="47dbbe9898ba28cfece0cd9485a165eb" category="paragraph">Il servizio ONTAP Mediator può assistere la configurazione IP di MetroCluster nell'esecuzione dello switchover non pianificato automatico fornendo un archivio fisicamente separato per le informazioni di stato.</block>
-  <block id="ef75c59ee0b21aa5485c12ab2eb869a7" category="paragraph"><block ref="ef75c59ee0b21aa5485c12ab2eb869a7" category="inline-link-rx"></block></block>
   <block id="7b25d54164390a979173c966708bcd3e" category="paragraph">Mirroring di FabricPool sulle configurazioni MetroCluster</block>
   <block id="456a60d3d7f70b899491cde66c53e366" category="paragraph">Puoi impostare configurazioni di FabricPool on MetroCluster con mirroring per il tiering dei dati cold su due diverse zone di errore.</block>
   <block id="50adf775e4799022cdc6de484f49f3f1" category="inline-link">Impostazione degli archivi di oggetti per FabricPool in una configurazione MetroCluster</block>
@@ -13583,14 +13565,10 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="47d81ac708cab22da7ea952550b6f757" category="summary">Con ogni release vengono fornite nuove funzionalità del mediatore ONTAP.  Ecco le novità.</block>
   <block id="3261bd656e2112e78b0313c87c039420" category="doc">Novità del supporto di ONTAP Mediator</block>
   <block id="9d01d502466559c8d4ff8682b3e00d92" category="paragraph">Con ogni release vengono forniti nuovi miglioramenti al mediatore ONTAP.  Ecco le novità.</block>
-  <block id="1cbc22a4f6eb33175d313f6ebcd56fd9" category="cell">Versione/funzionalità di ONTAP Mediator</block>
   <block id="e8467e9b509c4924668c01eb7ab2adde" category="cell">Versione di ONTAP</block>
-  <block id="cee4df42e3e78ea996ff39fd7cfe320a" category="paragraph">Il servizio ONTAP Mediator può assistere la configurazione IP di MetroCluster nell'esecuzione dello switchover non pianificato automatico fornendo un archivio fisicamente separato per le informazioni di stato.
-Configurazione del servizio ONTAP Mediator per lo switchover automatico non pianificato</block>
   <block id="63b6c1d0d10ce89604932c62d9b6f4d7" category="doc">Novità delle funzionalità di MetroCluster</block>
   <block id="3100460fa3d7ba2ea001abefda93f3bc" category="cell">Descrizione e dove saperne di più</block>
   <block id="677eca4ee8daca8d2b9156735c70729b" category="paragraph">Transizione da MetroCluster FC a MetroCluster IP usando uno switch condiviso per lo storage collegato MetroCluster IP e Ethernet</block>
-  <block id="d935deb4654475cd01823b1943de7d00" category="paragraph">È possibile passare senza interruzioni da una configurazione MetroCluster FC a una configurazione MetroCluster IP (ONTAP 9,8 e versioni successive) utilizzando uno switch condiviso.</block>
   <block id="9b9a95d11d51a9dc8ad8f89b7072a66d" category="paragraph"><block ref="9b9a95d11d51a9dc8ad8f89b7072a66d" category="inline-link-rx"></block></block>
   <block id="c8c7ff2d320bb817b5265b97fc451f0b" category="paragraph">Transizioni senza interruzioni da una configurazione MetroCluster FC a otto nodi a una configurazione MetroCluster IP</block>
   <block id="5b9e0c49b03f990a762696dc03ba2d75" category="paragraph">Puoi trasferire senza interruzioni i carichi di lavoro e i dati da una configurazione FC MetroCluster a otto nodi esistente a una nuova configurazione IP MetroCluster.</block>
@@ -13660,11 +13638,6 @@ Configurazione del servizio ONTAP Mediator per lo switchover automatico non pian
   <block id="684d63e7608a9651e2d8bee21d68cf7f" category="paragraph"><block ref="684d63e7608a9651e2d8bee21d68cf7f" category="inline-link-rx"></block></block>
   <block id="19aa48eac8765adacdffd4326cf95a85" category="paragraph">È possibile consentire a un sito del cluster di assumere il controllo dei task di un altro sito del cluster. Questa funzionalità consente di semplificare la manutenzione o il ripristino in caso di disastri.</block>
   <block id="5b8155e42c3d2db8152488c62b6cf9ea" category="paragraph"><block ref="5b8155e42c3d2db8152488c62b6cf9ea" category="inline-link-rx"></block></block>
-  <block id="c93a01651caeb8f0903789f4e2c6ca82" category="paragraph">Aggiornamento del cluster con ONTAP System Manager</block>
-  <block id="4ea7a398beabdb4718811003918eda21" category="paragraph">Puoi aggiornare un cluster nelle configurazioni di MetroCluster. Per i cluster nelle configurazioni MetroCluster, è necessario eseguire ciascuna operazione su entrambi i cluster, ad eccezione dell'aggiornamento del cluster.</block>
-  <block id="c7e90c4bd08c796e50d8af0c6b346a93" category="inline-link">Gestione dei cluster con System Manager</block>
-  <block id="785cf49e3cfc99670cc23b949297cd4c" category="paragraph"><block ref="785cf49e3cfc99670cc23b949297cd4c" category="inline-link-rx"></block></block>
-  <block id="cee937d02b9156f604109cd50b3658d1" category="doc">Novità nel supporto IP MetroCluster per gli switch Broadcom, Cisco e NVIDIA</block>
   <block id="5575ad3a333d0c5383b802ef33e4e17a" category="cell">Switch Broadcom IP</block>
   <block id="db639aacb326d316570b69a39011f1b2" category="paragraph">Quanta IX8</block>
   <block id="a28a8f1b6ed98f7c514003193e44ac48" category="cell">Switch IP Cisco</block>
@@ -13673,7 +13646,6 @@ Configurazione del servizio ONTAP Mediator per lo switchover automatico non pian
   <block id="ef0b6886d8755e5cb21c0bd5f9f81c01" category="cell">Switch NVIDIA</block>
   <block id="d4acd79e74a2b88899e53bc903561aae" category="paragraph">Più configurazioni IP MC sullo stesso switch NVIDIA SN2100</block>
   <block id="155bba03249764c61fd72335fd0c56c8" category="paragraph">SN2100</block>
-  <block id="cc1b247a7668beb64785f6df1f981bd6" category="doc">Novità del supporto della piattaforma FC MetroCluster</block>
   <block id="0aa28fce3490c51be9c1cc5c337f1c9d" category="cell">Piattaforme supportate in configurazioni MetroCluster FC</block>
   <block id="f0291c0e14447de291af4fef3e275d43" category="paragraph">ASA AFF A700 e ASA AFF A400</block>
   <block id="3fb7588c5c073b8764e9fba5e74f631a" category="paragraph">ONTAP 9.7P5</block>
@@ -13685,8 +13657,78 @@ Configurazione del servizio ONTAP Mediator per lo switchover automatico non pian
   <block id="3cc716dba68d44285ae03d4a0e650afb" category="sidebar">Novità delle funzioni MetroCluster</block>
   <block id="7a9ee1321dd82cefa7736a4643b1d4cb" category="sidebar">Novità del supporto della configurazione IP di MetroCluster</block>
   <block id="d793294f059b1014ac708a3a85a786cb" category="sidebar">Novità della configurazione FC MetroCluster</block>
-  <block id="f53be3830567c46eb450137d81abd1eb" category="sidebar">Novità del supporto per gli switch Brocade in MetroCluster FC</block>
-  <block id="c50301ea3686b38b168720b817903229" category="sidebar">Novità del supporto degli switch Broadcom, Cisco e NVIDIA in MetroCluster IP</block>
   <block id="986acab97d190ab2df45c246e97ca539" category="sidebar">Novità del supporto ONTAP Mediator</block>
   <block id="72b08fce3cdf931f9f180e97f8508090" category="sidebar">Novità del supporto di MetroCluster Tiebreaker</block>
+  <block id="9ae85011061f6a07b3199cc6631e205d" category="paragraph">Seguire la procedura descritta nella sezione relativa al fornitore dello switch:</block>
+  <block id="5a3808eade7ae7dfc1128e76ac8a6b87" category="inline-link-macro">Ripristinare l'interruttore Broadcom IP alle impostazioni predefinite</block>
+  <block id="c1d5e0b646c085cbf6cc97f215844ce8" category="list-text"><block ref="c1d5e0b646c085cbf6cc97f215844ce8" category="inline-link-macro-rx"></block></block>
+  <block id="10d9704804fc9a126c35cc824525113d" category="inline-link-macro">Ripristinare lo switch IP Cisco alle impostazioni predefinite</block>
+  <block id="7665201fdf545ef872524ea717a6b5e4" category="list-text"><block ref="7665201fdf545ef872524ea717a6b5e4" category="inline-link-macro-rx"></block></block>
+  <block id="159f95fdae86e1ad5e17a192aee59c43" category="inline-link-macro">Ripristinare lo switch NVIDIA IP alle impostazioni predefinite</block>
+  <block id="5548bb09ca13f0f29cfa2b29502f1f32" category="list-text"><block ref="5548bb09ca13f0f29cfa2b29502f1f32" category="inline-link-macro-rx"></block></block>
+  <block id="c3ea36c26671f8c16b968aeffbf12c7d" category="inline-link-macro">Scaricare e installare i file Broadcom RCF</block>
+  <block id="368aaabd8ccd78edfaeb1e279944bf6d" category="list-text"><block ref="368aaabd8ccd78edfaeb1e279944bf6d" category="inline-link-macro-rx"></block></block>
+  <block id="76dff903c42af8953fcd64558dc34099" category="inline-link-macro">Scaricare e installare i file RCF IP di Cisco</block>
+  <block id="89fdba60efe33dd9621db371306f12e5" category="list-text"><block ref="89fdba60efe33dd9621db371306f12e5" category="inline-link-macro-rx"></block></block>
+  <block id="8fa6539999f2d3aff134c30600c80e41" category="inline-link-macro">Scaricare e installare i file NVIDIA RCF</block>
+  <block id="2812633e4be142ea6fef81aa2fc3b357" category="list-text"><block ref="2812633e4be142ea6fef81aa2fc3b357" category="inline-link-macro-rx"></block></block>
+  <block id="ea9534759740df7ca366f32a3eb8a0ec" category="inline-xref">Scaricare e installare il software Cumulus</block>
+  <block id="a6c37e682cfc0729046dd2e498ad461c" category="list-text"><block ref="ef78584b865ab255d612a5aa6725b10d" category="inline-xref-macro-rx"></block></block>
+  <block id="4d8d9056b62fc01f5cd3f0898c551fde" category="section-title">Supporto della piattaforma</block>
+  <block id="9b6c50e7cbf80c446a0078ceb63104d0" category="section-title">Supporto interruttore</block>
+  <block id="9342c35c4399c8e6faf7c07d8bae26c5" category="paragraph">Per informazioni dettagliate su problemi noti, limitazioni e avvisi di aggiornamento che interessano le configurazioni di ONTAP MetroCluster, consultare<block ref="6e7f74aa9001f0524a965144f528bbc2" category="inline-link-rx"></block>. Per accedere alle Note di rilascio, è necessario accedere con l'account NetApp o creare un account.</block>
+  <block id="542203888545c733d7713856ba607788" category="paragraph">Per ulteriori informazioni sull'installazione o l'aggiornamento di ONTAP Mediator nella configurazione MetroCluster, è possibile visitare il sito Web all'indirizzo <block ref="98d8e0da2148573045cbd111c9373b18" category="inline-link-macro-rx"></block>.</block>
+  <block id="ab67c4c2b9b0f6070e68d79d3a0b6c63" category="cell">Funzionalità ONTAP Mediator</block>
+  <block id="5793a46a4020e2b9d210afaa14008d67" category="paragraph">Lo switchover non pianificato automatico assistito da mediatore (MAUSO) è supportato in caso di arresto ambientale.</block>
+  <block id="4765407452f01930deae2b9481b69e36" category="paragraph">Supporto iniziale per il servizio ONTAP Mediator nelle configurazioni MetroCluster IP</block>
+  <block id="de09b0e8b75c62ac84c620713e05647b" category="paragraph">È possibile passare senza interruzioni da una configurazione MetroCluster FC a una configurazione MetroCluster IP utilizzando uno switch storage condiviso.</block>
+  <block id="76a27f1dad18a5de567d4849d3e76b69" category="doc">Novità nel supporto di piattaforme e switch FC MetroCluster</block>
+  <block id="0f40216c1ad47c12e8ccc087d555570f" category="doc">Note di rilascio di ONTAP</block>
+  <block id="2dfc17cf61c3aebedc1a1f7f467baa26" category="paragraph">Seguire la procedura per l'installazione del software switch nell'argomento pertinente, a seconda che il tipo di switch sia Broadcom, Cisco o NVIDIA:</block>
+  <block id="9caf870a1494e70481403791fcece589" category="list-text">Ripetere <block ref="b2da07bc854b8a63875843471604110c" category="inline-xref-macro-rx"></block> per controllare lo stato di salute della configurazione.</block>
+  <block id="67d7197766de9fc9cf6113211650818b" category="sidebar">Le configurazioni NetApp MetroCluster combinano un clustering basato su array con la replica sincrona per offrire disponibilità continua, con una duplicazione immediata di tutti i dati mission-critical transazione per transazione. Le configurazioni MetroCluster migliorano le operazioni integrate senza interruzioni e di high Availability dell'hardware NetApp e del software di storage ONTAP, fornendo un livello supplementare di protezione per l'intero ambiente storage e di hosting.</block>
+  <block id="be11c74c1dd7f307bb80183a90dc2067" category="sidebar">Inizia subito</block>
+  <block id="2ef693575e01de24e090245f10a59777" category="sidebar">Installare MetroCluster IP</block>
+  <block id="5a3b01a5bff3f06441fb7188a02f105e" category="sidebar">Installare Fabric-Attached MetroCluster</block>
+  <block id="fdb8b17580937ddecfddeee4298a1482" category="sidebar">Installare Stretch MetroCluster</block>
+  <block id="18bd3543357b4fa11f6a58101dfa61a5" category="sidebar">Installare il sezionatore</block>
+  <block id="d2875782347edc6066d3025cecc9df38" category="sidebar">Installazione del mediatore (solo MetroCluster IP)</block>
+  <block id="ade01a5a398372194a42c36e9f5279ac" category="sidebar">Mantenere</block>
+  <block id="7b8e5f5947a6dadc276f09b5a095667d" category="sidebar">Manutenzione e sostituzione degli switch FC nelle configurazioni MetroCluster FC.</block>
+  <block id="7f5d1cf6b92b5f6a9e5fe290c7d568fa" category="sidebar">Switch IP</block>
+  <block id="e9e6a0d40b20996536edcfae7b0ca501" category="sidebar">Manutenzione e sostituzione degli switch IP nelle configurazioni IP MetroCluster.</block>
+  <block id="5360721f5d15a4a50d1c0ea177551d33" category="sidebar">ATTOBRIDGE</block>
+  <block id="6659ad060d95c49da27c02efe70880ee" category="sidebar">Manutenzione e sostituzione dei bridge FC-SAS ATTO nelle configurazioni MetroCluster FC.</block>
+  <block id="c89a58741e7240ddf3c43ec7dbb21cd7" category="sidebar">Shelf di dischi</block>
+  <block id="bb2a6473813b98ffe9edacc863bb749e" category="sidebar">Le configurazioni MetroCluster FC degli shelf di dischi vengono sostituite a caldo e senza interruzioni.</block>
+  <block id="9deb979aa141eacec55a34ce9dfd4cc9" category="sidebar">File RCF</block>
+  <block id="277ccac115bb10401c3dbe796a5fd555" category="sidebar">File RCF MetroCluster</block>
+  <block id="f4ff45e882d7ee5ad1b4a9e07301850d" category="sidebar">Generare o scaricare file RCF per gli switch MetroCluster.</block>
+  <block id="d59048f21fd887ad520398ce677be586" category="sidebar">Scopri di più</block>
+  <block id="b92dd7cb5813aceca4052255be1046a0" category="sidebar">Architettura e progettazione della soluzione NetApp MetroCluster | TR-4705</block>
+  <block id="c8ed4eb56c00a193e2bf85d5a38119ee" category="sidebar">Comprendere la soluzione MetroCluster FC.</block>
+  <block id="d821955413ef2ce3b63ac32371a5186e" category="sidebar">Architettura e progettazione della soluzione IP di MetroCluster | TR-4689</block>
+  <block id="33d6c0f3568f32d65b84533fcc9dcbcb" category="sidebar">Comprendere la soluzione IP di MetroCluster.</block>
+  <block id="3d5cf400e4fb829207d0ab81798b6587" category="sidebar">Aggiornare, espandere e convertire</block>
+  <block id="64cd3f6f5347e9d6c92e09aa1c656f87" category="sidebar">Aggiornare e aggiornare l'hardware</block>
+  <block id="fdc7fb09ec4ebc533362a55d221d305f" category="sidebar">Aggiornare i controller in una configurazione MetroCluster.</block>
+  <block id="e912938f380bdbc5125a46cb6974c985" category="sidebar">Espandere un MetroCluster a due nodi</block>
+  <block id="c495f5fb55d923c4b5bdcc9031d17504" category="sidebar">Aggiungere controller alle configurazioni MetroCluster per creare una configurazione a quattro o otto nodi.</block>
+  <block id="8b9fb0a48d871747071a5767bb11c3c9" category="sidebar">Espandere un MetroCluster a quattro nodi</block>
+  <block id="f0de1d093d27614c73e83446489eec92" category="sidebar">Aggiungere controller alle configurazioni MetroCluster per creare una configurazione a otto nodi.</block>
+  <block id="daf3fcb291d6eb9e42a7777197caa458" category="sidebar">Convertire MetroCluster FC in MetroCluster IP</block>
+  <block id="689a3f6927feed4862b6b5b03d4f0018" category="sidebar">Transizione di una configurazione IP MetroCluster esistente a una configurazione IP MetroCluster.</block>
+  <block id="822970998ef8866cd59ed6ba8d63af83" category="sidebar">Aggiornare i file MetroCluster IP RCF</block>
+  <block id="b2899a6511f7a2ac6656022f75581e5a" category="sidebar">Aggiornare i file RCF dello switch nelle configurazioni IP MetroCluster.</block>
+  <block id="b7c02f1bc7ffc889ddb9e99702663c56" category="sidebar">Firmware ATTO bridge</block>
+  <block id="ddac5beff5f77bf22595caa98bac08f9" category="sidebar">FibreBridge 7600N</block>
+  <block id="7189e471dda7f4816814f7b74c6948d1" category="sidebar">Scaricare il firmware per un bridge 7600.</block>
+  <block id="dcb741f9e6e5d6050aeb3d8fd347e9fd" category="sidebar">FibreBridge 7500N</block>
+  <block id="81defdfe6f2018754b9c90215acaf8c1" category="sidebar">Scaricare il firmware per un bridge 7500.</block>
+  <block id="dfcc398099d6a64026e51ab282e16253" category="sidebar">Più risorse</block>
+  <block id="fa0344a10c89a05b4e9232391d5feb01" category="sidebar">NetApp Config Advisor</block>
+  <block id="7bde48e6b0d33c17d731b283a4674428" category="sidebar">Verificare la configurazione e il cablaggio.</block>
+  <block id="d5552b01bf48dde88719269e524ddbb9" category="sidebar">Verificare che l'hardware sia supportato.</block>
+  <block id="3f2b90ec5a9b43745b9c8c9fedf48d8d" category="sidebar">Knowledge base di supporto NetApp</block>
+  <block id="b2cdf9234a2dabbbb6acb6f71e098209" category="sidebar">Cerca le risposte alle tue domande di supporto.</block>
 </blocks>

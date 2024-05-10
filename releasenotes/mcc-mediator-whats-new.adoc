@@ -13,34 +13,26 @@ summary: Con ogni release vengono fornite nuove funzionalità del mediatore ONTA
 [role="lead"]
 Con ogni release vengono forniti nuovi miglioramenti al mediatore ONTAP.  Ecco le novità.
 
+Per ulteriori informazioni sull'installazione o l'aggiornamento di ONTAP Mediator nella configurazione MetroCluster, è possibile visitare il sito Web all'indirizzo link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_mediator_requirements.html["Preparare l'installazione del servizio ONTAP Mediator"^].
+
 [cols="75,25"]
 |===
 
 
-| Versione/funzionalità di ONTAP Mediator | Versione di ONTAP 
+| Funzionalità ONTAP Mediator | Versione di ONTAP 
 
 
  a| 
-ONTAP Mediator 1,5 è disponibile per il monitoraggio delle configurazioni IP di MetroCluster.
+Lo switchover non pianificato automatico assistito da mediatore (MAUSO) è supportato in caso di arresto ambientale.
 
-link:https://docs.netapp.com/us-en/ontap/mediator/index.html["Installare o aggiornare il servizio di supporto ONTAP"^]
+Se un sito si arresta senza problemi a causa di un arresto ambientale, viene attivato MAUSO.
  a| 
-ONTAP 9.12.1
-
-
-
- a| 
-Il software ONTAP Mediator versione 1,4 è supportato nelle configurazioni MetroCluster IP.
-
-link:https://docs.netapp.com/us-en/ontap/mediator/index.html["Installare o aggiornare il servizio di supporto ONTAP"^]
- a| 
-ONTAP 9.11.1
+ONTAP 9.13.1
 
 
 
  a| 
-Il servizio ONTAP Mediator può assistere la configurazione IP di MetroCluster nell'esecuzione dello switchover non pianificato automatico fornendo un archivio fisicamente separato per le informazioni di stato.
-Configurazione del servizio ONTAP Mediator per lo switchover automatico non pianificato
+Supporto iniziale per il servizio ONTAP Mediator nelle configurazioni MetroCluster IP
  a| 
 ONTAP 9,7
 

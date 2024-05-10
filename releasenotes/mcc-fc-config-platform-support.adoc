@@ -4,11 +4,15 @@ sidebar: sidebar
 keywords: metrocluster, fc configuration, platform, support 
 summary:  
 ---
-= Novità del supporto della piattaforma FC MetroCluster
+= Novità nel supporto di piattaforme e switch FC MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ./media/
 
+
+
+
+== Supporto della piattaforma
 
 [cols="2*"]
 |===
@@ -40,5 +44,34 @@ ONTAP 9,7
 AFF A300 e FAS8200
  a| 
 ONTAP 9,5
+
+|===
+
+
+== Supporto interruttore
+
+[cols="2*"]
+|===
+| Switch FC Brocade | Inizio disponibile 
+
+
+ a| 
+G720
+ a| 
+ONTAP 9,8
+
+
+
+ a| 
+G620-1, G630-1
+ a| 
+ONTAP 9,8
+
+
+
+ a| 
+G630
+ a| 
+ONTAP 9,6
 
 |===

@@ -15,6 +15,7 @@ Potrebbe essere necessario aggiornare il firmware su uno switch IP MetroCluster.
 
 È necessario ripetere questa attività su ciascuno switch in successione.
 
+[[step_1_fw_upgrade]]
 .Fasi
 . Controllare lo stato della configurazione.
 +
@@ -86,7 +87,7 @@ To check if the nodes are ready to do a switchover or switchback operation, run 
 NOTE: È necessario installare il software dello switch sugli switch nel seguente ordine: Switch_A_1, switch_B_1, switch_A_2, switch_B_2.
 
 +
-Seguire la procedura per l'installazione del software switch nell'argomento pertinente delle informazioni _Installazione e configurazione IP MetroCluster_ a seconda che il tipo di switch sia Broadcom, Cisco o NVIDIA:
+Seguire la procedura per l'installazione del software switch nell'argomento pertinente, a seconda che il tipo di switch sia Broadcom, Cisco o NVIDIA:
 
 +
 ** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-switch-efos-software["Scaricare e installare il software Broadcom switch EFOS"]
@@ -94,8 +95,6 @@ Seguire la procedura per l'installazione del software switch nell'argomento pert
 ** link:../install-ip/task_switch_config_nvidia.html#download-and-install-the-cumulus-software["Scaricare e installare il software Cumulus switch NVIDIA SN2100"]
 
 
-
-
 . Ripetere il passaggio precedente per ciascuno degli switch.
-. Ripetere il passaggio 1 per verificare lo stato della configurazione.
+. Ripetere <<step_1_fw_upgrade,Fase 1>> per controllare lo stato di salute della configurazione.
 

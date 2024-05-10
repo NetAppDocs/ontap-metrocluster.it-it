@@ -106,20 +106,22 @@ Quando si esegue questo aggiornamento, è necessario aggiornare i file RCF sugli
 .Fasi
 . Preparare gli switch IP per l'applicazione dei nuovi file RCF.
 +
-Seguire i passaggi descritti nella sezione relativa al fornitore dello switch di link:../install-ip/index.html["Installazione e configurazione di MetroCluster IP"] contenuto.
+Seguire la procedura descritta nella sezione relativa al fornitore dello switch:
 
 +
-** link:../install-ip/task_switch_config_broadcom.html#resetting-the-broadcom-ip-switch-to-factory-defaults["Ripristino delle impostazioni predefinite dello switch IP Broadcom"]
-** link:../install-ip/task_switch_config_broadcom.html#resetting-the-cisco-ip-switch-to-factory-defaults["Ripristino delle impostazioni predefinite dello switch IP Cisco"]
+** link:../install-ip/task_switch_config_broadcom.html#resetting-the-broadcom-ip-switch-to-factory-defaults["Ripristinare l'interruttore Broadcom IP alle impostazioni predefinite"]
+** link:../install-ip/task_switch_config_cisco.html#resetting-the-cisco-ip-switch-to-factory-defaults["Ripristinare lo switch IP Cisco alle impostazioni predefinite"]
+** link:../install-ip/task_switch_config_nvidia.html#reset-the-nvidia-ip-sn2100-switch-to-factory-defaults["Ripristinare lo switch NVIDIA IP alle impostazioni predefinite"]
 
 
 . Scaricare e installare i file RCF.
 +
-Seguire la procedura descritta in link:../install-ip/index.html["Installazione e configurazione di MetroCluster IP"] contenuto.
+Seguire la procedura descritta nella sezione relativa al fornitore dello switch:
 
 +
-** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-rcf-files["Download e installazione dei file RCF Broadcom"]
-** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-cisco-ip-rcf-files["Download e installazione dei file Cisco IP RCF"]
+** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-rcf-files["Scaricare e installare i file Broadcom RCF"]
+** link:../install-ip/task_switch_config_cisco.html#downloading-and-installing-the-cisco-ip-rcf-files["Scaricare e installare i file RCF IP di Cisco"]
+** link:../install-ip/task_switch_config_nvidia.html#download-and-install-the-nvidia-rcf-files["Scaricare e installare i file NVIDIA RCF"]
 
 
 

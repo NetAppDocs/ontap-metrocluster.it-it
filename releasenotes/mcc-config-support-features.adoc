@@ -10,6 +10,11 @@ summary:
 :imagesdir: ./media/
 
 
+[role="lead"]
+Ogni versione del software per la gestione dei dati ONTAP 9 offre funzioni nuove e migliorate che migliorano le capacità, la gestibilità e le prestazioni delle configurazioni ONTAP MetroCluster.
+
+Per informazioni dettagliate su problemi noti, limitazioni e avvisi di aggiornamento che interessano le configurazioni di ONTAP MetroCluster, consultare https://library.netapp.com/ecm/ecm_download_file/ECMLP2492508["Note sulla versione di ONTAP 9"^]. Per accedere alle Note di rilascio, è necessario accedere con l'account NetApp o creare un account.
+
 [cols="20,65,15"]
 |===
 | Funzioni supportate nella configurazione MetroCluster | Descrizione | Inizio disponibile 
@@ -33,17 +38,6 @@ Supporto per il provisioning di un bucket S3 su aggregati con mirroring e senza 
 
 https://docs.netapp.com/us-en/ontap/s3-config/create-bucket-mcc-task.html["Crea un bucket su un aggregato con mirroring o senza mirror in una configurazione MetroCluster"]
  a| 
-ONTAP 9.14.1
-
-
-
- a| 
-ONTAP Mediator 1,5 è supportato in una configurazione MetroCluster IP
- a| 
-ONTAP Mediator 1,5 è disponibile per il monitoraggio delle configurazioni IP di MetroCluster.
-
-https://docs.netapp.com/us-en/ontap/mediator/index.html["Installare o aggiornare il servizio di supporto ONTAP"]
- a| 
 ONTAP 9.12.1
 
 
@@ -55,17 +49,6 @@ Il supporto IPSec per il protocollo host front-end (ad esempio NFS e iSCSI) è d
 
 https://docs.netapp.com/us-en/ontap/networking/configure_ip_security_@ipsec@_over_wire_encryption.html["Configurare la crittografia IP Security (IPsec) over wire"]
  a| 
-ONTAP 9.12.1
-
-
-
- a| 
-ONTAP mediatore 1,4
- a| 
-Il software ONTAP Mediator versione 1,4 è supportato nelle configurazioni MetroCluster IP.
-
-https://docs.netapp.com/us-en/ontap/mediator/index.html["Installare o aggiornare il servizio di supporto ONTAP"]
- a| 
 ONTAP 9.11.1
 
 
@@ -76,17 +59,6 @@ Gruppi di coerenza
 I gruppi di coerenza sono supportati nelle configurazioni MetroCluster.
 
 https://docs.netapp.com/us-en/ontap/mediator/index.html["Installare o aggiornare il servizio di supporto ONTAP"]
- a| 
-ONTAP 9.11.1
-
-
-
- a| 
-ONTAP Mediator è supportato nelle configurazioni MetroCluster IP
- a| 
-Il servizio ONTAP Mediator può assistere la configurazione IP di MetroCluster nell'esecuzione dello switchover non pianificato automatico fornendo un archivio fisicamente separato per le informazioni di stato.
-
-https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html["Configurazione del servizio ONTAP Mediator per lo switchover automatico non pianificato"]
  a| 
 ONTAP 9,7
 

@@ -10,8 +10,9 @@ summary:
 :imagesdir: ./media/
 
 
-[role="lead"]
-Le configurazioni IP di MetroCluster non sono supportate con array LUN.
+
+
+== Supporto della piattaforma
 
 [cols="2*"]
 |===
@@ -38,11 +39,6 @@ ONTAP 9.12.1P1
 
 ONTAP 9.13.1 GA e versioni successive di ONTAP.
 
-[NOTE]
-====
-Queste piattaforme non sono supportate con ONTAP 9.13.1 RC1.
-
-====
 
 
  a| 
@@ -93,5 +89,56 @@ ONTAP 9,6
 AFF A300 e FAS8200
  a| 
 ONTAP 9,5
+
+|===
+
+
+== Supporto interruttore
+
+[cols="2*"]
+|===
+| Switch Broadcom IP | Inizio disponibile 
+
+
+ a| 
+Quanta IX8
+ a| 
+ONTAP 9,6
+
+|===
+[cols="2*"]
+|===
+| Switch IP Cisco | Inizio disponibile 
+
+
+ a| 
+Nexus 9336C-FX2
+ a| 
+ONTAP 9.9.1
+
+
+
+ a| 
+9336C
+ a| 
+ONTAP 9,8
+
+|===
+[cols="2*"]
+|===
+| Switch NVIDIA | Inizio disponibile 
+
+
+ a| 
+Più configurazioni IP MC sullo stesso switch NVIDIA SN2100
+ a| 
+ONTAP 9.14.1
+
+
+
+ a| 
+SN2100
+ a| 
+ONTAP 9.12.1
 
 |===
