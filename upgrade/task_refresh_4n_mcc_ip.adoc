@@ -74,6 +74,7 @@ Se la manutenzione viene completata prima che sia trascorso il tempo, è possibi
 .. Ripetere il comando sul cluster partner.
 
 
+. Se la crittografia end-to-end è attivata, seguire i passaggi da a. link:../maintain/task-configure-encryption.html#disable-end-to-end-encryption["Disattiva la crittografia end-to-end"].
 . Rimuovere la configurazione MetroCluster esistente da Tiebreaker, Mediator o altro software in grado di avviare lo switchover.
 +
 [cols="2*"]
@@ -302,6 +303,7 @@ image::../media/mcc_dr_group_c5.png[gruppo dr mcc c5]
 
 
 
+. Se la crittografia end-to-end è stata disattivata prima di aggiungere i nuovi nodi, è possibile riattivarla seguendo la procedura descritta in link:../maintain/task-configure-encryption.html#enable-end-to-end-encryption["Attiva la crittografia end-to-end"].
 . Ripristinare il monitoraggio, se necessario, utilizzando la procedura per la configurazione.
 +
 [cols="2*"]

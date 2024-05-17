@@ -10,9 +10,51 @@ summary:
 :imagesdir: ./media/
 
 
+[role="lead"]
+Ulteriori informazioni sulle nuove funzionalità di MetroCluster.
+
 [cols="20,65,15"]
 |===
 | Funzioni supportate nella configurazione MetroCluster | Descrizione e dove saperne di più | Inizio disponibile 
+
+
+ a| 
+Supporto IP di MetroCluster per crittografia end-to-end
+ a| 
+La crittografia end-to-end è supportata sui sistemi AFF A400, FAS8300 e FAS8700 per crittografare il traffico back-end, come i dati di replica dello storage e NVlog, tra i siti in una configurazione IP MetroCluster.
+
+link:../maintain//task-configure-encryption.html["Configurare la crittografia end-to-end in una configurazione IP MetroCluster"]
+ a| 
+ONTAP 9.15.1
+
+
+
+ a| 
+Aumento del limite del volume per configurazioni IP MetroCluster a quattro nodi su sistemi AFF A800 e AFF C800
+ a| 
+Nelle configurazioni MetroCluster IP a quattro nodi, sono aumentati i seguenti limiti di volume per i sistemi AFF A800 e AFF C800:
+
+* Il numero massimo di volumi FlexVol per aggregato è aumentato da 200 a 625.
+* Il numero massimo di volumi FlexVol per nodo è aumentato da 800 a 1250.
+* Il numero massimo di volumi FlexVol per coppia ha è aumentato da 1600 a 2500.
+
+ a| 
+ONTAP 9.15.1
+
+
+
+ a| 
+Aumento del limite del volume per configurazioni IP MetroCluster a quattro nodi su sistemi AFF A900
+ a| 
+Nelle configurazioni MetroCluster IP a quattro nodi, sono aumentati i seguenti limiti di volume per i sistemi AFF A900:
+
+* Il numero massimo di volumi FlexVol per aggregato è aumentato da 200 a 625.
+* Il numero massimo di volumi FlexVol per nodo è aumentato da 800 a 1250.
+* Il numero massimo di volumi FlexVol per coppia ha è aumentato da 1600 a 2500.
+
+ a| 
+ONTAP 9.14.1
+
 
 
  a| 
@@ -53,7 +95,7 @@ Lo switchover non pianificato automatico assistito dal mediatore (MAUSO) viene a
  a| 
 Se un sito si arresta senza problemi a causa di un arresto ambientale, viene attivato MAUSO.
 
-https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_considerations_mediator.html#interoperability-of-ontap-mediator-with-other-applications-and-appliances["Interoperabilità di ONTAP Mediator con altre applicazioni e appliance"]
+https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept-ontap-mediator-supports-automatic-unplanned-switchover.html["In che modo il mediatore ONTAP supporta lo switchover automatico non pianificato"]
  a| 
 ONTAP 9.13.1
 

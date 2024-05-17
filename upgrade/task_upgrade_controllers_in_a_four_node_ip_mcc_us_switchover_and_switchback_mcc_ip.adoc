@@ -44,6 +44,7 @@ L'utilizzo della configurazione MetroCluster con diversi tipi di controller non 
 +
 Per ulteriori informazioni, consultare https://hwu.netapp.com/["NetApp Hardware Universe"].
 
+* Se è abilitato nel sistema, link:../maintain/task-configure-encryption.html#disable-end-to-end-encryption["Disattiva la crittografia end-to-end"] prima di eseguire l'aggiornamento del controller.
 * Gli indirizzi IP, le netmask e i gateway delle piattaforme originali verranno riutilizzati sulle nuove piattaforme.
 * In questa procedura vengono utilizzati i seguenti nomi di esempio:
 +
@@ -1829,3 +1830,9 @@ Una volta completato l'aggiornamento, inviare un messaggio AutoSupport che indic
 
 
 
+
+
+
+== Configurare la crittografia end-to-end
+
+Se è supportato sul sistema, è possibile crittografare il traffico back-end, come NVlog e i dati di replica dello storage, tra i siti IP di MetroCluster. Fare riferimento a. link:../maintain/task-configure-encryption.html["Configurare la crittografia end-to-end"] per ulteriori informazioni.

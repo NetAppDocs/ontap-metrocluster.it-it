@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: hardware, component, replace, individual, replacement, installation, guide, replacing, controller, booting, new 
 summary: 'Se i componenti hardware devono essere sostituiti, sostituirli utilizzando le rispettive guide di installazione e sostituzione dell"hardware.' 
 ---
-= Sostituzione dell'hardware e avvio di nuovi controller
+= Sostituire l'hardware e avviare i nuovi controller
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -15,7 +15,7 @@ Se i componenti hardware devono essere sostituiti, sostituirli utilizzando le ri
 
 
 
-== Sostituzione dell'hardware nel sito di disastro
+== Sostituire l'hardware in caso di disastro
 
 .Prima di iniziare
 I controller di storage devono essere spenti o devono rimanere spenti (mostrando il prompt DEL CARICATORE).
@@ -134,7 +134,7 @@ link:http://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardw
 
 
 
-== Determinazione degli ID di sistema e degli ID VLAN dei vecchi moduli controller
+== Determinare gli ID di sistema e gli ID VLAN dei vecchi moduli controller
 
 Dopo aver sostituito tutto l'hardware nel sito di emergenza, è necessario determinare gli ID di sistema dei moduli controller sostituiti. Quando si riassegnano i dischi ai nuovi moduli controller, sono necessari i vecchi ID di sistema. Se i sistemi sono AFF A220, AFF A250, AFF A400, AFF A800, FAS2750, I modelli FAS500f, FAS8300 o FAS8700 devono anche determinare gli ID VLAN utilizzati dalle interfacce IP di MetroCluster.
 
@@ -328,7 +328,7 @@ Node_A_2 Node_A_1 HA      enabled  online
 
 
 
-== Isolamento delle unità sostitutive dal sito sopravvissuto (configurazioni MetroCluster IP)
+== Isolare le unità sostitutive dal sito sopravvissuto (configurazioni IP MetroCluster)
 
 È necessario isolare eventuali dischi sostitutivi eliminando le connessioni MetroCluster iSCSI Initiator dai nodi sopravvissuti.
 
@@ -367,7 +367,7 @@ site_B::*> storage iscsi-initiator disconnect -node node_B_2 -label *
 
 
 
-== Cancellazione della configurazione su un modulo controller
+== Cancellare la configurazione su un modulo controller
 
 [role="lead"]
 Prima di utilizzare un nuovo modulo controller nella configurazione MetroCluster, è necessario cancellare la configurazione esistente.
@@ -407,7 +407,7 @@ Rispondere `yes` al prompt di conferma.
 
 
 
-== Avvio in rete dei nuovi moduli controller
+== NetBoot i nuovi moduli controller
 
 Se i nuovi moduli controller hanno una versione di ONTAP diversa da quella dei moduli controller sopravvissuti, è necessario eseguire il netboot dei nuovi moduli controller.
 
@@ -483,7 +483,7 @@ The node must be rebooted to start using the newly installed software. Do you wa
 
 
 
-== Determinazione degli ID di sistema dei moduli controller sostitutivi
+== Determinare gli ID di sistema dei moduli controller sostitutivi
 
 Dopo aver sostituito tutto l'hardware nel sito di emergenza, è necessario determinare l'ID di sistema del modulo o dei moduli controller di storage appena installati.
 
@@ -623,7 +623,7 @@ Nell'esempio seguente, il nuovo ID di sistema locale è 1574774991:
 
 
 
-== Verifica dello stato ha-config dei componenti
+== Verificare lo stato ha-config dei componenti
 
 In una configurazione MetroCluster, lo stato ha-config del modulo controller e dei componenti del telaio deve essere impostato su "mcc" o "mcc-2n" in modo che si avviino correttamente.
 
@@ -725,4 +725,33 @@ Configurazione IP MetroCluster
 
 |===
 . Ripetere questi passaggi sull'altro nodo sostitutivo.
+
+
+
+
+== Determinare se la crittografia end-to-end è stata abilitata sui sistemi originali
+
+È necessario verificare se i sistemi originali sono stati configurati per la crittografia end-to-end.
+
+.Fase
+. Eseguire il seguente comando dal sito sopravvissuto:
++
+`metrocluster node show -fields is-encryption-enabled`
+
++
+Se la crittografia è attivata, viene visualizzato il seguente output:
+
++
+[listing]
+----
+1 cluster_A node_A_1 true
+1 cluster_A node_A_2 true
+1 cluster_B node_B_1 true
+1 cluster_B node_B_2 true
+4 entries were displayed.
+----
++
+
+NOTE: Fare riferimento a. link:../install-ip/task-configure-end-to-end-encryption.html["Configurare la crittografia end-to-end"] per i sistemi supportati.
+
 

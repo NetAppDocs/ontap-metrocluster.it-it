@@ -514,6 +514,10 @@ setenv bootarg.mcc.lun_part true
 ----
 
 
+. Se i sistemi originali sono stati configurati per la crittografia end-to-end, al prompt del CARICATORE dei nodi sostitutivi, impostare il seguente bootarg:
++
+`setenv bootarg.mccip.encryption_enabled 1`
+
 . Se i sistemi originali sono stati configurati per ADP, al prompt DEL CARICATORE di ciascun nodo sostitutivo, impostare l'ID di sistema originale (*non* l'ID di sistema del modulo controller sostitutivo) e l'ID di sistema del partner DR del nodo:
 +
 `setenv bootarg.mcc.local_config_id original-sysID`

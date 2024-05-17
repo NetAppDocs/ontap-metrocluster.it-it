@@ -55,6 +55,7 @@ https://hwu.netapp.com["NetApp Hardware Universe"^]
 
 NOTE: L'esecuzione di un aggiornamento utilizzando il trasferimento aggregato (ARL) con i comandi "system controller replace" non è supportata per una configurazione MetroCluster IP a quattro nodi.
 
+* Se è abilitato nel sistema, link:../maintain/task-configure-encryption.html#disable-end-to-end-encryption["Disattiva la crittografia end-to-end"] prima di eseguire l'aggiornamento.
 * È necessario utilizzare la procedura di aggiornamento automatico del controller NSO per aggiornare i controller in entrambi i siti in sequenza.
 * Questa procedura di aggiornamento automatico del controller basata su NSO consente di avviare la sostituzione del controller in un sito di disaster recovery (DR) MetroCluster. È possibile avviare la sostituzione di un controller solo in un sito alla volta.
 * Per avviare una sostituzione del controller nel sito A, eseguire il comando di avvio per la sostituzione del controller dal sito B. L'operazione consente di sostituire i controller di entrambi i nodi solo nel sito A. Per sostituire i controller nel sito B, eseguire il comando di avvio per la sostituzione dei controller dal sito A. Viene visualizzato un messaggio che identifica il sito in cui vengono sostituiti i controller.
@@ -1145,9 +1146,15 @@ Configurare manualmente ONTAP Media, che è stato rimosso automaticamente prima 
 
 
 
-=== Ripristino del monitoraggio di Tiebreaker
+=== Ripristinare il monitoraggio di Tiebreaker
 
 Se la configurazione MetroCluster è stata precedentemente configurata per il monitoraggio da parte del software Tiebreaker, è possibile ripristinare la connessione Tiebreaker.
 
 . Attenersi alla procedura descritta in http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-7259BCA4-104C-49C6-BAD0-1068CA2A3DA5.html["Aggiunta di configurazioni MetroCluster"].
 
+
+
+
+=== Configurare la crittografia end-to-end
+
+Se è supportato sul sistema, è possibile crittografare il traffico back-end, come NVlog e i dati di replica dello storage, tra i siti IP di MetroCluster. Fare riferimento a. link:../maintain/task-configure-encryption.html["Configurare la crittografia end-to-end"] per ulteriori informazioni.

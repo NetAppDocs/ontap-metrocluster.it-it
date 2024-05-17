@@ -2972,10 +2972,21 @@ node_A_1 SVM 4 snmpv3user     snmp        usm                   10.10.10.13
 ----
 . Configurare SNMPv3 sugli switch dal prompt dello switch:
 +
+[role="tabbed-block"]
+====
+.Switch Brocade
+--
 `snmpconfig --set snmpv3`
 
+--
+.Switch Cisco
+--
+`snmp-server user <user_name>  auth [md5/sha/sha-256] <auth_password> priv (aes-128) <priv_password>`
+
+--
+====
 +
-Se si richiede l'accesso RO, dopo "User (ro):" specificare "snmpv3user" come mostrato nell'esempio:
+Se si richiede l'accesso RO, dopo "User (ro):" specificare "snmpv3user". Nell'esempio seguente vengono utilizzati gli switch Brocade:
 
 +
 [listing]
