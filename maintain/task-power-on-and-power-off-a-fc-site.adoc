@@ -332,10 +332,10 @@ Per gli switch FC Cisco...
 Le seguenti apparecchiature devono essere spente nell'ordine indicato:
 
 +
-** Switch FC MetroCluster
 ** Storage controller: Gli storage controller devono trovarsi attualmente nella `LOADER` è necessario spegnerli completamente.
-** Shelf di storage
+** Switch FC MetroCluster
 ** ATTO FibreBridge (se presente)
+** Shelf di storage
 
 
 
@@ -568,10 +568,6 @@ Accendere prima gli interruttori. Potrebbero essere stati accesi durante la fase
 
 
 . Disattivare gli ISL sugli switch FC.
-. Accendere i controller di archiviazione e attendere che venga visualizzato `LOADER` prompt. I controller non devono essere completamente avviati.
-+
-Se l'avvio automatico è attivato, premere `Ctrl+C` per interrompere l'avvio automatico dei controller.
-
 . Accendere gli shelf e attendere il tempo necessario per l'accensione completa.
 . Accendere i bridge FibreBridge.
 +
@@ -671,7 +667,15 @@ switch_A_1#
 
 
 |===
-. Verificare che lo storage sia visibile dal sito sopravvissuto. Riportare online i plesso offline. In questo modo vengono rieseguite le operazioni di risync e viene ristabilita SyncMirror.
+. Verificare che lo spazio di archiviazione sia visibile.
++
+.. Verificare che lo storage sia visibile dal sito sopravvissuto. Riportare i plesso offline in linea per riavviare l'operazione di risincronizzazione e ristabilire la SyncMirror.
+.. Verificare che la memoria locale sia visibile dal nodo in modalità manutenzione:
++
+`disk show -v`
+
+
+
 . Ristabilire la configurazione MetroCluster.
 +
 Seguire le istruzioni riportate in link:../disaster-recovery/task_recover_from_a_non_controller_failure_mcc_dr.html#verifying-that-your-system-is-ready-for-a-switchback["Verificare che il sistema sia pronto per lo switchback"] Per eseguire operazioni di healing e switchback in base alla configurazione MetroCluster.

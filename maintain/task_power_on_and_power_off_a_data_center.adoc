@@ -259,8 +259,8 @@ NOTE: Eseguire questa operazione per tutti i plessi che hanno dischi remoti a Cl
 È necessario spegnere le seguenti apparecchiature nell'ordine indicato:
 
 +
+** Storage controller: Gli storage controller devono trovarsi attualmente nella `LOADER` è necessario spegnerli completamente.
 ** Switch IP MetroCluster
-** Controller di storage
 ** Shelf di storage
 
 
@@ -321,16 +321,14 @@ Accendere prima gli interruttori. Potrebbero essere stati accesi durante la fase
 Se l'avvio automatico è attivato, premere `Ctrl+C` per interrompere l'avvio automatico dei controller.
 
 . Accendere gli scaffali, lasciando abbastanza tempo per accenderli completamente.
+. Verificare che lo spazio di archiviazione sia visibile.
 +
-.. Verificare che gli shelf e i dischi sui bridge siano chiaramente visibili.
-+
-È possibile utilizzare un comando come `sastargets` Sulla CLI atto.
-
-
-
-. Verificare che la memoria locale sia visibile dal nodo in modalità manutenzione:
+.. Verificare che lo storage sia visibile dal sito sopravvissuto. Riportare i plesso offline in linea per riavviare l'operazione di risincronizzazione e ristabilire la SyncMirror.
+.. Verificare che la memoria locale sia visibile dal nodo in modalità manutenzione:
 +
 `disk show -v`
+
+
 
 . Ristabilire la configurazione MetroCluster.
 +
