@@ -12756,12 +12756,7 @@
   <block id="da1fe90f1a7c8d5426c9fb653143159c" category="inline-xref">Utilizzo della porta ISL per Cisco 9132T in una configurazione MetroCluster che esegue ONTAP 9,1 o versione successiva</block>
   <block id="ebaff03f6ed502f4a413a1ce08e7b523" category="admonition">Per Cisco 9132T, vedere <block ref="745f667c2207ac60e33bebf6a26d4908" category="inline-xref-macro-rx"></block>.</block>
   <block id="b6adc54642d6ea9466bf5956bfd90921" category="section-title">Utilizzo delle porte Cisco 9132T in configurazioni MetroCluster a quattro e otto nodi che eseguono ONTAP 9,4 e versioni successive</block>
-  <block id="34adac1b835db756e4bda81aeab17aee" category="paragraph">La tabella seguente mostra l'utilizzo della porta su uno switch Cisco 9132T. La tabella mostra le configurazioni massime supportate con quattro e otto moduli controller in due gruppi DR.</block>
   <block id="65ac5210a13e16ff0c09cc508d39f010" category="admonition">Per le configurazioni a otto nodi, è necessario eseguire lo zoning manualmente, perché gli RCF non sono forniti.</block>
-  <block id="24ce95dff7cdbe82f47d82b0c5e3c3bd" category="paragraph">LEM2-5</block>
-  <block id="d1219ba7b45f6028da9ef53dc1d962dc" category="paragraph">LEM2-6</block>
-  <block id="d72635ed8e78c8bf248888485d54fefc" category="paragraph">LEM2-7</block>
-  <block id="bf56acff15a22deda5e2b827afffd42e" category="paragraph">LEM2-8</block>
   <block id="148fa39b011d75fbf87b5c6a6e4eb7ac" category="list-text">Nelle configurazioni a quattro nodi, è possibile collegare bridge aggiuntivi alle porte da LEM2-5 a LEM2-8 in switch 9132T con 2x LEMS.</block>
   <block id="1b3edf8d6e61a53c159f115111d76631" category="list-text">Nelle configurazioni a otto nodi, è possibile collegare bridge aggiuntivi alle porte da LEM2-13 a LEM2-16 in switch 9132T con 2x LEMS.</block>
   <block id="7aff2de5bc0a96f53245830100b31a76" category="section-title">Utilizzo delle porte Cisco 9132T per gli ISL in configurazioni a quattro e otto nodi in una configurazione MetroCluster che esegue ONTAP 9,1 o versione successiva</block>
@@ -13275,7 +13270,6 @@ Si applica a tutte le configurazioni MetroCluster.</block>
   <block id="f9805d94598bd6a841fddbff1c6ddc7b" category="paragraph">Le tabelle seguenti mostrano l'utilizzo delle porte bridge quando si utilizzano bridge FibreBridge 7500N o 7600N che utilizzano solo una porta FC (FC1 o FC2). Per i bridge FibreBridge 7500N o 7600N che utilizzano una porta FC, è possibile collegare via cavo FC1 o FC2 alla porta indicata come FC1. È possibile collegare altri bridge utilizzando le porte 25-48.</block>
   <block id="126b9e3a8501d897a2356aba96828af6" category="cell">Bridge 7500N o 7600N FibreBridge mediante una porta FC</block>
   <block id="69abf6cf7deeba7ace2f747f7661208f" category="cell">FibreBridge 7500N o 7600N utilizzando una porta FC</block>
-  <block id="1b3c29a52da9672be1cb789bb6d06ae8" category="cell">FibreBridge 7500N utilizzando due porte FC</block>
   <block id="0351289236b3260f9d0c35b64f62689c" category="paragraph">È possibile seguire il cablaggio per il bridge FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2). Invece di utilizzare quattro iniziatori, collegare solo due iniziatori e lasciare vuoti gli altri due collegati alla porta dello switch.</block>
   <block id="4883312b6c36aa2f1d5ce2e2f17638bd" category="paragraph">Se lo zoning viene eseguito manualmente, seguire lo zoning utilizzato per un bridge FibreBridge 7500N o 7600N utilizzando una porta FC (FC1 o FC2). In questo scenario, viene aggiunta una porta iniziatore anziché due a ciascun membro di zona per fabric.</block>
   <block id="1e008e69dc731ad28df3d6927462a7f3" category="paragraph">È possibile modificare la suddivisione in zone o eseguire un aggiornamento da FibreBridge 6500N a FibreBridge 7500N utilizzando la procedura descritta in <block ref="0b4bc6296d77be28e33d3b50e0ea0797" category="inline-link-macro-rx"></block>.</block>
@@ -13775,4 +13769,7 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="e387b7f8f98fe6ef00364ba0984c08a9" category="paragraph">Gli ID di sistema vecchi e nuovi sono stati identificati in <block ref="ce17cf746f0f051ba197f9e3096bf7f5" category="inline-link-macro-rx"></block>.</block>
   <block id="124ba57298a92342f8aec06ebcfb6415" category="inline-link-macro">Determinare gli ID di sistema dei vecchi moduli controller</block>
   <block id="3ac27de4b4347c98785ff06870fe7221" category="paragraph"><block ref="3ac27de4b4347c98785ff06870fe7221" category="inline-link-macro-rx"></block></block>
+  <block id="478093bd7e01c5abe587038bf808af00" category="paragraph">Le tabelle seguenti mostrano l'utilizzo delle porte su uno switch Cisco 9132T. Le tabelle mostrano le configurazioni massime supportate con quattro e otto moduli controller in due gruppi DR.</block>
+  <block id="9e667988f536ce55f0a4c5cf0908d042" category="cell">Cisco 9132T con 2x LEM e un gruppo MetroCluster o DR a quattro nodi</block>
+  <block id="7d83eb0736445dbf18519e99146d2fff" category="cell">Cisco 9132T con due MetroCluster a quattro nodi o un MetroCluster a otto nodi con due gruppi DR</block>
 </blocks>

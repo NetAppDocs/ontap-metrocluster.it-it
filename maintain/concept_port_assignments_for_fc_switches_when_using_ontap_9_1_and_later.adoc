@@ -3972,7 +3972,7 @@ ISL 4
 
 == Utilizzo delle porte Cisco 9132T in configurazioni MetroCluster a quattro e otto nodi che eseguono ONTAP 9,4 e versioni successive
 
-La tabella seguente mostra l'utilizzo della porta su uno switch Cisco 9132T. La tabella mostra le configurazioni massime supportate con quattro e otto moduli controller in due gruppi DR.
+Le tabelle seguenti mostrano l'utilizzo delle porte su uno switch Cisco 9132T. Le tabelle mostrano le configurazioni massime supportate con quattro e otto moduli controller in due gruppi DR.
 
 
 NOTE: Per le configurazioni a otto nodi, è necessario eseguire lo zoning manualmente, perché gli RCF non sono forniti.
@@ -3980,392 +3980,18 @@ NOTE: Per le configurazioni a otto nodi, è necessario eseguire lo zoning manual
 |===
 
 
-7+| Configurazioni che utilizzano FibreBridge 7500N o 7600N utilizzando entrambe le porte FC (FC1 e FC2) 
+4+| Cisco 9132T con 1 LEM 
 
 
-7+| MetroCluster 1 o DR Group 1 
+4+| MetroCluster 1 o DR Group 1 
 
 
-4+|  2+| Quattro nodi | Otto nodi 
+3+|  | Quattro nodi 
 
 
-2+| Componente | Porta | Si connette a FC_switch... | 9132T (1 LEM) | 9132T (2 LEM) | 9132T (2 LEM) 
+| FibreBridge 7500N o 7600N utilizzando due porte FC | Porta | Si connette a FC_switch... | 9132T (1 LEM) 
 
 
- a| 
-controller_x_1
- a| 
-Porta FC-VI A.
- a| 
-1
- a| 
-LEM1-1
- a| 
-LEM1-1
- a| 
-LEM1-1
-
-
-
- a| 
-Porta FC-VI b
- a| 
-2
- a| 
-LEM1-1
- a| 
-LEM1-1
- a| 
-LEM1-1
-
-
-
- a| 
-Porta FC-VI c
- a| 
-1
- a| 
-LEM1-2
- a| 
-LEM1-2
- a| 
-LEM1-2
-
-
-
- a| 
-Porta FC-VI d
- a| 
-2
- a| 
-LEM1-2
- a| 
-LEM1-2
- a| 
-LEM1-2
-
-
-
- a| 
-Porta HBA a
- a| 
-1
- a| 
-LEM1-5
- a| 
-LEM1-5
- a| 
-LEM1-3
-
-
-
- a| 
-Porta HBA b
- a| 
-2
- a| 
-LEM1-5
- a| 
-LEM1-5
- a| 
-LEM1-3
-
-
-
- a| 
-Porta HBA c
- a| 
-1
- a| 
-LEM1-6
- a| 
-LEM1-6
- a| 
-LEM1-4
-
-
-
- a| 
-Porta HBA d
- a| 
-2
- a| 
-LEM1-6
- a| 
-LEM1-6
- a| 
-LEM1-4
-
-
-
- a| 
-controller_x_2
- a| 
-Porta FC-VI A.
- a| 
-1
- a| 
-LEM1-7
- a| 
-LEM1-7
- a| 
-LEM1-5
-
-
-
- a| 
-Porta FC-VI b
- a| 
-2
- a| 
-LEM1-7
- a| 
-LEM1-7
- a| 
-LEM1-5
-
-
-
- a| 
-Porta FC-VI c
- a| 
-1
- a| 
-LEM1-8
- a| 
-LEM1-8
- a| 
-LEM1-6
-
-
-
- a| 
-Porta FC-VI d
- a| 
-2
- a| 
-LEM1-8
- a| 
-LEM1-8
- a| 
-LEM1-6
-
-
-
- a| 
-Porta HBA a
- a| 
-1
- a| 
-LEM1-11
- a| 
-LEM1-11
- a| 
-LEM1-7
-
-
-
- a| 
-Porta HBA b
- a| 
-2
- a| 
-LEM1-11
- a| 
-LEM1-11
- a| 
-LEM1-7
-
-
-
- a| 
-Porta HBA c
- a| 
-1
- a| 
-LEM1-12
- a| 
-LEM1-12
- a| 
-LEM1-8
-
-
-
- a| 
-Porta HBA d
- a| 
-2
- a| 
-LEM1-12
- a| 
-LEM1-12
- a| 
-LEM1-8
-
-
-
-7+| MetroCluster 2 o DR Group 2 
-
-
- a| 
-controller_x_3
- a| 
-Porta FC-VI A.
- a| 
-1
-|  |   a| 
-LEM2-1
-
-
-
- a| 
-Porta FC-VI b
- a| 
-2
-|  |   a| 
-LEM2-1
-
-
-
- a| 
-Porta FC-VI c
- a| 
-1
-|  |   a| 
-LEM2-2
-
-
-
- a| 
-Porta FC-VI d
- a| 
-2
-|  |   a| 
-LEM2-2
-
-
-
- a| 
-Porta HBA a
- a| 
-1
-|  |   a| 
-LEM2-3
-
-
-
- a| 
-Porta HBA b
- a| 
-2
-|  |   a| 
-LEM2-3
-
-
-
- a| 
-Porta HBA c
- a| 
-1
-|  |   a| 
-LEM2-4
-
-
-
- a| 
-Porta HBA d
- a| 
-2
-|  |   a| 
-LEM2-4
-
-
-
- a| 
-controller_x_4
- a| 
-Porta FC-VI-1 a
- a| 
-1
-|  |   a| 
-LEM2-5
-
-
-
- a| 
-Porta FC-VI-1 b
- a| 
-2
-|  |   a| 
-LEM2-5
-
-
-
- a| 
-Porta FC-VI-1 c
- a| 
-1
-|  |   a| 
-LEM2-6
-
-
-
- a| 
-Porta FC-VI-1 d
- a| 
-2
-|  |   a| 
-LEM2-6
-
-
-
- a| 
-Porta HBA a
- a| 
-1
-|  |   a| 
-LEM2-7
-
-
-
- a| 
-Porta HBA b
- a| 
-2
-|  |   a| 
-LEM2-7
-
-
-
- a| 
-Porta HBA c
- a| 
-1
-|  |   a| 
-LEM2-8
-
-
-
- a| 
-Porta HBA d
- a| 
-2
-|  |   a| 
-LEM2-8
-
-
-
-7+| MetroCluster 1 o DR Group 1 
-
-
-4+|  2+| Quattro nodi | Otto nodi 
-
-
-2+| FibreBridge 7500N utilizzando due porte FC | Porta | Si connette a FC_switch... | 9132T (1 LEM) | 9132T (2 LEM) | 9132T (2 LEM) 
-
-
- a| 
-Stack 1
  a| 
 bridge_x_1a
  a| 
@@ -4374,10 +4000,6 @@ FC1
 1
  a| 
 LEM1-13
- a| 
-LEM1-13
- a| 
-LEM1-9
 
 
 
@@ -4387,8 +4009,235 @@ FC2
 2
  a| 
 LEM1-13
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-14
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-14
+
+|===
+
+NOTE: Solo uno (1) stack di bridge è supportato utilizzando gli switch 9132T con 1 modulo LEM.
+
+|===
+
+
+4+| Cisco 9132T con 2x LEM e un gruppo MetroCluster o DR a quattro nodi 
+
+
+4+| MetroCluster 1 o DR Group 1 
+
+
+3+|  | Quattro nodi 
+
+
+| FibreBridge 7500N o 7600N utilizzando due porte FC | Porta | Si connette a FC_switch... | 9132T (2 LEM) 
+
+
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
  a| 
 LEM1-13
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-13
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-14
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-14
+
+
+
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-15
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-15
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-16
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-16
+
+
+
+ a| 
+bridge_x_3a
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM2-1
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM2-1
+
+
+
+ a| 
+bridge_x_3b
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM2-2
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM2-2
+
+
+
+ a| 
+bridge_x_ya
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM2-3
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM2-3
+
+
+
+ a| 
+bridge_x_yb
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM2-4
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM2-4
+
+|===
+
+NOTE: Nelle configurazioni a quattro nodi, è possibile collegare bridge aggiuntivi alle porte da LEM2-5 a LEM2-8 in switch 9132T con 2x LEMS.
+
+|===
+
+
+4+| Cisco 9132T con due MetroCluster a quattro nodi o un MetroCluster a otto nodi con due gruppi DR 
+
+
+4+| MetroCluster 1 o DR Group 1 
+
+
+| FibreBridge 7500N o 7600N utilizzando due porte FC | Porta | Si connette a FC_switch... | 9132T (2 LEM) 
+
+
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-9
+
+
+
+ a| 
+FC2
+ a| 
+2
  a| 
 LEM1-9
 
@@ -4401,10 +4250,6 @@ FC1
  a| 
 1
  a| 
-LEM1-14
- a| 
-LEM1-14
- a| 
 LEM1-10
 
 
@@ -4414,24 +4259,16 @@ FC2
  a| 
 2
  a| 
-LEM1-14
- a| 
-LEM1-14
- a| 
 LEM1-10
 
 
 
- a| 
-Stack 2
  a| 
 bridge_x_2a
  a| 
 FC1
  a| 
 1
-|   a| 
-LEM1-15
  a| 
 LEM1-11
 
@@ -4441,8 +4278,6 @@ LEM1-11
 FC2
  a| 
 2
-|   a| 
-LEM1-15
  a| 
 LEM1-11
 
@@ -4454,8 +4289,6 @@ bridge_x_2b
 FC1
  a| 
 1
-|   a| 
-LEM1-16
  a| 
 LEM1-12
 
@@ -4465,23 +4298,23 @@ LEM1-12
 FC2
  a| 
 2
-|   a| 
-LEM1-16
  a| 
 LEM1-12
 
 
 
- a| 
-Stack 3
+4+| MetroCluster 2 o DR Group 2 
+
+
+| FibreBridge 7500N o 7600N utilizzando due porte FC | Porta | Si connette a FC_switch... | 9132T (2 LEM) 
+
+
  a| 
 bridge_x_3a
  a| 
 FC1
  a| 
 1
-|   a| 
-LEM2-1
  a| 
 LEM2-9
 
@@ -4491,8 +4324,6 @@ LEM2-9
 FC2
  a| 
 2
-|   a| 
-LEM2-1
  a| 
 LEM2-9
 
@@ -4504,8 +4335,6 @@ bridge_x_3b
 FC1
  a| 
 1
-|   a| 
-LEM2-2
  a| 
 LEM2-10
 
@@ -4515,23 +4344,17 @@ LEM2-10
 FC2
  a| 
 2
-|   a| 
-LEM2-2
  a| 
 LEM2-10
 
 
 
  a| 
-Stack y
- a| 
 bridge_x_ya
  a| 
 FC1
  a| 
 1
-|   a| 
-LEM2-3
  a| 
 LEM2-11
 
@@ -4541,8 +4364,6 @@ LEM2-11
 FC2
  a| 
 2
-|   a| 
-LEM2-3
  a| 
 LEM2-11
 
@@ -4554,8 +4375,6 @@ bridge_x_yb
 FC1
  a| 
 1
-|   a| 
-LEM2-4
  a| 
 LEM2-12
 
@@ -4565,20 +4384,13 @@ LEM2-12
 FC2
  a| 
 2
-|   a| 
-LEM2-4
  a| 
 LEM2-12
 
 |===
-[NOTE]
-====
-* Nelle configurazioni a quattro nodi, è possibile collegare bridge aggiuntivi alle porte da LEM2-5 a LEM2-8 in switch 9132T con 2x LEMS.
-* Nelle configurazioni a otto nodi, è possibile collegare bridge aggiuntivi alle porte da LEM2-13 a LEM2-16 in switch 9132T con 2x LEMS.
-* Solo uno (1) stack di bridge è supportato utilizzando gli switch 9132T con 1 modulo LEM.
 
+NOTE: Nelle configurazioni a otto nodi, è possibile collegare bridge aggiuntivi alle porte da LEM2-13 a LEM2-16 in switch 9132T con 2x LEMS.
 
-====
 
 
 == Utilizzo delle porte Cisco 9132T per gli ISL in configurazioni a quattro e otto nodi in una configurazione MetroCluster che esegue ONTAP 9,1 o versione successiva
