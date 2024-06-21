@@ -11,11 +11,11 @@ summary: 'A partire da ONTAP 9.4, le configurazioni IP di MetroCluster supportan
 
 
 [role="lead"]
-A partire da ONTAP 9,4, le configurazioni IP di MetroCluster supportano nuove installazioni con ADP (partizione avanzata dei dischi).
+A partire da ONTAP 9,4, le configurazioni IP di MetroCluster supportano nuove installazioni con assegnazione automatica dei dischi e ADP (partizione avanzata dei dischi).
 
 Quando si utilizza ADP con le configurazioni IP MetroCluster, è necessario tenere presenti le seguenti considerazioni:
 
-* Per utilizzare ADP con le configurazioni IP di MetroCluster, è necessario ONTAP 9,4 e versioni successive.
+* Per utilizzare ADP con le configurazioni IP di MetroCluster su sistemi AFF e ASA, è necessario ONTAP 9,4 e versioni successive.
 * ADPv2 è supportato nelle configurazioni IP di MetroCluster.
 * L'aggregato root deve trovarsi nella partizione 3 per tutti i nodi in entrambi i siti.
 * Il partizionamento e l'assegnazione dei dischi vengono eseguiti automaticamente durante la configurazione iniziale dei siti MetroCluster.
