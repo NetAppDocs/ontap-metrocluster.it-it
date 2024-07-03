@@ -19,7 +19,7 @@ Assicurarsi che il sistema sia configurato correttamente, che tutti gli switch f
 Se l'apparecchiatura sul collegamento ISL cambia e la nuova configurazione del collegamento non supporta più la configurazione corrente----trunking e consegna ordinata----allora il fabric deve essere riconfigurato per la policy di routing corretta: In-order-delivery (IOD) o out-of-order-delivery (OOOD).
 
 
-NOTE: Per apportare modifiche all'OOD dal software ONTAP, attenersi alla seguente procedura: link:../install-fc/concept_configure_the_mcc_software_in_ontap.html#configuring-in-order-delivery-or-out-of-order-delivery-of-frames-on-ontap-software#configuring-in-order-delivery-or-out-of-order-delivery-of-frames-on-ontap-software["Configurazione della consegna in-order o out-of-order dei frame sul software ONTAP"]
+NOTE: Per apportare modifiche a OOD dal software ONTAP, attenersi alla seguente procedura: link:../install-fc/concept_configure_the_mcc_software_in_ontap.html#configuring-in-order-delivery-or-out-of-order-delivery-of-frames-on-ontap-software["Configurazione della consegna in-order o out-of-order dei frame sul software ONTAP"]
 
 .Fasi
 . Disattivare le porte FCVI e HBA dello storage:

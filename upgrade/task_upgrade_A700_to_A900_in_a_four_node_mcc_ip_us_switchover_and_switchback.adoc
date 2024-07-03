@@ -589,7 +589,7 @@ image::../media/drw_9500_remove_PCM.png[modulo controller]
 .. Spostare la connessione e5a su e5b.
 +
 
-NOTE: Lo slot 7 su tutti i nodi del cluster deve essere vuoto, come indicato nella <<Mappare le porte dai vecchi nodi ai nuovi nodi>> sezione.
+NOTE: Lo slot 7 su tutti i nodi del cluster deve essere vuoto come indicato nella <<upgrade_a700_a900_ip_map,Mappare le porte dai vecchi nodi ai nuovi nodi>> sezione.
 
 
 
@@ -838,23 +838,22 @@ Gli switch del sito_A verranno aggiornati quando i controller del sito_A verrann
 .Fasi
 . Preparare gli switch IP per l'applicazione dei nuovi file RCF.
 +
-Seguire le istruzioni della sezione relativa al fornitore dello switch nella sezione _Installazione e configurazione IP MetroCluster_.
+Seguire la procedura descritta nella sezione relativa al fornitore dello switch:
 
 +
-link:../install-ip/index.html["Installazione e configurazione di MetroCluster IP"]
-
-+
-** link:../install-ip/task_switch_config_broadcom.html#resetting-the-broadcom-ip-switch-to-factory-defaults["Ripristino delle impostazioni predefinite dello switch IP Broadcom"]
-** link:../install-ip/task_switch_config_broadcom.html#resetting-the-cisco-ip-switch-to-factory-defaults["Ripristino delle impostazioni predefinite dello switch IP Cisco"]
+** link:../install-ip/task_switch_config_broadcom.html#resetting-the-broadcom-ip-switch-to-factory-defaults["Ripristinare l'interruttore Broadcom IP alle impostazioni predefinite"]
+** link:../install-ip/task_switch_config_broadcom.html#resetting-the-cisco-ip-switch-to-factory-defaults["Ripristinare lo switch IP Cisco alle impostazioni predefinite"]
+** link:../install-ip/task_switch_config_nvidia.html["Ripristinare le impostazioni predefinite dello switch NVIDIA IP SN2100"]
 
 
 . Scaricare e installare i file RCF.
 +
-Seguire i passaggi descritti nella sezione relativa al fornitore dello switch di link:../install-ip/index.html["Installazione e configurazione di MetroCluster IP"].
+Seguire la procedura descritta nella sezione relativa al fornitore dello switch:
 
 +
-** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-rcf-files["Download e installazione dei file RCF Broadcom"]
-** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-cisco-ip-rcf-files["Download e installazione dei file Cisco IP RCF"]
+** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-rcf-files["Scaricare e installare i file Broadcom RCF"]
+** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-cisco-ip-rcf-files["Scaricare e installare i file RCF IP di Cisco"]
+** link:../install-ip/task_switch_config_nvidia.html#download-and-install-the-nvidia-rcf-files["Scaricare e installare i file RCF NVIDIA IP"]
 
 
 
@@ -872,7 +871,7 @@ A questo punto, i nuovi controller devono essere pronti e cablati.
 Alcuni valori di boot MetroCluster IP devono essere configurati sui nuovi moduli controller. I valori devono corrispondere a quelli configurati sui vecchi moduli controller.
 
 .A proposito di questa attività
-In questa attività, verranno utilizzati gli UUID e gli ID di sistema identificati in precedenza nella procedura di aggiornamento in link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html#gathering-information-before-the-upgrade["Raccolta di informazioni prima dell'aggiornamento"].
+In questa attività, verranno utilizzati gli UUID e gli ID di sistema identificati in precedenza nella procedura di aggiornamento in <<Raccogliere informazioni prima dell'aggiornamento>>.
 
 .Fasi
 . Su `LOADER>` Prompt, impostare i seguenti bootargs sui nuovi nodi in Site_B:
@@ -1283,7 +1282,7 @@ Verificare che i file LIF siano ospitati su nodi e porte appropriati, come mappa
 
 .A proposito di questa attività
 * Questa attività viene eseguita sul sito_B.
-* Vedere il piano di mappatura delle porte creato in link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html#mapping-ports-from-the-old-nodes-to-the-new-nodes["Mappatura delle porte dai vecchi nodi ai nuovi nodi"].
+* Vedere il piano di mappatura delle porte creato in <<upgrade_a700_a900_ip_map,Mappare le porte dai vecchi nodi ai nuovi nodi>>
 
 
 .Fasi
@@ -1436,7 +1435,7 @@ Questa attività può essere eseguita su qualsiasi nodo della configurazione Met
 È necessario ripetere le attività di aggiornamento sul sito_A.
 
 .Fasi
-. Ripetere i passaggi per aggiornare i nodi sul sito_A, iniziando con link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html#preparing-for-the-upgrade["Preparatevi per l'aggiornamento"].
+. Ripetere la procedura per aggiornare i nodi sul sito_A, iniziando con <<upgrade_a700_a900_ip_prepare,Preparatevi per l'aggiornamento>>.
 +
 Durante l'esecuzione delle attività, tutti i riferimenti di esempio ai siti e ai nodi vengono invertiti. Ad esempio, quando l'esempio viene fornito per lo switchover da Site_A, si passa da Site_B.
 

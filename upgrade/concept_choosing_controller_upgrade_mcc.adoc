@@ -21,52 +21,73 @@ In una procedura di aggiornamento, i controller vengono sostituiti con un nuovo 
 
 
 
-== Scelta di una procedura che utilizzi il processo di switchover e switchback
+== Aggiornamenti dei controller supportati
 
 Selezionare la piattaforma corrente dalla tabella FC o IP riportata di seguito. Se l'intersezione tra la riga della piattaforma corrente e la colonna della piattaforma di destinazione è vuota, l'aggiornamento non è supportato.
+
+
+NOTE: Per gli aggiornamenti supportati utilizzando `system controller replace` comandi in una configurazione IP MetroCluster a quattro nodi, fare riferimento alla tabella in link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_ip.html["Aggiornare i controller in una configurazione MetroCluster IP a quattro nodi utilizzando lo switchover e lo switchback con i comandi "system controller replace" (ONTAP 9.13.1 e versioni successive)"]
 
 
 
 === Aggiornamenti del controller IP MetroCluster supportati
 
-Se la piattaforma non è elencata, non è disponibile alcuna combinazione di upgrade del controller supportata.
-
-[IMPORTANT]
-====
-Quando si esegue un aggiornamento del controller, il vecchio e il nuovo tipo di piattaforma *devono* corrispondere.
-
-* Puoi aggiornare un sistema FAS ad un sistema FAS o AFF A-Series ad un AFF a-Series.
-* Non è possibile aggiornare un sistema FAS ad un AFF A-Series o AFF A-Series a un AFF C-Series.
-
-
+* Se la piattaforma non è elencata, non è disponibile alcuna combinazione di upgrade del controller supportata.
+* Quando si esegue un aggiornamento del controller, il vecchio e il nuovo tipo di piattaforma *devono* corrispondere:
++
+** Puoi aggiornare un sistema FAS ad un sistema FAS o AFF A-Series ad un AFF a-Series.
+** Non è possibile aggiornare un sistema FAS ad un AFF A-Series o AFF A-Series a un AFF C-Series.
++
 Ad esempio, se la piattaforma che si desidera aggiornare è FAS8200, è possibile eseguire l'aggiornamento a FAS9000. Non è possibile aggiornare un sistema FAS8200 a un sistema AFF A700.
 
-====
-image::../media/metrocluster_ip_upgrade_table_914.png[tabella di aggiornamento ip di MetroCluster 914]
+
+
+* Tutti i nodi (vecchi e nuovi) della configurazione MetroCluster devono eseguire la stessa versione di ONTAP.
+
+
+.Aggiornamenti del controller IP AFF e FAS MetroCluster supportati
+La seguente tabella mostra le combinazioni di piattaforme supportate per l'aggiornamento di un sistema AFF o FAS in una configurazione IP di MetroCluster:
+
+
+NOTE: I sistemi AFF A90, AFF A70 e AFF A1K richiedono ONTAP 9.15.1 o versione successiva.
+
+image::../media/metrocluster_ip_upgrade_so_sb_aff_fas.png[aggiornamento MetroCluster ip so sb AFF FAS]
 
 * Nota 1: Per questo aggiornamento, utilizzare la procedura link:task_upgrade_A700_to_A900_in_a_four_node_mcc_ip_us_switchover_and_switchback.html["Upgrade dei controller da AFF A700/FAS9000 a AFF A900/FAS9500 in una configurazione MetroCluster IP utilizzando switchover e switchback (ONTAP 9.10.1 o versione successiva)"]
 * Nota 2: Gli aggiornamenti dei controller sono supportati nei sistemi che eseguono ONTAP 9.13.1 o versioni successive.
-* Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, i nuovi controller devono eseguire la stessa versione di ONTAP dei vecchi controller.
+* Nota 3: La piattaforma di destinazione non può avere dischi interni fino al completamento dell'aggiornamento del controller. È possibile aggiungere le unità interne dopo l'aggiornamento.
+* Nota 4: Richiede la sostituzione dei moduli controller.
+
+
+.Aggiornamenti del controller IP ASA MetroCluster supportati
+La seguente tabella mostra le combinazioni di piattaforme supportate per l'aggiornamento di un sistema ASA in una configurazione MetroCluster IP:
+
+image::../media/metrocluster_ip_upgrade_so_sb_asa_fas.png[aggiornamento MetroCluster ip so sb ASA FAS]
+
+* Nota 1: Gli upgrade dei controller sono supportati sui sistemi con ONTAP 9.13.1 o versione successiva.
 
 
 
 
 === Aggiornamenti del controller FC MetroCluster supportati
 
-Se la piattaforma non è elencata, non è disponibile alcuna combinazione di upgrade del controller supportata.
-
-[IMPORTANT]
-====
-Quando si esegue un aggiornamento del controller, il vecchio e il nuovo tipo di piattaforma *devono* corrispondere.
-
-* Puoi aggiornare un sistema FAS ad un sistema FAS o AFF A-Series ad un AFF a-Series.
-* Non è possibile aggiornare un sistema FAS ad un AFF A-Series o AFF A-Series a un AFF C-Series.
-
-
+* Se la piattaforma non è elencata, non è disponibile alcuna combinazione di upgrade del controller supportata.
+* Quando si esegue un aggiornamento del controller, il vecchio e il nuovo tipo di piattaforma *devono* corrispondere:
++
+** Puoi aggiornare un sistema FAS ad un sistema FAS o AFF A-Series ad un AFF a-Series.
+** Non è possibile aggiornare un sistema FAS ad un AFF A-Series o AFF A-Series a un AFF C-Series.
++
 Ad esempio, se la piattaforma che si desidera aggiornare è FAS8200, è possibile eseguire l'aggiornamento a FAS9000. Non è possibile aggiornare un sistema FAS8200 a un sistema AFF A700.
 
-====
-image::../media/metrocluster_fc_upgrade_table_914.png[MetroCluster fc tabella di aggiornamento 914]
+
+
+* Tutti i nodi (vecchi e nuovi) della configurazione MetroCluster devono eseguire la stessa versione di ONTAP.
+
+
+.Aggiornamenti dei controller FC AFF e FAS MetroCluster supportati
+La tabella seguente mostra le combinazioni di piattaforme supportate per l'upgrade di un sistema AFF o FAS in una configurazione MetroCluster FC:
+
+image::../media/metrocluster_fc_upgrade_table_aff_fas.png[MetroCluster fc upgrade table AFF FAS]
 
 * Nota 1: Per l'aggiornamento dei controller quando le connessioni FCVI su nodi FAS8020 o AFF8020 esistenti utilizzano le porte 1c e 1d, vedere quanto seguehttps://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/Upgrading_controllers_when_FCVI_connections_on_existing_FAS8020_or_AFF8020_nodes_use_ports_1c_and_1d["Articolo della Knowledge base"^].
 * Nota 2: Gli upgrade dei controller da piattaforme AFF A300 o FAS8200 utilizzando le porte integrate 0e e 0f come connessioni FC-VI sono supportati solo sui seguenti sistemi:
@@ -83,9 +104,35 @@ Per ulteriori informazioni, consultare link:https://mysupport.netapp.com/site/bu
 
 * Nota 3: Per questo aggiornamento, fare riferimento a. link:task_upgrade_A700_to_A900_in_a_four_node_mcc_fc_us_switchover_and_switchback.html["Upgrade dei controller da AFF A700/FAS9000 a AFF A900/FAS9500 in una configurazione MetroCluster FC utilizzando switchover e switchback (ONTAP 9.10.1 o versione successiva)"]
 * Nota 4: Gli upgrade dei controller sono supportati sui sistemi con ONTAP 9.13.1 o versione successiva.
-* Nota 5: Gli upgrade dei controller sono supportati sui sistemi con ONTAP 9.14.1 o versione successiva.
-* Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, i nuovi controller devono eseguire la stessa versione di ONTAP dei vecchi controller.
 
+
+.Aggiornamenti del controller FC ASA MetroCluster supportati
+La tabella seguente mostra le combinazioni di piattaforme supportate per l'upgrade di un sistema ASA in una configurazione MetroCluster FC:
+
+[cols="3*"]
+|===
+| Piattaforma FC MetroCluster di origine | Piattaforma FC MetroCluster di destinazione | Supportato? 
+
+
+.2+| ASA A400 | ASA A400 | Sì 
+
+
+| ASA A900 | No 
+
+
+.2+| ASA A900 | ASA A400 | No 
+
+
+| ASA A900 | Sì (vedere nota 1) 
+|===
+* Nota 1: Gli upgrade dei controller sono supportati sui sistemi con ONTAP 9.14.1 o versione successiva.
+
+
+
+
+== Scegliere una procedura che utilizzi il processo di switchover e switchback
+
+Dopo aver esaminato le combinazioni di aggiornamenti supportate, scegliere la procedura di aggiornamento del controller corretta per la configurazione.
 
 [cols="2,1,1,2"]
 |===

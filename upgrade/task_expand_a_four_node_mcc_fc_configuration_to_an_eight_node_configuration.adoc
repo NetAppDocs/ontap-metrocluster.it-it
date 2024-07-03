@@ -40,7 +40,7 @@ Entrambi i siti devono essere espansi in modo uguale. Una configurazione MetroCl
 
 == Combinazioni di piattaforme supportate quando si aggiunge un secondo gruppo DR
 
-La seguente tabella mostra le combinazioni di piattaforme supportate per le configurazioni FC MetroCluster a otto nodi.
+Nelle tabelle seguenti sono illustrate le combinazioni di piattaforme supportate per le configurazioni MetroCluster FC a otto nodi.
 
 [IMPORTANT]
 ====
@@ -51,4 +51,27 @@ La seguente tabella mostra le combinazioni di piattaforme supportate per le conf
 
 
 ====
-image::../media/8node_comb_fc_914.png[Combinazioni di piattaforme per configurazioni a 8 nodi]
+.Combinazioni di espansione supportate AFF e FAS MetroCluster FC
+La tabella seguente mostra le combinazioni di piattaforme supportate per l'espansione di un sistema AFF o FAS in una configurazione MetroCluster FC:
+
+image::../media/8node_comb_fc.png[Combinazioni di piattaforme per configurazioni a 8 nodi]
+
+.Combinazioni di espansione ASA MetroCluster FC supportate
+La tabella seguente mostra le combinazioni di piattaforme supportate per l'espansione di un sistema ASA in una configurazione MetroCluster FC:
+
+[cols="3*"]
+|===
+| Gruppo DR a otto nodi 1 | Gruppo DR a otto nodi 2 | Supportato? 
+
+
+.2+| ASA A400 | ASA A400 | Sì 
+
+
+| ASA A900 | No 
+
+
+.2+| ASA A900 | ASA A400 | No 
+
+
+| ASA A900 | Sì 
+|===

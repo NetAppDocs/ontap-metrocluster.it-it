@@ -398,6 +398,52 @@ NOTE: Quando si imposta l'opzione DAC per più porte dello switch, è necessario
 
 
 
+== Impostare la velocità della porta dello switch per le interfacce IP MetroCluster
+
+.A proposito di questa attività
+Utilizzare questa procedura per impostare la velocità della porta dello switch su 100g per i seguenti sistemi:
+
+* AFF A70
+* AFF A90
+* AFF A1K
+
+
+.Fase
+. Utilizzare il file RCF con l' `runCmd` opzione per impostare la velocità. Questa operazione applica l'impostazione e salva la configurazione.
++
+I seguenti comandi impostano la velocità per le interfacce MetroCluster `swp7` e `swp8`:
+
++
+[source, cli]
+----
+sudo python3 SN2100_v2.20 _Switch-A1.py runCmd swp7 speed 100
+----
++
+[source, cli]
+----
+sudo python3 SN2100_v2.20 _Switch-A1.py runCmd swp8 speed 100
+----
++
+*Esempio*
+
++
+[listing]
+----
+cumulus@Switch-A-1:mgmt:~$ sudo python3 SN2100_v2.20_Switch-A1.py runCmd swp7 speed 100
+[sudo] password for cumulus: <password>
+    Running cumulus version  : 5.4.0
+    Running RCF file version : v2.20
+    Running command: Setting switchport swp7 to 100G speed
+    runCmd: 'nv set interface swp7 link auto-negotiate off', ret: 0
+    runCmd: 'nv set interface swp7 link speed 100G', ret: 0
+    runCmd: committed, ret: 0
+    Completion: SUCCESS
+cumulus@Switch-A-1:mgmt:~$
+----
+
+
+
+
 == Disattivare le porte e i canali delle porte ISL non utilizzati
 
 NetApp consiglia di disattivare le porte ISL e i canali delle porte inutilizzati per evitare avvisi di integrità non necessari.

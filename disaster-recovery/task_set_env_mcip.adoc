@@ -216,6 +216,9 @@ La seguente tabella elenca i modelli di piattaforma che utilizzano gli ID VLAN s
 
 
  a| 
+* AFF A70
+* AFF A90
+* AFF A1K
 * AFF A220
 * AFF A250
 * AFF A400
@@ -237,9 +240,48 @@ La seguente tabella elenca i modelli di piattaforma che utilizzano gli ID VLAN s
 Gli indirizzi richiesti sono gli indirizzi partner DR indicati nella colonna *Indirizzo di rete di destinazione*.
 
 +
-Il seguente output mostra gli indirizzi IP per una configurazione con i sistemi AFF A700 e FAS9000 con le interfacce IP MetroCluster sulle porte e5a e e5b. Le interfacce variano a seconda del tipo di piattaforma.
+L'output del comando varia in base al modello della piattaforma.
 
 +
+[role="tabbed-block"]
+====
+.Sistemi introdotti in ONTAP 9.15.1 o versioni successive
+--
+I sistemi introdotti in ONTAP 9.15.1 o versioni successive (AFF A70, AFF A90 e AFF A1K) dispongono di porte separate per ha e DR, come mostrato nell'esempio di output seguente:
+
+[listing]
+----
+cluster_B::*> metrocluster configuration-settings connection show
+DR                    Source          Destination
+DR                    Source          Destination
+Group Cluster Node    Network Address Network Address Partner Type Config State
+----- ------- ------- --------------- --------------- ------------ ------------
+1     cluster_B
+              node_B_1
+                 Home Port: e5a
+                      172.17.26.13    172.17.26.10    DR Partner   completed
+                 Home Port: e5a
+                      172.17.26.13    172.17.26.11    DR Auxiliary completed
+                 Home Port: e5b
+                      172.17.27.13    172.17.27.10    DR Partner   completed
+                 Home Port: e5b
+                      172.17.27.13    172.17.27.11    DR Auxiliary completed
+              node_B_2
+                 Home Port: e5a
+                      172.17.26.12    172.17.26.11    DR Partner   completed
+                 Home Port: e5a
+                      172.17.26.12    172.17.26.10    DR Auxiliary completed
+                 Home Port: e5b
+                      172.17.27.12    172.17.27.11    DR Partner   completed
+                 Home Port: e5b
+                      172.17.27.12    172.17.27.10    DR Auxiliary completed
+12 entries were displayed.
+----
+--
+.Tutti gli altri sistemi
+--
+Il seguente output mostra gli indirizzi IP per una configurazione con i sistemi AFF A700 e FAS9000 con le interfacce IP MetroCluster sulle porte e5a e e5b. Le interfacce possono variare a seconda del tipo di piattaforma.
+
 [listing]
 ----
 cluster_B::*> metrocluster configuration-settings connection show
@@ -276,12 +318,14 @@ Group Cluster Node    Network Address Network Address Partner Type Config State
                       172.17.27.12    172.17.27.10    DR Auxiliary completed
 12 entries were displayed.
 ----
+--
+====
 . Se è necessario determinare l'ID VLAN o l'indirizzo del gateway per l'interfaccia, determinare gli ID VLAN dal sito sopravvissuto:
 +
 `metrocluster configuration-settings interface show`
 
 +
-** È necessario l'ID VLAN se i modelli di piattaforma utilizzano gli ID VLAN (vedere l'elenco sopra) e se non si utilizzano gli ID VLAN predefiniti.
+** È necessario l'ID VLAN se i modelli di piattaforma utilizzano gli ID VLAN (vedere l'elenco sopra riportato) e se non si utilizzano gli ID VLAN predefiniti.
 ** Se si utilizza, è necessario l'indirizzo del gateway link:../install-ip/concept_considerations_layer_3.html["Reti wide-area Layer 3"].
 +
 Gli ID VLAN sono inclusi nella colonna *Indirizzo di rete* dell'output. La colonna *Gateway* mostra l'indirizzo IP del gateway.
@@ -306,27 +350,56 @@ Group Cluster Node     Network Address Netmask         Gateway         State
 ----
 
 
-. Se i nodi del sito di emergenza utilizzano gli ID VLAN (vedere l'elenco sopra), al prompt DEL CARICATORE per ciascuno dei nodi del sito di emergenza, impostare i seguenti bootargs:
+. Al prompt del LOADER per ciascuno dei nodi del sito di emergenza, impostare il valore di bootarg in base al modello di piattaforma:
 +
+[NOTE]
+====
+** Se le interfacce utilizzano le VLAN predefinite o se il modello di piattaforma non utilizza un ID VLAN (vedere l'elenco sopra riportato), _vlan-id_ non è necessario.
+** Se la configurazione non utilizza link:../install-ip/concept_considerations_layer_3.html["Layer3 Wide-Area Network"], Il valore per _gateway-IP-address_ è *0* (zero).
+
+
+====
++
+[role="tabbed-block"]
+====
+.Sistemi introdotti in ONTAP 9.15.1 o versioni successive
 --
+Il valore di _ha-partner-IP-address_ deve essere impostato su *0* (zero) nei sistemi introdotti in ONTAP 9.15.1 o versioni successive, in quanto dispongono di porte separate per DR e ha.
+
+Impostare il seguente bootarg:
+
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
+
+setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
+----
+I seguenti comandi impostano i valori per Node_A_1 utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:
+
+....
+setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,0,172.17.26.13,172.17.26.12,120
+
+setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,0,172.17.27.13,172.17.27.12,130
+....
+L'esempio seguente mostra i comandi per Node_A_1 senza ID VLAN:
+
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,0,172.17.26.13,172.17.26.12
+
+setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,0,172.17.27.13,172.17.27.12
+----
+--
+.Tutti gli altri sistemi
+--
+Impostare il seguente bootarg:
+
 ....
 setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
 
 setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
 ....
-[NOTE]
-====
-** Se le interfacce utilizzano le VLAN predefinite o il modello di piattaforma non richiede una VLAN (vedere l'elenco precedente), non è necessario il _vlan-id_.
-** Se la configurazione non utilizza link:../install-ip/concept_considerations_layer_3.html["Layer3 Wide-Area Network"], Il valore per _gateway-IP-address_ è *0* (zero).
-
-
-====
-** Se le interfacce utilizzano le VLAN predefinite o il modello di piattaforma non richiede una VLAN (vedere l'elenco precedente), non è necessario il _vlan-id_.
-** Se la configurazione non utilizza link:../install-ip/concept_considerations_layer_3.html["connessioni back-end di livello 3"], Il valore per _gateway-IP-address_ è *0* (zero).
-+
 I seguenti comandi impostano i valori per Node_A_1 utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:
-
-
 
 ....
 setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,172.17.26.11,172.17.26.13,172.17.26.12,120
@@ -335,37 +408,14 @@ setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,172.17.27.11,172.17.27.13,
 ....
 L'esempio seguente mostra i comandi per Node_A_1 senza ID VLAN:
 
-....
+[listing]
+----
 setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,172.17.26.11,172.17.26.13,172.17.26.12
 
 setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,172.17.27.11,172.17.27.13,172.17.27.12
-....
+----
 --
-. Se i nodi del sito di emergenza non sono sistemi che utilizzano ID VLAN, al prompt DEL CARICATORE per ciascuno dei nodi di emergenza, impostare i seguenti bootargs con local_IP/mask,gateway:
-+
-....
-setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address
-
-
-setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address
-....
-+
-[NOTE]
 ====
-** Se le interfacce utilizzano le VLAN predefinite o il modello di piattaforma non richiede una VLAN (vedere l'elenco precedente), non è necessario il _vlan-id_.
-** Se la configurazione non utilizza link:../install-ip/concept_considerations_layer_3.html["Reti wide-area Layer 3"], Il valore per _gateway-IP-address_ è *0* (zero).
-
-
-====
-+
-I seguenti comandi impostano i valori per Node_A_1. In questo esempio, i valori _gateway-IP-address_ e _vlan-id_ non vengono utilizzati.
-
-+
-....
-setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,172.17.26.11,172.17.26.13,172.17.26.12
-
-setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,172.17.27.11,172.17.27.13,172.17.27.12
-....
 . Dal sito sopravvissuto, raccogliere gli UUID per il sito di emergenza:
 +
 `metrocluster node show -fields node-cluster-uuid, node-uuid`

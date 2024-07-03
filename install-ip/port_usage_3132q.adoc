@@ -20,18 +20,36 @@ Prima di utilizzare le tabelle, rivedere le seguenti linee guida:
 
 
 
-== Utilizzo delle porte per i sistemi FAS2750 o AFF A220 e uno switch Cisco 3132Q-V.
+== Scegliere la tabella di cablaggio corretta per la configurazione
 
-image::../media/mcc_ip_cabling_a_fas2750_or_a220_to_a_cisco_3132q_v_switch.png[mcc ip che consente di collegare un fas2750 o a220 a uno switch cisco 3132q v]
+Utilizzare la tabella seguente per determinare quale tabella di cablaggio seguire.
 
-
-
-== Utilizzo delle porte per sistemi FAS9000 o AFF A700 e switch Cisco 3132Q-V.
-
-image::../media/mcc_ip_cabling_a_fas9000_or_aff_a700_to_a_cisco_3132q_v_switch.png[mcc ip che consente di collegare uno switch fas9000 o AFF a700 a uno switch cisco 3132q v.]
+[cols="2*"]
+|===
+| Se il sistema è... | Utilizzare questa tabella di cablaggio... 
 
 
+ a| 
+FAS2750, AFF A220
+| <<table_1_cisco_3132q,Assegnazione delle porte della piattaforma Cisco 3132Q-V (gruppo 1)>> 
 
-== Utilizzo delle porte per i sistemi AFF A800 o ASA A800 e uno switch Cisco 3132Q-V.
 
-image::../media/cabling_an_aff_a800_to_a_cisco_3132q_v_switch.png[collegamento di un AFF a800 a uno switch cisco 3132q v]
+| FAS9000, AFF A700 | <<table_2_cisco_3132q,Assegnazione delle porte della piattaforma Cisco 3132Q-V (gruppo 2)>> 
+
+
+| AFF A800, ASA A800 | <<table_3_cisco_3132q,Assegnazione delle porte della piattaforma Cisco 3132Q-V (gruppo 3)>> 
+|===
+.Assegnazione delle porte della piattaforma Cisco 3132Q-V (gruppo 1)
+Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema FAS2750 o AFF A220 a uno switch Cisco 3132Q-V:
+
+image::../media/mcc_ip_cabling_a_fas2750_or_a220_to_a_cisco_3132q_v_switch.png[Mostra le assegnazioni delle porte della piattaforma Cisco 3132Q-V.]
+
+.Assegnazione delle porte della piattaforma Cisco 3132Q-V (gruppo 2)
+Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema FAS9000 o AFF A700 a uno switch Cisco 3132Q-V:
+
+image::../media/mcc_ip_cabling_a_fas9000_or_aff_a700_to_a_cisco_3132q_v_switch.png[Mostra le assegnazioni delle porte della piattaforma Cisco 3132Q-V.]
+
+.Assegnazione delle porte della piattaforma Cisco 3132Q-V (gruppo 3)
+Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema AFF A800 o ASA A800 a uno switch Cisco 3132Q-V:
+
+image::../media/cabling_an_aff_a800_to_a_cisco_3132q_v_switch.png[Mostra le assegnazioni delle porte della piattaforma Cisco 3132Q-V.]

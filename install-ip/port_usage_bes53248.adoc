@@ -40,36 +40,83 @@ Qualsiasi configurazione o funzione che richieda la connessione delle connession
 
 
 
-.Note a cui si fa riferimento nelle tabelle:
+
+
+== Scegliere la tabella di cablaggio corretta per la configurazione
+
+Utilizzare la tabella seguente per determinare quale tabella di cablaggio seguire.
+
+[cols="2*"]
+|===
+| Se il sistema è... | Utilizzare questa tabella di cablaggio... 
+
+
+ a| 
+AFF A150, ASA A150
+
+FAS2750
+
+AFF A220
+| <<table_1_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 1)>> 
+
+
+| FAS500f AFF C250, ASA C250 AFF A250, ASA A250 | <<table_2_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 2)>> 
+
+
+| FAS8200, AFF A300 | <<table_3_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 3)>> 
+
+
+| AFF A320 | <<table_4_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 4)>> 
+
+
+| FAS8300 AFF C400, ASA C400 AFF A400, ASA A400 FAS8700 | <<table_5_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 5)>> 
+|===
+.Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 1)
+Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema AFF A150, ASA A150, FAS2750 o AFF A220 a uno switch Broadcom BES-53248:
+
+image::../media/mcc_ip_cabling_a_aff_asa_a150_a220_fas2750_to_a_broadcom_bes_53248_switch.png[Mostra le assegnazioni delle porte della piattaforma Broadcom BES-53248]
+
+* *Nota 1*: L'utilizzo di queste porte richiede una licenza aggiuntiva.
+* Se entrambe le configurazioni MetroCluster utilizzano la stessa piattaforma, NetApp consiglia di selezionare il gruppo "MetroCluster 3" per una configurazione e il gruppo "MetroCluster 4" per l'altra configurazione. Se le piattaforme sono diverse, selezionare "MetroCluster 3" o "MetroCluster 4" per la prima configurazione e "MetroCluster 1" o "MetroCluster 2" per la seconda configurazione.
+
+
+.Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 2)
+Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema FAS500f, AFF C250, ASA C250, AFF A250 o ASA A250 a uno switch Broadcom BES-53248:
+
+image::../media/mcc_ip_cabling_a_aff_asa_c250_a250_fas500f_to_a_broadcom_bes_53248_switch.png[Mostra le assegnazioni delle porte della piattaforma Broadcom BES-53248]
+
+* *Nota 1*: L'utilizzo di queste porte richiede una licenza aggiuntiva.
+* Se entrambe le configurazioni MetroCluster utilizzano la stessa piattaforma, NetApp consiglia di selezionare il gruppo "MetroCluster 3" per una configurazione e il gruppo "MetroCluster 4" per l'altra configurazione. Se le piattaforme sono diverse, selezionare "MetroCluster 3" o "MetroCluster 4" per la prima configurazione e "MetroCluster 1" o "MetroCluster 2" per la seconda configurazione.
+
+
+.Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 3)
+Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema FAS8200 o AFF A300 a uno switch Broadcom BES-53248:
+
+image::../media/mcc_ip_cabling_a_aff_a300_or_fas8200_to_a_broadcom_bes_53248_switch.png[Mostra le assegnazioni delle porte della piattaforma Broadcom BES-53248]
+
+* *Nota 1*: L'utilizzo di queste porte richiede una licenza aggiuntiva.
+
+
+.Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 4)
+Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema AFF A320 a uno switch Broadcom BES-53248:
+
+image::../media/mcc_ip_cabling_a_aff_a320_to_a_broadcom_bes_53248_switch.png[Mostra le assegnazioni delle porte della piattaforma Broadcom BES-53248]
+
 * *Nota 1*: L'utilizzo di queste porte richiede una licenza aggiuntiva.
 * *Nota 2*: È possibile collegare allo switch solo un singolo MetroCluster a quattro nodi che utilizza sistemi AFF A320.
 +
-Funzionalità che richiedono uno switch cluster non sono supportate in questa configurazione, incluse la transizione da FC a IP MetroCluster e le procedure di tech refresh.
+Le funzioni che richiedono un cluster con switch non sono supportate in questa configurazione. Inclusi la transizione da FC a IP MetroCluster e le procedure di tech refresh.
 
-* *Nota 3*: Lo switch BES-53248 richiede che tutte le porte di un gruppo a quattro porte funzionino alla stessa velocità. Per collegare una combinazione di piattaforme AFF 150, ASA A150, FAS2750, AFF A220 e FAS500f, AFF C250, ASA C250, AFF A250 e ASA A250, è necessario utilizzare le porte degli switch situate in gruppi separati a quattro porte. Se si richiede questo tipo di configurazione, si applica quanto segue:
+
+
+.Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 5)
+Esaminare le assegnazioni delle porte della piattaforma per il cavo a FAS8300, AFF C400, ASA C400, AFF A400, ASA A400, o dal sistema FAS8700 a uno switch Broadcom BES-53248:
+
+image::../media/mcc_ip_cabling_a_fas8300_a400_c400_or_fas8700_to_a_broadcom_bes_53248_switch.png[Mostra le assegnazioni delle porte della piattaforma Broadcom BES-53248]
+
+* *Nota 1*: L'utilizzo di queste porte richiede una licenza aggiuntiva.
+* *Nota 2*: È possibile collegare allo switch solo un singolo MetroCluster a quattro nodi che utilizza sistemi AFF A320.
 +
-** In https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator per MetroCluster IP"], I campi a discesa per "MetroCluster 1" e "MetroCluster 2" vengono compilati solo dopo aver selezionato una piattaforma per MetroCluster 3 o "MetroCluster 4".  Fare riferimento a. link:../install-ip/using_rcf_generator.html["Utilizzo delle tabelle delle porte con lo strumento RcfFileGenerator o di più configurazioni MetroCluster"] per ulteriori informazioni sull'utilizzo delle tabelle delle porte.
-** Se entrambe le configurazioni MetroCluster utilizzano la stessa piattaforma, NetApp consiglia di selezionare il gruppo "MetroCluster 3" per una configurazione e il gruppo "MetroCluster 4" per l'altra configurazione. Se le piattaforme sono diverse, selezionare "MetroCluster 3" o "MetroCluster 4" per la prima configurazione e selezionare "MetroCluster 1" o "MetroCluster 2" per la seconda configurazione.
+Le funzioni che richiedono un cluster con switch non sono supportate in questa configurazione. Inclusi la transizione da FC a IP MetroCluster e le procedure di tech refresh.
 
 
-
-
-
-
-== Collegamento di un AFF A150, ASA A150, FAS2750, AFF A220, FAS500f, AFF C250, ASA C250, AFF A250 o ASA A250 a uno switch Broadcom BES-53248
-
-image::../media/mcc_ip_cabling_a_aff_asa_a150_a220_c250_a250_fas2750_to_a_broadcom_bes_53248_switch.png[cablaggio ip mcc da AFF ASA a150 a220 c250 a250 fas2750 a uno switch broadcom bes 53248]
-
-
-
-== Collegamento di un sistema FAS8200, AFF A300 o AFF A320 a uno switch Broadcom BES-53248
-
-image::../media/mcc_ip_cabling_a_aff_a300_or_fas8200_to_a_broadcom_bes_53248_switch.png[mcc ip che consente di collegare un AFF a300 o fas8200 a uno switch broadcom bes 53248]
-
-image::../media/mcc_ip_cabling_a_aff_a320_to_a_broadcom_bes_53248_switch.png[mcc ip che consente di collegare un AFF a320 a uno switch broadcom bes 53248]
-
-
-
-== Collegamento di un sistema FAS8300, AFF C400, ASA C400, AFF A400, ASA A400 o FAS8700 a uno switch Broadcom BES-53248
-
-image::../media/mcc_ip_cabling_a_fas8300_a400_c400_or_fas8700_to_a_broadcom_bes_53248_switch.png[cablaggio ip mcc da fas8300 a400 c400 o fas8700 a uno switch broadcom bes 53248]

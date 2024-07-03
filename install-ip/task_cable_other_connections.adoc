@@ -32,6 +32,6 @@ Seguire le istruzioni di installazione della piattaforma in https://docs.netapp.
 
 +
 
-NOTE: I sistemi MetroCluster IP non dispongono di porte ha (High Availability) dedicate. Quando si utilizza _documentazione dei sistemi hardware ONTAP_ per installare la piattaforma, non seguire le istruzioni per collegare il cluster e le porte ha.
+NOTE: I sistemi MetroCluster IP non dispongono di porte ha (High Availability) dedicate. In base alla piattaforma, il traffico ha viene servito tramite MetroCluster, cluster locale o interfaccia cluster/MetroCluster condivisa. Quando si utilizza _documentazione dei sistemi hardware ONTAP_ per installare la piattaforma, non seguire le istruzioni per collegare il cluster e le porte ha.
 
 
