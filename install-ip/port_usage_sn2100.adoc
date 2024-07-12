@@ -24,6 +24,12 @@ Le seguenti configurazioni non sono attualmente supportate:
 
 .Esaminare queste considerazioni prima di utilizzare le tabelle di configurazione
 * La connessione di una configurazione MetroCluster a otto o due nodi richiede ONTAP 9.14.1 o versione successiva e il file RCF versione 2,00 o successiva.
++
+
+NOTE: La versione del file RCF è diversa dalla versione dello strumento RCFfilegenerator utilizzato per generare il file. Ad esempio, è possibile generare un file RCF versione 2,00 utilizzando RCFfilegenerator v1,6c.
+
+
+
 * Se si utilizzano più configurazioni MetroCluster, seguire la tabella corrispondente. Ad esempio:
 +
 ** Se si utilizzano due configurazioni MetroCluster a quattro nodi di tipo AFF A700, collegare il primo MetroCluster indicato come "MetroCluster 1" e il secondo MetroCluster indicato come "MetroCluster 2" nella tabella AFF A700.

@@ -19,57 +19,75 @@ Con l'aggiunta dei nuovi nodi, è necessario completare le fasi di transizione e
 
 È necessario implementare le connessioni IP MetroCluster, aggiornare la configurazione MetroCluster e disattivare la modalità di transizione.
 
+.Fasi
 . Formare i nuovi nodi in un gruppo di DR emettendo i seguenti comandi da controller node_A_1-IP:
 +
-`metrocluster configuration-settings dr-group create -partner-cluster peer-cluster-name -local-node local-controller-name -remote-node remote-controller-name`
+`metrocluster configuration-settings dr-group create -partner-cluster <peer_cluster_name> -local-node <local_controller_name> -remote-node <remote_controller_name>`
 
 +
 `metrocluster configuration-settings dr-group show`
 
 . Creare interfacce IP MetroCluster (Node_A_1-IP, Node_A_2-IP, Node_B_1-IP, Node_B_2-IP) -- è necessario creare due interfacce per controller; otto interfacce in totale:
 +
-`metrocluster configuration-settings interface create -cluster-name cluster-name -home-node controller-name -home-port port -address ip-address -netmask netmask -vlan-id vlan-id``metrocluster configuration-settings interface show`
+`metrocluster configuration-settings interface create -cluster-name <cluster_name> -home-node <controller_name> -home-port <port_name> -address <ip_address> -netmask <netmask_address> -vlan-id <vlan_id>`
 
 +
-
-NOTE: A partire da ONTAP 9.9.1, se si utilizza una configurazione Layer 3, è necessario specificare anche `-gateway` Parametro durante la creazione di interfacce IP MetroCluster. Fare riferimento a. link:../install-ip/concept_considerations_layer_3.html["Considerazioni per le reti wide-area di livello 3"].
-
-+
-Il parametro -vlan-id è necessario solo se non si utilizzano gli ID VLAN predefiniti. Solo alcuni sistemi supportano ID VLAN non predefiniti.
+`metrocluster configuration-settings interface show`
 
 +
---
-[NOTE]
+Alcune piattaforme utilizzano una VLAN per l'interfaccia IP di MetroCluster. Per impostazione predefinita, ciascuna delle due porte utilizza una VLAN diversa: 10 e 20.
+
++
+Se supportato, è anche possibile specificare una VLAN diversa (non predefinita) superiore a 100 (tra 101 e 4095) utilizzando il `-vlan-id` parametro nel `metrocluster configuration-settings interface create` comando.
+
++
+Le seguenti piattaforme *non* supportano il `-vlan-id` parametro:
+
++
+** FAS8200 e AFF A300
+** AFF A320
+** FAS9000 e AFF A700
+** AFF C800, ASA C800, AFF A800 e ASA A800
++
+Tutte le altre piattaforme supportano il `-vlan-id` parametro.
+
++
+Le assegnazioni VLAN predefinite e valide dipendono dal supporto del parametro da parte della piattaforma `-vlan-id` :
+
++
+[role="tabbed-block"]
 ====
-** Alcune piattaforme utilizzano una VLAN per l'interfaccia IP di MetroCluster. Per impostazione predefinita, ciascuna delle due porte utilizza una VLAN diversa: 10 e 20. È inoltre possibile specificare una VLAN diversa (non predefinita) superiore a 100 (tra 101 e 4095) utilizzando `-vlan-id parameter` in `metrocluster configuration-settings interface create` comando.
-** A partire da ONTAP 9.9.1, se si utilizza una configurazione Layer 3, è necessario specificare anche `-gateway` Parametro durante la creazione di interfacce IP MetroCluster. Fare riferimento a. link:../install-ip/concept_considerations_layer_3.html["Considerazioni per le reti wide-area di livello 3"].
-
-
-====
+.Piattaforme che supportano <code>-vlan-</code>
 --
-+
-I seguenti modelli di piattaforma possono essere aggiunti alla configurazione MetroCluster esistente se le VLAN utilizzate sono 10/20 o superiori a 100. Se si utilizzano altre VLAN, queste piattaforme non possono essere aggiunte alla configurazione esistente, in quanto l'interfaccia MetroCluster non può essere configurata. Se si utilizza un'altra piattaforma, la configurazione della VLAN non è rilevante in quanto non è richiesta in ONTAP.
+VLAN predefinita:
 
-+
-|===
-
-
-| Piattaforme AFF | Piattaforme FAS 
+*** Quando il `-vlan-id` parametro non è specificato, le interfacce vengono create con VLAN 10 per le porte "A" e VLAN 20 per le porte "B".
+*** La VLAN specificata deve corrispondere alla VLAN selezionata nell'RCF.
 
 
- a| 
-** AFF A220
-** AFF A250
-** AFF A400
+Intervalli VLAN validi:
 
- a| 
-** FAS2750
-** FAS500f
-** FAS8300
-** FAS8700
+*** VLAN 10 e 20 predefinite
+*** VLAN 101 e superiori (tra 101 e 4095)
 
 
-|===
+--
+.Piattaforme che non supportano <code>-vlan-</code>
+--
+VLAN predefinita:
+
+*** Non applicabile. L'interfaccia non richiede che venga specificata una VLAN sull'interfaccia MetroCluster. La porta dello switch definisce la VLAN utilizzata.
+
+
+Intervalli VLAN validi:
+
+*** Tutte le VLAN non esplicitamente escluse durante la generazione dell'RCF. L'RCF avvisa l'utente se la VLAN non è valida.
+
+
+--
+====
+
+
 
 
 . Eseguire l'operazione di connessione MetroCluster da controller node_A_1-IP per collegare i siti MetroCluster -- questa operazione può richiedere alcuni minuti:
@@ -237,11 +255,11 @@ Consultare le informazioni raccolte in link:task_connect_the_mcc_ip_controller_m
 
 .. Se necessario, modificare la configurazione LIF:
 +
-`vserver config override -command "network interface modify -vserver vserver_name -home-port active_port_after_upgrade -lif lif_name -home- node new_node_name"`
+`vserver config override -command "network interface modify -vserver <svm_name> -home-port <active_port_after_upgrade> -lif <lif_name> -home-node <new_node_name>`
 
 .. Ripristinare le LIF alle porte home:
 +
-`network interface revert * -vserver _vserver_name_`
+`network interface revert * -vserver <svm_name>`
 
 
 
@@ -260,7 +278,7 @@ A causa delle modifiche apportate alla configurazione LIF, è necessario riavvia
 
 . Riavviare le SVM sul cluster_A che non hanno un suffisso "`-mc`":
 +
-`vserver start -vserver svm-name -force true`
+`vserver start -vserver <svm_name> -force true`
 
 . Ripetere i passaggi precedenti sul cluster partner.
 . Verificare che tutte le SVM siano in buono stato:
@@ -289,7 +307,7 @@ I volumi di sistema hanno il nome "`MDV_CRS_*`_A`" o "`MDV_CRS_* B." Le designaz
 +
 .. Creare un aggregato mirrorato su controller node_A_2-IP per contenere il volume di sistema:
 +
-`aggr create -aggregate new_node_A_2-IP_aggr -diskcount 10 -mirror true -node nodename_node_A_2-IP`
+`aggr create -aggregate new_node_A_2-IP_aggr -diskcount 10 -mirror true -node node_A_2-IP`
 
 +
 `aggr show`
@@ -305,7 +323,7 @@ L'opzione avanzata "`-force-Small-aggregate true`" può essere utilizzata per li
 `vserver show`
 
 +
-`volume show -vserver _admin-vserver-name_`
+`volume show -vserver <admin_svm_name>`
 
 +
 È necessario identificare i volumi contenuti negli aggregati di proprietà di Site_A. Vengono visualizzati anche i volumi di sistema Site_B.
@@ -316,7 +334,7 @@ L'opzione avanzata "`-force-Small-aggregate true`" può essere utilizzata per li
 +
 .. Verificare la presenza di eventuali aggregati di destinazione:
 +
-`volume move target-aggr show -vserver _admin-vserver-name_ -volume system_vol_MDV_B`
+`volume move target-aggr show -vserver <admin_svm_name> -volume MDV_CRS_*_B`
 
 +
 L'aggregato appena creato su Node_A_2-IP dovrebbe essere elencato.
@@ -326,18 +344,18 @@ L'aggregato appena creato su Node_A_2-IP dovrebbe essere elencato.
 `set advanced`
 
 +
-`volume move start -vserver _admin-vserver_ -volume system_vol_MDV_B -destination-aggregate new_node_A_2-IP_aggr -cutover-window 40`
+`volume move start -vserver <admin_svm_name> -volume MDV_CRS_*_B -destination-aggregate new_node_A_2-IP_aggr -cutover-window 40`
 
 .. Controllare lo stato dell'operazione di spostamento:
 +
-`volume move show -vserver _admin-vserver-name_ -volume system_vol_MDV_B`
+`volume move show -vserver <admin_svm_name> -volume MDV_CRS_*_B`
 
 .. Una volta completata l'operazione di spostamento, verificare che il sistema MDV_CRS_*_B sia contenuto nel nuovo aggregato sul nodo_A_2-IP:
 +
 `set admin`
 
 +
-`volume show -vserver _admin-vserver_`
+`volume show -vserver <admin_svm_name>`
 
 
 

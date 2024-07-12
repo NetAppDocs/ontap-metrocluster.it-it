@@ -70,7 +70,7 @@ Gli switch intermedi forniti dal cliente devono soddisfare i seguenti requisiti:
 
 
 .Configurazione VLAN in ONTAP
-È possibile specificare la VLAN solo durante la creazione dell'interfaccia. Una volta create le interfacce MetroCluster, l'ID VLAN non può essere modificato. È possibile configurare altre VLAN durante la creazione dell'interfaccia, ma devono essere comprese nell'intervallo da 10 a 20 o nell'intervallo da 101 a 4096 (o nel numero supportato dal fornitore dello switch, a seconda del numero più basso).
+È possibile specificare la VLAN solo durante la creazione dell'interfaccia. È possibile configurare le VLAN 10 e 20 predefinite o le VLAN comprese tra 101 e 4096 (o il numero supportato dal fornitore dello switch, a seconda del numero più basso). Una volta create le interfacce MetroCluster, non è possibile modificare l'ID VLAN.
 
 
 NOTE: Alcuni fornitori di switch potrebbero riservare l'uso di determinate VLAN.

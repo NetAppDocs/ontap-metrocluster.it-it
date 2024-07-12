@@ -679,7 +679,7 @@ Lo switch si riavvia senza alcuna configurazione applicata e ripristina le impos
 
 == Download e installazione dei file RCF Broadcom
 
-È necessario scaricare e installare il file RCF dello switch su ogni switch nella configurazione IP MetroCluster.
+È necessario generare e installare il file RCF dello switch in ogni switch nella configurazione IP di MetroCluster.
 
 .Prima di iniziare
 Questa attività richiede un software per il trasferimento dei file, ad esempio FTP, TFTP, SFTP o SCP, per copiare i file sui centralini.
@@ -739,7 +739,7 @@ NOTE: File RCF per EFOS versione 3.4.4.6 o successiva 3.4.x.x. La release e la v
 .Fasi
 . Generare i file RCF Broadcom per l'IP MetroCluster.
 +
-.. Scaricare il https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator per MetroCluster IP"]
+.. Scaricare https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator per MetroCluster IP"^]
 .. Generare il file RCF per la configurazione utilizzando RcfFileGenerator per MetroCluster IP.
 +
 
