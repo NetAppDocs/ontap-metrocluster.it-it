@@ -894,7 +894,57 @@ La riparazione automatica degli aggregati dopo lo switchover negoziato viene dis
 +
 `boot_ontap`
 
-. Assegnare la porta home di tutti i file LIF di dati sul vecchio controller a una porta comune identica sia sul vecchio che sul nuovo modulo controller.
+. Modifica della LIF intercluster dei vecchi controller in modo da utilizzare una porta home diversa rispetto alle porte utilizzate per l'interconnessione ha o l'interconnessione MetroCluster IP DR nei nuovi controller.
++
+
+NOTE: Questo passaggio è necessario per un aggiornamento corretto.
+
++
+La LIF intercluster dei vecchi controller deve utilizzare una porta home diversa rispetto alle porte utilizzate per l'interconnessione ha o l'interconnessione MetroCluster IP DR nei nuovi controller. Ad esempio, quando si esegue l'upgrade ai controller AFF A90, le porte di interconnessione ha sono E1a e e7a e le porte di interconnessione MetroCluster IP DR sono E2B e E3B. Se ospitati sulle porte E1a, e7a, E2B o E3B, è necessario spostare le LIF intercluster LIF nei vecchi controller.
+
++
+Per la distribuzione e l'assegnazione delle porte sui nuovi nodi, fare riferimento alla https://hwu.netapp.com["NetApp Hardware Universe"].
+
++
+.. Sui vecchi controller, visualizzare la LIF intercluster:
++
+`network interface show  -role intercluster`
+
++
+A seconda che le LIF intercluster dei vecchi controller utilizzino le stesse porte delle porte utilizzate per l'interconnessione ha o l'interconnessione MetroCluster IP DR nei nuovi controller, eseguire una delle seguenti azioni.
+
++
+[cols="2*"]
+|===
+| Se la LIF intercluster... | Vai a... 
+
+
+| Utilizzare la stessa porta home | <<controller_manual_upgrade_prepare_network_ports_2b,Sottosezione b>> 
+
+
+| Utilizzare un'altra porta home | <<controller_manual_upgrade_prepare_network_ports_3,Fase 3>> 
+|===
+.. [[controller_manual_upgrade_Prepare_network_ports_2b]]modificare le LIF intercluster per utilizzare una porta home diversa:
++
+`network interface modify -vserver <vserver> -lif <intercluster_lif> -home-port <port-not-used-for-ha-interconnect-or-mcc-ip-dr-interconnect-on-new-nodes>`
+
+.. Verificare che tutte le LIF intercluster si trovino nelle nuove porte home:
++
+`network interface show -role intercluster -is-home  false`
+
++
+L'output del comando dovrebbe essere vuoto, a indicare che tutte le LIF intercluster si trovano nelle rispettive porte home.
+
+.. Se vi sono LIF che non sono nelle loro porte home, ripristinale usando il seguente comando:
++
+`network interface revert -lif <intercluster_lif>`
+
++
+Ripete il comando per ogni intercluster LIF che non si trova sulla porta home.
+
+
+
+. [[controller_manual_upgrade_Prepare_network_ports_3]]assegnare la porta home di tutte le LIF dati sul vecchio controller a una porta comune che è la stessa su entrambi i moduli controller vecchi e nuovi.
 +
 .. Visualizzare le LIF:
 +

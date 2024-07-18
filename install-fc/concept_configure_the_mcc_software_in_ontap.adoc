@@ -1301,7 +1301,7 @@ Il pool 1 contiene sempre i dischi remoti del sistema di storage proprietario.
 +
 .. Sul primo nodo, assegnare sistematicamente metà dei dischi su ogni shelf al pool 0 e l'altra metà al pool 0 del partner ha:
 +
-`disk assign -disk _disk-name_ -p _pool_ -n _number-of-disks_`
+`disk assign -shelf <shelf-name> -p <pool> -n <number-of-disks>`
 
 +
 Se lo storage controller Controller Controller Controller_A_1 ha quattro shelf, ciascuno con 8 SSD, devi eseguire i seguenti comandi:
