@@ -11,12 +11,13 @@ summary: A seconda dei requisiti, è possibile utilizzare reti condivise di live
 [role="lead"]
 A seconda dei requisiti, è possibile utilizzare reti condivise di livello 2 o 3 per implementare MetroCluster.
 
-A partire da ONTAP 9,6, le configurazioni IP MetroCluster con switch Cisco supportati possono condividere le reti esistenti per i collegamenti interswitch (ISL) invece di utilizzare ISL MetroCluster dedicati. Questa topologia è nota come _reti Layer 2 condivise_.
+A partire da ONTAP 9,6, le configurazioni IP di MetroCluster con switch supportati possono condividere le reti esistenti per i collegamenti interswitch (ISL) invece di utilizzare ISL MetroCluster dedicati. Questa topologia è nota come _reti Layer 2 condivise_.
 
 A partire da ONTAP 9.9.1, le configurazioni IP MetroCluster possono essere implementate con connessioni backend con routing IP (Layer 3). Questa topologia è nota come _reti Layer 3 condivise_.
 
 [NOTE]
 ====
+* Non tutte le funzionalità sono supportate in tutte le topologie di rete.
 * È necessario verificare che la capacità di rete sia adeguata e che le dimensioni dell'ISL siano appropriate per la configurazione in uso. La bassa latenza è fondamentale per la replica dei dati tra i siti MetroCluster. I problemi di latenza su queste connessioni possono influire sull'i/o del client
 * Tutti i riferimenti agli switch back-end MetroCluster fanno riferimento a switch validati NetApp o conformi a MetroCluster. Vedere link:mcc-compliant-netapp-validated-switches.html["Switch NetApp validati e conformi a MetroCluster"] per ulteriori dettagli.
 

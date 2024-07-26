@@ -4,23 +4,21 @@ sidebar: sidebar
 keywords: select, transition, procedure, depend, exist, metrocluster, fc, configuration, choosing, choose 
 summary: Selezionare una procedura di transizione in base alla configurazione MetroCluster FC esistente. 
 ---
-= Scelta della procedura di transizione
+= Scegli la procedura di transizione
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Quando si passa a una configurazione MetroCluster IP, è necessario disporre di una combinazione di modelli di piattaforma supportati. È inoltre necessario assicurarsi che la piattaforma IP di MetroCluster sia delle dimensioni appropriate per il carico che si sta passando dalla configurazione FC di MetroCluster alla configurazione IP di MetroCluster.
+Quando si passa a una configurazione MetroCluster IP, è necessario disporre di una combinazione di modelli di piattaforma supportati.
 
-La seguente tabella mostra le combinazioni di piattaforme supportate. È possibile passare da piattaforme nella colonna di sinistra a piattaforme elencate come supportate nelle colonne a destra, come indicato dalle celle colorate della tabella.
+È inoltre necessario assicurarsi che la piattaforma IP di MetroCluster sia delle dimensioni appropriate per il carico che si sta passando dalla configurazione FC di MetroCluster alla configurazione IP di MetroCluster.
 
-Ad esempio, è supportata la transizione da una configurazione MetroCluster FC costituita da moduli controller AFF8060 a una configurazione IP costituita da moduli controller AFF A400.
 
-image::../media/four_node_transition_mcc_9151.png[Mostra le combinazioni di piattaforme supportate per la transizione da IP a FC]
 
-* Nota 1: Questa combinazione di piattaforme richiede ONTAP 9.13.1 o versione successiva.
-* Nota 2: È necessario disporre di un'interfaccia 100GbE per le interfacce cluster locali sui nodi FC. Questa combinazione di piattaforme richiede ONTAP 9.11.1 o versione successiva.
+== Combinazioni di piattaforme supportate
+
 * Tutte le procedure di transizione richiedono ONTAP 9.8 o versioni successive, salvo diversamente indicato nelle note o come richiesto da una singola piattaforma.
 * Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, se si dispone di una configurazione a otto nodi, tutti e otto i nodi devono utilizzare la stessa versione di ONTAP.
 
@@ -33,6 +31,41 @@ image::../media/four_node_transition_mcc_9151.png[Mostra le combinazioni di piat
 
 
 ====
+.Combinazioni di transizione AFF e FAS supportate
+La seguente tabella mostra le combinazioni di piattaforme supportate. È possibile passare da piattaforme nella colonna di sinistra a piattaforme elencate come supportate nelle colonne a destra, come indicato dalle celle colorate della tabella.
+
+Ad esempio, è supportata la transizione da una configurazione MetroCluster FC costituita da moduli controller AFF8060 a una configurazione IP costituita da moduli controller AFF A400.
+
+image::../media/4node-transition-9151-update.png[Mostra le combinazioni di piattaforme supportate per la transizione da IP a FC]
+
+* Nota 1: Questa combinazione di piattaforme richiede ONTAP 9.11.1 o versione successiva.
+* Nota 2: È necessario disporre di un'interfaccia 40GbE per le interfacce cluster locali sui nodi FC.
+* Nota 3: È necessario disporre di un'interfaccia 100GbE per le interfacce cluster locali sui nodi FC.
+
+
+.Combinazioni di piattaforme di transizione ASA supportate
+La tabella seguente mostra le combinazioni di piattaforme supportate per i sistemi ASA.
+
+[cols="3*"]
+|===
+| Piattaforma FC MetroCluster di origine | Piattaforma IP MetroCluster di destinazione | Supportato? 
+
+
+.2+| ASA A400 | ASA A400 | Sì 
+
+
+| ASA A900 | No 
+
+
+.2+| ASA A900 | ASA A400 | No 
+
+
+| ASA A900 | Sì 
+|===
+
+
+== Scegli la procedura di transizione
+
 Selezionare una procedura di transizione in base alla configurazione MetroCluster FC esistente.
 
 Una procedura di transizione sostituisce il fabric switch FC back-end o la connessione FC-VI con una rete switch IP. La procedura esatta dipende dalla configurazione iniziale.
