@@ -23,14 +23,19 @@ In una procedura di aggiornamento, i controller vengono sostituiti con un nuovo 
 
 == Aggiornamenti dei controller supportati
 
-Selezionare la piattaforma corrente dalla tabella FC o IP riportata di seguito. Se l'intersezione tra la riga della piattaforma corrente e la colonna della piattaforma di destinazione è vuota, l'aggiornamento non è supportato.
-
-
-NOTE: Per gli aggiornamenti supportati utilizzando `system controller replace` comandi in una configurazione IP MetroCluster a quattro nodi, fare riferimento alla tabella in link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_ip.html["Aggiornare i controller in una configurazione MetroCluster IP a quattro nodi utilizzando lo switchover e lo switchback con i comandi "system controller replace" (ONTAP 9.13.1 e versioni successive)"]
+Scopri le combinazioni di aggiornamento dei controller FC e IP MetroCluster supportate.
 
 
 
-=== Aggiornamenti del controller IP MetroCluster supportati
+=== Aggiornamenti del controller IP MetroCluster supportati utilizzando i comandi "sostituzione del controller di sistema"
+
+Fare riferimento alla tabella in link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_ip.html["Aggiornare i controller in una configurazione MetroCluster IP a quattro nodi utilizzando lo switchover e lo switchback con i comandi "system controller replace" (ONTAP 9.13.1 e versioni successive)"] per le piattaforme supportate.
+
+
+
+=== Tutti gli altri aggiornamenti dei controller IP MetroCluster supportati
+
+Individuare la piattaforma *Source* dalle tabelle di aggiornamento del controller MetroCluster in questa sezione. Se l'intersezione della riga della piattaforma *Source* e della colonna della piattaforma *Target* è vuota, l'aggiornamento non è supportato.
 
 * Se la piattaforma non è elencata, non è disponibile alcuna combinazione di upgrade del controller supportata.
 * Quando si esegue un aggiornamento del controller, il vecchio e il nuovo tipo di piattaforma *devono* corrispondere:
@@ -46,7 +51,7 @@ Ad esempio, se la piattaforma che si desidera aggiornare è FAS8200, è possibil
 
 
 .Aggiornamenti del controller IP AFF e FAS MetroCluster supportati
-La seguente tabella mostra le combinazioni di piattaforme supportate per l'aggiornamento di un sistema AFF o FAS in una configurazione IP di MetroCluster:
+La seguente tabella mostra le combinazioni di piattaforme supportate per l'aggiornamento manuale di un sistema AFF o FAS in una configurazione IP di MetroCluster:
 
 image::../media/metrocluster_ip_upgrade_so_sb_aff_fas.png[aggiornamento MetroCluster ip so sb AFF FAS]
 
@@ -57,7 +62,7 @@ image::../media/metrocluster_ip_upgrade_so_sb_aff_fas.png[aggiornamento MetroClu
 
 
 .Aggiornamenti del controller IP ASA MetroCluster supportati
-La seguente tabella mostra le combinazioni di piattaforme supportate per l'aggiornamento di un sistema ASA in una configurazione MetroCluster IP:
+La seguente tabella mostra le combinazioni di piattaforme supportate per l'aggiornamento manuale di un sistema ASA in una configurazione IP di MetroCluster:
 
 image::../media/metrocluster_ip_upgrade_so_sb_asa_fas.png[aggiornamento MetroCluster ip so sb ASA FAS]
 
@@ -67,6 +72,8 @@ image::../media/metrocluster_ip_upgrade_so_sb_asa_fas.png[aggiornamento MetroClu
 
 
 === Aggiornamenti del controller FC MetroCluster supportati
+
+Individuare la piattaforma *Source* dalle tabelle di aggiornamento del controller MetroCluster in questa sezione. Se l'intersezione della riga della piattaforma *Source* e della colonna della piattaforma *Target* è vuota, l'aggiornamento non è supportato.
 
 * Se la piattaforma non è elencata, non è disponibile alcuna combinazione di upgrade del controller supportata.
 * Quando si esegue un aggiornamento del controller, il vecchio e il nuovo tipo di piattaforma *devono* corrispondere:

@@ -51,6 +51,94 @@ NOTE: Si consiglia di utilizzare la gestione in-band con accesso IP disattivato 
 
 
 
+== Numero di dischi e shelf supportati sui bridge FibreBridge 7600N e 7500N
+
+Nelle tabelle seguenti viene indicato il numero di dischi e shelf supportati dietro una coppia di bridge FibreBridge 7600N e 7500N.
+
+[NOTE]
+====
+* Si applica il primo limite raggiunto.
+* Se utilizzi DS460C shelf, è possibile utilizzare solo un massimo di 240 dischi, ovvero 4 shelf.
+* Se utilizzi DS212C shelf, è possibile utilizzare solo un massimo di 120 dischi, ovvero 10 shelf.
+
+
+====
+.Numero di dischi supportato
+Esaminare il numero di dischi supportati dietro una coppia di bridge FibreBridge 7600N o 7500N:
+
+[cols="3*"]
+|===
+| Configurazione disco | Tipo di disco | Dischi totali per coppia di bridge 
+
+
+| Tutti gli SSD | SSD | 96 
+
+
+| Tutti gli HDD | DISCO RIGIDO | 240 
+
+
+.2+| Misto (SSD da 96 TB) | SSD | 96 
+
+
+| DISCO RIGIDO | 144 
+
+
+.2+| Misto (SSD da 72 TB) | SSD | 72 
+
+
+| DISCO RIGIDO | 168 
+
+
+.2+| Misto (SSD da 48 TB) | SSD | 48 
+
+
+| DISCO RIGIDO | 192 
+
+
+.2+| Misto (SSD da 24 TB) | SSD | 24 
+
+
+| DISCO RIGIDO | 216 
+|===
+.Numero di shelf supportato
+Analisi del numero di shelf supportati dietro due ponti FibreBridge 7600N e 7500N:
+
+[cols="3*"]
+|===
+| Configurazione disco | Tipo di disco | Numero totale di shelf 
+
+
+| Tutti gli SSD | SSD | 4 
+
+
+| Tutti gli HDD | DISCO RIGIDO | 10 
+
+
+.2+| Misto | SSD | 1 
+
+
+| DISCO RIGIDO | 9 
+
+
+.2+| Misto | SSD | 2 
+
+
+| DISCO RIGIDO | 8 
+
+
+.2+| Misto | SSD | 3 
+
+
+| DISCO RIGIDO | 7 
+
+
+.2+| Misto | SSD | 4 
+
+
+| DISCO RIGIDO | 6 
+|===
+
+
 == Preparazione per l'installazione
 
 Quando si prepara l'installazione dei bridge come parte del nuovo sistema MetroCluster, è necessario assicurarsi che il sistema soddisfi determinati requisiti, tra cui il rispetto dei requisiti di configurazione e configurazione dei bridge. Altri requisiti includono il download dei documenti necessari, l'utility barra di navigazione atto e il firmware bridge.

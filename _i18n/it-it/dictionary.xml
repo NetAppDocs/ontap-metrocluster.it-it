@@ -2713,8 +2713,6 @@
   <block id="92d17a99a2247a42900b1a4c61e8e7d0" category="paragraph">Per utilizzare SNMP con il software Tiebreaker, è necessario configurare le impostazioni SNMP.</block>
   <block id="b108689bc1b65903b90d77f19e30d295" category="list-text">Utilizzare l'interfaccia CLI di tiebreaker<block ref="5ef546c28db0706808d8d451d5a71029" prefix=" " category="inline-code"></block> Comando per aggiungere configurazioni MetroCluster.</block>
   <block id="8891488ccf0af3b6c4a946824e6f0cdc" category="admonition">Al momento è supportato un solo host trap SNMP.</block>
-  <block id="c852f510264f0662076b7dc87a75f8f3" category="paragraph">L'esempio seguente mostra la configurazione di un ricevitore SNMP che supporta SNMP V3 con un indirizzo IP 10.240.45.66 e il numero di porta 162 per i messaggi trap. Il software Tiebreaker è pronto per inviare trap al ricevitore SNMP specificato.</block>
-  <block id="6eeb81da538b4f61a034b7c239d160a7" category="admonition">È necessario configurare SNMPv3 perché SNMPv1 non è sicuro. Assicurarsi che la stringa di comunità predefinita sia *NOT* impostata su public.</block>
   <block id="69b040d4f8adaa4c34e437207036c73c" category="list-text">Verificare che le impostazioni SNMP siano configurate:</block>
   <block id="da82ec774885b0fd4ea7e17756ffc01b" category="paragraph"><block ref="7565cd8285a4a137102f1417e0a1dc93" prefix="" category="inline-code"></block></block>
   <block id="c4aa541ec1b33e5e76d09363d75995f8" category="paragraph">L'esempio seguente mostra che il software di spareggio può inviare una trap SNMP per l'evento TEST_SNMP_CONFIG:</block>
@@ -4625,7 +4623,6 @@
   <block id="3dc6c07ff9f3385cccd9e96d7a1a20ec" category="inline-link-macro">Download e installazione del software NX-OS dello switch Cisco</block>
   <block id="1a031f58441757494134fdebb9c1beb1" category="list-text"><block ref="1a031f58441757494134fdebb9c1beb1" category="inline-link-macro-rx"></block></block>
   <block id="343c2d0dbf210b79686912b38bd4f45d" category="list-text"><block ref="680a4f630b21eab8e23842ce1e77c536" category="inline-link-macro-rx"></block> **</block>
-  <block id="d618e096c793dc69ae5eecca55aed391" category="list-text"><block ref="d618e096c793dc69ae5eecca55aed391" category="inline-link-macro-rx"></block></block>
   <block id="b9fc40955441f593ff27513c0973dab6" category="list-text">Scaricare e installare il file RCF IP in base al fornitore dello switch.</block>
   <block id="9ef17a3f10f59d77a32bb5649c8cc21a" category="list-text">Ricollegare le porte del gruppo A allo switch_A_1_IP.</block>
   <block id="b3e09dfbf5aba86a719fbbe20250487f" category="paragraph"><block ref="f029937928f9e48caf6799bb633f3e06" prefix="" category="inline-code"></block></block>
@@ -7194,8 +7191,6 @@
   <block id="a80638f76a6a6dafc444e1d6a0f9cf81" category="paragraph">Se uno o entrambi i moduli controller o le schede NVRAM sono stati sostituiti nel sito di emergenza, l'ID del sistema è stato modificato ed è necessario riassegnare i dischi appartenenti agli aggregati root ai moduli controller sostitutivi.</block>
   <block id="e15b0161757a3ccf3600819bf65e09fa" category="paragraph">Poiché i nodi sono in modalità switchover, solo i dischi contenenti gli aggregati root del pool1 del sito di disastro verranno riassegnati in questa attività. Si tratta degli unici dischi ancora di proprietà del vecchio ID di sistema a questo punto.</block>
   <block id="22916732ba49d4a12ff6d80e0cc481a4" category="paragraph">Gli esempi fanno le seguenti ipotesi:</block>
-  <block id="20898dec082f98c2108752693993068d" category="inline-link-macro">Determinazione dei nuovi ID di sistema dei moduli controller sostitutivi</block>
-  <block id="5e1cb1cee330d4cf39f42acae38f029c" category="paragraph">Gli ID di sistema vecchi e nuovi sono stati identificati in <block ref="47d4637528cdda0f4f546dfe2a3e35e6" category="inline-link-macro-rx"></block>.</block>
   <block id="bee007a62c2d24423af8145fa5ac8988" category="list-text">Con il nodo sostitutivo in modalità manutenzione, riassegnare i dischi aggregati root, utilizzando il comando corretto, a seconda che il sistema sia configurato con ADP e la versione di ONTAP.</block>
   <block id="04a28b895155936f643b8081ddfbb3a4" category="paragraph">È possibile procedere con la riassegnazione quando richiesto.</block>
   <block id="3f1ca0ba3af1d2e7a950a549093a765c" category="cell">Se il sistema utilizza ADP...</block>
@@ -10728,7 +10723,6 @@
   <block id="ec587e9e55329598422742d44262fbd5" category="list-text">Verificare che l'assegnazione automatica dei dischi sia attivata:</block>
   <block id="ca06ae8121f1cc11363fc78862822c7c" category="summary">Ulteriori informazioni sulla configurazione e sul funzionamento di MetroCluster IP sono disponibili nella documentazione NetApp.</block>
   <block id="1ff31a738d26e47dfa5c26bac0568556" category="summary">Dopo aver avviato ciascun nodo, viene richiesto di eseguire la configurazione di base del nodo e del cluster. Dopo aver configurato il cluster, tornare alla CLI ONTAP per creare aggregati e creare la configurazione MetroCluster.</block>
-  <block id="da6a152013b01d35131c7e6a0a834b28" category="paragraph">Se è necessario eseguire il netboot dei nuovi controller, vedere <block ref="3b790cf59184cbd534b9cbce1ed9244d" category="inline-link-macro-rx"></block>.</block>
   <block id="6ac62fa13c69ad320702cd9a98f97b12" category="list-text">Accendere ciascun nodo nel sito locale, se non è già stato fatto, e lasciare che tutti i nodi si avviino completamente.</block>
   <block id="c77851b696911673647cb7bed20ed179" category="paragraph">Se il sistema si trova in modalità manutenzione, è necessario eseguire il comando halt per uscire dalla modalità manutenzione, quindi eseguire il comando<block ref="ce54ef17bebf280339d340bd40dff593" prefix=" " category="inline-code"></block> per avviare il sistema e accedere alla configurazione del cluster.</block>
   <block id="2c4ba3dc166bed104e5a7cb242a33b52" category="list-text">Sul primo nodo di ciascun cluster, seguire le istruzioni per configurare il cluster.</block>
@@ -11681,8 +11675,6 @@
   <block id="74553544aa9c0c94d16a5a5ed85d6720" category="list-text">Verificare che non siano presenti avvisi sullo stato di salute:</block>
   <block id="44489e59a236bf582156026d721d7300" category="list-text">Scaricare e installare il file RCF IP, a seconda del fornitore dello switch.</block>
   <block id="d2038b70348bcc50135596de145913db" category="admonition">Aggiornare gli switch nel seguente ordine: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2</block>
-  <block id="c1e630c896fe7378e2dd05cd5272a6ff" category="list-text"><block ref="c1e630c896fe7378e2dd05cd5272a6ff" category="inline-link-macro-rx"></block></block>
-  <block id="e36e202b6cdca1dbc2cdea18cfdd7bdb" category="list-text"><block ref="e36e202b6cdca1dbc2cdea18cfdd7bdb" category="inline-link-macro-rx"></block></block>
   <block id="a208547a21e1dc907c538b655cfee7c1" category="admonition">Se si dispone di una configurazione di rete L2 condivisa o L3, potrebbe essere necessario regolare le porte ISL sugli switch intermedi/clienti. La modalità switchport potrebbe passare dalla modalità 'access' alla modalità 'trunk'. Procedere all'aggiornamento della seconda coppia di switch (A_2, B_2) solo se la connettività di rete tra gli switch A_1 e B_1 è completamente operativa e la rete funziona correttamente.</block>
   <block id="dd1fe3592fd98072942cfb0278eb80b6" category="list-text">Aggiungere i nuovi nodi IP MetroCluster alla configurazione MetroCluster esistente.</block>
   <block id="ad395886a6aa891d0b7c1af76d396eb7" category="list-text">Collegare il primo nuovo nodo IP MetroCluster (Node_A_1-new) alla configurazione IP MetroCluster esistente.</block>
@@ -12135,8 +12127,6 @@
   <block id="f51d3678c201a622cf18e8f30b08f3de" category="doc">Scegliere una procedura di aggiornamento del controller</block>
   <block id="959c17d1eadff13225c68a5578c6da93" category="paragraph">La procedura di aggiornamento del controller utilizzata dipende dal modello di piattaforma e dal tipo di configurazione MetroCluster.</block>
   <block id="789c52582d523f3977d636da81e92dc0" category="list-text">In una procedura di upgrade del controller basata su ARL, le operazioni di trasferimento aggregato vengono utilizzate per spostare i dati senza interruzioni dalla vecchia configurazione alla nuova configurazione aggiornata.</block>
-  <block id="310848f15048cc78b3cbee9c61235054" category="paragraph">Selezionare la piattaforma corrente dalla tabella FC o IP riportata di seguito. Se l'intersezione tra la riga della piattaforma corrente e la colonna della piattaforma di destinazione è vuota, l'aggiornamento non è supportato.</block>
-  <block id="569cf9bf2c0f655af1cc3b1657f11706" category="section-title">Aggiornamenti del controller IP MetroCluster supportati</block>
   <block id="d64734f1819a8d6339e74ffe37dc5430" category="paragraph">Se la piattaforma non è elencata, non è disponibile alcuna combinazione di upgrade del controller supportata.</block>
   <block id="17327179cc24e43223407ad31775b347" category="inline-link-macro">Upgrade dei controller da AFF A700/FAS9000 a AFF A900/FAS9500 in una configurazione MetroCluster IP utilizzando switchover e switchback (ONTAP 9.10.1 o versione successiva)</block>
   <block id="871aaccc4c0a59b618736750595955e7" category="list-text">Nota 1: Per questo aggiornamento, utilizzare la procedura <block ref="f668bd1de55e6e087edcf0e6120e96e3" category="inline-link-macro-rx"></block></block>
@@ -12625,10 +12615,6 @@
   <block id="ae236ebe2cd05ce4da7fe73d504f4946" category="list-text">Se lo sei <block ref="54f4a86aff0fc5aba4d6e37b225734c0" category="inline-link-macro-rx"></block>, i nuovi nodi devono disporre di spazio di archiviazione sufficiente per ospitare i dati dei vecchi nodi, insieme a dischi adeguati per gli aggregati root e i dischi di riserva.</block>
   <block id="30db39dffca5d3a3ab759b48303153b1" category="list-text">Se il gruppo DR da rimuovere contiene volumi mirror per la condivisione del carico, non è possibile spostarli.  Ricreare tutti i volumi mirror di condivisione del carico in un altro gruppo DR, quindi eliminare i volumi mirror di condivisione del carico nel gruppo DR da rimuovere.</block>
   <block id="0108924065f583138162139c8d2325c4" category="list-text">Eseguire le operazioni su un interruttore alla volta, nell'ordine seguente: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2.</block>
-  <block id="4c73c980356e24dbc4b9bfa823ff3540" category="inline-link-macro">Ripristino delle impostazioni predefinite dello switch NVIDIA IP SN2100</block>
-  <block id="5ea045545da6545f166122f615c720c2" category="list-text"><block ref="5ea045545da6545f166122f615c720c2" category="inline-link-macro-rx"></block></block>
-  <block id="9d2a9152feb1a65b3472b15d2e557bca" category="inline-link-macro">Download e installazione dei file RCF NVIDIA IP</block>
-  <block id="3ebe02a815587b2ddedbada8c501d0ef" category="list-text"><block ref="3ebe02a815587b2ddedbada8c501d0ef" category="inline-link-macro-rx"></block></block>
   <block id="61cdeb097cfdf5250ae69244ebf01a62" category="list-text">Se si utilizza una configurazione xWDM, potrebbero essere necessarie impostazioni aggiuntive sugli ISL. Per ulteriori informazioni, consultare la documentazione del fornitore di xWDM.</block>
   <block id="91debec19d39d0379223807f0659efab" category="section-title">Correzione della configurazione in una configurazione MetroCluster</block>
   <block id="40a0ce393bbc07b8791fe3c093d906bf" category="paragraph">Nelle configurazioni FC di MetroCluster è possibile eseguire le operazioni di riparazione in un ordine specifico per ripristinare la funzionalità MetroCluster in seguito a uno switchover.</block>
@@ -13218,7 +13204,6 @@ Si applica a tutte le configurazioni MetroCluster.</block>
   <block id="75b44b50a5c15f2121717071fc8e9fc0" category="inline-link-macro">Scaricare e installare il software Cumulus switch NVIDIA SN2100</block>
   <block id="99534ab88dcf6802b885593070964693" category="list-text"><block ref="99534ab88dcf6802b885593070964693" category="inline-link-macro-rx"></block></block>
   <block id="5b2fc0c613f01db3129e4c4e07ac3dfe" category="list-text"><block ref="5b2fc0c613f01db3129e4c4e07ac3dfe" category="inline-link-macro-rx"></block></block>
-  <block id="b482922c3bf6cd48549cdf23465ffee6" category="list-text"><block ref="b482922c3bf6cd48549cdf23465ffee6" category="inline-link-macro-rx"></block></block>
   <block id="31108c872023e7ac673e45c455e290ec" category="list-text"><block ref="31108c872023e7ac673e45c455e290ec" category="inline-link-macro-rx"></block></block>
   <block id="d28f21bcfe7f0ae76389ce8cf95e1346" category="paragraph">Lo switch viene ripristinato e conserva la configurazione iniziale, ad esempio la configurazione della rete di gestione e le credenziali correnti, così come esistevano prima dell'applicazione del file RCF. Dopo il riavvio, è possibile applicare una nuova configurazione utilizzando la stessa versione o una versione diversa del file RCF.</block>
   <block id="2d0212aab3adea9540211da211dead7b" category="section-title">[[Cumulus-install-option]] scaricare e installare il software Cumulus</block>
@@ -13382,8 +13367,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="368aaabd8ccd78edfaeb1e279944bf6d" category="list-text"><block ref="368aaabd8ccd78edfaeb1e279944bf6d" category="inline-link-macro-rx"></block></block>
   <block id="76dff903c42af8953fcd64558dc34099" category="inline-link-macro">Scaricare e installare i file RCF IP di Cisco</block>
   <block id="89fdba60efe33dd9621db371306f12e5" category="list-text"><block ref="89fdba60efe33dd9621db371306f12e5" category="inline-link-macro-rx"></block></block>
-  <block id="8fa6539999f2d3aff134c30600c80e41" category="inline-link-macro">Scaricare e installare i file NVIDIA RCF</block>
-  <block id="2812633e4be142ea6fef81aa2fc3b357" category="list-text"><block ref="2812633e4be142ea6fef81aa2fc3b357" category="inline-link-macro-rx"></block></block>
   <block id="ea9534759740df7ca366f32a3eb8a0ec" category="inline-xref">Scaricare e installare il software Cumulus</block>
   <block id="a6c37e682cfc0729046dd2e498ad461c" category="list-text"><block ref="ef78584b865ab255d612a5aa6725b10d" category="inline-xref-macro-rx"></block></block>
   <block id="4d8d9056b62fc01f5cd3f0898c551fde" category="section-title">Supporto della piattaforma</block>
@@ -13472,7 +13455,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="84e9aa8f760c1f5f0f19cf4fc3153c4b" category="paragraph">Nelle configurazioni MetroCluster IP a quattro nodi, sono aumentati i seguenti limiti di volume per i sistemi AFF A900:</block>
   <block id="69cd959e02d2a7b70720f5426f4f0888" category="list-text">Se i sistemi originali sono stati configurati per la crittografia end-to-end, al prompt del CARICATORE dei nodi sostitutivi, impostare il seguente bootarg:</block>
   <block id="635e42fd721973aab43465fb05d0c976" category="paragraph"><block ref="62c037d8665e336dd114412a0b756bfc" prefix="" category="inline-code"></block></block>
-  <block id="5a8c7594ee8269dda78a3c94154a49fc" category="doc">Sostituire l'hardware e avviare i nuovi controller</block>
   <block id="81a393ca01b7355292a9de6a418b7506" category="section-title">Sostituire l'hardware in caso di disastro</block>
   <block id="341755fab7492718abaee90d7addc0e1" category="section-title">Determinare gli ID di sistema e gli ID VLAN dei vecchi moduli controller</block>
   <block id="7783c9328f785a62c6d922c7aee5f5bf" category="section-title">Isolare le unità sostitutive dal sito sopravvissuto (configurazioni IP MetroCluster)</block>
@@ -13499,7 +13481,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="fdc6d534c52f6619e898db680403f69b" category="list-text">Verificare che l'interfaccia IP MetroCluster non sia in linea.</block>
   <block id="2d393525a6ebfc702ca856ed72512167" category="list-text">Portare online la porta di interfaccia IP MetroCluster.</block>
   <block id="0ab751f551b18333e82474f5ca9b4122" category="list-text">Verificare che la porta di interfaccia IP MetroCluster sia in linea.</block>
-  <block id="e387b7f8f98fe6ef00364ba0984c08a9" category="paragraph">Gli ID di sistema vecchi e nuovi sono stati identificati in <block ref="ce17cf746f0f051ba197f9e3096bf7f5" category="inline-link-macro-rx"></block>.</block>
   <block id="124ba57298a92342f8aec06ebcfb6415" category="inline-link-macro">Determinare gli ID di sistema dei vecchi moduli controller</block>
   <block id="3ac27de4b4347c98785ff06870fe7221" category="paragraph"><block ref="3ac27de4b4347c98785ff06870fe7221" category="inline-link-macro-rx"></block></block>
   <block id="478093bd7e01c5abe587038bf808af00" category="paragraph">Le tabelle seguenti mostrano l'utilizzo delle porte su uno switch Cisco 9132T. Le tabelle mostrano le configurazioni massime supportate con quattro e otto moduli controller in due gruppi DR.</block>
@@ -13516,10 +13497,8 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="c5dcd35af16918a17ee9c3a5c153f0af" category="inline-link">IMT</block>
   <block id="24d65add9a27d74b80e9a9cebdfc8e56" category="paragraph">La tua versione di ONTAP deve supportare la combinazione di shelf. Fare riferimento allo strumento matrice di interoperabilità (IMT) per verificare se la versione di ONTAP in uso supporta la combinazione di shelf.<block ref="30796bf173a80af0dc9c120f98ffaed6" category="inline-link-rx"></block></block>
   <block id="8872b0d09737dfd9b6fcafd4e8c2356b" category="list-text"><block ref="8872b0d09737dfd9b6fcafd4e8c2356b" category="inline-link-rx"></block></block>
-  <block id="fe06217dfe728a4663456cded8fa4095" category="list-text"><block ref="fe06217dfe728a4663456cded8fa4095" category="inline-link-macro-rx"></block></block>
   <block id="80d79e74efb3cf7c2ad45e7e1c96223d" category="inline-link-macro">Ripristinare le impostazioni predefinite dello switch NVIDIA IP SN2100</block>
   <block id="9dce4db3e352a666d92ce25dd5f94a51" category="list-text"><block ref="9dce4db3e352a666d92ce25dd5f94a51" category="inline-link-macro-rx"></block></block>
-  <block id="4f586337d2fd3e18706fce945038a04a" category="list-text"><block ref="4f586337d2fd3e18706fce945038a04a" category="inline-link-macro-rx"></block></block>
   <block id="59908dc1540a829f2e5b2241e8bda0cd" category="inline-link-macro">Scaricare e installare i file RCF NVIDIA IP</block>
   <block id="73f5dfd8823a821a2efabbc978e0229c" category="list-text"><block ref="73f5dfd8823a821a2efabbc978e0229c" category="inline-link-macro-rx"></block></block>
   <block id="c61e96543ff55077f64d8dd03940c2c6" category="list-text">AFF A70</block>
@@ -13683,16 +13662,13 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="e4d3a0569925dd58f4e2c0c40b889993" category="paragraph">AFF A220, FAS2750</block>
   <block id="fc028e3a959d5040cb2c7b0ceac73cf8" category="paragraph">AFF A300, FAS8200</block>
   <block id="28cf84e4b9c7d19ba37159218fdea6f0" category="section-title">Aggiornamenti dei controller supportati</block>
-  <block id="df9d5dab8402039e8e49491ea2b155f4" category="admonition">Per gli aggiornamenti supportati utilizzando<block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> comandi in una configurazione IP MetroCluster a quattro nodi, fare riferimento alla tabella in <block ref="cdc5d26dd7214bbc9da99c730f208713" category="inline-link-macro-rx"></block></block>
   <block id="00422b8712ec5454364e6489bb81ba29" category="list-text">Quando si esegue un aggiornamento del controller, il vecchio e il nuovo tipo di piattaforma *devono* corrispondere:</block>
   <block id="ea246a6495df1b87df40d7c322d23942" category="list-text">Tutti i nodi (vecchi e nuovi) della configurazione MetroCluster devono eseguire la stessa versione di ONTAP.</block>
   <block id="5505f24f1b03305d31aacdd035c7f251" category="paragraph-title">Aggiornamenti del controller IP AFF e FAS MetroCluster supportati</block>
-  <block id="fcb21df516134bd5563b8b7bef30f98b" category="paragraph">La seguente tabella mostra le combinazioni di piattaforme supportate per l'aggiornamento di un sistema AFF o FAS in una configurazione IP di MetroCluster:</block>
   <block id="7b8670a76cf1dc8cbe357ce34cc11736" category="image-alt">aggiornamento MetroCluster ip so sb AFF FAS</block>
   <block id="ae189029f72cc261fbad1afff41d9552" category="list-text">Nota 3: La piattaforma di destinazione non può avere dischi interni fino al completamento dell'aggiornamento del controller. È possibile aggiungere le unità interne dopo l'aggiornamento.</block>
   <block id="39eb8422a5f49fae94f0335febb78701" category="list-text">Nota 4: Richiede la sostituzione dei moduli controller.</block>
   <block id="2d5d2a9ece12ce430adc9f20c9e9464d" category="paragraph-title">Aggiornamenti del controller IP ASA MetroCluster supportati</block>
-  <block id="1fdcb939cb28cfa6612abe5d949f5cdb" category="paragraph">La seguente tabella mostra le combinazioni di piattaforme supportate per l'aggiornamento di un sistema ASA in una configurazione MetroCluster IP:</block>
   <block id="6d340f03110b449d466e554ef5a4a7af" category="image-alt">aggiornamento MetroCluster ip so sb ASA FAS</block>
   <block id="9311605dda14c8d475dd817b196dbe33" category="list-text">Nota 1: Gli upgrade dei controller sono supportati sui sistemi con ONTAP 9.13.1 o versione successiva.</block>
   <block id="e201b3063a835c6ab815286f4d0dc126" category="paragraph-title">Aggiornamenti dei controller FC AFF e FAS MetroCluster supportati</block>
@@ -13756,7 +13732,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="c5b67774bb32fdf25c42ebcc33f3e43d" category="list-text">Ripetere la procedura per ciascun nodo del gruppo di DR in fase di aggiornamento.</block>
   <block id="6986e6230a992abf2372b5ddb288c1ec" category="list-text"><block ref="6986e6230a992abf2372b5ddb288c1ec" category="inline-link-macro-rx"></block></block>
   <block id="9cf1b9d10ebe2c0f0ae4072a054220a3" category="list-text"><block ref="9cf1b9d10ebe2c0f0ae4072a054220a3" category="inline-link-macro-rx"></block></block>
-  <block id="0bc8e4789fc33f4aefa1d33adc11eb9f" category="list-text"><block ref="0bc8e4789fc33f4aefa1d33adc11eb9f" category="inline-link-macro-rx"></block></block>
   <block id="d71cd39faa20e04542bb87bdbf15456a" category="list-text"><block ref="d71cd39faa20e04542bb87bdbf15456a" category="inline-link-macro-rx"></block></block>
   <block id="a3b6bdcb84b2fd3938bbc199daa24115" category="section-title">NetBoot i nuovi controller</block>
   <block id="1d6634f1d19b7ad582264acf3f3975d4" category="list-text">Controllare se i nodi sono multipercorso: +<block ref="395c8c225a0f5ec95ae5122ac1899d9b" prefix=" " category="inline-code"></block></block>
@@ -13807,7 +13782,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="ef53a1465284a8eba202285b88ef0eb2" category="section-title">Aggiornare gli RCF dello switch per adattarsi alle nuove piattaforme</block>
   <block id="8aedcbe06dc4ee85bfbfe46c6a62713c" category="paragraph">Questa attività viene eseguita nel sito contenente i controller attualmente in fase di aggiornamento. Negli esempi illustrati in questa procedura, si sta effettuando prima l'aggiornamento di site_B.</block>
   <block id="097b5e4a3935e7904f9e57e130711c8b" category="inline-link-macro">Scaricare e installare i file RCF dello switch NVIDIA IP SN2100</block>
-  <block id="28e2bd4eabf6ae375e91c35fdc2b3bde" category="list-text"><block ref="28e2bd4eabf6ae375e91c35fdc2b3bde" category="inline-link-macro-rx"></block></block>
   <block id="a0738c0401f656b59d11c3e37bee47f0" category="paragraph">In questa attività, verranno utilizzati gli UUID e gli ID di sistema identificati in precedenza nella procedura di aggiornamento in <block ref="a74b37b1135e46e1745610d5ef77ba43" category="inline-xref-macro-rx"></block>.</block>
   <block id="080c153c3d5c3f5a7519058826d07cb8" category="paragraph"><block ref="579363eabf2a70eb9e6c8d9b1bca9609" prefix="" category="inline-code"></block></block>
   <block id="ba2a7c5e352255c376b6b0d315a1ffc1" category="paragraph"><block ref="3edfeb45325920fedac6b21b22c6872d" prefix="" category="inline-code"></block></block>
@@ -14040,4 +14014,56 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="5feb826151198d290926a00c8f0166bd" category="paragraph">La tabella seguente mostra le combinazioni di piattaforme supportate per i sistemi ASA.</block>
   <block id="26f5174a535725c2475715c5b1747824" category="cell">Piattaforma IP MetroCluster di destinazione</block>
   <block id="315289188a5b2b11bb8fe0c80160e8d4" category="sidebar">Inviare un messaggio AutoSupport personalizzato prima di aggiungere nodi alla configurazione MetroCluster</block>
+  <block id="dff95cb9e5adc8c22082286195b9c18b" category="list-text"><block ref="dff95cb9e5adc8c22082286195b9c18b" category="inline-link-macro-rx"></block></block>
+  <block id="86e4bcdd91ae737b95a3cf066dd128f7" category="paragraph">Gli ID di sistema vecchi e nuovi sono stati identificati in <block ref="e3858d0d76295d35179b2ac088c574f3" category="inline-link-macro-rx"></block>.</block>
+  <block id="f411a218519aacec5088cc5a3d23eb64" category="paragraph">Gli ID di sistema vecchi e nuovi sono stati identificati in <block ref="372daca62ea6308294fd70c00fcc8af2" category="inline-link-macro-rx"></block>.</block>
+  <block id="11ceccfd751fe28a61b558ba07583aff" category="section-title">Numero di dischi e shelf supportati sui bridge FibreBridge 7600N e 7500N</block>
+  <block id="ff2961229b46cc89dffec4aab67d010d" category="paragraph">Nelle tabelle seguenti viene indicato il numero di dischi e shelf supportati dietro una coppia di bridge FibreBridge 7600N e 7500N.</block>
+  <block id="b8cbb75a8c2b1413bcddd7c532ccc064" category="list-text">Si applica il primo limite raggiunto.</block>
+  <block id="2a3f0c8b0ca6744889b3ffa76d4b9f5b" category="list-text">Se utilizzi DS460C shelf, è possibile utilizzare solo un massimo di 240 dischi, ovvero 4 shelf.</block>
+  <block id="5ccf1f9193b673f77fa0a023f0c64238" category="list-text">Se utilizzi DS212C shelf, è possibile utilizzare solo un massimo di 120 dischi, ovvero 10 shelf.</block>
+  <block id="402fb729f11d0452c518d4172b605b2c" category="paragraph-title">Numero di dischi supportato</block>
+  <block id="c75f82dd210bf38bdd42ff246823dd9e" category="paragraph">Esaminare il numero di dischi supportati dietro una coppia di bridge FibreBridge 7600N o 7500N:</block>
+  <block id="3baa66bdd3ca9158478ad78d6079db1c" category="cell">Configurazione disco</block>
+  <block id="3d0bf05155f3dfd0eeccf9e953d46156" category="cell">Tipo di disco</block>
+  <block id="eda8b8dec444e51f3afb1c089a183afc" category="cell">Dischi totali per coppia di bridge</block>
+  <block id="4a761ba24826218f4585e8feddc64d7c" category="cell">Tutti gli SSD</block>
+  <block id="34df20bab5e85dc75bfc94ef569cced9" category="cell">SSD</block>
+  <block id="b0df25be54449fa53d1180d01ad8bdc5" category="cell">Tutti gli HDD</block>
+  <block id="9c2dc227590d4220750b52b21b0aeb99" category="cell">DISCO RIGIDO</block>
+  <block id="335f5352088d7d9bf74191e006d8e24c" category="cell">240</block>
+  <block id="de97ed9eb6dc112873264b693e05c88c" category="cell">Misto (SSD da 96 TB)</block>
+  <block id="0a09c8844ba8f0936c20bd791130d6b6" category="cell">144</block>
+  <block id="1b48b5dfad482eb966c69b885c217e13" category="cell">Misto (SSD da 72 TB)</block>
+  <block id="006f52e9102a8d3be2fe5614f42ba989" category="cell">168</block>
+  <block id="79fa5a72c63f064bf5ae4709ac221926" category="cell">Misto (SSD da 48 TB)</block>
+  <block id="58a2fc6ed39fd083f55d4182bf88826d" category="cell">192</block>
+  <block id="1c151db89d2679449be5c45bb7b8d994" category="cell">Misto (SSD da 24 TB)</block>
+  <block id="45fbc6d3e05ebd93369ce542e8f2322d" category="cell">216</block>
+  <block id="c742d6affaef84b501d784319fca6de4" category="paragraph-title">Numero di shelf supportato</block>
+  <block id="22daa6b9c9c5e98028929434af5223de" category="paragraph">Analisi del numero di shelf supportati dietro due ponti FibreBridge 7600N e 7500N:</block>
+  <block id="ca7ac3a83947da614de147e934674475" category="cell">Numero totale di shelf</block>
+  <block id="699b4f79215d191584653efebf156e52" category="cell">Misto</block>
+  <block id="04e334293a29a0fcdf98b56004e27edc" category="section-title">Conformità a MetroCluster rispetto agli switch validati NetApp</block>
+  <block id="5c5c34d5e7843e9424f3ca2380ae18ea" category="list-text"><block ref="5c5c34d5e7843e9424f3ca2380ae18ea" category="inline-link-macro-rx"></block></block>
+  <block id="a629fe794ff2e51df541a99e4468ebb2" category="paragraph">Se è necessario eseguire il netboot dei nuovi controller, consultare <block ref="a7e3b7fa9390de21e9e66df9d4048c53" category="inline-link-macro-rx"></block>.</block>
+  <block id="910d0f6661c3968f4e7402c808d31b3f" category="list-text"><block ref="910d0f6661c3968f4e7402c808d31b3f" category="inline-link-macro-rx"></block></block>
+  <block id="740c0d0f6d37afa212fad2bd272a4212" category="list-text">Tiebreaker 1,6 supporta solo SNMPv3.</block>
+  <block id="a98720fe58fe46f2a22c59d172b69fbf" category="list-text">Sebbene Tiebreaker 1,5 e 1,4 supportino SNMPv1 e SNMPv3, NetApp consiglia vivamente di configurare SNMPv3 per una sicurezza ottimale.</block>
+  <block id="c93871f59c253b2d1ca21a1ce2a00ff8" category="paragraph">La<block ref="5ef546c28db0706808d8d451d5a71029" prefix=" " category="inline-code"></block> risposta del comando dipende dalla versione di tiebreaker in esecuzione.</block>
+  <block id="bb4e2064b1b9dc64a3fb5d4bbdce1c6d" category="paragraph">Nell'esempio seguente viene illustrata la configurazione di un ricevitore SNMP che supporta SNMPv3 con un indirizzo IP 192.0.2.255 e il numero di porta 162 per i messaggi trap. Il software Tiebreaker è pronto per inviare trap al ricevitore SNMP specificato.</block>
+  <block id="17a3b20a7dea5f1be315df3d2d4ba571" category="admonition">Tiebreaker 1,6 supporta solo SNMPv3</block>
+  <block id="837173a04a89631774aea0ce8c3f374d" category="open-title">Tiebreaker 1,5 e 1,4</block>
+  <block id="b2962497ee34ee0b78461915f42ef154" category="admonition">È necessario configurare SNMPv3 perché SNMPv1 non è sicuro. Verificare che la stringa di comunità predefinita sia *NOT* impostata su public.</block>
+  <block id="b30066626a2a1f5bfd537d010ce36f51" category="paragraph">Scopri le combinazioni di aggiornamento dei controller FC e IP MetroCluster supportate.</block>
+  <block id="8babc09a7497ad4c2756db165bd8cd5c" category="section-title">Aggiornamenti del controller IP MetroCluster supportati utilizzando i comandi "sostituzione del controller di sistema"</block>
+  <block id="190421b938f84b927163204510df7319" category="paragraph">Fare riferimento alla tabella in <block ref="cdc5d26dd7214bbc9da99c730f208713" category="inline-link-macro-rx"></block> per le piattaforme supportate.</block>
+  <block id="8e30d2803b603d7bc1c9f3584b57c881" category="section-title">Tutti gli altri aggiornamenti dei controller IP MetroCluster supportati</block>
+  <block id="17c7cb78cf2f2286d3034a3959bc800e" category="paragraph">Individuare la piattaforma *Source* dalle tabelle di aggiornamento del controller MetroCluster in questa sezione. Se l'intersezione della riga della piattaforma *Source* e della colonna della piattaforma *Target* è vuota, l'aggiornamento non è supportato.</block>
+  <block id="ece07deebff7293937869fc01fd521f0" category="paragraph">La seguente tabella mostra le combinazioni di piattaforme supportate per l'aggiornamento manuale di un sistema AFF o FAS in una configurazione IP di MetroCluster:</block>
+  <block id="8430e377fbc83f194587bd875ac99b4b" category="paragraph">La seguente tabella mostra le combinazioni di piattaforme supportate per l'aggiornamento manuale di un sistema ASA in una configurazione IP di MetroCluster:</block>
+  <block id="13457800bf31e25265b68e75f49b98c7" category="inline-link-macro">[Ripristinare lo switch IP Broadcom alle impostazioni predefinite</block>
+  <block id="0f664d89fa7312c24449004d102db687" category="list-text"><block ref="0f664d89fa7312c24449004d102db687" category="inline-link-macro-rx"></block></block>
+  <block id="8a97a528989bc12cbf81ee0102a889dc" category="list-text"><block ref="8a97a528989bc12cbf81ee0102a889dc" category="inline-link-macro-rx"></block></block>
+  <block id="5517f0f4079cbe32b861155b72575d78" category="paragraph">La tabella seguente mostra le combinazioni di piattaforme supportate per l'aggiornamento di un sistema AFF o FAS in una configurazione IP MetroCluster utilizzando i comandi "sostituzione controller di sistema":</block>
 </blocks>
