@@ -15,6 +15,9 @@ Potrebbe essere necessario aggiornare un file RCF su uno switch IP Cisco. Ad ese
 
 .A proposito di questa attività
 * A partire dalla versione 1.4a di RcfFileGenerator, è disponibile una nuova opzione per modificare (aggiornare, eseguire il downgrade o sostituire) la configurazione dello switch sugli switch IP Cisco senza eseguire una "cancellazione in scrittura".
+* link:enable-console-logging-before-maintenance.html["Attivare la registrazione della console"] prima di eseguire questa attività.
+
+
 * Lo switch Cisco 9336C-FX2 è dotato di due tipi di storage di switch diversi con nomi diversi nell'RCF. Utilizzare la tabella seguente per determinare il tipo di storage Cisco 9336C-FX2 corretto per la propria configurazione:
 +
 [cols="3*"]

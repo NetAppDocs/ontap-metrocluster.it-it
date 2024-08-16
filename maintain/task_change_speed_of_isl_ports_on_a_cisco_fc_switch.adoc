@@ -13,8 +13,12 @@ summary: 'Potrebbe essere necessario modificare la velocità delle porte ISL su 
 [role="lead"]
 Potrebbe essere necessario modificare la velocità delle porte ISL su uno switch per migliorare la qualità dell'ISL. Gli ISL che viaggiano su distanze maggiori potrebbero aver bisogno di una riduzione della velocità per migliorare la qualità.
 
-Per garantire la connettività ISL, è necessario completare tutti i passaggi su entrambi gli switch.
+.A proposito di questa attività
+* Completare tutti i passaggi su entrambi gli switch per garantire la connettività ISL.
+* link:enable-console-logging-before-maintenance.html["Attivare la registrazione della console"] prima di eseguire questa attività.
 
+
+.Fasi
 . Disattivare le porte ISL degli ISL che si desidera modificare in base alla velocità di su entrambi gli switch del fabric:
 +
 `*FC_switch_A_1# config t*`

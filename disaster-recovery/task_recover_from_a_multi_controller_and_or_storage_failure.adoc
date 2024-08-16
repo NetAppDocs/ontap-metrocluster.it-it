@@ -13,19 +13,25 @@ summary: 'Se il guasto del controller si estende a tutti i moduli controller su 
 [role="lead"]
 Se il guasto del controller si estende a tutti i moduli controller su un lato di un gruppo DR in una configurazione MetroCluster (incluso un singolo controller in una configurazione MetroCluster a due nodi) o se lo storage è stato sostituito, è necessario sostituire l'apparecchiatura e riassegnare la proprietà dei dischi per il ripristino dal disastro.
 
-* Prima di decidere di utilizzare questa procedura, esaminare le procedure di ripristino disponibili.
+Prima di utilizzare questa procedura, verificare di aver controllato ed eseguito le seguenti operazioni:
+
+* Rivedere le procedure di ripristino disponibili prima di decidere di utilizzare questa procedura.
 +
 link:concept_choosing_the_correct_recovery_procedure_parent_concept.html["Scelta della procedura di ripristino corretta"]
 
-* Il sito di disastro deve essere recintato.
+* Verificare che la registrazione della console sia attivata sui dispositivi.
++
+link:task-enable-console-logging.html["Attivare la registrazione della console"]
+
+* Assicurarsi che il sito colpito da disastro sia chiuso.
 +
 link:task_perform_a_forced_switchover_after_a_disaster.html#fencing-off-the-disaster-site["Recinzione fuori dal sito di disastro"].
 
-* Lo switchover deve essere stato eseguito.
+* Verificare che sia stato eseguito lo switchover.
 +
 link:task_perform_a_forced_switchover_after_a_disaster.html#performing-a-forced-switchover["Esecuzione di uno switchover forzato"].
 
-* Le unità sostitutive e i moduli controller devono essere nuovi e non devono essere stati assegnati in precedenza.
+* Verificare che le unità sostitutive e i moduli controller siano nuovi e che non siano stati assegnati in precedenza.
 * Gli esempi di questa procedura mostrano configurazioni a due o quattro nodi. Se si dispone di una configurazione a otto nodi (due gruppi di DR), è necessario prendere in considerazione eventuali errori ed eseguire l'attività di ripristino richiesta sui moduli controller aggiuntivi.
 
 

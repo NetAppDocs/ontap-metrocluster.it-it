@@ -13,8 +13,12 @@ summary: Potrebbe essere necessario rinominare uno switch IP Cisco per fornire u
 [role="lead"]
 Potrebbe essere necessario rinominare uno switch IP Cisco per fornire un nome coerente per tutta la configurazione.
 
-Negli esempi di questa attività, il nome dello switch viene modificato da `myswitch` a. `IP_switch_A_1`.
+.A proposito di questa attività
+* Negli esempi di questa attività, il nome dello switch viene modificato da `myswitch` a. `IP_switch_A_1`.
+* link:enable-console-logging-before-maintenance.html["Attivare la registrazione della console"] prima di eseguire questa attività.
 
+
+.Fasi
 . Accedere alla modalità di configurazione globale:
 +
 `*configure terminal*`

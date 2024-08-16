@@ -13,13 +13,20 @@ summary: 'Per aggiornare o eseguire il downgrade del firmware su uno switch FC C
 [role="lead"]
 Per aggiornare o eseguire il downgrade del firmware su uno switch FC Cisco, è necessario utilizzare i comandi specifici di Cisco per disattivare lo switch, eseguire e verificare l'aggiornamento, riavviare e riabilitare lo switch.
 
-* Il sistema deve essere collegato correttamente.
-* Tutti i percorsi verso gli shelf di storage devono essere disponibili.
-* Gli stack degli shelf di dischi devono essere stabili.
-* Il fabric dello switch FC deve essere integro.
-* Tutti i componenti del sistema devono essere integri.
-* Il sistema deve funzionare normalmente.
-* È necessaria la password admin e l'accesso a un server FTP o SCP.
+.A proposito di questa attività
+Verificare di aver controllato ed eseguito le seguenti attività per la configurazione:
+
+* Il sistema è collegato correttamente.
+* Sono disponibili tutti i percorsi verso gli shelf di storage.
+* Gli stack degli shelf di dischi sono stabili.
+* Il fabric dello switch FC è in buone condizioni.
+* Tutti i componenti del sistema sono in buone condizioni.
+* Il sistema funziona normalmente.
+* Si dispone della password admin e dell'accesso a un server FTP o SCP.
+* La registrazione della console è attivata.
++
+link:enable-console-logging-before-maintenance.html["Attivare la registrazione della console"]
+
 
 
 Il fabric dello switch viene disattivato durante l'aggiornamento o il downgrade del firmware e la configurazione MetroCluster si basa sul secondo fabric per continuare a funzionare.

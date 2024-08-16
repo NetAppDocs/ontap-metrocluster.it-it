@@ -13,6 +13,11 @@ summary: Durante la transizione senza interruzioni da MetroCluster FC a nodi IP,
 [role="lead"]
 Durante la transizione senza interruzioni da MetroCluster FC a nodi IP, è necessario spostare senza interruzioni gli oggetti host FC SAN da MetroCluster FC a nodi IP.
 
+
+
+== Spostare un carico di lavoro SAN FC da MetroCluster FC a nodi IP MetroCluster
+
+.Fasi
 . Impostare nuove interfacce FC (LIFS) sui nodi IP MetroCluster:
 +
 .. Se necessario, sui nodi IP MetroCluster, modificare le porte FC da utilizzare per la connettività del client al linguaggio di destinazione FC.

@@ -16,6 +16,8 @@ Potrebbe essere necessario aggiungere gli ISL a uno switch se si sta aggiungendo
 .Prima di iniziare
 Assicurarsi che il sistema sia configurato correttamente, che tutti gli switch fabric siano operativi e che non siano presenti errori.
 
+link:enable-console-logging-before-maintenance.html["Attivare la registrazione della console"] prima di eseguire questa attività.
+
 Se l'apparecchiatura sul collegamento ISL cambia e la nuova configurazione del collegamento non supporta più la configurazione corrente----trunking e consegna ordinata----allora il fabric deve essere riconfigurato per la policy di routing corretta: In-order-delivery (IOD) o out-of-order-delivery (OOOD).
 
 

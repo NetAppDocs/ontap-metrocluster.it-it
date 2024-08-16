@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: metrocluster, upgrade, refresh, four, node, ip, configuration, add, autosupport 
 summary: 'A partire da ONTAP 9.8, è possibile aggiornare i controller e lo storage in una configurazione MetroCluster IP a quattro nodi espandendo la configurazione fino a diventare una configurazione temporanea a otto nodi e rimuovendo quindi il vecchio gruppo di disaster recovery (DR).' 
 ---
-= Aggiornamento di una configurazione MetroCluster IP a quattro o otto nodi (ONTAP 9.8 e versioni successive)
+= Aggiornare una configurazione MetroCluster IP a quattro o otto nodi (ONTAP 9.8 e versioni successive)
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -39,6 +39,24 @@ NOTE: Se si aggiornano entrambi i gruppi di DR, la combinazione di piattaforme p
 * Si applicano i limiti inferiori delle piattaforme di origine e di destinazione. Se si passa a una piattaforma superiore, i limiti della nuova piattaforma si applicano solo dopo il completamento dell'aggiornamento tecnico di tutti i gruppi di DR.
 * Se si esegue un aggiornamento tecnico su una piattaforma con limiti inferiori rispetto alla piattaforma di origine, è necessario regolare e ridurre i limiti in modo che siano pari o inferiori ai limiti della piattaforma di destinazione prima di eseguire questa procedura.
 
+
+
+
+== Attivare la registrazione della console
+
+NetApp consiglia vivamente di attivare la registrazione della console sui dispositivi in uso e di eseguire le seguenti operazioni quando si esegue questa procedura:
+
+* Lasciare attivato AutoSupport durante la manutenzione.
+* Attivare un messaggio AutoSupport di manutenzione prima e dopo la manutenzione per disattivare la creazione del caso per tutta la durata dell'attività di manutenzione.
++
+Consultare l'articolo della Knowledge base link:https://kb.netapp.com/Support_Bulletins/Customer_Bulletins/SU92["Come eliminare la creazione automatica del caso durante le finestre di manutenzione pianificata"^].
+
+* Abilita la registrazione della sessione per qualsiasi sessione CLI. Per istruzioni su come attivare la registrazione della sessione, consultare la sezione "registrazione dell'output della sessione" nell'articolo della Knowledge base link:https://kb.netapp.com/on-prem/ontap/Ontap_OS/OS-KBs/How_to_configure_PuTTY_for_optimal_connectivity_to_ONTAP_systems["Come configurare Putty per una connettività ottimale ai sistemi ONTAP"^].
+
+
+
+
+== Eseguire la procedura di aggiornamento
 
 .Fasi
 . Verificare di disporre di un dominio di broadcast predefinito creato sui vecchi nodi.

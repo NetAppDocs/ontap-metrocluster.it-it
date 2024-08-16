@@ -19,6 +19,7 @@ A partire da ONTAP 9.10.1, è possibile aggiungere shelf NS224 da un MetroCluste
 * I nodi devono eseguire ONTAP 9.9.1 o versione successiva.
 * Tutti gli shelf NS224 attualmente connessi devono essere collegati agli stessi switch di MetroCluster (configurazione storage condiviso/switch MetroCluster).
 * Questa procedura non può essere utilizzata per convertire una configurazione con shelf NS224 collegati direttamente o shelf NS224 collegati a switch Ethernet dedicati in una configurazione che utilizza switch storage/MetroCluster condivisi.
+* link:enable-console-logging-before-maintenance.html["Attivare la registrazione della console"] prima di eseguire questa attività.
 
 
 

@@ -13,9 +13,12 @@ summary: 'Quando si eseguono interventi di manutenzione, potrebbe essere necessa
 [role="lead"]
 Quando si eseguono attività di manutenzione, potrebbe essere necessario portare una porta di interfaccia IP MetroCluster offline o online.
 
-È possibile utilizzare la seguente procedura per collegare una porta di interfaccia IP di MetroCluster in modalità non in linea o in linea.
+.A proposito di questa attività
+link:enable-console-logging-before-maintenance.html["Attivare la registrazione della console"] prima di eseguire questa attività.
 
 .Fasi
+È possibile utilizzare la seguente procedura per portare una porta di interfaccia IP di MetroCluster online o offline.
+
 . Impostare il livello di privilegio su Advanced (avanzato).
 +
 [source, cli]

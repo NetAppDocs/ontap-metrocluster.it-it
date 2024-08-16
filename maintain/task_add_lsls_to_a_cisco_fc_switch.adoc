@@ -13,7 +13,10 @@ summary: Potrebbe essere necessario aggiungere gli ISL a uno switch se si sta ag
 [role="lead"]
 Potrebbe essere necessario aggiungere gli ISL a uno switch se si sta aggiungendo o aggiornando hardware come controller aggiuntivi o più veloci o switch più veloci.
 
-Per garantire la connettività ISL, è necessario completare anche i passaggi completati su uno switch.
+.A proposito di questa attività
+* Completare tutti i passaggi su entrambi gli switch per garantire la connettività ISL.
+* link:enable-console-logging-before-maintenance.html["Attivare la registrazione della console"] prima di eseguire questa attività.
+
 
 .Fasi
 . Disattivare le porte ISL degli ISL da aggiungere su entrambi gli switch del fabric:
