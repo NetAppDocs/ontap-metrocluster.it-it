@@ -149,11 +149,7 @@ entries:
     - title: Configurare i cluster in una configurazione MetroCluster
       entries:
       - title: Configurare le LIF tra cluster
-        entries:
-        - title: Configurare le LIF di intercluster su porte dedicate
-          url: "/upgrade/task_configure_intercluster_lifs_to_use_dedicated_intercluster_ports.html"
-        - title: Configurare le LIF tra cluster su porte dati condivise
-          url: "/upgrade/task_configure_intercluster_lifs_to_share_data_ports.html"
+        url: "/upgrade/task-configure-intercluster-lifs-4node.html"
       - title: Eseguire il mirroring degli aggregati root
         url: "/upgrade/task_mirror_the_root_aggregates_mcc.html"
       - title: Implementare la configurazione MetroCluster
