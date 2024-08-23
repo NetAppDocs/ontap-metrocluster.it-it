@@ -1963,16 +1963,11 @@
   <block id="54a9d9c6ebf1a9314ea2b6e91c5456f8" category="paragraph"><block ref="e15d3c3a9160b0a07a5af30b190a1104" prefix="" category="inline-code"></block></block>
   <block id="73ddd59b62d7cac14fe61d1197513233" category="list-text">Dal prompt del controller, controllare lo stato dei bridge:<block ref="5612ed7a515d4278d578c100f6f1a976" prefix=" " category="inline-code"></block></block>
   <block id="4fbce0abe0f7baa2bbb93f9658cfc55b" category="list-text">Se la porta Ethernet MP1 è abilitata, eseguire il seguente comando:</block>
-  <block id="9013c925bc3a423f843c073690ed8081" category="list-text">[[step17-Reconnect-newbridge]] ricollegare i cavi SAS e FC alle stesse porte del nuovo bridge.</block>
   <block id="3b5ef1874490ddb39e2ab56e91c15fd9" category="admonition">Attendere almeno 10 secondi prima di collegare la porta. I connettori dei cavi SAS sono dotati di chiave; se orientati correttamente in una porta SAS, il connettore scatta in posizione e il LED LNK della porta SAS dello shelf di dischi si illumina di verde. Per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso il basso (nella parte inferiore del connettore). Per i controller, l'orientamento delle porte SAS può variare a seconda del modello di piattaforma; pertanto, l'orientamento corretto del connettore del cavo SAS varia.</block>
-  <block id="6795687b051fe5f1cb692559517648dd" category="list-text">[[step18-verify-each-bridge]]verificare che ciascun bridge sia in grado di visualizzare tutti i dischi e gli shelf di dischi a cui è collegato il bridge.</block>
   <block id="cf6dbfa4f0192b540abc550aae0f260f" category="list-text">In un browser Web supportato, inserire l'indirizzo IP del bridge nella casella del browser.</block>
   <block id="34edf66bb3dff09e9c2aaf868d030164" category="paragraph">Viene visualizzato il link alla homepage di ATTO FibreBridge.</block>
   <block id="b9da98e99c8057fc3b9a54d9d19ff501" category="inline-xref">Fase 18</block>
-  <block id="828e19cfb619dbe3f082c13af71c8804" category="paragraph">Ripetere <block ref="eecb3f0fe03b243e2ecc1f82fe37ecc5" category="inline-xref-macro-rx"></block> per ogni bridge rimanente.</block>
   <block id="9c709df0d0930ada3ab147bf9abe8f06" category="inline-xref">Fase 17</block>
-  <block id="78cffeb475b967afce30e7091b0a7aec" category="list-text">Verificare l'eventuale presenza di cavi SAS allentati o correggere il cablaggio SAS ripetendo le operazioni <block ref="34712c7e0b7391b53f3aade40f6e2ba2" category="inline-xref-macro-rx"></block>.</block>
-  <block id="daae67946266f0e5177fa51a3f38fec3" category="list-text">Ripetere <block ref="eecb3f0fe03b243e2ecc1f82fe37ecc5" category="inline-xref-macro-rx"></block>.</block>
   <block id="2273b85e84dfebeb5a21bbd359461d0f" category="list-text">Se il bridge si trova in una configurazione Fabric-Attached MetroCluster, riattivare la porta dello switch FC disattivata all'inizio di questa procedura.</block>
   <block id="9a20682ddc8cef489d77b087b78b3e16" category="paragraph">Deve essere la porta che si connette al bridge.</block>
   <block id="253278bf8807d2fb353066f7109cc7f2" category="list-text">Dalla console di sistema di entrambi i moduli controller, verificare che tutti i moduli controller abbiano accesso attraverso il nuovo bridge agli shelf di dischi (ovvero che il sistema sia cablato per ha multipath):</block>
@@ -14099,4 +14094,14 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="764a523cf339780ca4471f143c5ae04c" category="paragraph"><block ref="d1f7a93b5f0792c01647ca314d5d7e27" prefix="" category="inline-code"></block></block>
   <block id="6e7eea4bc90b7da31497a85ace82eec8" category="paragraph"><block ref="751a8e9d76de229f9092fac6fb23b628" prefix="" category="inline-code"></block></block>
   <block id="f1fe27301697eb21073abfcd231c91ab" category="section-title">Eseguire la procedura di aggiornamento</block>
+  <block id="a713923def413049fcd7bd32d239c3b4" category="list-text">Collegare i cavi FC alle stesse porte del nuovo bridge.</block>
+  <block id="c09b16f8a5b97a430a942e2624c2ffc8" category="paragraph">Se il nuovo bridge è dello stesso tipo del bridge partner, eseguire l'aggiornamento allo stesso firmware del bridge partner. Se il nuovo bridge è di tipo diverso da quello del bridge partner, eseguire l'aggiornamento al firmware più recente supportato dal bridge e dalla versione di ONTAP. Vedere <block ref="55e804464be1a7c24451c93244c66ff0" category="inline-link-macro-rx"></block></block>
+  <block id="b5a56495c6cd7b15008b12f44e1c09f9" category="list-text">[[step18-reconnect-newbridge]] ricollegare i cavi SAS alle stesse porte del nuovo bridge.</block>
+  <block id="1bf1e8417c00edaec85599df5b47ee94" category="list-text">[[step19-verify-each-bridge]]verificare che ciascun bridge sia in grado di visualizzare tutti i dischi e gli shelf di dischi a cui è collegato il bridge.</block>
+  <block id="287bc804244a679c73d0cac4cb0c0b2c" category="inline-xref">Passaggio 19</block>
+  <block id="c582e7ac4118500a1aaf382ea318eeeb" category="paragraph">Ripetere l'operazione <block ref="1c41b1b96665f865995fbed1d8884dfe" category="inline-xref-macro-rx"></block> per ciascun ponte rimanente.</block>
+  <block id="2788b7f6b6e21bc5a33df0d4aebf4730" category="list-text">Verificare l'eventuale presenza di cavi SAS allentati o correggere il cablaggio SAS ripetendo la procedura <block ref="4f69a23cfa1cdd17cebbee3d88ffc0e9" category="inline-xref-macro-rx"></block>.</block>
+  <block id="dd59329be100bd10605cd63312522627" category="list-text">Ripetere <block ref="1c41b1b96665f865995fbed1d8884dfe" category="inline-xref-macro-rx"></block>.</block>
+  <block id="0b9029dad5ded8eb8b9621381b59b85b" category="paragraph">Per aggiornare la configurazione FC di MetroCluster, procedere come segue.</block>
+  <block id="e80b737c5dcc4e6b9a5a4eecb2dc9582" category="paragraph">Per aggiornare la configurazione dell'IP di MetroCluster, procedere come segue.</block>
 </blocks>

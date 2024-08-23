@@ -409,11 +409,12 @@ Viene richiesto di riavviare il bridge.
 
 
 
+. Collegare i cavi FC alle stesse porte del nuovo bridge.
 . Aggiornare il firmware FibreBridge su ciascun bridge.
 +
-Se il nuovo bridge è dello stesso tipo del bridge partner, eseguire l'aggiornamento allo stesso firmware del bridge partner. Se il nuovo bridge è di tipo diverso da quello del bridge partner, eseguire l'aggiornamento al firmware più recente supportato dal bridge e dalla versione di ONTAP. Consultare la sezione "aggiornamento del firmware su un bridge FibreBridge" in _manutenzione MetroCluster_.
+Se il nuovo bridge è dello stesso tipo del bridge partner, eseguire l'aggiornamento allo stesso firmware del bridge partner. Se il nuovo bridge è di tipo diverso da quello del bridge partner, eseguire l'aggiornamento al firmware più recente supportato dal bridge e dalla versione di ONTAP. Vedere link:task_update_firmware_on_a_fibrebridge_bridge_parent_topic.html["Aggiornamento del firmware su un bridge FibreBridge"]
 
-. [[step17-Reconnect-newbridge]] ricollegare i cavi SAS e FC alle stesse porte del nuovo bridge.
+. [[step18-reconnect-newbridge]] ricollegare i cavi SAS alle stesse porte del nuovo bridge.
 +
 È necessario sostituire i cavi che collegano il ponte alla parte superiore o inferiore della scaffalatura. I bridge FibreBridge 7600N e 7500N richiedono cavi mini-SAS per questi collegamenti.
 
@@ -421,7 +422,7 @@ Se il nuovo bridge è dello stesso tipo del bridge partner, eseguire l'aggiornam
 
 NOTE: Attendere almeno 10 secondi prima di collegare la porta. I connettori dei cavi SAS sono dotati di chiave; se orientati correttamente in una porta SAS, il connettore scatta in posizione e il LED LNK della porta SAS dello shelf di dischi si illumina di verde. Per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso il basso (nella parte inferiore del connettore). Per i controller, l'orientamento delle porte SAS può variare a seconda del modello di piattaforma; pertanto, l'orientamento corretto del connettore del cavo SAS varia.
 
-. [[step18-verify-each-bridge]]verificare che ciascun bridge sia in grado di visualizzare tutti i dischi e gli shelf di dischi a cui è collegato il bridge.
+. [[step19-verify-each-bridge]]verificare che ciascun bridge sia in grado di visualizzare tutti i dischi e gli shelf di dischi a cui è collegato il bridge.
 +
 [cols="35,65"]
 |===
@@ -496,15 +497,15 @@ Tgt VendorID ProductID        Type SerialNumber
  a| 
 Esatto
  a| 
-Ripetere <<step18-verify-each-bridge,Fase 18>> per ogni bridge rimanente.
+Ripetere l'operazione <<step19-verify-each-bridge,Passaggio 19>> per ciascun ponte rimanente.
 
 
 
  a| 
 Non corretto
  a| 
-.. Verificare l'eventuale presenza di cavi SAS allentati o correggere il cablaggio SAS ripetendo le operazioni <<step17-reconnect-newbridge,Fase 17>>.
-.. Ripetere <<step18-verify-each-bridge,Fase 18>>.
+.. Verificare l'eventuale presenza di cavi SAS allentati o correggere il cablaggio SAS ripetendo la procedura <<step18-reconnect-newbridge,Fase 18>>.
+.. Ripetere <<step19-verify-each-bridge,Passaggio 19>>.
 
 
 |===
