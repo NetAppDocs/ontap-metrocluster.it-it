@@ -124,94 +124,120 @@ Questa attività deve essere eseguita su ciascuno dei vecchi nodi:
 
 * Node_A_1-FC
 * Node_B_1-FC
-+
-.. Arrestare tutto il traffico client.
-.. Su uno dei nodi FC MetroCluster, ad esempio Node_A_1-FC, abilitare la transizione.
-+
-... Impostare il livello di privilegio avanzato: `set -priv advanced`
-... Attiva transizione: `metrocluster transition enable -transition-mode disruptive`
-... Tornare alla modalità admin: `set -priv admin`
 
 
-.. Eseguire il mirroring dell'aggregato root eliminando il plesso remoto degli aggregati root.
+.Fasi
+. Arrestare tutto il traffico client.
+. Su uno dei nodi FC MetroCluster, ad esempio Node_A_1-FC, abilitare la transizione.
 +
-... Identificare gli aggregati root: `storage aggregate show -root true`
-... Visualizzare gli aggregati pool1: `storage aggregate plex show -pool 1`
-... Eliminare il plex locale dell'aggregato root: `aggr plex delete aggr-name -plex plex-name`
-... Offline il plesso remoto dell'aggregato root: `aggr plex offline root-aggregate -plex remote-plex-for-root-aggregate`
+.. Impostare il livello di privilegio avanzato: `set -priv advanced`
+.. Attiva transizione: `metrocluster transition enable -transition-mode disruptive`
+.. Tornare alla modalità admin: `set -priv admin`
+
+
+. Eseguire il mirroring dell'aggregato root eliminando il plesso remoto degli aggregati root.
++
+.. Identificare gli aggregati root: `storage aggregate show -root true`
+.. Visualizzare gli aggregati pool1: `storage aggregate plex show -pool 1`
+.. Offline ed eliminare il plesso remoto dell'aggregato root: +
+`aggr plex offline <root-aggregate> -plex <remote-plex-for-root-aggregate>`
++
+`aggr plex delete <root-aggregate> -plex <remote-plex-for-root-aggregate>`
+
 +
 Ad esempio:
 
 +
 [listing]
 ----
- # aggr plex offline aggr0_node_A_1-FC_01 -plex plex4
+ # aggr plex offline aggr0_node_A_1-FC_01 -plex remoteplex4
+----
++
+[listing]
+----
+# aggr plex delete aggr0_node_A_1-FC_01 -plex remoteplex4
 ----
 
 
-.. Confermare il numero di caselle postali, l'assegnazione automatica del disco e la modalità di transizione prima di procedere con i seguenti comandi su ciascun controller:
+. Confermare il numero di caselle postali, l'assegnazione automatica del disco e la modalità di transizione prima di procedere con i seguenti comandi su ciascun controller:
 +
-... Impostare il livello di privilegio avanzato: `set -priv advanced`
-... Verificare che per ciascun modulo controller siano visualizzate solo tre unità mailbox: `storage failover mailbox-disk show`
-... Tornare alla modalità admin: `set -priv admin`
-... Verificare che la modalità di transizione sia disgregativa: Mostra MetroCluster Transition
+.. Impostare il livello di privilegio avanzato: `set -priv advanced`
+.. Verificare che per ciascun modulo controller siano visualizzate solo tre unità mailbox: `storage failover mailbox-disk show`
+.. Tornare alla modalità admin: `set -priv admin`
+.. Verificare che la modalità di transizione sia disgregativa: Mostra MetroCluster Transition
 
 
-.. Verificare la presenza di eventuali dischi rotti: `disk show -broken`
-.. Rimuovere o sostituire eventuali dischi rotti
-.. Verificare che gli aggregati siano integri utilizzando i seguenti comandi su Node_A_1-FC e Node_B_1-FC:``storage aggregate show``/
+. Verificare la presenza di eventuali dischi rotti: `disk show -broken`
+. Rimuovere o sostituire eventuali dischi rotti
+. Conferma che gli aggregati siano integri utilizzando i seguenti comandi su node_A_1-FC e node_B_1-FC:
++
+`storage aggregate show`
+
++
+`storage aggregate plex show`
+
 +
 Il comando show dell'aggregato di storage indica che l'aggregato root è senza mirror.
 
-.. Verificare la presenza di VLAN o gruppi di interfacce: `network port ifgrp show``network port vlan show`
+. Verificare la presenza di VLAN o gruppi di interfacce:
++
+`network port ifgrp show`
+
++
+`network port vlan show`
+
 +
 Se non sono presenti componenti, saltare i due passi seguenti.
 
-.. Visualizzare l'elenco delle LIF utilizzando VLAN o ifgrps: `network interface show -fields home-port,curr-port``network port show -type if-group | vlan`
-.. Rimuovere eventuali VLAN e gruppi di interfacce.
+. Visualizzare l'elenco delle LIF utilizzando VLAN o ifgrps:
++
+`network interface show -fields home-port,curr-port`
+
++
+`network port show -type if-group | vlan`
+
+. Rimuovere eventuali VLAN e gruppi di interfacce.
 +
 È necessario eseguire questi passaggi per tutti i file LIF in tutte le SVM, incluse quelle con il suffisso -mc.
 
 +
-... Spostare le LIF utilizzando le VLAN o i gruppi di interfacce su una porta disponibile: `network interface modify -vserver vserver-name -lif lif_name -home- port port`
-... Visualizzare le LIF che non si trovano sulle porte home: `network interface show -is-home false`
-... Ripristinare tutte le LIF alle rispettive porte home: `network interface revert -vserver vserver_name -lif lif_name`
-... Verificare che tutte le LIF siano presenti sulle porte home: `network interface show -is-home false`
+.. Spostare le LIF utilizzando le VLAN o i gruppi di interfacce su una porta disponibile: `network interface modify -vserver vserver-name -lif lif_name -home- port port`
+.. Visualizzare le LIF che non si trovano sulle porte home: `network interface show -is-home false`
+.. Ripristinare tutte le LIF alle rispettive porte home: `network interface revert -vserver vserver_name -lif lif_name`
+.. Verificare che tutte le LIF siano presenti sulle porte home: `network interface show -is-home false`
 +
 Nell'output non dovrebbe essere visualizzato alcun LIF.
 
-... Rimuovere le porte VLAN e ifgrp dal dominio di broadcast: `network port broadcast-domain remove-ports -ipspace ipspace -broadcast-domain broadcast-domain-name -ports nodename:portname,nodename:portname,..`
-... Verificare che tutte le porte vlan e ifgrp non siano assegnate a un dominio di trasmissione: `network port show -type if-group | vlan`
-... Elimina tutte le VLAN: `network port vlan delete -node nodename -vlan-name vlan-name`
-... Elimina gruppi di interfacce: `network port ifgrp delete -node nodename -ifgrp ifgrp-name`
+.. Rimuovere le porte VLAN e ifgrp dal dominio di broadcast: `network port broadcast-domain remove-ports -ipspace ipspace -broadcast-domain broadcast-domain-name -ports nodename:portname,nodename:portname,..`
+.. Verificare che tutte le porte vlan e ifgrp non siano assegnate a un dominio di trasmissione: `network port show -type if-group | vlan`
+.. Elimina tutte le VLAN: `network port vlan delete -node nodename -vlan-name vlan-name`
+.. Elimina gruppi di interfacce: `network port ifgrp delete -node nodename -ifgrp ifgrp-name`
 
 
-.. Spostare le eventuali LIF necessarie per risolvere i conflitti con le porte dell'interfaccia IP di MetroCluster.
+. Spostare le eventuali LIF necessarie per risolvere i conflitti con le porte dell'interfaccia IP di MetroCluster.
 +
 È necessario spostare i LIF identificati al punto 1 di link:concept_requirements_for_fc_to_ip_transition_2n_mcc_transition.html["Mappatura delle porte dai nodi FC MetroCluster ai nodi IP MetroCluster"].
 
 +
-... Spostare le LIF ospitate sulla porta desiderata su un'altra porta: `network interface modify -lif lifname -vserver vserver-name -home-port new-homeport``network interface revert -lif lifname -vserver vservername`
-... Se necessario, spostare la porta di destinazione in un dominio IPSpace e broadcast appropriato. `network port broadcast-domain remove-ports -ipspace current-ipspace -broadcast-domain current-broadcast-domain -ports controller-name:current-port``network port broadcast-domain add-ports -ipspace new-ipspace -broadcast-domain new-broadcast-domain -ports controller-name:new-port`
+.. Spostare le LIF ospitate sulla porta desiderata su un'altra porta: `network interface modify -lif lifname -vserver vserver-name -home-port new-homeport``network interface revert -lif lifname -vserver vservername`
+.. Se necessario, spostare la porta di destinazione in un dominio IPSpace e broadcast appropriato. `network port broadcast-domain remove-ports -ipspace current-ipspace -broadcast-domain current-broadcast-domain -ports controller-name:current-port``network port broadcast-domain add-ports -ipspace new-ipspace -broadcast-domain new-broadcast-domain -ports controller-name:new-port`
 
 
-.. Arrestare i controller FC MetroCluster (Node_A_1-FC e Node_B_1-FC): `system node halt`
-.. Al prompt DEL CARICATORE, sincronizzare i clock hardware tra i moduli controller FC e IP.
+. Arrestare i controller FC MetroCluster (Node_A_1-FC e Node_B_1-FC): `system node halt`
+. Al prompt DEL CARICATORE, sincronizzare i clock hardware tra i moduli controller FC e IP.
 +
-... Sul vecchio nodo MetroCluster FC (Node_A_1-FC), visualizzare la data: `show date`
-... Sui nuovi controller IP MetroCluster (Node_A_1-IP e Node_B_1-IP), impostare la data visualizzata sul controller originale: `set date mm/dd/yy`
-... Sui nuovi controller IP MetroCluster (Node_A_1-IP e Node_B_1-IP), verificare la data: `show date`
+.. Sul vecchio nodo MetroCluster FC (Node_A_1-FC), visualizzare la data: `show date`
+.. Sui nuovi controller IP MetroCluster (Node_A_1-IP e Node_B_1-IP), impostare la data visualizzata sul controller originale: `set date mm/dd/yy`
+.. Sui nuovi controller IP MetroCluster (Node_A_1-IP e Node_B_1-IP), verificare la data: `show date`
 
 
-.. Arrestare e spegnere i moduli controller FC MetroCluster (Node_A_1-FC e Node_B_1-FC), i bridge FC-SAS (se presenti), gli switch FC (se presenti) e ogni shelf di storage collegato a questi nodi.
-.. Scollega gli shelf dai controller FC MetroCluster e documenta quali shelf sono storage locale per ciascun cluster.
+. Arrestare e spegnere i moduli controller FC MetroCluster (Node_A_1-FC e Node_B_1-FC), i bridge FC-SAS (se presenti), gli switch FC (se presenti) e ogni shelf di storage collegato a questi nodi.
+. Scollega gli shelf dai controller FC MetroCluster e documenta quali shelf sono storage locale per ciascun cluster.
 +
 Se la configurazione utilizza bridge FC-SAS o switch back-end FC, scollegarli e rimuoverli.
 
-.. In modalità di manutenzione sui nodi FC MetroCluster (Node_A_1-FC e Node_B_1-FC), verificare che non siano collegati dischi: `disk show -v`
-.. Spegnere e rimuovere i nodi MetroCluster FC.
-
-
+. In modalità di manutenzione sui nodi FC MetroCluster (Node_A_1-FC e Node_B_1-FC), verificare che non siano collegati dischi: `disk show -v`
+. Spegnere e rimuovere i nodi MetroCluster FC.
 
 
 A questo punto, i controller FC MetroCluster sono stati rimossi e gli shelf sono scollegati da tutti i controller.
