@@ -678,7 +678,7 @@ cluster_A::>
 
 +
 
-NOTE: È necessario creare almeno un aggregato di dati mirrorati per sito. Si consiglia di disporre di due aggregati di dati mirrorati per sito su nodi IP MetroCluster per ospitare i volumi MDV, tuttavia è supportato un singolo aggregato per sito (ma non consigliato). È possibile che un sito di MetroCluster disponga di un singolo aggregato di dati mirrorati e l'altro sito disponga di più aggregato di dati mirrorati.
+NOTE: È necessario creare almeno un aggregato di dati mirrorati per sito. Si consiglia di disporre di due aggregati di dati mirrorati per sito su nodi IP MetroCluster per ospitare i volumi MDV, tuttavia è supportato un singolo aggregato per sito (ma non consigliato). È accettabile che un sito della MetroCluster disponga di un singolo aggregato di dati mirrorati e l'altro sito disponga di più di un aggregato di dati mirrorati.
 
 +
 Nell'esempio seguente viene illustrata la creazione di un aggregato su Node_A_3-IP.

@@ -1063,20 +1063,32 @@ aggr_data_a2
 +
 `set -privilege advanced`
 
-.. Aggiornare la configurazione MetroCluster su uno dei nuovi nodi:
+.. Aggiornare la configurazione MetroCluster su uno dei nodi:
 +
-`metrocluster configure`
+[cols="30,70"]
+|===
 
-+
-L'esempio seguente mostra la configurazione MetroCluster aggiornata su entrambi i gruppi di DR:
 
-+
-[listing]
-----
-cluster_A::*> metrocluster configure -refresh true
+| Se la configurazione di MetroCluster dispone di... | Quindi... 
 
-[Job 726] Job succeeded: Configure is successful.
-----
+
+ a| 
+Aggregati di dati multipli
+ a| 
+Dal prompt di qualsiasi nodo, eseguire:
+
+`metrocluster configure <node-name>`
+
+
+
+ a| 
+Un singolo aggregato di dati con mirroring in uno o entrambi i siti
+ a| 
+Da qualsiasi prompt del nodo, configurare MetroCluster con il `-allow-with-one-aggregate true` parametro:
+
+`metrocluster configure -allow-with-one-aggregate true <node-name>`
+
+|===
 .. Riavviare ciascuno dei nuovi nodi:
 +
 `node reboot -node <node_name> -inhibit-takeover true`
@@ -1093,7 +1105,7 @@ cluster_A::*> metrocluster configure -refresh true
 
 +
 
-NOTE: È necessario creare almeno un aggregato di dati mirrorati per sito. Si consiglia di disporre di due aggregati di dati mirrorati per sito su nodi IP MetroCluster per ospitare i volumi MDV, tuttavia è supportato un singolo aggregato per sito (ma non consigliato). È possibile che un sito di MetroCluster disponga di un singolo aggregato di dati mirrorati e l'altro sito disponga di più aggregato di dati mirrorati.
+NOTE: È necessario creare almeno un aggregato di dati mirrorati per sito. Si consiglia di disporre di due aggregati di dati mirrorati per sito su nodi IP MetroCluster per ospitare i volumi MDV, tuttavia è supportato un singolo aggregato per sito (ma non consigliato). È accettabile che un sito della MetroCluster disponga di un singolo aggregato di dati mirrorati e l'altro sito disponga di più di un aggregato di dati mirrorati.
 
 +
 Nell'esempio seguente viene illustrata la creazione di un aggregato su Node_A_1-New.
@@ -1161,12 +1173,14 @@ Group Cluster Node               State          Mirroring Mode
 
 cluster_A::*>
 ----
-. Spostare i volumi MDV_CRS dai vecchi nodi ai nuovi nodi con privilegi avanzati.
+. Spostare i volumi MDV_CRS in modalità privilegio avanzato.
 +
 .. Visualizzare i volumi per identificare i volumi MDV:
 +
+Se si dispone di un singolo aggregato di dati mirrorati per sito, spostare entrambi i volumi MDV in questo singolo aggregato. Se si dispone di due o più aggregati di dati mirrorati, spostare ciascun volume MDV in un aggregato diverso.
 
-NOTE: Se si dispone di un singolo aggregato di dati mirrorati per sito, spostare entrambi i volumi MDV in questo singolo aggregato. Se si dispone di due o più aggregati di dati mirrorati, spostare ciascun volume MDV in un aggregato diverso.
++
+Se si sta espandendo una configurazione MetroCluster a quattro nodi in una configurazione permanente a otto nodi, è necessario spostare uno dei volumi MDV nel nuovo gruppo DR.
 
 +
 L'esempio seguente mostra i volumi MDV in `volume show` uscita:

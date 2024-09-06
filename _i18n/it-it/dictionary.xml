@@ -3854,7 +3854,6 @@
   <block id="7e6d5ec0a20a9a4499623036df823e6b" category="list-text">Verificare che i nodi siano aggiunti al gruppo di DR:</block>
   <block id="b24de9180a5deb759a394eebcd1a0305" category="list-text">Creare aggregati di dati mirrorati su ciascuno dei nuovi nodi MetroCluster:</block>
   <block id="a8f0490385b664bc34aae209741dbdce" category="paragraph"><block ref="edf828d9708194065efb37a90089aae4" prefix="" category="inline-code"></block></block>
-  <block id="aabce8f4cea0092b527adf5c08e57ba7" category="admonition">È necessario creare almeno un aggregato di dati mirrorati per sito. Si consiglia di disporre di due aggregati di dati mirrorati per sito su nodi IP MetroCluster per ospitare i volumi MDV, tuttavia è supportato un singolo aggregato per sito (ma non consigliato). È possibile che un sito di MetroCluster disponga di un singolo aggregato di dati mirrorati e l'altro sito disponga di più aggregato di dati mirrorati.</block>
   <block id="1ecf45c0e50d338e165546ea9f33580d" category="paragraph">Nell'esempio seguente viene illustrata la creazione di un aggregato su Node_A_3-IP.</block>
   <block id="d607e1acecde451facff1ac4a2c32440" category="list-text">Spostare i volumi MDV_CRS dai vecchi nodi ai nuovi nodi con privilegi avanzati.</block>
   <block id="ec4e7a3ff9894fa6a469a40a07dfca12" category="list-text">Visualizzare i volumi per identificare i volumi MDV:</block>
@@ -11584,8 +11583,6 @@
   <block id="2dccf53d6ed326f889d8e764529b9794" category="list-text">Verificare l'assegnazione automatica e il partizionamento del disco:</block>
   <block id="3f95b2ea711d433e26a8b5eb63bbd17a" category="paragraph"><block ref="02b924a96c72679822883a70dfe48211" prefix="" category="inline-code"></block></block>
   <block id="6c46e592d5f16891d3a16e5f364e031b" category="section-title">Finalizzare l'aggiunta dei nuovi nodi</block>
-  <block id="f00a8c2c5126c8a92b929c756950f0f8" category="list-text">Aggiornare la configurazione MetroCluster su uno dei nuovi nodi:</block>
-  <block id="2ae5190e09d5d39bdc4388104b1ebcd4" category="paragraph"><block ref="3b3242ced99842a6c2c16f489b78e773" prefix="" category="inline-code"></block></block>
   <block id="7062dd7205e5ed0cba84efd4203bc9cc" category="paragraph">Nell'esempio seguente viene illustrata la creazione di un aggregato su Node_A_1-New.</block>
   <block id="7d7a3fc828a61ba2a0ef14619b7c2ccb" category="list-text">Verificare che i nodi siano aggiunti al gruppo di DR.</block>
   <block id="b0d21d87e852192022d32882c31d8709" category="paragraph">L'esempio seguente mostra i volumi MDV in<block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block> uscita:</block>
@@ -14031,4 +14028,12 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="4ac7d2ae8e04576a892556ab9a493959" category="list-text">Rimuovere le porte VLAN e ifgrp dal dominio di broadcast:<block ref="bd72bbf935a7a9d39c21cf3731500f70" prefix=" " category="inline-code"></block></block>
   <block id="07b3edb46d2774fa411b0f9a1b01bead" category="sidebar">Prepararsi per la manutenzione di MetroCluster</block>
   <block id="053564114ce5591908a1b29312289c15" category="sidebar">Aggiungere shelf a una configurazione MetroCluster IP usando switch MetroCluster di storage condivisi</block>
+  <block id="59a029b0a65d8928b8afd42fd7a5bfe2" category="admonition">È necessario creare almeno un aggregato di dati mirrorati per sito. Si consiglia di disporre di due aggregati di dati mirrorati per sito su nodi IP MetroCluster per ospitare i volumi MDV, tuttavia è supportato un singolo aggregato per sito (ma non consigliato). È accettabile che un sito della MetroCluster disponga di un singolo aggregato di dati mirrorati e l'altro sito disponga di più di un aggregato di dati mirrorati.</block>
+  <block id="478e4322f0111cf3e7bdad12bea24701" category="list-text">Aggiornare la configurazione MetroCluster su uno dei nodi:</block>
+  <block id="4ad402ea3fb0bcfdc921fd3083047f45" category="paragraph">Dal prompt di qualsiasi nodo, eseguire:</block>
+  <block id="28d0a71b806dfc9c57cc495498c72954" category="paragraph">Un singolo aggregato di dati con mirroring in uno o entrambi i siti</block>
+  <block id="d419812c67afb77388be54f4cb41eb86" category="paragraph">Da qualsiasi prompt del nodo, configurare MetroCluster con il<block ref="d972f8bbe9b04d39b8b96b699cf921e9" prefix=" " category="inline-code"></block> parametro:</block>
+  <block id="3635681631407e08104ac78c0039ed70" category="paragraph"><block ref="0825cd88596408a485ffc279f70b9da9" prefix="" category="inline-code"></block></block>
+  <block id="753303bac17f77fab4f01ca22a7ff80e" category="list-text">Spostare i volumi MDV_CRS in modalità privilegio avanzato.</block>
+  <block id="4e934a5efc9ac0d78daef92737cd79bf" category="paragraph">Se si sta espandendo una configurazione MetroCluster a quattro nodi in una configurazione permanente a otto nodi, è necessario spostare uno dei volumi MDV nel nuovo gruppo DR.</block>
 </blocks>
