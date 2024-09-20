@@ -674,6 +674,122 @@ Obbligatorio
 |===
 
 
+== Verifica e configurazione dello stato ha dei componenti in modalità manutenzione
+
+Quando si configura un sistema di storage in una configurazione MetroCluster FC, è necessario assicurarsi che lo stato di alta disponibilità (ha) del modulo controller e dei componenti del telaio sia mcc o mcc-2n in modo che questi componenti si avviino correttamente. Sebbene questo valore debba essere preconfigurato nei sistemi ricevuti in fabbrica, è comunque necessario verificare l'impostazione prima di procedere.
+
+[CAUTION]
+====
+Se lo stato ha del modulo controller e del telaio non è corretto, non è possibile configurare il MetroCluster senza reinizializzare il nodo. È necessario correggere l'impostazione utilizzando questa procedura, quindi inizializzare il sistema utilizzando una delle seguenti procedure:
+
+* In una configurazione IP di MetroCluster, seguire la procedura descritta in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_sw_config_verify_haconfig.html["Ripristinare le impostazioni predefinite del sistema su un modulo controller"].
+* In una configurazione MetroCluster FC, seguire la procedura descritta in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/concept_configure_the_mcc_software_in_ontap.html#restoring-system-defaults-and-configuring-the-hba-type-on-a-controller-module["Ripristinare le impostazioni predefinite del sistema e configurare il tipo di HBA su un modulo controller"].
+
+
+====
+.Prima di iniziare
+Verificare che il sistema sia in modalità di manutenzione.
+
+.Fasi
+. In modalità Maintenance (manutenzione), visualizzare lo stato ha del modulo controller e dello chassis:
++
+`ha-config show`
+
++
+Lo stato ha corretto dipende dalla configurazione di MetroCluster.
+
++
+|===
+
+
+| Tipo di configurazione di MetroCluster | Stato HA per tutti i componenti... 
+
+
+ a| 
+Configurazione FC MetroCluster a otto o quattro nodi
+ a| 
+mcc
+
+
+
+ a| 
+Configurazione MetroCluster FC a due nodi
+ a| 
+mcc-2n
+
+
+
+ a| 
+Configurazione IP MetroCluster a otto o quattro nodi
+ a| 
+mccip
+
+|===
+. Se lo stato del sistema visualizzato del controller non è corretto, impostare lo stato ha corretto per la configurazione sul modulo controller:
++
+|===
+
+
+| Tipo di configurazione di MetroCluster | Comando 
+
+
+ a| 
+Configurazione FC MetroCluster a otto o quattro nodi
+ a| 
+`ha-config modify controller mcc`
+
+
+
+ a| 
+Configurazione MetroCluster FC a due nodi
+ a| 
+`ha-config modify controller mcc-2n`
+
+
+
+ a| 
+Configurazione IP MetroCluster a otto o quattro nodi
+ a| 
+`ha-config modify controller mccip`
+
+|===
+. Se lo stato del sistema visualizzato del telaio non è corretto, impostare lo stato ha corretto per la configurazione sul telaio:
++
+|===
+
+
+| Tipo di configurazione di MetroCluster | Comando 
+
+
+ a| 
+Configurazione FC MetroCluster a otto o quattro nodi
+ a| 
+`ha-config modify chassis mcc`
+
+
+
+ a| 
+Configurazione MetroCluster FC a due nodi
+ a| 
+`ha-config modify chassis mcc-2n`
+
+
+
+ a| 
+Configurazione IP MetroCluster a otto o quattro nodi
+ a| 
+`ha-config modify chassis mccip`
+
+|===
+. Avviare il nodo su ONTAP:
++
+`boot_ontap`
+
+. Ripetere l'intera procedura per verificare lo stato ha su ogni nodo nella configurazione MetroCluster.
+
+
+
+
 == Ripristino delle impostazioni predefinite del sistema e configurazione del tipo di HBA su un modulo controller
 
 .A proposito di questa attività
@@ -1502,116 +1618,6 @@ Se lo storage controller node_B_1 dispone di quattro shelf, eseguire i seguenti 
 
 
 
-
-
-
-
-== Verifica e configurazione dello stato ha dei componenti in modalità manutenzione
-
-Quando si configura un sistema storage in una configurazione MetroCluster, è necessario assicurarsi che lo stato di alta disponibilità (ha) del modulo controller e dei componenti dello chassis sia mcc o mcc-2n in modo che questi componenti si avviino correttamente.
-
-.Prima di iniziare
-Il sistema deve essere in modalità di manutenzione.
-
-.A proposito di questa attività
-Questa attività non è richiesta sui sistemi ricevuti dalla fabbrica.
-
-.Fasi
-. In modalità Maintenance (manutenzione), visualizzare lo stato ha del modulo controller e dello chassis:
-+
-`ha-config show`
-
-+
-Lo stato ha corretto dipende dalla configurazione di MetroCluster.
-
-+
-|===
-
-
-| Numero di controller nella configurazione MetroCluster | Lo stato HA per tutti i componenti deve essere... 
-
-
- a| 
-Configurazione MetroCluster FC a otto o quattro nodi
- a| 
-mcc
-
-
-
- a| 
-Configurazione MetroCluster FC a due nodi
- a| 
-mcc-2n
-
-
-
- a| 
-Configurazione IP MetroCluster
- a| 
-mccip
-
-|===
-. Se lo stato di sistema visualizzato del controller non è corretto, impostare lo stato ha per il modulo controller:
-+
-|===
-
-
-| Numero di controller nella configurazione MetroCluster | Comando 
-
-
- a| 
-Configurazione MetroCluster FC a otto o quattro nodi
- a| 
-ha-config modify controller mcc
-
-
-
- a| 
-Configurazione MetroCluster FC a due nodi
- a| 
-ha-config modify controller mcc-2n
-
-
-
- a| 
-Configurazione IP MetroCluster
- a| 
-ha-config modify controller mccip
-
-|===
-. Se lo stato di sistema visualizzato dello chassis non è corretto, impostare lo stato ha per lo chassis:
-+
-|===
-
-
-| Numero di controller nella configurazione MetroCluster | Comando 
-
-
- a| 
-Configurazione MetroCluster FC a otto o quattro nodi
- a| 
-ha-config modify chassis mcc
-
-
-
- a| 
-Configurazione MetroCluster FC a due nodi
- a| 
-ha-config modifica telaio mcc-2n
-
-
-
- a| 
-Configurazione IP MetroCluster
- a| 
-ha-config modify chassis mccip
-
-|===
-. Avviare il nodo su ONTAP:
-+
-`boot_ontap`
-
-. Ripetere questi passaggi su ciascun nodo della configurazione MetroCluster.
 
 
 
