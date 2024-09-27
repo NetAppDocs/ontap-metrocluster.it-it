@@ -6,7 +6,7 @@
 ====
 Se lo stato ha del modulo controller e del telaio non è corretto, non è possibile configurare il MetroCluster senza reinizializzare il nodo. È necessario correggere l'impostazione utilizzando questa procedura, quindi inizializzare il sistema utilizzando una delle seguenti procedure:
 
-* In una configurazione IP di MetroCluster, seguire la procedura descritta in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_sw_config_verify_haconfig.html["Ripristinare le impostazioni predefinite del sistema su un modulo controller"].
+* In una configurazione IP di MetroCluster, seguire la procedura descritta in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_sw_config_restore_defaults.html["Ripristinare le impostazioni predefinite del sistema su un modulo controller"].
 * In una configurazione MetroCluster FC, seguire la procedura descritta in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/concept_configure_the_mcc_software_in_ontap.html#restoring-system-defaults-and-configuring-the-hba-type-on-a-controller-module["Ripristinare le impostazioni predefinite del sistema e configurare il tipo di HBA su un modulo controller"].
 
 

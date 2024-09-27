@@ -41,7 +41,7 @@ Ogni SVM di dati richiede la configurazione di tutti i potenziali indirizzi del 
 
 Le LIF BGP sono specifiche di un nodo, simili alle LIF di intercluster: Ogni nodo ha una configurazione univoca, che non deve essere replicata nei nodi del sito di DR.
 
-configurato, l'esistenza del v0a (v0b e così via). Convalida continuamente la connettività, garantendo la riuscita di una migrazione LIF o di un failover (a differenza di L2, dove una configurazione guasta è visibile solo dopo l'interruzione).
+L'esistenza di v0a (v0b e così via) convalida costantemente la connettività, garantendo il successo di una migrazione LIF o di un failover (a differenza di L2, dove una configurazione guasta è visibile solo dopo l'interruzione).
 
 Una delle principali differenze architetturali consiste nel fatto che i client non devono più condividere la stessa subnet IP del VIP delle SVM di dati. Un router L3 con resilienza di livello Enterprise e funzionalità di ridondanza appropriate attivate (ad esempio, VRRP/HSRP) deve trovarsi sul percorso tra lo storage e i client affinché VIP possa funzionare correttamente.
 

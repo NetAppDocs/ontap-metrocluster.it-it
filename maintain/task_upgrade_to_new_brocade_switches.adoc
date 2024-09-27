@@ -53,12 +53,9 @@ image::../media/brocade_upgr_to_g620_fab_1_down.gif[brocade upgr a g620 fab 1 do
 +
 image::../media/brocade_upgr_to_g620_replaced_a_1.gif[l'aggiornamento di brocade a g620 ha sostituito un 1]
 
-.. Disattivare i nuovi switch:
+.. Disattivare i nuovi switch eseguendo il seguente comando su entrambi gli switch:
 +
 `switchCfgPersistentDisable`
-
-+
-Il comando disattiva entrambi gli switch nel fabric dello switch.
 
 +
 [listing]
@@ -79,8 +76,13 @@ image::../media/brocade_upgr_to_g620_replaced_b_1.gif[aggiornamento brocade a g6
 
 
 . Accendere i nuovi switch e lasciarli avviare.
-. Scaricare i file RCF per il nuovo switch.
-. Applicare i file RCF a entrambi i nuovi switch del fabric, seguendo le istruzioni riportate nella pagina di download.
+. Configurare gli switch FC Brocade mediante una delle seguenti procedure:
++
+link:../install-fc/task_reset_the_brocade_fc_switch_to_factory_defaults.html["Configurare gli switch Brocade FC con i file RCF"]
+
++
+link:../install-fc/task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Configurare manualmente gli switch Brocade FC"]
+
 . Salvare la configurazione dello switch:
 +
 `cfgSave`

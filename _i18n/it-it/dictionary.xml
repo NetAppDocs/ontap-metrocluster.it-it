@@ -2052,15 +2052,11 @@
   <block id="e485e2a29b3e88e7af57a872271ec004" category="list-text">Scollegare e rimuovere lo switch disattivato.</block>
   <block id="6ab8d2ea7c4ab8de2d0240533675a5ba" category="list-text">Installare il nuovo switch nel rack.</block>
   <block id="9db38090d74d3c900ffdd688465bb5e8" category="image-alt">l'aggiornamento di brocade a g620 ha sostituito un 1</block>
-  <block id="a0c9a11807b32c8820a3f0a43340ed14" category="list-text">Disattivare i nuovi switch:</block>
-  <block id="7b78e18dcd3185c34c9f26454f6f184a" category="paragraph">Il comando disattiva entrambi gli switch nel fabric dello switch.</block>
   <block id="d0ec9e05561bfe12c0306959eddf56c8" category="list-text">Collegare il nuovo switch utilizzando le assegnazioni delle porte consigliate.</block>
   <block id="98865fdc5c9769318f840c5f626b7ec2" category="list-text">Ripetere questi passaggi secondari sul sito MetroCluster del partner per sostituire il secondo switch nel primo fabric.</block>
   <block id="5a5070abc66ad4ba93c9599236c17675" category="paragraph">Entrambi gli switch del fabric 1 sono stati sostituiti.</block>
   <block id="9359b4d4c7ebe7a35b725df2addeaf7b" category="image-alt">aggiornamento brocade a g620 sostituito b 1</block>
   <block id="0fd8560791ae174b08c82bd0ee74f32e" category="list-text">Accendere i nuovi switch e lasciarli avviare.</block>
-  <block id="54f59ef2ee1220bd27c7e59f620f7e4a" category="list-text">Scaricare i file RCF per il nuovo switch.</block>
-  <block id="b71b5bca0bcdc72655be357f3c8b1c42" category="list-text">Applicare i file RCF a entrambi i nuovi switch del fabric, seguendo le istruzioni riportate nella pagina di download.</block>
   <block id="44a651ee20f59b8ff5887857d2eb80dc" category="list-text">Salvare la configurazione dello switch:</block>
   <block id="8baaacde06cbd685134e16e9023a6e85" category="list-text">Attendere 10 minuti per consentire alla configurazione di stabilizzarsi.</block>
   <block id="f7a6db45ff24ce0a158fab57e41dfafb" category="list-text">Tornare al prompt dello switch, verificare la versione del firmware dello switch:</block>
@@ -3329,13 +3325,9 @@
   <block id="b42bad79baad4f4f943c81fc37bedccd" category="list-text">Collegare i nodi IP MetroCluster agli switch IP come illustrato nella <block ref="657bcb6c51639854c4fdede551507755" category="inline-link-macro-rx"></block>.</block>
   <block id="4852598a3e684943b3bfcba06307b21d" category="list-text">Configurare i nodi IP MetroCluster utilizzando le seguenti sezioni:</block>
   <block id="49bbf1feafd5bd1fce43e87c0b9dbd0b" category="inline-link-macro">Raccolta delle informazioni richieste</block>
-  <block id="1cbfeb82dbc642ca3cfc8e2db84c469c" category="list-text"><block ref="1cbfeb82dbc642ca3cfc8e2db84c469c" category="inline-link-macro-rx"></block></block>
   <block id="9d288331dcbf3df246af2a35300324d8" category="inline-link-macro">Cancellazione della configurazione su un modulo controller</block>
-  <block id="87389a8ef852aa6f8fecae947cf8fd86" category="list-text"><block ref="87389a8ef852aa6f8fecae947cf8fd86" category="inline-link-macro-rx"></block></block>
   <block id="6260a0c66ccd92620d9889772b65cffe" category="inline-link-macro">Verifica dello stato ha-config dei componenti</block>
-  <block id="251fa3a6289ecafe7b95d67056605968" category="list-text"><block ref="251fa3a6289ecafe7b95d67056605968" category="inline-link-macro-rx"></block></block>
   <block id="9db419369e9211f992a02b77873b9294" category="inline-link-macro">Assegnazione manuale dei dischi per il pool 0 (ONTAP 9.4 e versioni successive)</block>
-  <block id="42aa3219583515464abe8c61ef6c61d3" category="list-text"><block ref="42aa3219583515464abe8c61ef6c61d3" category="inline-link-macro-rx"></block></block>
   <block id="d93785c679dd9ecbbe55df9329146a8d" category="list-text">Dalla modalità Maintenance, eseguire il comando halt per uscire dalla modalità Maintenance, quindi eseguire il comando boot_ontap per avviare il sistema e accedere alla configurazione del cluster.</block>
   <block id="ccaa4e34c729aaba9db9c5a44c41381f" category="paragraph">Non completare la procedura guidata del cluster o del nodo.</block>
   <block id="fbb3c6ac39d170b58b6e9006735f762f" category="list-text">Ripetere questa procedura sugli altri nodi IP MetroCluster.</block>
@@ -10351,7 +10343,6 @@
   <block id="fdf0e783eca74a7abe3d6795a4f8efc9" category="doc">Considerazioni per gli aggregati senza mirror</block>
   <block id="8e1b87e111c6a25dd28266989f14eb98" category="paragraph">Il volume di metadati del servizio di replica della configurazione (CRS) e i volumi radice SVM dei dati devono trovarsi su un aggregato mirrorato. Non è possibile spostare questi volumi in aggregato senza mirror. Se si trovano su aggregato senza mirror, le operazioni di switchover e switchback negoziate vengono vetoed. In questo caso, il comando` MetroCluster check` visualizza un avviso.</block>
   <block id="a63e8da5ab0d323dfa2d8c1590db4fed" category="paragraph">A seconda della versione di ONTAP in uso, è necessario configurare le LIF di peering BGP nel nodo SVM, non nel sistema o nei dati SVM. Nel 9.8, le LIF BGP sono visibili nella SVM del cluster (sistema) e le SVM del nodo non sono più presenti.</block>
-  <block id="e3bb1ae61b6d4dc1b02fdb23cab46189" category="paragraph">configurato, l'esistenza del v0a (v0b e così via). Convalida continuamente la connettività, garantendo la riuscita di una migrazione LIF o di un failover (a differenza di L2, dove una configurazione guasta è visibile solo dopo l'interruzione).</block>
   <block id="426935cb277802e33f3b6af9b3badb1a" category="summary">È necessario configurare gli switch IP Cisco per l'utilizzo come interconnessione del cluster e per la connettività IP MetroCluster back-end.</block>
   <block id="e0dd6c69ebcc82355424ad704fd214bc" category="doc">Configurazione degli switch IP Cisco</block>
   <block id="154b79668d2e81b5a47cc3c8bb3378a1" category="paragraph">Molte delle procedure descritte in questa sezione sono procedure indipendenti ed è necessario eseguire solo quelle a cui si è indirizzati o che sono pertinenti al proprio compito.</block>
@@ -10654,8 +10645,6 @@
   <block id="ff63653e290a8e5b339966cb9855555f" category="summary">Dopo aver rimosso la configurazione MetroCluster, tutte le interconnessioni e la connettività dei dischi devono essere regolate in modo da essere supportate. Per rimuovere la configurazione MetroCluster, contattare il supporto tecnico.</block>
   <block id="52ad3b024ecc6eae02e8415cef1140ba" category="summary">È necessario configurare gli switch IP per fornire la connettività IP MetroCluster back-end.</block>
   <block id="85a0d4656a0546275569f1e7ff91dc7f" category="inline-link-macro">Configurazione degli switch IP Broadcom</block>
-  <block id="c94a009c5a39824e241500e9f7d49cad" category="summary">A partire da ONTAP 9.5, ONTAP supporta la connettività Layer 3 utilizzando il protocollo VIP (Virtual IP) e Border Gateway (BGP).</block>
-  <block id="23b070f17dffe8e66479102b1681ffad" category="doc">Utilizzo del protocollo Virtual IP e Border Gateway con una configurazione MetroCluster</block>
   <block id="449a2bdc6a969f884c1d33fb66eecea7" category="section-title">Limiti di latenza e perdita di pacchetti negli ISL</block>
   <block id="5bb182767225fa9e1ca2133f4aa4f1df" category="inline-link-macro">Hardware Universe.</block>
   <block id="5b39512a68b8704473f81b0e6ba1272e" category="paragraph">Qualsiasi dispositivo che contribuisca alla latenza deve essere considerato.</block>
@@ -14031,7 +14020,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="753303bac17f77fab4f01ca22a7ff80e" category="list-text">Spostare i volumi MDV_CRS in modalità privilegio avanzato.</block>
   <block id="4e934a5efc9ac0d78daef92737cd79bf" category="paragraph">Se si sta espandendo una configurazione MetroCluster a quattro nodi in una configurazione permanente a otto nodi, è necessario spostare uno dei volumi MDV nel nuovo gruppo DR.</block>
   <block id="dbe62ccc612e92f8dc68e42a4661fecb" category="paragraph">Se lo stato ha del modulo controller e del telaio non è corretto, non è possibile configurare il MetroCluster senza reinizializzare il nodo. È necessario correggere l'impostazione utilizzando questa procedura, quindi inizializzare il sistema utilizzando una delle seguenti procedure:</block>
-  <block id="a86b0de4e0b4c477962412e4fb878fa1" category="list-text">In una configurazione IP di MetroCluster, seguire la procedura descritta in <block ref="46904e83320ab310261c288a6a607871" category="inline-link-macro-rx"></block>.</block>
   <block id="73fa02989b9da1f069817272869a683b" category="inline-link-macro">Ripristinare le impostazioni predefinite del sistema e configurare il tipo di HBA su un modulo controller</block>
   <block id="20e47a9aa4ad4f6197046707d54204fc" category="list-text">In una configurazione MetroCluster FC, seguire la procedura descritta in <block ref="61b5232c30227f4608eee40560fc97c5" category="inline-link-macro-rx"></block>.</block>
   <block id="db298781944827895a870278a91cf51d" category="paragraph">Verificare che il sistema sia in modalità di manutenzione.</block>
@@ -14045,4 +14033,9 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="84afb0fe12dfc2a5fa1e2e978393b33c" category="paragraph">Quando si configura un sistema di storage in una configurazione MetroCluster FC, è necessario assicurarsi che lo stato di alta disponibilità (ha) del modulo controller e dei componenti del telaio sia mcc o mcc-2n in modo che questi componenti si avviino correttamente. Sebbene questo valore debba essere preconfigurato nei sistemi ricevuti in fabbrica, è comunque necessario verificare l'impostazione prima di procedere.</block>
   <block id="cbc29e9b371b7013e6625c2fa3c7ec20" category="paragraph">In una configurazione IP di MetroCluster, è necessario verificare che lo stato ha-config del controller e dei componenti del telaio sia impostato su "mccip" in modo che si avviino correttamente. Sebbene questo valore debba essere preconfigurato nei sistemi ricevuti in fabbrica, è comunque necessario verificare l'impostazione prima di procedere.</block>
   <block id="b6eb7f38a057c8f63ffc29f23e6be071" category="sidebar">Come configurare configurazioni a otto nodi</block>
+  <block id="37887b7927053bae8056fe215242ac04" category="list-text">In una configurazione IP di MetroCluster, seguire la procedura descritta in <block ref="e39e92837d61810422f20d9c0acf650b" category="inline-link-macro-rx"></block>.</block>
+  <block id="654458233d1a8772886f997ae2b46c7c" category="paragraph">L'esistenza di v0a (v0b e così via) convalida costantemente la connettività, garantendo il successo di una migrazione LIF o di un failover (a differenza di L2, dove una configurazione guasta è visibile solo dopo l'interruzione).</block>
+  <block id="705abb444ac66e0442a9ae4646471061" category="list-text">Disattivare i nuovi switch eseguendo il seguente comando su entrambi gli switch:</block>
+  <block id="f67761c61087dd0914ed518ef2c5f8e3" category="list-text">Configurare gli switch FC Brocade mediante una delle seguenti procedure:</block>
+  <block id="4aa62d2d0cdae8fdaf47d41d558bac24" category="list-text"><block ref="4aa62d2d0cdae8fdaf47d41d558bac24" category="inline-link-macro-rx"></block></block>
 </blocks>
