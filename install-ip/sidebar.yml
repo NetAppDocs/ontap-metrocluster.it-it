@@ -91,32 +91,42 @@ entries:
       url: "/install-ip/task_config_switch_health.html"
 - title: Configurare il software MetroCluster in ONTAP
   entries:
-  - title: Panoramica
-    url: "/install-ip/concept_configure_the_mcc_software_in_ontap.html"
-  - title: Come configurare configurazioni a otto nodi
-    url: "/install-ip/task_sw_config_8n.html"
-  - title: Raccogliere le informazioni richieste
-    url: "/install-ip/task_sw_config_gather_info.html"
-  - title: Analogie e differenze tra cluster standard e configurazioni MetroCluster
-    url: "/install-ip/task_sw_config_differences.html"
-  - title: Verificare lo stato ha-config dei componenti
-    url: "/install-ip/task_sw_config_verify_haconfig.html"
-  - title: Ripristino delle impostazioni predefinite di sistema su un modulo controller
-    url: "/install-ip/task_sw_config_restore_defaults.html"
-  - title: Assegnazione manuale delle unità al pool 0
-    url: "/install-ip/task_sw_config_assign_pool0.html"
-  - title: Configurazione di ONTAP
-    url: "/install-ip/task_sw_config_setup_ontap.html"
-  - title: Configurare i cluster in una configurazione MetroCluster
-    url: "/install-ip/task_sw_config_configure_clusters.html"
-  - title: Configurare la crittografia end-to-end
-    url: "/install-ip/task-configure-end-to-end-encryption.html"
-  - title: Verificare lo switchover, la riparazione e lo switchback
-    url: "/install-ip/task_sw_config_verify_switchover.html"
-  - title: Configurare il software MetroCluster Tiebreaker o ONTAP Mediator
-    url: "/install-ip/task_sw_config_configure_mediator.html"
-  - title: Proteggere i file di backup della configurazione
-    url: "/install-ip/task_sw_config_protect_backup.html"
+  - title: Configurare il software MetroCluster utilizzando l'interfaccia CLI
+    entries:
+    - title: Panoramica
+      url: "/install-ip/concept_configure_the_mcc_software_in_ontap.html"
+    - title: Come configurare configurazioni a otto nodi
+      url: "/install-ip/task_sw_config_8n.html"
+    - title: Raccogliere le informazioni richieste
+      url: "/install-ip/task_sw_config_gather_info.html"
+    - title: Analogie e differenze tra cluster standard e configurazioni MetroCluster
+      url: "/install-ip/task_sw_config_differences.html"
+    - title: Verificare lo stato ha-config dei componenti
+      url: "/install-ip/task_sw_config_verify_haconfig.html"
+    - title: Ripristino delle impostazioni predefinite di sistema su un modulo controller
+      url: "/install-ip/task_sw_config_restore_defaults.html"
+    - title: Assegnazione manuale delle unità al pool 0
+      url: "/install-ip/task_sw_config_assign_pool0.html"
+    - title: Configurazione di ONTAP
+      url: "/install-ip/task_sw_config_setup_ontap.html"
+    - title: Configurare i cluster in una configurazione MetroCluster
+      url: "/install-ip/task_sw_config_configure_clusters.html"
+    - title: Configurare la crittografia end-to-end
+      url: "/install-ip/task-configure-end-to-end-encryption.html"
+    - title: Verificare lo switchover, la riparazione e lo switchback
+      url: "/install-ip/task_sw_config_verify_switchover.html"
+    - title: Configurare il software MetroCluster Tiebreaker o ONTAP Mediator
+      url: "/install-ip/task_sw_config_configure_mediator.html"
+    - title: Proteggere i file di backup della configurazione
+      url: "/install-ip/task_sw_config_protect_backup.html"
+  - title: Configurare il software MetroCluster utilizzando Gestione sistema
+    entries:
+    - title: Configurare un sito IP MetroCluster
+      url: "/install-ip/set-up-mcc-site-system-manager.html"
+    - title: Impostare il peering IP MetroCluster
+      url: "/install-ip/set-up-mcc-peering-system-manager.html"
+    - title: Configurare un sito IP MetroCluster
+      url: "/install-ip/configure-mcc-site-system-manager.html"
 - title: Configurare il servizio ONTAP Mediator per lo switchover automatico non pianificato
   entries:
   - title: Preparare l'installazione del servizio ONTAP Mediator
@@ -130,6 +140,8 @@ entries:
     url: "/install-ip/task_connecting_mcc_to_different_mediator_instance.html"
   - title: In che modo il mediatore ONTAP supporta lo switchover automatico non pianificato
     url: "/install-ip/concept-ontap-mediator-supports-automatic-unplanned-switchover.html"
+  - title: Gestione del ONTAP Mediator con System Manager
+    url: "/install-ip/task-sm-mediator.html"
 - title: Test della configurazione MetroCluster
   url: "/install-ip/task_test_the_mcc_configuration.html"
 - title: Considerazioni sulla rimozione delle configurazioni MetroCluster

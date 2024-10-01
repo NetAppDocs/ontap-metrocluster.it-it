@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: install-ip/configure-mcc-site-system-manager.html 
+keywords: metrocluster, configuration, config, mcc, HA, cluster 
+summary: A partire da ONTAP 9.8, è possibile gestire le operazioni di configurazione IP di MetroCluster con System Manager. Questo implica la configurazione, il peering e la configurazione di due cluster. 
+---
+= Configurare un sito IP MetroCluster
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+A partire da ONTAP 9.8, è possibile gestire le operazioni di configurazione IP di MetroCluster con System Manager. Questo implica la configurazione di due cluster, il peering dei cluster e la configurazione dei cluster.
+
+.Prima di iniziare
+Completare le seguenti procedure:
+
+* link:set-up-mcc-site-system-manager.html["Configurare un sito IP MetroCluster"]
+* link:set-up-mcc-peering-system-manager.html["Impostare il peering IP MetroCluster"]
+
+
+
+
+== Configurare la connessione tra cluster
+
+.Fasi
+. Accedere a System Manager da uno dei siti e selezionare *Dashboard*.
++
+Nella sezione *MetroCluster*, la figura mostra i due cluster configurati e peered per i siti MetroCluster. Il cluster da cui si sta lavorando (cluster locale) viene visualizzato a sinistra.
+
+. Fare clic su *Configura MetroCluster*. Da questa finestra, effettuare le seguenti operazioni:
++
+.. Vengono visualizzati i nodi per ciascun cluster nella configurazione MetroCluster. Utilizzare gli elenchi a discesa per selezionare i nodi nel cluster locale che saranno partner del disaster recovery con i nodi nel cluster remoto.
+.. Fare clic sulla casella di controllo se si desidera configurare il servizio ONTAP Mediator. Vedere link:./task-sm-mediator.html["Configurare il servizio ONTAP Mediator"].
+.. Se entrambi i cluster dispongono di una licenza per attivare la crittografia, viene visualizzata la sezione *Encryption*.
++
+Per attivare la crittografia, immettere una passphrase.
+
+.. Fare clic sulla casella di controllo se si desidera configurare MetroCluster con una rete Layer 3 condivisa.
++
+
+NOTE: I nodi partner ha e gli switch di rete che si connettono ai nodi devono avere una configurazione corrispondente.
+
+
+
+. Fare clic su *Salva* per configurare i siti MetroCluster.
++
+Nella sezione *MetroCluster* della dashboard, il grafico mostra un segno di spunta sul collegamento tra i due cluster, a indicare che la connessione è in buone condizioni.
+
+

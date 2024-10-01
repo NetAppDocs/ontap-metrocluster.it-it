@@ -1,7 +1,7 @@
 ---
 permalink: maintain/task-modify-ip-netmask-properties.html 
 sidebar: sidebar 
-keywords: vlan, ip, gateway,netmask, address, network, interface, subnet 
+keywords: vlan, ip, gateway,netmask, address, network, interface, subnet,metrocluster, layer 3, edit, net mask, configuration, configure,cli, system, manager 
 summary: 'È possibile modificare le seguenti proprietà di un"interfaccia IP MetroCluster, indirizzo IP e maschera e gateway. È possibile utilizzare qualsiasi combinazione di parametri per l"aggiornamento.' 
 ---
 = Modificare le proprietà di un'interfaccia IP MetroCluster
@@ -15,21 +15,35 @@ A partire da ONTAP 9.10.1, è possibile modificare le seguenti proprietà di un'
 
 Potrebbe essere necessario aggiornare queste proprietà, ad esempio, se viene rilevato un indirizzo IP duplicato o se un gateway deve essere modificato in caso di rete di livello 3 a causa di modifiche alla configurazione del router.
 
+
+
+== Modificare l'indirizzo IP, la netmask e il gateway
+
+La procedura che segui dipende dall'utilizzo di Gestione di sistema di ONTAP o dell'interfaccia CLI.
+
+[role="tabbed-block"]
+====
+.System Manager
+--
+Utilizzare System Manager per modificare le proprietà di indirizzo IP, netmask e gateway.
+
+.Fase
+Aggiornare l'indirizzo IP, la maschera di rete e il gateway per ogni nodo e interfaccia.
+
+--
+.CLI
+--
+Utilizzare la CLI per modificare le proprietà di indirizzo IP, netmask e gateway.
+
 .A proposito di questa attività
 * È possibile modificare solo un'interfaccia alla volta. L'interfaccia verrà rallentata fino a quando le altre interfacce non saranno aggiornate e le connessioni non verranno ristabilita.
 * Utilizzare `metrocluster configuration-settings interface modify` Per modificare qualsiasi proprietà dell'interfaccia IP di MetroCluster.
 +
 
-NOTE: Questi comandi modificano la configurazione di un nodo specifico per una determinata porta. Per ripristinare la connettività di rete completa, sono necessari comandi simili su altre porte. Analogamente, anche gli switch di rete devono aggiornare la configurazione. Ad esempio, se il gateway viene aggiornato, idealmente viene modificato su entrambi i nodi di una coppia ha, poiché sono identici. Inoltre, anche lo switch connesso a tali nodi deve aggiornare il gateway.
+NOTE: Questi comandi modificano la configurazione di un nodo specifico per una determinata porta. Per ripristinare la connettività di rete completa, sono necessari comandi simili su altre porte. Analogamente, anche gli switch di rete devono aggiornare la configurazione. Ad esempio, se il gateway viene aggiornato, idealmente viene modificato su entrambi i nodi di una coppia ha, poiché sono identici. Anche lo switch connesso a tali nodi deve aggiornare il proprio gateway.
 
 * Utilizzare i `metrocluster configuration-settings interface show`comandi , , `metrocluster connection check`e `metrocluster connection show` per verificare che tutta la connettività funzioni in tutte le interfacce.
 
-
-
-
-== Modificare l'indirizzo IP, la netmask e il gateway
-
-Eseguire i seguenti passaggi per modificare l'indirizzo IP, la netmask e il gateway di un'interfaccia IP MetroCluster.
 
 .Fasi
 . Aggiornare l'indirizzo IP, la netmask e il gateway per un singolo nodo e interfaccia:
@@ -135,3 +149,6 @@ Group Cluster Node    Network Address Network Address Partner Type Config State
                       192.168.20.100  192.168.21.250  DR Auxiliary completed
 ----
 
+
+--
+====
