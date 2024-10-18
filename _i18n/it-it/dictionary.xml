@@ -920,7 +920,6 @@
   <block id="eee74a5fbb91c1e61f0861dec4f05ecf" category="list-text">Vedere il piano di mappatura delle porte creato in <block ref="ab9fddb5e9f46cc8a59622b30650af49" category="inline-link-macro-rx"></block>.</block>
   <block id="50f4e96f99c70a7e3b9840b8f3295862" category="list-text">Ripetere i passaggi per aggiornare i nodi sul cluster_A, iniziando da <block ref="757f7f08bca76a1242dc77528a445472" category="inline-link-macro-rx"></block>.</block>
   <block id="ff8648705a32483b6efc36e81f3ff6c9" category="paragraph"><block ref="7efa6fc838c006d396e42638b4ff25d1" category="inline-link-macro-rx"></block>.</block>
-  <block id="455aeb5b6e6bb2c51d7485e26da56e30" category="paragraph">Link:../install-ip/concept_mediator_requirements.html [Configurazione del servizio ONTAP Mediator da una configurazione IP MetroCluster].</block>
   <block id="88577472afb219c41162d2707cb8cbaf" category="summary">È necessario avviare il modulo controller esistente in ONTAP.</block>
   <block id="c7747038c0f1377c3bfb0e109164ae36" category="doc">Avvio del modulo controller esistente</block>
   <block id="4dd312d890939484a0937bcf2da10578" category="list-text">Al prompt DEL CARICATORE, avviare il modulo controller esistente in ONTAP:</block>
@@ -3051,7 +3050,6 @@
   <block id="87e3fddd4347c3eea1eee68f594f1a43" category="sidebar">Spegnere un'intera configurazione IP MetroCluster</block>
   <block id="98e0abbb33a3ee2f9258bc3cb733233b" category="sidebar">Spegnere un'intera configurazione MetroCluster FC</block>
   <block id="2e1da8890bf2e6b2753bc66ee08ecc81" category="sidebar">Come utilizzare lo strumento matrice di interoperabilità per trovare le informazioni MetroCluster</block>
-  <block id="b25d5935c651d85fc394ce7858eb2c60" category="sidebar">Installare e configurare MetroCluster Tiebreaker</block>
   <block id="2ec9cf7fc01c78e918f2c1109d699ebd" category="sidebar">Configurare l'accesso admin a ONTAPI e SSH</block>
   <block id="38484792ce18e1ac90df07df1cbe4040" category="sidebar">Installare il software Tiebreaker</block>
   <block id="77d873129b2551d3791bd53918453706" category="sidebar">Configurare il software Tiebreaker</block>
@@ -4425,7 +4423,6 @@
   <block id="1a6ef31c02bc656e4fbac4327c5198d9" category="cell">Disruptivo o senza interruzioni</block>
   <block id="5a2ebfb8baa378cfcfcba58bbb1380c2" category="cell">Requisiti</block>
   <block id="8c4271e6faf2cea4cfc8e5b7108d8ee9" category="cell">Procedura</block>
-  <block id="ae4bcbe3a4d8a4dd251ebc90c0689dc3" category="paragraph">Quattro nodi</block>
   <block id="b8910962b1d031cc1eb8e8ad588c4c48" category="paragraph">Senza interruzioni</block>
   <block id="b1967383562a98a66ed0eff3ea640595" category="paragraph">I nuovi shelf di storage sono supportati sulle nuove piattaforme.</block>
   <block id="6e2ee39d0f9ccdad593782674a048e67" category="inline-link-macro">Collegamento alla procedura</block>
@@ -12102,7 +12099,6 @@
   <block id="2e53212ba8ca8b35cbf4ed2b9eb52b0c" category="doc">Aggiunta a caldo di uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7600N o 7500N</block>
   <block id="e3e17f353727a0bf80bc5f781fadd978" category="list-text">I bridge FibreBridge 7600N o 7500N devono essere collegati e disporre di porte SAS disponibili.</block>
   <block id="7ec840edd23c7b1a5bd3b9167d726942" category="list-text">Verificare la presenza di eventuali avvisi sullo stato di salute sui bridge dopo l'aggiunta dei nuovi stack:</block>
-  <block id="4aa202a3c65f2813f56a71404d4e0d9f" category="paragraph">Otto nodi</block>
   <block id="74c873abf18bb043c43561d25adce539" category="paragraph"><block ref="74c873abf18bb043c43561d25adce539" category="inline-link-macro-rx"></block></block>
   <block id="0159b80d745d9b405520a30a29416d2d" category="paragraph">Prima di eseguire l'aggiornamento, è necessario raccogliere informazioni per ciascuno dei vecchi nodi e, se necessario, regolare i domini di broadcast di rete, rimuovere eventuali VLAN e gruppi di interfacce e raccogliere informazioni sulla crittografia.</block>
   <block id="3b2740b2f65f79e770509c9b837df2de" category="paragraph">Durante la procedura di aggiornamento, sostituisci questi vecchi ID di sistema con gli ID di sistema dei moduli controller.</block>
@@ -13193,7 +13189,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="19aa48eac8765adacdffd4326cf95a85" category="paragraph">È possibile consentire a un sito del cluster di assumere il controllo dei task di un altro sito del cluster. Questa funzionalità consente di semplificare la manutenzione o il ripristino in caso di disastri.</block>
   <block id="5b8155e42c3d2db8152488c62b6cf9ea" category="paragraph"><block ref="5b8155e42c3d2db8152488c62b6cf9ea" category="inline-link-rx"></block></block>
   <block id="5575ad3a333d0c5383b802ef33e4e17a" category="cell">Switch Broadcom IP</block>
-  <block id="db639aacb326d316570b69a39011f1b2" category="paragraph">Quanta IX8</block>
   <block id="a28a8f1b6ed98f7c514003193e44ac48" category="cell">Switch IP Cisco</block>
   <block id="f0936c8d947d6fc9958bb86b9f3f74f8" category="paragraph">Nexus 9336C-FX2</block>
   <block id="aff36115ba8ba0cb671d3dfa2208bed1" category="paragraph">9336C</block>
@@ -14270,4 +14265,9 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="ae58261cc60a8a566f51001fa9647cc8" category="sidebar">Configurare il software MetroCluster utilizzando Gestione sistema</block>
   <block id="7dbb00295563db0482d1cd647c85ce79" category="sidebar">Gestione del ONTAP Mediator con System Manager</block>
   <block id="08df7de62062ac541a6aa573389a0bff" category="sidebar">Controllare lo stato di salute di una configurazione MetroCluster</block>
+  <block id="bcaee96b0ab793907da56767503991e2" category="admonition">Le porte dell'IP di MetroCluster e dello switch connesso non sono online fino a quando non si creano le interfacce IP di MetroCluster.</block>
+  <block id="6db27f68adde7b6578b513891108402f" category="paragraph">BES-53248</block>
+  <block id="c71b2061a1720b5d01c7a9a079938384" category="paragraph">Quattro o otto nodi</block>
+  <block id="be0859f362012838e5040b2ef44bc04b" category="paragraph"><block ref="bacc4dbebf17d22c9a0361ded0994067" category="inline-link-macro-rx"></block>.</block>
+  <block id="04615ba020125ab8e6efd72006cee7b6" category="sidebar">Installare e configurare MetroCluster Tiebreaker</block>
 </blocks>
