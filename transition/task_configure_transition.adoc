@@ -645,6 +645,14 @@ Devi rispondere con `y` quando viene richiesto di passare alla modalità avanzat
 
 NOTE: La Best practice consiste nell'avere più aggregati di dati mirrorati. Quando è presente un solo aggregato mirrorato, la protezione è inferiore perché i volumi di metadati si trovano sullo stesso aggregato piuttosto che su aggregati separati.
 
+. Riavviare ciascuno dei nuovi nodi:
++
+`node reboot -node <node_name> -inhibit-takeover true`
+
++
+
+NOTE: Non è necessario riavviare i nodi in un ordine specifico, ma è necessario attendere che un nodo sia completamente avviato e che tutte le connessioni siano stabilite prima di riavviare il nodo successivo.
+
 . Verificare che i nodi siano aggiunti al gruppo di DR:
 +
 `metrocluster node show`
