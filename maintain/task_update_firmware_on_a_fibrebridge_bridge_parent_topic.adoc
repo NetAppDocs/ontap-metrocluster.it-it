@@ -41,7 +41,7 @@ In IMT, è possibile utilizzare il campo soluzione storage per selezionare la so
 NOTE: Questa procedura è senza interruzioni e richiede circa 30 minuti.
 
 
-NOTE: A partire da ONTAP 9.8, la `storage bridge` il comando viene sostituito con `system bridge`. La procedura riportata di seguito mostra `storage bridge` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `system bridge` è preferibile utilizzare il comando.
+NOTE: A partire da ONTAP 9.8, il `system bridge` comando sostituisce `storage bridge` . La procedura seguente mostra il `system bridge` comando, ma se si esegue una versione precedente a ONTAP 9.8, è necessario utilizzare il `storage bridge` comando.
 
 .Fasi
 . Richiamare un messaggio AutoSupport che indica l'inizio della manutenzione:
@@ -70,15 +70,52 @@ https://mysupport.netapp.com/site/products/all/details/atto-fibrebridge/download
 +
 Quando richiesto, rispondere con "`y`" per passare alla modalità avanzata e visualizzare il prompt della modalità avanzata (*).
 
-. Aggiornare il firmware del bridge:
+. Aggiornare il firmware del bridge.
 +
-`storage bridge firmware update -bridge name -uri _URL-of-firmware-package_`
+A partire da ONTAP 9.16,1, è possibile utilizzare le credenziali per aggiornare il firmware del bridge se sono richieste dal server per scaricare il pacchetto firmware.
 
 +
+[role="tabbed-block"]
+====
+.Se le credenziali non sono richieste:
+--
+.. Aggiornare il firmware del bridge:
+
+
+[source, cli]
+----
+system bridge firmware update -bridge <name> -uri <URL-of-firmware-package>
+----
+.Esempio
 [listing]
 ----
-cluster_A> storage bridge firmware update -bridge bridge_A_1a -uri http://192.168.132.97/firmware.ZBD
+cluster_A> system bridge firmware update -bridge bridge_A_1a -uri http://192.168.132.97/firmware.ZBD
 ----
+--
+.Se sono necessarie le credenziali:
+--
+.. Aggiornare il firmware del bridge e specificare il nome utente richiesto:
++
+[source, cli]
+----
+system bridge firmware update -bridge <name> -uri <URL-of-firmware-package> -username <name>
+----
+.. Immettere la password quando richiesto nell'output, come mostrato nell'esempio seguente:
+
+
+.Esempio
+[listing]
+----
+cluster_A> system bridge firmware update -bridge bridge_A_1a -uri http://192.168.132.97/firmware.ZBD -username abc
+
+(system bridge)
+
+Enter the password:
+
+[Job 70] Job is queued: System bridge firmware update job.
+----
+--
+====
 . Tornare al livello di privilegio admin:
 +
 `set -privilege admin`
@@ -88,12 +125,12 @@ cluster_A> storage bridge firmware update -bridge bridge_A_1a -uri http://192.16
 `job show -name "_job-name_"`
 
 +
-Il seguente esempio mostra che il processo "`saggiornamento firmware del bridge di torage`" è ancora in esecuzione:
+L'esempio seguente mostra che il lavoro "system bridge firmware update" è ancora in esecuzione:
 
 +
 [listing]
 ----
-cluster_A> job show -name "storage bridge firmware update"
+cluster_A> job show -name "system bridge firmware update"
 Owning
 
 Job ID Name                 Vserver    Node           State
@@ -102,7 +139,7 @@ Job ID Name                 Vserver    Node           State
                             cluster_A
                                        node_A_1
                                                       Running
-Description: Storage bridge firmware update job
+Description: System bridge firmware update job
 ----
 +
 Dopo circa 10 minuti, il nuovo firmware è completamente installato e lo stato del processo sarà Success (riuscito):
@@ -110,16 +147,16 @@ Dopo circa 10 minuti, il nuovo firmware è completamente installato e lo stato d
 +
 [listing]
 ----
-cluster_A> job show -name "storage bridge firmware update"
+cluster_A> job show -name "system bridge firmware update"
 
                             Owning
 Job ID Name                 Vserver    Node           State
 ------ -------------------- ---------- -------------- ----------
-2246   Storage bridge firmware update
+2246   System bridge firmware update
                             cluster_A
                                        node_A_1
                                                       Success
-Description: Storage bridge firmware update job
+Description: System bridge firmware update job
 ----
 . Completare la procedura in base all'attivazione della gestione in-band e alla versione di ONTAP in esecuzione nel sistema:
 +
@@ -151,7 +188,7 @@ Ready.
 *** Se si utilizza ONTAP 9.5 o versione successiva, la gestione in-band è supportata e il comando può essere inviato dal prompt del cluster:
 
 
-.. Eseguire `storage bridge run-cli -name _bridge-name_ -command FlashImages` comando.
+.. Eseguire il `system bridge run-cli -name _bridge-name_ -command FlashImages` comando.
 +
 
 NOTE: L'esempio mostra che l'immagine flash principale mostra l'immagine del nuovo firmware, mentre l'immagine flash secondaria mostra l'immagine precedente.
@@ -159,7 +196,7 @@ NOTE: L'esempio mostra che l'immagine flash principale mostra l'immagine del nuo
 +
 [listing]
 ----
-cluster_A> storage bridge run-cli -name ATTO_7500N_IB_1 -command FlashImages
+cluster_A> system bridge run-cli -name ATTO_7500N_IB_1 -command FlashImages
 
 [Job 2257]
 
@@ -174,7 +211,7 @@ Ready.
 ----
 .. Se necessario, riavviare il bridge:
 +
-`storage bridge run-cli -name ATTO_7500N_IB_1 -command FirmwareRestart`
+`system bridge run-cli -name ATTO_7500N_IB_1 -command FirmwareRestart`
 
 +
 
@@ -201,12 +238,12 @@ System Storage Configuration: Quad-Path HA
 ----
 . Verificare che il firmware di FibreBridge sia stato aggiornato:
 +
-`storage bridge show -fields fw-version,symbolic-name`
+`system bridge show -fields fw-version,symbolic-name`
 
 +
 [listing]
 ----
-cluster_A> storage bridge show -fields fw-version,symbolic-name
+cluster_A> system bridge show -fields fw-version,symbolic-name
 name fw-version symbolic-name
 ----------------- ----------------- -------------
 ATTO_20000010affeaffe 3.10 A06X bridge_A_1a

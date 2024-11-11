@@ -21,6 +21,28 @@ Per informazioni dettagliate su problemi noti, limitazioni e avvisi di aggiornam
 
 
  a| 
+Supporto di mobilità dei dati SVM per la migrazione delle configurazioni MetroCluster
+ a| 
+ONTAP supporta la migrazione di una SVM da una coppia ha non MetroCluster a una configurazione MetroCluster o da una configurazione MetroCluster a una coppia ha non MetroCluster. Impossibile migrare una SVM tra configurazioni MetroCluster.
+
+link:https://docs.netapp.com/us-en/ontap/svm-migrate/index.html["Mobilità dei dati SVM"^]
+ a| 
+ONTAP 9.16.1
+
+
+
+ a| 
+Supporto di autenticazione MD5 per i gruppi di peer BGP
+ a| 
+ONTAP supporta l'autenticazione MD5 sui gruppi di peer BGP per proteggere le sessioni BGP. Quando MD5 è abilitato, le sessioni BGP possono essere stabilite ed elaborate solo tra i peer autorizzati, evitando potenziali interruzioni della sessione da parte di un attore non autorizzato.
+
+link:https://docs.netapp.com/us-en/ontap/networking/configure_virtual_ip_@vip@_lifs.html["Configurare i LIF VIP (Virtual IP)"^]
+ a| 
+ONTAP 9.16.1
+
+
+
+ a| 
 Supporto IP MetroCluster per NVMe
  a| 
 Il protocollo host front-end NVMe/TCP è supportato sulle configurazioni MetroCluster IP a quattro nodi.
