@@ -122,7 +122,7 @@ Enter the password:
 
 . Verificare che l'aggiornamento del firmware sia completo:
 +
-`job show -name "_job-name_"`
+`job show -name "<job_name>"`
 
 +
 L'esempio seguente mostra che il lavoro "system bridge firmware update" è ancora in esecuzione:
@@ -188,7 +188,7 @@ Ready.
 *** Se si utilizza ONTAP 9.5 o versione successiva, la gestione in-band è supportata e il comando può essere inviato dal prompt del cluster:
 
 
-.. Eseguire il `system bridge run-cli -name _bridge-name_ -command FlashImages` comando.
+.. Eseguire il `system bridge run-cli -name <bridge_name> -command FlashImages` comando.
 +
 
 NOTE: L'esempio mostra che l'immagine flash principale mostra l'immagine del nuovo firmware, mentre l'immagine flash secondaria mostra l'immagine precedente.
@@ -294,121 +294,4 @@ flashimages
  Ready.
 ----
 . Ripetere i passaggi da 5 a 13 sul bridge successivo fino a quando tutti i bridge nella configurazione MetroCluster non sono stati aggiornati.
-
-
-
-
-== Aggiornamento del firmware su FibreBridge 7500N nelle configurazioni che eseguono ONTAP 9,3.x e versioni precedenti
-
-Potrebbe essere necessario aggiornare il firmware sui bridge FibreBridge per verificare di disporre delle funzioni più recenti o per risolvere eventuali problemi. Questa procedura deve essere utilizzata per FibreBridge 7500N nelle configurazioni che eseguono ONTAP 9,3.x
-
-.Prima di iniziare
-* La configurazione MetroCluster deve funzionare normalmente.
-* Tutti i bridge FibreBridge nella configurazione MetroCluster devono essere operativi.
-* Tutti i percorsi di storage devono essere disponibili.
-* È necessaria la password admin e l'accesso a un server FTP o SCP.
-* È necessario utilizzare una versione del firmware supportata.
-+
-https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp"^]
-
-+
-In IMT, è possibile utilizzare il campo soluzione storage per selezionare la soluzione MetroCluster. Utilizzare *Esplora componenti* per selezionare i componenti e la versione di ONTAP per perfezionare la ricerca. È possibile fare clic su *Mostra risultati* per visualizzare l'elenco delle configurazioni supportate che corrispondono ai criteri.
-
-
-
-A partire da ONTAP 9.3, è possibile utilizzare il comando di aggiornamento del firmware del bridge di storage ONTAP per aggiornare il firmware del bridge sui bridge FibreBridge 7500N.
-
-link:task_update_firmware_on_a_fibrebridge_bridge_parent_topic.html["Aggiornamento del firmware su bridge FibreBridge 7600N o 7500N su configurazioni con ONTAP 9.4 e versioni successive"]
-
-Questa attività deve essere eseguita su ciascun bridge FibreBridge nella configurazione MetroCluster, in modo che tutti i bridge eseguano la stessa versione del firmware.
-
-
-NOTE: Questa procedura è senza interruzioni e richiede circa 30 minuti.
-
-.Fasi
-. Richiamare un messaggio AutoSupport che indica l'inizio della manutenzione:
-+
-`system node autosupport invoke -node * -type all -message MAINT=_maintenance-window-in-hours_`
-
-+
-"`_maintenance-window-in-hours_`" specifica la durata della finestra di manutenzione, con un massimo di 72 ore. Se la manutenzione viene completata prima che sia trascorso il tempo, è possibile richiamare un messaggio AutoSupport che indica la fine del periodo di manutenzione:
-
-+
-`system node autosupport invoke -node * -type all -message MAINT=end`
-
-. Accedere alla pagina ATTO FibreBridge e selezionare il firmware appropriato per il bridge.
-+
-https://mysupport.netapp.com/site/products/all/details/atto-fibrebridge/downloads-tab["PAGINA DI download DEL firmware DI ATTO FibreBridge"^]
-
-. Leggere attentamente il documento attenzione/MustRead e il Contratto per l'utente finale, quindi fare clic sulla casella di controllo per indicare l'accettazione e procedere.
-. Scaricare il file del firmware del bridge seguendo i passaggi da 1 a 3 della procedura nella pagina di download del firmware ATTO FibreBridge.
-. Fare una copia della pagina di download del firmware ATTO FibreBridge e delle note di rilascio come riferimento quando viene richiesto di aggiornare il firmware su ciascun bridge.
-. Aggiornare il bridge:
-+
-.. Installare il firmware sul ponte FibreBridge 7500N.
-+
-Fare riferimento alle istruzioni fornite nella sezione "`Aggiorna firmware'' del _Manuale d'installazione e funzionamento atto FibreBridge 7500N_.
-
-+
-*ATTENZIONE:* assicurarsi di spegnere e riaccendere il singolo bridge. Se si attendono e si riattiva contemporaneamente entrambi i bridge in uno stack, il controller potrebbe perdere l'accesso ai dischi, causando un guasto al plex o un panico per più dischi.
-
-+
-Il bridge dovrebbe riavviarsi.
-
-.. Dalla console di uno dei controller, verificare che il bridge sia stato riavviato correttamente:
-+
-`sysconfig`
-
-+
-Il sistema deve essere cablato per l'alta disponibilità multipath (entrambi i controller hanno accesso attraverso i bridge agli shelf di dischi in ogni stack).
-
-+
-[listing]
-----
-cluster_A::> node run -node cluster_A-01 -command sysconfig
-NetApp Release 9.1P7: Sun Aug 13 22:33:49 PDT 2017
-System ID: 1234567890 (cluster_A-01); partner ID: 0123456789 (cluster_A-02)
-System Serial Number: 200012345678 (cluster_A-01)
-System Rev: A4
-System Storage Configuration: Quad-Path HA
-----
-.. Dalla console di uno dei controller, verificare che il firmware FibreBridge sia stato aggiornato:
-+
-`storage bridge show -fields fw-version,symbolic-name`
-
-+
-[listing]
-----
-cluster_A::> storage bridge show -fields fw-version,symbolic-name
- name              fw-version        symbolic-name
- ----------------- ----------------- -------------
- ATTO_10.0.0.1     1.63 071C 51.01   bridge_A_1a
- ATTO_10.0.0.2     1.63 071C 51.01   bridge_A_1b
- ATTO_10.0.1.1     1.63 071C 51.01   bridge_B_1a
- ATTO_10.0.1.2     1.63 071C 51.01   bridge_B_1b
- 4 entries were displayed.
-----
-.. Ripetere i passaggi precedenti sullo stesso bridge per aggiornare la seconda partizione.
-.. Verificare che entrambe le partizioni siano aggiornate:
-+
-`flashimages`
-
-+
-L'output dovrebbe mostrare la stessa versione per entrambe le partizioni.
-
-+
-[listing]
-----
-Ready.
-flashimages
-4
-;Type         Version
-;=====================================================
-Primary    2.80 003T
-Secondary    2.80 003T
-Ready.
-----
-
-
-. Ripetere il passaggio precedente sul bridge successivo, fino a quando tutti i bridge nella configurazione MetroCluster non sono stati aggiornati.
 

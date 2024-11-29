@@ -308,6 +308,7 @@ Questa attività deve essere ripetuta su ogni switch nella configurazione IP Met
 
 ====
 .Fasi
+. Scaricare il firmware dello switch dal link:https://www.broadcom.com/support/bes-switch["Sito di supporto Broadcom"^].
 . Verificare che la versione di EFOS in uso sia conforme a FIPS o non conforme a FIPS utilizzando `show fips status` comando. Negli esempi seguenti, `IP_switch_A_1` Utilizza EFOS conforme a FIPS e. `IP_switch_A_2` Utilizza EFOS non conforme a FIPS.
 +
 *Esempio 1*

@@ -47,95 +47,45 @@ La disponibilità della gestione in-band dei bridge dipende dalla versione di ON
 I comandi di Bridge CLI possono essere emessi dall'interfaccia ONTAP `storage bridge run-cli -name _bridge_name_ -command _bridge_command_name_` All'interfaccia ONTAP.
 
 
-NOTE: Si consiglia di utilizzare la gestione in-band con accesso IP disattivato per migliorare la sicurezza limitando la connettività fisica del bridge.
+NOTE: Si consiglia di utilizzare la gestione in banda con l'accesso IP disattivato per migliorare la protezione limitando la connettività fisica al bridge.
 
 
 
-== Numero di dischi e shelf supportati sui bridge FibreBridge 7600N e 7500N
+== Limiti del bridge FibreBridge 7600N e 7500N e regole di collegamento
 
-Nelle tabelle seguenti viene indicato il numero di dischi e shelf supportati dietro una coppia di bridge FibreBridge 7600N e 7500N.
+Rivedere i limiti e le considerazioni quando si collegano i ponti FibreBridge 7600N e 7500N.
 
-[NOTE]
-====
-* Si applica il primo limite raggiunto.
-* Se utilizzi DS460C shelf, è possibile utilizzare solo un massimo di 240 dischi, ovvero 4 shelf.
-* Se utilizzi DS212C shelf, è possibile utilizzare solo un massimo di 120 dischi, ovvero 10 shelf.
+.Limiti del ponte FibreBridge 7600N e 7500N
+* Il numero massimo di HDD e SSD combinati è 240.
+* Il numero massimo di dischi SSD è 96.
+* Il numero massimo di SSD per porta SAS è 48.
+* Il numero massimo di shelf per porta SAS è 10.
 
 
-====
-.Numero di dischi supportato
-Esaminare il numero di dischi supportati dietro una coppia di bridge FibreBridge 7600N o 7500N:
+.Le regole di collegamento dei bridge FibreBridge 7600N e 7500N
+* Non combinare dischi SSD e HDD sulla stessa porta SAS.
+* Distribuire gli shelf in maniera uniforme sulle porte SAS.
+* Non si dovrebbero avere DS460 shelf sulla stessa porta SAS degli altri tipi di shelf (ad esempio DS212 o DS224 shelf).
 
-[cols="3*"]
+
+.Configurazione di esempio
+Di seguito è illustrato un esempio di configurazione per il collegamento di quattro shelf DS224 con dischi SSD e sei shelf DS224 con dischi HDD:
+
+[cols="2*"]
 |===
-| Configurazione disco | Tipo di disco | Dischi totali per coppia di bridge 
+| Porta SAS | Shelf e dischi 
 
 
-| Tutti gli SSD | SSD | 96 
+| Porta SAS-A | 2x DS224 shelf con dischi SSD 
 
 
-| Tutti gli HDD | DISCO RIGIDO | 240 
+| Porta SAS-B | 2x DS224 shelf con dischi SSD 
 
 
-.2+| Misto (SSD da 96 TB) | SSD | 96 
+| Porta SAS-C. | 3x DS224 shelf con dischi HDD 
 
 
-| DISCO RIGIDO | 144 
-
-
-.2+| Misto (SSD da 72 TB) | SSD | 72 
-
-
-| DISCO RIGIDO | 168 
-
-
-.2+| Misto (SSD da 48 TB) | SSD | 48 
-
-
-| DISCO RIGIDO | 192 
-
-
-.2+| Misto (SSD da 24 TB) | SSD | 24 
-
-
-| DISCO RIGIDO | 216 
-|===
-.Numero di shelf supportato
-Analisi del numero di shelf supportati dietro due ponti FibreBridge 7600N e 7500N:
-
-[cols="3*"]
-|===
-| Configurazione disco | Tipo di disco | Numero totale di shelf 
-
-
-| Tutti gli SSD | SSD | 4 
-
-
-| Tutti gli HDD | DISCO RIGIDO | 10 
-
-
-.2+| Misto | SSD | 1 
-
-
-| DISCO RIGIDO | 9 
-
-
-.2+| Misto | SSD | 2 
-
-
-| DISCO RIGIDO | 8 
-
-
-.2+| Misto | SSD | 3 
-
-
-| DISCO RIGIDO | 7 
-
-
-.2+| Misto | SSD | 4 
-
-
-| DISCO RIGIDO | 6 
+| Porta SAS-D. | 3x DS224 shelf con dischi HDD 
 |===
 
 

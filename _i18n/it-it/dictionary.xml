@@ -1128,7 +1128,6 @@
   <block id="1f06fb185175c42c17ad8392e330767e" category="paragraph">Quando richiesto, rispondere con "`y`" per passare alla modalità avanzata e visualizzare il prompt della modalità avanzata (*).</block>
   <block id="3240aad2738f70e3ab16c6dadcff4f64" category="list-text">Aggiornare il firmware del bridge:</block>
   <block id="4b3afe92d6efd942da2f6c9cc0193156" category="list-text">Verificare che l'aggiornamento del firmware sia completo:</block>
-  <block id="e8ecfd692141a2af654944f772388550" category="paragraph"><block ref="35cf6f7333734661dc09591dc27f71cd" prefix="" category="inline-code"></block></block>
   <block id="57218ce2b3683cc3d220300cdb1a5112" category="paragraph">Dopo circa 10 minuti, il nuovo firmware è completamente installato e lo stato del processo sarà Success (riuscito):</block>
   <block id="1023e499127e1c9705dbc019dc65ffca" category="list-text">Completare la procedura in base all'attivazione della gestione in-band e alla versione di ONTAP in esecuzione nel sistema:</block>
   <block id="ad4a04ec96320f2893d5f6989086846f" category="list-text">Se si utilizza ONTAP 9.4, la gestione in-band non è supportata e il comando deve essere emesso dalla console bridge:</block>
@@ -1141,7 +1140,6 @@
   <block id="2667ea3cde22695f6975f497f96d298f" category="list-text">Verificare che il bridge sia stato riavviato correttamente:</block>
   <block id="6e4b7fcf9090d34cd27cab087264a169" category="paragraph">Il sistema deve essere cablato per l'alta disponibilità multipath (entrambi i controller hanno accesso attraverso i bridge agli shelf di dischi in ogni stack).</block>
   <block id="67fe76fc6c243ad7a07dba1bedbd68be" category="list-text">Verificare che il firmware di FibreBridge sia stato aggiornato:</block>
-  <block id="871912239094dc44baa2ec93ffb8d632" category="paragraph"><block ref="d6532f205af7738fbda4ce33335d4e04" prefix="" category="inline-code"></block></block>
   <block id="f7600c022afd87e76a4e915ac9399e45" category="list-text">Verificare che le partizioni siano aggiornate dal prompt del bridge:</block>
   <block id="06e7ec6ae7f944544771022d467d0496" category="paragraph"><block ref="c27e24b8b45de3e3c43ee4f5da981459" prefix="" category="inline-code"></block></block>
   <block id="98e693f628e7057fb87edf44897d2df1" category="paragraph">L'immagine flash principale visualizza l'immagine del nuovo firmware, mentre l'immagine flash secondaria visualizza l'immagine precedente.</block>
@@ -1149,18 +1147,6 @@
   <block id="aebdbdde32f31274fe9fc6e75b482c32" category="list-text">Verificare che entrambe le immagini flash siano aggiornate alla stessa versione.</block>
   <block id="1b7c547e0c44744faa2a37c6b0435cc2" category="paragraph">L'output dovrebbe mostrare la stessa versione per entrambe le partizioni.</block>
   <block id="bb7439d72897f5b031319c5576c3cc67" category="list-text">Ripetere i passaggi da 5 a 13 sul bridge successivo fino a quando tutti i bridge nella configurazione MetroCluster non sono stati aggiornati.</block>
-  <block id="2ff283b5fcea4bdb853d6b9da8d8948c" category="paragraph"><block ref="2ff283b5fcea4bdb853d6b9da8d8948c" category="inline-link-macro-rx"></block></block>
-  <block id="2d0700f1234a9f9dd9937555291170ec" category="paragraph">"`_maintenance-window-in-hours_`" specifica la durata della finestra di manutenzione, con un massimo di 72 ore. Se la manutenzione viene completata prima che sia trascorso il tempo, è possibile richiamare un messaggio AutoSupport che indica la fine del periodo di manutenzione:</block>
-  <block id="8c3f1a5045c47c008de3de6fa5352da3" category="list-text">Scaricare il file del firmware del bridge seguendo i passaggi da 1 a 3 della procedura nella pagina di download del firmware ATTO FibreBridge.</block>
-  <block id="3083b982cc912e364f9e1bc28cc6915a" category="list-text">Fare una copia della pagina di download del firmware ATTO FibreBridge e delle note di rilascio come riferimento quando viene richiesto di aggiornare il firmware su ciascun bridge.</block>
-  <block id="ae87d5531ab43f90dedaa89f103356a1" category="list-text">Aggiornare il bridge:</block>
-  <block id="8458ea1c3c1ea2053887d2f331da77f4" category="paragraph">*ATTENZIONE:* assicurarsi di spegnere e riaccendere il singolo bridge. Se si attendono e si riattiva contemporaneamente entrambi i bridge in uno stack, il controller potrebbe perdere l'accesso ai dischi, causando un guasto al plex o un panico per più dischi.</block>
-  <block id="6eee07f1028e6e37c9b9675c78a3ecab" category="paragraph">Il bridge dovrebbe riavviarsi.</block>
-  <block id="86b1ef008f18b43ce62a9069606c0c6d" category="list-text">Dalla console di uno dei controller, verificare che il bridge sia stato riavviato correttamente:</block>
-  <block id="7eb8d2db2d90e516a56d7472a56b99bd" category="list-text">Dalla console di uno dei controller, verificare che il firmware FibreBridge sia stato aggiornato:</block>
-  <block id="ed0f0385ac6d639a877dbd50ffe09fc9" category="list-text">Ripetere i passaggi precedenti sullo stesso bridge per aggiornare la seconda partizione.</block>
-  <block id="c1e404b965bd033d8d0a2284a04382d6" category="list-text">Verificare che entrambe le partizioni siano aggiornate:</block>
-  <block id="f716521a03deca3c493b0dbaa94f969c" category="list-text">Ripetere il passaggio precedente sul bridge successivo, fino a quando tutti i bridge nella configurazione MetroCluster non sono stati aggiornati.</block>
   <block id="2fb10535c586c96b3774f785a3997a21" category="paragraph"><block ref="69cfa26d6e6345bb4eef9a298daa32f3" prefix="" category="inline-code"></block></block>
   <block id="9d9aef7264cbb39bb4c46c285f3b1647" category="paragraph"><block ref="c55b2fab97bf32977f3799d9d5689c0b" prefix="" category="inline-code"></block></block>
   <block id="43f3f166376065e515d7eb33479e4f37" category="paragraph"><block ref="0f0a05e9497053a21c6cfccec36a35fa" prefix="" category="inline-code"></block></block>
@@ -12902,11 +12888,6 @@ Si applica a tutte le configurazioni MetroCluster.</block>
   <block id="480cf83fd6c463ccef2ed2a9d0dce2c4" category="list-text">Inserire il<block ref="bedfcd4488b13f5b7062e121a6a8baa5" prefix=" " category="inline-code"></block> per abilitare in modo persistente le porte. Questa operazione deve essere eseguita su entrambi gli switch del sito sopravvissuto.</block>
   <block id="9f6a23c1abc971d714730192ce961b96" category="paragraph">Seguire le istruzioni riportate in <block ref="9c0d52e0ce7a57d643217990aba10043" category="inline-link-macro-rx"></block> Per eseguire operazioni di healing e switchback in base alla configurazione MetroCluster.</block>
   <block id="0b4bc6296d77be28e33d3b50e0ea0797" category="paragraph"><block ref="0b4bc6296d77be28e33d3b50e0ea0797" category="inline-link-macro-rx"></block></block>
-  <block id="e49bc35e0118f2b5a5904c13e1833761" category="section-title">Aggiornamento del firmware su FibreBridge 7500N nelle configurazioni che eseguono ONTAP 9,3.x e versioni precedenti</block>
-  <block id="1a5e839afe7a716dd2640f7fdb69669a" category="paragraph">Potrebbe essere necessario aggiornare il firmware sui bridge FibreBridge per verificare di disporre delle funzioni più recenti o per risolvere eventuali problemi. Questa procedura deve essere utilizzata per FibreBridge 7500N nelle configurazioni che eseguono ONTAP 9,3.x</block>
-  <block id="ef1eae725a44cfeb66559e3d3e94f7ec" category="paragraph">A partire da ONTAP 9.3, è possibile utilizzare il comando di aggiornamento del firmware del bridge di storage ONTAP per aggiornare il firmware del bridge sui bridge FibreBridge 7500N.</block>
-  <block id="05791e70fbe1537753bf5a023b7623eb" category="list-text">Installare il firmware sul ponte FibreBridge 7500N.</block>
-  <block id="c1a1962dd8879c856d3b821c9622f94c" category="paragraph">Fare riferimento alle istruzioni fornite nella sezione "`Aggiorna firmware'' del _Manuale d'installazione e funzionamento atto FibreBridge 7500N_.</block>
   <block id="24ea961e35f1e60e606fd840735a7b80" category="summary">Se è necessario eseguire la manutenzione del sito o spostare un singolo sito in una configurazione IP MetroCluster, è necessario sapere come spegnere e riaccendere il sito.</block>
   <block id="064c811af1591c939040fba47365213b" category="doc">Spegnere e riaccendere un singolo sito in una configurazione IP di MetroCluster</block>
   <block id="b66411bb5022a5619d62ef25fa47b67f" category="paragraph">Nelle configurazioni IP di MetroCluster che eseguono ONTAP 9,5 o versione precedente, i nodi del sito di disastro non si avviano automaticamente su ONTAP e i plex rimangono offline.</block>
@@ -13855,33 +13836,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="dff95cb9e5adc8c22082286195b9c18b" category="list-text"><block ref="dff95cb9e5adc8c22082286195b9c18b" category="inline-link-macro-rx"></block></block>
   <block id="86e4bcdd91ae737b95a3cf066dd128f7" category="paragraph">Gli ID di sistema vecchi e nuovi sono stati identificati in <block ref="e3858d0d76295d35179b2ac088c574f3" category="inline-link-macro-rx"></block>.</block>
   <block id="f411a218519aacec5088cc5a3d23eb64" category="paragraph">Gli ID di sistema vecchi e nuovi sono stati identificati in <block ref="372daca62ea6308294fd70c00fcc8af2" category="inline-link-macro-rx"></block>.</block>
-  <block id="11ceccfd751fe28a61b558ba07583aff" category="section-title">Numero di dischi e shelf supportati sui bridge FibreBridge 7600N e 7500N</block>
-  <block id="ff2961229b46cc89dffec4aab67d010d" category="paragraph">Nelle tabelle seguenti viene indicato il numero di dischi e shelf supportati dietro una coppia di bridge FibreBridge 7600N e 7500N.</block>
-  <block id="b8cbb75a8c2b1413bcddd7c532ccc064" category="list-text">Si applica il primo limite raggiunto.</block>
-  <block id="2a3f0c8b0ca6744889b3ffa76d4b9f5b" category="list-text">Se utilizzi DS460C shelf, è possibile utilizzare solo un massimo di 240 dischi, ovvero 4 shelf.</block>
-  <block id="5ccf1f9193b673f77fa0a023f0c64238" category="list-text">Se utilizzi DS212C shelf, è possibile utilizzare solo un massimo di 120 dischi, ovvero 10 shelf.</block>
-  <block id="402fb729f11d0452c518d4172b605b2c" category="paragraph-title">Numero di dischi supportato</block>
-  <block id="c75f82dd210bf38bdd42ff246823dd9e" category="paragraph">Esaminare il numero di dischi supportati dietro una coppia di bridge FibreBridge 7600N o 7500N:</block>
-  <block id="3baa66bdd3ca9158478ad78d6079db1c" category="cell">Configurazione disco</block>
-  <block id="3d0bf05155f3dfd0eeccf9e953d46156" category="cell">Tipo di disco</block>
-  <block id="eda8b8dec444e51f3afb1c089a183afc" category="cell">Dischi totali per coppia di bridge</block>
-  <block id="4a761ba24826218f4585e8feddc64d7c" category="cell">Tutti gli SSD</block>
-  <block id="34df20bab5e85dc75bfc94ef569cced9" category="cell">SSD</block>
-  <block id="b0df25be54449fa53d1180d01ad8bdc5" category="cell">Tutti gli HDD</block>
-  <block id="9c2dc227590d4220750b52b21b0aeb99" category="cell">DISCO RIGIDO</block>
-  <block id="335f5352088d7d9bf74191e006d8e24c" category="cell">240</block>
-  <block id="de97ed9eb6dc112873264b693e05c88c" category="cell">Misto (SSD da 96 TB)</block>
-  <block id="0a09c8844ba8f0936c20bd791130d6b6" category="cell">144</block>
-  <block id="1b48b5dfad482eb966c69b885c217e13" category="cell">Misto (SSD da 72 TB)</block>
-  <block id="006f52e9102a8d3be2fe5614f42ba989" category="cell">168</block>
-  <block id="79fa5a72c63f064bf5ae4709ac221926" category="cell">Misto (SSD da 48 TB)</block>
-  <block id="58a2fc6ed39fd083f55d4182bf88826d" category="cell">192</block>
-  <block id="1c151db89d2679449be5c45bb7b8d994" category="cell">Misto (SSD da 24 TB)</block>
-  <block id="45fbc6d3e05ebd93369ce542e8f2322d" category="cell">216</block>
-  <block id="c742d6affaef84b501d784319fca6de4" category="paragraph-title">Numero di shelf supportato</block>
-  <block id="22daa6b9c9c5e98028929434af5223de" category="paragraph">Analisi del numero di shelf supportati dietro due ponti FibreBridge 7600N e 7500N:</block>
-  <block id="ca7ac3a83947da614de147e934674475" category="cell">Numero totale di shelf</block>
-  <block id="699b4f79215d191584653efebf156e52" category="cell">Misto</block>
   <block id="04e334293a29a0fcdf98b56004e27edc" category="section-title">Conformità a MetroCluster rispetto agli switch validati NetApp</block>
   <block id="5c5c34d5e7843e9424f3ca2380ae18ea" category="list-text"><block ref="5c5c34d5e7843e9424f3ca2380ae18ea" category="inline-link-macro-rx"></block></block>
   <block id="a629fe794ff2e51df541a99e4468ebb2" category="paragraph">Se è necessario eseguire il netboot dei nuovi controller, consultare <block ref="a7e3b7fa9390de21e9e66df9d4048c53" category="inline-link-macro-rx"></block>.</block>
@@ -14272,7 +14226,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="c540a55c1af8888d4507b7c80af2d372" category="list-text">Aggiornare il firmware del bridge e specificare il nome utente richiesto:</block>
   <block id="e9b9a2eac9e5ccde661c85666e1bebfc" category="list-text">Immettere la password quando richiesto nell'output, come mostrato nell'esempio seguente:</block>
   <block id="9f81eba7dfa3609b17894df364395597" category="paragraph">L'esempio seguente mostra che il lavoro "system bridge firmware update" è ancora in esecuzione:</block>
-  <block id="92289ea5a47b731862869f48712c9527" category="list-text">Eseguire il<block ref="e595c34083a230fd789d64c7de21c72a" prefix=" " category="inline-code"></block> comando.</block>
   <block id="52e06a42c952a2b1bdb77dfc0f6f90ff" category="paragraph"><block ref="a51df89c214b1838fdbc8273e8704555" prefix="" category="inline-code"></block></block>
   <block id="968258a4c4370a9f6fe8b87ce4255cca" category="paragraph"><block ref="6604a22a7f45489dfc4b36fa6c37c036" prefix="" category="inline-code"></block></block>
   <block id="afdf08fe53823e29ce4e277959c64b1e" category="paragraph">Supporto di mobilità dei dati SVM per la migrazione delle configurazioni MetroCluster</block>
@@ -14288,4 +14241,30 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="0cb8709673d91d9b41f7a2d9110be6db" category="paragraph">Aggiornamento firmware Fibrebridge tramite credenziali</block>
   <block id="cca6b3113bea250bb0e5ecb42fcd1f6b" category="paragraph">È possibile aggiornare il firmware sui bridge Fibrebridge utilizzando le credenziali se sono richieste dal server per scaricare il pacchetto firmware.</block>
   <block id="7f35c16e72037a8dea668c5bb0e6327d" category="paragraph"><block ref="7f35c16e72037a8dea668c5bb0e6327d" category="inline-link-macro-rx"></block></block>
+  <block id="dd5e73f11c8453deab39cc51184b718c" category="admonition">Si consiglia di utilizzare la gestione in banda con l'accesso IP disattivato per migliorare la protezione limitando la connettività fisica al bridge.</block>
+  <block id="794172cd90da1900d6103d0859717cae" category="section-title">Limiti del bridge FibreBridge 7600N e 7500N e regole di collegamento</block>
+  <block id="6640e784b645fe9fb8ac2e43bbd6435c" category="paragraph">Rivedere i limiti e le considerazioni quando si collegano i ponti FibreBridge 7600N e 7500N.</block>
+  <block id="2578541f645016c0cd8de75379c88d3e" category="list-title">Limiti del ponte FibreBridge 7600N e 7500N</block>
+  <block id="33993760dba186d29e6c1b1c4a5a9eb6" category="list-text">Il numero massimo di HDD e SSD combinati è 240.</block>
+  <block id="0ea95754c61ccceaa6093ef60f306589" category="list-text">Il numero massimo di dischi SSD è 96.</block>
+  <block id="6aa9ec42d5ec998ae8c42e6ff59ac177" category="list-text">Il numero massimo di SSD per porta SAS è 48.</block>
+  <block id="3443a5a71e5726152a93cb7f1222c252" category="list-text">Il numero massimo di shelf per porta SAS è 10.</block>
+  <block id="c15552ec0e1dcd2dc0268b8f8853f8b0" category="list-title">Le regole di collegamento dei bridge FibreBridge 7600N e 7500N</block>
+  <block id="cd4785cfe3cc59dcc3af8a0b3d1c2d26" category="list-text">Non combinare dischi SSD e HDD sulla stessa porta SAS.</block>
+  <block id="bfbbc9e02b02d4cba470cc14b2b71995" category="list-text">Distribuire gli shelf in maniera uniforme sulle porte SAS.</block>
+  <block id="b2d9a3d2403921e9bad0f2de39898557" category="list-text">Non si dovrebbero avere DS460 shelf sulla stessa porta SAS degli altri tipi di shelf (ad esempio DS212 o DS224 shelf).</block>
+  <block id="881aa664fe300b14a430d83d71657f1b" category="paragraph-title">Configurazione di esempio</block>
+  <block id="4849ab8ff2c4f06051acea06836aec90" category="paragraph">Di seguito è illustrato un esempio di configurazione per il collegamento di quattro shelf DS224 con dischi SSD e sei shelf DS224 con dischi HDD:</block>
+  <block id="b13899cc9055a7a129cc3597a28caf33" category="cell">Porta SAS</block>
+  <block id="b559966ca417caecbc925fd04a9d4253" category="cell">Shelf e dischi</block>
+  <block id="a56114e15d97418161a772996c894a0c" category="cell">Porta SAS-A</block>
+  <block id="823cebd40c22009076dea45c51d568b3" category="cell">2x DS224 shelf con dischi SSD</block>
+  <block id="d375b409cacda3ce9f6afe9379e101ce" category="cell">Porta SAS-B</block>
+  <block id="0b7b249cf6a212613080ac29d6eda992" category="cell">Porta SAS-C.</block>
+  <block id="c394385c28e9969eb81c66b053fd009c" category="cell">3x DS224 shelf con dischi HDD</block>
+  <block id="f7cdd2784709f45955fc9f25497956ae" category="cell">Porta SAS-D.</block>
+  <block id="e5246bcdb743ec1c543a9253bc3a20f0" category="inline-link-macro">Sito di supporto Broadcom</block>
+  <block id="7e8efc833fbde0ff722d85e00415edec" category="list-text">Scaricare il firmware dello switch dal <block ref="7b0bfad9e7dd6186ed0f14c867034109" category="inline-link-macro-rx"></block>.</block>
+  <block id="e6d64e0eb5e781bce7f755d1457a9170" category="paragraph"><block ref="b2f8990b0f3f5de2520bc483556b14eb" prefix="" category="inline-code"></block></block>
+  <block id="b0782c02cc2d2b20315a3f6a825b3fbe" category="list-text">Eseguire il<block ref="2586ba33015a99bfc10dda523f819039" prefix=" " category="inline-code"></block> comando.</block>
 </blocks>
