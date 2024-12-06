@@ -113,6 +113,9 @@ Nella documentazione vengono utilizzati i seguenti nomi di esempio:
 
 Le configurazioni IP di MetroCluster utilizzano un adattatore Ethernet da 40/100 Gbps o 10/25 Gbps per le interfacce IP verso gli switch IP utilizzati per il fabric IP di MetroCluster.
 
+
+NOTE: Le porte integrate sono integrate nell'hardware del controller (slot 0) e non possono essere sostituite, quindi lo slot richiesto per l'adattatore non è applicabile.
+
 |===
 
 
@@ -138,7 +141,7 @@ AFF A800, AFF C800, ASA A800 e ASA C800
  a| 
 X1146A/porte integrate
  a| 
-Slot 1
+Slot 1/non applicabile per porte integrate
  a| 
 e0b. e1b
 
@@ -171,7 +174,7 @@ FAS2750, AFF A150, ASA A150 e AFF A220
  a| 
 Porte integrate
  a| 
-Slot 0
+Non applicabile
  a| 
 e0a, e0b
 
@@ -182,7 +185,7 @@ FAS500f, AFF A250, ASA A250, ASA C250 e AFF C250
  a| 
 Porte integrate
  a| 
-Slot 0
+Non applicabile
  a| 
 e0c, e0d
 
@@ -193,7 +196,7 @@ AFF A320
  a| 
 Porte integrate
  a| 
-Slot 0
+Non applicabile
  a| 
 e0g, e0h
 
