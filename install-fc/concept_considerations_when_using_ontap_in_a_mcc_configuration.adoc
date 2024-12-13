@@ -243,6 +243,7 @@ Durante la creazione di LIF, è necessario prendere in considerazione le seguent
 * ARP Broadcasts (trasmissioni ARP): È necessario attivare le trasmissioni ARP tra i due cluster
 * LIF duplicati: Non è necessario creare più LIF con lo stesso indirizzo IP (LIF duplicati) in un IPSpace
 * Configurazioni NFS e SAN: È necessario utilizzare diverse macchine virtuali di storage (SVM) per gli aggregati senza mirror e con mirroring
+* Creare un oggetto subnet prima di creare una LIF. Un oggetto subnet consente a ONTAP di determinare le destinazioni di failover sul cluster di destinazione poiché dispone di un dominio di broadcast associato.
 
 
 

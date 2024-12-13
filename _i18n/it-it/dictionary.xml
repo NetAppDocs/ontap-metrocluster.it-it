@@ -14270,4 +14270,5 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="ad084693a846cdc2cf77ad2bb2e7382a" category="paragraph"><block ref="1c61f86d2f111f8c80a5d8ff728df70d" prefix="" category="inline-code"></block></block>
   <block id="5f9a9e91fc7e98f1998a1dcee4eab83f" category="paragraph">Verifica di includere nell'aggregato solo i dischi nello shelf senza mirror.</block>
   <block id="6f1eb898d916ac10201421006f5406e2" category="admonition">È anche possibile utilizzare il<block ref="2ee4c97cd7e2dff2e12ae3225818c09b" prefix=" " category="inline-code"></block> parametro nel comando per specificare i dischi che si desidera utilizzare per l'aggregato.</block>
+  <block id="668c968f31daa1f3b0b86ddf4b09543e" category="list-text">Creare un oggetto subnet prima di creare una LIF. Un oggetto subnet consente a ONTAP di determinare le destinazioni di failover sul cluster di destinazione poiché dispone di un dominio di broadcast associato.</block>
 </blocks>
