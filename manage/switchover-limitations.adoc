@@ -1,0 +1,52 @@
+---
+permalink: manage/switchover-limitations.html 
+sidebar: sidebar 
+keywords: switchover, perform, heal, operation, restore, metrocluster, functionality, fc, configuration, ip, limitations, 
+summary: Durante uno switchover, alcune operazioni non devono essere eseguite. 
+---
+= Limiti durante lo switchover della configurazione di MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Quando il sistema è in switchover, alcune operazioni non devono essere eseguite. Ulteriori informazioni sulle operazioni con restrizioni durante lo switchover del sistema.
+
+
+
+== Operazioni limitate nello switchover
+
+Quando il sistema è in switchover, le seguenti operazioni non sono supportate:
+
+* Creazione o eliminazione di aggregati e volumi
+* Creazione o eliminazione di SVM
+* Creazione o eliminazione di LIF
+* Aggiunta o rimozione di dischi (solo se vengono sostituiti come parte di una procedura di ripristino)
+* Esecuzione di modifiche alla configurazione di SnapMirror SVM DR
+* Modifica dei domini di broadcast esistenti o creazione di nuovi domini di broadcast
+* Modifica delle subnet di rete in corso
+
+
+
+
+== Sostituzione dell'hardware durante lo switchover
+
+Utilizzare le seguenti procedure per sostituire l'hardware del controller quando il sistema è in fase di switchover:
+
+* Se è necessario sostituire un controller dello stesso tipo, nel sito non nello switchover, seguire la procedura descritta in link:../disaster-recovery/task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristino in caso di guasto di un multi-controller o di uno storage"].
++
+** Se è necessario sostituire i moduli del controller e lo chassis mentre i nodi vengono commutati nel sito rimasto, arrestare entrambi i controller ed eseguire la procedura da a link:../disaster-recovery/task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristino in caso di guasto di un multi-controller o di uno storage"].
+
+
+* Se è necessario sostituire un controller con un altro tipo di controller, seguire la procedura per la configurazione in link:../upgrade/concept_choosing_controller_upgrade_mcc.html["Scegliere una procedura di aggiornamento del controller"].
++
+** Se il sistema esegue uno switchover a causa di un guasto al controller o in caso di guasto al controller durante lo switchover, devi prima sostituire l'hardware del controller, eseguire uno switchback ed eseguire un upgrade del controller:
++
+... Per sostituire l'hardware del controller ed eseguire lo switchback, seguire link:../disaster-recovery/task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristino in caso di guasto di un multi-controller o di uno storage"].
+... Dopo aver sostituito l'hardware, eseguire un aggiornamento del controller utilizzando le procedure descritte in link:../upgrade/concept_choosing_controller_upgrade_mcc.html["Scegliere una procedura di aggiornamento del controller"].
+
+
+
+
+

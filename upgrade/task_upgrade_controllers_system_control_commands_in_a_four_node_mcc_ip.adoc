@@ -362,7 +362,7 @@ Prima di iniziare lo switchover, l'operazione di automazione viene interrotta in
 
 === Preparare la configurazione di rete dei vecchi controller
 
-Per garantire che la rete riprenda correttamente sui nuovi controller, è necessario spostare i file LIF su una porta comune e rimuovere la configurazione di rete dei vecchi controller.
+Per consentire alla rete di riprendere in modo pulito i nuovi controller, si verifica che il posizionamento della LIF sia corretto e si rimuove la configurazione di rete dei vecchi controller.
 
 .A proposito di questa attività
 * Questa attività deve essere eseguita su ciascuno dei vecchi nodi.
@@ -426,6 +426,10 @@ Ripete il comando per ogni intercluster LIF che non si trova sulla porta home.
 
 . [[controller_replace_upgrade_Prepare_network_ports_3]]assegnare la porta home di tutte le interfacce LIF dati del vecchio controller a una porta comune che sia la stessa su entrambi i moduli controller vecchi e nuovi.
 +
+
+CAUTION: Se i controller nuovi e vecchi non dispongono di una porta comune, non è necessario modificare le LIF dati. Saltare questo passaggio e passare direttamente a <<upgrades_assisted_without_matching_ports,Fase 4>>.
+
++
 .. Visualizzare le LIF:
 +
 `network interface show`
@@ -457,7 +461,7 @@ network interface modify -vserver vs0 -lif datalif1 -home-port e0d
 ----
 
 
-. Modificare i domini di broadcast per rimuovere la VLAN e le porte fisiche che devono essere eliminate:
+. [[updates_assisted_without_matching_ports]] modificare i domini di broadcast per rimuovere la VLAN e le porte fisiche che devono essere eliminate:
 +
 `broadcast-domain remove-ports -broadcast-domain <broadcast-domain-name>-ports <node-name:port-id>`
 
@@ -1323,12 +1327,68 @@ Gestione esterna delle chiavi
 Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-32DA96C3-9B04-4401-92B8-EAF323C3C863.html["Ripristino delle chiavi di crittografia esterne per la gestione delle chiavi"^].
 
 |===
-. Prima di riprendere l'operazione, verificare che MetroCluster sia configurato correttamente. Controllare lo stato del nodo:
+. Verificare che MetroCluster sia configurato correttamente. Controllare lo stato del nodo:
 +
 `metrocluster node show`
 
 +
 Verificare che i nuovi nodi (Site_B) si trovino nello stato *Waiting for switchback* from Site_A.
+
+
+
+
+
+=== Verificare e ripristinare la configurazione LIF
+
+Verificare che le LIF siano ospitate nei nodi appropriati prima di procedere con l'operazione di switchback automatico.
+
+.A proposito di questa attività
+* Questa attività viene eseguita sul sito_B.
+
+
+
+CAUTION: Prima di eseguire uno switchback, devi verificare che la posizione delle LIF dati sia corretta sui nuovi nodi. Quando si esegue il switchback della configurazione, ONTAP tenta di riprendere il traffico sulla porta home utilizzata dalle LIF. Il guasto i/o può verificarsi quando la connessione della porta principale alla porta dello switch e alla VLAN non è corretta.
+
+.Fasi
+. Verificare che le LIF siano ospitate nel nodo e nelle porte appropriate prima del switchback.
++
+.. Passare al livello di privilegio avanzato:
++
+`set -privilege advanced`
+
+.. Visualizza le LIF e conferma che ogni LIF dati sta utilizzando la porta home corretta:
++
+`network interface show`
+
+.. Modificare le LIF che non utilizzano la porta home corretta:
++
+`network interface modify -vserver <svm-name> -lif <data-lif> -home-port <port-id>`
+
++
+Se il comando restituisce un errore, è possibile ignorare la configurazione della porta:
+
++
+`vserver config override -command "network interface modify -vserver <svm-name> -home-port <active_port_after_upgrade> -lif <lif_name> -home-node <new_node_name>"`
+
++
+Quando si immette il comando di modifica dell'interfaccia di rete in `vserver config override` non è possibile utilizzare la funzione di completamento automatico della scheda. È possibile creare la rete `interface modify` utilizzando il completamento automatico e quindi racchiuderlo in `vserver config override` comando.
+
+.. Verificare che tutte le LIF dati si trovino sulla porta home corretta:
++
+`network interface show`
+
+.. Tornare al livello di privilegio admin:
++
+`set -privilege admin`
+
+
+
+. Ripristinare le interfacce nel nodo principale:
++
+`network interface revert * -vserver <svm-name>`
+
++
+Eseguire questo passaggio su tutte le SVM secondo necessità.
 
 . Riprendere l'operazione:
 +

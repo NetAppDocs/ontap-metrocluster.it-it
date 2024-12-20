@@ -3029,10 +3029,19 @@ A partire da Fabric OS 9,0.1, SNMPv2 non è supportato per il monitoraggio dello
 [NOTE]
 ====
 * Per evitare interferenze da altre fonti, è necessario posizionare bridge e LIF di gestione dei nodi in una rete dedicata.
-* Se si utilizza una rete dedicata per il monitoraggio dello stato di salute, ciascun nodo deve disporre di una LIF di gestione dei nodi in tale rete dedicata.
+* Se utilizzi una rete dedicata per il monitoring dello stato di salute, ciascun nodo deve avere una LIF di gestione nodo in quella rete dedicata.
 
 
 ====
+NetApp supporta solo i seguenti strumenti per monitorare i componenti in una configurazione FC MetroCluster:
+
+* Brocade Network Advisor (BNA)
+* Brocade SANnav
+* Active IQ Config Advisor
+* Monitoraggio dello stato di salute NetApp (ONTAP)
+* Raccolta dati MetroCluster (MC_DC)
+
+
 
 
 ==== Configurazione degli switch MetroCluster FC per il monitoraggio dello stato di salute

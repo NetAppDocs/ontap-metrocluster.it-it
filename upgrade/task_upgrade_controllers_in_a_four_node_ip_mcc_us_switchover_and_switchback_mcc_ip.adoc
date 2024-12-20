@@ -896,7 +896,7 @@ La riparazione automatica degli aggregati dopo lo switchover negoziato viene dis
 
 == Rimuovere le configurazioni dell'interfaccia e disinstallare i vecchi controller
 
-È necessario spostare i file LIF dei dati su una porta comune, rimuovere le VLAN e i gruppi di interfacce sui vecchi controller, quindi disinstallare fisicamente i controller.
+Verificare che la LIF sia posizionata correttamente. Quindi rimuovere le VLAN e i gruppi di interfacce sui vecchi controller e disinstallare fisicamente i controller.
 
 .A proposito di questa attività
 * Questi passaggi vengono eseguiti sui vecchi controller (node_B_1-old, node_B_2-old).
@@ -960,6 +960,10 @@ Ripete il comando per ogni intercluster LIF che non si trova sulla porta home.
 
 . [[controller_manual_upgrade_Prepare_network_ports_3]]assegnare la porta home di tutte le LIF dati sul vecchio controller a una porta comune che è la stessa su entrambi i moduli controller vecchi e nuovi.
 +
+
+CAUTION: Se i controller nuovi e vecchi non dispongono di una porta comune, non è necessario modificare le LIF dati. Saltare questo passaggio e passare direttamente a <<upgrades_manual_without_matching_ports,Fase 4>>.
+
++
 .. Visualizzare le LIF:
 +
 `network interface show`
@@ -989,7 +993,7 @@ network interface modify -vserver vs0 -lif datalif1 -home-port e0d
 ----
 
 
-. Modificare i domini di broadcast per rimuovere la VLAN e le porte fisiche che devono essere eliminate:
+. [[updates_manual_without_matching_ports]] modificare i domini di broadcast per rimuovere la VLAN e le porte fisiche che devono essere eliminate:
 +
 `broadcast-domain remove-ports -broadcast-domain <broadcast-domain-name> -ports <node-name:port-id>`
 
@@ -1796,19 +1800,36 @@ Verificare che i file LIF siano ospitati su nodi e porte appropriati, come mappa
 * Vedere il piano di mappatura delle porte creato in link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html["Mappatura delle porte dai vecchi nodi ai nuovi nodi"].
 
 
+
+CAUTION: Prima di eseguire uno switchback, devi verificare che la posizione delle LIF dati sia corretta sui nuovi nodi. Quando si esegue il switchback della configurazione, ONTAP tenta di riprendere il traffico sulla porta home utilizzata dalle LIF. Il guasto i/o può verificarsi quando la connessione della porta principale alla porta dello switch e alla VLAN non è corretta.
+
 .Fasi
-. Verificare che i file LIF siano ospitati sul nodo e sulle porte appropriati prima di passare al switchback.
+. Verificare che le LIF siano ospitate nel nodo e nelle porte appropriate prima del switchback.
 +
 .. Passare al livello di privilegio avanzato:
 +
 `set -privilege advanced`
 
-.. Eseguire l'override della configurazione della porta per garantire il corretto posizionamento di LIF:
+.. Visualizza le LIF e conferma che ogni LIF dati sta utilizzando la porta home corretta:
 +
-`vserver config override -command "network interface modify -vserver <svm-name> -home-port <active_port_after_upgrade> -lif <lif_name> -home-node <new_node_name>`
+`network interface show`
+
+.. Modificare le LIF che non utilizzano la porta home corretta:
++
+`network interface modify -vserver <svm-name> -lif <data-lif> -home-port <port-id>`
+
++
+Se il comando restituisce un errore, è possibile ignorare la configurazione della porta:
+
++
+`vserver config override -command "network interface modify -vserver <svm-name> -home-port <active_port_after_upgrade> -lif <lif_name> -home-node <new_node_name>"`
 
 +
 Quando si immette il comando di modifica dell'interfaccia di rete in `vserver config override` non è possibile utilizzare la funzione di completamento automatico della scheda. È possibile creare la rete `interface modify` utilizzando il completamento automatico e quindi racchiuderlo in `vserver config override` comando.
+
+.. Verificare che tutte le LIF dati si trovino sulla porta home corretta:
++
+`network interface show`
 
 .. Tornare al livello di privilegio admin:
 +
