@@ -855,10 +855,125 @@ Seguire la procedura descritta nella sezione relativa al fornitore dello switch:
 Alcuni valori di boot MetroCluster IP devono essere configurati sui nuovi moduli controller. I valori devono corrispondere a quelli configurati sui vecchi moduli controller.
 
 .A proposito di questa attività
-In questa attività, verranno utilizzati gli UUID e gli ID di sistema identificati in precedenza nella procedura di aggiornamento in <<gather_info_system_replace,Raccogliere informazioni prima dell'aggiornamento>>.
+* Sono necessari gli UUID e gli ID di sistema identificati in precedenza nella procedura di aggiornamento in <<gather_info_so_sb,Raccogliere informazioni prima dell'aggiornamento>>.
+* A seconda del modello di piattaforma, è possibile specificare l'ID VLAN utilizzando il `-vlan-id` parametro. Le seguenti piattaforme non supportano il `-vlan-id` parametro:
++
+** FAS8200 e AFF A300
+** AFF A320
+** FAS9000 e AFF A700
+** AFF C800, ASA C800, AFF A800 e ASA A800
++
+Tutte le altre piattaforme supportano il `-vlan-id` parametro.
+
+
+
+* I valori di bootarg MetroCluster impostati dipendono dall'utilizzo di porte cluster/ha condivise o di porte MetroCluster/ha condivise nel nuovo sistema.
++
+I sistemi elencati nella tabella seguente utilizzano *porte MetroCluster/ha condivise*.
+
++
+Tutti gli altri sistemi utilizzano *porte cluster/ha condivise*.
+
++
+[cols="2*"]
+|===
+| Sistemi AFF e ASA che utilizzano porte ha/MetroCluster condivise | Sistemi FAS che utilizzano porte ha/MetroCluster condivise 
+
+
+ a| 
+** AFF A150, ASA A150
+** AFF A220
+** AFF C250, ASA C250
+** AFF A250, ASA A250
+** AFF A300
+** AFF A320
+** AFF C400, ASA C400
+** AFF A400, ASA A400
+** AFF A700
+** AFF C800, ASA C800
+** AFF A800, ASA A800
+** AFF A900, ASA A900
+
+ a| 
+** FAS2750
+** FAS500f
+** FAS8200
+** FAS8300
+** FAS8700
+** FAS9000
+** FAS9500
+
+
+|===
+
 
 .Fasi
 . Su `LOADER>` Prompt, impostare i seguenti bootargs sui nuovi nodi in Site_B:
++
+I passaggi che seguono dipendono dalle porte utilizzate dal nuovo modello di piattaforma.
+
++
+[role="tabbed-block"]
+====
+.Sistemi che utilizzano porte ha/cluster condivisi
+--
+.. Impostare i seguenti bootargs:
++
+`setenv bootarg.mcc.port_a_ip_config <local-IP-address/local-IP-mask,0,0,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id>`
+
++
+`setenv bootarg.mcc.port_b_ip_config <local-IP-address/local-IP-mask,0,0,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id>`
+
++
+
+NOTE: Se le interfacce utilizzano un ID VLAN predefinito, il `vlan-id` parametro non è necessario.
+
++
+Nell'esempio seguente vengono impostati i valori per node_B_1-new utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:
+
++
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,0,172.17.26.13,172.17.26.12,120
+setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,0,172.17.27.13,172.17.27.12,130
+----
++
+Nell'esempio seguente vengono impostati i valori per node_B_2-new utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:
+
++
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config 172.17.26.11/23,0,0,172.17.26.12,172.17.26.13,120
+setenv bootarg.mcc.port_b_ip_config 172.17.27.11/23,0,0,172.17.27.12,172.17.27.13,130
+----
++
+Nell'esempio seguente vengono impostati i valori per node_B_1-new utilizzando VLAN predefinite per tutte le connessioni DR IP MetroCluster:
+
++
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config
+172.17.26.10/23,0,0,172.17.26.13,172.17.26.12
+setenv bootarg.mcc.port_b_ip_config
+172.17.27.10/23,0,0,172.17.27.13,172.17.27.12
+----
++
+Nell'esempio seguente vengono impostati i valori per node_B_2-new utilizzando VLAN predefinite per tutte le connessioni DR IP MetroCluster:
+
++
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config
+172.17.26.11/23,0,0,172.17.26.12,172.17.26.13
+setenv bootarg.mcc.port_b_ip_config
+172.17.27.11/23,0,0,172.17.27.12,172.17.27.13
+----
+
+
+--
+.Sistemi che utilizzano porte ha/MetroCluster condivise
+--
+.. Impostare i seguenti bootargs:
 +
 `setenv bootarg.mcc.port_a_ip_config <local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id>`
 
@@ -866,7 +981,11 @@ In questa attività, verranno utilizzati gli UUID e gli ID di sistema identifica
 `setenv bootarg.mcc.port_b_ip_config <local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id>`
 
 +
-Nell'esempio seguente vengono impostati i valori per Node_B_1 utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:
+
+NOTE: Se le interfacce utilizzano un ID VLAN predefinito, il `vlan-id` parametro non è necessario.
+
++
+Nell'esempio seguente vengono impostati i valori per node_B_1-new utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:
 
 +
 [listing]
@@ -875,7 +994,7 @@ setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,172.17.26.11,172.17.26.13,
 setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,172.17.27.11,172.17.27.13,172.17.27.12,130
 ----
 +
-Nell'esempio seguente vengono impostati i valori per Node_B_2 utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:
+Nell'esempio seguente vengono impostati i valori per node_B_2-new utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:
 
 +
 [listing]
@@ -884,7 +1003,7 @@ setenv bootarg.mcc.port_a_ip_config 172.17.26.11/23,0,172.17.26.10,172.17.26.12,
 setenv bootarg.mcc.port_b_ip_config 172.17.27.11/23,0,172.17.27.10,172.17.27.12,172.17.27.13,130
 ----
 +
-Nell'esempio seguente vengono impostati i valori per node_B_1 utilizzando VLAN predefinite per tutte le connessioni DR IP MetroCluster:
+Nell'esempio seguente vengono impostati i valori per node_B_1-new utilizzando VLAN predefinite per tutte le connessioni DR IP MetroCluster:
 
 +
 [listing]
@@ -895,7 +1014,7 @@ setenv bootarg.mcc.port_b_ip_config
 172.17.27.10/23,0,172.17.27.11,172.17.27.13,172.17.27.12
 ----
 +
-Nell'esempio seguente vengono impostati i valori per node_B_2 utilizzando VLAN predefinite per tutte le connessioni DR IP MetroCluster:
+Nell'esempio seguente vengono impostati i valori per node_B_2-new utilizzando VLAN predefinite per tutte le connessioni DR IP MetroCluster:
 
 +
 [listing]
@@ -905,6 +1024,10 @@ setenv bootarg.mcc.port_a_ip_config
 setenv bootarg.mcc.port_b_ip_config
 172.17.27.11/23,0,172.17.27.10,172.17.27.12,172.17.27.13
 ----
+
+
+--
+====
 . Ai nuovi nodi" `LOADER` Impostare gli UUID:
 +
 `setenv bootarg.mgwd.partner_cluster_uuid <partner-cluster-UUID>`
@@ -922,9 +1045,9 @@ setenv bootarg.mcc.port_b_ip_config
 `setenv bootarg.mcc_iscsi.node_uuid <local-node-UUID>`
 
 +
-.. Impostare gli UUID su Node_B_1.
+.. Impostare gli UUID su Node_B_1-New.
 +
-L'esempio seguente mostra i comandi per impostare gli UUID su Node_B_1:
+L'esempio seguente mostra i comandi per impostare gli UUID su Node_B_1-New:
 
 +
 [listing]
@@ -935,9 +1058,9 @@ setenv bootarg.mcc.pri_partner_uuid f37b240b-9ac1-11e7-9b42-00a098c9e55d
 setenv bootarg.mcc.aux_partner_uuid bf8e3f8f-9ac4-11e7-bd4e-00a098ca379f
 setenv bootarg.mcc_iscsi.node_uuid f03cb63c-9a7e-11e7-b68b-00a098908039
 ----
-.. Impostare gli UUID su Node_B_2:
+.. Impostare gli UUID su Node_B_2-New:
 +
-L'esempio seguente mostra i comandi per impostare gli UUID su Node_B_2:
+L'esempio seguente mostra i comandi per impostare gli UUID su Node_B_2-New:
 
 +
 [listing]
@@ -984,12 +1107,12 @@ Info: This cluster has partitioned disks. To get a complete list of spare disk
 
 +
 
-NOTE: Il `setenv bootarg.mcc.local_config_id` Variable deve essere impostato sul sys-id del modulo controller *original*, Node_B_1.
+NOTE: Il `setenv bootarg.mcc.local_config_id` Variable deve essere impostato sul sys-id del modulo controller *original*, node_B_1-old.
 
 +
-.. Impostare le variabili su Node_B_1.
+.. Impostare le variabili su Node_B_1-New.
 +
-L'esempio seguente mostra i comandi per impostare i valori su Node_B_1:
+L'esempio seguente mostra i comandi per impostare i valori su Node_B_1-New:
 
 +
 [listing]
@@ -997,9 +1120,9 @@ L'esempio seguente mostra i comandi per impostare i valori su Node_B_1:
 setenv bootarg.mcc.local_config_id 537403322
 setenv bootarg.mcc.dr_partner 537403324
 ----
-.. Impostare le variabili su Node_B_2.
+.. Impostare le variabili su Node_B_2-new.
 +
-L'esempio seguente mostra i comandi per impostare i valori su Node_B_2:
+L'esempio seguente mostra i comandi per impostare i valori su Node_B_2-New:
 
 +
 [listing]

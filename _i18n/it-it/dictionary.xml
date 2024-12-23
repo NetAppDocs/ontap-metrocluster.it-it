@@ -440,17 +440,6 @@
   <block id="956cd19055bcda776c4aa38d849f5270" category="paragraph">L'elenco delle directory deve contenere una cartella netboot con un file del kernel: ontap-version_image.tgz</block>
   <block id="d58685908c79a70d5ff1a6db6c223402" category="paragraph">Non è necessario estrarre il file ontap-version_image.tgz.</block>
   <block id="8154d55f73ab64571f60299356015117" category="section-title">Ripristino della configurazione HBA</block>
-  <block id="f3b7262f888ca591450dde27d2e71aaf" category="paragraph">Nell'esempio seguente vengono impostati i valori per Node_B_1 utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:</block>
-  <block id="65197a1036db006851c7578b94728a50" category="paragraph">Nell'esempio seguente vengono impostati i valori per Node_B_2 utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:</block>
-  <block id="bf8bfdf49f6f753bf2394e6dce1882b0" category="list-text">Impostare gli UUID su Node_B_1.</block>
-  <block id="5eac2f82a290cf5f7626a80d0e2c07aa" category="paragraph">L'esempio seguente mostra i comandi per impostare gli UUID su Node_B_1:</block>
-  <block id="f2925ea98441cdf274d96211ca1ada37" category="list-text">Impostare gli UUID su Node_B_2:</block>
-  <block id="812568fdfa215d28245c0e27f1e6f5ce" category="paragraph">L'esempio seguente mostra i comandi per impostare gli UUID su Node_B_2:</block>
-  <block id="384df789341519934d49ceef6f3f8c5e" category="admonition">Il<block ref="12f728ceb5fc82e860ec81c090369ca5" prefix=" " category="inline-code"></block> Variable deve essere impostato sul sys-id del modulo controller *original*, Node_B_1.</block>
-  <block id="1e9e20507e30afe8b79feaf697336037" category="list-text">Impostare le variabili su Node_B_1.</block>
-  <block id="96a30b5e5305a12e0752b81f173e6fc6" category="paragraph">L'esempio seguente mostra i comandi per impostare i valori su Node_B_1:</block>
-  <block id="ed8d1dfb2569c85ee7b108aa3e6a5466" category="list-text">Impostare le variabili su Node_B_2.</block>
-  <block id="bacd790164cac2c217ca06a37ce78e9c" category="paragraph">L'esempio seguente mostra i comandi per impostare i valori su Node_B_2:</block>
   <block id="e97c2d73dc1c54dfe8c4452dcb629eb7" category="section-title">Riassegnazione dei dischi aggregati root</block>
   <block id="664faa773b897771d732ec0de99d505a" category="paragraph">Riassegnare i dischi aggregati root al nuovo modulo controller, utilizzando<block ref="5fb641c5977b93de82b81e36db0454cf" prefix=" " category="inline-code"></block> raccolte in precedenza</block>
   <block id="f512860c2fb2587692f9d8aaa69ad4c4" category="list-text">Arrestare il sistema e avviare la modalità di manutenzione dal prompt DEL CARICATORE:</block>
@@ -886,15 +875,6 @@
   <block id="7d0c5485611d6bb6608dc139509b8698" category="list-text">Raccogliere i valori di bootarg:</block>
   <block id="cd60490d5712d0d4fead93178d76d0d7" category="paragraph">Seguire i passaggi della procedura per il fornitore dello switch:</block>
   <block id="fa14a702e51b19084e9474a2f3ee6905" category="list-text">Accendere i nuovi nodi e avviarli in modalità manutenzione.</block>
-  <block id="ae33f232a65af78b38ef0d615f9b4685" category="list-text">Se i nodi da aggiornare sono i modelli AFF A400, FAS8300 o FAS8700, impostare i seguenti bootargs al prompt DEL CARICATORE:</block>
-  <block id="b776a192613301675eb8a9978b122c2e" category="admonition">Se le interfacce utilizzano le VLAN predefinite, l'id vlan non è necessario.</block>
-  <block id="f15ac8125bcf03a0a837e92a4cc50161" category="paragraph">I seguenti comandi impostano i valori per Node_B_1-New utilizzando VLAN 120 per la prima rete e VLAN 130 per la seconda rete:</block>
-  <block id="e74024ee9d7f8e95f3e626a5c873a315" category="paragraph">I seguenti comandi impostano i valori per Node_B_2-New utilizzando VLAN 120 per la prima rete e VLAN 130 per la seconda rete:</block>
-  <block id="44f9e07ea9ebd3af9d897a1fd22a2893" category="paragraph">L'esempio seguente mostra i comandi per node_B_1-new quando viene utilizzata la VLAN predefinita:</block>
-  <block id="39587765d8074fb3d6e4963abb2b1998" category="paragraph">L'esempio seguente mostra i comandi per node_B_2-new quando viene utilizzata la VLAN predefinita:</block>
-  <block id="d81eefa1c7e616946da2c21d8091ff22" category="list-text">Se i nodi da aggiornare non sono sistemi elencati nella fase precedente, al prompt DEL CARICATORE per ciascuno dei nodi sopravvissuti, impostare i seguenti bootargs con local_IP/mask:</block>
-  <block id="ad660c4b2e3b57b6c520334fa6e9e973" category="paragraph">I seguenti comandi impostano i valori per node_B_1-new:</block>
-  <block id="e99a6d6afe39a84ad08205e484b19f40" category="paragraph">I seguenti comandi impostano i valori per node_B_2-new:</block>
   <block id="b6eb4854ed8abef4df5eb8ee192a6d06" category="list-text">Al prompt DEL CARICATORE dei nuovi nodi, impostare gli UUID:</block>
   <block id="c9d5ebb47f50b3ec208877d0c063b7ff" category="list-text">Impostare gli UUID su Node_B_1-New.</block>
   <block id="496b18f1dee3ef49e665af4d8b2f692f" category="paragraph">L'esempio seguente mostra i comandi per impostare gli UUID su Node_B_1-New:</block>
@@ -13568,11 +13548,8 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="ef53a1465284a8eba202285b88ef0eb2" category="section-title">Aggiornare gli RCF dello switch per adattarsi alle nuove piattaforme</block>
   <block id="8aedcbe06dc4ee85bfbfe46c6a62713c" category="paragraph">Questa attività viene eseguita nel sito contenente i controller attualmente in fase di aggiornamento. Negli esempi illustrati in questa procedura, si sta effettuando prima l'aggiornamento di site_B.</block>
   <block id="097b5e4a3935e7904f9e57e130711c8b" category="inline-link-macro">Scaricare e installare i file RCF dello switch NVIDIA IP SN2100</block>
-  <block id="a0738c0401f656b59d11c3e37bee47f0" category="paragraph">In questa attività, verranno utilizzati gli UUID e gli ID di sistema identificati in precedenza nella procedura di aggiornamento in <block ref="a74b37b1135e46e1745610d5ef77ba43" category="inline-xref-macro-rx"></block>.</block>
   <block id="080c153c3d5c3f5a7519058826d07cb8" category="paragraph"><block ref="579363eabf2a70eb9e6c8d9b1bca9609" prefix="" category="inline-code"></block></block>
   <block id="ba2a7c5e352255c376b6b0d315a1ffc1" category="paragraph"><block ref="3edfeb45325920fedac6b21b22c6872d" prefix="" category="inline-code"></block></block>
-  <block id="862fde34d3847472911a47c752a908d7" category="paragraph"><block ref="89ed4000c8f8ef2820e346fa5400a05a" prefix="" category="inline-code"></block></block>
-  <block id="d45e24cad9f9369e3d68aa5fb105c745" category="paragraph"><block ref="bf4900d508399da9f73f695794148642" prefix="" category="inline-code"></block></block>
   <block id="53eeb8487a1b47736074a390cc992c92" category="paragraph"><block ref="cce414ec64a9c4e23a2e870045abf8dc" prefix="" category="inline-code"></block></block>
   <block id="88e5cedcd18951b04046ff208ab8ff3a" category="paragraph"><block ref="38241bd430968bdc944f07594d46f2ea" prefix="" category="inline-code"></block></block>
   <block id="39531e530d83708f9ed5390dc12c1a07" category="paragraph"><block ref="1a08db264211390895870fb4d46031c2" prefix="" category="inline-code"></block></block>
@@ -13627,9 +13604,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="58d7ca4c8c3e89d8d921fc52e28adc1c" category="list-text">Accendere i nuovi nodi e premere Ctrl-C quando viene richiesto di visualizzare il<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> prompt.</block>
   <block id="b18f9742d77912f838f8a0bc859bbf11" category="list-text">Quando<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> richiesto, configurare la connessione netboot per una LIF di gestione:</block>
   <block id="7c9dbc13c4af0588948dc0974ad07931" category="paragraph">Dopo aver eseguito il comando, attendere fino a quando il nodo non si arresta al<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> prompt.</block>
-  <block id="1eeedf4cd6f5dec243d5f4e1418fc445" category="paragraph">In questa attività, verranno utilizzati gli UUID e gli ID di sistema identificati in precedenza nella procedura di aggiornamento in <block ref="9c150672da580a5dceed21dfb73c4b76" category="inline-xref-macro-rx"></block>.</block>
-  <block id="fee55a9e6e115fa7d775bb57b8cb4b87" category="paragraph">Nell'esempio seguente vengono impostati i valori per node_B_1 utilizzando VLAN predefinite per tutte le connessioni DR IP MetroCluster:</block>
-  <block id="2046d129795b588ef0d8a2657f550cbc" category="paragraph">Nell'esempio seguente vengono impostati i valori per node_B_2 utilizzando VLAN predefinite per tutte le connessioni DR IP MetroCluster:</block>
   <block id="6efdcf657072c6d286d4dff5b0919f19" category="list-text">Se i sistemi originali sono stati configurati per ADP, al prompt di ciascuno dei nodi sostitutivi<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> , abilitare ADP:</block>
   <block id="2a881aa88a35b35de21b4af29f7c41a7" category="paragraph">I vecchi ID di sistema sono stati identificati in <block ref="315917271da740413467f609180e49f8" category="inline-xref-macro-rx"></block>.</block>
   <block id="b2d1a6a95156d238b86f82d812e29748" category="admonition">Prima di procedere con la riassegnazione del disco, è necessario verificare che i dischi pool0 e pool1 appartenenti all'aggregato root del nodo siano visualizzati nell'<block ref="63328c72194085e2f8ff497b866f6d24" prefix=" " category="inline-code"></block> output. Nell'esempio seguente, l'output elenca i dischi pool0 e pool1 di proprietà di node_B_1-old.</block>
@@ -14328,4 +14302,30 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="07bfa9093a8ef293dfd6099e38fde255" category="list-text">Verificare che MetroCluster sia configurato correttamente. Controllare lo stato del nodo:</block>
   <block id="d64694bac02c7b4eea890e175a53a0c7" category="paragraph">Verificare che le LIF siano ospitate nei nodi appropriati prima di procedere con l'operazione di switchback automatico.</block>
   <block id="db85d3fd5e7d7beaa319d4ebe299145b" category="sidebar">Limiti quando il sistema è in switchover</block>
+  <block id="e2b04aa38f9463877227eab80f2afa55" category="list-text">Sono necessari gli UUID e gli ID di sistema identificati in precedenza nella procedura di aggiornamento in <block ref="a74b37b1135e46e1745610d5ef77ba43" category="inline-xref-macro-rx"></block>.</block>
+  <block id="1ee9e9c6e0682332b92cf414d56216e5" category="list-text">A seconda del modello di piattaforma, è possibile specificare l'ID VLAN utilizzando il<block ref="6790c40b1680557da1f80536ae186301" prefix=" " category="inline-code"></block> parametro. Le seguenti piattaforme non supportano il<block ref="6790c40b1680557da1f80536ae186301" prefix=" " category="inline-code"></block> parametro:</block>
+  <block id="2c17b709cf340ae9f4b202df67582f0d" category="list-text">AFF C800, ASA C800, AFF A800 e ASA A800</block>
+  <block id="9a7bf3cb6e6fcf5bc8021ad8b24c709d" category="list-text">I valori di bootarg MetroCluster impostati dipendono dall'utilizzo di porte cluster/ha condivise o di porte MetroCluster/ha condivise nel nuovo sistema.</block>
+  <block id="01c711ec30c5984ab759c03d8ae83dbc" category="paragraph">I sistemi elencati nella tabella seguente utilizzano *porte MetroCluster/ha condivise*.</block>
+  <block id="72b13aee8e15cbc1635a37e0cc999b15" category="paragraph">Tutti gli altri sistemi utilizzano *porte cluster/ha condivise*.</block>
+  <block id="b4a6f2e0f896be0b4aa0ce4693340515" category="cell">Sistemi AFF e ASA che utilizzano porte ha/MetroCluster condivise</block>
+  <block id="a92298a0da357308bf3f327f1d13f333" category="cell">Sistemi FAS che utilizzano porte ha/MetroCluster condivise</block>
+  <block id="8f7306dd779bf45e84d3417319068f67" category="list-text">AFF A250, ASA A250</block>
+  <block id="58588e3dc50a2798e7501fa654fd258f" category="list-text">AFF C400, ASA C400</block>
+  <block id="3620dab5844cf978130a9d0a58017f2a" category="list-text">AFF A400, ASA A400</block>
+  <block id="9d4b0febc0f20a3a06297c23c3559983" category="list-text">AFF C800, ASA C800</block>
+  <block id="9576d309dc6946e2591793a503a98da6" category="list-text">AFF A900, ASA A900</block>
+  <block id="1891901e07a2b1183ae0bdb153f73f5b" category="paragraph">I passaggi che seguono dipendono dalle porte utilizzate dal nuovo modello di piattaforma.</block>
+  <block id="194a07d9daae191baeeb97eb547e1768" category="open-title">Sistemi che utilizzano porte ha/cluster condivisi</block>
+  <block id="66e20f51e3a078b6cbc064932bff53cc" category="list-text">Impostare i seguenti bootargs:</block>
+  <block id="365c4529a692b9621626b7a16d6f1fcf" category="paragraph"><block ref="44edf5bc5c9ded025ac5ca02d1f1dc5b" prefix="" category="inline-code"></block></block>
+  <block id="b53e7075a1894b2cbd85248fb5a648ef" category="paragraph"><block ref="057e6af1be749fa6fb8d9dd6a88adc62" prefix="" category="inline-code"></block></block>
+  <block id="945d0ede3512e9e4eaadb1711c02216c" category="admonition">Se le interfacce utilizzano un ID VLAN predefinito, il<block ref="883efb435dfcdbab29a2ff69d0287888" prefix=" " category="inline-code"></block> parametro non è necessario.</block>
+  <block id="b07af26bfbb0ba81d6796450189f5cf8" category="paragraph">Nell'esempio seguente vengono impostati i valori per node_B_1-new utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:</block>
+  <block id="a06bd9649be55565fd74562b1ee1756e" category="paragraph">Nell'esempio seguente vengono impostati i valori per node_B_2-new utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:</block>
+  <block id="a1909236f08f260f2b52aebf539344be" category="paragraph">Nell'esempio seguente vengono impostati i valori per node_B_1-new utilizzando VLAN predefinite per tutte le connessioni DR IP MetroCluster:</block>
+  <block id="a0436481bda3531d4a5eda5dac0e5608" category="paragraph">Nell'esempio seguente vengono impostati i valori per node_B_2-new utilizzando VLAN predefinite per tutte le connessioni DR IP MetroCluster:</block>
+  <block id="1a5991cd222add52b1f5aa51350d470e" category="list-title">Sistemi che utilizzano porte ha/MetroCluster condivise</block>
+  <block id="f4c0383379a5ae93d0b5e4c4f8586e47" category="open-title">Sistemi che utilizzano porte ha/cluster condivisi</block>
+  <block id="fce1683696c48d3d34e98e19d634ae19" category="open-title">Sistemi che utilizzano porte ha/MetroCluster condivise</block>
 </blocks>
