@@ -38,15 +38,17 @@ IMPORTANT: Nei comandi è necessario utilizzare sia i protocolli di autenticazio
 [listing]
 ----
 (IP_switch_1)# config
-(IP_switch_1) (Config)# snmp-server user <user_name> network-admin [auth-md5/auth-sha/noauth] "<auth_password>" [priv-aes128/priv-des] "<priv_password>"
+(IP_switch_1) (Config)# snmp-server user <user_name> network-admin auth-sha priv-aes128
 ----
 +
-È necessario utilizzare le virgolette intorno alle password di autenticazione e privacy, come illustrato nell'esempio seguente:
+Quando richiesto, immettere la password di autenticazione.
 
 +
 [listing]
 ----
-snmp-server user admin1 network-admin auth-md5 "password" priv-des "password"
+#snmp-server user admin1 network-admin auth-sha priv-aes128
+
+Enter Authentication Password:
 ----
 
 
