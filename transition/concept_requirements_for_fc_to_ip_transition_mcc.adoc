@@ -11,19 +11,28 @@ summary: Prima di avviare il processo di transizione, è necessario assicurarsi 
 
 
 [role="lead"]
-Prima di avviare il processo di transizione, è necessario assicurarsi che la configurazione soddisfi i requisiti.
+Prima di avviare il processo di transizione, verificare che la configurazione soddisfi i requisiti.
 
-* Se si dispone di una configurazione a otto nodi, tutti i nodi devono eseguire ONTAP 9.13.1 o versione successiva.
-* Se si dispone di una configurazione a quattro nodi, tutti i nodi devono eseguire ONTAP 9.8 o versione successiva.
-* Le piattaforme esistenti e nuove devono essere una combinazione supportata per la transizione.
+Se la configurazione soddisfa i seguenti requisiti, è possibile eseguire una transizione senza interruzioni FC-to-IP:
+
+* Se si possiede una configurazione a otto nodi, tutti i nodi eseguono ONTAP 9.13.1 o versione successiva.
+* Se si possiede una configurazione a quattro nodi, tutti i nodi eseguono ONTAP 9,8 o versione successiva.
+* Le piattaforme nuove ed esistenti sono una combinazione supportata per la transizione.
 +
 link:concept_choosing_your_transition_procedure_mcc_transition.html["Piattaforme supportate per una transizione senza interruzioni"]
 
-* Deve supportare una configurazione del cluster con switch.
+* La configurazione supporta una configurazione cluster con switch.
 +
-https://hwu.netapp.com["NetApp Hardware Universe"]
+https://hwu.netapp.com["Hardware Universe"^]
 
-* Deve soddisfare tutti i requisiti e i cavi descritti nelle _procedure di installazione e configurazione di MetroCluster_.
+
+
+[CAUTION]
+====
+Se utilizzi switch MetroCluster di storage condiviso, puoi passare solo a una configurazione IP MetroCluster a quattro nodi. La transizione a una configurazione MetroCluster IP a otto nodi utilizzando gli switch MetroCluster di storage condiviso non è supportata. Una volta completata la transizione a una configurazione IP MetroCluster a quattro nodi, è possibile link:../upgrade/task_expand_a_four_node_mcc_ip_configuration.html["Espandere in una configurazione MetroCluster IP a otto nodi"].
+
+====
+* La configurazione soddisfa tutti i requisiti ed è cablata come descritto nelle seguenti _procedure di installazione e configurazione di MetroCluster_.
 +
 link:../install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"]
 

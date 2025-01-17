@@ -31,6 +31,9 @@ Assicurarsi che gli switch IP siano supportati. Se il modello di switch esistent
 
 
 
-Per informazioni sul modello di piattaforma e sul supporto dello switch, consulta la sezione _NetApp Hardware Universe_.
+[CAUTION]
+====
+Se utilizzi switch MetroCluster di storage condiviso, puoi passare solo a una configurazione IP MetroCluster a quattro nodi. La transizione a una configurazione MetroCluster IP a otto nodi utilizzando gli switch MetroCluster di storage condiviso non è supportata. Una volta completata la transizione a una configurazione IP MetroCluster a quattro nodi, è possibile link:../upgrade/task_expand_a_four_node_mcc_ip_configuration.html["Espandere in una configurazione MetroCluster IP a otto nodi"].
 
-https://hwu.netapp.com["NetApp Hardware Universe"]
+====
+Vedere la https://hwu.netapp.com["Hardware Universe"^] per informazioni sui modelli di piattaforma e sul supporto degli switch.
