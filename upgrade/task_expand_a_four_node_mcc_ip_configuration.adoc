@@ -94,8 +94,8 @@ Nelle tabelle seguenti sono illustrate le combinazioni di piattaforme supportate
 
 [IMPORTANT]
 ====
-* Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, se si dispone di una configurazione a otto nodi, tutti e otto i nodi devono utilizzare la stessa versione di ONTAP.
-* Le combinazioni di questa tabella si applicano solo alle configurazioni a 8 nodi regolari o permanenti.
+* Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, se si dispone di una configurazione a otto nodi, tutti e otto i nodi devono utilizzare la stessa versione di ONTAP. Fare riferimento alla link:https://hwu.netapp.com["Hardware Universe"^] per la versione minima supportata di ONTAP per la combinazione in uso.
+* Le combinazioni di questa tabella si applicano solo alle configurazioni a otto nodi regolari o permanenti.
 * Le combinazioni di piattaforme mostrate in questa tabella *non* si applicano se si utilizzano le procedure di transizione o aggiornamento.
 * Tutti i nodi di un gruppo di DR devono essere dello stesso tipo e configurazione.
 
@@ -104,7 +104,7 @@ Nelle tabelle seguenti sono illustrate le combinazioni di piattaforme supportate
 .Combinazioni di espansione AFF e FAS MetroCluster IP supportate
 La tabella seguente mostra le combinazioni di piattaforme supportate per l'espansione di un sistema AFF o FAS in una configurazione IP di MetroCluster:
 
-image::../media/8node_comb_ip_aff_fas.png[Combinazioni di piattaforme per configurazioni a 8 nodi]
+image::../media/mccip_expand_ip_8node_9161.png[Combinazioni di piattaforme per configurazioni a 8 nodi]
 
 * *Nota 1*: Per queste combinazioni è necessario ONTAP 9.9.1 o versione successiva (o la versione minima di ONTAP supportata dalla piattaforma).
 * *Nota 2*: Per queste combinazioni è necessario ONTAP 9.13.1 o versione successiva (o la versione minima di ONTAP supportata dalla piattaforma).

@@ -1,0 +1,78 @@
+---
+permalink: upgrade/upgrade-mcc-ip-system-controller-replace-complete-upgrade.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: Completare il processo di aggiornamento automatico del controller verificando la raggiungibilità della rete e ripristinando qualsiasi configurazione di monitoraggio. 
+---
+= Completare l'aggiornamento del controller IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Completare il processo di aggiornamento automatico del controller verificando la raggiungibilità della rete e ripristinando qualsiasi configurazione di monitoraggio.
+
+
+
+== Verificare la raggiungibilità della rete
+
+L'operazione di automazione esegue controlli del sistema di verifica e quindi si ferma per verificare la raggiungibilità della rete. Dopo la verifica, viene avviata la fase di riconquista delle risorse e l'operazione di automazione esegue lo switchback nel sito A e si ferma ai controlli successivi all'aggiornamento. Dopo aver ripristinato l'operazione di automazione, esegue i controlli post-aggiornamento e, se non vengono rilevati errori, contrassegna l'aggiornamento come completo.
+
+.Fasi
+. Verificare la raggiungibilità della rete seguendo il messaggio della console.
+. Una volta completata la verifica, riprendere l'operazione:
++
+`system controller replace resume`
+
+. L'operazione di automazione viene eseguita `heal-aggregate`, `heal-root-aggregate`E le operazioni di switchback presso il sito A e i controlli successivi all'aggiornamento. Quando l'operazione viene interrotta, controllare manualmente lo stato LIF DELLA SAN e verificare la configurazione di rete seguendo il messaggio della console.
+. Una volta completata la verifica, riprendere l'operazione:
++
+`system controller replace resume`
+
+. Controllare lo stato dei controlli successivi all'aggiornamento:
++
+`system controller replace show`
+
++
+Se i controlli post-aggiornamento non hanno segnalato alcun errore, l'aggiornamento è completo.
+
+. Dopo aver completato l'aggiornamento del controller, accedere al sito B e verificare che i controller sostituiti siano configurati correttamente.
+
+
+
+
+== Aggiornare i nodi su cluster_A.
+
+È necessario ripetere le attività di aggiornamento per aggiornare i nodi su cluster_A nel sito A.
+
+.Fasi
+. Ripetere i passaggi per aggiornare i nodi su cluster_A, iniziando con link:upgrade-mcc-ip-system-controller-replace-supported-platforms.html["Preparatevi per l'aggiornamento"].
++
+Durante l'esecuzione delle attività, tutti i riferimenti di esempio ai cluster e ai nodi vengono invertiti.
+
+
+
+
+
+== Riconfigurare il mediatore ONTAP
+
+Configurare manualmente ONTAP Media, che è stato rimosso automaticamente prima di avviare l'aggiornamento.
+
+. Attenersi alla procedura descritta in link:../install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html["Configurare il servizio ONTAP Mediator da una configurazione IP MetroCluster"].
+
+
+
+
+== Ripristinare il monitoraggio di Tiebreaker
+
+Se la configurazione MetroCluster è stata precedentemente configurata per il monitoraggio da parte del software Tiebreaker, è possibile ripristinare la connessione Tiebreaker.
+
+. Utilizzare i passaggi descritti in http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-7259BCA4-104C-49C6-BAD0-1068CA2A3DA5.html["Aggiunta di configurazioni MetroCluster"].
+
+
+
+
+== Configurare la crittografia end-to-end
+
+Se è supportato sul sistema, è possibile crittografare il traffico back-end, come NVlog e i dati di replica dello storage, tra i siti IP di MetroCluster. Fare riferimento a. link:../maintain/task-configure-encryption.html["Configurare la crittografia end-to-end"] per ulteriori informazioni.

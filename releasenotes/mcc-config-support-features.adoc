@@ -23,7 +23,12 @@ Per informazioni dettagliate su problemi noti, limitazioni e avvisi di aggiornam
  a| 
 Supporto di mobilità dei dati SVM per la migrazione delle configurazioni MetroCluster
  a| 
-ONTAP supporta la migrazione di una SVM da una coppia ha non MetroCluster a una configurazione MetroCluster o da una configurazione MetroCluster a una coppia ha non MetroCluster. Impossibile migrare una SVM tra configurazioni MetroCluster.
+ONTAP supporta le seguenti migrazioni SVM di MetroCluster:
+
+* Migrazione di una SVM tra una coppia ha non MetroCluster e una configurazione IP MetroCluster
+* Migrazione di una SVM tra due configurazioni IP di MetroCluster
+* Migrazione di una SVM tra una configurazione FC di MetroCluster e una configurazione IP di MetroCluster
+
 
 link:https://docs.netapp.com/us-en/ontap/svm-migrate/index.html["Mobilità dei dati SVM"^]
  a| 
@@ -58,7 +63,7 @@ Supporto dello storage a oggetti S3 su aggregati con mirroring e senza mirror
  a| 
 È possibile abilitare un server per lo storage a oggetti S3 su una SVM in un aggregato con mirroring o senza mirror nelle configurazioni IP e FC di MetroCluster.
 
-https://docs.netapp.com/us-en/ontap/s3-config/index.html["Panoramica della configurazione S3"]
+https://docs.netapp.com/us-en/ontap/s3-config/index.html["Panoramica della configurazione S3"^]
  a| 
 ONTAP 9.14.1
 
@@ -69,7 +74,7 @@ Supporto per il provisioning di un bucket S3 su aggregati con mirroring e senza 
  a| 
 È possibile creare un bucket su un aggregato con mirroring o senza mirror nelle configurazioni di MetroCluster.
 
-https://docs.netapp.com/us-en/ontap/s3-config/create-bucket-mcc-task.html["Crea un bucket su un aggregato con mirroring o senza mirror in una configurazione MetroCluster"]
+https://docs.netapp.com/us-en/ontap/s3-config/create-bucket-mcc-task.html["Crea un bucket su un aggregato con mirroring o senza mirror in una configurazione MetroCluster"^]
  a| 
 ONTAP 9.12.1
 
@@ -91,7 +96,7 @@ Supporto IPSec per il protocollo host front-end nelle configurazioni fabric-atta
  a| 
 Il supporto IPSec per il protocollo host front-end (ad esempio NFS e iSCSI) è disponibile nelle configurazioni MetroCluster IP e MetroCluster fabric-attached.
 
-https://docs.netapp.com/us-en/ontap/networking/configure_ip_security_@ipsec@_over_wire_encryption.html["Configurare la crittografia IP Security (IPsec) over wire"]
+https://docs.netapp.com/us-en/ontap/networking/configure_ip_security_@ipsec@_over_wire_encryption.html["Configurare la crittografia IP Security (IPsec) over wire"^]
  a| 
 ONTAP 9.11.1
 
@@ -111,7 +116,7 @@ Mirroring di FabricPool sulle configurazioni MetroCluster
  a| 
 Puoi impostare configurazioni di FabricPool on MetroCluster con mirroring per il tiering dei dati cold su due diverse zone di errore.
 
-https://docs.netapp.com/us-en/ontap/fabricpool/setup-object-stores-mcc-task.html["Impostazione degli archivi di oggetti per FabricPool in una configurazione MetroCluster"]
+https://docs.netapp.com/us-en/ontap/fabricpool/setup-object-stores-mcc-task.html["Impostazione degli archivi di oggetti per FabricPool in una configurazione MetroCluster"^]
  a| 
 ONTAP 9,7
 

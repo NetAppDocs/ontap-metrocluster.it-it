@@ -1,0 +1,77 @@
+---
+permalink: upgrade/upgrade-mcc-ip-system-controller-replace-requirements.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: 'Verifica che il sistema soddisfi tutti i requisiti prima di eseguire l"upgrade del controller.' 
+---
+= Requisiti per l'utilizzo di questa procedura di aggiornamento dell'IP di MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Verifica che il tuo sistema soddisfi tutti i requisiti prima di eseguire l'upgrade del controller.
+
+* Questa procedura può essere utilizzata solo per l'aggiornamento del controller.
++
+Gli altri componenti della configurazione, come gli shelf di storage o gli switch, non possono essere aggiornati contemporaneamente.
+
+* Gli switch IP MetroCluster (tipo di switch, fornitore e modello) e la versione del firmware devono essere supportati sui controller nuovi ed esistenti nella configurazione di aggiornamento.
++
+Per informazioni sugli switch supportati e sulle versioni del firmware, fare riferimento alla link:https://hwu.netapp.com["Hardware Universe"^] o link:https://imt.netapp.com/matrix/["IMT"^] alla .
+
+* I sistemi IP di MetroCluster devono eseguire la stessa versione di ONTAP in entrambi i siti.
+* Quando si esegue l'aggiornamento da sistemi con più slot o porte rispetto al nuovo sistema, è necessario verificare che siano presenti slot e porte sufficienti sul nuovo sistema.
++
+Prima di iniziare l'aggiornamento, consultare la link:https://hwu.netapp.com["Hardware Universe"^] per verificare il numero di slot e porte sul nuovo sistema.
+
+* È possibile utilizzare questa procedura per aggiornare i controller in una configurazione MetroCluster IP a quattro nodi utilizzando switchover e switchback automatici basati su NSO.
++
+
+NOTE: L'esecuzione di un aggiornamento tramite il trasferimento degli aggregati (ARL) con i comandi "Systems controller replace" non è supportata per una configurazione IP MetroCluster a quattro nodi.
+
+* Se è attivato sul sistema, link:../maintain/task-configure-encryption.html#disable-end-to-end-encryption["disattiva la crittografia end-to-end"] prima di eseguire l'aggiornamento.
+* È necessario utilizzare la procedura di aggiornamento automatico del controller NSO per aggiornare i controller in entrambi i siti in sequenza.
+* Questa procedura di aggiornamento automatico del controller basata su NSO consente di avviare la sostituzione del controller in un sito di disaster recovery (DR) MetroCluster. È possibile avviare la sostituzione di un controller solo in un sito alla volta.
+* Per avviare una sostituzione del controller nel sito A, eseguire il comando di avvio per la sostituzione del controller dal sito B. L'operazione consente di sostituire i controller di entrambi i nodi solo nel sito A. Per sostituire i controller nel sito B, eseguire il comando di avvio per la sostituzione dei controller dal sito A. Viene visualizzato un messaggio che identifica il sito in cui vengono sostituiti i controller.
+
+
+In questa procedura vengono utilizzati i seguenti nomi di esempio:
+
+* Cluster_A presso il sito_A.
++
+** Prima dell'aggiornamento:
++
+*** Node_A_1-old
+*** Node_A_2-old
+
+
+** Dopo l'aggiornamento:
++
+*** Node_A_1-new
+*** Node_A_2-new
+
+
+
+
+* Cluster_B nel sito_B.
++
+** Prima dell'aggiornamento:
++
+*** Node_B_1-old
+*** Node_B_2-old
+
+
+** Dopo l'aggiornamento:
++
+*** Node_B_1-new
+*** Node_B_2-new
+
+
+
+
+
+
+.Quali sono le prossime novità?
+link:upgrade-mcc-ip-system-controller-replace-console-logging.html["Attivare la registrazione della console"].

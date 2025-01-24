@@ -1,0 +1,131 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual-reassign-root-agg.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: Riassegnare i dischi aggregati root al nuovo modulo controller, utilizzando gli ID di sistema raccolti in precedenza. 
+---
+= Riassegnare i dischi aggregati root al nuovo modulo controller IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Riassegnare i dischi aggregati root al nuovo modulo controller utilizzando gli ID di sistema raccolti in precedenza.
+
+.A proposito di questa attività
+I vecchi ID di sistema sono stati identificati in link:upgrade-mcc-ip-prepare-system.html#gather-information-before-the-upgrade["Raccogliere informazioni prima dell'aggiornamento"].
+
+Le operazioni vengono eseguite in modalità manutenzione.
+
+
+NOTE: I dischi aggregati root sono gli unici dischi che devono essere riassegnati durante il processo di upgrade dei controller. La proprietà del disco degli aggregati di dati viene gestita come parte dell'operazione di switchover/switchback.
+
+.Fasi
+. Avviare il sistema in modalità di manutenzione:
++
+`boot_ontap maint`
+
+. Visualizzare i dischi su Node_B_1-New dal prompt della modalità di manutenzione:
++
+`disk show -a`
+
++
+
+CAUTION: Prima di procedere con la riassegnazione del disco, verificare che i dischi pool0 e pool1 che appartengono all'aggregato root del nodo siano visualizzati nell' `disk show`output. Nell'esempio seguente, l'output elenca i dischi pool0 e pool1 di proprietà di node_B_1-old.
+
++
+L'output del comando mostra l'ID di sistema del nuovo modulo controller (1574774970). Tuttavia, il vecchio ID di sistema (537403322) possiede ancora i dischi dell'aggregato root. Questo esempio non mostra le unità di proprietà di altri nodi nella configurazione MetroCluster.
+
++
+[listing]
+----
+*> disk show -a
+Local System ID: 1574774970
+DISK                  OWNER                 POOL   SERIAL NUMBER   HOME                  DR HOME
+------------          ---------             -----  -------------   -------------         -------------
+prod3-rk18:9.126L44   node_B_1-old(537403322)  Pool1  PZHYN0MD     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod4-rk18:9.126L49   node_B_1-old(537403322)  Pool1  PPG3J5HA     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod4-rk18:8.126L21   node_B_1-old(537403322)  Pool1  PZHTDSZD     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod2-rk18:8.126L2    node_B_1-old(537403322)  Pool0  S0M1J2CF     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod2-rk18:8.126L3    node_B_1-old(537403322)  Pool0  S0M0CQM5     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod1-rk18:9.126L27   node_B_1-old(537403322)  Pool0  S0M1PSDW     node_B_1-old(537403322)  node_B_1-old(537403322)
+.
+.
+.
+----
+. Riassegnare i dischi aggregati root sugli shelf di dischi ai nuovi controller.
++
+|===
+
+
+| Se si utilizza ADP... | Quindi utilizzare questo comando... 
+
+
+ a| 
+Sì
+ a| 
+`disk reassign -s <old-sysid> -d <new-sysid> -r <dr-partner-sysid>`
+
+
+
+ a| 
+No
+ a| 
+`disk reassign -s <old-sysid> -d <new-sysid>`
+
+|===
+. Riassegnare i dischi aggregati root sugli shelf di dischi ai nuovi controller:
++
+`disk reassign -s <old-sysid> -d <new-sysid>`
+
++
+L'esempio seguente mostra la riassegnazione dei dischi in una configurazione non ADP:
+
++
+[listing]
+----
+*> disk reassign -s 537403322 -d 1574774970
+Partner node must not be in Takeover mode during disk reassignment from maintenance mode.
+Serious problems could result!!
+Do not proceed with reassignment if the partner is in takeover mode. Abort reassignment (y/n)? n
+
+After the node becomes operational, you must perform a takeover and giveback of the HA partner node to ensure disk reassignment is successful.
+Do you want to continue (y/n)? y
+Disk ownership will be updated on all disks previously belonging to Filer with sysid 537403322.
+Do you want to continue (y/n)? y
+----
+. Verificare che i dischi dell'aggregato root siano riassegnati correttamente:
++
+`disk show`
+
++
+`storage aggr status`
+
++
+[listing]
+----
+
+*> disk show
+Local System ID: 537097247
+
+  DISK                    OWNER                    POOL   SERIAL NUMBER   HOME                     DR HOME
+------------              -------------            -----  -------------   -------------            -------------
+prod03-rk18:8.126L18 node_B_1-new(537097247)  Pool1  PZHYN0MD        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod04-rk18:9.126L49 node_B_1-new(537097247)  Pool1  PPG3J5HA        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod04-rk18:8.126L21 node_B_1-new(537097247)  Pool1  PZHTDSZD        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod02-rk18:8.126L2  node_B_1-new(537097247)  Pool0  S0M1J2CF        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod02-rk18:9.126L29 node_B_1-new(537097247)  Pool0  S0M0CQM5        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod01-rk18:8.126L1  node_B_1-new(537097247)  Pool0  S0M1PSDW        node_B_1-new(537097247)   node_B_1-new(537097247)
+::>
+::> aggr status
+           Aggr          State           Status                Options
+aggr0_node_B_1           online          raid_dp, aggr         root, nosnap=on,
+                                         mirrored              mirror_resync_priority=high(fixed)
+                                         fast zeroed
+                                         64-bit
+----
+
+
+.Quali sono le prossime novità?
+link:upgrade-mcc-ip-manual-boot-new-controllers.html["Avvia i nuovi controller e ripristina la configurazione LIF"].

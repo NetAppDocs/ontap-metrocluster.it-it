@@ -1,0 +1,92 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual-requirements.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc, requirements 
+summary: 'Verifica che il sistema soddisfi tutti i requisiti prima di eseguire l"upgrade del controller.' 
+---
+= Requisiti per l'utilizzo di questa procedura di aggiornamento dell'IP di MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Verifica che il tuo sistema soddisfi tutti i requisiti prima di eseguire l'upgrade del controller.
+
+
+
+== Piattaforme supportate da questa procedura
+
+* Sulle piattaforme deve essere in esecuzione ONTAP 9.8 o versione successiva.
+* La piattaforma di destinazione (nuova) deve essere un modello diverso rispetto alla piattaforma originale.
+* È possibile aggiornare solo modelli di piattaforma specifici utilizzando questa procedura in una configurazione MetroCluster IP.
++
+** Per informazioni sulle combinazioni di aggiornamento della piattaforma supportate, consultare la tabella di aggiornamento IP di MetroCluster in link:concept_choosing_controller_upgrade_mcc.html["Scegliere una procedura di aggiornamento del controller"].
++
+Fare riferimento a. https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_controller_upgrade_mcc.html#choosing-a-procedure-that-uses-the-switchover-and-switchback-process["Scelta di un metodo di aggiornamento o refresh"] per ulteriori procedure.
+
+
+
+
+
+
+
+== Requisiti
+
+* Questa procedura si applica ai moduli controller in una configurazione MetroCluster IP.
+* Tutti i controller della configurazione devono essere aggiornati durante lo stesso periodo di manutenzione.
++
+L'utilizzo della configurazione MetroCluster con diversi tipi di controller non è supportato al di fuori di questa attività di manutenzione.
+
+* I sistemi IP di MetroCluster devono eseguire la stessa versione di ONTAP in entrambi i siti.
+* Gli switch IP MetroCluster (tipo di switch, vendor e modello) e la versione del firmware devono essere supportati sui controller nuovi ed esistenti nella configurazione di aggiornamento.
++
+Per informazioni sugli switch supportati e sulle versioni del firmware, fare riferimento alla link:https://hwu.netapp.com["Hardware Universe"^] o link:https://imt.netapp.com/matrix/["IMT"^] alla .
+
+* Quando si esegue l'aggiornamento da sistemi con più slot o porte rispetto al nuovo sistema, è necessario verificare che siano presenti slot e porte sufficienti sul nuovo sistema.
++
+Prima di iniziare l'aggiornamento, consultare la link:https://hwu.netapp.com["Hardware Universe"^] per verificare il numero di slot e porte sul nuovo sistema.
+
+* Se è abilitato sul sistema, link:../maintain/task-configure-encryption.html#disable-end-to-end-encryption["disattiva la crittografia end-to-end"] prima di eseguire l'aggiornamento.
+* Se la nuova piattaforma ha meno slot rispetto al sistema originale o se ha un numero inferiore o diversi tipi di porte, potrebbe essere necessario aggiungere un adattatore al nuovo sistema.
+* Riutilizzate gli indirizzi IP, le netmask e i gateway delle piattaforme originali sulle nuove piattaforme.
+
+
+In questa procedura vengono utilizzati i seguenti nomi di esempio:
+
+* Cluster_A presso il sito_A.
++
+** Prima dell'aggiornamento:
++
+*** Node_A_1-old
+*** Node_A_2-old
+
+
+** Dopo l'aggiornamento:
++
+*** Node_A_1-new
+*** Node_A_2-new
+
+
+
+
+* Cluster_B nel sito_B.
++
+** Prima dell'aggiornamento:
++
+*** Node_B_1-old
+*** Node_B_2-old
+
+
+** Dopo l'aggiornamento:
++
+*** Node_B_1-new
+*** Node_B_2-new
+
+
+
+
+
+
+.Quali sono le prossime novità?
+link:upgrade-mcc-ip-manual-console-logging.html["Attivare la registrazione della console"].

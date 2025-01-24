@@ -1,0 +1,166 @@
+---
+permalink: upgrade/upgrade-mcc-ip-system-controller-replace-restore-hba-set-ha.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: Configurare le schede HBA nel modulo controller e verificare e impostare lo stato ha del controller e dello chassis. 
+---
+= Ripristinare la configurazione dell'HBA e impostare lo stato ha del controller IP MetroCluster e dello chassis
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Configurare le schede HBA nel modulo controller e verificare e impostare lo stato ha del controller e dello chassis.
+
+
+
+== Ripristinare la configurazione dell'HBA
+
+A seconda della presenza e della configurazione delle schede HBA nel modulo controller, è necessario configurarle correttamente per il proprio sito.
+
+.Fasi
+. In modalità manutenzione, configurare le impostazioni per qualsiasi HBA nel sistema:
++
+.. Verificare le impostazioni correnti delle porte: `ucadmin show`
+.. Aggiornare le impostazioni della porta secondo necessità.
+
+
++
+|===
+
+
+| Se si dispone di questo tipo di HBA e della modalità desiderata... | Utilizzare questo comando... 
+
+
+ a| 
+FC CNA
+ a| 
+`ucadmin modify -m fc -t initiator <adapter-name>`
+
+
+
+ a| 
+Ethernet CNA
+ a| 
+`ucadmin modify -mode cna <adapter-name>`
+
+
+
+ a| 
+Destinazione FC
+ a| 
+`fcadmin config -t target <adapter-name>`
+
+
+
+ a| 
+Iniziatore FC
+ a| 
+`fcadmin config -t initiator <adapter-name>`
+
+|===
+. Uscire dalla modalità di manutenzione:
++
+`halt`
+
++
+Dopo aver eseguito il comando, attendere fino a quando il nodo non si arresta al `LOADER` prompt.
+
+. Avviare nuovamente il nodo nella modalità di manutenzione per applicare le modifiche di configurazione:
++
+`boot_ontap maint`
+
+. Verificare le modifiche:
++
+|===
+
+
+| Se si dispone di questo tipo di HBA... | Utilizzare questo comando... 
+
+
+ a| 
+CNA
+ a| 
+`ucadmin show`
+
+
+
+ a| 
+FC
+ a| 
+`fcadmin show`
+
+|===
+
+
+
+
+== Impostare lo stato ha sui nuovi controller e chassis
+
+È necessario verificare lo stato ha dei controller e dello chassis e, se necessario, aggiornarlo in modo che corrisponda alla configurazione del sistema.
+
+.Fasi
+. In modalità Maintenance (manutenzione), visualizzare lo stato ha del modulo controller e dello chassis:
++
+`ha-config show`
+
++
+Lo stato ha per tutti i componenti deve essere `mccip`.
+
+. Se lo stato di sistema visualizzato del controller o dello chassis non è corretto, impostare lo stato ha:
++
+`ha-config modify controller mccip`
+
++
+`ha-config modify chassis mccip`
+
+. Verificare e modificare le porte Ethernet collegate agli shelf NS224 o agli switch di storage.
++
+.. Verificare le porte Ethernet collegate agli shelf NS224 o agli switch di storage:
++
+`storage port show`
+
+.. Imposta su modalità tutte le porte Ethernet connesse a shelf Ethernet o switch di storage, compresi gli switch condivisi per storage e cluster `storage` :
++
+`storage port modify -p <port> -m storage`
+
++
+Esempio:
+
++
+[listing]
+----
+*> storage port modify -p e5b -m storage
+Changing NVMe-oF port e5b to storage mode
+----
++
+
+NOTE: Questo deve essere impostato su tutte le porte interessate per un aggiornamento corretto.
+
++
+I dischi dagli shelf collegati alle porte Ethernet sono riportati nell' `sysconfig -v` output.
+
++
+Consultare la link:https://hwu.netapp.com["Hardware Universe"^] per informazioni sulle porte di archiviazione del sistema a cui si sta eseguendo l'aggiornamento.
+
+.. Verificare che `storage` la modalità sia impostata e verificare che le porte siano nello stato online:
++
+`storage port show`
+
+
+
+. Arrestare il nodo: `halt`
++
+Il nodo deve arrestarsi su `LOADER>` prompt.
+
+. Su ciascun nodo, controllare la data, l'ora e il fuso orario del sistema: `show date`
+. Se necessario, impostare la data in UTC o GMT: `set date <mm/dd/yyyy>`
+. Controllare l'ora utilizzando il seguente comando al prompt dell'ambiente di boot: `show time`
+. Se necessario, impostare l'ora in UTC o GMT: `set time <hh:mm:ss>`
+. Salvare le impostazioni: `saveenv`
+. Raccogliere le variabili di ambiente: `printenv`
+
+
+.Quali sono le prossime novità?
+link:upgrade-mcc-ip-system-controller-replace-apply-rcf-set-bootarg.html["Aggiornare i file RCF dello switch e impostare i valori di avvio IP di MetroCluster"].

@@ -232,7 +232,7 @@ e0a, e0b
  a| 
 e3a, e3b
  a| 
-Nessuna porta corrispondente. Dopo l'aggiornamento, è necessario ricreare le porte del cluster.link:task_prepare_cluster_ports_on_the_exist_controller.html["Preparazione delle porte del cluster su un modulo controller esistente"]
+Nessuna porta corrispondente. In seguito all'upgrade, ricreare le porte del cluster. link:task_prepare_cluster_ports_on_the_exist_controller.html["Preparazione delle porte del cluster su un modulo controller esistente"]
 
 
 
@@ -869,15 +869,14 @@ The node must be rebooted to start using the newly installed software. Do you wa
 
 === Cancellazione della configurazione su un modulo controller
 
-[role="lead"]
 Prima di utilizzare un nuovo modulo controller nella configurazione MetroCluster, è necessario cancellare la configurazione esistente.
 
 .Fasi
-. Se necessario, arrestare il nodo per visualizzare il prompt DEL CARICATORE:
+. Se necessario, arrestare il nodo per visualizzare il `LOADER` prompt:
 +
 `halt`
 
-. Al prompt DEL CARICATORE, impostare le variabili ambientali sui valori predefiniti:
+. Quando `LOADER` richiesto, impostare le variabili ambientali sui valori predefiniti:
 +
 `set-defaults`
 
@@ -885,7 +884,7 @@ Prima di utilizzare un nuovo modulo controller nella configurazione MetroCluster
 +
 `saveenv`
 
-. Al prompt DEL CARICATORE, avviare il menu di avvio:
+. Quando `LOADER` richiesto, avviare il menu di avvio:
 +
 `boot_ontap menu`
 

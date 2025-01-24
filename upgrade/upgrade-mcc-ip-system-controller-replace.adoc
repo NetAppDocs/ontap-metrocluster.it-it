@@ -1,0 +1,29 @@
+---
+permalink: upgrade/upgrade-mcc-ip-system-controller-replace.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: È possibile utilizzare questa operazione di switchover MetroCluster automatizzato e guidato per eseguire un aggiornamento del controller senza interruzioni per una configurazione IP MetroCluster a quattro nodi. 
+---
+= Flusso di lavoro per l'aggiornamento dei controller IP MetroCluster mediante i comandi "sostituzione controller di sistema" (ONTAP 9.13.1 o versione successiva)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puoi utilizzare questa operazione di switchover automatizzato e guidata del MetroCluster per eseguire un upgrade del controller senza interruzioni in una configurazione IP di MetroCluster a quattro nodi con ONTAP 9.13.1 in un secondo momento. Altri componenti (ad esempio shelf di storage o switch) non possono essere aggiornati come parte di questa procedura.
+
+.Questo flusso di lavoro
+È possibile utilizzare questo workflow per aggiornare i controller IP MetroCluster con ONTAP 9.13.1 o versione successiva utilizzando lo switchover e lo switchback con i `system controller replace` comandi.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Uno"]link:upgrade-mcc-ip-system-controller-replace-supported-platforms.html["Preparatevi all'aggiornamento"]
+[role="quick-margin-para"]
+Analizza le combinazioni e i requisiti di upgrade supportati e completa le attività richieste per preparare il sistema per l'upgrade del controller. Il processo di aggiornamento automatico dei controller inizia con una serie di controlli preliminari prima di raccogliere le informazioni di configurazione e rimuovere qualsiasi software di monitoraggio esistente.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Due"]link:upgrade-mcc-ip-system-controller-replace-prepare-network-configuration.html["Aggiorna i controller"]
+[role="quick-margin-para"]
+L'operazione di automazione avvia le operazioni di switchover. Al termine di queste operazioni, l'operazione viene sospesa in modo da preparare la configurazione di rete dei vecchi controller, installare nel rack i nuovi controller, riassegnare i dischi dell'aggregato root e avviare i nuovi controller.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Tre"]link:upgrade-mcc-ip-system-controller-replace-complete-upgrade.html["Completare l'aggiornamento"]
+[role="quick-margin-para"]
+Completare l'aggiornamento automatico del controller verificando la raggiungibilità della rete, ripetendo le attività di aggiornamento sul secondo sito e ripristinando la configurazione di monitoraggio.

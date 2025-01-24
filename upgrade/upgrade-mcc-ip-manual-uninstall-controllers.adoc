@@ -1,0 +1,167 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual-uninstall-controllers.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: Spostare le LIF dati in una porta comune, rimuovere le VLAN e i gruppi di interfacce sui vecchi controller, quindi disinstallare fisicamente i controller. 
+---
+= Rimuovere le configurazioni dell'interfaccia e disinstallare i vecchi controller IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Verificare che la LIF sia posizionata correttamente. Quindi rimuovere le VLAN e i gruppi di interfacce sui vecchi controller e disinstallare fisicamente i controller.
+
+.A proposito di questa attività
+* Eseguire questi passaggi sui vecchi controller (Node_B_1-old, Node_B_2-old).
+* Per utilizzare questa procedura, è necessario disporre delle informazioni raccolte inlink:upgrade-mcc-ip-prepare-system.html#map-ports-from-the-old-nodes-to-the-new-nodes["Mappare le porte dai vecchi nodi ai nuovi nodi"].
+
+
+.Fasi
+. Avviare i vecchi nodi e accedere ai nodi:
++
+`boot_ontap`
+
+. Modifica della LIF intercluster dei vecchi controller in modo da utilizzare una porta home diversa rispetto alle porte utilizzate per l'interconnessione ha o l'interconnessione MetroCluster IP DR nei nuovi controller.
++
+
+NOTE: Questo passaggio è necessario per un aggiornamento corretto.
+
++
+La LIF intercluster dei vecchi controller deve utilizzare una porta home diversa rispetto alle porte utilizzate per l'interconnessione ha o l'interconnessione MetroCluster IP DR nei nuovi controller. Ad esempio, quando si esegue l'upgrade ai controller AFF A90, le porte di interconnessione ha sono E1a e e7a e le porte di interconnessione MetroCluster IP DR sono E2B e E3B. Se ospitati sulle porte E1a, e7a, E2B o E3B, è necessario spostare le LIF intercluster LIF nei vecchi controller.
+
++
+Per la distribuzione e l'assegnazione delle porte sui nuovi nodi, fare riferimento alla https://hwu.netapp.com["Hardware Universe"].
+
++
+.. Sui vecchi controller, visualizzare la LIF intercluster:
++
+`network interface show  -role intercluster`
+
++
+A seconda che le LIF intercluster dei vecchi controller utilizzino le stesse porte delle porte utilizzate per l'interconnessione ha o l'interconnessione MetroCluster IP DR nei nuovi controller, eseguire una delle seguenti azioni.
+
++
+[cols="2*"]
+|===
+| Se la LIF intercluster... | Vai a... 
+
+
+| Utilizzare la stessa porta home | <<controller_manual_upgrade_prepare_network_ports_2b,Sottosezione b>> 
+
+
+| Utilizzare un'altra porta home | <<controller_manual_upgrade_prepare_network_ports_3,Fase 3>> 
+|===
+.. [[controller_manual_upgrade_Prepare_network_ports_2b]]modificare le LIF intercluster per utilizzare una porta home diversa:
++
+`network interface modify -vserver <vserver> -lif <intercluster_lif> -home-port <port-not-used-for-ha-interconnect-or-mcc-ip-dr-interconnect-on-new-nodes>`
+
+.. Verificare che tutte le LIF intercluster si trovino nelle nuove porte home:
++
+`network interface show -role intercluster -is-home  false`
+
++
+L'output del comando dovrebbe essere vuoto, a indicare che tutte le LIF intercluster si trovano nelle rispettive porte home.
+
+.. Ripristina le LIF che non si trovano nelle porte home:
++
+`network interface revert -lif <intercluster_lif>`
+
++
+Ripete il comando per ogni intercluster LIF che non è sulla porta home.
+
+
+
+. [[controller_manual_upgrade_Prepare_network_ports_3]]assegnare la porta home di tutte le LIF dati sul vecchio controller a una porta comune che è la stessa su entrambi i moduli controller vecchi e nuovi.
++
+
+CAUTION: Se i controller nuovi e vecchi non dispongono di una porta comune, non è necessario modificare le LIF dati. Saltare questo passaggio e passare direttamente a <<upgrades_manual_without_matching_ports,Fase 4>>.
+
++
+.. Visualizzare le LIF:
++
+`network interface show`
+
++
+Tutti i file LIFS di dati, inclusi SAN e NAS, fanno parte di un'amministrazione e sono inattivi in quanto disponibili nel sito di switchover (cluster_A).
+
+.. Esaminare l'output per trovare una porta di rete fisica comune che sia la stessa sui controller vecchi e nuovi che non sia utilizzata come porta del cluster.
++
+Ad esempio, e0d è una porta fisica sui vecchi controller ed è presente anche sui nuovi controller. e0d non viene utilizzato come porta del cluster o in altro modo sui nuovi controller.
+
++
+Per l'utilizzo delle porte per i modelli di piattaforma, vedere la https://hwu.netapp.com/["Hardware Universe"]
+
+.. Modificare tutti i dati LIFS per utilizzare la porta comune come porta home: +
+`network interface modify -vserver <svm-name> -lif <data-lif> -home-port <port-id>`
++
+Nell'esempio seguente, questo è "e0d".
+
++
+Ad esempio:
+
++
+[listing]
+----
+network interface modify -vserver vs0 -lif datalif1 -home-port e0d
+----
+
+
+. [[updates_manual_without_matching_ports]]modificare i domini di trasmissione per rimuovere la VLAN e le porte fisiche che devono essere eliminate:
++
+`broadcast-domain remove-ports -broadcast-domain <broadcast-domain-name> -ports <node-name:port-id>`
+
++
+Ripetere questo passaggio per tutte le porte VLAN e fisiche.
+
+. Rimuovere le porte VLAN utilizzando le porte del cluster come porte membro e gruppi di interfacce utilizzando le porte del cluster come porte membro.
++
+.. Elimina porte VLAN: +
+`network port vlan delete -node <node_name> -vlan-name <portid-vlandid>`
++
+Ad esempio:
+
++
+[listing]
+----
+network port vlan delete -node node1 -vlan-name e1c-80
+----
+.. Rimuovere le porte fisiche dai gruppi di interfacce:
++
+`network port ifgrp remove-port -node <node_name> -ifgrp <interface-group-name> -port <portid>`
+
++
+Ad esempio:
+
++
+[listing]
+----
+network port ifgrp remove-port -node node1 -ifgrp a1a -port e0d
+----
+.. Rimuovere le porte VLAN e del gruppo di interfacce dal dominio di broadcast:
++
+`network port broadcast-domain remove-ports -ipspace <ipspace> -broadcast-domain <broadcast-domain-name> -ports <nodename:portname,nodename:portnamee>,..`
+
+.. Modificare le porte del gruppo di interfacce per utilizzare altre porte fisiche come membro, come necessario:
++
+`ifgrp add-port -node <node_name> -ifgrp <interface-group-name> -port <port-id>`
+
+
+
+. Arrestare i nodi al `LOADER` prompt:
++
+`halt -inhibit-takeover true`
+
+. Collegarsi alla console seriale dei vecchi controller (Node_B_1-old e Node_B_2-old) al sito_B e verificare che visualizzi il `LOADER` prompt.
+. Raccogliere i valori di bootarg:
++
+`printenv`
+
+. Scollegare le connessioni di storage e di rete su node_B_1-old e node_B_2-old. Etichettare i cavi in modo da poterli ricollegare ai nuovi nodi.
+. Scollegare i cavi di alimentazione da Node_B_1-old e Node_B_2-old.
+. Rimuovere i controller Node_B_1-old e Node_B_2-old dal rack.
+
+
+.Quali sono le prossime novità?
+link:upgrade-mcc-ip-manual-setup-controllers.html["Configurare le nuove centraline"].

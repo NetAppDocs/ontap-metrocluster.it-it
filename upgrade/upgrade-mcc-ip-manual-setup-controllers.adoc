@@ -1,0 +1,107 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual-setup-controllers.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: Montare su rack e collegare i nuovi controller IP MetroCluster. 
+---
+= Configurare i nuovi controller IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Montare su rack e collegare i nuovi controller IP MetroCluster.
+
+.Fasi
+. Pianificare il posizionamento dei nuovi moduli controller e degli shelf di storage in base alle necessità.
++
+Lo spazio rack dipende dal modello di piattaforma dei moduli controller, dai tipi di switch e dal numero di shelf di storage nella configurazione.
+
+. Mettere a terra l'utente.
+. Se l'aggiornamento richiede la sostituzione dei moduli controller, ad esempio l'aggiornamento da un sistema AFF A800 a un sistema AFF A90 o da un sistema AFF C800 a un sistema AFF C80, è necessario rimuovere il modulo controller dallo chassis quando si sostituisce il modulo controller. Per tutti gli altri aggiornamenti, passare a <<ip_upgrades_so_sb_4,Fase 4>>.
++
+Nella parte anteriore dello chassis, premere con decisione ciascun disco fino a quando non si avverte un arresto positivo. Ciò conferma che le unità sono saldamente alloggiate contro il piano intermedio del telaio.
+
++
+image::../media/drw-a800-drive-seated.png[Mostra la rimozione del modulo controller dal telaio]
+
+. [[ip_updates_so_sb_4]] installare i moduli del controller.
++
+La procedura di installazione che segui dipende se l'aggiornamento richiede la sostituzione dei moduli controller o se sono necessari moduli IOM per convertire i vecchi controller in uno shelf esterno.
+
++
+[cols="2*"]
+|===
+| Se si sta effettuando l'aggiornamento... | Seguire i passaggi per ... 
+
+
+ a| 
+** Da un AFF A150 a un sistema AFF A20
+** Da un AFF A220 a un sistema AFF A20
+
+| Conversione da controller a shelf esterno 
+
+
+ a| 
+** Da AFF A800 a un sistema AFF A90
+** Da un AFF C800 a un sistema AFF C80
+
+| Sostituzione del modulo controller 
+
+
+| Qualsiasi altra combinazione di upgrade dei controller | Tutti gli altri aggiornamenti 
+|===
++
+[role="tabbed-block"]
+====
+.Conversione da controller a shelf esterno
+--
+Se i tuoi controller MetroCluster IP originali sono modelli AFF A150 o AFF A220, puoi convertire la coppia ha AFF A150 o AFF A220 in uno shelf di dischi DS224C, quindi allegarla ai nuovi nodi.
+
+Ad esempio, quando si effettua l'upgrade da un sistema AFF A150 o AFF A220 a un sistema AFF A20, è possibile convertire la coppia ha AFF A150 o AFF A220 in uno shelf DS224C sostituendo i moduli controller AFF A150 o AFF A220 con IOM12 moduli.
+
+.Fasi
+.. Sostituire i moduli controller nel nodo che si sta convertendo con moduli shelf IOM12.
++
+https://hwu.netapp.com["Hardware Universe"^]
+
+.. Impostare l'ID dello shelf del disco.
++
+Ogni shelf di dischi, incluso lo chassis, richiede un ID univoco.
+
+.. Reimpostare gli altri ID dello shelf di dischi secondo necessità.
+.. Spegnere gli scaffali.
+.. Collegare lo shelf di dischi convertiti a una porta SAS del nuovo sistema e, se si utilizza un cablaggio ACP out-of-band, alla porta ACP del nuovo nodo.
+.. Accendere lo shelf di dischi convertito e gli altri shelf di dischi collegati ai nuovi nodi.
+.. Accendere i nuovi nodi, quindi interrompere il processo di boot su ciascun nodo premendo Ctrl-C per accedere al prompt dell'ambiente di boot.
+
+
+--
+.Sostituzione del modulo controller
+--
+L'installazione separata dei nuovi controller non è applicabile agli upgrade dei sistemi integrati con dischi e controller nello stesso chassis, ad esempio da un sistema AFF A800 a un sistema AFF A90. È necessario sostituire i nuovi moduli controller e le schede i/o dopo aver spento i vecchi controller, come illustrato nell'immagine seguente.
+
+L'immagine di esempio seguente è solo a scopo di rappresentazione, i moduli controller e le schede i/o possono variare da un sistema all'altro.
+
+image::../media/a90-a70-pcm-swap.png[Mostra lo scambio del modulo controller]
+
+--
+.Tutti gli altri aggiornamenti
+--
+Installare i moduli controller nel rack o nell'armadietto.
+
+--
+====
+. Collegare l'alimentazione dei controller, la console seriale e le connessioni di gestione come descritto in link:../install-ip/using_rcf_generator.html["Collegare via cavo gli switch IP MetroCluster"].
++
+Non collegare altri cavi scollegati dai vecchi controller in questo momento.
+
++
+https://docs.netapp.com/us-en/ontap-systems/index.html["Documentazione dei sistemi hardware ONTAP"^]
+
+. Accendere i nuovi nodi e avviarli in modalità manutenzione.
+
+
+.Quali sono le prossime novità?
+link:upgrade-mcc-ip-manual-hba-set-ha.html["Ripristinare la configurazione dell'HBA e impostare lo stato ha"].

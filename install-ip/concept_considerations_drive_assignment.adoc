@@ -261,15 +261,11 @@ I dischi su ogni shelf esterno sono divisi in due gruppi uguali (metà). Ogni ha
  a| 
 Una shelf viene utilizzata dalla coppia ha locale. Il secondo shelf viene utilizzato dalla coppia ha remota.
 
-Le partizioni su ogni shelf vengono utilizzate per creare l'aggregato root. Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni::
-+
---
+Le partizioni su ogni shelf vengono utilizzate per creare l'aggregato root. Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
+
 * Otto partizioni per i dati
 * Due partizioni di parità
 * Due partizioni di riserva
-
-
---
 
 
 
@@ -306,8 +302,7 @@ Solo dischi interni
  a| 
 I dischi interni sono divisi in quattro gruppi uguali. Ciascun gruppo viene assegnato automaticamente a un pool separato e ciascun pool viene assegnato a un controller separato nella configurazione.
 
-
-NOTE: Metà delle unità interne rimane non assegnata prima della configurazione di MetroCluster.
+*Nota:* metà delle unità interne rimangono non assegnate prima della configurazione di MetroCluster.
  a| 
 Due quarti sono utilizzati dalla coppia ha locale. Gli altri due quarti vengono utilizzati dalla coppia ha remota.
 
@@ -341,8 +336,7 @@ Ad esempio: Uno shelf con trimestri da Q1 a Q4 può avere le seguenti assegnazio
 * D4:pool Node_B_2 1
 
 
-
-NOTE: Metà delle unità interne rimane non assegnata prima della configurazione di MetroCluster.
+*Nota:* metà delle unità interne rimangono non assegnate prima della configurazione di MetroCluster.
  a| 
 Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
 
@@ -354,7 +348,7 @@ Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
 |===
 
 
-=== ADP e assegnazione dei dischi su sistemi AFF C250, AFF A250, ASA A250, ASA C250 e FAS500f
+=== ADP e assegnazione dei dischi su sistemi AFF A250, AFF C250, ASA A250, ASA C250, FAS500f, AFF A20, AFF A30 e AFF C30
 
 |===
 
@@ -362,10 +356,8 @@ Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
 | Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
 
 
- a| 
-Numero minimo di dischi consigliati (per sito)
- a| 
-48 dischi
+.2+| Numero minimo di dischi consigliati (per sito)  a| 
+48 dischi (solo dischi esterni, senza dischi interni)
  a| 
 I dischi su ogni shelf esterno sono divisi in due gruppi uguali (metà). Ogni half-shelf viene assegnato automaticamente a un pool separato.
  a| 
@@ -381,9 +373,78 @@ Le partizioni su ogni shelf vengono utilizzate per creare l'aggregato root. L'ag
 
 
  a| 
+48 dischi (dischi esterni e interni)
+ a| 
+Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato. I dischi degli shelf esterni sono divisi in quattro gruppi uguali (quarter). Ogni trimestre viene assegnato automaticamente a un pool separato.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include:
+
+* Otto partizioni per i dati
+* Due partizioni di parità
+* Due partizioni di riserva
+
+
+
+
+ a| 
 Numero minimo di dischi supportati (per sito)
  a| 
 16 dischi interni
+ a| 
+I dischi sono divisi in quattro gruppi uguali. Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
+
+* Due partizioni per i dati
+* Due partizioni di parità
+* Nessuna partizione di riserva
+
+
+|===
+
+
+=== Assegnazione di dischi e ADP sui sistemi AFF A50 e AFF C60
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+.2+| Numero minimo di dischi consigliati (per sito)  a| 
+48 dischi (solo dischi esterni, senza dischi interni)
+ a| 
+I dischi su ogni shelf esterno sono divisi in due gruppi uguali (metà). Ogni half-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+La coppia ha locale utilizza uno shelf. La coppia ha remota utilizza il secondo shelf.
+
+Le partizioni su ogni shelf vengono utilizzate per creare l'aggregato root. L'aggregato root include le seguenti partizioni in ogni plex:
+
+* Otto partizioni per i dati
+* Due partizioni di parità
+* Due partizioni di riserva
+
+
+
+
+ a| 
+48 dischi (dischi esterni e interni)
+ a| 
+Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato. I dischi degli shelf esterni sono divisi in quattro gruppi uguali (quarter). Ogni trimestre viene assegnato automaticamente a un pool separato.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include:
+
+* Otto partizioni per i dati
+* Due partizioni di parità
+* Due partizioni di riserva
+
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+24 dischi interni
  a| 
 I dischi sono divisi in quattro gruppi uguali. Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
  a| 
@@ -522,7 +583,7 @@ Ciascuno dei due plessi nell'aggregato root include:
 |===
 
 
-=== ADP e assegnazione dei dischi su AFF C800, ASA C800, ASA A800, AFF A800, AFF A70, e AFF A90
+=== ADP e assegnazione dei dischi sui sistemi AFF C800, ASA C800, ASA A800 e AFF A800
 
 |===
 
@@ -537,8 +598,51 @@ Dischi interni e 96 dischi esterni
  a| 
 Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato. I dischi sugli shelf esterni vengono assegnati automaticamente shelf-by-shelf, con tutti i dischi su ogni shelf assegnati a uno dei quattro nodi nella configurazione MetroCluster.
  a| 
-L'aggregato root viene creato con 12 partizioni root sullo shelf interno.
+Ciascuno dei due plessi nell'aggregato root include:
 
+* Otto partizioni per i dati
+* Due partizioni di parità
+* Due partizioni di riserva
+
+
+*Nota:* l'aggregato root viene creato con 12 partizioni root sullo shelf interno.
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+24 dischi interni
+ a| 
+Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato.
+ a| 
+Ciascuno dei due plessi nell'aggregato root include:
+
+* Tre partizioni per i dati
+* Due partizioni di parità
+* Una partizione di riserva
+
+
+*Nota:* l'aggregato root viene creato con 12 partizioni root sullo shelf interno.
+
+|===
+
+
+=== ADP e assegnazione dei dischi su sistemi AFF A70, AFF A90 e AFF C80
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per aggregato root 
+
+
+ a| 
+Numero minimo di dischi consigliati (per sito)
+ a| 
+Dischi interni e 96 dischi esterni
+ a| 
+Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato. I dischi sugli shelf esterni vengono assegnati automaticamente shelf-by-shelf, con tutti i dischi su ogni shelf assegnati a uno dei quattro nodi nella configurazione MetroCluster.
+ a| 
 Ciascuno dei due plessi nell'aggregato root include:
 
 * Otto partizioni per i dati
@@ -555,8 +659,6 @@ Numero minimo di dischi supportati (per sito)
  a| 
 Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato.
  a| 
-L'aggregato root viene creato con 12 partizioni root sullo shelf interno.
-
 Ciascuno dei due plessi nell'aggregato root include:
 
 * Tre partizioni per i dati
@@ -676,43 +778,12 @@ Le stesse linee guida e regole per l'assegnazione dei dischi per i sistemi AFF C
 
 
 
-=== Assegnazione dei dischi sui sistemi FAS9000
+=== Assegnazione dei dischi su sistemi FAS9000, FAS9500, FAS70 e FAS90
 
 |===
 
 
 | Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
-
-
- a| 
-Numero minimo di dischi consigliati (per sito)
- a| 
-96 dischi
- a| 
-I dischi vengono assegnati automaticamente shelf-by-shelf.
- a| 
-Non applicabile
-
-
-
- a| 
-Numero minimo di dischi supportati (per sito)
- a| 
-48 dischi
- a| 
-I dischi sugli shelf sono divisi in due gruppi uguali (metà). Ogni half-shelf viene assegnato automaticamente a un pool separato.
- a| 
-Non applicabile
-
-|===
-
-
-=== Assegnazione dei dischi sui sistemi FAS9500
-
-|===
-
-
-| Linee guida | Shelf per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
 
 
  a| 

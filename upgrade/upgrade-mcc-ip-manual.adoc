@@ -1,0 +1,29 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: 'A partire da ONTAP 9.8, è possibile utilizzare l"operazione di switchover MetroCluster per fornire un servizio senza interruzioni ai client mentre i moduli controller del cluster partner vengono aggiornati.' 
+---
+= Flusso di lavoro per gli aggiornamenti dei controller IP MetroCluster utilizzando lo switchover e lo switchback (ONTAP 9,8 e versioni successive)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A partire da ONTAP 9.8, è possibile utilizzare l'operazione di switchover MetroCluster per fornire un servizio senza interruzioni ai client mentre i moduli controller del cluster partner vengono aggiornati. Altri componenti (ad esempio shelf di storage o switch) non possono essere aggiornati come parte di questa procedura.
+
+.Questo flusso di lavoro
+È possibile utilizzare questo workflow per aggiornare i controller IP MetroCluster utilizzando lo switchover e lo switchback nei sistemi che eseguono ONTAP 9,8 o versioni successive.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Uno"]link:upgrade-mcc-ip-manual-requirements.html["Preparatevi all'aggiornamento"]
+[role="quick-margin-para"]
+Analizza le combinazioni e i requisiti di upgrade supportati e completa le attività richieste per preparare il sistema per l'upgrade del controller.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Due"]link:upgrade-mcc-ip-manual-switchover.html["Aggiorna i controller"]
+[role="quick-margin-para"]
+Passare alla configurazione MetroCluster per rimuovere la configurazione dai vecchi controller, montare su rack e installare i nuovi controller, riassegnare i dischi dell'aggregato root e avviare i nuovi controller prima di eseguire uno switchback.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Tre"]link:upgrade-mcc-ip-manual-complete-upgrade.html["Completare l'aggiornamento"]
+[role="quick-margin-para"]
+Completare l'aggiornamento del controller ripetendo le attività di aggiornamento nel secondo sito e ripristinando qualsiasi configurazione di monitoraggio.

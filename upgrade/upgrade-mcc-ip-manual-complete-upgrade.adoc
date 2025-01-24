@@ -1,0 +1,128 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual-complete-upgrade.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc, complete 
+summary: 'Dopo aver aggiornato i moduli controller, eseguire le attività necessarie per completare l"aggiornamento.' 
+---
+= Completare l'aggiornamento del controller IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dopo aver aggiornato i moduli controller, eseguire le attività necessarie per completare l'aggiornamento.
+
+
+
+== Controllare lo stato della configurazione MetroCluster
+
+Dopo aver aggiornato i moduli controller, è necessario verificare lo stato della configurazione MetroCluster.
+
+.A proposito di questa attività
+È possibile eseguire questa attività su qualsiasi nodo nella configurazione MetroCluster.
+
+.Fasi
+. Verificare il funzionamento della configurazione MetroCluster:
++
+.. Confermare la configurazione MetroCluster e verificare che la modalità operativa sia normale: +
+`metrocluster show`
+.. Eseguire un controllo MetroCluster: +
+`metrocluster check run`
+.. Visualizzare i risultati del controllo MetroCluster:
++
+`metrocluster check show`
+
+
+
+. Verificare lo stato e la connettività MetroCluster.
++
+.. Verificare le connessioni IP MetroCluster:
++
+`storage iscsi-initiator show`
+
+.. Verificare che i nodi funzionino:
++
+`metrocluster node show`
+
+.. Verificare che le interfacce IP di MetroCluster siano disponibili:
++
+`metrocluster configuration-settings interface show`
+
+.. Verificare che il failover locale sia attivato:
++
+`storage failover show`
+
+
+
+
+
+
+
+== Aggiornare i nodi su cluster_A.
+
+È necessario ripetere le attività di aggiornamento per aggiornare i nodi su cluster_A nel sito A.
+
+.Fasi
+. Ripetere i passaggi per aggiornare i nodi su cluster_A, iniziando con link:upgrade-mcc-ip-manual-requirements.html["Preparatevi per l'aggiornamento"].
++
+Durante l'esecuzione delle attività, tutti i riferimenti di esempio ai cluster e ai nodi vengono invertiti. Ad esempio, quando l'esempio viene dato allo switchover da cluster_A, si passa da cluster_B.
+
+
+
+
+
+== Ripristinare il monitoraggio di Tiebreaker o Mediator
+
+Dopo aver completato l'aggiornamento della configurazione MetroCluster, è possibile riprendere il monitoraggio con l'utility Tiebreaker o Mediator.
+
+.Fasi
+. Ripristinare il monitoraggio, se necessario, utilizzando la procedura per la configurazione.
++
+|===
+| Se si utilizza... | Utilizzare questa procedura 
+
+
+ a| 
+Spareggio
+ a| 
+link:../tiebreaker/concept_configuring_the_tiebreaker_software.html#adding-metrocluster-configurations["Aggiunta di configurazioni MetroCluster"].
+
+
+
+ a| 
+Mediatore
+ a| 
+link:../install-ip/concept_mediator_requirements.html["Configurare il servizio ONTAP Mediator da una configurazione IP MetroCluster"].
+
+
+
+ a| 
+Applicazioni di terze parti
+ a| 
+Consultare la documentazione del prodotto.
+
+|===
+
+
+
+
+== Inviare un messaggio AutoSupport personalizzato dopo la manutenzione
+
+Una volta completato l'aggiornamento, inviare un messaggio AutoSupport che indica la fine della manutenzione, in modo da poter riprendere la creazione automatica del caso.
+
+.Fasi
+. Per riprendere la generazione automatica del caso di supporto, inviare un messaggio AutoSupport per indicare che la manutenzione è stata completata.
++
+.. Eseguire il seguente comando: +
+`system node autosupport invoke -node * -type all -message MAINT=end`
+.. Ripetere il comando sul cluster partner.
+
+
+
+
+
+
+== Configurare la crittografia end-to-end
+
+Se è supportato sul sistema, è possibile crittografare il traffico back-end, come NVlog e i dati di replica dello storage, tra i siti IP di MetroCluster. Fare riferimento a. link:../maintain/task-configure-encryption.html["Configurare la crittografia end-to-end"] per ulteriori informazioni.

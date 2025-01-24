@@ -18,7 +18,7 @@ La procedura di refresh del sistema utilizzata dipende dal modello di piattaform
 == Combinazioni di aggiornamento tecnico MetroCluster IP supportate
 
 * È necessario completare la procedura di aggiornamento tecnico prima di aggiungere un nuovo carico.
-* Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, se si dispone di una configurazione a otto nodi, tutti e otto i nodi devono utilizzare la stessa versione di ONTAP.
+* Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, se si dispone di una configurazione a otto nodi, tutti e otto i nodi devono utilizzare la stessa versione di ONTAP. Fare riferimento alla link:https://hwu.netapp.com["Hardware Universe"^] per la versione minima supportata di ONTAP per la combinazione in uso.
 * Non superare i limiti di oggetti della "parte inferiore" delle piattaforme nella combinazione. Applicare il limite inferiore di oggetti delle due piattaforme.
 * Se i limiti della piattaforma di destinazione sono inferiori ai limiti MetroCluster, è necessario riconfigurare il MetroCluster in modo che sia uguale o inferiore ai limiti della piattaforma di destinazione prima di aggiungere i nuovi nodi.
 * Fare riferimento a. link:https://hwu.netapp.com["Hardware Universe"^] per i limiti della piattaforma.
@@ -27,21 +27,21 @@ La procedura di refresh del sistema utilizzata dipende dal modello di piattaform
 .Combinazioni di tech refresh AFF e FAS MetroCluster IP supportate
 La tabella seguente mostra le combinazioni di piattaforme supportate per l'aggiornamento di un sistema AFF o FAS in una configurazione IP di MetroCluster:
 
-image::../media/metrocluster_techref_ip.png[Combinazioni di aggiornamento tecnico IP di MetroCluster]
+image::../media/mcc-ip-techrefresh-comb-9161.png[Combinazioni di aggiornamento tecnico IP di MetroCluster]
 
 *Nota 1:* questa combinazione richiede ONTAP 9.13.1 o versione successiva.
 
 .Combinazioni di aggiornamento tecnologico ASA MetroCluster IP supportate
 La seguente tabella mostra le combinazioni di piattaforme supportate per l'aggiornamento di un sistema ASA in una configurazione MetroCluster IP:
 
-image::../media/metrocluster_techref_ip_asa.png[Combinazioni di aggiornamento tecnologico di MetroCluster IP ASA]
+image::../media/mcc-ip-techrefresh-asa-9161.png[Combinazioni di aggiornamento tecnologico di MetroCluster IP ASA]
 
 
 
 == Combinazioni di aggiornamento tecnico FC MetroCluster supportate
 
 * È necessario completare la procedura di aggiornamento tecnico prima di aggiungere un nuovo carico.
-* Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, se si dispone di una configurazione a otto nodi, tutti e otto i nodi devono utilizzare la stessa versione di ONTAP.
+* Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, se si dispone di una configurazione a otto nodi, tutti e otto i nodi devono utilizzare la stessa versione di ONTAP. Fare riferimento alla link:https://hwu.netapp.com["Hardware Universe"^] per la versione minima supportata di ONTAP per la combinazione in uso.
 * Non superare i limiti di oggetti della "parte inferiore" delle piattaforme nella combinazione. Applicare il limite inferiore di oggetti delle due piattaforme.
 * Se i limiti della piattaforma di destinazione sono inferiori ai limiti MetroCluster, è necessario riconfigurare il MetroCluster in modo che sia pari o inferiore ai limiti della piattaforma di destinazione prima di aggiungere i nuovi nodi.
 * Fare riferimento a. link:https://hwu.netapp.com["Hardware Universe"^] per i limiti della piattaforma.

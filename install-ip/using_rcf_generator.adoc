@@ -19,7 +19,8 @@ Esaminare queste considerazioni prima di utilizzare le tabelle:
 * Le seguenti tabelle mostrano l'utilizzo della porta per il sito A. Lo stesso cablaggio viene utilizzato per il sito B.
 * Gli switch non possono essere configurati con porte di velocità diverse (ad esempio, una combinazione di porte da 100 Gbps e porte da 40 Gbps).
 * Tenere traccia del gruppo di porte MetroCluster (MetroCluster 1, MetroCluster 2, ecc.). Queste informazioni saranno necessarie quando si utilizza lo strumento RcfFileGenerator come descritto più avanti in questa procedura di configurazione.
-* Il https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator per MetroCluster IP"] fornisce inoltre una panoramica del cablaggio per porta per ogni switch. Utilizzare questa panoramica dei cavi per verificare il cablaggio.
+* È necessario collegare tutti i nodi allo stesso modo. Se sono disponibili diverse opzioni di combinazione di porte per collegare i nodi, tutti i nodi devono utilizzare le stesse combinazioni di porte. Ad esempio, E1a su node1 e E1a su node2 devono essere collegati a un interruttore. Analogamente, la seconda porta di entrambi i nodi deve essere collegata al secondo switch.
+* La https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator per MetroCluster IP"^] fornisce inoltre una panoramica del cablaggio per porta per ogni switch. Utilizzare questa panoramica dei cavi per verificare il cablaggio.
 
 
 
