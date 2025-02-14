@@ -230,6 +230,44 @@ Node_A_1
 
 
 |===
+* I valori di bootarg MetroCluster impostati dipendono dall'utilizzo di porte cluster/ha condivise o di porte MetroCluster/ha condivise nel nuovo sistema. Utilizzare le seguenti informazioni per determinare le porte per il sistema in uso.
++
+I sistemi elencati nella tabella seguente utilizzano *porte MetroCluster/ha condivise*.
+
++
+Tutti gli altri sistemi utilizzano *porte cluster/ha condivise*.
+
++
+[cols="2*"]
+|===
+| Sistemi AFF e ASA che utilizzano porte ha/MetroCluster condivise | Sistemi FAS che utilizzano porte ha/MetroCluster condivise 
+
+
+ a| 
+** AFF A150, ASA A150
+** AFF A220
+** AFF C250, ASA C250
+** AFF A250, ASA A250
+** AFF A300
+** AFF A320
+** AFF C400, ASA C400
+** AFF A400, ASA A400
+** AFF A700
+** AFF C800, ASA C800
+** AFF A800, ASA A800
+** AFF A900, ASA A900
+
+ a| 
+** FAS2750
+** FAS500f
+** FAS8200
+** FAS8300
+** FAS8700
+** FAS9000
+** FAS9500
+
+
+|===
 
 
 .Fasi
@@ -241,15 +279,13 @@ Node_A_1
 Gli indirizzi richiesti sono gli indirizzi partner DR indicati nella colonna *Indirizzo di rete di destinazione*.
 
 +
-L'output del comando varia in base al modello della piattaforma.
+L'output dei comandi varia in base all'utilizzo delle porte ha/cluster condivise o MetroCluster/ha condivise sul modello della piattaforma.
 
 +
 [role="tabbed-block"]
 ====
-.Sistemi introdotti in ONTAP 9.15.1 o versioni successive
+.Sistemi che utilizzano porte ha/cluster condivisi
 --
-I sistemi introdotti in ONTAP 9.15.1 o versioni successive (AFF A70, AFF A90 e AFF A1K) dispongono di porte separate per ha e DR, come mostrato nell'esempio di output seguente:
-
 [listing]
 ----
 cluster_B::*> metrocluster configuration-settings connection show
@@ -279,7 +315,7 @@ Group Cluster Node    Network Address Network Address Partner Type Config State
 12 entries were displayed.
 ----
 --
-.Tutti gli altri sistemi
+.Sistemi che utilizzano porte ha/MetroCluster condivise
 --
 Il seguente output mostra gli indirizzi IP per una configurazione con i sistemi AFF A700 e FAS9000 con le interfacce IP MetroCluster sulle porte e5a e e5b. Le interfacce possono variare a seconda del tipo di piattaforma.
 
@@ -351,7 +387,7 @@ Group Cluster Node     Network Address Netmask         Gateway         State
 ----
 
 
-. Al prompt del LOADER per ciascuno dei nodi del sito di emergenza, impostare il valore di bootarg in base al modello di piattaforma:
+. Al `LOADER` prompt di ciascuno dei nodi del sito di emergenza, impostare il valore di bootarg a seconda che il modello di piattaforma utilizzi porte cluster/ha condivise o porte MetroCluster/ha condivise:
 +
 [NOTE]
 ====
@@ -363,17 +399,15 @@ Group Cluster Node     Network Address Netmask         Gateway         State
 +
 [role="tabbed-block"]
 ====
-.Sistemi introdotti in ONTAP 9.15.1 o versioni successive
+.Sistemi che utilizzano porte ha/cluster condivisi
 --
-Il valore di _ha-partner-IP-address_ deve essere impostato su *0* (zero) nei sistemi introdotti in ONTAP 9.15.1 o versioni successive, in quanto dispongono di porte separate per DR e ha.
-
 Impostare il seguente bootarg:
 
 [listing]
 ----
-setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
+setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,0,0,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
 
-setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
+setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,0,0,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
 ----
 I seguenti comandi impostano i valori per Node_A_1 utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:
 
@@ -391,14 +425,14 @@ setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,0,172.17.26.13,172.17.26.1
 setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,0,172.17.27.13,172.17.27.12
 ----
 --
-.Tutti gli altri sistemi
+.Sistemi che utilizzano porte ha/MetroCluster condivise
 --
 Impostare il seguente bootarg:
 
 ....
-setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
+setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
 
-setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
+setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
 ....
 I seguenti comandi impostano i valori per Node_A_1 utilizzando la VLAN 120 per la prima rete e la VLAN 130 per la seconda rete:
 

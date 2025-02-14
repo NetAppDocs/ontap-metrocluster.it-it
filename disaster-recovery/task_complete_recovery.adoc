@@ -281,34 +281,41 @@ aggr_b2          -         -     - unknown      - node_A_1
 +
 Se il sito di disastro includeva aggregati senza mirror e gli aggregati senza mirror non sono più presenti, l'aggregato potrebbe essere visualizzato con uno stato "`Unknown`" nell'output del comando show dell'aggregato di storage. Contattare il supporto tecnico per rimuovere le voci non aggiornate per gli aggregati senza mirror, fare riferimento all'articolo della Knowledge base link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/How_to_remove_stale_unmirrored_aggregate_entries_in_a_MetroCluster_following_disaster_where_storage_was_lost["Come rimuovere le voci aggregate obsolete senza mirror in un MetroCluster in seguito a un disastro in cui lo storage è stato perso."^]
 
-. Verificare che tutte le SVM di destinazione della sincronizzazione sul cluster sopravvissuto siano inattive (mostrando uno stato Admin di "`ssurfared`") e che le SVM di origine della sincronizzazione sul cluster di emergenza siano attive e in esecuzione:
+. Verificare che tutte le SVM di destinazione della sincronizzazione sul cluster rimasto siano inattive (mostrando lo stato operativo di "sormontato"):
++
+`vserver show -subtype sync-destination`
+
++
+[listing]
+----
+node_B_1::> vserver show -subtype sync-destination
+                                 Admin    Operational  Root
+Vserver       Type    Subtype    State    State        Volume    Aggregate
+-----------   ------- ---------- -------- ----------   --------  ----------
+...
+cluster_A-vs1a-mc data sync-destination
+                               running    stopped    vs1a_vol   aggr_b2
+
+----
++
+Gli aggregati Sync-destination nella configurazione MetroCluster hanno il suffisso "`-mc`" aggiunto automaticamente al loro nome per facilitarne l'identificazione.
+
+. Verificare che le SVM di sincronizzazione sul cluster di disaster recovery siano attive e in esecuzione:
 +
 `vserver show -subtype sync-source`
 
 +
 [listing]
 ----
-node_B_1::> vserver show -subtype sync-source
-                               Admin      Root                       Name    Name
-Vserver     Type    Subtype    State      Volume     Aggregate       Service Mapping
------------ ------- ---------- ---------- ---------- ----------      ------- -------
+node_A_1::> vserver show -subtype sync-source
+                                  Admin    Operational  Root
+Vserver        Type    Subtype    State    State        Volume     Aggregate
+-----------    ------- ---------- -------- ----------   --------   ----------
 ...
-vs1a        data    sync-source
-                               running    vs1a_vol   node_B_2        file    file
-                                                                     aggr_b2
+vs1a           data    sync-source
+                                  running  running    vs1a_vol  aggr_b2
 
-node_A_1::> vserver show -subtype sync-destination
-                               Admin      Root                         Name    Name
-Vserver            Type    Subtype    State      Volume     Aggregate  Service Mapping
------------        ------- ---------- ---------- ---------- ---------- ------- -------
-...
-cluster_A-vs1a-mc  data    sync-destination
-                                      stopped    vs1a_vol   sosb_      file    file
-                                                                       aggr_b2
 ----
-+
-Gli aggregati Sync-destination nella configurazione MetroCluster hanno il suffisso "-mc" aggiunto automaticamente al loro nome per facilitarne l'identificazione.
-
 . Verificare che le operazioni di switchback siano riuscite utilizzando `metrocluster operation show` comando.
 +
 |===
