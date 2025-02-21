@@ -104,7 +104,7 @@ Nelle tabelle seguenti sono illustrate le combinazioni di piattaforme supportate
 .Combinazioni di espansione AFF e FAS MetroCluster IP supportate
 La tabella seguente mostra le combinazioni di piattaforme supportate per l'espansione di un sistema AFF o FAS in una configurazione IP di MetroCluster:
 
-image::../media/mccip_expand_ip_8node_9161.png[Combinazioni di piattaforme per configurazioni a 8 nodi]
+image::../media/mccip_expand_ip_8node_9161-updated.png[Combinazioni di piattaforme per configurazioni a 8 nodi]
 
 * *Nota 1*: Per queste combinazioni è necessario ONTAP 9.9.1 o versione successiva (o la versione minima di ONTAP supportata dalla piattaforma).
 * *Nota 2*: Per queste combinazioni è necessario ONTAP 9.13.1 o versione successiva (o la versione minima di ONTAP supportata dalla piattaforma).
@@ -208,7 +208,6 @@ Intervalli VLAN validi:
 
 * Entrambi i gruppi di DR utilizzano le stesse VLAN per l'espansione da una configurazione a quattro nodi a una configurazione MetroCluster a otto nodi.
 * Se non è possibile configurare entrambi i gruppi DR utilizzando la stessa VLAN, è necessario aggiornare il gruppo DR che non supporta il `vlan-id` parametro per utilizzare una VLAN supportata dall'altro gruppo DR.
-* A seconda della versione di ONTAP in uso, è possibile modificare alcune proprietà dell'interfaccia IP di MetroCluster dopo la configurazione iniziale. Per informazioni dettagliate sugli elementi supportati, fare riferimento a. link:../maintain/task-modify-ip-netmask-properties.html["Modificare le proprietà di un'interfaccia IP MetroCluster"]
 
 
 
@@ -693,6 +692,7 @@ cluster_A::>
 +
 [NOTE]
 ====
+** Non utilizzare indirizzi IP 169.254.17.x o 169.254.18.x quando si creano interfacce IP MetroCluster per evitare conflitti con indirizzi IP dell'interfaccia generati automaticamente dal sistema nello stesso intervallo.
 ** Se supportato, è possibile specificare una VLAN diversa (non predefinita) superiore a 100 (tra 101 e 4095) utilizzando il `-vlan-id` parametro nel `metrocluster configuration-settings interface create` comando. Per informazioni sulla piattaforma supportata, consultare la <<Considerazioni sulle VLAN per l'aggiunta di un nuovo gruppo DR>> sezione.
 ** È possibile configurare le interfacce IP di MetroCluster da entrambi i cluster.
 

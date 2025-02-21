@@ -23,6 +23,51 @@ Verificare che la LIF sia posizionata correttamente. Quindi rimuovere le VLAN e 
 +
 `boot_ontap`
 
+. Se il sistema a cui si sta eseguendo l'aggiornamento NON è presente nella tabella seguente, verificare che le interfacce IP di MetroCluster stiano utilizzando indirizzi IP supportati.
++
+|===
+
+
+| Sistemi AFF e ASA | Sistemi FAS 
+
+
+ a| 
+** AFF A150, ASA A150
+** AFF A220
+** AFF C250, ASA C250
+** AFF A250, ASA A250
+** AFF A300
+** AFF A320
+** AFF C400, ASA C400
+** AFF A400, ASA A400
+** AFF A700
+** AFF C800, ASA C800
+** AFF A800, ASA A800
+** AFF A900, ASA A900
+
+ a| 
+** FAS2750
+** FAS500f
+** FAS8200
+** FAS8300
+** FAS8700
+** FAS9000
+** FAS9500
+
+
+|===
++
+.. Verificare gli indirizzi IP delle interfacce MetroCluster sui vecchi controller:
++
+`metrocluster configuration-settings interface show`
+
+.. Se le interfacce MetroCluster utilizzano gli indirizzi IP 169.254.17.x o 169.254.18.x, consultare la sezione link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/How_to_modify_the_properties_of_a_MetroCluster_IP_interface["L'articolo della Knowledge base "come modificare le proprietà di un'interfaccia IP di MetroCluster""^] per modificare gli indirizzi IP dell'interfaccia prima di procedere con l'aggiornamento.
++
+
+CAUTION: L'aggiornamento a qualsiasi sistema non elencato nella tabella non è supportato se le interfacce MetroCluster sono configurate con indirizzi IP 169.254.17.x o 169.254.18.x.
+
+
+
 . Modifica della LIF intercluster dei vecchi controller in modo da utilizzare una porta home diversa rispetto alle porte utilizzate per l'interconnessione ha o l'interconnessione MetroCluster IP DR nei nuovi controller.
 +
 
@@ -51,7 +96,7 @@ A seconda che le LIF intercluster dei vecchi controller utilizzino le stesse por
 | Utilizzare la stessa porta home | <<controller_manual_upgrade_prepare_network_ports_2b,Sottosezione b>> 
 
 
-| Utilizzare un'altra porta home | <<controller_manual_upgrade_prepare_network_ports_3,Fase 3>> 
+| Utilizzare un'altra porta home | <<controller_manual_upgrade_prepare_network_ports_3,Fase 4>> 
 |===
 .. [[controller_manual_upgrade_Prepare_network_ports_2b]]modificare le LIF intercluster per utilizzare una porta home diversa:
 +
@@ -76,7 +121,7 @@ Ripete il comando per ogni intercluster LIF che non è sulla porta home.
 . [[controller_manual_upgrade_Prepare_network_ports_3]]assegnare la porta home di tutte le LIF dati sul vecchio controller a una porta comune che è la stessa su entrambi i moduli controller vecchi e nuovi.
 +
 
-CAUTION: Se i controller nuovi e vecchi non dispongono di una porta comune, non è necessario modificare le LIF dati. Saltare questo passaggio e passare direttamente a <<upgrades_manual_without_matching_ports,Fase 4>>.
+CAUTION: Se i controller nuovi e vecchi non dispongono di una porta comune, non è necessario modificare le LIF dati. Saltare questo passaggio e passare direttamente a <<upgrades_manual_without_matching_ports,Fase 5>>.
 
 +
 .. Visualizzare le LIF:
@@ -84,7 +129,7 @@ CAUTION: Se i controller nuovi e vecchi non dispongono di una porta comune, non 
 `network interface show`
 
 +
-Tutti i file LIFS di dati, inclusi SAN e NAS, fanno parte di un'amministrazione e sono inattivi in quanto disponibili nel sito di switchover (cluster_A).
+Tutte le LIF dati, comprese SAN e NAS, vengono amministrate in maniera operativa in maniera puntuale (cluster_A).
 
 .. Esaminare l'output per trovare una porta di rete fisica comune che sia la stessa sui controller vecchi e nuovi che non sia utilizzata come porta del cluster.
 +

@@ -29,6 +29,10 @@ Con l'aggiunta dei nuovi nodi, è necessario completare le fasi di transizione e
 
 . Creare interfacce IP MetroCluster (Node_A_1-IP, Node_A_2-IP, Node_B_1-IP, Node_B_2-IP) -- è necessario creare due interfacce per controller; otto interfacce in totale:
 +
+
+CAUTION: Non utilizzare indirizzi IP 169.254.17.x o 169.254.18.x quando si creano interfacce IP MetroCluster per evitare conflitti con indirizzi IP dell'interfaccia generati automaticamente dal sistema nello stesso intervallo.
+
++
 `metrocluster configuration-settings interface create -cluster-name <cluster_name> -home-node <controller_name> -home-port <port_name> -address <ip_address> -netmask <netmask_address> -vlan-id <vlan_id>`
 
 +

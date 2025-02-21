@@ -18,7 +18,7 @@ In tutte le configurazioni, ciascuno dei due siti MetroCluster è configurato co
  a| 
 Numero di controller
  a| 
-Quattro o otto*
+Quattro o otto^1^
  a| 
 Quattro o otto
  a| 
@@ -207,15 +207,15 @@ Sì
 Sì
 
 |===
-*Importante*
+*Note*
 
-Tenere presente le seguenti considerazioni per le configurazioni IP MetroCluster a otto nodi:
+. Fare riferimento alle seguenti considerazioni relative alle configurazioni IP MetroCluster a 8 nodi:
++
+** Le configurazioni a otto nodi sono supportate a partire da ONTAP 9.9.1.
+** Sono supportati solo gli switch MetroCluster validati da NetApp (ordinati da NetApp).
+** Le configurazioni che utilizzano connessioni backend con routing IP (Layer 3) non sono supportate.
 
-* Le configurazioni a otto nodi sono supportate a partire da ONTAP 9.9.1.
-* Sono supportati solo gli switch MetroCluster validati da NetApp (ordinati da NetApp).
-* Le configurazioni che utilizzano connessioni backend con routing IP (Layer 3) non sono supportate.
-* Le configurazioni che utilizzano reti private Layer 2 condivise non sono supportate.
-* Le configurazioni che utilizzano uno switch condiviso Cisco 9336C-FX2 non sono supportate.
+
 
 
 

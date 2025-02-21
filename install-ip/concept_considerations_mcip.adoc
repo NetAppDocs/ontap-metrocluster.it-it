@@ -156,3 +156,6 @@ Non vengono creati o modificati dai comandi dell'interfaccia di rete.
 * Non esegue il failover, ma rimangono associati alla porta su cui sono stati creati.
 * Le configurazioni IP di MetroCluster utilizzano porte Ethernet specifiche (a seconda della piattaforma) per le interfacce IP di MetroCluster.
 
+
+
+CAUTION: Non utilizzare indirizzi IP 169.254.17.x o 169.254.18.x quando si creano interfacce IP MetroCluster per evitare conflitti con indirizzi IP dell'interfaccia generati automaticamente dal sistema nello stesso intervallo.
