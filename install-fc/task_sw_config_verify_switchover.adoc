@@ -3118,7 +3118,7 @@ Queste attività si applicano solo ai sistemi con bridge FC-SAS.
 In una configurazione Fabric-Attached MetroCluster, è necessario eseguire alcune procedure di configurazione aggiuntive per monitorare gli switch FC.
 
 
-NOTE: A partire da ONTAP 9.8, la `storage switch` il comando viene sostituito con `system switch`. La procedura riportata di seguito mostra `storage switch` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `system switch` è preferibile utilizzare il comando.
+NOTE: A partire da ONTAP 9,8, il `storage switch` comando viene sostituito da `system switch fibre-channel`. La procedura seguente mostra il `storage switch` comando, ma se si esegue ONTAP 9,8 o versione successiva, il `system switch fibre-channel` comando è preferito.
 
 .Fasi
 . Aggiungere uno switch con un indirizzo IP a ciascun nodo MetroCluster:

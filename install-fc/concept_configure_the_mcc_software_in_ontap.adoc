@@ -3021,6 +3021,9 @@ L'esempio mostra come configurare un utente di sola lettura. Se necessario, è p
 
 Prima di monitorare i componenti in una configurazione MetroCluster, è necessario eseguire alcune procedure di configurazione speciali.
 
+
+NOTE: Per una maggiore sicurezza, NetApp consiglia di configurare SNMPv2 o SNMPv3 per monitorare lo stato dello switch.
+
 .A proposito di questa attività
 Queste attività si applicano solo ai sistemi con bridge FC-SAS.
 
@@ -3049,7 +3052,7 @@ NetApp supporta solo i seguenti strumenti per monitorare i componenti in una con
 In una configurazione Fabric-Attached MetroCluster, è necessario eseguire alcune procedure di configurazione aggiuntive per monitorare gli switch FC.
 
 
-NOTE: A partire da ONTAP 9.8, la `storage switch` il comando viene sostituito con `system switch`. La procedura riportata di seguito mostra `storage switch` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `system switch` è preferibile utilizzare il comando.
+NOTE: A partire da ONTAP 9,8, il `storage switch` comando viene sostituito da `system switch fibre-channel`. La procedura seguente mostra il `storage switch` comando, ma se si esegue ONTAP 9,8 o versione successiva, il `system switch fibre-channel` comando è preferito.
 
 .Fasi
 . Aggiungere uno switch con un indirizzo IP a ciascun nodo MetroCluster:

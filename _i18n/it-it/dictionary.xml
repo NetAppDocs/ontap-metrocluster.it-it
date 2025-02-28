@@ -1354,8 +1354,6 @@
   <block id="3d3f8220d38456693795f57399e3dd66" category="paragraph">L'esempio seguente mostra l'abilitazione della porta fc1/14 e fc1/15 sullo switch A_1:</block>
   <block id="d448f82c3dc45aeef9b75bf272bc8ed4" category="list-text">Verificare che la porta dello switch sia disattivata:</block>
   <block id="0483b2aca795ea6933a0ab7502b4e963" category="list-text">Ristabilire la configurazione MetroCluster.</block>
-  <block id="5cb7ce670094889d3c954b543759f688" category="summary">La preparazione all'aggiunta a caldo di uno shelf di dischi SAS comporta il download di documenti, nonché del firmware del disco e dello shelf di dischi.</block>
-  <block id="85c019b69442635697fc1b5b3f6cfad3" category="doc">Preparazione all'aggiunta a caldo di shelf di dischi SAS</block>
   <block id="98f4bbee1fe7223d4a878a15a9e719ad" category="list-text">Il sistema deve essere una configurazione supportata e deve essere in esecuzione una versione supportata di ONTAP.</block>
   <block id="79fb12280740c382675b2f2b02401b80" category="list-text">Tutti i dischi e gli shelf di dischi del sistema devono disporre della versione più recente del firmware.</block>
   <block id="623d27fb1a71775c853589b6aa232fcb" category="paragraph">Prima di aggiungere shelf, è possibile aggiornare il firmware del disco e dello shelf nella configurazione MetroCluster.</block>
@@ -1367,7 +1365,6 @@
   <block id="8e916218cb72668e639a5859eade4041" category="list-text">La _Guida all'installazione_ per il modello di shelf di dischi.</block>
   <block id="55276018e99703958158b6e0fb364ef6" category="list-text">Verificare che lo shelf di dischi che si sta aggiungendo a caldo sia supportato.</block>
   <block id="a1ea1902849dc9b29d8207ac18e4b9be" category="list-text">Scarica l'ultima versione del firmware per shelf di dischi e dischi:</block>
-  <block id="680f2c91c58cc6532106b87cb564cc68" category="admonition">In questa fase, si sta completando solo la parte di download delle istruzioni fornite nei collegamenti. Seguire la procedura descritta in <block ref="47adb28a466429763b049bd78d160e0f" category="inline-link-macro-rx"></block> sezione per l'installazione dello shelf di dischi.</block>
   <block id="a2624d2fcb6a24cb4e50b81563b7fea1" category="list-text">Scaricare il firmware del disco ed eseguire una copia delle istruzioni del firmware del disco per riferimento in seguito.</block>
   <block id="9b862d0c04151d954efe49c5341a3541" category="inline-link">Download NetApp: Firmware del disco</block>
   <block id="6d8db2137b9e061e374fe522ee024f3c" category="paragraph"><block ref="6d8db2137b9e061e374fe522ee024f3c" category="inline-link-rx"></block></block>
@@ -2138,8 +2135,6 @@
   <block id="c930f1407b119fed6e0e8cb7aab0c04e" category="paragraph"><block ref="3e553fc48f78ab9c545115ebcf297b1f" prefix="" category="inline-code"></block></block>
   <block id="9684ced23869ffd0ef90656a6aa83c1d" category="paragraph"><block ref="5f8c76c5246344cdbc54fffd2aa86640" prefix="" category="inline-code"></block></block>
   <block id="0f03e15eba6bd2b5d72c3bf12b9e6464" category="summary">È possibile aggiungere a caldo uno shelf di dischi quando si desidera aumentare lo storage senza alcuna riduzione delle performance.</block>
-  <block id="e57ca4b3df83a88b6254675613163df0" category="list-text">Il sistema deve soddisfare tutti i requisiti di <block ref="08d6c3cbf42a81a0c26843f87c874545" category="inline-link-macro-rx"></block>.</block>
-  <block id="5c96ab4a94ce2c03e50e3170dc50e8be" category="list-text">Per aggiungere a caldo uno shelf, l'ambiente deve soddisfare uno dei seguenti scenari:</block>
   <block id="dc7e96665a67891a688cad5299c9216d" category="list-text">Sono presenti due bridge FibreBridge 7500N collegati a uno stack di shelf di dischi SAS.</block>
   <block id="bbe46ae98258b21267300cd00fda2d33" category="list-text">Questa procedura consente di aggiungere a caldo uno shelf di dischi all'ultimo shelf di dischi in uno stack.</block>
   <block id="de765cbcb90d504e6ac736ad12d5610f" category="paragraph">Questa procedura viene scritta con il presupposto che l'ultimo shelf di dischi in uno stack sia collegato da IOM A bridge A e da IOM B a bridge B.</block>
@@ -2148,18 +2143,10 @@
   <block id="4854106a7e78843664930c4dc2100549" category="admonition">Ogni coppia di bridge FibreBridge 7500N o 7600N può supportare fino a quattro stack.</block>
   <block id="2d0d17a81f0643f24076c9d6053d77c6" category="admonition">L'aggiunta a caldo di uno shelf di dischi richiede l'aggiornamento del firmware del disco sul shelf di dischi aggiunto a caldo eseguendo il<block ref="da6a6b7cd3f4972b2a5426b567597f96" prefix=" " category="inline-code"></block> comando in modalità avanzata. L'esecuzione di questo comando può causare interruzioni se il firmware dei dischi esistenti nel sistema è una versione precedente.</block>
   <block id="6cf82bfa742937a27072b88c527e1707" category="list-text">Verificare la connettività dello shelf di dischi dalla console di sistema di uno dei controller:</block>
-  <block id="14eed54cda8c3aab4e76c858751a1903" category="paragraph"><block ref="b69a08e3a245ecaded81bdc0df023669" prefix="" category="inline-code"></block></block>
   <block id="e9a0680136bcf6c65f2b08336c359725" category="paragraph">L'output è simile a quanto segue:</block>
   <block id="71acbd7b99f4163d9bdf49cc4896c1d8" category="list-text">Ciascun bridge su una linea separata e sotto ogni porta FC a cui è visibile; ad esempio, l'aggiunta a caldo di uno shelf di dischi a un set di bridge FibreBridge 7500N produce il seguente output:</block>
   <block id="ee60b9bc622c703e1065f07dcdc02e73" category="list-text">Ogni shelf di dischi su una linea separata sotto ogni porta FC a cui è visibile:</block>
   <block id="4f4cc17134e7a0dec2fd6c91d9961c0e" category="list-text">Ciascun disco su una linea separata sotto ciascuna porta FC a cui è visibile:</block>
-  <block id="12c600f2f4991508e5f17240b49e8493" category="list-text">Verificare che l'assegnazione automatica dei dischi sia attivata dalla console di uno dei controller:</block>
-  <block id="128d6bb86b0214622ee2f48931f27dc8" category="paragraph"><block ref="d657fc9a7a565dff61fc29c4771341b5" prefix="" category="inline-code"></block></block>
-  <block id="3afff8040872589b8f259af1b1b02113" category="paragraph">Il criterio di assegnazione automatica viene visualizzato nella colonna Auto Assign (assegnazione automatica).</block>
-  <block id="37ecabf9d8255c1ef714fdd4b6878eb6" category="list-text">Se nel sistema non è attivata l'assegnazione automatica dei dischi o se i dischi nello stesso stack appartengono a entrambi i controller, assegnare i dischi ai pool appropriati.</block>
-  <block id="21dc7cf52756619aa7572059edd48927" category="paragraph">Se si suddivide un singolo stack di shelf di dischi tra due controller, l'assegnazione automatica dei dischi deve essere disattivata prima di assegnare la proprietà dei dischi; in caso contrario, quando si assegna un singolo disco, i dischi rimanenti potrebbero essere assegnati automaticamente allo stesso controller e pool.</block>
-  <block id="c6a74b565a0bfaf4ae27e4430afa45d3" category="paragraph">Il<block ref="288479a9c6226aa028a286d1be971626" prefix=" " category="inline-code"></block> il comando disattiva l'assegnazione automatica del disco.</block>
-  <block id="5b63e4a9bc611666d00f442d845ec5c6" category="admonition">I dischi non devono essere aggiunti ad aggregati o volumi fino a quando il firmware del disco e dello shelf non sono stati aggiornati.</block>
   <block id="70a0e75e35d9914b9a2f7708da941117" category="list-text">Installare e cablare lo shelf di dischi:</block>
   <block id="28f13ef1be475bc18398b06c9ee9c0ad" category="paragraph">Non forzare un connettore in una porta. I cavi mini-SAS sono inseriti; quando orientati correttamente in una porta SAS, il cavo SAS scatta in posizione e il LED LNK della porta SAS dello shelf di dischi si illumina di verde.per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso l'alto (sul lato superiore del connettore).</block>
   <block id="d4fa97d509c1914d4c73c7be277a3f4a" category="list-text">Installare lo shelf di dischi, accenderlo e impostare l'ID dello shelf.</block>
@@ -2169,13 +2156,9 @@
   <block id="414b35b7f0918196aa1be1723514bab1" category="paragraph">L'altra estremità del cavo rimane collegata al ponte B.</block>
   <block id="56beeff85a5bf6777fb64089e64c8286" category="list-text">Collegare a margherita il nuovo shelf di dischi collegando le nuove porte IOM dello shelf (di IOM A e IOM B) alle ultime porte IOM dello shelf (di IOM A e IOM B).</block>
   <block id="345e380efa5afa2a2afb3abe3096922a" category="list-text">Aggiornare il firmware del disco alla versione più recente dalla console di sistema.</block>
-  <block id="7c4d248493f91032503b9fa1ff16b78a" category="list-text">Passare al livello di privilegio avanzato: +<block ref="69cfa26d6e6345bb4eef9a298daa32f3" prefix=" " category="inline-code"></block></block>
-  <block id="0ffb0a1b769b7a5cb0f4a4adc97d95ff" category="list-text">Aggiornare il firmware del disco alla versione più recente dalla console di sistema: +<block ref="b7f15bbb562e83813b06727133789742" prefix=" " category="inline-code"></block></block>
-  <block id="87576e79d18b52132e5cb37d09d7cf8b" category="list-text">Tornare al livello di privilegio admin: +<block ref="d5ca624cb3a7e6be13a829c838df3f7b" prefix=" " category="inline-code"></block></block>
   <block id="06157b5d60c5ad595acb6690d509af40" category="list-text">Ripetere i passaggi precedenti sull'altro controller.</block>
   <block id="fa634ad56afbbccc6627976c9b99f372" category="paragraph"><block ref="980128e66cbc950381050e9f0f63328d" prefix="" category="inline-code"></block></block>
   <block id="72fef016a314fe19829bf53a238ef0d5" category="paragraph"><block ref="4a17c7fe0d64ac54ba1ec5e6a7dcbaa9" prefix="" category="inline-code"></block></block>
-  <block id="b6c8d49615b2216ec73c49f38815ee2b" category="list-text">Se si stanno aggiungendo a caldo più shelf di dischi, ripetere i passaggi precedenti per ogni shelf di dischi che si sta aggiungendo a caldo.</block>
   <block id="d00eeba84b5629eed18d5bf5d99a1f34" category="summary">Quando si imposta la configurazione MetroCluster, è possibile utilizzare lo strumento di interoperabilità per assicurarsi di utilizzare le versioni software e hardware supportate.</block>
   <block id="04eb4a0cffc8fcd7e040135169e7a0cf" category="paragraph">Dopo aver aperto la matrice di interoperabilità, è possibile utilizzare il campo soluzione storage per selezionare la soluzione MetroCluster in uso.</block>
   <block id="810084908a2d14110f44e74be651b281" category="paragraph">Utilizzare *Esplora componenti* per selezionare i componenti e la versione di ONTAP per perfezionare la ricerca.</block>
@@ -2954,7 +2937,6 @@
   <block id="8d07a21c40606b1098d1a2ff5a5b5f1c" category="sidebar">Aggiunta a caldo di uno stack di shelf di dischi SAS a una coppia esistente di bridge FibreBridge 7500N</block>
   <block id="8780e2c60443de7cb84cd78e41b4b572" category="sidebar">Aggiunta a caldo di uno stack di shelf di dischi SAS e bridge a un sistema MetroCluster</block>
   <block id="404bb11b70239a316af681095fbdeff7" category="sidebar">Aggiungere a caldo uno shelf di dischi SAS a uno stack di shelf di dischi SAS</block>
-  <block id="46738ba3e846392ff7b6408dfb3589f6" category="sidebar">Aggiungere a caldo uno shelf di dischi</block>
   <block id="26efac9be7856206ad935a9151a6a64c" category="sidebar">Aggiungere a caldo uno shelf di dischi IOM12 a uno stack di shelf di dischi IOM6 in una configurazione MetroCluster collegata a un bridge</block>
   <block id="cabfdbae66cbee4984c63ed2d5544390" category="sidebar">Rimozione a caldo dello storage da una configurazione MetroCluster FC</block>
   <block id="40a09e232a862af1f1a00bbe4b0defb8" category="sidebar">Sostituire uno shelf senza interruzioni in una configurazione stretch MetroCluster</block>
@@ -8533,7 +8515,6 @@
   <block id="7271fe2deb2377f6fe3e360239e1a3ff" category="list-text">Se si utilizza una rete dedicata per il monitoraggio dello stato di salute, ciascun nodo deve disporre di una LIF di gestione dei nodi in tale rete dedicata.</block>
   <block id="9245afe84f46306a811d61036f2f5698" category="section-title">Configurazione degli switch MetroCluster FC per il monitoraggio dello stato di salute</block>
   <block id="6d8346a61b76a8b57a9dd1d8b8188d3f" category="paragraph">In una configurazione Fabric-Attached MetroCluster, è necessario eseguire alcune procedure di configurazione aggiuntive per monitorare gli switch FC.</block>
-  <block id="51070538b9cde5e5b54a8cbc07f43009" category="admonition">A partire da ONTAP 9.8, la<block ref="688266bc53c9ead911ef4b45027ac96a" prefix=" " category="inline-code"></block> il comando viene sostituito con<block ref="de1f6d32042385fcaa11b87930ec5f53" prefix=" " category="inline-code"></block>. La procedura riportata di seguito mostra<block ref="688266bc53c9ead911ef4b45027ac96a" prefix=" " category="inline-code"></block> Ma se si utilizza ONTAP 9.8 o versione successiva, il comando<block ref="de1f6d32042385fcaa11b87930ec5f53" prefix=" " category="inline-code"></block> è preferibile utilizzare il comando.</block>
   <block id="2699745f7ba3417d015d2b62691bd3b8" category="list-text">Aggiungere uno switch con un indirizzo IP a ciascun nodo MetroCluster:</block>
   <block id="6efb794ecca356d1adc84930ec9dbd7a" category="paragraph"><block ref="68b9e7d8919ec973a35f33ae6c5c28a1" prefix="" category="inline-code"></block></block>
   <block id="04759fd0dd941282c27fc50325811bf9" category="paragraph">Questo comando deve essere ripetuto su tutti e quattro gli switch nella configurazione MetroCluster.</block>
@@ -9907,7 +9888,6 @@
   <block id="968f63536cc26e1ac460060836284646" category="paragraph">bridge_x_8a</block>
   <block id="4409c993164a314b23d52edf9f7ddb07" category="paragraph">bridge_x_8b</block>
   <block id="de8504b73ea228d0ea9bbce69752092e" category="cell">Ponte</block>
-  <block id="4968e1c4a92e0df27646933918f92be2" category="section-title">Utilizzo delle porte Cisco per gli ISL in una configurazione a otto nodi in una configurazione MetroCluster con ONTAP 9.1 o versione successiva</block>
   <block id="a0e45cbea6afae054f370a0854ab9b4f" category="paragraph">A seconda della versione di ONTAP in uso, è possibile eseguire alcune operazioni specifiche di MetroCluster utilizzando Gestione di sistema di ONTAP.</block>
   <block id="8dc21fc84b0da6d36b0ff79fb6495c7b" category="paragraph">Ad esempio, le SVM "vs1" (cache) e "vs2" (origine) si trovano sul sito_A. Questi SVM sono in peering.</block>
   <block id="685fd8e4740bc36c11367ec44db4636f" category="paragraph">Dopo lo switchover, le SVM "vs1-mc" e "vs2-mc" vengono attivate presso il sito del partner (Site_B). Devono essere revocati manualmente per consentire a FlexCache di utilizzare<block ref="73ef473578e305fb86ebd8db4a77897c" prefix=" " category="inline-code"></block> comando.</block>
@@ -13145,7 +13125,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="bc8be72fdc9d6054f356bb2b7f80fd12" category="inline-link">Matrice di interoperabilità NetApp</block>
   <block id="769db6797bc8c70f9ceb0ea238fcfef2" category="list-text"><block ref="769db6797bc8c70f9ceb0ea238fcfef2" category="inline-link-rx"></block></block>
   <block id="c9dd6bad4c7d561872f2e2d498a990bf" category="inline-link-macro">Tool di matrice di interoperabilità (IMT)</block>
-  <block id="520ac91f29d97371c4fac829efc70617" category="admonition">Un insieme di moduli IOM12 e IOM6 è supportato all'interno dello stesso stack se il sistema esegue una versione supportata di ONTAP. Per stabilire se la versione di ONTAP in uso supporta la miscelazione degli scaffali, consulta la <block ref="cd3982462c40dc1b1a511ada7c72bab9" category="inline-link-macro-rx"></block>. Se la versione di ONTAP in uso non è supportata e non è possibile aggiornare o eseguire il downgrade dei moduli IOM sullo stack esistente o sul nuovo shelf da aggiungere a una combinazione supportata di moduli IOM, è necessario effettuare una delle seguenti operazioni:</block>
   <block id="c5dcd35af16918a17ee9c3a5c153f0af" category="inline-link">IMT</block>
   <block id="24d65add9a27d74b80e9a9cebdfc8e56" category="paragraph">La tua versione di ONTAP deve supportare la combinazione di shelf. Fare riferimento allo strumento matrice di interoperabilità (IMT) per verificare se la versione di ONTAP in uso supporta la combinazione di shelf.<block ref="30796bf173a80af0dc9c120f98ffaed6" category="inline-link-rx"></block></block>
   <block id="8872b0d09737dfd9b6fcafd4e8c2356b" category="list-text"><block ref="8872b0d09737dfd9b6fcafd4e8c2356b" category="inline-link-rx"></block></block>
@@ -13604,7 +13583,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="f411a218519aacec5088cc5a3d23eb64" category="paragraph">Gli ID di sistema vecchi e nuovi sono stati identificati in <block ref="372daca62ea6308294fd70c00fcc8af2" category="inline-link-macro-rx"></block>.</block>
   <block id="04e334293a29a0fcdf98b56004e27edc" category="section-title">Conformità a MetroCluster rispetto agli switch validati NetApp</block>
   <block id="5c5c34d5e7843e9424f3ca2380ae18ea" category="list-text"><block ref="5c5c34d5e7843e9424f3ca2380ae18ea" category="inline-link-macro-rx"></block></block>
-  <block id="a629fe794ff2e51df541a99e4468ebb2" category="paragraph">Se è necessario eseguire il netboot dei nuovi controller, consultare <block ref="a7e3b7fa9390de21e9e66df9d4048c53" category="inline-link-macro-rx"></block>.</block>
   <block id="910d0f6661c3968f4e7402c808d31b3f" category="list-text"><block ref="910d0f6661c3968f4e7402c808d31b3f" category="inline-link-macro-rx"></block></block>
   <block id="740c0d0f6d37afa212fad2bd272a4212" category="list-text">Tiebreaker 1,6 supporta solo SNMPv3.</block>
   <block id="a98720fe58fe46f2a22c59d172b69fbf" category="list-text">Sebbene Tiebreaker 1,5 e 1,4 supportino SNMPv1 e SNMPv3, NetApp consiglia vivamente di configurare SNMPv3 per una sicurezza ottimale.</block>
@@ -14579,7 +14557,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="391ee14bc6581827dc4f2d88ff91afcf" category="paragraph">È possibile collegare bridge aggiuntivi per un secondo gruppo di DR o una seconda configurazione MetroCluster utilizzando le porte dalla 33 alla 40 seguendo lo stesso schema.</block>
   <block id="785ca789cd5d47a1b40d11e4fa3a608a" category="paragraph">È possibile collegare bridge aggiuntivi per un secondo gruppo di DR o una seconda configurazione MetroCluster utilizzando le porte dalla 25 alla 48 seguendo lo stesso schema.</block>
   <block id="3914736797bebae05c8e9387dd6727f0" category="paragraph">Le tabelle seguenti mostrano l'utilizzo delle porte bridge quando si utilizzano bridge FibreBridge 7500N o 7600N che utilizzano solo una porta FC (FC1 o FC2). Per i bridge FibreBridge 7500N o 7600N che utilizzano una porta FC, è possibile collegare FC1 o FC2 alla porta indicata come FC1. È inoltre possibile collegare ulteriori bridge utilizzando le porte 25-48.</block>
-  <block id="8e92988c7461b180dbee8d97f92e6742" category="paragraph">È possibile collegare altri ponti utilizzando le porte da 25 a 48 seguendo lo stesso schema.</block>
   <block id="23a48f21ed38a9e3df523f469f325385" category="paragraph">Le tabelle seguenti mostrano l'utilizzo delle porte su uno switch Cisco 9132T.</block>
   <block id="b38a704e8751bf228cfb309f0668b3e1" category="section-title">Configurazioni del controller che utilizzano FibreBridge 7500N o 7600N utilizzando entrambe le porte FC (FC1 e FC2)</block>
   <block id="2d98516f0953aef9ad21de45b1d6ed89" category="paragraph">La tabella seguente mostra le configurazioni dei controller che utilizzano FibreBridge 7500N o 7600N utilizzando entrambe le porte FC (FC1 e FC2). Le tabelle mostrano le configurazioni massime supportate con quattro e otto moduli controller in due gruppi DR.</block>
@@ -14635,4 +14612,36 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="6750be268fde99a8fc70da3cae96763b" category="cell"><block ref="dc13cd459e510658615266395ba927b0" category="inline-xref-macro-rx"></block></block>
   <block id="3485285ca38e1ca4c0a680f9bcf47989" category="admonition">Se i controller nuovi e vecchi non dispongono di una porta comune, non è necessario modificare le LIF dati. Saltare questo passaggio e passare direttamente a <block ref="d2fd743661c244ff041df8d51a55b2b7" category="inline-xref-macro-rx"></block>.</block>
   <block id="57e1aa86ef1214c6b5a618674a806136" category="paragraph">Tutte le LIF dati, comprese SAN e NAS, saranno "`up''" e funzionalmente "deown'" in quanto sono attive nel sito di switchover (cluster_A).</block>
+  <block id="10a71a5f735ab2b1b550a2d004b57ffb" category="paragraph">È possibile collegare ponti aggiuntivi utilizzando le porte da 25 a 48 seguendo lo stesso schema.</block>
+  <block id="937a8da9d8c2c67fd94deda08131bfdd" category="section-title">Utilizzo della porta Cisco per gli ISL in una configurazione MetroCluster a otto nodi che esegue ONTAP 9,1 o versione successiva</block>
+  <block id="3940782c6ee1e8e37bce75ab000a6d7d" category="admonition">Per una maggiore sicurezza, NetApp consiglia di configurare SNMPv2 o SNMPv3 per monitorare lo stato dello switch.</block>
+  <block id="0d81f0b5554e85bb5f4956551639b630" category="admonition">A partire da ONTAP 9,8, il<block ref="688266bc53c9ead911ef4b45027ac96a" prefix=" " category="inline-code"></block> comando viene sostituito da<block ref="07a3b9d70f925392ee8d0581b56ebc10" prefix=" " category="inline-code"></block>. La procedura seguente mostra il<block ref="688266bc53c9ead911ef4b45027ac96a" prefix=" " category="inline-code"></block> comando, ma se si esegue ONTAP 9,8 o versione successiva, il<block ref="07a3b9d70f925392ee8d0581b56ebc10" prefix=" " category="inline-code"></block> comando è preferito.</block>
+  <block id="c8b1f4f0bee22e8e9a9aaaca29899782" category="paragraph">Se è necessario eseguire il netboot dei nuovi controller, consultare <block ref="afb88e8c89f7c0d7fb7d1ebfbdc283e2" category="inline-link-macro-rx"></block>.</block>
+  <block id="a6aee16f598d71d2363e2ad405b96904" category="section-title">Fase 1: Preparazione per l'aggiunta a caldo di uno shelf di dischi SAS</block>
+  <block id="cd4905b4e7a5872ce137a31e09bec11f" category="paragraph">Per prepararsi all'aggiunta a caldo di uno shelf di dischi SAS, è necessario scaricare i documenti insieme al firmware del disco e dello shelf di dischi.</block>
+  <block id="1078b9b6fada180d5d2977e8dc4eb310" category="list-text">Verificare che il sistema sia una configurazione supportata e che sia in esecuzione una versione supportata di ONTAP.</block>
+  <block id="a68f0e2c7746e4949e616e09deefa430" category="list-text">Verificare che tutti i dischi e gli shelf di dischi del sistema dispongano della versione più recente del firmware.</block>
+  <block id="658991cef9031aff484b78a0f664f5f0" category="paragraph">Prima di aggiungere shelf, potrebbe essere necessario aggiornare il firmware di dischi e shelf per tutta la configurazione di MetroCluster.</block>
+  <block id="7cbe99d38a9a2492f41bfc34788b6fac" category="paragraph">Un mix di moduli IOM12 e moduli IOM6 è supportato nello stesso stack se il sistema esegue una versione ONTAP supportata. Per stabilire se la versione di ONTAP supporta la miscelazione dei ripiani, fare riferimento alla <block ref="cd3982462c40dc1b1a511ada7c72bab9" category="inline-link-macro-rx"></block>. Se la versione di ONTAP in uso non è supportata e non è possibile aggiornare o eseguire il downgrade dei moduli IOM sullo stack esistente o sul nuovo shelf da aggiungere a una combinazione supportata di moduli IOM, è necessario effettuare una delle seguenti operazioni:</block>
+  <block id="918d32b75f0ab883abba3a8dc0c3ae8d" category="inline-link">Tool di matrice di interoperabilità</block>
+  <block id="5ea32bc696ea7fb5909f26eb6fb24417" category="list-text"><block ref="5ea32bc696ea7fb5909f26eb6fb24417" category="inline-link-rx"></block></block>
+  <block id="0f0f148d21dd2972977d97fb2e7ff5e9" category="paragraph"><block ref="0f0f148d21dd2972977d97fb2e7ff5e9" category="inline-link-rx"></block></block>
+  <block id="8645e21bfe6e4af4b86dc7f347ff1ad6" category="inline-xref">aggiunta a caldo di uno shelf di dischi</block>
+  <block id="b3394ffae831094f34a567e6f5658dfb" category="admonition">In questa fase, completare solo la parte di download delle istruzioni. È necessario seguire i passaggi della sezione <block ref="bd373ad10590b532f39995f449879640" category="inline-xref-macro-rx"></block> per installare lo shelf di dischi.</block>
+  <block id="cbeb50ea11dcfbcf2a36bc8effcd7514" category="section-title">Fase 2: Aggiunta a caldo di uno shelf di dischi</block>
+  <block id="c206cf1f63422466bcc0a56ffa34123c" category="paragraph">Per aggiungere a caldo uno shelf di dischi a uno stack, procedere come segue.</block>
+  <block id="d465e46678961f39056474479053b77c" category="inline-xref">Preparare gli shelf di dischi SAS ad aggiunta a caldo</block>
+  <block id="28c3aa6a67e1038d45e0f61906e2d210" category="list-text">Verificare che il sistema soddisfi tutti i requisiti indicati in <block ref="c0573ce1dde2ba325b85f674f143ecea" category="inline-xref-macro-rx"></block>.</block>
+  <block id="0c91ecf1246b9e97873b4360209bb137" category="list-text">Verifica che l'ambiente soddisfi uno dei seguenti scenari prima di aggiungere a caldo uno shelf:</block>
+  <block id="9fec734595e2181d9080ae32be062c8e" category="paragraph">Se si inserisce un cavo SAS nella porta errata, dopo aver rimosso il cavo da una porta SAS, è necessario attendere almeno 120 secondi prima di collegare il cavo a un'altra porta SAS. In caso contrario, il sistema non riconoscerà che il cavo è stato spostato su una porta diversa.</block>
+  <block id="6d23583b72982551e4b1285062f3285d" category="list-text">Controllare se il sistema ha attivato l'assegnazione automatica del disco dalla console di uno dei controller:</block>
+  <block id="109bce5ec1f0d60b99a07c70667f9ec6" category="paragraph">Il criterio di assegnazione automatica viene visualizzato nella colonna assegnazione automatica.</block>
+  <block id="d34edb1bb0aabf3ee05da705ddbc6721" category="list-text">Se il sistema non ha attivato l'assegnazione automatica dei dischi o se i dischi nello stesso stack sono di proprietà di entrambi i controller, assegnare i dischi ai pool appropriati.</block>
+  <block id="d5d63af17881e8ca258c6181c1cfda6f" category="list-text">Se stai suddividendo uno stack singolo di shelf di dischi tra due controller, l'assegnazione automatica dei dischi deve essere disattivata prima di assegnare la proprietà dei dischi; in caso contrario, quando si assegna un disco singolo, i dischi rimanenti potrebbero essere assegnati automaticamente allo stesso controller e allo stesso pool.</block>
+  <block id="dbde8ddb53b3da1d0f1fca94208162fb" category="paragraph">Il<block ref="525fe6a472b1a0c1313c938f9357b6f3" prefix=" " category="inline-code"></block> comando disattiva l'assegnazione automatica del disco.</block>
+  <block id="f8133ef8bfee82369ae5763e817990e8" category="list-text">Non è possibile aggiungere dischi ad aggregati o volumi fino a quando non è stato aggiornato il firmware di dischi e shelf di dischi.</block>
+  <block id="13985cb259a6148e54b3c766e90f12d3" category="list-text">Passare al livello di privilegi avanzati: +<block ref="0581d0d071ad835f74bf419081ce5d75" prefix=" " category="inline-code"></block></block>
+  <block id="1925007e066bed6950af241a5bb2641e" category="list-text">Aggiornare il firmware dell'unità disco alla versione più recente dalla console di sistema: +<block ref="da6a6b7cd3f4972b2a5426b567597f96" prefix=" " category="inline-code"></block></block>
+  <block id="0dfe9ec4ea6b3d29900dd8df5b21179e" category="list-text">Avviare Active IQ Config Advisor.</block>
+  <block id="c4d48c87201e87b08fdc19bd686fd707" category="list-text">Se si aggiungono a caldo più di uno shelf di dischi, ripetere la procedura descritta in precedenza per ciascuno shelf di dischi che si sta aggiungendo a caldo.</block>
 </blocks>

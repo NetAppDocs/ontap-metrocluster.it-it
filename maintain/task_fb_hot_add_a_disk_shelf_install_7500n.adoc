@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: metrocluster, maintain, service, hot, add, disk, shelf 
 summary: È possibile aggiungere a caldo uno shelf di dischi quando si desidera aumentare lo storage senza alcuna riduzione delle performance. 
 ---
-= Aggiunta a caldo di uno shelf di dischi
+= Aggiungere a caldo uno shelf di dischi SAS a uno stack di shelf di dischi SAS
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -13,14 +13,79 @@ summary: È possibile aggiungere a caldo uno shelf di dischi quando si desidera 
 [role="lead"]
 È possibile aggiungere a caldo uno shelf di dischi quando si desidera aumentare lo storage senza alcuna riduzione delle performance.
 
-* Il sistema deve soddisfare tutti i requisiti di link:task_fb_hot_add_shelf_prepare_7500n.html["Preparazione all'aggiunta a caldo di shelf di dischi SAS"].
-* Per aggiungere a caldo uno shelf, l'ambiente deve soddisfare uno dei seguenti scenari:
+
+
+== Fase 1: Preparazione per l'aggiunta a caldo di uno shelf di dischi SAS
+
+Per prepararsi all'aggiunta a caldo di uno shelf di dischi SAS, è necessario scaricare i documenti insieme al firmware del disco e dello shelf di dischi.
+
+.Prima di iniziare
+* Verificare che il sistema sia una configurazione supportata e che sia in esecuzione una versione supportata di ONTAP.
+* Verificare che tutti i dischi e gli shelf di dischi del sistema dispongano della versione più recente del firmware.
++
+Prima di aggiungere shelf, potrebbe essere necessario aggiornare il firmware di dischi e shelf per tutta la configurazione di MetroCluster.
+
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ug-rdg/home.html["Upgrade, revert o downgrade"]
+
+
+
+[NOTE]
+====
+Un mix di moduli IOM12 e moduli IOM6 è supportato nello stesso stack se il sistema esegue una versione ONTAP supportata. Per stabilire se la versione di ONTAP supporta la miscelazione dei ripiani, fare riferimento alla link:https://imt.netapp.com/matrix/["Tool di matrice di interoperabilità (IMT)"^]. Se la versione di ONTAP in uso non è supportata e non è possibile aggiornare o eseguire il downgrade dei moduli IOM sullo stack esistente o sul nuovo shelf da aggiungere a una combinazione supportata di moduli IOM, è necessario effettuare una delle seguenti operazioni:
+
+* Avviare un nuovo stack su una nuova porta SAS (se supportata dalla coppia di bridge).
+* Avviare un nuovo stack su una coppia di bridge aggiuntiva.
+
+
+====
+.Fasi
+. Scarica o visualizza i seguenti documenti dal sito di supporto NetApp:
++
+** https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità"]
+** La _Guida all'installazione_ per il modello di shelf di dischi.
+
+
+. Verificare che lo shelf di dischi che si sta aggiungendo a caldo sia supportato.
++
+https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità"^]
+
+. Scarica l'ultima versione del firmware per shelf di dischi e dischi:
++
+
+NOTE: In questa fase, completare solo la parte di download delle istruzioni. È necessario seguire i passaggi della sezione <<step_2_hot_add_shelf,aggiunta a caldo di uno shelf di dischi>> per installare lo shelf di dischi.
+
++
+.. Scaricare il firmware del disco ed eseguire una copia delle istruzioni del firmware del disco per riferimento in seguito.
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Download NetApp: Firmware del disco"^]
+
+.. Scaricare il firmware dello shelf di dischi ed eseguire una copia delle istruzioni del firmware dello shelf di dischi per riferimento in seguito.
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Download NetApp: Firmware shelf di dischi"^]
+
+
+
+
+
+
+
+== Fase 2: Aggiunta a caldo di uno shelf di dischi
+
+Per aggiungere a caldo uno shelf di dischi a uno stack, procedere come segue.
+
+.Prima di iniziare
+* Verificare che il sistema soddisfi tutti i requisiti indicati in <<prepare_to_hot_add_disk,Preparare gli shelf di dischi SAS ad aggiunta a caldo>>.
+* Verifica che l'ambiente soddisfi uno dei seguenti scenari prima di aggiungere a caldo uno shelf:
 +
 ** Sono presenti due bridge FibreBridge 7500N collegati a uno stack di shelf di dischi SAS.
 ** Sono presenti due bridge FibreBridge 7600N collegati a uno stack di shelf di dischi SAS.
 ** Si dispone di un bridge FibreBridge 7500N e di un bridge FibreBridge 7600N collegati a uno stack di shelf di dischi SAS.
 
 
+
+
+.A proposito di questa attività
 * Questa procedura consente di aggiungere a caldo uno shelf di dischi all'ultimo shelf di dischi in uno stack.
 +
 Questa procedura viene scritta con il presupposto che l'ultimo shelf di dischi in uno stack sia collegato da IOM A bridge A e da IOM B a bridge B.
@@ -29,22 +94,22 @@ Questa procedura viene scritta con il presupposto che l'ultimo shelf di dischi i
 * È necessario aggiungere a caldo un numero uguale di shelf di dischi in ogni sito.
 * Se si aggiungono a caldo più shelf di dischi, è necessario aggiungere a caldo uno shelf di dischi alla volta.
 +
-
-NOTE: Ogni coppia di bridge FibreBridge 7500N o 7600N può supportare fino a quattro stack.
-
+Ogni coppia di bridge FibreBridge 7500N o 7600N può supportare fino a quattro stack.
 
 
 
-IMPORTANT: L'aggiunta a caldo di uno shelf di dischi richiede l'aggiornamento del firmware del disco sul shelf di dischi aggiunto a caldo eseguendo il `storage disk firmware update` comando in modalità avanzata. L'esecuzione di questo comando può causare interruzioni se il firmware dei dischi esistenti nel sistema è una versione precedente.
+[CAUTION]
+====
+L'aggiunta a caldo di uno shelf di dischi richiede l'aggiornamento del firmware del disco sul shelf di dischi aggiunto a caldo eseguendo il `storage disk firmware update` comando in modalità avanzata. L'esecuzione di questo comando può causare interruzioni se il firmware dei dischi esistenti nel sistema è una versione precedente.
 
+Se si inserisce un cavo SAS nella porta errata, dopo aver rimosso il cavo da una porta SAS, è necessario attendere almeno 120 secondi prima di collegare il cavo a un'altra porta SAS. In caso contrario, il sistema non riconoscerà che il cavo è stato spostato su una porta diversa.
 
-IMPORTANT: Se si inserisce un cavo SAS nella porta errata, quando si rimuove il cavo da una porta SAS, è necessario attendere almeno 120 secondi prima di collegarlo a una porta SAS diversa. In caso contrario, il sistema non riconosce che il cavo è stato spostato su un'altra porta.
-
+====
 .Fasi
 . Mettere a terra l'utente.
 . Verificare la connettività dello shelf di dischi dalla console di sistema di uno dei controller:
 +
-`*sysconfig -v*`
+`sysconfig -v`
 
 +
 L'output è simile a quanto segue:
@@ -74,12 +139,12 @@ cisco_A_1-1:9.126L2   : NETAPP   X421_HCOBD450A10 NA01 418.0GB (879097968 520B/s
 ----
 
 
-. Verificare che l'assegnazione automatica dei dischi sia attivata dalla console di uno dei controller:
+. Controllare se il sistema ha attivato l'assegnazione automatica del disco dalla console di uno dei controller:
 +
-`*storage disk option show*`
+`storage disk option show`
 
 +
-Il criterio di assegnazione automatica viene visualizzato nella colonna Auto Assign (assegnazione automatica).
+Il criterio di assegnazione automatica viene visualizzato nella colonna assegnazione automatica.
 
 +
 [listing]
@@ -91,22 +156,21 @@ node_A_1             on           on           on           default
 node_A_2             on           on           on           default
 2 entries were displayed.
 ----
-. Se nel sistema non è attivata l'assegnazione automatica dei dischi o se i dischi nello stesso stack appartengono a entrambi i controller, assegnare i dischi ai pool appropriati.
+. Se il sistema non ha attivato l'assegnazione automatica dei dischi o se i dischi nello stesso stack sono di proprietà di entrambi i controller, assegnare i dischi ai pool appropriati.
 +
 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"]
 
 +
 [NOTE]
 ====
-Se si suddivide un singolo stack di shelf di dischi tra due controller, l'assegnazione automatica dei dischi deve essere disattivata prima di assegnare la proprietà dei dischi; in caso contrario, quando si assegna un singolo disco, i dischi rimanenti potrebbero essere assegnati automaticamente allo stesso controller e pool.
+** Se stai suddividendo uno stack singolo di shelf di dischi tra due controller, l'assegnazione automatica dei dischi deve essere disattivata prima di assegnare la proprietà dei dischi; in caso contrario, quando si assegna un disco singolo, i dischi rimanenti potrebbero essere assegnati automaticamente allo stesso controller e allo stesso pool.
++
+Il `storage disk option modify -node <node-name> -autoassign off` comando disattiva l'assegnazione automatica del disco.
 
-Il `storage disk option modify -node _node-name_ -autoassign off` il comando disattiva l'assegnazione automatica del disco.
+** Non è possibile aggiungere dischi ad aggregati o volumi fino a quando non è stato aggiornato il firmware di dischi e shelf di dischi.
+
 
 ====
-+
-
-NOTE: I dischi non devono essere aggiunti ad aggregati o volumi fino a quando il firmware del disco e dello shelf non sono stati aggiornati.
-
 . Aggiornare il firmware dello shelf di dischi alla versione più recente utilizzando le istruzioni per il firmware scaricato.
 +
 È possibile eseguire i comandi della procedura dalla console di sistema di uno dei controller.
@@ -143,15 +207,15 @@ La _Guida all'installazione_ per il modello di shelf di dischi fornisce informaz
 https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Download NetApp: Firmware del disco"]
 
 +
-.. Passare al livello di privilegio avanzato: +
-`*set -privilege advanced*`
+.. Passare al livello di privilegi avanzati: +
+`set -privilege advanced`
 +
 Devi rispondere con `*y*` quando viene richiesto di passare alla modalità avanzata e di visualizzare il prompt della modalità avanzata (*).
 
-.. Aggiornare il firmware del disco alla versione più recente dalla console di sistema: +
-`*storage disk firmware update*`
+.. Aggiornare il firmware dell'unità disco alla versione più recente dalla console di sistema: +
+`storage disk firmware update`
 .. Tornare al livello di privilegio admin: +
-`*set -privilege admin*`
+`set -privilege admin`
 .. Ripetere i passaggi precedenti sull'altro controller.
 
 
@@ -159,28 +223,28 @@ Devi rispondere con `*y*` quando viene richiesto di passare alla modalità avanz
 +
 .. Verificare che il sistema sia multipercorso:
 +
-`*node run -node _node-name_ sysconfig -a*`
+`node run -node <node-name> sysconfig -a`
 
 .. Verificare la presenza di eventuali avvisi sullo stato di salute su entrambi i cluster: +
-`*system health alert show*`
+`system health alert show`
 .. Confermare la configurazione MetroCluster e verificare che la modalità operativa sia normale: +
-`*metrocluster show*`
+`metrocluster show`
 .. Eseguire un controllo MetroCluster: +
-`*metrocluster check run*`
+`metrocluster check run`
 .. Visualizzare i risultati del controllo MetroCluster:
 +
-`*metrocluster check show*`
+`metrocluster check show`
 
 .. Verificare la presenza di eventuali avvisi sullo stato di salute sugli switch (se presenti):
 +
-`*storage switch show*`
+`storage switch show`
 
-.. Eseguire Config Advisor.
+.. Avviare Active IQ Config Advisor.
 +
 https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Download NetApp: Config Advisor"]
 
 .. Dopo aver eseguito Config Advisor, esaminare l'output dello strumento e seguire le raccomandazioni nell'output per risolvere eventuali problemi rilevati.
 
 
-. Se si stanno aggiungendo a caldo più shelf di dischi, ripetere i passaggi precedenti per ogni shelf di dischi che si sta aggiungendo a caldo.
+. Se si aggiungono a caldo più di uno shelf di dischi, ripetere la procedura descritta in precedenza per ciascuno shelf di dischi che si sta aggiungendo a caldo.
 

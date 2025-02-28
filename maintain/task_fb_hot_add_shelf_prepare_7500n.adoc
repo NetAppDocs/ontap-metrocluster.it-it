@@ -1,60 +1,8 @@
 ---
 permalink: maintain/task_fb_hot_add_shelf_prepare_7500n.html 
-sidebar: sidebar 
-keywords: metrocluster, maintain, service, prepare, hot, add, sas, disk, shelves 
-summary: 'La preparazione all"aggiunta a caldo di uno shelf di dischi SAS comporta il download di documenti, nonché del firmware del disco e dello shelf di dischi.' 
+redirect: ontap-metrocluster/maintain/task_fb_hot_add_a_disk_shelf_install_7500n.html 
 ---
-= Preparazione all'aggiunta a caldo di shelf di dischi SAS
+= 
 :allow-uri-read: 
-:icons: font
-:imagesdir: ../media/
-
-
-[role="lead"]
-La preparazione all'aggiunta a caldo di uno shelf di dischi SAS comporta il download di documenti, nonché del firmware del disco e dello shelf di dischi.
-
-* Il sistema deve essere una configurazione supportata e deve essere in esecuzione una versione supportata di ONTAP.
-* Tutti i dischi e gli shelf di dischi del sistema devono disporre della versione più recente del firmware.
-+
-Prima di aggiungere shelf, è possibile aggiornare il firmware del disco e dello shelf nella configurazione MetroCluster.
-
-+
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ug-rdg/home.html["Upgrade, revert o downgrade"]
-
-
-
-
-NOTE: Un insieme di moduli IOM12 e IOM6 è supportato all'interno dello stesso stack se il sistema esegue una versione supportata di ONTAP. Per stabilire se la versione di ONTAP in uso supporta la miscelazione degli scaffali, consulta la link:https://imt.netapp.com/matrix/["Tool di matrice di interoperabilità (IMT)"^]. Se la versione di ONTAP in uso non è supportata e non è possibile aggiornare o eseguire il downgrade dei moduli IOM sullo stack esistente o sul nuovo shelf da aggiungere a una combinazione supportata di moduli IOM, è necessario effettuare una delle seguenti operazioni:
-
-* Avviare un nuovo stack su una nuova porta SAS (se supportata dalla coppia di bridge).
-* Avviare un nuovo stack su una coppia di bridge aggiuntiva.
-
-
-.Fasi
-. Scarica o visualizza i seguenti documenti dal sito di supporto NetApp:
-+
-** https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp"]
-** La _Guida all'installazione_ per il modello di shelf di dischi.
-
-
-. Verificare che lo shelf di dischi che si sta aggiungendo a caldo sia supportato.
-+
-https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp"]
-
-. Scarica l'ultima versione del firmware per shelf di dischi e dischi:
-+
-
-NOTE: In questa fase, si sta completando solo la parte di download delle istruzioni fornite nei collegamenti. Seguire la procedura descritta in link:task_fb_hot_add_a_disk_shelf_install_7500n.html["Aggiunta a caldo di uno shelf di dischi"] sezione per l'installazione dello shelf di dischi.
-
-+
-.. Scaricare il firmware del disco ed eseguire una copia delle istruzioni del firmware del disco per riferimento in seguito.
-+
-https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Download NetApp: Firmware del disco"]
-
-.. Scaricare il firmware dello shelf di dischi ed eseguire una copia delle istruzioni del firmware dello shelf di dischi per riferimento in seguito.
-+
-https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Download NetApp: Firmware shelf di dischi"]
-
-
 
 
