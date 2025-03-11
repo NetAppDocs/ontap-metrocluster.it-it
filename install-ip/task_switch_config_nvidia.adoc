@@ -404,14 +404,37 @@ NOTE: Quando si imposta l'opzione DAC per più porte dello switch, è necessario
 
 
 
+== Impostare la correzione degli errori in avanti per i sistemi che utilizzano la connettività a 25 Gbps
+
+Se il sistema è configurato utilizzando una connettività a 25 Gbps, impostare manualmente il parametro Forward Error Correction (fec) su Off dopo aver applicato l'RCF. L'RCF non applica questa impostazione.
+
+.A proposito di questa attività
+* Questa attività si applica solo alle piattaforme che utilizzano la connettività a 25 Gbps. Fare riferimento alla link:../install-ip/port_usage_sn2100.html["Assegnazioni delle porte della piattaforma per gli switch IP SN2100 supportati da NVIDIA"].
+* Questa attività deve essere eseguita su tutti e quattro gli switch nella configurazione IP di MetroCluster.
+* È necessario aggiornare ogni porta dello switch singolarmente, non è possibile specificare più porte o intervalli di porte nel comando.
+
+
+.Fasi
+. Impostare il `fec` parametro su Off per la prima porta dello switch che utilizza la connettività a 25 Gbps:
++
+`sudo python3 SN2100_v2.0_Switch-A1.py runCmd <switchport> fec off`
+
+. Ripetere l'operazione per ogni porta dello switch a 25 Gbps collegata a un modulo controller.
+
+
+
+
 == Impostare la velocità della porta dello switch per le interfacce IP MetroCluster
 
 .A proposito di questa attività
-Utilizzare questa procedura per impostare la velocità della porta dello switch su 100g per i seguenti sistemi:
+* Utilizzare questa procedura per impostare la velocità della porta dello switch su 100g per i seguenti sistemi:
++
+** AFF A70
+** AFF A90
+** AFF A1K
 
-* AFF A70
-* AFF A90
-* AFF A1K
+
+* È necessario aggiornare ogni porta dello switch singolarmente, non è possibile specificare più porte o intervalli di porte nel comando.
 
 
 .Fase
@@ -452,8 +475,9 @@ cumulus@Switch-A-1:mgmt:~$
 
 == Disattivare le porte e i canali delle porte ISL non utilizzati
 
-NetApp consiglia di disattivare le porte ISL e i canali delle porte inutilizzati per evitare avvisi di integrità non necessari.
+NetApp consiglia di disattivare le porte ISL e i canali delle porte inutilizzati per evitare avvisi di integrità non necessari. È necessario disattivare ogni porta o canale porta individualmente, non è possibile specificare più porte o intervalli di porte nel comando.
 
+.Fasi
 . Identificare le porte ISL e i canali delle porte non utilizzati utilizzando il banner del file RCF:
 +
 

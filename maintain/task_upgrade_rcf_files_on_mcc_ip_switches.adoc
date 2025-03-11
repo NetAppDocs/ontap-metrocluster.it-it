@@ -11,63 +11,17 @@ summary: Potrebbe essere necessario aggiornare un file RCF su uno switch IP Metr
 
 
 [role="lead"]
-Potrebbe essere necessario aggiornare un file RCF su uno switch IP MetroCluster. Ad esempio, se la versione del file RCF in esecuzione sugli switch non è supportata dalla versione ONTAP, dalla versione firmware dello switch o da entrambe.
+Potrebbe essere necessario aggiornare un file RCF (Reference Configuration file) su uno switch IP MetroCluster. Ad esempio, se la versione RCF in esecuzione sugli switch non è supportata dalla versione ONTAP, dalla versione firmware dello switch o da entrambe.
 
+.Prima di iniziare
+* Se si sta installando un nuovo firmware dello switch, è necessario installare il firmware dello switch prima di aggiornare il file RCF.
+* Prima di aggiornare l'RCF, link:task_upgrade_firmware_on_mcc_ip_switches.html["Verificare che l'RCF sia supportato"].
+* link:enable-console-logging-before-maintenance.html["Attivare la registrazione della console"] prima di eseguire questa attività.
 
-
-== Verificare che il file RCF sia supportato
-
-Se si sta modificando la versione di ONTAP o la versione del firmware dello switch, è necessario verificare di disporre di un file RCF supportato per tale versione. Se si utilizza il generatore RCF, viene generato il file RCF corretto.
-
-.Fasi
-. Utilizzare i seguenti comandi degli switch per verificare la versione del file RCF:
-+
-[cols="30,70"]
-|===
-
-
-| Da questo switch... | Eseguire questo comando... 
-
-
- a| 
-Switch Broadcom
- a| 
-`(IP_switch_A_1) # show clibanner`
-
-
-
- a| 
-Switch Cisco
- a| 
-`IP_switch_A_1# show banner motd`
-
-|===
-+
-Per entrambi gli switch, individuare la riga nell'output che indica la versione del file RCF. Ad esempio, il seguente output proviene da uno switch Cisco, che indica che la versione del file RCF è "`v1.80`".
-
-+
-....
-Filename : NX3232_v1.80_Switch-A2.txt
-....
-. Per controllare quali file sono supportati per una versione, uno switch e una piattaforma ONTAP specifici, utilizzare RcfFileGenerator. Se è possibile generare il file RCF per la configurazione in uso o a cui si desidera eseguire l'aggiornamento, il file è supportato.
-. Per verificare che il firmware dello switch sia supportato, fare riferimento a quanto segue:
-+
-** https://hwu.netapp.com["Hardware Universe"]
-** https://imt.netapp.com/matrix/["Matrice di interoperabilità NetApp"^]
-
-
-
-
-
-
-== Aggiornare i file RCF
-
-Se si sta installando un nuovo firmware dello switch, è necessario installare il firmware dello switch prima di aggiornare il file RCF.
 
 .A proposito di questa attività
-* Questa procedura interrompe il traffico sullo switch in cui viene aggiornato il file RCF. Il traffico riprenderà una volta applicato il nuovo file RCF.
+* Questa procedura interrompe il traffico sullo switch in cui viene aggiornato il file RCF. Il traffico riprende quando viene applicato il nuovo file RCF.
 * Eseguire le operazioni su un interruttore alla volta, nell'ordine seguente: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2.
-* link:enable-console-logging-before-maintenance.html["Attivare la registrazione della console"] prima di eseguire questa attività.
 
 
 .Fasi

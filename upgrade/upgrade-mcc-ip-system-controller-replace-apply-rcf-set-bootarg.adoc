@@ -68,15 +68,42 @@ Tutte le altre piattaforme supportano il `-vlan-id` parametro.
 
 * I valori di bootarg MetroCluster impostati dipendono dall'utilizzo di porte cluster/ha condivise o di porte MetroCluster/ha condivise nel nuovo sistema.
 +
-I sistemi elencati nella tabella seguente utilizzano *porte MetroCluster/ha condivise*.
+[role="tabbed-block"]
+====
+.Porte ha/cluster condiviso
+--
+I sistemi elencati nella seguente tabella utilizzano porte ha/cluster condivisi:
 
-+
-Tutti gli altri sistemi utilizzano *porte cluster/ha condivise*.
-
-+
 [cols="2*"]
 |===
-| Sistemi AFF e ASA che utilizzano porte ha/MetroCluster condivise | Sistemi FAS che utilizzano porte ha/MetroCluster condivise 
+| Sistemi AFF e ASA | Sistemi FAS 
+
+
+ a| 
+** AFF A20
+** AFF A30
+** AFF C30
+** AFF A50
+** AFF C60
+** AFF C80
+** AFF A70
+** AFF A90
+** AFF A1K
+
+ a| 
+** FAS70
+** FAS90
+
+
+|===
+--
+.Porte ha/MetroCluster condivise
+--
+I sistemi elencati nella seguente tabella utilizzano porte MetroCluster/ha condivise:
+
+[cols="2*"]
+|===
+| Sistemi AFF e ASA | Sistemi FAS 
 
 
  a| 
@@ -104,6 +131,8 @@ Tutti gli altri sistemi utilizzano *porte cluster/ha condivise*.
 
 
 |===
+--
+====
 
 
 .Fasi

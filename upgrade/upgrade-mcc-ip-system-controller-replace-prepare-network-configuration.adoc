@@ -28,11 +28,46 @@ L'operazione di automazione avvia le operazioni di switchover. Al termine di que
 +
 `boot_ontap`
 
-. Se il sistema a cui si sta eseguendo l'aggiornamento NON è presente nella tabella seguente, verificare che le interfacce IP di MetroCluster stiano utilizzando indirizzi IP supportati.
+. Se il sistema che si sta aggiornando utilizza *porte cluster/ha condivise*, verificare che le interfacce IP di MetroCluster utilizzino indirizzi IP supportati.
 +
+Utilizza le seguenti informazioni per determinare se il nuovo sistema utilizza le porte ha/cluster condivise:
+
++
+[role="tabbed-block"]
+====
+.Porte ha/cluster condiviso
+--
+I sistemi elencati nella seguente tabella utilizzano porte ha/cluster condivisi:
+
+[cols="2*"]
 |===
+| Sistemi AFF e ASA | Sistemi FAS 
 
 
+ a| 
+** AFF A20
+** AFF A30
+** AFF C30
+** AFF A50
+** AFF C60
+** AFF C80
+** AFF A70
+** AFF A90
+** AFF A1K
+
+ a| 
+** FAS70
+** FAS90
+
+
+|===
+--
+.Porte ha/MetroCluster condivise
+--
+I sistemi elencati nella seguente tabella utilizzano porte MetroCluster/ha condivise:
+
+[cols="2*"]
+|===
 | Sistemi AFF e ASA | Sistemi FAS 
 
 
@@ -61,6 +96,8 @@ L'operazione di automazione avvia le operazioni di switchover. Al termine di que
 
 
 |===
+--
+====
 +
 .. Verificare gli indirizzi IP delle interfacce MetroCluster sui vecchi controller:
 +
@@ -69,7 +106,7 @@ L'operazione di automazione avvia le operazioni di switchover. Al termine di que
 .. Se le interfacce MetroCluster utilizzano gli indirizzi IP 169.254.17.x o 169.254.18.x, consultare la sezione link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/How_to_modify_the_properties_of_a_MetroCluster_IP_interface["L'articolo della Knowledge base "come modificare le proprietà di un'interfaccia IP di MetroCluster""^] per modificare gli indirizzi IP dell'interfaccia prima di procedere con l'aggiornamento.
 +
 
-CAUTION: L'aggiornamento a qualsiasi sistema non elencato nella tabella non è supportato se le interfacce MetroCluster sono configurate con indirizzi IP 169.254.17.x o 169.254.18.x.
+CAUTION: L'aggiornamento a qualsiasi sistema che utilizzi *porte cluster/ha condivise* non è supportato se le interfacce MetroCluster sono configurate con indirizzi IP 169.254.17.x o 169.254.18.x.
 
 
 

@@ -1,0 +1,288 @@
+---
+permalink: maintain/task-change-isl-properties-iod-ood-ciso-fc.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, change, isl, properties, isl, ports, iod, ood,configuration, cisco, switch 
+summary: 'È possibile aggiungere collegamenti interswitch (ISL), modificare la velocità ISL e riconfigurare le impostazioni IOD (in-Order Delivery) o OOOD (out-of-Order Delivery) su uno switch FC Cisco.' 
+---
+= Modificare le proprietà ISL e la configurazione IOD/OOOD su uno switch FC Cisco
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+È possibile aggiungere collegamenti interswitch (ISL), modificare la velocità ISL e riconfigurare le impostazioni IOD (in-Order Delivery) o OOOD (out-of-Order Delivery) su uno switch FC Cisco.
+
+
+
+== Aggiunta di ISL a uno switch FC Cisco
+
+Potrebbe essere necessario aggiungere ISL a uno switch se, ad esempio, si sta aggiungendo o aggiornando l'hardware, oppure se si sta eseguendo l'aggiornamento a controller più veloci o a switch più veloci.
+
+.A proposito di questa attività
+Eseguire questi passaggi su entrambi gli switch nel fabric per verificare la connettività ISL.
+
+.Fasi
+. Disattivare le porte ISL degli ISL da aggiungere su entrambi gli switch del fabric:
++
+`FC_switch_A_1#config t`
+
++
+Immettere i seguenti comandi di configurazione, uno per riga. Inserire CTRL-Z dopo aver immesso tutti i comandi di configurazione.
+
++
+[listing]
+----
+
+	FC_switch_A_1(config)# interface fc1/36
+	FC_switch_A_1(config-if)# shut
+	FC_switch_A_1(config)# end
+----
+. Inserire i SFP nelle porte che si stanno aggiungendo come porte ISL e cablarle in base a link:../install-fc/task_configure_the_mcc_hardware_components_fabric.html["Collegare una configurazione MetroCluster collegata al fabric"].
++
+Verificare che queste porte siano elencate nella documentazione del cablaggio relativa al modello di switch a cui si desidera aggiungerle.
+
+. Configurare le porte ISL seguendo la procedura descritta in link:../install-fc/task_cable_the_isl_between_the_mcc_sites_fabric_config.html["Collegamento degli ISL tra siti MetroCluster"].
+. Abilitare tutte le porte ISL (se non attivate) su entrambi gli switch del fabric:
++
+`FC_switch_A_1# config t`
+
++
+Immettere i seguenti comandi di configurazione, uno per riga. Terminare con CTRL-Z dopo aver immesso tutti i comandi di configurazione.
+
++
+[listing]
+----
+
+ FC_switch_A_1# interface fc1/36
+	FC_switch_A_1(config-if)# no shut
+	FC_switch_A_1(config)# end
+----
+. Verificare che gli ISL siano stati stabiliti tra entrambi gli switch:
++
+`show topology isl`
+
+. Ripetere la procedura sul secondo fabric:
++
+[listing]
+----
+--------------------------------------------------------------------------------
+	__________Local_________ _________Remote_________ VSAN Cost I/F  PC    I/F  Band
+	 PC Domain SwName   Port  Port   SwName Domain PC          Stat Stat Speed width
+	--------------------------------------------------------------------------------
+	  1   0x11 cisco9 fc1/36  fc1/36 cisco9 0xbc    1    1   15 up   up    16g   64g
+	  1   0x11 cisco9 fc1/40  fc1/40 cisco9 0xbc    1    1   15 up   up    16g   64g
+	  1   0x11 cisco9 fc1/44  fc1/44 cisco9 0xbc    1    1   15 up   up    16g   64g
+	  1   0x11 cisco9 fc1/48  fc1/48 cisco9 0xbc    1    1   15 up   up    16g   64g
+----
+
+
+
+
+== Consente di modificare le velocità delle porte ISL su uno switch FC Cisco
+
+È possibile modificare la velocità delle porte ISL su uno switch per migliorare la qualità dell'ISL, ad esempio riducendo la velocità su ISL che percorrono una distanza maggiore.
+
+.A proposito di questa attività
+Eseguire questi passaggi su entrambi gli switch nel fabric per verificare la connettività ISL.
+
+.Fasi
+. Disabilitare le porte ISL per gli ISL per i quali si desidera modificare la velocità su entrambi gli switch nel fabric:
++
+`FC_switch_A_1# config t`
+
++
+Immettere i seguenti comandi di configurazione, uno per riga. Terminare con CTRL-Z dopo aver immesso tutti i comandi di configurazione.
+
++
+[listing]
+----
+
+ FC_switch_A_1(config)# interface fc1/36
+	FC_switch_A_1(config-if)# shut
+	FC_switch_A_1(config)# end
+----
+. Modificare la velocità delle porte ISL su entrambi gli switch del fabric:
++
+`FC_switch_A_1# config t`
+
++
+Immettere i seguenti comandi di configurazione, uno per riga. Terminare con CTRL-Z dopo aver immesso tutti i comandi di configurazione.
+
++
+[listing]
+----
+
+ FC_switch_A_1(config)# interface fc1/36
+	FC_switch_A_1(config-if)# switchport speed 16000
+----
++
+
+NOTE: Le velocità delle porte sono 16 = 16.000 Gbps, 8 = 8.000 Gbps e 4 = 4.000 Gbps.
+
++
+Verificare che le porte ISL dello switch siano elencate nella link:../install-fc/index.html["Installare una configurazione MetroCluster fabric-attached"].
+
+. Abilitare tutte le porte ISL (se non attivate) su entrambi gli switch del fabric:
++
+`FC_switch_A_1# config t`
+
++
+Immettere i seguenti comandi di configurazione, uno per riga. Terminare con CTRL-Z dopo aver immesso tutti i comandi di configurazione.
+
++
+[listing]
+----
+
+ FC_switch_A_1(config)# interface fc1/36
+	FC_switch_A_1(config-if)# no shut
+	FC_switch_A_1(config)# end
+----
+. Verificare che gli ISL siano stati stabiliti tra entrambi gli switch:
++
+`show topology isl`
+
++
+[listing]
+----
+--------------------------------------------------------------------------------
+	__________Local_________ _________Remote_________ VSAN Cost I/F  PC    I/F  Band
+	 PC Domain SwName   Port  Port   SwName Domain PC          Stat Stat Speed width
+	--------------------------------------------------------------------------------
+	  1   0x11 cisco9 fc1/36  fc1/36 cisco9 0xbc    1    1   15 up   up    16g   64g
+	  1   0x11 cisco9 fc1/40  fc1/40 cisco9 0xbc    1    1   15 up   up    16g   64g
+	  1   0x11 cisco9 fc1/44  fc1/44 cisco9 0xbc    1    1   15 up   up    16g   64g
+	  1   0x11 cisco9 fc1/48  fc1/48 cisco9 0xbc    1    1   15 up   up    16g   64g
+----
+. Ripetere la procedura per il secondo fabric dello switch.
+
+
+
+
+== Riconfigurare il VSAN per garantire IOD o OOD dei frame
+
+Si consigliano le impostazioni IOD standard. Se necessario, riconfigurare l'OOD.
+
+
+
+=== Riconfigurare il modulo IOD
+
+Per riconfigurare l'IOD dei frame, procedere come segue.
+
+.Fasi
+. Accedere alla modalità di configurazione:
++
+`conf t`
+
+. Consentire la garanzia degli scambi per VSAN:
++
+`in-order-guarantee vsan <vsan-ID>`
+
++
+
+IMPORTANT: Per le SAN FC-VI (FCVI_1_10 e FCVI_2_30), è necessario abilitare la garanzia in-order di frame e scambi solo su VSAN 10.
+
++
+.. Abilitare il bilanciamento del carico per VSAN:
++
+`vsan <vsan-ID> loadbalancing src-dst-id`
+
+.. Uscire dalla modalità di configurazione:
++
+`end`
+
+.. Copiare running-config in startup-config:
++
+`copy running-config startup-config`
+
++
+I comandi per configurare IOD di frame su FC_switch_A_1:
+
++
+[listing]
+----
+FC_switch_A_1# config t
+FC_switch_A_1(config)# in-order-guarantee vsan 10
+FC_switch_A_1(config)# vsan database
+FC_switch_A_1(config-vsan-db)# vsan 10 loadbalancing src-dst-id
+FC_switch_A_1(config-vsan-db)# end
+FC_switch_A_1# copy running-config startup-config
+----
++
+I comandi per configurare IOD di frame su FC_switch_B_1:
+
++
+[listing]
+----
+FC_switch_B_1# config t
+FC_switch_B_1(config)# in-order-guarantee vsan 10
+FC_switch_B_1(config)# vsan database
+FC_switch_B_1(config-vsan-db)# vsan 10 loadbalancing src-dst-id
+FC_switch_B_1(config-vsan-db)# end
+FC_switch_B_1# copy running-config startup-config
+----
+
+
+
+
+
+
+=== Riconfigurare OOD
+
+Per riconfigurare l'OOOD dei fotogrammi, procedere come segue.
+
+.Fasi
+. Accedere alla modalità di configurazione:
++
+`conf t`
+
+. Disattivare la garanzia di scambio in-order per VSAN:
++
+`no in-order-guarantee vsan <vsan-ID>`
+
+. Abilitare il bilanciamento del carico per VSAN:
++
+`vsan <vsan-ID> loadbalancing src-dst-id`
+
+. Uscire dalla modalità di configurazione:
++
+`end`
+
+. Copiare running-config in startup-config:
++
+`copy running-config startup-config`
+
++
+I comandi per configurare OOD dei frame su FC_switch_A_1:
+
++
+[listing]
+----
+FC_switch_A_1# config t
+FC_switch_A_1(config)# no in-order-guarantee vsan 10
+FC_switch_A_1(config)# vsan database
+FC_switch_A_1(config-vsan-db)# vsan 10 loadbalancing src-dst-id
+FC_switch_A_1(config-vsan-db)# end
+FC_switch_A_1# copy running-config startup-config
+----
++
+I comandi per configurare OOD dei frame su FC_switch_B_1:
+
++
+[listing]
+----
+FC_switch_B_1# config t
+FC_switch_B_1(config)# no in-order-guarantee vsan 10
+FC_switch_B_1(config)# vsan database
+FC_switch_B_1(config-vsan-db)# vsan 10 loadbalancing src-dst-id
+FC_switch_B_1(config-vsan-db)# end
+FC_switch_B_1# copy running-config startup-config
+----
++
+
+NOTE: Quando si configura ONTAP sui moduli controller, OOD deve essere configurato esplicitamente su ciascun modulo controller nella configurazione MetroCluster.
+
++
+link:../install-fc/concept_configure_the_mcc_software_in_ontap.html#configuring-in-order-delivery-or-out-of-order-delivery-of-frames-on-ontap-software["Informazioni sulla configurazione IOD o OOD dei frame sul software ONTAP"].
+
+
