@@ -366,6 +366,118 @@ Run "debug vreport show" to address remaining aggregate or volume issues.
 
 cluster_B::>
 ....
+. Se la configurazione utilizza bridge FC-SAS o switch back-end FC, scollegarli e rimuoverli.
++
+[role="tabbed-block"]
+====
+.Rimozione dei bridge FC-to-SAS
+--
+.. Identificare i ponti:
++
+`system bridge show`
+
+.. Rimuovere i ponti:
++
+`system bridge remove -name <bridge_name>`
+
+.. Verificare che i ponti siano stati rimossi:
++
+`system bridge show`
+
+
+
+L'esempio seguente mostra che i ponti vengono rimossi:
+
+.Esempio
+[%collapsible]
+=====
+[listing]
+----
+cluster1::> system bridge remove -name ATTO_10.226.197.16
+cluster1::> system bridge show
+                                                                Is        Monitor
+    Bridge     Symbolic Name Vendor  Model     Bridge WWN       Monitored Status
+    ---------- ------------- ------- --------- ---------------- --------- -------
+    ATTO_FibreBridge6500N_1
+               Bridge Number 16
+                             Atto    FibreBridge 6500N
+                                               2000001086603824 false     -
+    ATTO_FibreBridge6500N_2
+               Not Set       Atto    FibreBridge 6500N
+                                               20000010866037e8 false     -
+    ATTO_FibreBridge6500N_3
+               Not Set       Atto    FibreBridge 6500N
+                                               2000001086609e0e false     -
+    ATTO_FibreBridge6500N_4
+               Not Set       Atto    FibreBridge 6500N
+                                               2000001086609c06 false     -
+    4 entries were displayed.
+----
+=====
+--
+.Rimuovere gli switch FC
+--
+.. Identificare gli interruttori:
++
+`system switch fibre-channel show`
+
+.. Rimuovere gli interruttori:
++
+`system switch fibre-channel remove -switch-name <switch_name>`
+
+.. Verificare che gli interruttori siano stati rimossi:
++
+`system switch fibre-channel show`
+
+
+
+.Esempio
+[%collapsible]
+=====
+[listing]
+----
+cluster1::> system switch fibre-channel show
+                Symbolic                                     Is        Monitor
+    Switch      Name     Vendor  Model      Switch WWN       Monitored Status
+    ----------- -------- ------- ---------- ---------------- --------- -------
+    Cisco_10.226.197.34
+                mcc-cisco-8Gb-fab-4
+                         Cisco   DS-C9148-16P-K9
+                                            2000547fee78f088 true      ok
+    mcc-cisco-8Gb-fab-1
+                mcc-cisco-8Gb-fab-1
+                         Cisco   -          -                false     -
+    mcc-cisco-8Gb-fab-2
+                mcc-cisco-8Gb-fab-2
+                         Cisco   -          -                false     -
+    mcc-cisco-8Gb-fab-3
+                mcc-cisco-8Gb-fab-3
+                         Cisco   -          -                false     -
+    4 entries were displayed.
+cluster1::> system switch fibre-channel remove -switch-name Cisco_10.226.197.34
+cluster1::> system switch fibre-channel show
+                Symbolic                                     Is        Monitor
+    Switch      Name     Vendor  Model      Switch WWN       Monitored Status
+    ----------- -------- ------- ---------- ---------------- --------- -------
+    mcc-cisco-8Gb-fab-4
+                mcc-cisco-8Gb-fab-4
+                         Cisco
+                                 -          -                false     -
+    mcc-cisco-8Gb-fab-1
+                mcc-cisco-8Gb-fab-1
+                         Cisco   -          -                false     -
+    mcc-cisco-8Gb-fab-2
+                mcc-cisco-8Gb-fab-2
+                         Cisco   -          -                false     -
+    mcc-cisco-8Gb-fab-3
+                mcc-cisco-8Gb-fab-3
+                         Cisco   -          -                false     -
+    4 entries were displayed
+cluster1::>
+----
+=====
+--
+====
 . Spegnere i moduli controller FC MetroCluster e gli shelf di storage.
 . Scollegare e rimuovere i moduli controller FC MetroCluster e gli shelf di storage.
 

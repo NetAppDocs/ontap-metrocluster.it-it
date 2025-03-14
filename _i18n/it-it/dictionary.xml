@@ -976,7 +976,6 @@
   <block id="ece9cd164ae327acd345452e1394e14b" category="list-text">Abilitare la connettività allo storage e ai controller.</block>
   <block id="1be401e7a858584f61efaa34e33d6dc0" category="paragraph">L'esempio seguente mostra l'utilizzo della porta:</block>
   <block id="e5fe800fef736c2c8af1453a59683d3c" category="summary">Per aggiornare o eseguire il downgrade del firmware su uno switch Brocade FC, è necessario utilizzare i comandi specifici di Brocade per disattivare lo switch, eseguire e verificare la modifica del firmware, riavviare e riabilitare lo switch.</block>
-  <block id="1ab0f1fa27ba43bfea0e9de2529316c8" category="doc">Aggiornamento o downgrade del firmware su uno switch Brocade FC</block>
   <block id="168f20b249437abf8c684700d798efa2" category="list-text">È necessario disporre dei file del firmware.</block>
   <block id="db6e0c8057b108f77da141b83e047b8d" category="paragraph">Il fabric dello switch viene disattivato durante un aggiornamento o un downgrade del firmware e la configurazione MetroCluster si basa sul secondo fabric per continuare a funzionare.</block>
   <block id="6751765455c440079966f9a59475b0bc" category="paragraph">Questa attività deve essere eseguita su ciascuno switch fabric in successione in modo che tutti gli switch eseguano la stessa versione del firmware.</block>
@@ -6017,7 +6016,6 @@
   <block id="cb2882d39ecc345874a2172a679345a0" category="list-text">I cluster devono disporre di licenze FabricPool con limiti di capacità corrispondenti.</block>
   <block id="da1d8a158d031df0c087914bc717f807" category="list-text">I cluster devono avere IPspaces con nomi corrispondenti.</block>
   <block id="84225993604927d7b2805e680fc6afb7" category="paragraph">Può trattarsi dell'IPSpace predefinito o di uno spazio IP creato da un amministratore. Questo IPSpace verrà utilizzato per le impostazioni di configurazione dell'archivio di oggetti FabricPool.</block>
-  <block id="eadb8b792e9f449e89ae54e27988217b" category="list-text">Per l'IPSpace selezionato, ciascun cluster deve avere una LIF intercluster definita che possa raggiungere l'archivio di oggetti esterno</block>
   <block id="b6f8b39e7216b4698097318b7db733fa" category="section-title">Configurazione di un aggregato per l'utilizzo in un FabricPool mirrorato</block>
   <block id="442b9e1156d425921777551173359408" category="admonition">Prima di configurare l'aggregato, è necessario impostare gli archivi di oggetti come descritto in "impostazione degli archivi di oggetti per FabricPool in una configurazione MetroCluster" in <block ref="a65430c79af53447a6078bbb1ffdf593" category="inline-link-macro-rx"></block>.</block>
   <block id="8d0251be64ec85684b5dfb469e20ba1c" category="paragraph">Per configurare un aggregato per l'utilizzo in un FabricPool:</block>
@@ -10783,11 +10781,9 @@
   <block id="12007e1d59f4d09c87dbe2c438256244" category="cell">Destinazione</block>
   <block id="261addf78c7b2c961032b3dd08ba0b1f" category="cell">Scopo</block>
   <block id="5946d090ccc9cc4eb9c55cf3e9e8d35a" category="paragraph">31784/tcp</block>
-  <block id="39af2fc562277654190ca9b83e431189" category="paragraph">Interfacce di gestione del cluster ONTAP</block>
   <block id="47c5e6a166f9432ff96681fa2a62c791" category="paragraph">Server web di ONTAP Mediator</block>
   <block id="8cf15eeaee2b3382338ecab30027c48b" category="paragraph">API REST (HTTPS)</block>
   <block id="5395ab3ceab5345ee4a1117e436bec89" category="paragraph">3260/tcp</block>
-  <block id="4026cb63b92cdc28e17e39a79de589f7" category="paragraph">Cluster ONTAP (LIF per la gestione dei dati o LIF per la gestione dei dati)</block>
   <block id="1c44912242a1c1688be9805f25a62dbd" category="paragraph">Target iSCSI del mediatore ONTAP</block>
   <block id="a3993ea912c0ecd6926aed69b72fd59a" category="paragraph">Connessione dati iSCSI per caselle postali</block>
   <block id="63639615515d028231f302c56bab6ad7" category="section-title">Linee guida per l'aggiornamento del mediatore ONTAP in una configurazione MetroCluster</block>
@@ -14681,4 +14677,31 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="11f90eb1d0dccabe5ea84d5795fc2ef7" category="paragraph">Utilizza le seguenti informazioni per determinare se il nuovo sistema utilizza le porte ha/cluster condivise:</block>
   <block id="fb1ce5d087cc4c4bd39c43bc3af7058b" category="admonition">L'aggiornamento a qualsiasi sistema che utilizzi *porte cluster/ha condivise* non è supportato se le interfacce MetroCluster sono configurate con indirizzi IP 169.254.17.x o 169.254.18.x.</block>
   <block id="25b129509e36ff88d2beb94d08667a62" category="sidebar">Modificare le proprietà ISL o la configurazione IOD/OOOD su uno switch FC Cisco</block>
+  <block id="8b578a27fe20d5a32a06b05afeaa5b16" category="list-text">Per l'IPSpace selezionato, ogni cluster deve avere una LIF intercluster che possa raggiungere l'archivio di oggetti esterno.</block>
+  <block id="d98545518df18c073a4a75d72759ddfe" category="list-text">La migrazione SVM non è supportata con FabricPool se l'origine o la destinazione è un cluster MetroCluster.</block>
+  <block id="de60962ea114e8e20b41343aa7431cbf" category="inline-link-macro">Scopri di più sulla mobilità dei dati delle SVM</block>
+  <block id="cb692d9778a8fa1464d6b442ab90722f" category="paragraph"><block ref="53c488ccbc80272b509e45a126fd033b" category="inline-link-macro-rx"></block>.</block>
+  <block id="b4911e786bbd878f489a84835fcee570" category="list-text">IPv6 non è supportato con ONTAP Mediator.</block>
+  <block id="d247a27201590148c4ea6bf493729fd1" category="list-text">La porta 22/tcp non è necessaria per il normale funzionamento, ma è possibile attivarla temporaneamente per la manutenzione e disattivarla al termine della sessione di manutenzione.</block>
+  <block id="02674a4ef33e11c879283629996c8ff8" category="cell">Direzione</block>
+  <block id="c5df47f9068f6d11f238ec77908abf18" category="paragraph">22/tcp</block>
+  <block id="6c7e3200049198face0d2648e9d1a27d" category="paragraph">In entrata</block>
+  <block id="58dc7db50a2e11a9de9e6cc092c59d4d" category="paragraph">Mediatore ONTAP</block>
+  <block id="348d25e332990b97eda5823a9561cd76" category="paragraph">Gestione SSH / ONTAP Mediator</block>
+  <block id="abd4328c725637aabedbd02d3b7ffd40" category="paragraph">Bidirezionale</block>
+  <block id="7df18ff4393ac59f9af7b68478828591" category="inline-link-macro">Guida all'aggiornamento del software del sistema operativo Brocade Fabric, 9,2.x</block>
+  <block id="81095da37e6499e1af51ce2d0316b8c1" category="paragraph">Se si sta eseguendo l'aggiornamento a Fabric OS v 9,2.x o versioni successive, è necessario disporre di un certificato Brocade TruFOS installato. Per ulteriori informazioni, fare riferimento a <block ref="0c25af31b20d46ca79e55fb8f6beb4c9" category="inline-link-macro-rx"></block>.</block>
+  <block id="b2fe7ec3c609e490e177268be9c6a2c7" category="open-title">Rimozione dei bridge FC-to-SAS</block>
+  <block id="1c5eaf0274c09872a2287c430ed75a60" category="list-text">Identificare i ponti:</block>
+  <block id="4d100b8e119ce2e8a98e720e612260d2" category="paragraph"><block ref="5c2aa4362fb9d40ad679411e69f26e74" prefix="" category="inline-code"></block></block>
+  <block id="679425df5c12f3f894799666283b2fcd" category="list-text">Rimuovere i ponti:</block>
+  <block id="ee90b235e787cdea487ac811b405275d" category="paragraph"><block ref="6ecfba135a48bcb7f43c03b5132edab0" prefix="" category="inline-code"></block></block>
+  <block id="2d3a681bfca3f3afa13da28bbcb3d157" category="list-text">Verificare che i ponti siano stati rimossi:</block>
+  <block id="457c5fa19fe4bf31989022bf10e2133b" category="paragraph">L'esempio seguente mostra che i ponti vengono rimossi:</block>
+  <block id="9a752ae21c1569c1e94c2b3c0c4ec816" category="open-title">Rimuovere gli switch FC</block>
+  <block id="07c2ed77d8d4a66a9da7bc64642f43ac" category="list-text">Identificare gli interruttori:</block>
+  <block id="6ac0707c59f9a8bac7c112671ebed890" category="paragraph"><block ref="2fb4e63397068939776b11238421ef0d" prefix="" category="inline-code"></block></block>
+  <block id="a7bb11a2d517e74f775b8aefe3c16638" category="list-text">Rimuovere gli interruttori:</block>
+  <block id="027e94eee8bf21f30bcb532977a993c1" category="paragraph"><block ref="4f1415de9c82b1c8c8506139320b0115" prefix="" category="inline-code"></block></block>
+  <block id="fdb1649f24689923739f1476888a8957" category="list-text">Verificare che gli interruttori siano stati rimossi:</block>
 </blocks>
