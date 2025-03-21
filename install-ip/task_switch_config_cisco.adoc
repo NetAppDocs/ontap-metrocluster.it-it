@@ -388,6 +388,8 @@ Questa procedura deve essere ripetuta su ciascuno switch IP nella configurazione
 
 https://hwu.netapp.com["NetApp Hardware Universe"]
 
+Se si utilizza un adattatore QSFP-SFP+, potrebbe essere necessario configurare la porta ISL in modalità di velocità nativa invece che in modalità di velocità breakout. Per determinare la modalità di velocità della porta ISL, consultare la documentazione fornita con lo switch.
+
 Sono disponibili quattro file RCF, uno per ciascuno dei quattro switch nella configurazione IP di MetroCluster. È necessario utilizzare i file RCF corretti per il modello di switch in uso.
 
 |===

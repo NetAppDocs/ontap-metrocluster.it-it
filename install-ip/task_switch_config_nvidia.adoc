@@ -315,6 +315,8 @@ NOTE: Se si esegue un'ulteriore configurazione dopo aver reimpostato lo switch e
 .A proposito di questa attività
 Ripetere questa procedura su ciascuno switch IP nella configurazione MetroCluster IP (nuova installazione) o sullo switch sostitutivo (sostituzione dello switch).
 
+Se si utilizza un adattatore QSFP-SFP+, potrebbe essere necessario configurare la porta ISL in modalità di velocità nativa invece che in modalità di velocità breakout. Per determinare la modalità di velocità della porta ISL, consultare la documentazione fornita con lo switch.
+
 .Fasi
 . Generare i file NVIDIA RCF per MetroCluster IP.
 +
