@@ -9121,8 +9121,6 @@
   <block id="6eadef8f58c5652471c6fde6bd5bcea0" category="list-text">Metro-e e TDM (SONET/SDH) non sono supportati e non sono supportati frame o segnali nativi non FC.</block>
   <block id="50e3a52a02d2d225339b996dd2aae728" category="paragraph">Metro-e indica che il frame o la segnalazione Ethernet si verifica in modo nativo su una distanza metropolitana o tramite TDM (Time-Division Multiplexing), MPLS (MultiProtocol Label Switching) o WDM (Wavelength-Division Multiplexing).</block>
   <block id="fcdc08d4065e5763ed7b6bf90f0fa228" category="list-text">Gli interni TDMS, FCR (routing FC nativo) o FCIP non sono supportati per il fabric dello switch FC MetroCluster.</block>
-  <block id="13032557b3a76e59b63458b53f6d1410" category="list-text">Alcuni switch del fabric dello switch FC MetroCluster supportano crittografia o compressione e talvolta entrambi.</block>
-  <block id="82224eb6f53e517d9764730a573763df" category="paragraph"><block ref="82224eb6f53e517d9764730a573763df" category="inline-link-rx"></block></block>
   <block id="b54ac66ca0ca34c593eeed1fe8cd4e03" category="list-text">La funzione Brocade Virtual Fabric (VF) non è supportata.</block>
   <block id="c51b448f36df4e8b4b68e7af4df4c6b8" category="list-text">Lo zoning FC basato sulla porta del dominio è supportato, ma lo zoning basato sul nome mondiale (WWN) non è supportato.</block>
   <block id="1895119723122826713ca9b3d616a96b" category="section-title">Analisi dei requisiti di licenza Brocade</block>
@@ -12907,10 +12905,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="1f9fcd1010f1e0dd33b166603da0ce84" category="paragraph">Transizione da una configurazione FC MetroCluster a una configurazione IP MetroCluster AFF A250 o FAS500f</block>
   <block id="56d5901b9c1bf4f73e626ae675e092f1" category="paragraph">È possibile passare da una configurazione FC MetroCluster a una configurazione IP AFF A250 o FAS500f MetroCluster.</block>
   <block id="082e2199f2e8e7e6ff724185b8487f99" category="paragraph"><block ref="082e2199f2e8e7e6ff724185b8487f99" category="inline-link-rx"></block></block>
-  <block id="1e18e1f9085022bf9b99cbfaf58ab4d5" category="paragraph">Configurazione dell'indirizzo IP MetroCluster di livello 3 nelle configurazioni IP MetroCluster</block>
-  <block id="6b289b60214afb640cb3b88389dfe97e" category="paragraph">In una configurazione di livello 3, è possibile modificare l'indirizzo IP, la netmask e il gateway della MetroCluster.</block>
-  <block id="bacf5875940eb96c091917a5d1b9e1ad" category="inline-link">Modifica di indirizzo, netmask e gateway in un IP MetroCluster</block>
-  <block id="bf130f5d7d338872a9f3b57415d62749" category="paragraph"><block ref="bf130f5d7d338872a9f3b57415d62749" category="inline-link-rx"></block></block>
   <block id="cdafe0852c5285bf1f5846616c50f62d" category="paragraph">Aggiornamento semplificato del controller dei nodi in una configurazione MetroCluster FC</block>
   <block id="407ce0bae822f5f1b99e4d9c2a25b062" category="paragraph">La procedura di upgrade per il processo di upgrade che utilizza switchover e switchback è stata semplificata.</block>
   <block id="f897370f92c3d8ec5324c468747e4210" category="paragraph"><block ref="f897370f92c3d8ec5324c468747e4210" category="inline-link-rx"></block></block>
@@ -14705,4 +14699,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="02637489efdd2722934159348bf04810" category="section-title">Configurazioni degli shelf che utilizzano FibreBridge 7500N o 7600N usando entrambe le porte FC (FC1 e FC2)</block>
   <block id="19c5470fc0cd91ca38fde0aea868fce3" category="paragraph">Nella tabella seguente sono illustrate le configurazioni shelf supportate in MetroCluster 1 o DR Group 1 per bridge FibreBridge 7500N o 7600N, utilizzando entrambe le porte FC (FC1 e FC2). Quando si utilizza questa tabella di configurazione, è necessario tenere presente quanto segue:</block>
   <block id="844fb1aaef97c4328b587658a21a78d2" category="paragraph">Se si utilizza un adattatore QSFP-SFP+, potrebbe essere necessario configurare la porta ISL in modalità di velocità nativa invece che in modalità di velocità breakout. Per determinare la modalità di velocità della porta ISL, consultare la documentazione fornita con lo switch.</block>
+  <block id="1894908b5d36f7ab21f7b1b1afcc630c" category="list-text">I seguenti switch FC Brocade supportano la crittografia ISL WAN e la compressione per fabric di back-end FC MetroCluster:</block>
+  <block id="0df6785d5da501ba31bbeb3f6ee67c24" category="list-text">Brocade G630</block>
 </blocks>

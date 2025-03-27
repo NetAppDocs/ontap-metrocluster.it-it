@@ -50,12 +50,15 @@ Nei diversi tessuti è possibile utilizzare lunghezze diverse. La stessa velocit
 Metro-e indica che il frame o la segnalazione Ethernet si verifica in modo nativo su una distanza metropolitana o tramite TDM (Time-Division Multiplexing), MPLS (MultiProtocol Label Switching) o WDM (Wavelength-Division Multiplexing).
 
 * Gli interni TDMS, FCR (routing FC nativo) o FCIP non sono supportati per il fabric dello switch FC MetroCluster.
-* Alcuni switch del fabric dello switch FC MetroCluster supportano crittografia o compressione e talvolta entrambi.
+* I seguenti switch FC Brocade supportano la crittografia ISL WAN e la compressione per fabric di back-end FC MetroCluster:
 +
-https://mysupport.netapp.com/matrix["Tool di matrice di interoperabilità NetApp (IMT)"]
+** Brocade G720
+** Brocade G630
+** Brocade G620
+** Brocade 6520
 
-+
-In IMT, è possibile utilizzare il campo soluzione storage per selezionare la soluzione MetroCluster. Utilizzare *Esplora componenti* per selezionare i componenti e la versione di ONTAP per perfezionare la ricerca. È possibile fare clic su *Mostra risultati* per visualizzare l'elenco delle configurazioni supportate che corrispondono ai criteri.
+
+
 
 * La funzione Brocade Virtual Fabric (VF) non è supportata.
 * Lo zoning FC basato sulla porta del dominio è supportato, ma lo zoning basato sul nome mondiale (WWN) non è supportato.
