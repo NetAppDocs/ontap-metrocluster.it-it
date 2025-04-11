@@ -24,6 +24,7 @@ Tutti gli aggiornamenti supportati ai seguenti sistemi richiedono di impostare u
 * AFF C80
 * AFF A50, AFF A20, AFF A30
 * AFF C30, AFF C60
+* FAS50
 
 
 
@@ -50,13 +51,13 @@ Utilizzare la tabella seguente per determinare quale bootarg impostare per la co
 | Da AFF A220 a AFF A20 | `bootarg.siw.interop_enabled` 
 
 
-| Tutti gli altri aggiornamenti supportati per sistemi AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30 o AFF C60 | `hw.cxgbe.toe_keepalive_disable` 
+| Tutti gli altri aggiornamenti supportati per sistemi AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30, AFF C60 o FAS50 | `hw.cxgbe.toe_keepalive_disable` 
 |===
 
 
 == Fase 2: Impostare il bootarg richiesto sui vecchi controller
 
-Questa attività è *solo* necessaria quando si esegue l'aggiornamento a un sistema AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30 o AFF C60.
+Questa attività è *solo* necessaria quando si esegue l'aggiornamento a un sistema AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30, AFF C60 o FAS50.
 
 .Fasi
 . Arrestare un nodo in ciascun sito e consentire al partner ha di eseguire un takeover dello storage del nodo:

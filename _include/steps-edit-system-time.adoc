@@ -1,0 +1,48 @@
+= 
+:allow-uri-read: 
+
+
+A seconda della versione di ONTAP, è possibile configurare NTP dalla scheda *cluster* o *Insights* dell'interfaccia utente di Gestione sistema.
+
+[role="tabbed-block"]
+====
+.Cluster
+--
+In Gestione sistema, è possibile configurare NTP dalla scheda *cluster* utilizzando due diverse opzioni, a seconda della versione di ONTAP:
+
+.ONTAP 9.8 o versione successiva:
+Per sincronizzare NTP dalla scheda *cluster* di ONTAP 9,8 o versioni successive, procedere come segue.
+
+.Fasi
+. Andare a *Cluster > Overview*
+. Quindi selezionare l'image:icon-more-kebab-blue-bg.jpg["Altro"]opzione e selezionare *Modifica*.
+. Nella finestra *Modifica dettagli cluster*, selezionare l'opzione *+Aggiungi* sotto Server NTP.
+. Aggiungere il nome e il percorso e specificare l'indirizzo IP del server di riferimento orario.
+. Quindi, selezionare *Salva*.
+. Ripetere la procedura per eventuali server di riferimento orario aggiuntivi.
+
+
+.ONTAP 9.11.1 o versione successiva:
+Per sincronizzare NTP dalla finestra *Insights* della scheda *Cluster* di ONTAP 9.11.1 o versioni successive, procedere come segue.
+
+.Fasi
+. Andare a *Cluster > Overview*
+. Scorrere verso il basso fino alla finestra *Insights* nella pagina, individuare *sono configurati troppi pochi server NTP*, quindi selezionare *Fix it*.
+. Specificare l'indirizzo IP del server di riferimento orario, quindi selezionare *Salva*.
+. Ripetere il passaggio precedente per tutti i server di riferimento orario aggiuntivi.
+
+
+--
+.Approfondimenti
+--
+In ONTAP 9.11.1 o versioni successive, è anche possibile configurare l'NTP utilizzando la scheda *Insights* in Gestione sistema:
+
+.Fasi
+. Accedere alla scheda *Insights* nell'interfaccia utente di System Manager.
+. Scorrere fino a *sono configurati troppi server NTP* e selezionare *Correggi*.
+. Specificare l'indirizzo IP del server di riferimento orario, quindi selezionare *Salva*.
+. Ripetere il passaggio precedente per tutti i server di riferimento orario aggiuntivi.
+
+
+--
+====

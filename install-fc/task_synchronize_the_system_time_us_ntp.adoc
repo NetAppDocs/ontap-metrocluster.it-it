@@ -2,38 +2,64 @@
 permalink: install-fc/task_synchronize_the_system_time_us_ntp.html 
 sidebar: sidebar 
 keywords: metrocluster, fabric, installation, synchronize, system, time, ntp 
-summary: 'Ogni cluster necessita di un proprio server NTP (Network Time Protocol) per sincronizzare l"ora tra i nodi e i relativi client. È possibile utilizzare la finestra di dialogo Edit DateTime (Modifica data) in System Manager per configurare il server NTP.' 
+summary: 'Ogni cluster necessita di un proprio server NTP (Network Time Protocol) per sincronizzare l"ora tra i nodi e i relativi client.' 
 ---
-= Sincronizzazione dell'ora di sistema mediante NTP
+= Sincronizzare l'ora del sistema utilizzando NTP
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Ogni cluster necessita di un proprio server NTP (Network Time Protocol) per sincronizzare l'ora tra i nodi e i relativi client. È possibile utilizzare la finestra di dialogo Edit DateTime (Modifica data) in System Manager per configurare il server NTP.
-
-.Prima di iniziare
-È necessario aver scaricato e installato System Manager. System Manager è disponibile sul sito di supporto NetApp.
+Ogni cluster necessita di un proprio server NTP (Network Time Protocol) per sincronizzare l'ora tra i nodi e i relativi client.
 
 .A proposito di questa attività
 * Non è possibile modificare le impostazioni del fuso orario per un nodo guasto o per il nodo partner dopo un Takeover.
 * Ogni cluster nella configurazione MetroCluster FC deve disporre di uno o più server NTP separati utilizzati dai nodi, dagli switch FC e dai bridge FC-SAS in quel sito MetroCluster.
-+
-Se si utilizza il software MetroCluster Tiebreaker, deve disporre anche di un server NTP separato.
+* Se si utilizza il software MetroCluster Tiebreaker, deve disporre anche di un server NTP separato.
 
 
+A seconda della versione di ONTAP, è possibile configurare NTP dalla scheda *cluster* o *Insights* dell'interfaccia utente di Gestione sistema.
+
+[role="tabbed-block"]
+====
+.Cluster
+--
+In Gestione sistema, è possibile configurare NTP dalla scheda *cluster* utilizzando due diverse opzioni, a seconda della versione di ONTAP:
+
+.ONTAP 9.8 o versione successiva:
+Per sincronizzare NTP dalla scheda *cluster* di ONTAP 9,8 o versioni successive, procedere come segue.
 
 .Fasi
-. Dalla home page, fare doppio clic sul sistema di storage appropriato.
-. Espandere la gerarchia *Cluster* nel riquadro di navigazione a sinistra.
-. Nel riquadro di navigazione, fare clic su *Configuration* *System Tools* *DateTime*.
-. Fare clic su *Edit* (Modifica).
-. Selezionare il fuso orario.
-. Specificare gli indirizzi IP dei server di riferimento orario, quindi fare clic su *Aggiungi*.
-+
-È necessario aggiungere un server NTP all'elenco dei server di riferimento orario. Il controller di dominio può essere un server autorevole.
+. Andare a *Cluster > Overview*
+. Quindi selezionare l'image:icon-more-kebab-blue-bg.jpg["Altro"]opzione e selezionare *Modifica*.
+. Nella finestra *Modifica dettagli cluster*, selezionare l'opzione *+Aggiungi* sotto Server NTP.
+. Aggiungere il nome e il percorso e specificare l'indirizzo IP del server di riferimento orario.
+. Quindi, selezionare *Salva*.
+. Ripetere la procedura per eventuali server di riferimento orario aggiuntivi.
 
-. Fare clic su *OK*.
-. Verificare le modifiche apportate alle impostazioni di data e ora nella finestra *Data e ora*.
 
+.ONTAP 9.11.1 o versione successiva:
+Per sincronizzare NTP dalla finestra *Insights* della scheda *Cluster* di ONTAP 9.11.1 o versioni successive, procedere come segue.
+
+.Fasi
+. Andare a *Cluster > Overview*
+. Scorrere verso il basso fino alla finestra *Insights* nella pagina, individuare *sono configurati troppi pochi server NTP*, quindi selezionare *Fix it*.
+. Specificare l'indirizzo IP del server di riferimento orario, quindi selezionare *Salva*.
+. Ripetere il passaggio precedente per tutti i server di riferimento orario aggiuntivi.
+
+
+--
+.Approfondimenti
+--
+In ONTAP 9.11.1 o versioni successive, è anche possibile configurare l'NTP utilizzando la scheda *Insights* in Gestione sistema:
+
+.Fasi
+. Accedere alla scheda *Insights* nell'interfaccia utente di System Manager.
+. Scorrere fino a *sono configurati troppi server NTP* e selezionare *Correggi*.
+. Specificare l'indirizzo IP del server di riferimento orario, quindi selezionare *Salva*.
+. Ripetere il passaggio precedente per tutti i server di riferimento orario aggiuntivi.
+
+
+--
+====

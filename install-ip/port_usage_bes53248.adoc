@@ -46,7 +46,7 @@ Qualsiasi configurazione o funzione che richieda la connessione delle connession
 
 Utilizzare la tabella seguente per determinare quale tabella di cablaggio seguire.
 
-[cols="2*"]
+[cols="25,75"]
 |===
 | Se il sistema è... | Utilizzare questa tabella di cablaggio... 
 
@@ -63,16 +63,19 @@ AFF A220
 | FAS500f AFF C250, ASA C250 AFF A250, ASA A250 | <<table_2_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 2)>> 
 
 
-| AFF A20 AFF C30, AFF A30 AFF C60 | <<table_3_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 3)>> 
+| AFF A20 | <<table_3_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 3)>> 
 
 
-| FAS8200, AFF A300 | <<table_4_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 4)>> 
+| AFF C30, AFF A30 FAS50 AFF C60 | <<table_4_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 4)>> 
 
 
-| AFF A320 | <<table_5_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 5)>> 
+| FAS8200, AFF A300 | <<table_5_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 5)>> 
 
 
-| FAS8300 AFF C400, ASA C400 AFF A400, ASA A400 FAS8700 | <<table_6_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 6)>> 
+| AFF A320 | <<table_6_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 6)>> 
+
+
+| FAS8300 AFF C400, ASA C400 AFF A400, ASA A400 FAS8700 | <<table_7_bes_53248,Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 7)>> 
 |===
 .Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 1)
 Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema AFF A150, ASA A150, FAS2750 o AFF A220 a uno switch Broadcom BES-53248:
@@ -93,14 +96,29 @@ image::../media/mcc_ip_cabling_a_aff_asa_c250_a250_fas500f_to_a_broadcom_bes_532
 
 
 .Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 3)
-Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema AFF A20, AFF C30, AFF A30 o AFF C60 a uno switch Broadcom BES-53248:
+Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema AFF A20 a uno switch Broadcom BES-53248:
 
-image:../media/mcc-ip-cabling-aff-a20-a30-c30-c60-to-a-broadcom-bes-53248-switch.png["Mostra le assegnazioni delle porte della piattaforma Broadcom BES-53248"]
+image:../media/mccip-cabling-bes-a20-updated.png["Mostra le assegnazioni delle porte della piattaforma Broadcom BES-53248"]
 
 * *Nota 1*: L'utilizzo di queste porte richiede una licenza aggiuntiva.
 
 
 .Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 4)
+Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema AFF A30, AFF C30, AFF C60 o FAS50 a uno switch Broadcom BES-53248 utilizzando una scheda Ethernet 25g a quattro porte.
+
+[NOTE]
+====
+* Questa configurazione richiede una scheda Ethernet 25g GB a quattro porte nello slot 4 per collegare il cluster locale e le interfacce ha.
+* Questa configurazione richiede un adattatore QSFP-SFP+ nella scheda del controller per supportare una velocità di rete di 25Gbps Mbps.
+
+
+====
+image:../media/mccip-cabling-bes-a30-c30-fas50-c60-25G.png["Mostra le assegnazioni delle porte della piattaforma Broadcom BES-53248"]
+
+* *Nota 1*: L'utilizzo di queste porte richiede una licenza aggiuntiva.
+
+
+.Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 5)
 Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema FAS8200 o AFF A300 a uno switch Broadcom BES-53248:
 
 image::../media/mcc-ip-cabling-a-aff-a300-or-fas8200-to-a-broadcom-bes-53248-switch-9161.png[Mostra le assegnazioni delle porte della piattaforma Broadcom BES-53248]
@@ -108,7 +126,7 @@ image::../media/mcc-ip-cabling-a-aff-a300-or-fas8200-to-a-broadcom-bes-53248-swi
 * *Nota 1*: L'utilizzo di queste porte richiede una licenza aggiuntiva.
 
 
-.Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 5)
+.Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 6)
 Esaminare le assegnazioni delle porte della piattaforma per collegare un sistema AFF A320 a uno switch Broadcom BES-53248:
 
 image::../media/mcc-ip-cabling-a-aff-a320-to-a-broadcom-bes-53248-switch.png[Mostra le assegnazioni delle porte della piattaforma Broadcom BES-53248]
@@ -120,7 +138,7 @@ Le funzioni che richiedono un cluster con switch non sono supportate in questa c
 
 
 
-.Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 6)
+.Assegnazione delle porte della piattaforma Broadcom BES-53248 (gruppo 7)
 Esaminare le assegnazioni delle porte della piattaforma per il cavo a FAS8300, AFF C400, ASA C400, AFF A400, ASA A400, o dal sistema FAS8700 a uno switch Broadcom BES-53248:
 
 image::../media/mcc-ip-cabling-a-fas8300-a400-c400-or-fas8700-to-a-broadcom-bes-53248-switch.png[Mostra le assegnazioni delle porte della piattaforma Broadcom BES-53248]

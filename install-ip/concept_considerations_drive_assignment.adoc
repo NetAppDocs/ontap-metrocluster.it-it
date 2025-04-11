@@ -375,7 +375,7 @@ Le partizioni su ogni shelf vengono utilizzate per creare l'aggregato root. L'ag
  a| 
 48 dischi (dischi esterni e interni)
  a| 
-Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato. I dischi degli shelf esterni sono divisi in quattro gruppi uguali (quarter). Ogni trimestre viene assegnato automaticamente a un pool separato.
+Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato. I dischi degli shelf esterni sono divisi in quattro gruppi uguali (quarter). Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
  a| 
 Ciascuno dei due plessi nell'aggregato root include:
 
@@ -430,7 +430,7 @@ Le partizioni su ogni shelf vengono utilizzate per creare l'aggregato root. L'ag
  a| 
 48 dischi (dischi esterni e interni)
  a| 
-Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato. I dischi degli shelf esterni sono divisi in quattro gruppi uguali (quarter). Ogni trimestre viene assegnato automaticamente a un pool separato.
+Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato. I dischi degli shelf esterni sono divisi in quattro gruppi uguali (quarter). Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
  a| 
 Ciascuno dei due plessi nell'aggregato root include:
 
@@ -803,6 +803,44 @@ Numero minimo di dischi supportati (per sito)
 24 dischi
  a| 
 I dischi sono divisi in quattro gruppi uguali (quarti). Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Non applicabile
+
+|===
+
+
+=== Assegnazione dei dischi sui sistemi FAS50
+
+|===
+
+
+| Linee guida | Dischi per sito | Regole di assegnazione dei dischi | Layout ADP per la partizione root 
+
+
+.2+| Numero minimo di dischi consigliati (per sito)  a| 
+48 dischi (solo dischi esterni, senza dischi interni)
+ a| 
+I dischi su ogni shelf esterno sono divisi in due gruppi uguali (metà). Ogni half-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Non applicabile
+
+
+
+ a| 
+48 dischi (dischi esterni e interni)
+ a| 
+Le partizioni interne sono divise in quattro gruppi uguali (quarti). Ogni trimestre viene assegnato automaticamente a un pool separato. I dischi degli shelf esterni sono divisi in quattro gruppi uguali (quarter). Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
+ a| 
+Non applicabile
+
+
+
+ a| 
+Numero minimo di dischi supportati (per sito)
+ a| 
+24 dischi
+ a| 
+I dischi sono divisi in quattro gruppi uguali. Ogni quarter-shelf viene assegnato automaticamente a un pool separato.
  a| 
 Non applicabile
 
