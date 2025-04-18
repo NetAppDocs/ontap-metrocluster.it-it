@@ -11,7 +11,10 @@ summary: 'Gli aggiornamenti ai sistemi introdotti in ONTAP 9.15.1 o versioni suc
 
 
 [role="lead"]
-Gli aggiornamenti dei controller ai sistemi introdotti in ONTAP 9.15.1 o versioni successive richiedono l'impostazione di un bootarg prima di poter avviare l'aggiornamento.
+Gli aggiornamenti dei controller ai sistemi introdotti in ONTAP 9.15.1 o versioni successive richiedono di impostare un bootarg sui vecchi controller prima di poter avviare l'aggiornamento.
+
+
+NOTE: È necessario impostare il bootarg richiesto su tutti i vecchi nodi in entrambi i siti prima di avviare l'aggiornamento.
 
 
 
@@ -60,7 +63,7 @@ Utilizzare la tabella seguente per determinare quale bootarg impostare per la co
 Questa attività è *solo* necessaria quando si esegue l'aggiornamento a un sistema AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30, AFF C60 o FAS50.
 
 .Fasi
-. Arrestare un nodo in ciascun sito e consentire al partner ha di eseguire un takeover dello storage del nodo:
+. Arrestare un nodo in entrambi i siti e consentire al partner ha di eseguire un takeover dello storage del nodo:
 +
 `halt  -node <node_name>`
 
@@ -107,7 +110,7 @@ Questa attività è *solo* necessaria quando si esegue l'aggiornamento a un sist
 +
 `storage failover giveback -ofnode <node_name>`
 
-. Ripetere la procedura per ciascun nodo del gruppo di DR in fase di aggiornamento.
+. Ripetere la procedura per tutti i nodi del gruppo DR o dei gruppi DR che si sta aggiornando.
 
 
 .Quali sono le prossime novità?

@@ -13210,14 +13210,12 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="cb2b71f7328cfbc51d68290fdef5e64a" category="inline-link-macro">disattiva la crittografia end-to-end</block>
   <block id="2843a33605079ab99cc2f26a41a2bcbb" category="list-text">Se è attivato sul sistema, <block ref="7a9d12e6dbd7c75c145032be8c2b8549" category="inline-link-macro-rx"></block> prima di eseguire l'aggiornamento.</block>
   <block id="973338f6a10e6b7ac7c39f19d7b492b2" category="list-text">Riutilizzate gli indirizzi IP, le netmask e i gateway delle piattaforme originali sulle nuove piattaforme.</block>
-  <block id="77cd2bc0bfe264cad96e3619cb8678b1" category="list-text">Arrestare un nodo in ciascun sito e consentire al partner ha di eseguire un takeover dello storage del nodo:</block>
   <block id="8b0fde7ba026b4e4de5c975b52e10b78" category="paragraph"><block ref="fc0e5e4abc6e1b590b3364b384105526" prefix="" category="inline-code"></block></block>
   <block id="807f12cb6d4e38b470996608263f29ac" category="list-text">Al<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> prompt del nodo arrestato, immettere quanto segue:</block>
   <block id="80ce63b6e2ae11a72a38bf7e4ef35369" category="paragraph"><block ref="924cd73da4c8e153eb2de352d5e9a0e1" prefix="" category="inline-code"></block></block>
   <block id="a0fd3a832d10febc3517df104c662c1d" category="paragraph"><block ref="c3e347fd62df99318c1112b24c25c070" prefix="" category="inline-code"></block></block>
   <block id="7fea19d34419d662a854d37c6044222a" category="list-text">All'avvio del nodo, eseguire un giveback per il nodo quando richiesto:</block>
   <block id="9fd57da49ac1975b29677831c2286586" category="paragraph"><block ref="fb72d634bc57a858bd0751f5c6335d6e" prefix="" category="inline-code"></block></block>
-  <block id="c5b67774bb32fdf25c42ebcc33f3e43d" category="list-text">Ripetere la procedura per ciascun nodo del gruppo di DR in fase di aggiornamento.</block>
   <block id="6986e6230a992abf2372b5ddb288c1ec" category="list-text"><block ref="6986e6230a992abf2372b5ddb288c1ec" category="inline-link-macro-rx"></block></block>
   <block id="9cf1b9d10ebe2c0f0ae4072a054220a3" category="list-text"><block ref="9cf1b9d10ebe2c0f0ae4072a054220a3" category="inline-link-macro-rx"></block></block>
   <block id="d71cd39faa20e04542bb87bdbf15456a" category="list-text"><block ref="d71cd39faa20e04542bb87bdbf15456a" category="inline-link-macro-rx"></block></block>
@@ -14137,7 +14135,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="3d8c3985ef8f7b9c50308a5dfab923c4" category="paragraph"><block ref="f85c62a3a981a8b83a61b1dc7959165b" category="inline-link-macro-rx"></block>.</block>
   <block id="ed1dd620ec6ed4baac7e1208e4a9d25d" category="summary">Gli aggiornamenti ai sistemi introdotti in ONTAP 9.15.1 o versioni successive richiedono l'impostazione di un bootarg prima di poter procedere con l'aggiornamento del controller.</block>
   <block id="496db1855de52190cc06d85f972a650b" category="doc">Impostare il bootarg richiesto (per gli aggiornamenti MetroCluster IP ai sistemi introdotti in ONTAP 9.15.1 o versioni successive)</block>
-  <block id="46e4bb8c59f161cfa278e9cc00ce227a" category="paragraph">Gli aggiornamenti dei controller ai sistemi introdotti in ONTAP 9.15.1 o versioni successive richiedono l'impostazione di un bootarg prima di poter avviare l'aggiornamento.</block>
   <block id="59b020257dd689cba5d5780a512943fd" category="section-title">Passo 1: Determinare il bootarg da impostare sui vecchi controller</block>
   <block id="6e9eadf85899a23a56a99cb9a6df7652" category="paragraph">Tutti gli aggiornamenti supportati ai seguenti sistemi richiedono di impostare un bootarg sui vecchi controller prima di eseguire l'aggiornamento del controller:</block>
   <block id="724bf3ae18d86521a5b9d77a13fcfddb" category="list-text">AFF C80</block>
@@ -14778,4 +14775,10 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="c21a199bc091a4db6d90366971734cf9" category="paragraph"><block ref="c21a199bc091a4db6d90366971734cf9" category="inline-image-macro-rx" type="image"></block></block>
   <block id="4d4e0d3e34b6b8a05aa28d2f8e68fab4" category="paragraph"><block ref="4d4e0d3e34b6b8a05aa28d2f8e68fab4" category="inline-image-macro-rx" type="image"></block></block>
   <block id="e94f3a81af196da788fa0f158f9d57fc" category="sidebar">Scopri di più sull'utilizzo di Active IQ Unified Manager e System Manager per ulteriori informazioni su configurazione e monitoring</block>
+  <block id="5c1f1ec5000a0efcdda7a9cf624dafe7" category="paragraph">Gli aggiornamenti dei controller ai sistemi introdotti in ONTAP 9.15.1 o versioni successive richiedono di impostare un bootarg sui vecchi controller prima di poter avviare l'aggiornamento.</block>
+  <block id="d7aa339b18c7637dfafa2ace54386b6c" category="admonition">È necessario impostare il bootarg richiesto su tutti i vecchi nodi in entrambi i siti prima di avviare l'aggiornamento.</block>
+  <block id="ac37738788377720cfa00ec2fd76c841" category="list-text">Arrestare un nodo in entrambi i siti e consentire al partner ha di eseguire un takeover dello storage del nodo:</block>
+  <block id="0fd6026f96835994e1e5d178235825d6" category="list-text">Ripetere la procedura per tutti i nodi del gruppo DR o dei gruppi DR che si sta aggiornando.</block>
+  <block id="29a7afcbdc44731ef5db6482e263bc76" category="paragraph">Gli aggiornamenti ai sistemi introdotti in ONTAP 9.15.1 o versioni successive richiedono di impostare un bootarg sui vecchi controller prima di poter avviare l'aggiornamento.</block>
+  <block id="ffb8d6643ebe516c638a6ca5b500299d" category="list-text">Ripetere la procedura su tutti e quattro i nodi del gruppo DR che si sta aggiornando.</block>
 </blocks>
