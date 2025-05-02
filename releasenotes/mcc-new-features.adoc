@@ -11,7 +11,9 @@ summary:
 
 
 [role="lead"]
-Ulteriori informazioni sulle nuove funzionalità di MetroCluster.
+Ogni versione del software per la gestione dei dati ONTAP 9 offre funzioni nuove e migliorate che migliorano le capacità, la gestibilità e le prestazioni delle configurazioni ONTAP MetroCluster.
+
+Per informazioni dettagliate su problemi noti, limitazioni e avvisi di aggiornamento che interessano le configurazioni di ONTAP MetroCluster, consultare https://library.netapp.com/ecm/ecm_download_file/ECMLP2492508["Note sulla versione di ONTAP 9"^]. Per accedere alle Note di rilascio, è necessario accedere con l'account NetApp o creare un account.
 
 [cols="20,65,15"]
 |===
@@ -24,6 +26,33 @@ Aggiornamento firmware Fibrebridge tramite credenziali
 È possibile aggiornare il firmware sui bridge Fibrebridge utilizzando le credenziali se sono richieste dal server per scaricare il pacchetto firmware.
 
 link:../maintain/task_update_firmware_on_a_fibrebridge_bridge_parent_topic.html["Aggiornare il firmware su un bridge FibreBridge"]
+ a| 
+ONTAP 9.16.1
+
+
+
+ a| 
+Supporto di mobilità dei dati SVM per la migrazione delle configurazioni MetroCluster
+ a| 
+ONTAP supporta le seguenti migrazioni SVM di MetroCluster:
+
+* Migrazione di una SVM tra una coppia ha non MetroCluster e una configurazione IP MetroCluster
+* Migrazione di una SVM tra due configurazioni IP di MetroCluster
+* Migrazione di una SVM tra una configurazione FC di MetroCluster e una configurazione IP di MetroCluster
+
+
+link:https://docs.netapp.com/us-en/ontap/svm-migrate/index.html["Mobilità dei dati SVM"^]
+ a| 
+ONTAP 9.16.1
+
+
+
+ a| 
+Supporto di autenticazione MD5 per i gruppi di peer BGP
+ a| 
+ONTAP supporta l'autenticazione MD5 sui gruppi di peer BGP per proteggere le sessioni BGP. Quando MD5 è abilitato, le sessioni BGP possono essere stabilite ed elaborate solo tra i peer autorizzati, evitando potenziali interruzioni della sessione da parte di un attore non autorizzato.
+
+link:https://docs.netapp.com/us-en/ontap/networking/configure_virtual_ip_@vip@_lifs.html["Configurare i LIF VIP (Virtual IP)"^]
  a| 
 ONTAP 9.16.1
 
@@ -55,6 +84,17 @@ ONTAP 9.15.1
 
 
  a| 
+Supporto IP MetroCluster per NVMe
+ a| 
+Il protocollo host front-end NVMe/TCP è supportato sulle configurazioni MetroCluster IP a quattro nodi.
+
+link:https://docs.netapp.com/us-en/ontap/san-admin/san-config-mcc-concept.html["Configurazioni SAN in un ambiente MetroCluster"^]
+ a| 
+ONTAP 9.15.1
+
+
+
+ a| 
 Aumento del limite del volume per configurazioni IP MetroCluster a quattro nodi su sistemi AFF A900
  a| 
 Nelle configurazioni MetroCluster IP a quattro nodi, sono aumentati i seguenti limiti di volume per i sistemi AFF A900:
@@ -63,6 +103,28 @@ Nelle configurazioni MetroCluster IP a quattro nodi, sono aumentati i seguenti l
 * Il numero massimo di volumi FlexVol per nodo è aumentato da 800 a 1250.
 * Il numero massimo di volumi FlexVol per coppia ha è aumentato da 1600 a 2500.
 
+ a| 
+ONTAP 9.14.1
+
+
+
+ a| 
+Supporto dello storage a oggetti S3 su aggregati con mirroring e senza mirror
+ a| 
+È possibile abilitare un server per lo storage a oggetti S3 su una SVM in un aggregato con mirroring o senza mirror nelle configurazioni IP e FC di MetroCluster.
+
+https://docs.netapp.com/us-en/ontap/s3-config/ontap-version-support-s3-concept.html#s3-support-with-metrocluster["Supporto S3 con MetroCluster"^]
+ a| 
+ONTAP 9.14.1
+
+
+
+ a| 
+Supporto per il provisioning di un bucket S3 su aggregati con mirroring e senza mirror in un cluster MetroCluster
+ a| 
+È possibile creare un bucket su un aggregato con mirroring o senza mirror nelle configurazioni di MetroCluster.
+
+link:https://docs.netapp.com/us-en/ontap/s3-config/create-bucket-mcc-task.html#process-to-create-buckets["Creare un bucket ONTAP S3 su un aggregato con mirroring o senza mirror in una configurazione MetroCluster"^]
  a| 
 ONTAP 9.14.1
 
@@ -84,7 +146,7 @@ Transizioni senza interruzioni da una configurazione MetroCluster FC a otto nodi
  a| 
 Puoi trasferire senza interruzioni i carichi di lavoro e i dati da una configurazione FC MetroCluster a otto nodi esistente a una nuova configurazione IP MetroCluster.
 
-https://docs.netapp.com/us-en/ontap-metrocluster/transition/concept_nondisruptively_transitioning_from_a_four_node_mcc_fc_to_a_mcc_ip_configuration.html["Transizione senza interruzioni da una configurazione FC MetroCluster a una configurazione IP MetroCluster"]
+https://docs.netapp.com/us-en/ontap-metrocluster/transition/concept_nondisruptively_transitioning_from_a_four_node_mcc_fc_to_a_mcc_ip_configuration.html["Passare senza interruzioni da una configurazione FC MetroCluster a una configurazione IP MetroCluster"]
  a| 
 ONTAP 9.13.1
 
@@ -117,7 +179,7 @@ Supporto delle configurazioni MetroCluster IP a otto nodi
  a| 
 È possibile aggiornare i controller e lo storage in una configurazione IP MetroCluster a otto nodi espandendo la configurazione fino a diventare una configurazione temporanea a dodici nodi, quindi rimuovere i vecchi gruppi di disaster recovery.
 
-https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_refresh_4n_mcc_ip.html["Aggiornamento di una configurazione IP MetroCluster a quattro nodi"]
+https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_refresh_4n_mcc_ip.html["Aggiornare una configurazione MetroCluster IP a quattro nodi"]
  a| 
 ONTAP 9.13.1
 
@@ -128,7 +190,7 @@ Conversione della configurazione IP di MetroCluster in una configurazione di swi
  a| 
 È possibile convertire una configurazione IP di MetroCluster in una configurazione di switch MetroCluster di storage condiviso.
 
-https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_replace_an_ip_switch.html["Sostituzione di uno switch IP"]
+https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_replace_an_ip_switch.html["Sostituire uno switch IP"]
  a| 
 ONTAP 9.13.1
 
@@ -150,14 +212,36 @@ S3 su una SVM su un aggregato senza mirror in una configurazione IP di MetroClus
  a| 
 È possibile abilitare un server per lo storage a oggetti ONTAP Simple Storage Service (S3) su una SVM in un aggregato senza mirror in una configurazione IP di MetroCluster.
 
-https://docs.netapp.com/us-en/ontap/s3-config/index.html#s3-configuration-with-system-manager-and-the-ontap-cli["Configurazione S3 con Gestore di sistema e CLI ONTAP"]
+https://docs.netapp.com/us-en/ontap/s3-config/ontap-version-support-s3-concept.html#s3-support-with-metrocluster["Supporto S3 con MetroCluster"^]
  a| 
 ONTAP 9.12.1
 
 
 
  a| 
-Transizione da una configurazione FC MetroCluster a una configurazione IP MetroCluster AFF A250 o FAS500f
+Supporto IP MetroCluster per NVMe
+ a| 
+Il protocollo NVMe/FC è supportato sulle configurazioni IP MetroCluster a quattro nodi.
+
+link:https://docs.netapp.com/us-en/ontap/san-admin/san-config-mcc-concept.html["Configurazioni SAN in un ambiente MetroCluster"^]
+ a| 
+ONTAP 9.12.1
+
+
+
+ a| 
+Supporto IPSec per il protocollo host front-end nelle configurazioni fabric-attached MetroCluster IP e MetroCluster
+ a| 
+Il supporto IPSec per il protocollo host front-end (ad esempio NFS e iSCSI) è disponibile nelle configurazioni MetroCluster IP e MetroCluster fabric-attached.
+
+https://docs.netapp.com/us-en/ontap/networking/configure_ip_security_@ipsec@_over_wire_encryption.html["Configurare la crittografia IP Security (IPsec) over wire"^]
+ a| 
+ONTAP 9.12.1
+
+
+
+ a| 
+Transizione da una configurazione FC MetroCluster a una configurazione IP AFF A250 o FAS500f MetroCluster
  a| 
 È possibile passare da una configurazione FC MetroCluster a una configurazione IP AFF A250 o FAS500f MetroCluster.
 
@@ -168,11 +252,22 @@ ONTAP 9.11.1
 
 
  a| 
+Gruppi di coerenza
+ a| 
+I gruppi di coerenza sono supportati nelle configurazioni MetroCluster.
+
+https://docs.netapp.com/us-en/ontap/consistency-groups/index.html#multi-admin-verification-support-for-consistency-groups["Gruppi di coerenza nelle configurazioni MetroCluster"^]
+ a| 
+ONTAP 9.11.1
+
+
+
+ a| 
 Aggiornamento semplificato del controller dei nodi in una configurazione MetroCluster FC
  a| 
 La procedura di upgrade per il processo di upgrade che utilizza switchover e switchback è stata semplificata.
 
-https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_upgrade_controllers_in_a_four_node_fc_mcc_us_switchover_and_switchback_mcc_fc_4n_cu.html["Aggiornamento dei controller in una configurazione MetroCluster FC mediante switchover e switchback"]
+https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_upgrade_controllers_in_a_four_node_fc_mcc_us_switchover_and_switchback_mcc_fc_4n_cu.html["Eseguire l'upgrade dei controller in una configurazione FC MetroCluster utilizzando switchover e switchback"]
  a| 
 ONTAP 9.10.1
 
@@ -190,111 +285,12 @@ ONTAP 9.9.1
 
 
  a| 
-Supporto per cluster a 8 nodi
+Supporto delle configurazioni MetroCluster a otto nodi
  a| 
-I cluster permanenti a 8 nodi sono supportati nelle configurazioni IP e fabric-attached.
+I cluster permanenti a otto nodi sono supportati nelle configurazioni IP e MetroCluster fabric-attached.
 
-https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_install_and_cable_the_mcc_components.html["Installazione e cablaggio dei componenti MetroCluster"]
+https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_install_and_cable_the_mcc_components.html["Installare e cablare i componenti MetroCluster"]
  a| 
 ONTAP 9.9.1
-
-
-
- a| 
-Interfaccia semplificata per la gestione delle operazioni di IP MetroCluster con System Manager
- a| 
-Puoi gestire le operazioni di IP MetroCluster con System Manager, inclusa la configurazione di siti IP MetroCluster, l'associazione dei siti e la configurazione dei cluster.
-
-https://docs.netapp.com/us-en/ontap/concept_metrocluster_manage_nodes.html["Gestire siti MetroCluster"]
- a| 
-ONTAP 9,8
-
-
-
- a| 
-Switchover e switchback di IP MetroCluster con System Manager
- a| 
-Puoi utilizzare System Manager per eseguire tutti i passaggi di procedure di switchover e switchback pianificate o non pianificate per le configurazioni IP MetroCluster.
-
-https://docs.netapp.com/us-en/ontap/task_metrocluster_switchover_switchback.html["Switchover e switchback MetroCluster"]
- a| 
-ONTAP 9,8
-
-
-
- a| 
-Transizione da configurazioni MetroCluster FC a MetroCluster IP
- a| 
-È supportata la transizione dei workload e dei dati da una configurazione FC MetroCluster a quattro nodi esistente a una nuova configurazione MetroCluster IP.
-
-https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_an_upgrade_method_mcc.html["Aggiornare, aggiornare o espandere la configurazione di MetroCluster"]
-
-https://docs.netapp.com/us-en/ontap-metrocluster/transition/concept_choosing_your_transition_procedure_mcc_transition.html["Transizione da MetroCluster FC a MetroCluster IP"]
- a| 
-ONTAP 9,8
-
-
-
- a| 
-Nuove procedure di aggiornamento e aggiornamento
- a| 
-È supportato l'aggiornamento o il refresh hardware delle configurazioni MetroCluster FC e IP a quattro nodi.
-
-https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_an_upgrade_method_mcc.html["Aggiornare, aggiornare o espandere la configurazione di MetroCluster"]
-
-https://docs.netapp.com/us-en/ontap-metrocluster/transition/concept_choosing_your_transition_procedure_mcc_transition.html["Transizione da MetroCluster FC a MetroCluster IP"]
- a| 
-ONTAP 9,8
-
-
-
- a| 
-Aggregati senza mirror
- a| 
-Gli aggregati senza mirror sono supportati nelle configurazioni IP di MetroCluster.
-
-https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/considerations_unmirrored_aggrs.html["Considerazioni per gli aggregati senza mirror"]
- a| 
-ONTAP 9,8
-
-
-
- a| 
-Switch compatibili MetroCluster
- a| 
-Le configurazioni IP di MetroCluster possono supportare gli switch non convalidati da NetApp, a condizione che siano conformi alle specifiche NetApp.
-
-https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_considerations_mc_compliant_switches.html["Considerazioni sull'utilizzo di switch compatibili con MetroCluster"]
- a| 
-ONTAP 9,7
-
-
-
- a| 
-Condivisione di rete privata a livello 2
- a| 
-Le configurazioni IP MetroCluster con switch Cisco supportati possono condividere le reti esistenti per gli ISL, invece di utilizzare ISL MetroCluster dedicati. Le versioni precedenti di ONTAP richiedono ISL dedicati.
-
-Gli switch IP MetroCluster sono dedicati alla configurazione MetroCluster e non possono essere condivisi. Solo le porte MetroCluster ISL degli switch IP MetroCluster possono connettersi agli switch condivisi.
-
-[CAUTION]
-====
-Se si utilizza una rete condivisa, il cliente è responsabile del rispetto dei requisiti di rete MetroCluster nella rete condivisa.
-
-====
-https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/index.html["Installazione e configurazione di MetroCluster IP"]
- a| 
-ONTAP 9,6
-
-
-
- a| 
-Switchover e switchback MetroCluster
- a| 
-È possibile consentire a un sito del cluster di assumere il controllo dei task di un altro sito del cluster. Questa funzionalità consente di semplificare la manutenzione o il ripristino in caso di disastri.
-
-https://docs.netapp.com/us-en/ontap-metrocluster/manage/index.html["Switchover e switchback MetroCluster"]
- a| 
-ONTAP 9,6
 
 |===

@@ -4,22 +4,37 @@ sidebar: sidebar
 keywords: metrocluster, maintain, service, find, procedures, maintenance, tasks 
 summary: 'Quando si eseguono le attività di manutenzione dell"hardware MetroCluster, assicurarsi di selezionare la procedura corretta.' 
 ---
-= Dove trovare le procedure per le attività di manutenzione di MetroCluster
+= Scopri la manutenzione di MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Quando si eseguono le attività di manutenzione dell'hardware MetroCluster, assicurarsi di selezionare la procedura corretta.
+Scoprite come preparare le attività di manutenzione di MetroCluster e scegliere la procedura di manutenzione corretta per la vostra configurazione.
 
-.Procedure di manutenzione per diversi tipi di configurazioni MetroCluster
+
+
+== Prepararsi per le attività di manutenzione
+
+Prima di eseguire qualsiasi procedura di manutenzione, rivedere le informazioni contenute in link:enable-console-logging-before-maintenance.html["Prepararsi per la manutenzione di MetroCluster"].
+
+
+NOTE: È necessario abilitare la registrazione della console e rimuovere il monitoraggio di ONTAP Mediator o Tiebreaker prima di eseguire le attività di manutenzione.
+
+
+
+== Procedure di manutenzione per diversi tipi di configurazioni MetroCluster
+
 * Se si dispone di una configurazione IP MetroCluster, consultare le procedure descritte in link:task-modify-ip-netmask-properties.html["Procedure di manutenzione per le configurazioni IP di MetroCluster"].
 * Se si dispone di una configurazione MetroCluster FC, consultare le procedure descritte in link:task_modify_switch_or_bridge_ip_address_for_health_monitoring.html["Procedure di manutenzione per le configurazioni MetroCluster FC"].
 * Se non è possibile trovare la procedura nella sezione specifica della configurazione, consultare le procedure descritte in link:task_replace_a_shelf_nondisruptively_in_a_stretch_mcc_configuration.html["Procedure di manutenzione per tutte le configurazioni MetroCluster"].
 
 
-.Tutte le altre procedure di manutenzione
+
+
+== Tutte le altre procedure di manutenzione
+
 Nella tabella seguente sono riportati i collegamenti alle procedure di manutenzione MetroCluster non presenti nelle tre sezioni elencate in precedenza:
 
 |===
