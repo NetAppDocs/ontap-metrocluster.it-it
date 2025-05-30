@@ -86,9 +86,24 @@ entries:
       - title: Configurare la crittografia MACsec sugli switch Cisco 9336C
         url: "/install-ip/task_switch_config_cisco_macsec.html"
     - title: Configurare gli switch NVIDIA IP
-      url: "/install-ip/task_switch_config_nvidia.html"
-    - title: Configurare gli switch IP MetroCluster per il monitoraggio dello stato
-      url: "/install-ip/task_config_switch_health.html"
+      entries:
+      - title: Configurare lo switch NVIDIA SN2100
+        url: "/install-ip/task_switch_config_nvidia.html"
+      - title: Installare il file CSHM
+        url: "/install-ip/task-nvidia-health-monitoring.html"
+  - title: Monitorare lo stato dello switch IP MetroCluster
+    entries:
+    - title: Scopri di più sul monitoraggio dello stato dello switch in una configurazione
+        IP MetroCluster
+      url: "/install-ip/configure-cshm-mccip.html"
+    - title: Configurare SNMPv3 sugli switch IP MetroCluster
+      url: "/install-ip/config-snmpv3.html"
+    - title: Configurare la raccolta dei log sugli switch IP MetroCluster
+      url: "/install-ip/task-configure-log-collection-mccip.html"
+    - title: Gestire il monitoraggio dello switch Ethernet
+      url: "/install-ip/manage-monitor.html"
+    - title: Verificare il monitoraggio dello switch Ethernet
+      url: "/install-ip/task-monitor-verify-mccip.html"
 - title: Configurare il software MetroCluster in ONTAP
   entries:
   - title: Configurare il software MetroCluster utilizzando l'interfaccia CLI
@@ -127,20 +142,21 @@ entries:
       url: "/install-ip/set-up-mcc-peering-system-manager.html"
     - title: Configurare un sito IP MetroCluster
       url: "/install-ip/configure-mcc-site-system-manager.html"
-- title: Configurare il servizio ONTAP Mediator per lo switchover automatico non pianificato
+- title: Configurare ONTAP Mediator per il passaggio automatico non pianificato
   entries:
-  - title: Preparare l'installazione del servizio ONTAP Mediator
+  - title: Prepararsi all'installazione di ONTAP Mediator
     url: "/install-ip/concept_mediator_requirements.html"
-  - title: Configurazione del servizio ONTAP Mediator da una configurazione IP MetroCluster
+  - title: Configurazione di ONTAP Mediator da una configurazione IP MetroCluster
     url: "/install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html"
-  - title: Disconfigurare il servizio ONTAP Mediator dalla configurazione IP di MetroCluster
+  - title: Annullare la configurazione di ONTAP Mediator dalla configurazione IP di
+      MetroCluster
     url: "/install-ip/task_remove_unconfigure_mediator.html"
   - title: Connettere una configurazione MetroCluster a un'istanza diversa di ONTAP
       Mediator
     url: "/install-ip/task_connecting_mcc_to_different_mediator_instance.html"
-  - title: In che modo il mediatore ONTAP supporta lo switchover automatico non pianificato
+  - title: Come ONTAP Mediator supporta il passaggio automatico non pianificato
     url: "/install-ip/concept-ontap-mediator-supports-automatic-unplanned-switchover.html"
-  - title: Gestione del ONTAP Mediator con System Manager
+  - title: Gestire ONTAP Mediator con System Manager
     url: "/install-ip/task-sm-mediator.html"
 - title: Test della configurazione MetroCluster
   url: "/install-ip/task_test_the_mcc_configuration.html"

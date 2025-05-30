@@ -1,10 +1,10 @@
 ---
 permalink: install-ip/concept_mediator_requirements.html 
 sidebar: sidebar 
-keywords: ontap, mediator, service, assist, metrocluster, ip, configuration, perform, automatic, unplan, switchover, physical, repository, status, information, configuring, configure, install, configuring, configure, mtu size, packet loss, bandwidth, firewall, rhel, centos, linux, revert, kernal, upgrade, latency 
-summary: 'A partire da ONTAP 9.7, il servizio mediatore ONTAP può aiutare la configurazione IP di MetroCluster nell"esecuzione di uno switchover automatico non pianificato, fornendo un repository fisicamente separato per le informazioni di stato.' 
+keywords: ontap, mediator, assist, metrocluster, ip, configuration, perform, automatic, unplan, switchover, physical, repository, status, information, configuring, configure, install, configuring, configure, mtu size, packet loss, bandwidth, firewall, rhel, centos, linux, revert, kernal, upgrade, latency 
+summary: 'A partire da ONTAP 9.7, ONTAP Mediator può assistere la configurazione IP di MetroCluster nell"esecuzione di uno switchover automatico non pianificato fornendo un repository fisicamente separato per le informazioni sullo stato.' 
 ---
-= Preparare l'installazione del servizio ONTAP Mediator
+= Prepararsi all'installazione di ONTAP Mediator
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -15,22 +15,22 @@ L'ambiente deve soddisfare determinati requisiti.
 
 I seguenti requisiti si applicano a un gruppo di disaster recovery (gruppo di DR). Scopri di più link:concept_parts_of_an_ip_mcc_configuration_mcc_ip.html#disaster-recovery-dr-groups["Gruppi DR"].
 
-* Se si prevede di aggiornare la versione di Linux, eseguire questa operazione prima di installare il servizio ONTAP Mediator più recente.
-* Il servizio ONTAP Mediator e il software MetroCluster Tiebreaker non devono essere utilizzati con la stessa configurazione MetroCluster.
-* Il supporto ONTAP deve essere installato su un host LINUX in una posizione separata dai siti MetroCluster.
+* Se si prevede di aggiornare la versione di Linux, farlo prima di installare la versione più recente di ONTAP Mediator.
+* I software ONTAP Mediator e MetroCluster Tiebreaker non devono essere utilizzati entrambi con la stessa configurazione MetroCluster.
+* ONTAP Mediator deve essere installato su un host Linux in una posizione diversa dai siti MetroCluster.
 +
 La connettività tra il mediatore ONTAP e ciascun sito deve essere composta da due domini di guasto separati.
 
-* Il servizio ONTAP può supportare fino a cinque configurazioni MetroCluster contemporaneamente.
+* ONTAP Mediator può supportare fino a cinque configurazioni MetroCluster contemporaneamente.
 * Lo switchover automatico non pianificato è supportato in ONTAP 9.7 e versioni successive.
 * IPv6 non è supportato con ONTAP Mediator.
 
 
 
 
-== Requisiti di rete per l'utilizzo di Mediator in una configurazione MetroCluster
+== Requisiti di rete per l'utilizzo di ONTAP Mediator in una configurazione MetroCluster
 
-Per installare il servizio ONTAP Mediator in una configurazione MetroCluster, è necessario assicurarsi che la configurazione soddisfi diversi requisiti di rete.
+Per installare ONTAP Mediator in una configurazione MetroCluster, è necessario assicurarsi che la configurazione soddisfi diversi requisiti di rete.
 
 * Latenza
 +
@@ -49,7 +49,7 @@ Per il traffico ICMP (Internet Control message Protocol) e TCP, la perdita di pa
 
 * Larghezza di banda
 +
-Il collegamento tra il servizio Mediator e un gruppo DR deve avere almeno 20 Mbps di larghezza di banda.
+Il collegamento tra ONTAP Mediator e un gruppo DR deve avere almeno 20 Mbps di larghezza di banda.
 
 * Connettività indipendente
 +
@@ -59,7 +59,7 @@ Il collegamento tra il servizio Mediator e un gruppo DR deve avere almeno 20 Mbp
 
 
 
-== Requisiti dell'host per il mediatore ONTAP in una configurazione MetroCluster
+== Requisiti host per ONTAP Mediator in una configurazione MetroCluster
 
 È necessario assicurarsi che la configurazione soddisfi diversi requisiti dell'host.
 
@@ -143,15 +143,15 @@ Connessione dati iSCSI per caselle postali
 |===
 
 
-== Linee guida per l'aggiornamento del mediatore ONTAP in una configurazione MetroCluster
+== Linee guida per l'aggiornamento di ONTAP Mediator in una configurazione MetroCluster
 
-Se si sta aggiornando il mediatore ONTAP, è necessario soddisfare i requisiti della versione Linux e seguire le linee guida per l'aggiornamento.
+Se si desidera aggiornare ONTAP Mediator, è necessario soddisfare i requisiti della versione Linux e seguire le linee guida per l'aggiornamento.
 
-* Il servizio Mediator può essere aggiornato da una versione immediatamente precedente alla versione corrente.
+* ONTAP Mediator può essere aggiornato da una versione immediatamente precedente alla versione corrente.
 * Tutte le versioni di Mediator sono supportate nelle configurazioni MetroCluster IP con ONTAP 9.7 o versioni successive.
 
 
-link:https://docs.netapp.com/us-en/ontap/mediator/index.html["Installare o aggiornare il servizio di supporto ONTAP"^]
+link:https://docs.netapp.com/us-en/ontap/mediator/index.html["Installa o aggiorna ONTAP Mediator"^]
 
 
 

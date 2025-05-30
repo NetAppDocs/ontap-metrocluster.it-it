@@ -19,7 +19,7 @@ Le diverse configurazioni MetroCluster eseguono lo switchover automatico in dive
 +
 In queste configurazioni, AUSO viene avviato se i controller si guastano ma lo storage (e i bridge, se presenti) rimangono operativi.
 
-* *Configurazioni IP MetroCluster che utilizzano il servizio ONTAP Mediator (ONTAP 9.7 e versioni successive)*
+* *Configurazioni IP MetroCluster tramite ONTAP Mediator (ONTAP 9.7 e versioni successive)*
 +
 In queste configurazioni, MAUSO viene avviato nelle stesse circostanze di AUSO, come descritto sopra, e anche dopo un guasto completo del sito (controller, storage e switch).
 

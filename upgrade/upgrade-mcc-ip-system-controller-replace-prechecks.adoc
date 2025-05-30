@@ -117,7 +117,7 @@ Seguire la procedura descritta nella sezione relativa al fornitore dello switch:
 
 == Eseguire i controlli preliminari del sistema
 
-Prima dell'avvio dei controlli preliminari, se ONTAP Mediator è installato, viene rilevato e rimosso automaticamente. Per confermare la rimozione, viene richiesto di inserire un nome utente e una password. Una volta completato l'aggiornamento, o se i controlli preliminari non riescono o si sceglie di non procedere con l'aggiornamento, è necessario manualmente link:../install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html["Riconfigurare il servizio ONTAP Mediator"].
+Prima dell'avvio dei controlli preliminari, se ONTAP Mediator è installato, viene rilevato e rimosso automaticamente. Per confermare la rimozione, viene richiesto di inserire un nome utente e una password. Una volta completato l'aggiornamento, o se i controlli preliminari non riescono o si sceglie di non procedere con l'aggiornamento, è necessario manualmente link:../install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html["riconfigurare ONTAP Mediator"].
 
 Durante l'aggiornamento, è possibile eseguire il `system controller replace show` oppure `system controller replace show-details` Dal sito A per controllare lo stato. Se i comandi restituiscono un output vuoto, attendere alcuni minuti ed eseguire nuovamente il comando.
 

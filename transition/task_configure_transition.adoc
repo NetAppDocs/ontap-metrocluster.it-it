@@ -604,7 +604,7 @@ aggr_data_a2
 È necessario incorporare il nuovo gruppo DR nella configurazione MetroCluster e creare aggregati di dati mirrorati sui nuovi nodi.
 
 .Fasi
-. Configurare MetroCluster in base all'eventuale presenza di uno o più aggregati di dati:
+. Configurare MetroCluster a seconda che vi sia un singolo aggregato di dati o più aggregati su entrambi i cluster:
 +
 |===
 
@@ -613,7 +613,7 @@ aggr_data_a2
 
 
  a| 
-Aggregati di dati multipli
+Aggregati di dati multipli su entrambi i cluster
  a| 
 Dal prompt di qualsiasi nodo, configurare MetroCluster:
 
@@ -625,7 +625,7 @@ NOTE: Devi eseguire `metrocluster configure` e *non* `metrocluster configure -re
 
 
  a| 
-Un singolo aggregato di dati mirrorato
+Un singolo aggregato di dati speculari su entrambi i cluster
  a| 
 .. Dal prompt di qualsiasi nodo, passare al livello di privilegio avanzato:
 +

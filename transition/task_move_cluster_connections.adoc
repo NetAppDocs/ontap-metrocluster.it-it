@@ -64,21 +64,42 @@ La seguente tabella mostra a quali porte switch si connettono i nodi FC. Per lo 
 | Modello di switch | Modello di nodo IP MetroCluster | Porte dello switch | Si connette a. 
 
 
-.2+| Cisco 3132Q-V, 3232C o 9336C-FX2 .2+| Qualsiasi  a| 
-5
+| Cisco 3132Q-V.  a| 
+Qualsiasi
+ a| 
+5, 6
  a| 
 Interfaccia del cluster locale sul nodo FC
 
 
 
  a| 
-6
+Cisco 3232C o 9336C-FX2
+ a| 
+Qualsiasi
+ a| 
+5, 6 o 13, 14
+
+*Nota:* le porte dello switch 13 e 14 possono essere utilizzate solo quando si selezionano due modalità di velocità.
  a| 
 Interfaccia del cluster locale sul nodo FC
 
 
 
-.6+| Broadcom BES-53248  a| 
+ a| 
+Cisco 9336C-FX2 condiviso
+ a| 
+Qualsiasi
+ a| 
+3,4 o 11,12
+
+*Nota:* le porte dello switch 11 e 12 possono essere utilizzate solo quando si selezionano due modalità di velocità.
+ a| 
+Interfaccia del cluster locale sul nodo FC
+
+
+
+.3+| Broadcom BES-53248  a| 
 FAS500f/A250
  a| 
 1 - 6
@@ -100,6 +121,19 @@ Interfaccia del cluster locale sul nodo FC
 FAS8300/A400/FAS8700
  a| 
 1 - 6
+ a| 
+Interfaccia del cluster locale sul nodo FC
+
+
+
+ a| 
+NVIDIA SN2100
+ a| 
+Qualsiasi
+ a| 
+5,6 o 11,12
+
+*Nota:* le porte dello switch 11 e 12 possono essere utilizzate solo quando si selezionano due modalità di velocità.
  a| 
 Interfaccia del cluster locale sul nodo FC
 
@@ -271,20 +305,23 @@ link:../install-ip/concept_considerations_differences.html["Installazione e conf
 Utilizzare il firmware più recente supportato dai nodi IP MetroCluster.
 
 +
-*** link:../install-ip/task_switch_config_broadcom.html["Download e installazione del software EFOS dello switch Broadcom"]
-*** link:../install-ip/task_switch_config_cisco.html["Download e installazione del software NX-OS dello switch Cisco"]
+*** link:../install-ip/task_switch_config_broadcom.html["Scaricare e installare il software Broadcom switch EFOS"]
+*** link:../install-ip/task_switch_config_cisco.html["Scaricare e installare il software Cisco switch NX-OS"]
+*** link:../install-ip/task_switch_config_nvidia.html#download-and-install-the-cumulus-software["Scarica e installa il software NVIDIA Cumulus"]
 
 
 .. Preparare gli switch IP per l'applicazione dei nuovi file RCF.
 +
-*** link:../install-ip/task_switch_config_broadcom.html["Ripristino delle impostazioni predefinite dello switch IP Broadcom"] **
-*** link:../install-ip/task_switch_config_cisco.html["Ripristino delle impostazioni predefinite dello switch IP Cisco"]
+*** link:../install-ip/task_switch_config_broadcom.html["Ripristinare l'interruttore Broadcom IP alle impostazioni predefinite"]
+*** link:../install-ip/task_switch_config_cisco.html["Ripristinare lo switch IP Cisco alle impostazioni predefinite"]
+*** link:../install-ip/task_switch_config_nvidia.html#reset-the-nvidia-ip-sn2100-switch-to-factory-defaults["Ripristinare le impostazioni predefinite dello switch NVIDIA IP SN2100"]
 
 
 .. Scaricare e installare il file RCF IP in base al fornitore dello switch.
 +
-*** link:../install-ip/task_switch_config_broadcom.html["Download e installazione dei file Broadcom IP RCF"]
-*** link:../install-ip/task_switch_config_cisco.html["Download e installazione dei file Cisco IP RCF"]
+*** link:../install-ip/task_switch_config_broadcom.html["Scarica e installa i file RCF di Broadcom IP"]
+*** link:../install-ip/task_switch_config_cisco.html["Scarica e installa i file Cisco IP RCF"]
+*** link:../install-ip/task_switch_config_nvidia.html#download-and-install-the-nvidia-rcf-files["Scaricare e installare i file NVIDIA RCF"]
 
 
 

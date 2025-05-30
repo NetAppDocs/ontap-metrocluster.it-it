@@ -16,11 +16,11 @@ summary: È possibile scaricare e installare su un terzo sito il software MetroC
 .Prima di iniziare
 È necessario disporre di un host Linux dotato di connettività di rete per entrambi i cluster nella configurazione MetroCluster. I requisiti specifici sono contenuti nella documentazione di MetroCluster Tiebreaker o ONTAP Mediator.
 
-Se si effettua la connessione a un'istanza di Tiebreaker o ONTAP Mediator esistente, è necessario disporre del nome utente, della password e dell'indirizzo IP del servizio di spareggio o mediatore.
+Se ci si connette a un'istanza esistente di Tiebreaker o di ONTAP Mediator, è necessario disporre di nome utente, password e indirizzo IP del Tiebreaker o del Mediator.
 
 Se è necessario installare una nuova istanza di ONTAP Mediator, seguire le istruzioni per installare e configurare il software.
 
-link:concept_mediator_requirements.html["Configurazione del servizio ONTAP Mediator per lo switchover automatico non pianificato"]
+link:concept_mediator_requirements.html["Configurare ONTAP Mediator per il passaggio automatico non pianificato"]
 
 Se è necessario installare una nuova istanza del software Tiebreaker, seguire la link:../tiebreaker/concept_overview_of_the_tiebreaker_software.html["istruzioni per installare e configurare il software"].
 
@@ -30,9 +30,9 @@ Non è possibile utilizzare sia il software MetroCluster Tiebreaker che il media
 link:../install-ip/concept_considerations_mediator.html["Considerazioni sull'utilizzo di ONTAP Mediator o MetroCluster Tiebreaker"]
 
 .Fase
-. Configurare il servizio ONTAP Mediator o il software Tiebreaker:
+. Configurare ONTAP Mediator o il software Tiebreaker:
 +
-** Se si utilizza un'istanza esistente del mediatore ONTAP, aggiungere il servizio del mediatore ONTAP a ONTAP:
+** Se si utilizza un'istanza esistente di ONTAP Mediator, aggiungere ONTAP Mediator a ONTAP:
 +
 `metrocluster configuration-settings mediator add -mediator-address ip-address-of-mediator-host`
 

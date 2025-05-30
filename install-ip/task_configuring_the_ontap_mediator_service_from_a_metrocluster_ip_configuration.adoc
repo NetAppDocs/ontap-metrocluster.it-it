@@ -2,24 +2,24 @@
 permalink: install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html 
 sidebar: sidebar 
 keywords: metrocluster, mediator, configure 
-summary: Il servizio ONTAP Mediator deve essere configurato sul nodo ONTAP per essere utilizzato in una configurazione IP MetroCluster. 
+summary: 'Per l"utilizzo in una configurazione IP MetroCluster, ONTAP Mediator deve essere configurato sul nodo ONTAP.' 
 ---
-= Configurare il servizio ONTAP Mediator da una configurazione IP MetroCluster
+= Configurare ONTAP Mediator da una configurazione IP MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Il servizio ONTAP Mediator deve essere configurato sul nodo ONTAP per essere utilizzato in una configurazione IP MetroCluster.
+Per l'utilizzo in una configurazione IP MetroCluster, ONTAP Mediator deve essere configurato sul nodo ONTAP.
 
 .Prima di iniziare
-* Il mediatore ONTAP deve essere stato installato correttamente in una posizione di rete raggiungibile da entrambi i siti MetroCluster.
+* ONTAP Mediator deve essere stato installato correttamente in una posizione di rete raggiungibile da entrambi i siti MetroCluster.
 +
-link:https://docs.netapp.com/us-en/ontap/mediator/index.html["Installare o aggiornare il servizio di supporto ONTAP"^]
+link:https://docs.netapp.com/us-en/ontap/mediator/index.html["Installa o aggiorna ONTAP Mediator"^]
 
-* È necessario disporre dell'indirizzo IP dell'host che esegue il servizio ONTAP Mediator.
-* È necessario disporre del nome utente e della password per il servizio di supporto ONTAP.
+* È necessario disporre dell'indirizzo IP dell'host su cui è in esecuzione ONTAP Mediator.
+* È necessario disporre del nome utente e della password per ONTAP Mediator.
 * Tutti i nodi della configurazione IP di MetroCluster devono essere in linea.
 
 
@@ -29,11 +29,11 @@ CAUTION: A partire da ONTAP 9.12.1, è possibile attivare la funzione di switcho
 .A proposito di questa attività
 * Questa attività attiva lo switchover automatico non pianificato per impostazione predefinita.
 * Questa attività può essere eseguita sull'interfaccia ONTAP di qualsiasi nodo della configurazione IP di MetroCluster.
-* Una singola installazione del servizio ONTAP può essere configurata con un massimo di cinque configurazioni IP MetroCluster.
+* Una singola installazione di ONTAP Mediator può essere configurata con un massimo di cinque configurazioni IP MetroCluster.
 
 
 .Fasi
-. Aggiungere il servizio ONTAP Mediator a ONTAP:
+. Aggiungere ONTAP Mediator a ONTAP:
 +
 `metrocluster configuration-settings mediator add -mediator-address _ip-address-of-mediator-host_`
 
