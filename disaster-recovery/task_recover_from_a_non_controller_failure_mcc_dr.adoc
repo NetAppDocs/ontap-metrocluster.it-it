@@ -186,11 +186,34 @@ Eseguire il comando: `boot_ontap`
 ====
 . Una volta completato il boot del nodo, verificare che gli aggregati root siano mirrorati.
 +
-Se sono presenti entrambi i plessi, la risincronizzazione viene avviata automaticamente. Se un plex non riesce, distruggerlo e ristabilire la relazione di mirroring utilizzando il seguente comando per ricreare il mirror:
+[role="tabbed-block"]
+====
+.Se un plex fallisce:
+--
+.. Distruggi il plex fallito:
++
+`storage aggregate plex delete -aggregate <aggregate_name> -plex <plex_name>`
 
+.. Ripristinare la relazione speculare ricreando lo specchio:
 +
 `storage aggregate mirror -aggregate <aggregate-name>`
 
+
+
+--
+.Se un plex è offline:
+--
+Online il plesso:
+
+`storage aggregate plex online -aggregate <aggregate_name> -plex <plex_name>`
+
+--
+.Se entrambi i plessi sono presenti:
+--
+La risincronizzazione viene avviata automaticamente.
+
+--
+====
 . Simulare l'operazione di switchback:
 +
 .. Dal prompt di uno dei nodi sopravvissuti, passare al livello di privilegio avanzato:

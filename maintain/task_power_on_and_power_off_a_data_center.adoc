@@ -278,7 +278,7 @@ Una volta spento il sito, è possibile iniziare il lavoro di manutenzione. La pr
 
 .Fasi
 . Verificare che il cablaggio di tutti i componenti sia registrato attentamente in modo che possa essere ricollegato correttamente nella nuova posizione.
-. Spostare fisicamente tutto l'hardware, i controller di storage, gli switch IP, i FibreBridge e gli shelf di storage.
+. Spostare fisicamente tutto l'hardware, i controller di archiviazione, gli switch IP e gli scaffali di archiviazione.
 . Configurare le porte ISL e verificare la connettività tra siti.
 +
 .. Accendere gli switch IP.
@@ -325,14 +325,22 @@ Se l'avvio automatico è attivato, premere `Ctrl+C` per interrompere l'avvio aut
 CAUTION: Non accendere gli scaffali prima di accendere i controller. In questo modo si evita che i controller si avviino involontariamente in ONTAP.
 
 . Accendere gli scaffali, lasciando abbastanza tempo per accenderli completamente.
-. Verificare che lo spazio di archiviazione sia visibile.
+. Verificare che l'archiviazione sia visibile dalla modalità di manutenzione.
 +
-.. Verificare che lo storage sia visibile dal sito sopravvissuto. Riportare i plesso offline in linea per riavviare l'operazione di risincronizzazione e ristabilire la SyncMirror.
-.. Verificare che la memoria locale sia visibile dal nodo in modalità manutenzione:
+.. Avviare in modalità di manutenzione:
++
+`boot_ontap maint`
+
+.. Verificare che lo storage sia visibile dal sito sopravvissuto.
+.. Verificare che l'archiviazione locale sia visibile dal nodo in modalità di manutenzione:
 +
 `disk show -v`
 
 
+
+. Arrestare i nodi:
++
+`halt`
 
 . Ristabilire la configurazione MetroCluster.
 +

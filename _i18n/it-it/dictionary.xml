@@ -12515,7 +12515,6 @@ Si applica a tutte le configurazioni MetroCluster.</block>
   <block id="2900f8420dafccee0a2692e48506c6cb" category="open-title">Se i nodi sono al prompt del CARICATORE:</block>
   <block id="796bd1c27d5eea106367802d9fd5bd0e" category="paragraph">Eseguire il comando:<block ref="ce54ef17bebf280339d340bd40dff593" prefix=" " category="inline-code"></block></block>
   <block id="4129cca17421055c633ccbc72f65d61f" category="list-text">Una volta completato il boot del nodo, verificare che gli aggregati root siano mirrorati.</block>
-  <block id="f691b46b240bca97e906bfb1366247a7" category="paragraph">Se sono presenti entrambi i plessi, la risincronizzazione viene avviata automaticamente. Se un plex non riesce, distruggerlo e ristabilire la relazione di mirroring utilizzando il seguente comando per ricreare il mirror:</block>
   <block id="9abd59a18f57d6cb4282adb209f8b563" category="list-text">Sono presenti due bridge FibreBridge 7600N collegati a uno stack di shelf di dischi SAS.</block>
   <block id="fc35f0bbf60965f7ec34001ad687a3f3" category="list-text">Si dispone di un bridge FibreBridge 7500N e di un bridge FibreBridge 7600N collegati a uno stack di shelf di dischi SAS.</block>
   <block id="3ed94c5d90da7ee057d27e4a111e2d56" category="list-text">Spegnere il bridge atto e rimuovere i cavi di alimentazione collegati al bridge.</block>
@@ -12562,7 +12561,6 @@ Si applica a tutte le configurazioni MetroCluster.</block>
   <block id="b13f7000aa5add9a5264da17e3dc4f67" category="list-text">Arrestare i nodi eseguendo il seguente comando su ciascun nodo:</block>
   <block id="de48c3af46bd57dad9f2ad02bbb26041" category="paragraph"><block ref="8a921c8973814d1a72edcc98a6686da9" prefix="" category="inline-code"></block></block>
   <block id="84b0c3d7ab439004e978c709f15fc230" category="paragraph">È necessario spegnere le seguenti apparecchiature nell'ordine indicato:</block>
-  <block id="98734a3d5b75c8baf95c27fbc27a15f1" category="list-text">Spostare fisicamente tutto l'hardware, i controller di storage, gli switch IP, i FibreBridge e gli shelf di storage.</block>
   <block id="1cef707d96d59ea52cd45984a36d2f11" category="list-text">Accendere gli switch IP.</block>
   <block id="ac8327044a4ce63889944095a1b6aed8" category="list-text">Accendere gli scaffali, lasciando abbastanza tempo per accenderli completamente.</block>
   <block id="d5061566f9570e151daa3fd59fb31405" category="list-text">Verificare che la memoria locale sia visibile dal nodo in modalità manutenzione:</block>
@@ -14666,7 +14664,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="c452f245605b541913c8927f2fb39f4b" category="inline-link-macro">Considerazioni sull'assegnazione automatica delle unità e sui sistemi ADP</block>
   <block id="9648215f493ab7d57f334a1db39291f3" category="admonition">A partire da ONTAP 9,4, le configurazioni IP di MetroCluster supportano nuove installazioni con assegnazione automatica dei dischi e ADP (partizione avanzata dei dischi). Per ulteriori informazioni, fare riferimento <block ref="b265df9824eecc73bbbf36d6341665a3" category="inline-link-macro-rx"></block> a.</block>
   <block id="cbeca2fa89a3ea8f375e96b634c42759" category="doc">Configurare SNMPv3 sugli switch IP MetroCluster</block>
-  <block id="630f606ab1d9cdb74f5fddde24450385" category="paragraph">Questa attività illustra i passaggi generici per la configurazione di SNMPv3 su uno switch. Alcune delle versioni del firmware dello switch elencate potrebbero non essere supportate in una configurazione IP MetroCluster.</block>
   <block id="578f5e3d8693dd5b8f97c29bf9aec80b" category="paragraph">È necessario seguire i passaggi per una versione del firmware dello switch supportata in una configurazione IP MetroCluster. Fare riferimento a <block ref="9c839fcdfb8699a63c787254d7b1ae03" category="inline-link-macro-rx"></block> per verificare le versioni del firmware supportate.</block>
   <block id="1451684986f1c945fdb4e4f2a8b904be" category="list-text">SNMPv3 è supportato solo su ONTAP 9.12.1 e versioni successive.</block>
   <block id="e43f0bacec59589637fec825db76ae04" category="list-text">ONTAP 9.13.1P12, 9.14.1P9, 9.15.1P5, 9.16.1 e versioni successive risolvono questi due problemi:</block>
@@ -14692,7 +14689,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="c19095c0c8945d1d4e4e73ec7a11354c" category="paragraph">Configurare un nome utente SNMPv3 SNMPv3_USER sugli switch NVIDIA SN2100 che eseguono CLI 5.4.0:</block>
   <block id="cd12738ab621b27db86ca1b02e9d118c" category="open-title">NVIDIA - CL 5.11.0</block>
   <block id="1d478fc1ce1613a790d5d77707c188f6" category="paragraph">Configurare un nome utente SNMPv3 SNMPv3_USER sugli switch NVIDIA SN2100 che eseguono CLI 5.11.0:</block>
-  <block id="8ec049d1fe155ff0c4df415c3d4691e2" category="doc">Panoramica del monitoraggio dello stato dello switch in una configurazione IP MetroCluster</block>
   <block id="8ae4eeaa7baed19106cc30ea02483c5e" category="paragraph">Il monitor dello stato degli switch Ethernet (CSHM) ha la responsabilità di garantire lo stato operativo degli switch del cluster e della rete di storage e di raccogliere i registri degli switch a scopo di debug.</block>
   <block id="4ae61f4d1ec2f0efafd8ee4274e49ccf" category="section-title">Note importanti per la configurazione di CSHM in una configurazione IP MetroCluster</block>
   <block id="b38569be2d36a20e8902840c1ea976fe" category="paragraph">Questa sezione contiene i passaggi generici per la configurazione di SNMPv3 e la raccolta dei log sugli switch Cisco, Broadcom e NVIDIA SN2100. È necessario seguire i passaggi per una versione del firmware dello switch supportata in una configurazione IP MetroCluster. Fare riferimento a <block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block> per verificare le versioni del firmware supportate.</block>
@@ -14897,4 +14893,18 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="eb781ca5db4579a64062bcf161d91cbe" category="sidebar">Verificare il monitoraggio dello switch Ethernet</block>
   <block id="3ef38a7332e8a3a92f8540dfdb80708d" category="sidebar">Configurazione di ONTAP Mediator da una configurazione IP MetroCluster</block>
   <block id="84e085c408a358fe4e512066e45c3837" category="sidebar">Gestire ONTAP Mediator con System Manager</block>
+  <block id="d2dfa94f0ec6119f137b05b65f72b726" category="open-title">Se un plex fallisce:</block>
+  <block id="a3d50ad07bbec0a08b055954bb66cfcb" category="list-text">Distruggi il plex fallito:</block>
+  <block id="eb10fb6e54a620d06a2f18c1a660ffe4" category="paragraph"><block ref="10736eb62e72d120f2dcaa0fe0b7666f" prefix="" category="inline-code"></block></block>
+  <block id="b78dcdf12c052d8955dc51b3b3b7b105" category="list-text">Ripristinare la relazione speculare ricreando lo specchio:</block>
+  <block id="e6534782a81c039714b69e68abd6dd24" category="open-title">Se un plex è offline:</block>
+  <block id="5bf31f2147933b41528417b67db14d59" category="paragraph">Online il plesso:</block>
+  <block id="db0df63b9e668f95fb18ff3a3c311c03" category="paragraph"><block ref="abdcc012bb91335575fa83e50f5bd9f2" prefix="" category="inline-code"></block></block>
+  <block id="173d04d1482af7bc613216daa9c54d3b" category="open-title">Se entrambi i plessi sono presenti:</block>
+  <block id="0cb322072bf2ca0a4a593635bde1f36d" category="paragraph">Questa procedura illustra i passaggi generici per configurare SNMPv3 su uno switch. Alcune delle versioni del firmware dello switch elencate potrebbero non essere supportate in una configurazione IP MetroCluster.</block>
+  <block id="00f60657daab6d52f5bc57575661559b" category="list-text">Spostare fisicamente tutto l'hardware, i controller di archiviazione, gli switch IP e gli scaffali di archiviazione.</block>
+  <block id="ba17277e87e849f2a38d0126b17905d8" category="list-text">Verificare che l'archiviazione sia visibile dalla modalità di manutenzione.</block>
+  <block id="ef1806576a0dffd58481510c7525ed90" category="list-text">Avviare in modalità di manutenzione:</block>
+  <block id="41af2ca5f1002ab08c75f010d70581a4" category="list-text">Verificare che lo storage sia visibile dal sito sopravvissuto.</block>
+  <block id="b496741d8a784412385f91b26ad4e4f1" category="list-text">Verificare che l'archiviazione locale sia visibile dal nodo in modalità di manutenzione:</block>
 </blocks>
