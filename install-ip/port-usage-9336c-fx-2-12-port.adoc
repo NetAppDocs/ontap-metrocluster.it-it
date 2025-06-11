@@ -1,0 +1,138 @@
+---
+permalink: install-ip/port-usage-9336c-fx-2-12-port.html 
+sidebar: sidebar 
+keywords: cabling, cable, component, link, site, management, network, networks, hardware, component, switch, cluster, connection, management, data, configuring, configure 
+summary: 'L"utilizzo della porta in una configurazione IP MetroCluster dipende dal modello dello switch e dal tipo di piattaforma.' 
+---
+= Assegnazioni delle porte della piattaforma per gli switch Cisco 9336C-FX2 a 12 porte
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'utilizzo della porta in una configurazione IP MetroCluster dipende dal modello dello switch e dal tipo di piattaforma.
+
+Prima di utilizzare le tabelle di configurazione, fare riferimento alle seguenti considerazioni:
+
+* Le tabelle in questa sezione si riferiscono agli switch Cisco 9336C-FX2 a 12 porte.
++
+Se si dispone di uno switch Cisco 9336C-FX2 a 36 porte che non collega gli scaffali NS224, utilizzare le tabelle in link:port_usage_3232c_9336c.html["Assegnazioni delle porte della piattaforma per gli switch Cisco 3232C o Cisco 9336C-FX2 a 36 porte"] .
+
++
+Se si dispone di uno switch Cisco 9336C-FX2 a 36 porte e almeno una configurazione MetroCluster o un gruppo DR collega gli scaffali NS224 allo switch MetroCluster, utilizzare le tabelle in link:port_usage_9336c_shared.html["Assegnazioni delle porte della piattaforma per uno switch Cisco 9336C-FX2 a 36 porte che collega l'archiviazione NS224"] .
+
+
+
+
+NOTE: Lo switch Cisco 9336C-FX2 a 12 porte non supporta la connessione degli scaffali NS224 allo switch MetroCluster.
+
+* Le seguenti tabelle mostrano l'utilizzo della porta per il sito A. Lo stesso cablaggio viene utilizzato per il sito B.
+* Non è possibile configurare gli switch con porte a velocità diverse (ad esempio, un mix di porte da 100 Gbps e porte da 40 Gbps).
+* Se si configura un singolo MetroCluster con gli switch, utilizzare il gruppo di porte *MetroCluster 1*.
++
+Tieni traccia del gruppo di porte MetroCluster (MetroCluster 1, MetroCluster 2). Ti servirà quando utilizzerai lo strumento RcfFileGenerator, come descritto più avanti in questa procedura di configurazione.
+
+* RcfFileGenerator per MetroCluster IP fornisce anche una panoramica del cablaggio per porta per ogni switch.
+
+
+
+
+== Scegliere la tabella di cablaggio corretta per la configurazione
+
+Utilizzare la tabella seguente per determinare quale tabella di cablaggio seguire.
+
+[cols="25,75"]
+|===
+| Se il sistema è... | Utilizzare questa tabella di cablaggio... 
+
+
+| AFF A150, ASA A150 FAS500f AFF C250, ASA C250 AFF A250, ASA A250 | <<table_1_cisco_12port_9336c,Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 1)>> 
+
+
+| AFF A20 | <<table_2_cisco_12port_9336c,Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 2)>> 
+
+
+| AFF A30, AFF C30 FAS50 AFF C60  a| 
+La tabella seguente dipende dall'utilizzo di una scheda Ethernet 25g (gruppo 3a) o 100g (gruppo 3b).
+
+* <<table_3a_cisco_12port_9336c,Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 3a - 25G)>>
+* <<table_3b_cisco_12port_9336c,Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 3b - 100G)>>
+
+
+
+
+| FAS8300, AFF C400, ASA C400, FAS8700 AFF A400, ASA A400 | <<table_4_cisco_12port_9336c,Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 4)>> 
+
+
+| AFF A50 | <<table_5_cisco_12port_9336c,Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 5)>> 
+
+
+| AFF C800, ASA C800, AFF A800, ASA A800 FAS9500, AFF A900, ASA A900 | <<table_6_cisco_12port_9336c,Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 6)>> 
+
+
+| FAS70, AFF A70 AFF C80 FAS90, AFF A90 AFF A1K | <<table_7_cisco_12port_9336c,Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 7)>> 
+|===
+.Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 1)
+Esaminare le assegnazioni delle porte della piattaforma per cablare un sistema AFF A150, ASA A150, FAS500f, AFF C250, ASA C250, AFF A250 o ASA A250 a uno switch Cisco 9336C-FX2 a 12 porte:
+
+image:../media/mccip-cabling-9336c-12-port-a150-fas500f-a250-c250.png["Mostra le assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte"]
+
+*Nota 1:* È possibile configurare solo le porte 19 e 20 *oppure* le porte 21 e 22. Se si utilizzano prima le porte 19 e 20, le porte 21 e 22 vengono bloccate. Se si utilizzano prima le porte 21 e 22, le porte 19 e 20 vengono bloccate.
+
+.Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 2)
+Esaminare le assegnazioni delle porte della piattaforma per cablare un sistema AFF A20 a uno switch Cisco 9336C-FX2 a 12 porte:
+
+image:../media/mccip-cabling-9336c-12-port-a20.png["Mostra le assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte"]
+
+*Nota 1:* È possibile configurare solo le porte 19 e 20 *oppure* le porte 21 e 22. Se si utilizzano prima le porte 19 e 20, le porte 21 e 22 vengono bloccate. Se si utilizzano prima le porte 21 e 22, le porte 19 e 20 vengono bloccate.
+
+.Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 3a)
+Esaminare le assegnazioni delle porte della piattaforma per cablare un sistema AFF A30, AFF C30, AFF C60 o FAS50 a uno switch Cisco 9336C-FX2 a 12 porte utilizzando una scheda Ethernet 25G a quattro porte.
+
+
+NOTE: Questa configurazione richiede una scheda Ethernet 25g GB a quattro porte nello slot 4 per collegare il cluster locale e le interfacce ha.
+
+image:../media/mccip-cabling-9336c-12-port-a30-c30-fas50-c60-25g.png["Mostra le assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte"]
+
+*Nota 1:* È possibile configurare solo le porte 19 e 20 *oppure* le porte 21 e 22. Se si utilizzano prima le porte 19 e 20, le porte 21 e 22 vengono bloccate. Se si utilizzano prima le porte 21 e 22, le porte 19 e 20 vengono bloccate.
+
+.Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 3b)
+Esaminare le assegnazioni delle porte della piattaforma per cablare un sistema AFF A30, AFF C30, AFF C60 o FAS50 a uno switch Cisco 9336C-FX2 a 12 porte utilizzando una scheda Ethernet 100G a due porte.
+
+
+NOTE: Questa configurazione richiede una scheda Ethernet 100g GB a due porte nello slot 4 per collegare il cluster locale e le interfacce ha.
+
+image:../media/mccip-cabling-9336c-12-port-a30-c30-fas50-c60-100g.png["Mostra le assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte"]
+
+*Nota 1:* È possibile configurare solo le porte 19 e 20 *oppure* le porte 21 e 22. Se si utilizzano prima le porte 19 e 20, le porte 21 e 22 vengono bloccate. Se si utilizzano prima le porte 21 e 22, le porte 19 e 20 vengono bloccate.
+
+.Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 4)
+Esaminare le assegnazioni delle porte della piattaforma per cablare un sistema FAS8300, AFF C400, ASA C400, FAS8700, AFF A400 o ASA A400 a uno switch Cisco 9336C-FX2 a 12 porte:
+
+image::../media/mccip-cabling-9336c-12-port-a400-c400-fas8300-fas8700.png[Mostra le assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte]
+
+*Nota 1:* È possibile configurare solo le porte 19 e 20 *oppure* le porte 21 e 22. Se si utilizzano prima le porte 19 e 20, le porte 21 e 22 vengono bloccate. Se si utilizzano prima le porte 21 e 22, le porte 19 e 20 vengono bloccate.
+
+.Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 5)
+Esaminare le assegnazioni delle porte della piattaforma per cablare un sistema AFF A50 a uno switch Cisco 9336C-FX2 a 12 porte:
+
+image::../media/mccip-cabling-9336c-12-port-a50.png[Mostra le assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte]
+
+*Nota 1:* È possibile configurare solo le porte 19 e 20 *oppure* le porte 21 e 22. Se si utilizzano prima le porte 19 e 20, le porte 21 e 22 vengono bloccate. Se si utilizzano prima le porte 21 e 22, le porte 19 e 20 vengono bloccate.
+
+.Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 6)
+Esaminare le assegnazioni delle porte della piattaforma per cablare un sistema AFF C800, ASA C800, AFF A800, ASA A800, FAS9500, AFF A900 o ASA A900 a uno switch Cisco 9336C-FX2 a 12 porte:
+
+image::../media/mccip-cabling-9336c-12-port-c800-a800-fas9500-a900.png[Mostra le assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte]
+
+*Nota 1:* È possibile configurare solo le porte 19 e 20 *oppure* le porte 21 e 22. Se si utilizzano prima le porte 19 e 20, le porte 21 e 22 vengono bloccate. Se si utilizzano prima le porte 21 e 22, le porte 19 e 20 vengono bloccate.
+
+*Nota 2:* utilizzare le porte e4a ed e4e oppure e4a ed e8a se si utilizza un adattatore X91440A (40 Gbps). Utilizzare le porte e4a e e4b o e4a e E8a se si utilizza un adattatore X91153A (100Gbps).
+
+.Assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte (gruppo 7)
+Esaminare le assegnazioni delle porte della piattaforma per cablare un sistema AFF A70, FAS70, AFF C80, FAS90, AFF A90 o AFF A1K a uno switch Cisco 9336C-FX2 a 12 porte:
+
+image:../media/mccip-cabling-9336c-12-port-fas70-a70-c80-fas90-a90-a1k.png["Mostra le assegnazioni delle porte della piattaforma Cisco 9336C-FX2 a 12 porte"]
+
+*Nota 1:* È possibile configurare solo le porte 19 e 20 *oppure* le porte 21 e 22. Se si utilizzano prima le porte 19 e 20, le porte 21 e 22 vengono bloccate. Se si utilizzano prima le porte 21 e 22, le porte 19 e 20 vengono bloccate.
