@@ -132,6 +132,9 @@ La configurazione MetroCluster su AFF A900 o FAS9500 richiede 8 porte FC-VI su s
 
 Prima di aggiornare i file RCF e il cablaggio per la configurazione AFF A900 o FAS9500 Fabric MetroCluster, è necessario verificare lo stato e la connettività della configurazione.
 
+
+CAUTION: È Questo errore indica una mancata corrispondenza delle dimensioni della NVRAM tra i nodi di ciascun sito ed è il comportamento previsto quando sono presenti modelli di piattaforma diversi su entrambi i siti. possibile ignorare l'errore fino al completamento dell'aggiornamento del controller per tutti i nodi del gruppo DR.
+
 .Fasi
 . Verificare il funzionamento della configurazione MetroCluster in ONTAP:
 +

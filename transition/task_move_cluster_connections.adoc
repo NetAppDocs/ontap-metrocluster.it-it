@@ -11,21 +11,23 @@ summary: Dopo aver esaminato tutti i requisiti e aver preparato la transizione, 
 
 
 [role="lead"]
-È necessario spostare le interfacce del cluster della configurazione MetroCluster FC sugli switch IP.
+Spostare le interfacce cluster della configurazione MetroCluster FC sugli switch IP.
 
 
 
-== Spostare le connessioni del cluster sui nodi FC MetroCluster
+== Passaggio 1: spostare le connessioni del cluster sui nodi MetroCluster FC
 
-È necessario spostare le connessioni del cluster sui nodi FC MetroCluster sugli switch IP. La procedura dipende dal fatto che si stiano utilizzando gli switch IP esistenti o i nuovi switch IP.
+Spostare le connessioni del cluster sui nodi MetroCluster FC sugli switch IP. I passaggi da seguire variano a seconda che si utilizzino switch IP esistenti o nuovi.
 
-Questa attività deve essere eseguita su entrambi i siti MetroCluster.
+.A proposito di questa attività
+* Questa attività viene eseguita su entrambi i siti MetroCluster.
+
 
 
 
 === Quali connessioni spostare
 
-La seguente attività presuppone che un modulo controller utilizzi due porte per le connessioni del cluster. Alcuni modelli di moduli controller utilizzano quattro o più porte per la connessione cluster. In tal caso, ai fini di questo esempio, le porte sono divise in due gruppi, alternando le porte tra i due gruppi
+L'attività seguente presuppone che un modulo controller utilizzi due porte per le connessioni del cluster. Alcuni modelli di moduli controller utilizzano quattro o più porte per la connessione cluster. In questo esempio, le porte sono divise in due gruppi, alternando le porte tra i due gruppi.
 
 La tabella seguente mostra le porte di esempio utilizzate in questa attività.
 
@@ -68,6 +70,19 @@ La seguente tabella mostra a quali porte switch si connettono i nodi FC. Per lo 
 Qualsiasi
  a| 
 5, 6
+ a| 
+Interfaccia del cluster locale sul nodo FC
+
+
+
+ a| 
+Cisco 9336C-FX2 (12 porte)
+ a| 
+Qualsiasi
+ a| 
+3,4 o 11,12
+
+*Nota:* per utilizzare le porte 11 e 12 dello switch, è necessario selezionare due modalità di velocità.
  a| 
 Interfaccia del cluster locale sul nodo FC
 
@@ -140,10 +155,11 @@ Interfaccia del cluster locale sul nodo FC
 |===
 
 
-=== Spostamento delle connessioni del cluster locale quando si utilizzano nuovi switch IP
+=== Spostare le connessioni del cluster locale quando si utilizzano nuovi switch IP
 
-Se si utilizzano nuovi switch IP, è necessario spostare fisicamente le connessioni cluster dei nodi FC MetroCluster esistenti sui nuovi switch.
+Se si utilizzano nuovi switch IP, è necessario spostare fisicamente le connessioni cluster dei nodi MetroCluster FC esistenti sui nuovi switch.
 
+.Fasi
 . Spostare il gruppo di nodi MetroCluster FC A connessioni cluster ai nuovi switch IP.
 +
 Utilizzare le porte descritte in <<Quali connessioni spostare>>.
@@ -262,12 +278,14 @@ cluster_A::*>
 
 
 
-=== Spostamento delle connessioni del cluster locale durante il riutilizzo degli switch IP esistenti
+=== Spostare le connessioni del cluster locale quando si riutilizzano gli switch IP esistenti
 
-Se si riutilizzano gli switch IP esistenti, è necessario aggiornare il firmware, riconfigurare gli switch con i file RCF (Reference Configure Files) corretti e spostare le connessioni alle porte corrette uno switch alla volta.
+Se si riutilizzano switch IP esistenti, è necessario aggiornare il firmware, riconfigurare gli switch con i file di configurazione di riferimento (RCF) corretti e spostare le connessioni sulle porte corrette, uno switch alla volta.
 
+.A proposito di questa attività
 Questa attività è necessaria solo se i nodi FC sono collegati a switch IP esistenti e si stanno riutilizzando gli switch.
 
+.Fasi
 . Scollegare le connessioni del cluster locale che si connettono allo switch_A_1_IP
 +
 .. Scollegare le porte del gruppo A dallo switch IP esistente.
@@ -391,10 +409,11 @@ Cluster-A::*>
 
 
 
-== Verificare che le connessioni del cluster siano spostate e che il cluster sia integro
+== Passaggio 2: verificare che le connessioni del cluster siano state spostate e che il cluster sia integro
 
-Per garantire una connettività corretta e che la configurazione sia pronta per procedere con il processo di transizione, è necessario verificare che le connessioni del cluster siano spostate correttamente, che gli switch del cluster siano riconosciuti e che il cluster funzioni correttamente.
+Per garantire che la connettività sia corretta e che la configurazione sia pronta per procedere con il processo di transizione, verificare che le connessioni del cluster siano state spostate correttamente, che gli switch del cluster siano stati riconosciuti e che il cluster sia integro.
 
+.Fasi
 . Verificare che tutte le porte del cluster siano attive e in esecuzione:
 +
 `network port show -ipspace Cluster`

@@ -150,7 +150,10 @@ Quando si esegue l'aggiornamento da AFF A700 a AFF A900 o da FAS9000 a FAS9500, 
 
 === Verificare lo stato di salute di MetroCluster prima dell'aggiornamento del sito
 
-Prima di eseguire l'aggiornamento, è necessario verificare lo stato e la connettività della configurazione di MetroCluster.
+Prima di eseguire l'aggiornamento, verificare lo stato e la connettività della configurazione MetroCluster.
+
+
+CAUTION: È Questo errore indica una mancata corrispondenza delle dimensioni della NVRAM tra i nodi di ciascun sito ed è il comportamento previsto quando sono presenti modelli di piattaforma diversi su entrambi i siti. possibile ignorare l'errore fino al completamento dell'aggiornamento del controller per tutti i nodi del gruppo DR.
 
 .Fasi
 . Verificare il funzionamento della configurazione MetroCluster in ONTAP:

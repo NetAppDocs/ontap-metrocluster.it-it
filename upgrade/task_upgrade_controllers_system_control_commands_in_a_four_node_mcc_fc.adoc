@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: metrocluster, upgrade, controllers, switchover, switchback, fc, configuration, net, boot, root, aggregate, system, commands, mcc 
 summary: È possibile utilizzare questa operazione di switchover MetroCluster automatizzato e guidato per eseguire un aggiornamento del controller senza interruzioni per una configurazione FC MetroCluster a quattro nodi. 
 ---
-= Aggiornamento dei controller in una configurazione MetroCluster FC a quattro nodi mediante switchover e switchback con comandi "system controller replace" (ONTAP 9.10.1 e versioni successive)
+= Aggiornare i controller in una configurazione MetroCluster FC a quattro nodi utilizzando lo switchover e lo switchback con i comandi "system controller replace" (ONTAP 9.10.1 e versioni successive)
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -20,7 +20,7 @@ summary: È possibile utilizzare questa operazione di switchover MetroCluster au
 * Per informazioni sulle combinazioni di upgrade della piattaforma supportate, consultare la tabella di aggiornamento MetroCluster FC in  link:concept_choosing_controller_upgrade_mcc.html#supported-metrocluster-fc-controller-upgrades["Scegliere una procedura di aggiornamento del controller"].
 
 
-Fare riferimento a. link:concept_choosing_an_upgrade_method_mcc.html["Scelta di un metodo di aggiornamento o refresh"] per ulteriori procedure.
+Per ulteriori procedure, fare riferimento alla link:concept_choosing_an_upgrade_method_mcc.html["Scegliere un metodo di aggiornamento o aggiornamento"].
 
 
 
@@ -93,23 +93,32 @@ Consultare l'articolo della Knowledge base link:https://kb.netapp.com/Support_Bu
 
 
 
-== Preparazione per l'aggiornamento
+== Preparatevi per l'aggiornamento
 
 Per prepararsi all'aggiornamento del controller, è necessario eseguire controlli preliminari del sistema e raccogliere le informazioni di configurazione.
 
 Durante l'aggiornamento, è possibile eseguire il `system controller replace show` oppure `system controller replace show-details` Dal sito A per controllare lo stato. Se i comandi restituiscono un output vuoto, attendere alcuni minuti ed eseguire nuovamente il comando.
 
 .Fasi
-. Avviare la procedura di sostituzione automatica del controller dal sito A per sostituire i controller nel sito B:
+. Eseguire il seguente comando dal sito A per sostituire i controller nel sito B:
 +
 `system controller replace start`
 
 +
-L'operazione automatica esegue i controlli preliminari. Se non vengono rilevati problemi, l'operazione viene interrotta in modo da poter raccogliere manualmente le informazioni relative alla configurazione.
+[NOTE]
+====
+** Se si ripete la procedura in un sito, dopo aver già sostituito i controller nell'altro, si verifica un errore dovuto a una mancata corrispondenza tra i nodi in ciascun sito. Questo è il comportamento previsto quando sono presenti modelli di piattaforma diversi in entrambi i siti.
++
+Se viene restituito solo l'errore di mancata corrispondenza, è possibile utilizzare  `-skip-metrocluster-check true` opzione con il  `system controller replace start` comando per saltare i controlli MetroCluster.
+
+
+
+====
++
+L'operazione automatizzata esegue i controlli. Se non vengono rilevati problemi, l'operazione viene interrotta in modo da poter raccogliere manualmente le informazioni relative alla configurazione.
 
 +
-
-NOTE: Vengono visualizzati il sistema di origine corrente e tutti i sistemi di destinazione compatibili. Se il controller di origine è stato sostituito con un controller con una versione ONTAP diversa o con una piattaforma non compatibile, l'operazione di automazione si interrompe e segnala un errore dopo l'avvio dei nuovi nodi. Per riportare il cluster a uno stato integro, è necessario seguire la procedura di ripristino manuale.
+Vengono visualizzati il sistema di origine corrente e tutti i sistemi di destinazione compatibili. Se il controller di origine è stato sostituito con un controller con una versione ONTAP diversa o con una piattaforma non compatibile, l'operazione di automazione si interrompe e segnala un errore dopo l'avvio dei nuovi nodi. Per ripristinare il cluster in condizioni operative, seguire la procedura di ripristino manuale.
 
 +
 Il `system controller replace start` il comando potrebbe segnalare il seguente errore di verifica preliminare:
@@ -130,7 +139,7 @@ Controllare se si è verificato questo errore a causa di aggregati senza mirror 
 
 
 
-=== Raccolta di informazioni prima dell'aggiornamento
+=== Raccogliere informazioni prima dell'aggiornamento
 
 Prima di eseguire l'aggiornamento, se il volume root è crittografato, è necessario raccogliere la chiave di backup e altre informazioni per avviare i nuovi controller con i vecchi volumi root crittografati.
 
@@ -250,7 +259,7 @@ La passphrase sarà necessaria più avanti nella procedura di aggiornamento.
 
 
 
-=== Rimozione della configurazione esistente dal software di monitoraggio o dallo spareggio
+=== Rimuovere la configurazione esistente dallo spareggio o da un altro software di monitoraggio
 
 Se la configurazione esistente viene monitorata con la configurazione di MetroCluster Tiebreaker o altre applicazioni di terze parti (ad esempio, ClusterLion) che possono avviare uno switchover, è necessario rimuovere la configurazione MetroCluster dal Tiebreaker o da un altro software prima di sostituire il vecchio controller.
 
@@ -264,7 +273,7 @@ Consultare la documentazione dell'applicazione.
 
 
 
-== Sostituzione dei vecchi controller e avvio dei nuovi controller
+== Sostituire i vecchi controller e avviare i nuovi controller
 
 Una volta raccolte le informazioni e riavviata l'operazione, l'automazione procede con l'operazione di switchover.
 
@@ -276,13 +285,13 @@ Prima di iniziare lo switchover, l'operazione di automazione viene interrotta in
 
 
 
-=== Preparazione della configurazione di rete dei vecchi controller
+=== Preparare la configurazione di rete dei vecchi controller
 
 Per garantire che la rete riprenda correttamente sui nuovi controller, è necessario spostare i file LIF su una porta comune e rimuovere la configurazione di rete dei vecchi controller.
 
 .A proposito di questa attività
 * Questa attività deve essere eseguita su ciascuno dei vecchi nodi.
-* Verranno utilizzate le informazioni raccolte in <<Preparazione per l'aggiornamento>>.
+* Verranno utilizzate le informazioni raccolte in <<Preparatevi per l'aggiornamento>>.
 
 
 .Fasi
@@ -377,7 +386,7 @@ Questa operazione deve essere eseguita su entrambi i nodi.
 
 
 
-=== Configurazione dei nuovi controller
+=== Configurare le nuove centraline
 
 I nuovi controller devono essere montati in rack e cablati.
 
@@ -407,7 +416,7 @@ https://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardware 
 
 
 
-=== Avvio in rete dei nuovi controller
+=== NetBoot i nuovi controller
 
 Dopo aver installato i nuovi nodi, è necessario eseguire il netboot per assicurarsi che i nuovi nodi eseguano la stessa versione di ONTAP dei nodi originali. Il termine netboot indica che si sta eseguendo l'avvio da un'immagine ONTAP memorizzata su un server remoto. Durante la preparazione per il netboot, è necessario inserire una copia dell'immagine di boot di ONTAP 9 su un server Web a cui il sistema può accedere.
 
@@ -475,7 +484,7 @@ The node must be rebooted to start using the newly installed software. Do you wa
 
 
 
-=== Cancellazione della configurazione su un modulo controller
+=== Cancellare la configurazione su un modulo controller
 
 Prima di utilizzare un nuovo modulo controller nella configurazione MetroCluster, è necessario cancellare la configurazione esistente.
 
@@ -514,7 +523,7 @@ Rispondere `yes` al prompt di conferma.
 
 
 
-=== Ripristino della configurazione HBA
+=== Ripristinare la configurazione dell'HBA
 
 A seconda della presenza e della configurazione delle schede HBA nel modulo controller, è necessario configurarle correttamente per l'utilizzo da parte del sito.
 
@@ -595,14 +604,14 @@ FC
 
 
 
-=== Riassegnazione dei dischi aggregati root
+=== Riassegnare i dischi aggregati root
 
 Riassegnare i dischi aggregati root al nuovo modulo controller, utilizzando `sysids` raccolte in precedenza
 
 .A proposito di questa attività
 Questa attività viene eseguita in modalità manutenzione.
 
-I vecchi ID di sistema sono stati identificati in link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_fc.html#gathering-information-before-the-upgrade["Raccolta di informazioni prima dell'aggiornamento"].
+I vecchi ID di sistema sono stati identificati in link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_fc.html#gather-information-before-the-upgrade["Raccogliere informazioni prima dell'aggiornamento"].
 
 Gli esempi di questa procedura utilizzano controller con i seguenti ID di sistema:
 
@@ -836,7 +845,7 @@ Se uno dei nodi è in modalità Takeover, eseguire un giveback utilizzando `stor
 
 .. Aggiungere eventuali porte a un dominio di broadcast in base alle esigenze.
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-003BDFCD-58A3-46C9-BF0C-BA1D1D1475F9.html["Aggiunta o rimozione di porte da un dominio di broadcast"^]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-003BDFCD-58A3-46C9-BF0C-BA1D1D1475F9.html["Aggiungere o rimuovere porte da un dominio di broadcast"^]
 
 .. Aggiungere la porta fisica che ospiterà le LIF dell'intercluster al dominio di trasmissione corrispondente.
 .. Modificare le LIF dell'intercluster per utilizzare la nuova porta fisica come porta home.
@@ -845,17 +854,17 @@ https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-003BDFCD-58
 Potrebbe essere necessario riconfigurare il peering del cluster.
 
 +
-link:../install-fc/concept_configure_the_mcc_software_in_ontap.html#peering-the-clusters["Creazione di una relazione peer del cluster"]
+link:../install-fc/concept_configure_the_mcc_software_in_ontap.html#peering-the-clusters["Creare una relazione peer del cluster"]
 
 .. Ricreare VLAN e gruppi di interfacce in base alle esigenze.
 +
 L'appartenenza alla VLAN e al gruppo di interfacce potrebbe essere diversa da quella del nodo precedente.
 
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-8929FCE2-5888-4051-B8C0-E27CAF3F2A63.html["Creazione di una VLAN"^]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-8929FCE2-5888-4051-B8C0-E27CAF3F2A63.html["Creare un VLAN"^]
 
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-DBC9DEE2-EAB7-430A-A773-4E3420EE2AA1.html["Combinazione di porte fisiche per creare gruppi di interfacce"^]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-DBC9DEE2-EAB7-430A-A773-4E3420EE2AA1.html["Combina le porte fisiche per creare gruppi di interfacce"^]
 
 .. Verificare che il cluster partner sia raggiungibile e che la configurazione sia risincronizzata correttamente sul cluster partner:
 +
@@ -876,7 +885,7 @@ Gestione delle chiavi integrata
  a| 
 `security key-manager onboard sync`
 
-Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-E4AB2ED4-9227-4974-A311-13036EB43A3D.html["Ripristino delle chiavi di crittografia integrate per la gestione delle chiavi"^].
+Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-E4AB2ED4-9227-4974-A311-13036EB43A3D.html["Ripristinare le chiavi di crittografia integrate per la gestione delle chiavi"^].
 
 
 
@@ -885,7 +894,7 @@ Gestione esterna delle chiavi
  a| 
 `security key-manager external restore -vserver _SVM_ -node _node_ -key-server _host_name|IP_address:port_ -key-id key_id -key-tag key_tag _node-name_`
 
-Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-32DA96C3-9B04-4401-92B8-EAF323C3C863.html["Ripristino delle chiavi di crittografia esterne per la gestione delle chiavi"^].
+Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-32DA96C3-9B04-4401-92B8-EAF323C3C863.html["Ripristinare le chiavi di crittografia esterne per la gestione delle chiavi"^].
 
 |===
 . Prima di riprendere l'operazione, verificare che MetroCluster sia configurato correttamente. Controllare lo stato del nodo:
@@ -903,7 +912,7 @@ Verificare che i nuovi nodi (Site_B) si trovino nello stato *Waiting for switchb
 
 
 
-== Completamento dell'aggiornamento
+== Completare l'aggiornamento
 
 L'operazione di automazione esegue controlli del sistema di verifica e quindi si ferma per verificare la raggiungibilità della rete. Dopo la verifica, viene avviata la fase di riconquista delle risorse e l'operazione di automazione esegue lo switchback nel sito A e si ferma ai controlli successivi all'aggiornamento. Dopo aver ripristinato l'operazione di automazione, esegue i controlli post-aggiornamento e, se non vengono rilevati errori, contrassegna l'aggiornamento come completo.
 
@@ -930,9 +939,22 @@ Se i controlli successivi all'aggiornamento non hanno segnalato errori, l'aggior
 
 
 
+== Aggiornare i nodi su cluster_A.
+
+È necessario ripetere le attività di aggiornamento per aggiornare i nodi su cluster_A nel sito A.
+
+.Fasi
+. Ripetere i passaggi per aggiornare i nodi su cluster_A, iniziando con <<fc_controller_replace_prepare,preparazione per l'aggiornamento>>.
++
+Quando si ripete la procedura, tutti i riferimenti di esempio ai cluster e ai nodi vengono invertiti.
+
+
+
+
+
 === Ripristino del monitoraggio di Tiebreaker
 
 Se la configurazione MetroCluster è stata precedentemente configurata per il monitoraggio da parte del software Tiebreaker, è possibile ripristinare la connessione Tiebreaker.
 
-. Attenersi alla procedura descritta in http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-7259BCA4-104C-49C6-BAD0-1068CA2A3DA5.html["Aggiunta di configurazioni MetroCluster"].
+. Utilizzare i passaggi descritti in http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-7259BCA4-104C-49C6-BAD0-1068CA2A3DA5.html["Aggiunta di configurazioni MetroCluster"].
 
