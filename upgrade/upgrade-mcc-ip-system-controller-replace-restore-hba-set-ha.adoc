@@ -162,5 +162,18 @@ Il nodo deve arrestarsi su `LOADER>` prompt.
 . Raccogliere le variabili di ambiente: `printenv`
 
 
+
+
+== Rimuovere le unità interne dallo chassis del nuovo controller
+
+Quando si esegue l'aggiornamento da un sistema dotato solo di unità esterne a un sistema dotato di unità esterne e interne (dischi e controller nello stesso chassis), è necessario rimuovere o sostituire tutte le unità interne dal nuovo sistema finché non si completa l'aggiornamento.
+
+
+CAUTION: Questa attività è obbligatoria per un corretto aggiornamento del controller sui sistemi interessati.
+
+unità interne dal nuovo sistema.
+
+Dopo aver completato questa operazione, nessuna unità interna dovrebbe essere accessibile. Le unità verranno aggiunte al nuovo controller più avanti nella procedura.
+
 .Quali sono le prossime novità?
 link:upgrade-mcc-ip-system-controller-replace-apply-rcf-set-bootarg.html["Aggiornare i file RCF dello switch e impostare i valori di avvio IP di MetroCluster"].

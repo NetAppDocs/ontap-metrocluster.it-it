@@ -72,6 +72,17 @@ Quando si ripete la procedura, tutti i riferimenti di esempio ai cluster e ai no
 
 
 
+== Aggiungere nuovamente le unità interne al nuovo controller
+
+Se hai effettuato l'aggiornamento da un sistema con solo unità esterne a un sistema con unità esterne e interne (dischi e controller nello stesso chassis), puoi aggiungere o reinstallare i dischi rimossi o rimossi dagli slot interni del nuovo sistema. Puoi farlo in qualsiasi momento dopo aver completato l'aggiornamento su entrambi i siti e dopo che il cluster è integro.
+
+Dopo aver aggiunto o reinstallato le unità, queste possono essere utilizzate in ONTAP secondo necessità.
+
+
+NOTE: Questo compito si applica solo a determinate combinazioni di potenziamento. Per ulteriori informazioni, fare riferimento link:upgrade-mcc-ip-manual-hba-set-ha.html#remove-internal-drives-from-the-chassis-on-the-new-controller["rimuovere le unità interne dallo chassis del nuovo controller"] a.
+
+
+
 == Ripristinare il monitoraggio di Tiebreaker o Mediator
 
 Dopo aver completato l'aggiornamento della configurazione MetroCluster, è possibile riprendere il monitoraggio con l'utility Tiebreaker o Mediator.
