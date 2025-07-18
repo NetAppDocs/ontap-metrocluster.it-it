@@ -1727,12 +1727,12 @@ https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-concepts/home.html["
 È necessario creare un aggregato di dati mirrorato su ciascun nodo del gruppo DR.
 
 .Prima di iniziare
-* È necessario sapere quali dischi o LUN di array verranno utilizzati nel nuovo aggregato.
+* Devi sapere quali dischi verranno utilizzati nel nuovo aggregato.
 * Se nel sistema sono presenti più tipi di dischi (storage eterogeneo), è necessario comprendere come assicurarsi di selezionare il tipo di disco corretto.
 
 
 .A proposito di questa attività
-* I dischi e le LUN degli array sono di proprietà di un nodo specifico; quando si crea un aggregato, tutti i dischi dell'aggregato devono essere di proprietà dello stesso nodo, che diventa il nodo principale dell'aggregato.
+* I dischi sono di proprietà di un nodo specifico; quando si crea un aggregato, tutti i dischi in tale aggregato devono essere di proprietà dello stesso nodo, che diventa il nodo principale per quell'aggregato.
 * I nomi degli aggregati devono essere conformi allo schema di denominazione stabilito al momento della pianificazione della configurazione MetroCluster.
 +
 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"^]
@@ -1756,7 +1756,7 @@ Se si è connessi al cluster nell'interfaccia di gestione del cluster, è possib
 
 +
 ** Nodo principale dell'aggregato (ovvero, il nodo proprietario dell'aggregato durante il normale funzionamento)
-** Elenco di unità o LUN di array specifici da aggiungere all'aggregato
+** Elenco dei dischi specifici da aggiungere all'aggregato
 ** Numero di dischi da includere
 +
 
@@ -1767,7 +1767,7 @@ NOTE: Nella configurazione minima supportata, in cui è disponibile un numero li
 ** Dimensioni delle unità da utilizzare
 ** Velocità del disco da utilizzare
 ** Tipo RAID per i gruppi RAID sull'aggregato
-** Numero massimo di unità o LUN di array che possono essere inclusi in un gruppo RAID
+** Numero massimo di dischi che possono essere inclusi in un gruppo RAID
 ** Se sono consentiti dischi con diversi RPM per ulteriori informazioni su queste opzioni, consultare la `storage aggregate create` pagina man.
 +
 Il seguente comando crea un aggregato mirrorato con 10 dischi:
@@ -1795,7 +1795,7 @@ cluster_A::> storage aggregate create aggr1_node_A_1 -diskcount 10 -node node_A_
 È possibile creare aggregati di dati senza mirroring per i dati che non richiedono il mirroring ridondante fornito dalle configurazioni MetroCluster.
 
 .Prima di iniziare
-* È necessario sapere quali dischi o LUN di array verranno utilizzati nel nuovo aggregato.
+* Devi sapere quali dischi verranno utilizzati nel nuovo aggregato.
 * Se nel sistema sono presenti più tipi di dischi (storage eterogeneo), è necessario comprendere come verificare che sia selezionato il tipo di disco corretto.
 
 
@@ -1808,7 +1808,7 @@ cluster_A::> storage aggregate create aggr1_node_A_1 -diskcount 10 -node node_A_
 
 NOTE: Gli aggregati senza mirror devono essere locali rispetto al nodo che li possiede.
 
-* I dischi e le LUN degli array sono di proprietà di un nodo specifico; quando si crea un aggregato, tutti i dischi dell'aggregato devono essere di proprietà dello stesso nodo, che diventa il nodo principale dell'aggregato.
+* I dischi sono di proprietà di un nodo specifico; quando si crea un aggregato, tutti i dischi in tale aggregato devono essere di proprietà dello stesso nodo, che diventa il nodo principale per quell'aggregato.
 * I nomi degli aggregati devono essere conformi allo schema di denominazione stabilito al momento della pianificazione della configurazione MetroCluster.
 * Il link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"] contiene ulteriori informazioni sugli aggregati di mirroring.
 
@@ -1830,14 +1830,14 @@ Se si è connessi al cluster nell'interfaccia di gestione del cluster, è possib
 
 +
 ** Nodo principale dell'aggregato (ovvero, il nodo proprietario dell'aggregato durante il normale funzionamento)
-** Elenco di unità o LUN di array specifici da aggiungere all'aggregato
+** Elenco dei dischi specifici da aggiungere all'aggregato
 ** Numero di dischi da includere
 ** Stile checksum da utilizzare per l'aggregato
 ** Tipo di dischi da utilizzare
 ** Dimensioni delle unità da utilizzare
 ** Velocità del disco da utilizzare
 ** Tipo RAID per i gruppi RAID sull'aggregato
-** Numero massimo di unità o LUN di array che possono essere inclusi in un gruppo RAID
+** Numero massimo di dischi che possono essere inclusi in un gruppo RAID
 ** Se sono consentiti dischi con diversi RPM per ulteriori informazioni su queste opzioni, consultare la `storage aggregate create` pagina man.
 +
 Il seguente comando crea un aggregato senza mirror con 10 dischi:

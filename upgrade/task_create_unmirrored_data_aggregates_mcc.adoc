@@ -14,7 +14,7 @@ summary: È possibile creare aggregati di dati senza mirroring per i dati che no
 È possibile creare aggregati di dati senza mirroring per i dati che non richiedono il mirroring ridondante fornito dalle configurazioni MetroCluster.
 
 .A proposito di questa attività
-* È necessario sapere quali dischi o LUN di array verranno utilizzati nel nuovo aggregato.
+* Verificare di sapere quali unità verranno utilizzate nel nuovo aggregato.
 * Se nel sistema sono presenti più tipi di dischi (storage eterogeneo), è necessario comprendere come verificare che sia selezionato il tipo di disco corretto.
 
 
@@ -24,7 +24,7 @@ IMPORTANT: Nelle configurazioni MetroCluster IP, gli aggregati remoti senza mirr
 
 NOTE: Gli aggregati senza mirror devono essere locali rispetto al nodo che li possiede.
 
-* I dischi e le LUN degli array sono di proprietà di un nodo specifico; quando si crea un aggregato, tutti i dischi dell'aggregato devono essere di proprietà dello stesso nodo, che diventa il nodo principale dell'aggregato.
+* I dischi sono di proprietà di un nodo specifico; quando si crea un aggregato, tutti i dischi in tale aggregato devono essere di proprietà dello stesso nodo, che diventa il nodo principale per quell'aggregato.
 * I nomi degli aggregati devono essere conformi allo schema di denominazione stabilito al momento della pianificazione della configurazione MetroCluster.
 * _Gestione di dischi e aggregati_ contiene ulteriori informazioni sugli aggregati di mirroring.
 
@@ -56,14 +56,14 @@ Verifica di includere nell'aggregato solo i dischi nello shelf senza mirror.
 
 +
 ** Nodo principale dell'aggregato (ovvero, il nodo proprietario dell'aggregato durante il normale funzionamento)
-** Elenco di unità o LUN di array specifici da aggiungere all'aggregato
+** Elenco dei dischi specifici da aggiungere all'aggregato
 ** Numero di dischi da includere
 ** Stile checksum da utilizzare per l'aggregato
 ** Tipo di dischi da utilizzare
 ** Dimensioni delle unità da utilizzare
 ** Velocità del disco da utilizzare
 ** Tipo RAID per i gruppi RAID sull'aggregato
-** Numero massimo di unità o LUN di array che possono essere inclusi in un gruppo RAID
+** Numero massimo di dischi che possono essere inclusi in un gruppo RAID
 ** Se sono consentiti dischi con diversi RPM
 +
 Per ulteriori informazioni su queste opzioni, consultare `storage aggregate create` pagina man.

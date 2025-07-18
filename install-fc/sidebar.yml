@@ -10,11 +10,6 @@ entries:
     url: "/install-fc/concept_considerations_differences.html"
   - title: Peering dei cluster
     url: "/install-fc/concept_considerations_peering.html"
-  - title: Considerazioni per le configurazioni MetroCluster con shelf di dischi nativi
-      o LUN di array
-    url: "/install-fc/concept_considerations_array_luns.html"
-  - title: Considerazioni per la transizione da 7-Mode a ONTAP
-    url: "/install-fc/concept_considerations_7mt.html"
   - title: Considerazioni per gli ISL
     url: "/install-fc/concept_considerations_isls_mcfc.html"
   - title: Considerazioni sull'utilizzo di apparecchiature TDM/WDM con configurazioni
@@ -26,8 +21,6 @@ entries:
     url: "/install-fc/concept_considerations_unmirrored_aggrs.html"
   - title: Utilizzo del firewall nei siti MetroCluster
     url: "/install-fc/concept_considerations_firewalls.html"
-- title: Scegliere la procedura di installazione corretta per la configurazione
-  url: "/install-fc/concept_choosing_the_correct_installation_procedure_for_your_configuration_mcc_install.html"
 - title: Collegare una configurazione MetroCluster collegata al fabric
   entries:
   - title: Panoramica
@@ -115,29 +108,6 @@ entries:
       url: "/install-fc/task_fcsw_cisco_configure_a_cisco_switch_supertask.html"
   - title: Installare bridge FC-SAS e shelf di dischi SAS
     url: "/install-fc/task_install_fc_sas_bridges_shelves.html"
-- title: Configurare l'hardware per la condivisione di un fabric FC Brocade 6510 durante
-    la transizione
-  entries:
-  - title: Panoramica
-    url: "/install-fc/task_fmc_mcc_transition_configure_the_mcc_hardware_for_share_a_7_mode_brocade_6510_fc_fabric_dure_transition.html"
-  - title: Verifica dei requisiti di licenza Brocade
-    url: "/install-fc/concept_fcsw_brocade_reviewing_brocade_license_requirements.html"
-  - title: Eseguire il rack dei componenti hardware
-    url: "/install-fc/task_rack_the_hardware_components_mcc_fabric_and_ip.html"
-  - title: Collegare i nuovi controller MetroCluster ai fabric FC esistenti
-    url: "/install-fc/task_fmc_mcc_transition_cable_the_new_mcc_controllers_to_the_exist_fc_fabrics.html"
-  - title: Configurare la condivisione di fabric switch tra la configurazione 7-Mode
-      e Clustered MetroCluster
-    entries:
-    - title: Disattivare uno dei fabric dello switch
-      url: "/install-fc/task_fmc_mcc_transition_disable_one_of_the_switch_fabrics.html"
-    - title: Elimina lo zoning ti e configura le impostazioni IOD
-      url: "/install-fc/task_fmc_mcc_transition_configure_zone_and_qos.html"
-    - title: Assicurarsi che gli ISL si trovino nello stesso gruppo di porte e configurare
-        lo zoning
-      url: "/install-fc/task_fmc_mcc_transition_ensure_isls_are_in_the_same_port_group_and_configure_zon.html"
-    - title: Riabilitare il fabric dello switch e verificarne il funzionamento
-      url: "/install-fc/task_fmc_mcc_transition_reenable_the_switch_fabric_and_verify_operation.html"
 - title: Configurare il software MetroCluster in ONTAP
   url: "/install-fc/concept_configure_the_mcc_software_in_ontap.html"
 - title: Considerazioni sull'utilizzo del protocollo Virtual IP e Border Gateway con
@@ -145,113 +115,8 @@ entries:
   url: "/install-fc/concept_considerations_for_using_virtual_ip_and_border_gateway_protocol_with_a_mcc_configuration.html"
 - title: Verificare la configurazione di MetroCluster
   url: "/install-fc/task_test_the_mcc_configuration.html"
-- title: Considerazioni sulla rimozione delle configurazioni MetroCluster
+- title: Rimuovere le configurazioni MetroCluster
   url: "/install-fc/concept_considerations_when_removing_mcc_configurations.html"
-- title: Pianificare e installare una configurazione MetroCluster con LUN array
-  entries:
-  - title: Pianificare una configurazione MetroCluster con LUN array
-    url: "/install-fc/concept_planning_for_a_mcc_configuration_with_array_luns.html"
-  - title: Configurazione MetroCluster supportata con LUN array
-    url: "/install-fc/reference_supported_mcc_configuration_with_array_luns.html"
-  - title: Requisiti per una configurazione MetroCluster con LUN array
-    url: "/install-fc/reference_requirements_for_a_mcc_configuration_with_array_luns_reference.html"
-  - title: Installare e collegare i componenti MetroCluster in una configurazione
-      con LUN array
-    entries:
-    - title: Rack dei componenti hardware in una configurazione MetroCluster con LUN
-        array
-      url: "/install-fc/task_rack_the_hardware_components_in_a_mcc_configuration_with_array_luns.html"
-    - title: Preparare uno storage array per l'utilizzo con i sistemi ONTAP
-      url: "/install-fc/task_prepare_a_storage_array_for_use_with_ontap_systems.html"
-    - title: Porte switch richieste per una configurazione MetroCluster con LUN array
-      url: "/install-fc/concept_switch_ports_required_for_a_eight_node_mcc_configuration_with_array_luns.html"
-    - title: Collegare le porte FC-VI e HBA in una configurazione MetroCluster con
-        i LUN degli array
-      entries:
-      - title: Collegare le porte FC-VI e HBA in una configurazione Fabric-Attached
-          MetroCluster a due nodi con LUN array
-        url: "/install-fc/task_cable_the_fc_vi_and_hba_ports_to_switches_in_a_two_node_fabric_attached_mcc_configuration_with_array_luns.html"
-      - title: Collegare le porte FC-VI e HBA in una configurazione Fabric-Attached
-          MetroCluster a quattro nodi con LUN array
-        url: "/install-fc/task_cable_the_fc_vi_and_hba_ports_to_switches_in_a_four_node_fabric_attached_mcc_configuration_with_array_luns.html"
-      - title: Collegare le porte FC-VI e HBA in una configurazione Fabric-Attached
-          MetroCluster a otto nodi con LUN array
-        url: "/install-fc/task_cable_the_fc_vi_and_hba_ports_to_switches_in_an_eight_node_fabric_attached_mcc_configuration_with_array_luns.html"
-    - title: Collegare gli ISL in una configurazione MetroCluster con i LUN degli
-        array
-      url: "/install-fc/task_cable_the_isls_in_a_mcc_configuration_with_array_luns.html"
-    - title: Cablare l'interconnessione del cluster in configurazioni a otto o quattro
-        nodi
-      url: "/install-fc/task_cable_the_cluster_interconnect_in_four_node_configurations.html"
-    - title: Cablare le connessioni di peering del cluster
-      url: "/install-fc/task_cable_the_cluster_peering_connections.html"
-    - title: Collegare l'interconnessione ha, se necessario
-      url: "/install-fc/task_cable_the_ha_interconnect.html"
-    - title: Cablare la gestione e le connessioni dati
-      url: "/install-fc/task_cable_the_management_and_data_connections.html"
-    - title: Cablare gli array storage agli switch FC in una configurazione MetroCluster
-      entries:
-      - title: Panoramica
-        url: "/install-fc/task_cable_storage_arrays_to_fc_switches_in_a_mcc_configuration.html"
-      - title: Esempio di collegamento delle porte dello storage array agli switch
-          FC in una configurazione MetroCluster a due nodi
-        url: "/install-fc/reference_example_of_cabling_array_luns_to_fc_switches_in_a_two_node_mcc_configuration.html"
-      - title: Esempio di collegamento delle porte dello storage array agli switch
-          FC in una configurazione MetroCluster a quattro nodi
-        url: "/install-fc/reference_example_of_cabling_array_luns_to_fc_switches_in_a_four_node_mcc_configuration.html"
-      - title: Esempio di collegamento delle porte dello storage array agli switch
-          FC in una configurazione MetroCluster a otto nodi
-        url: "/install-fc/reference_example_of_cabling_array_luns_to_fc_switches_in_an_eight_node_mcc_configuration.html"
-  - title: Zoning dello switch in una configurazione MetroCluster con LUN array
-    entries:
-    - title: Requisiti per lo zoning dello switch in una configurazione MetroCluster
-        con LUN array
-      url: "/install-fc/reference_requirements_for_switch_zoning_in_a_mcc_configuration_with_array_luns.html"
-    - title: Esempio di zoning dello switch in una configurazione MetroCluster a due
-        nodi con LUN array
-      url: "/install-fc/concept_example_of_switch_zoning_in_a_two_node_mcc_configuration_with_array_luns.html"
-    - title: Esempio di zoning dello switch in una configurazione MetroCluster a quattro
-        nodi con LUN array
-      url: "/install-fc/concept_example_of_switch_zoning_in_a_four_node_mcc_configuration_with_array_luns.html"
-    - title: Esempio di zoning dello switch in una configurazione MetroCluster a otto
-        nodi con LUN array
-      url: "/install-fc/concept_example_of_switch_zoning_in_an_eight_node_mcc_configuration_with_array_luns.html"
-  - title: Configurare ONTAP in una configurazione MetroCluster con LUN array
-    entries:
-    - title: Verifica e configurazione dello stato ha dei componenti in modalità manutenzione
-      url: "/install-fc/task_verify_the_ha_state_of_components_is_mcc_or_mcc_2n_in_maintenance_mode.html"
-    - title: Configurazione di ONTAP su un sistema che utilizza solo LUN di array
-      url: "/install-fc/task_configure_ontap_on_a_system_that_uses_only_array_luns.html"
-    - title: Configurare il cluster
-      url: "/install-fc/concept_setting_up_the_cluster.html"
-    - title: Installare la licenza per l'utilizzo di LUN array in una configurazione
-        MetroCluster
-      url: "/install-fc/task_install_the_license_for_us_array_luns_in_a_mcc_configuration.html"
-    - title: Configurazione delle porte FC-VI su una scheda X1132A-R6 quad-port su
-        sistemi FAS8020
-      url: "/install-fc/task_configure_fc_vi_ports_on_a_x1132a_r6_quad_port_card.html"
-    - title: Assegnare la proprietà delle LUN degli array
-      url: "/install-fc/task_assign_ownership_of_array_luns.html"
-    - title: Peer dei cluster
-      url: "/install-fc/task_peer_the_clusters_mcc_with_array_luns.html"
-    - title: Eseguire il mirroring degli aggregati root
-      url: "/install-fc/task_mirror_the_root_aggregates_mcc_with_array_luns.html"
-    - title: Creazione di aggregati di dati sulla configurazione di MetroCluster,
-        implementazione e verifica
-      url: "/install-fc/task_create_data_aggregates_and_implement_the_configuration_mcc_with_array_luns.html"
-  - title: Implementare una configurazione MetroCluster con dischi e LUN di array
-    entries:
-    - title: Panoramica
-      url: "/install-fc/concept_implementing_a_mcc_configuration_with_both_disks_and_array_luns.html"
-    - title: Considerazioni sull'implementazione di una configurazione MetroCluster
-        con dischi e LUN di array
-      url: "/install-fc/concept_considerations_for_implementing_a_mcc_configuration_with_disks_and_array_luns.html"
-    - title: Esempio di una configurazione MetroCluster a due nodi collegata al fabric
-        con dischi e LUN di array
-      url: "/install-fc/reference_example_of_a_two_node_fabric_attached_mcc_configuration_with_disks_and_array_luns.html"
-    - title: Esempio di configurazione MetroCluster a quattro nodi con dischi e LUN
-        di array
-      url: "/install-fc/concept_example_of_a_four_node_mcc_configuration_with_disks_and_array_luns.html"
 - title: Come utilizzare Active IQ Unified Manager e Gestore di sistema di ONTAP per
     ulteriori configurazioni e monitoraggi
   entries:
