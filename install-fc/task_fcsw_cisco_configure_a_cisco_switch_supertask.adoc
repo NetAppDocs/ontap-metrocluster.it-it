@@ -353,7 +353,7 @@ Ciascuna porta deve essere configurata singolarmente.
 
 Fare riferimento alle seguenti sezioni per identificare le porte F (switch-to-node) per la configurazione:
 
-* link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.1 e versioni successive"]
+* link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC"]
 
 
 Questa attività deve essere eseguita su ogni switch nella configurazione MetroCluster.
@@ -1184,7 +1184,7 @@ FC_switch_B_1# copy running-config startup-config
 
 
 .Informazioni correlate
-Quando si utilizzano ONTAP 9.1 e versioni successive, verificare di utilizzare le assegnazioni delle porte specificate quando si cablano gli switch FC. Fare riferimento a. link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.1 e versioni successive"]
+È necessario verificare di utilizzare le assegnazioni delle porte specificate quando si cablano gli switch FC. Fare riferimento a link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC"]
 
 
 

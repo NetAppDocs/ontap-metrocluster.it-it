@@ -14,7 +14,7 @@ summary: Se sono stati sostituiti gli switch FC nel sito di emergenza, è necess
 Se sono stati sostituiti gli switch FC nel sito di emergenza, è necessario configurarli utilizzando le procedure specifiche del vendor. È necessario configurare uno switch, verificare che l'accesso allo storage nel sito sopravvissuto non sia influenzato, quindi configurare il secondo switch.
 
 .Attività correlate
-link:../install-fc/concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.1 e versioni successive"]
+link:../install-fc/concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC"]
 
 
 
@@ -35,7 +35,7 @@ Gli esempi di questa procedura si basano sui seguenti presupposti:
 
 Verificare di utilizzare le assegnazioni delle porte specificate quando si cablano gli switch FC:
 
-* link:../install-fc/concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.1 e versioni successive"]
+* link:../install-fc/concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Assegnazioni delle porte per gli switch FC"]
 
 
 Gli esempi mostrano due bridge FC-SAS. Se si dispone di più bridge, è necessario disattivare e successivamente attivare le porte aggiuntive.

@@ -1,0 +1,1252 @@
+---
+permalink: install-fc/brocade-fc-port-config-bridges.html 
+sidebar: sidebar 
+keywords: ONTAP, FAS, FC, Brocade, metrocluster 
+summary: 'Le tabelle seguenti mostrano l"utilizzo delle porte sugli switch Brocade .' 
+---
+= Utilizzo della porta Brocade per i bridge FC-SAS in una configurazione MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Scopri le assegnazioni delle porte necessarie per cablare gli switch FC Brocade ai bridge FC-SAS. Le assegnazioni delle porte variano a seconda che i bridge utilizzino una o due porte FC.
+
+
+NOTE: Gli switch Brocade 7810 supportano solo un gruppo DR.
+
+
+
+== Configurazioni Shelf che utilizzano bridge FibreBridge 7500N o 7600N utilizzando entrambe le porte FC (FC1 e FC2)
+
+
+
+=== MetroCluster 1 o DR 1
+
+La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 1 o DR Group 1 per i bridge FibreBridge 7500N o 7600N che utilizzano entrambe le porte FC (FC1 e FC2) sugli switch Brocade . Si consiglia di tenere presente quanto segue quando si utilizza questa tabella di configurazione:
+
+* Sugli switch Brocade 6505, G610, G710, G620, G620-1, G630 e G630-1, è possibile cablare bridge aggiuntivi alle porte 12-15.
+* Sugli switch Brocade 6510 e DCX 8510-8 è possibile cablare bridge aggiuntivi alle porte 12-19.
+* Sugli switch Brocade 6520 è possibile cablare bridge aggiuntivi alle porte 12-21 e 24-45.
+* Sugli switch Brocade 7810 e 7840, MetroCluster 1 o DR group 1 supporta solo due stack di bridge.
+* Sugli switch Brocade G720 e G730 è possibile cablare bridge aggiuntivi alle porte 16-21.
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Componente* | *Porta* | *Si collega allo switch FC...* | *Porta 6505, G610, G710* | *6510, porta DCX 8510-8* | *porta 6520* | *porta 7810* | *porta 7840* | *Porta G620, G620-1, G630, G630-1* | *Porta G720, G730* 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+10
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+10
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+11
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+11
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+14
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+14
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+15
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+15
+
+|===
+
+
+=== MetroCluster 2 o DR 2
+
+La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 2 o DR Group 2 per i bridge FibreBridge 7500N o 7600N che utilizzano entrambe le porte FC (FC1 e FC2) sugli switch Brocade . Quando si utilizza questa tabella di configurazione, è importante tenere presente quanto segue:
+
+* Sugli switch Brocade 6510, DCX 8510-8 e 7840, MetroCluster 2 o DR group 2 supporta solo due stack di bridge.
+* Sugli switch Brocade 6520 è possibile cablare bridge aggiuntivi alle porte 60-69 e 72-93.
+* Sugli switch Brocade G620, G620-1, G630 e G630-1 è possibile cablare bridge aggiuntivi alle porte 32-35.
+* Sugli switch Brocade G720 e G730 è possibile cablare bridge aggiuntivi alle porte 36-39.
+* L'utilizzo delle porte per gli switch Brocade 6505, G610 e G710 in una configurazione MetroCluster a otto nodi non è illustrato. A causa del numero limitato di porte, l'assegnazione avviene sito per sito, in base al modello di controller e al numero di ISL e coppie di bridge utilizzati.
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Componente* | *Porta* | *Si collega allo switch FC...* | *Porta 6505, G610, G710* | *6510, porta DCX 8510-8* | *porta 6520* | *porta 7810* | *porta 7840* | *Porta G620, G620-1, G630, G630-1* | *Porta G720, G730* 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / a
+ a| 
+32
+ a| 
+56
+ a| 
+n / a
+ a| 
+20
+ a| 
+26
+ a| 
+32
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / a
+ a| 
+32
+ a| 
+56
+ a| 
+n / a
+ a| 
+20
+ a| 
+26
+ a| 
+32
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / a
+ a| 
+33
+ a| 
+57
+ a| 
+n / a
+ a| 
+21
+ a| 
+27
+ a| 
+33
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / a
+ a| 
+33
+ a| 
+57
+ a| 
+n / a
+ a| 
+21
+ a| 
+27
+ a| 
+33
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / a
+ a| 
+34
+ a| 
+58
+ a| 
+n / a
+ a| 
+22
+ a| 
+30
+ a| 
+34
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / a
+ a| 
+34
+ a| 
+58
+ a| 
+n / a
+ a| 
+22
+ a| 
+30
+ a| 
+34
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / a
+ a| 
+35
+ a| 
+59
+ a| 
+n / a
+ a| 
+23
+ a| 
+31
+ a| 
+35
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / a
+ a| 
+35
+ a| 
+59
+ a| 
+n / a
+ a| 
+23
+ a| 
+31
+ a| 
+35
+
+|===
+
+
+=== MetroCluster 3 o gruppo DR 3
+
+La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 3 o DR Group 3 per i bridge FibreBridge 7500N o 7600N che utilizzano entrambe le porte FC (FC1 e FC2) sugli switch Brocade . Si consiglia di tenere presente quanto segue quando si utilizza questa tabella di configurazione:
+
+* Sugli switch Brocade G630 e G630-1 è possibile cablare bridge aggiuntivi alle porte 60-63.
+* Sugli switch Brocade G730 è possibile collegare bridge aggiuntivi alle porte 64, 65, 68 e 69.
+
+
+[cols="2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Componente* | *Porta* | *Si collega allo switch FC...* | *Porta G630, G630-1* | *Porta G730* 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+56
+ a| 
+58
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+56
+ a| 
+58
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+57
+ a| 
+59
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+57
+ a| 
+59
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+58
+ a| 
+62
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+58
+ a| 
+62
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+59
+ a| 
+63
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+59
+ a| 
+63
+
+|===
+
+
+=== MetroCluster 4 o gruppo DR 4
+
+La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 4 o DR Group 4 per i bridge FibreBridge 7500N o 7600N che utilizzano entrambe le porte FC (FC1 e FC2) sugli switch Brocade . Si consiglia di tenere presente quanto segue quando si utilizza questa tabella di configurazione:
+
+* Sugli switch Brocade G630 e G630-1 è possibile cablare bridge aggiuntivi alle porte 80-83.
+* Sugli switch Brocade G730 è possibile cablare bridge aggiuntivi alle porte 84-95.
+
+
+[cols="2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Componente* | *Porta* | *Si collega allo switch FC...* | *Porta G630, G630-1* | *Porta G730* 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+74
+ a| 
+80
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+74
+ a| 
+80
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+75
+ a| 
+81
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+75
+ a| 
+81
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+78
+ a| 
+82
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+78
+ a| 
+82
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+79
+ a| 
+83
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+79
+ a| 
+83
+
+|===
+
+
+== Configurazioni di shelf che utilizzano FibreBridge 7500N o 7600N utilizzando solo una porta FC (FC1 o FC2)
+
+
+
+=== MetroCluster 1 o DR 1
+
+La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 1 o DR Group 1 utilizzando FibreBridge 7500N o 7600N e una sola porta FC (FC1 o FC2) sugli switch Brocade . Si prega di tenere presente quanto segue quando si utilizza questa tabella di configurazione:
+
+* Sugli switch Brocade 6505, G610, G710, G620, G620-1, G630 e G630-1, sono presenti dei bridge aggiuntivi per le porte 12-15.
+* Sugli switch Brocade 6510 e DCX 8510-8 è possibile cablare bridge aggiuntivi alle porte 12-19.
+* Sugli switch Brocade 6520 è possibile cablare bridge aggiuntivi alle porte 16-21 e 24-45.
+* Sugli switch Brocade G720 e G730 è possibile cablare bridge aggiuntivi alle porte 16-21.
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a,2a,2a,2a"]
+|===
+| *Componente* | *Porta* | *Si collega allo switch FC...* | *Porta 6505, G610, G710* | *6510, porta DCX 8510-8* | *porta 6520* | *porta 7810* | *porta 7840* | *Porta G620, G620-1, G630, G630-1* | *Porta G720, G730* 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+1
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+10
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+2
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+10
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+1
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+11
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+2
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+11
+
+
+
+ a| 
+Stack 3
+ a| 
+bridge_x_3a
+ a| 
+1
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+14
+
+
+
+ a| 
+bridge_x_3b
+ a| 
+2
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+14
+
+
+
+ a| 
+Stack 4
+ a| 
+bridge_x_4a
+ a| 
+1
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+15
+
+
+
+ a| 
+bridge_x_4b
+ a| 
+2
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+15
+
+|===
+
+
+=== MetroCluster 2 o DR 2
+
+La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 2 o DR Group 2 per i bridge FibreBridge 7500N o 7600N che utilizzano una porta FC (FC1 o FC2) sugli switch Brocade . È importante tenere presente quanto segue quando si utilizza questa tabella di configurazione:
+
+* Sugli switch Brocade 6520 è possibile cablare bridge aggiuntivi alle porte 60-69 e 72-93.
+* Sugli switch Brocade G620, G620-1, G630, G630-1 è possibile cablare bridge aggiuntivi alle porte 32-35.
+* Sugli switch Brocade G720 e G730 è possibile cablare bridge aggiuntivi alle porte 36-39.
+* L'utilizzo delle porte per gli switch Brocade 6505, G610 e G710 in una configurazione MetroCluster a otto nodi non è illustrato. A causa del numero limitato di porte, l'assegnazione avviene sito per sito, in base al modello di controller e al numero di ISL e coppie di bridge utilizzati.
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a,2a,2a,2a"]
+|===
+| *Componente* | *Porta* | *Si collega allo switch FC...* | *Porta 6505, G610, G710* | *6510, porta DCX 8510-8* | *porta 6520* | *porta 7810* | *porta 7840* | *Porta G620, G620-1, G630, G630-1* | *Porta G720, G730* 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+1
+ a| 
+n / a
+ a| 
+32
+ a| 
+56
+ a| 
+n / a
+ a| 
+20
+ a| 
+26
+ a| 
+32
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+2
+ a| 
+n / a
+ a| 
+32
+ a| 
+56
+ a| 
+n / a
+ a| 
+20
+ a| 
+26
+ a| 
+32
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+1
+ a| 
+n / a
+ a| 
+33
+ a| 
+57
+ a| 
+n / a
+ a| 
+21
+ a| 
+27
+ a| 
+33
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+2
+ a| 
+n / a
+ a| 
+33
+ a| 
+57
+ a| 
+n / a
+ a| 
+21
+ a| 
+27
+ a| 
+33
+
+
+
+ a| 
+Stack 3
+ a| 
+bridge_x_3a
+ a| 
+1
+ a| 
+n / a
+ a| 
+34
+ a| 
+58
+ a| 
+n / a
+ a| 
+22
+ a| 
+30
+ a| 
+34
+
+
+
+ a| 
+bridge_x_3b
+ a| 
+2
+ a| 
+n / a
+ a| 
+34
+ a| 
+58
+ a| 
+n / a
+ a| 
+22
+ a| 
+30
+ a| 
+34
+
+
+
+ a| 
+Stack 4
+ a| 
+bridge_x_4a
+ a| 
+1
+ a| 
+n / a
+ a| 
+35
+ a| 
+59
+ a| 
+n / a
+ a| 
+23
+ a| 
+31
+ a| 
+35
+
+
+
+ a| 
+bridge_x_4b
+ a| 
+2
+ a| 
+n / a
+ a| 
+35
+ a| 
+59
+ a| 
+n / a
+ a| 
+23
+ a| 
+31
+ a| 
+35
+
+|===
+
+
+=== MetroCluster 3 o gruppo DR 3
+
+La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 3 o DR Group 3 per i bridge FibreBridge 7500N o 7600N che utilizzano una porta FC (FC1 o FC2) sugli switch Brocade . È importante tenere presente quanto segue quando si utilizza questa tabella di configurazione:
+
+* Sugli switch Brocade G630 e G630-1 è possibile cablare bridge aggiuntivi alle porte 60-63.
+* Sugli switch Brocade G730 è possibile collegare bridge aggiuntivi alle porte 64, 65, 68, 69.
+
+
+[cols="2a,2a,2a,2a,2a"]
+|===
+| *Componente* | *Porta* | *Si collega allo switch FC...* | *Porta G630, G630-1* | *Porta G730* 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+1
+ a| 
+56
+ a| 
+58
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+2
+ a| 
+56
+ a| 
+58
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+1
+ a| 
+57
+ a| 
+59
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+2
+ a| 
+57
+ a| 
+59
+
+
+
+ a| 
+Stack 3
+ a| 
+bridge_x_3a
+ a| 
+1
+ a| 
+58
+ a| 
+62
+
+
+
+ a| 
+bridge_x_3b
+ a| 
+2
+ a| 
+58
+ a| 
+62
+
+
+
+ a| 
+Stack 4
+ a| 
+bridge_x_4a
+ a| 
+1
+ a| 
+59
+ a| 
+63
+
+
+
+ a| 
+bridge_x_4b
+ a| 
+2
+ a| 
+59
+ a| 
+63
+
+|===
+
+
+=== MetroCluster 4 o gruppo DR 4
+
+La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 4 o DR Group 4 per i bridge FibreBridge 7500N o 7600N che utilizzano una porta FC (FC1 o FC2) sugli switch Brocade . Quando si utilizza questa tabella di configurazione, è importante tenere presente quanto segue:
+
+* Sugli switch Brocade G630 e G630-1 è possibile cablare bridge aggiuntivi alle porte 80-83.
+* Sugli switch Brocade G730 è possibile cablare bridge aggiuntivi alle porte 84-95.
+
+
+[cols="2a,2a,2a,2a,2a"]
+|===
+| *Componente* | *Porta* | *Si collega allo switch FC...* | *Porta G630, G630-1* | *Porta G730* 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+1
+ a| 
+74
+ a| 
+80
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+2
+ a| 
+74
+ a| 
+80
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+1
+ a| 
+75
+ a| 
+81
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+2
+ a| 
+75
+ a| 
+81
+
+
+
+ a| 
+Stack 3
+ a| 
+bridge_x_3a
+ a| 
+1
+ a| 
+78
+ a| 
+82
+
+
+
+ a| 
+bridge_x_3b
+ a| 
+2
+ a| 
+78
+ a| 
+82
+
+
+
+ a| 
+Stack 4
+ a| 
+bridge_x_4a
+ a| 
+1
+ a| 
+79
+ a| 
+83
+
+
+
+ a| 
+bridge_x_4b
+ a| 
+2
+ a| 
+79
+ a| 
+83
+
+|===

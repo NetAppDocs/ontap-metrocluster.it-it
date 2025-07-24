@@ -11,32 +11,45 @@ summary: È possibile configurare i sistemi FAS8020, AFF8020, FAS8200 e AFF A300
 
 
 [role="lead"]
-È possibile configurare i sistemi FAS8020, AFF8020, FAS8200 e AFF A300 utilizzando una singola porta iniziatore per ciascun fabric e due porte iniziatore per ciascun controller.
+È possibile configurare i sistemi FAS8200 e AFF A300 utilizzando una singola porta iniziatore per ogni fabric e due porte iniziatore per ogni controller.
 
-È possibile seguire il cablaggio per il bridge FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2). Invece di utilizzare quattro iniziatori, collegare solo due iniziatori e lasciare vuoti gli altri due collegati alla porta dello switch.
+È possibile seguire il cablaggio del bridge FibreBridge 7600N utilizzando una sola porta FC (FC1 o FC2). Invece di utilizzare quattro iniziatori, collegarne solo due e lasciare vuoti gli altri due collegati alla porta dello switch.
 
-Se lo zoning viene eseguito manualmente, seguire lo zoning utilizzato per un bridge FibreBridge 7500N o 7600N utilizzando una porta FC (FC1 o FC2). In questo scenario, viene aggiunta una porta iniziatore anziché due a ciascun membro di zona per fabric.
+Se la suddivisione in zone viene eseguita manualmente, seguire la suddivisione in zone utilizzata per un bridge FibreBridge 7600N che utilizza una porta FC (FC1 o FC2). In questo scenario, a ciascun elemento di zona per fabric viene aggiunta una porta di avvio anziché due.
 
 È possibile modificare la suddivisione in zone o eseguire un aggiornamento da FibreBridge 6500N a FibreBridge 7500N utilizzando la procedura descritta in link:../maintain/task_replace_a_sle_fc_to_sas_bridge.html#hot_swap_6500n["Scambio a caldo di un bridge FibreBridge 6500N con un bridge FibreBridge 7600N o 7500N"].
 
-La seguente tabella mostra le assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.1 e versioni successive.
+La tabella seguente mostra le assegnazioni delle porte per gli switch Brocade FC quando si utilizza una singola porta iniziatore per ogni fabric e due porte iniziatore per ogni controller.
 
+[cols="2a,2a,2a,2a"]
 |===
-
-
 4+| Configurazioni che utilizzano FibreBridge 7500N o 7600N utilizzando una sola porta FC (FC1 o FC2) 
 
 
-4+| *MetroCluster 1 o DR Group 1* 
+ a| 
+*MetroCluster 1 o DR Group 1*
 
 
-.2+| *Componente* .2+| *Porta* 2+| * Modelli di switch Brocade 6505, 6510, 6520, 7840, G620, G610 e DCX 8510-8* 
+
+ a| 
+*Componente*
+ a| 
+*Porta*
+ a| 
+*6505, 6510, 6520, 7840, G620, G630, G610, G710, G720, G730 e DCX 8510-8*
 
 
-| *Si collega allo switch FC...* | *Si collega alla porta dello switch...* 
+
+ a| 
+*Si collega allo switch FC...*
+ a| 
+*Si collega alla porta dello switch...*
 
 
-.8+| controller_x_1  a| 
+
+ a| 
+controller_x_1
+ a| 
 Porta FC-VI A.
  a| 
 1
@@ -145,74 +158,5 @@ bridge_x_yb
 2
  a| 
 11
-
-|===
-La seguente tabella mostra le assegnazioni delle porte per gli switch FC quando si utilizza ONTAP 9.0.
-
-|===
-
-
-4+| *Configurazione MetroCluster a due nodi* 
-
-
-.2+| *Componente* .2+| *Porta* 2+| *Brocade 6505, 6510 o DCX 8510-8* 
-
-
-| *FC_switch_x_1* | *FC_switch_x_2* 
-
-
- a| 
-controller_x_1
- a| 
-Porta FC-VI A.
- a| 
-0
- a| 
--
-
-
-
- a| 
-Porta FC-VI b
- a| 
--
- a| 
-0
-
-
-
- a| 
-Porta HBA a
- a| 
-1
- a| 
--
-
-
-
- a| 
-Porta HBA b
- a| 
--
- a| 
-1
-
-
-
- a| 
-Porta HBA c
- a| 
-2
- a| 
--
-
-
-
- a| 
-Porta HBA d
- a| 
--
- a| 
-2
 
 |===

@@ -2,17 +2,27 @@
 :allow-uri-read: 
 
 
-A partire da ONTAP 9.15.1, è possibile configurare la crittografia end-to-end per crittografare il traffico back-end, ad esempio NVlog e i dati di replica dello storage, tra i siti in una configurazione IP di MetroCluster.
+A partire da ONTAP 9.15.1, è possibile configurare la crittografia end-to-end sui sistemi supportati per crittografare il traffico back-end, ad esempio i dati di replicazione NVlog e di storage, tra i siti in una configurazione IP MetroCluster .
 
 .A proposito di questa attività
 * Per eseguire questa attività, è necessario essere un amministratore del cluster.
 * Prima di poter configurare la crittografia end-to-end, è necessario link:https://docs.netapp.com/us-en/ontap/encryption-at-rest/configure-external-key-management-concept.html["Configurare la gestione esterna delle chiavi"^].
 * Esaminare i sistemi supportati e la versione ONTAP minima richiesta per configurare la crittografia end-to-end in una configurazione IP di MetroCluster:
 +
+[cols="2*"]
 |===
-
-
 | Release ONTAP minima | Sistemi supportati 
+
+
+ a| 
+ONTAP 9.17.1
+ a| 
+** AFF A800, AFF C800
+** AFF A20, AFF A30, AFF C30, AFF A50, AFF C60
+** AFF A70, AFF A90, AFF A1K, AFF C80
+** FAS50, FAS70, FAS90
+
+
 
 
  a| 

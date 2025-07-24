@@ -1,0 +1,680 @@
+---
+permalink: install-fc/cisco-9132t-fc-port-config-controllers.html 
+sidebar: sidebar 
+keywords: ONTAP, FAS, FC, Cisco, metrocluster 
+summary: Scopri di più sulle assegnazioni delle porte necessarie per cablare gli switch Cisco 9132T FC ai tuoi controller. 
+---
+= Utilizzo della porta Cisco 9132T per i controller in una configurazione MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Scopri di più sulle assegnazioni delle porte necessarie per cablare gli switch Cisco 9132T FC ai tuoi controller.
+
+La tabella seguente mostra le configurazioni dei controller che utilizzano FibreBridge 7500N o 7600N utilizzando entrambe le porte FC (FC1 e FC2). Le tabelle mostrano le configurazioni massime supportate con quattro e otto moduli controller in due gruppi DR.
+
+
+NOTE: Per le configurazioni a otto nodi, è necessario eseguire lo zoning manualmente, perché gli RCF non sono forniti.
+
+
+
+== MetroCluster 1 o DR 1
+
+La tabella seguente mostra le configurazioni del controller supportate per MetroCluster 1 o DR Group 1 sugli switch Cisco 9132T. Quando si utilizza questa tabella di configurazione, è necessario tenere presente quanto segue:
+
+* I sistemi AFF A900 e FAS9500 dispongono di otto porte FC-VI (a, b, c e d per FC-VI-1 e FC-VI-2).
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Componente* | *Porta* | *Si connette a FC_switch...* | *9132T 1x LEM (quattro nodi)* | *9132T 2x LEM (quattro nodi)* | *9132T 2x LEM (otto nodi)* 
+
+
+ a| 
+controller_x_1
+ a| 
+Porta FC-VI A.
+ a| 
+1
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+
+
+
+ a| 
+Porta FC-VI b
+ a| 
+2
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+
+
+
+ a| 
+Porta FC-VI c
+ a| 
+1
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+
+
+
+ a| 
+Porta FC-VI d
+ a| 
+2
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+
+
+
+ a| 
+Porta FC-VI-2 a
+ a| 
+1
+ a| 
+LEM1-3
+ a| 
+LEM1-3
+ a| 
+n / a
+
+
+
+ a| 
+Porta FC-VI-2 b
+ a| 
+2
+ a| 
+LEM1-3
+ a| 
+LEM1-3
+ a| 
+n / a
+
+
+
+ a| 
+Porta FC-VI-2 c
+ a| 
+1
+ a| 
+LEM1-4
+ a| 
+LEM1-4
+ a| 
+n / a
+
+
+
+ a| 
+Porta FC-VI-2 d
+ a| 
+2
+ a| 
+LEM1-4
+ a| 
+LEM1-4
+ a| 
+n / a
+
+
+
+ a| 
+Porta HBA a
+ a| 
+1
+ a| 
+LEM1-5
+ a| 
+LEM1-5
+ a| 
+LEM1-3
+
+
+
+ a| 
+Porta HBA b
+ a| 
+2
+ a| 
+LEM1-5
+ a| 
+LEM1-5
+ a| 
+LEM1-3
+
+
+
+ a| 
+Porta HBA c
+ a| 
+1
+ a| 
+LEM1-6
+ a| 
+LEM1-6
+ a| 
+LEM1-4
+
+
+
+ a| 
+Porta HBA d
+ a| 
+2
+ a| 
+LEM1-6
+ a| 
+LEM1-6
+ a| 
+LEM1-4
+
+
+
+ a| 
+controller_x_2
+ a| 
+Porta FC-VI A.
+ a| 
+1
+ a| 
+LEM1-7
+ a| 
+LEM1-7
+ a| 
+LEM1-5
+
+
+
+ a| 
+Porta FC-VI b
+ a| 
+2
+ a| 
+LEM1-7
+ a| 
+LEM1-7
+ a| 
+LEM1-5
+
+
+
+ a| 
+Porta FC-VI c
+ a| 
+1
+ a| 
+LEM1-8
+ a| 
+LEM1-8
+ a| 
+LEM1-6
+
+
+
+ a| 
+Porta FC-VI d
+ a| 
+2
+ a| 
+LEM1-8
+ a| 
+LEM1-8
+ a| 
+LEM1-6
+
+
+
+ a| 
+Porta FC-VI-2 a
+ a| 
+1
+ a| 
+LEM1-9
+ a| 
+LEM1-9
+ a| 
+n / a
+
+
+
+ a| 
+Porta FC-VI-2 b
+ a| 
+2
+ a| 
+LEM1-9
+ a| 
+LEM1-9
+ a| 
+n / a
+
+
+
+ a| 
+Porta FC-VI-2 c
+ a| 
+1
+ a| 
+LEM1-10
+ a| 
+LEM1-10
+ a| 
+n / a
+
+
+
+ a| 
+Porta FC-VI-2 d
+ a| 
+2
+ a| 
+LEM1-10
+ a| 
+LEM1-10
+ a| 
+n / a
+
+
+
+ a| 
+Porta HBA a
+ a| 
+1
+ a| 
+LEM1-11
+ a| 
+LEM1-11
+ a| 
+LEM1-7
+
+
+
+ a| 
+Porta HBA b
+ a| 
+2
+ a| 
+LEM1-11
+ a| 
+LEM1-11
+ a| 
+LEM1-7
+
+
+
+ a| 
+Porta HBA c
+ a| 
+1
+ a| 
+LEM1-12
+ a| 
+LEM1-12
+ a| 
+LEM1-8
+
+
+
+ a| 
+Porta HBA d
+ a| 
+2
+ a| 
+LEM1-12
+ a| 
+LEM1-12
+ a| 
+LEM1-8
+
+|===
+
+
+== MetroCluster 2 o DR 2
+
+La tabella seguente mostra le configurazioni del controller Cisco 9132T supportate per MetroCluster 2 o gruppo DR 2 sugli switch Cisco 9132T. Quando si utilizza questa tabella di configurazione, è necessario tenere presente quanto segue:
+
+* I sistemi AFF A900 e FAS9500 dispongono di otto porte FC-VI (a, b, c e d per FC-VI-1 e FC-VI-2).
+* MetroCluster 2 o DR Group 2 non è supportato sugli switch Cisco 9132T per i sistemi AFF A900 e FAS9500 .
+* MetroCluster 2 o DR Group 2 è supportato solo nelle configurazioni MetroCluster a otto nodi
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Componente* | *Porta* | *Si connette a FC_switch...* | *9132T 1x LEM (quattro nodi)* | *9132T 2x LEM (quattro nodi)* | *9132T 2x LEM (otto nodi)* 
+
+
+ a| 
+controller_x_3
+ a| 
+Porta FC-VI A.
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-1
+
+
+
+ a| 
+Porta FC-VI b
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-1
+
+
+
+ a| 
+Porta FC-VI c
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-2
+
+
+
+ a| 
+Porta FC-VI d
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-2
+
+
+
+ a| 
+Porta FC-VI-2 a
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+n / a
+
+
+
+ a| 
+Porta FC-VI-2 b
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+n / a
+
+
+
+ a| 
+Porta FC-VI-2 c
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+n / a
+
+
+
+ a| 
+Porta FC-VI-2 d
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+n / a
+
+
+
+ a| 
+Porta HBA a
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-3
+
+
+
+ a| 
+Porta HBA b
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-3
+
+
+
+ a| 
+Porta HBA c
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-4
+
+
+
+ a| 
+Porta HBA d
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-4
+
+
+
+ a| 
+controller_x_4
+ a| 
+Porta FC-VI-1 a
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-5
+
+
+
+ a| 
+Porta FC-VI-1 b
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-5
+
+
+
+ a| 
+Porta FC-VI-1 c
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-6
+
+
+
+ a| 
+Porta FC-VI-1 d
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-6
+
+
+
+ a| 
+Porta FC-VI-2 a
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+n / a
+
+
+
+ a| 
+Porta FC-VI-2 b
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+n / a
+
+
+
+ a| 
+Porta FC-VI-2 c
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+n / a
+
+
+
+ a| 
+Porta FC-VI-2 d
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+n / a
+
+
+
+ a| 
+Porta HBA a
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-7
+
+
+
+ a| 
+Porta HBA b
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-7
+
+
+
+ a| 
+Porta HBA c
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-8
+
+
+
+ a| 
+Porta HBA d
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM2-8
+
+|===

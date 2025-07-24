@@ -1,0 +1,62 @@
+---
+permalink: install-fc/fc-switch-port-assignment-overview.html 
+sidebar: sidebar 
+keywords: ONTAP, FAS, FC, Brocade, ISL, Cisco, metrocluster, switch, cabling, port, assignment 
+summary: Quando si cablano gli switch FC, è necessario verificare di utilizzare le assegnazioni delle porte specificate. 
+---
+= Assegnazioni delle porte per gli switch MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Quando si cablano gli switch FC, è necessario verificare di utilizzare le assegnazioni delle porte specificate.
+
+È possibile riconfigurare le porte non utilizzate per il collegamento di porte di avvio, porte FC-VI o ISL affinché fungano da porte di archiviazione. Tuttavia, se si utilizzano le porte RCF supportate, è necessario modificare la suddivisione in zone di conseguenza.
+
+Se si utilizzano gli RCF supportati, le porte ISL potrebbero non connettersi alle stesse porte mostrate e potrebbe essere necessario riconfigurarle manualmente.
+
+Se avete configurato gli switch utilizzando le assegnazioni delle porte per ONTAP 9, potete continuare a utilizzare le assegnazioni precedenti. Tuttavia, le nuove configurazioni che eseguono ONTAP 9.1 o versioni successive dovrebbero utilizzare le assegnazioni delle porte mostrate qui.
+
+
+
+== Linee guida generali per il cablaggio
+
+Quando si utilizzano le tabelle di cablaggio, è necessario conoscere le seguenti linee guida:
+
+* Gli switch Brocade e Cisco utilizzano diverse numerazioni delle porte:
++
+** Negli switch Brocade, la prima porta è numerata 0.
+** Sugli switch Cisco, la prima porta è numerata 1.
+
+
+* Il cablaggio è lo stesso per ogni switch FC nel fabric dello switch.
+* Puoi ordinare sistemi storage AFF A300 e FAS8200 con una delle due opzioni per la connettività FC-VI:
++
+** Porte integrate 0e e 0f configurate in modalità FC-VI.
+** Porte 1a e 1b su una scheda FC-VI nello slot 1.
+
+
+* I sistemi storage AFF A700 e FAS9000 richiedono quattro porte FC-VI. Le seguenti tabelle mostrano il cablaggio degli switch FC con quattro porte FC-VI su ciascun controller, ad eccezione dello switch Cisco 9250i.
++
+Per gli altri sistemi storage, utilizzare i cavi mostrati nelle tabelle ma ignorare i cavi delle porte FC-VI c e d.
+
++
+È possibile lasciare vuote queste porte.
+
+* I sistemi storage AFF A400 e FAS8300 utilizzano le porte 2a e 2b per la connettività FC-VI.
+* Se si dispone di due configurazioni MetroCluster che condividono gli ISL, utilizzare le stesse assegnazioni delle porte di un cablaggio MetroCluster a otto nodi.
+* Il numero di ISL cablate può variare a seconda dei requisiti del sito.
+* Consultare la sezione relativa alle considerazioni sull'ISL.
++
+link:concept_considerations_isls_mcfc.html["Considerazioni per gli ISL"]
+
+
+
+
+
+== Linee guida per il cablaggio AFF A900 e FAS9500
+
+* I sistemi storage AFF A900 o FAS9500 richiedono otto porte FC-VI. Se si utilizza un AFF A900 o FAS9500, è necessario utilizzare la configurazione a otto porte. Se la configurazione include gli altri modelli di sistemi di storage, utilizzare i cavi mostrati nelle tabelle ma ignorare i cavi delle porte FC-VI non necessarie.
+

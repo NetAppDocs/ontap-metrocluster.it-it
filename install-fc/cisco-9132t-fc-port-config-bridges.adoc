@@ -1,0 +1,276 @@
+---
+permalink: install-fc/cisco-9132t-fc-port-config-bridges.html 
+sidebar: sidebar 
+keywords: ONTAP, FAS, FC, Cisco, metrocluster 
+summary: Scopri di più sulle assegnazioni delle porte necessarie per cablare gli switch Cisco 9132T FC ai bridge FC-SAS utilizzando entrambe le porte FC. 
+---
+= Utilizzo della porta Cisco 9132T per bridge FC-SAS in una configurazione MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Scopri di più sulle assegnazioni delle porte necessarie per cablare gli switch Cisco 9132T FC ai bridge FC-SAS utilizzando entrambe le porte FC.
+
+
+NOTE: È supportato solo uno (1) stack di bridge utilizzando gli switch Cisco 9132T con 1 modulo LEM.
+
+
+
+== MetroCluster 1 o DR 1
+
+La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 1 o DR Group 1 per i bridge FibreBridge 7500N o 7600N che utilizzano entrambe le porte FC (FC1 e FC2) sugli switch Cisco 9132T. Quando si utilizza questa tabella di configurazione, è importante tenere presente quanto segue:
+
+* Nelle configurazioni a quattro nodi, è possibile cablare bridge aggiuntivi alle porte LEM2-1 fino a LEM2-8 sugli switch Cisco 9132T con 2xLEM.
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Componente* | *Porta* | *Si connette a FC_switch...* | *9132T 1x LEM (quattro nodi)* | *9132T 2x LEM (quattro nodi)* | *9132T 2x LEM (otto nodi)* 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-13
+ a| 
+LEM1-13
+ a| 
+LEM1-9
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-13
+ a| 
+LEM1-13
+ a| 
+LEM1-9
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-14
+ a| 
+LEM1-14
+ a| 
+LEM1-10
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-14
+ a| 
+LEM1-14
+ a| 
+LEM1-10
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / a
+ a| 
+LEM1-15
+ a| 
+LEM1-11
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / a
+ a| 
+LEM1-15
+ a| 
+LEM1-11
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / a
+ a| 
+LEM1-16
+ a| 
+LEM1-12
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / a
+ a| 
+LEM1-16
+ a| 
+LEM1-12
+
+|===
+
+
+== MetroCluster 2 o DR 2
+
+La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 2 o DR Group 2 per i bridge FibreBridge 7500N o 7600N che utilizzano entrambe le porte FC (FC1 e FC2) sugli switch Cisco 9132T. Quando si utilizza questa tabella di configurazione, è importante tenere presente quanto segue:
+
+* Nelle configurazioni a otto nodi, è possibile cablare bridge aggiuntivi alle porte LEM2-13 tramite LEM2-16 sugli switch Cisco 9132T con 2 LEM.
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Componente* | *Porta* | *Si connette a FC_switch...* | *9132T 1x LEM (quattro nodi)* | *9132T 2x LEM (quattro nodi)* | *9132T 2x LEM (otto nodi)* 
+
+
+ a| 
+Stack 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM1-9
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM1-9
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM1-10
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM1-10
+
+
+
+ a| 
+Stack 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM1-11
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM1-11
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM1-12
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / a
+ a| 
+n / a
+ a| 
+LEM1-12
+
+|===
