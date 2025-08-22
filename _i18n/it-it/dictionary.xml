@@ -8287,7 +8287,6 @@
   <block id="177f79b7f42518cbd6ed3a48de1f222b" category="paragraph">Se lo switch FC è configurato per IOD, il software ONTAP deve essere configurato per IOD. Analogamente, se lo switch FC è configurato per OOD, è necessario configurare ONTAP per OOD.</block>
   <block id="0a9b432f5f5621ba3d2bafdaa8d5be41" category="paragraph"><block ref="0383eb2f14d55814a9666ef7d5a31b98" prefix="" category="inline-code"></block></block>
   <block id="b88127542a36dbd88f1d9b0eb0e66dc0" category="paragraph">ONTAP attualmente supporta la crittografia AES-128.</block>
-  <block id="7c36b0e12ce814681762efb6b2ec6cc4" category="paragraph">L'esempio mostra come configurare un utente di sola lettura. Se necessario, è possibile regolare gli utenti RW.</block>
   <block id="046a4dbe28831449e896740fded1c064" category="paragraph">È inoltre necessario impostare le password degli account inutilizzati per proteggerli e utilizzare la migliore crittografia disponibile nella versione di ONTAP.</block>
   <block id="6002be2e075c56f18d1738b11fc6e4f4" category="paragraph">È possibile verificare che i componenti e le relazioni nella configurazione di MetroCluster funzionino correttamente.</block>
   <block id="220a5f3f86ae97f0476676c92a412f16" category="paragraph">Dopo la configurazione iniziale e dopo aver apportato eventuali modifiche alla configurazione MetroCluster, è necessario eseguire un controllo. È inoltre necessario eseguire un controllo prima di un'operazione di switchover negoziata (pianificata) o di switchback.</block>
@@ -8365,7 +8364,6 @@
   <block id="f66f2933c2717a1cacefad1ec4730aec" category="list-text">Impostare la configurazione della porta sul valore predefinito per tutte le porte:</block>
   <block id="d7a01c9755b9d94f47a5a7d930b0905d" category="paragraph"><block ref="45e3f8f9bac635c50d73056054e7260f" prefix="" category="inline-code"></block></block>
   <block id="4461eb2aa0e7be56b07bfd03b50adda3" category="paragraph">È necessario completare questo passaggio per ciascuna porta.</block>
-  <block id="1711fdcc6944bbeddd35a626101f4b4d" category="list-text">Verificare che lo switch stia utilizzando il metodo dinamico POD (Port on Demand).</block>
   <block id="2f3d07c01cbdac4d395d3a14b661150c" category="admonition">Per le versioni Brocade Fabric OS precedenti alla 8.0, eseguire i seguenti comandi come admin e per le versioni 8.0 e successive come root.</block>
   <block id="64fa0d568b3592806aa948b76b25721e" category="list-text">Eseguire il comando License:</block>
   <block id="d63c14f8f4da1b2f3355284117aa43d6" category="list-text">Attivare l'utente root se è disattivato da Brocade.</block>
@@ -8574,7 +8572,6 @@
   <block id="b1398f0ec1ab6f110b2b054dcbd970f4" category="list-text">Impostare il criterio APT (Advanced Performance Tuning) su 3:</block>
   <block id="9157f6f9ad659d140aac1994cee26e61" category="paragraph"><block ref="48d59963b7ad141246e95838886bc346" prefix="" category="inline-code"></block></block>
   <block id="9c5e2ae210ac93c8c28206f6341c674f" category="list-text">Verificare le impostazioni OOOD:</block>
-  <block id="8e6415ee4068075bb4d9b0908c9e0ba1" category="list-text">Verificare che lo switch stia utilizzando il metodo di licenza della porta dinamica.</block>
   <block id="39c3f713772acf06f906fa354070ccae" category="admonition">Le versioni Brocade FabricOS precedenti alla 8.0 eseguono i seguenti comandi come admin e le versioni 8.0 e successive come root.</block>
   <block id="bb455cc655a37d9370a7b572be5c356a" category="list-text">Abilitare l'utente root.</block>
   <block id="9982799dc107b44357ff54b7e3b835e7" category="paragraph">Se l'utente root è già disattivato da Brocade, attivare l'utente root come illustrato nell'esempio seguente:</block>
@@ -10921,8 +10918,6 @@
   <block id="21a858f81918f7707fbcd7bef86f8797" category="paragraph">Eseguire il comando<block ref="c53664d593e772e240ea0e6fdcfc79e1" prefix=" " category="inline-code"></block>.</block>
   <block id="afff4aa2c1e899c46d499fb894d82ada" category="open-title">Per Fabric OS 9.0 e versioni successive</block>
   <block id="39219ac241ea7f4ccb98564b8a02b92c" category="paragraph">Eseguire il comando<block ref="ee9cf2be6d80be01f66c5272dabe9164" prefix=" " category="inline-code"></block>.</block>
-  <block id="6662b782a3a75b8e31dda70ebe53c4f0" category="paragraph">Eseguire il comando<block ref="c3d759c84d82a17cd2fc31c0bbd2be02" prefix=" " category="inline-code"></block>.</block>
-  <block id="1fb30ffcb217df70eb8b61a9c76f518f" category="paragraph">Eseguire il comando<block ref="f7fd6058274b87da3f8cba419f53bb7e" prefix=" " category="inline-code"></block>.</block>
   <block id="3c8938b87b13dff113f84a2814ddff39" category="paragraph"><block ref="f7fd6058274b87da3f8cba419f53bb7e" prefix="" category="inline-code"></block></block>
   <block id="1ad5a70ead9bdd722df6000495e21c24" category="list-text">Se si utilizza Fabric OS 8.2.x e versioni precedenti, è necessario modificare il metodo di licenza in dinamico:</block>
   <block id="7fafa568d6f3c9a0ee98323f64b1c01c" category="admonition">In Fabric OS 9.0 e versioni successive, il metodo di licenza è dinamico per impostazione predefinita. Il metodo di licenza statico non è supportato.</block>
@@ -10951,7 +10946,6 @@
   <block id="7dd57dad7ab33a64ea80d69dc576695f" category="list-text">La configurazione IP di MetroCluster potrebbe già essere collegata direttamente agli shelf NS224 o a switch di storage dedicati.</block>
   <block id="2d27e76da02804de2afe9d209e5cbb1c" category="admonition">Si consiglia di mantenere almeno il 20% di spazio libero per gli aggregati con mirroring, per performance e disponibilità dello storage ottimali. Sebbene il suggerimento sia del 10% per gli aggregati non speculari, il 10% di spazio aggiuntivo può essere utilizzato dal filesystem per assorbire le modifiche incrementali. I cambiamenti incrementali aumentano l'utilizzo dello spazio per gli aggregati con mirroring grazie all'architettura copy-on-write basata su Snapshot di ONTAP. Il mancato rispetto di queste Best practice può avere un impatto negativo sulle prestazioni.</block>
   <block id="0e5e2d82a1039e41c19d2248f3b64787" category="admonition">È possibile configurare le interfacce IP di MetroCluster da entrambi i cluster.</block>
-  <block id="6212a1ad66c5ad9d3c50380aa91aab6a" category="list-text">Nessun guasto hardware</block>
   <block id="2af958a8143c65676390b5e251abe90a" category="list-text">Verificare che il<block ref="a78608714add699f555f2a66df0ee249" prefix=" " category="inline-code"></block> Il pacchetto è installato sull'host Linux. In questo modo si evita un<block ref="b0c94f1494e22d963244e235719a2582" prefix=" " category="inline-code"></block> Errore quando si esegue nuovamente la scansione dell'host Linux per i LUN appena mappati utilizzando<block ref="685ca42026debec2f3691cc5faae67d5" prefix=" " category="inline-code"></block> comando.</block>
   <block id="1f52bd2314f9805b0a0098b0f56a0dc4" category="paragraph">Potrebbe essere necessario riavviare i nodi.</block>
   <block id="ab85fd4f549c390675df901a8ef3f78e" category="list-text">Creazione di interfacce FC LIFS/su nodi IP per tutte le SVM SAN. In alternativa, verificare che i WWPN delle LIF FC appena create siano registrati nello switch FC SAN</block>
@@ -11957,10 +11951,8 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="bd7a871cd772a6f8f044f086ccc3ed68" category="list-text">Se il sistema supporta la crittografia end-to-end, è possibile farlo <block ref="2fd1db8c2a0ebb290526de8f46b28acd" category="inline-link-macro-rx"></block> Nel nuovo gruppo DR.</block>
   <block id="0088c1e15cccccdb2e3dc23e762335e0" category="list-text">Se la crittografia end-to-end è attivata, seguire i passaggi da a. <block ref="8a6f29aee2b87dab72caa4c63be583f5" category="inline-link-macro-rx"></block>.</block>
   <block id="7b27e86dbf07563fca6c99e2fca83549" category="list-text">Se la crittografia end-to-end è stata disattivata prima di aggiungere i nuovi nodi, è possibile riattivarla seguendo la procedura descritta in <block ref="2fd1db8c2a0ebb290526de8f46b28acd" category="inline-link-macro-rx"></block>.</block>
-  <block id="149bff96621a57d63b9a824d96957df7" category="open-title">Switch Brocade</block>
   <block id="250f3098aa37d3a08b48b8157db8a62e" category="open-title">Switch Cisco</block>
   <block id="6204028fd0e3ba079ca2fce4bb224e24" category="paragraph"><block ref="010303eb2e404f6eb49cc314fc8aa294" prefix="" category="inline-code"></block></block>
-  <block id="a1032909a057927264a07294a53b91b5" category="paragraph">Se si richiede l'accesso RO, dopo "User (ro):" specificare "snmpv3user". Nell'esempio seguente vengono utilizzati gli switch Brocade:</block>
   <block id="ddaa39224424042ba35394afbe714a70" category="list-text">Per eseguire questa attività, è necessario essere un amministratore del cluster.</block>
   <block id="ffe47e3eda7ee0a88fa1a1b82a09899e" category="inline-link-macro">Configurare la gestione esterna delle chiavi</block>
   <block id="ca6ec36bc37ffec6b208710049cf5f93" category="list-text">Prima di poter configurare la crittografia end-to-end, è necessario <block ref="16044a12704308be53c493c61be8d30c" category="inline-link-macro-rx"></block>.</block>
@@ -14398,4 +14390,15 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="25849b8ea5119a6ccbe0ef06d8e35773" category="doc">Testare il passaggio del nodo ONTAP per la configurazione IP MetroCluster</block>
   <block id="7282d891d20cd1520e021b2ba6c78e20" category="list-text">È supportata la crittografia dei dati inattivi.<block ref="6774dcdb02085dead82047685ca775f1" category="inline-link-macro-rx"></block></block>
   <block id="f42ec02236cb8b0134435967892ad733" category="paragraph"><block ref="f42ec02236cb8b0134435967892ad733" category="inline-link-macro-rx"></block></block>
+  <block id="929f699475d2ee16cffb5df619460281" category="list-text">Nessun guasto hardware (ad esempio, un'interruzione di corrente)</block>
+  <block id="8e7bac68088266dc4f6ea54160a86aa8" category="open-title">Switch Brocade (FOS 9.0 e successivi)</block>
+  <block id="bbf1d4b45eed310475529b62acce8abc" category="paragraph"><block ref="5c14098cbb5e352eab3dbedad51645c3" prefix="" category="inline-code"></block></block>
+  <block id="fb9a60f6eec8993cd6b4f12e486c000c" category="open-title">Switch Brocade (FOS 8.x e precedenti)</block>
+  <block id="c713289c1b13431b23b477490f615275" category="paragraph">L'esempio mostra come configurare un utente di sola lettura.  Se necessario, è possibile modificare gli utenti RW.  Se è necessario l'accesso RO, dopo "Utente (ro):" specificare "snmpv3user".</block>
+  <block id="da9939718fb44905950716c648f7501d" category="list-text">Se si utilizza una versione precedente a FOS 9.0, verificare che lo switch utilizzi il metodo di licenza dinamico Port on Demand (POD).</block>
+  <block id="2fc05e860677e088c66d18d9fe3bb918" category="paragraph"><block ref="c3d759c84d82a17cd2fc31c0bbd2be02" prefix="" category="inline-code"></block></block>
+  <block id="56df97178d6ee4000ee0e436cc180453" category="list-text">Se si utilizza una versione precedente a FOS 9.0, verificare che lo switch utilizzi il metodo dinamico Port on Demand (POD).</block>
+  <block id="6eb6a2663a1f73cd3119f3cb6f287206" category="paragraph"><block ref="c3d759c84d82a17cd2fc31c0bbd2be02" prefix="" category="inline-code"></block> .</block>
+  <block id="5667ca92a697e03bc95d429bfe20fda5" category="inline-link">switch di sistema ethernet configura-monitor-stato</block>
+  <block id="a7692359e6ab53408219d1f4fbab4614" category="paragraph">Vedi il<block ref="e8f3e733a7456e37aaeb3c329fac3e94" category="inline-link-rx"></block> comando per ulteriori dettagli.</block>
 </blocks>
