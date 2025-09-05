@@ -159,7 +159,6 @@ NOTE: Tutti i dischi del gruppo di disaster recovery devono utilizzare lo stesso
 +
 https://hwu.netapp.com["NetApp Hardware Universe"^]
 
-* Una combinazione di moduli IOM12 e moduli IOM3 non è supportata nello stesso stack di storage. Una combinazione di moduli IOM12 e moduli IOM6 è supportata nello stesso stack di storage se il sistema esegue una versione supportata di ONTAP.
 
 
 [NOTE]
@@ -489,18 +488,7 @@ link:../maintain/index.html["Gestire i componenti di MetroCluster"]
 
 
 
-=== Cablare gli shelf di dischi ai ponti
-
-Per il cablaggio degli shelf di dischi, è necessario utilizzare i bridge FC-SAS corretti.
-
-.Scelte
-* <<cabling_fb_7600N_7500N_with_iom12,Collegare un ponte FibreBridge 7600N o 7500N con shelf di dischi utilizzando IOM12 moduli>>
-* <<cabling_fb_7600N_7500N_with_iom6_iom3,Collegare un ponte FibreBridge 7600N o 7500N con shelf di dischi utilizzando moduli IOM6 o IOM3>>
-
-
-
-
-==== Collegare un ponte FibreBridge 7600N o 7500N con shelf di dischi utilizzando IOM12 moduli
+=== Collegare un ponte FibreBridge 7600N o 7500N con shelf di dischi utilizzando IOM12 moduli
 
 Dopo aver configurato il bridge, è possibile iniziare a cablare il nuovo sistema.
 
@@ -528,7 +516,7 @@ La _Guida all'installazione e al servizio_ per il modello di shelf di dischi for
 +
 .. Per il primo stack di shelf di dischi, collegare il cavo IOM A del primo shelf alla porta SAS A su FibreBridge A e il cavo IOM B dell'ultimo shelf alla porta SAS A su FibreBridge B.
 .. Per ulteriori stack di shelf, ripetere il passaggio precedente utilizzando la successiva porta SAS disponibile sui bridge FibreBridge, utilizzando la porta B per il secondo stack, la porta C per il terzo stack e la porta D per il quarto stack.
-.. Durante il cablaggio, collegare gli stack basati sui moduli IOM12 e IOM3/IOM6 allo stesso bridge, purché siano collegati a porte SAS separate.
+.. Durante il cablaggio, collegare gli stack basati sui moduli IOM12 allo stesso bridge, a condizione che siano collegati a porte SAS separate.
 +
 --
 
@@ -540,43 +528,6 @@ image::../media/mcc_cabling_bridge_and_sas3_stack_with_7500n_and_multiple_stacks
 
 --
 
-
-
-
-
-
-==== Collegare un ponte FibreBridge 7600N o 7500N con ripiani utilizzando moduli IOM6 o IOM3
-
-Dopo aver configurato il bridge, è possibile iniziare a cablare il nuovo sistema. Il bridge FibreBridge 7600N o 7500N utilizza connettori mini-SAS e supporta shelf che utilizzano moduli IOM6 o IOM3.
-
-.A proposito di questa attività
-I moduli IOM3 non sono supportati con i bridge FibreBridge 7600N.
-
-Per gli shelf di dischi, inserire un connettore per cavo SAS con la linguetta rivolta verso il basso (nella parte inferiore del connettore).
-
-.Fasi
-. Concatenare a margherita gli shelf in ogni stack.
-+
---
-.. Per il primo stack di shelf, collegare IOM A una porta quadrata del primo shelf alla porta SAS A su FibreBridge A.
-.. Per il primo stack di shelf, collegare la porta IOM B circolare dell'ultimo shelf alla porta SAS A su FibreBridge B.
-
-
-La _Guida all'installazione e al servizio_ per il modello di shelf fornisce informazioni dettagliate sugli shelf con concatenamento a margherita.
-
-https://library.netapp.com/ecm/ecm_download_file/ECMP1119629["Guida all'installazione e al servizio degli shelf di dischi SAS per DS4243, DS2246, DS4486 e DS4246"^]
-
-La figura seguente mostra un set di bridge collegati a una pila di shelf:
-
-image::../media/mcc_cabling_bridge_and_sas_stack_with_7500n_and_single_stack.gif[bridge di cablaggio mcc e stack sas con 7500n e stack singolo]
-
---
-. Per ulteriori stack di shelf, ripetere i passaggi precedenti utilizzando la successiva porta SAS disponibile sui bridge FibreBridge, utilizzando la porta B per un secondo stack, la porta C per un terzo stack e la porta D per un quarto stack.
-+
-La figura seguente mostra quattro stack collegati a una coppia di bridge FibreBridge 7600N o 7500N.
-
-+
-image::../media/mcc_cabling_bridge_and_sas_stack_with_7500n_four_stacks.gif[bridge di cablaggio mcc e stack sas con 7500n quattro stack]
 
 
 
@@ -633,7 +584,7 @@ Non corretto
  a| 
 .. Verificare l'eventuale presenza di cavi SAS allentati o correggere il cablaggio SAS riinserendo gli shelf di dischi nei bridge.
 +
-<<Cablare gli shelf di dischi ai ponti>>
+<<Collegare un ponte FibreBridge 7600N o 7500N con shelf di dischi utilizzando IOM12 moduli>>
 
 .. Ripetere <<step1-verify-detect,Fase 1>> per ogni bridge rimanente.
 

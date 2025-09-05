@@ -36,7 +36,7 @@ La _Guida all'installazione e al servizio_ per il modello di shelf di dischi for
 +
 .. Per il primo stack di shelf di dischi, collegare IOM A del primo shelf alla porta SAS A su FibreBridge A. Cavo IOM B dell'ultimo shelf alla porta SAS A su FibreBridge B.
 .. Per ulteriori stack di shelf, ripetere il passaggio precedente utilizzando la successiva porta SAS disponibile sui bridge FibreBridge, utilizzando la porta B per il secondo stack, la porta C per il terzo stack e la porta D per il quarto stack.
-.. Durante il cablaggio, collegare gli stack basati sui moduli IOM12 e IOM3/IOM6 allo stesso bridge, purché siano collegati a porte SAS separate.
+.. Durante il cablaggio, collegare gli stack basati sui moduli IOM12 allo stesso bridge, a condizione che siano collegati a porte SAS separate.
 +
 
 NOTE: Ogni stack può utilizzare diversi modelli di IOM, ma tutti gli shelf di dischi all'interno di uno stack devono utilizzare lo stesso modello.

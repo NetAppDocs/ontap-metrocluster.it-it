@@ -30,15 +30,6 @@ https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ug-rdg/home.html["Up
 
 
 
-[NOTE]
-====
-Un mix di moduli IOM12 e moduli IOM6 è supportato nello stesso stack se il sistema esegue una versione ONTAP supportata. Per stabilire se la versione di ONTAP supporta la miscelazione dei ripiani, fare riferimento alla link:https://imt.netapp.com/matrix/["Tool di matrice di interoperabilità (IMT)"^]. Se la versione di ONTAP in uso non è supportata e non è possibile aggiornare o eseguire il downgrade dei moduli IOM sullo stack esistente o sul nuovo shelf da aggiungere a una combinazione supportata di moduli IOM, è necessario effettuare una delle seguenti operazioni:
-
-* Avviare un nuovo stack su una nuova porta SAS (se supportata dalla coppia di bridge).
-* Avviare un nuovo stack su una coppia di bridge aggiuntiva.
-
-
-====
 .Fasi
 . Scarica o visualizza i seguenti documenti dal sito di supporto NetApp:
 +

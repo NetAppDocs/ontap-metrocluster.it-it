@@ -11,29 +11,43 @@ summary: 'Gli aggiornamenti ai sistemi introdotti in ONTAP 9.15.1 o versioni suc
 
 
 [role="lead"]
-Gli aggiornamenti dei controller ai sistemi introdotti in ONTAP 9.15.1 o versioni successive richiedono di impostare un bootarg sui vecchi controller prima di poter avviare l'aggiornamento.
+Se si esegue l'aggiornamento a un sistema introdotto in ONTAP 9.15.1 o versione successiva, solitamente è necessario impostare un bootarg sui vecchi controller prima di poter avviare l'aggiornamento.
 
 
-NOTE: È necessario impostare il bootarg richiesto su tutti i vecchi nodi in entrambi i siti prima di avviare l'aggiornamento.
-
-
-
-== Passo 1: Determinare il bootarg da impostare sui vecchi controller
-
-Tutti gli aggiornamenti supportati ai seguenti sistemi richiedono di impostare un bootarg sui vecchi controller prima di eseguire l'aggiornamento del controller:
-
-* AFF A70, AFF A90, AFF A1K
-* FAS70, FAS90
-* AFF C80
-* AFF A50, AFF A20, AFF A30
-* AFF C30, AFF C60
-* FAS50
+NOTE: Se la combinazione di aggiornamento è interessata, per un aggiornamento riuscito è necessario impostare un bootarg su tutti i vecchi controller.  Esaminare attentamente le informazioni contenute in questa sezione per verificare se la combinazione di aggiornamento richiede l'impostazione di un bootarg e come impostare il bootarg corretto per la combinazione.
 
 
 
-CAUTION: Se si sta eseguendo l'aggiornamento a uno dei sistemi elencati, è *necessario* impostare un bootarg richiesto sul sistema esistente prima di eseguire l'aggiornamento. Per tutti gli altri aggiornamenti, è possibile saltare questa attività e passare direttamente a link:upgrade-mcc-ip-prepare-system.html["Preparare il sistema per l'aggiornamento"].
+== Passaggio 1: determinare se è necessario impostare un bootarg sui vecchi controller
 
-La maggior parte degli aggiornamenti ai sistemi introdotti in ONTAP 9.15.1 o versioni successive richiedono di impostare il `hw.cxgbe.toe_keepalive_disable` bootarg sui vecchi controller. Tuttavia, alcuni percorsi di aggiornamento richiedono invece di impostare il `bootarg.siw.interop_enabled` bootarg.
+Utilizzare le seguenti informazioni per verificare se è necessario impostare un bootarg obbligatorio prima di avviare l'aggiornamento:
+
+* *È necessario* impostare un bootarg sui vecchi controller per gli aggiornamenti supportati sui seguenti sistemi, salvo diversa indicazione:
++
+** AFF A70, AFF A90, AFF A1K
+** FAS70, FAS90
+** AFF C80
+** AFF A50, AFF A20, AFF A30
+** AFF C30, AFF C60
+** FAS50
+
+
+* *Non* è necessario impostare alcun bootarg sui vecchi controller se l'aggiornamento è una delle seguenti combinazioni:
++
+** Da un sistema AFF A70 a un sistema AFF A90
+** Da un sistema FAS70 a un sistema FAS90
+
+
+
+
+
+CAUTION: Se l'aggiornamento non richiede l'impostazione di alcun argomento di avvio, è possibile saltare questa attività e passare direttamente alink:upgrade-mcc-ip-prepare-system.html["Preparare il sistema per l'aggiornamento"] .
+
+
+
+== Passaggio 2: determina il bootarg che devi impostare sui vecchi controller
+
+La maggior parte degli aggiornamenti interessati richiedono di impostare `hw.cxgbe.toe_keepalive_disable` bootarg sui vecchi controller.  Tuttavia, alcuni percorsi di aggiornamento richiedono di impostare `bootarg.siw.interop_enabled` bootarg invece.
 
 Utilizzare la tabella seguente per determinare quale bootarg impostare per la combinazione di aggiornamento specifica.
 
@@ -54,13 +68,20 @@ Utilizzare la tabella seguente per determinare quale bootarg impostare per la co
 | Da AFF A220 a AFF A20 | `bootarg.siw.interop_enabled` 
 
 
-| Tutti gli altri aggiornamenti supportati per sistemi AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30, AFF C60 o FAS50 | `hw.cxgbe.toe_keepalive_disable` 
+ a| 
+Tutti gli altri aggiornamenti ai sistemi AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A30, AFF C30, AFF C60 o FAS50
+
+*Nota:* non è necessario impostare alcun bootarg se l'aggiornamento avviene da un sistema AFF A70 a un sistema AFF A90 o da un sistema FAS70 a un sistema FAS90.
+| `hw.cxgbe.toe_keepalive_disable` 
 |===
 
 
-== Fase 2: Impostare il bootarg richiesto sui vecchi controller
+== Passaggio 3: impostare il bootarg richiesto sui vecchi controller
 
-Questa attività è *solo* necessaria quando si esegue l'aggiornamento a un sistema AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30, AFF C60 o FAS50.
+Dopo aver determinato il bootarg richiesto per la combinazione di aggiornamento, seguire i passaggi per impostare il bootarg sui vecchi controller.  Questa attività è *necessaria* solo per gli aggiornamenti interessati.
+
+
+NOTE: Prima di avviare l'aggiornamento, è necessario impostare bootarg su tutti i vecchi nodi in entrambi i siti.
 
 .Fasi
 . Arrestare un nodo in entrambi i siti e consentire al partner ha di eseguire un takeover dello storage del nodo:
