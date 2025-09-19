@@ -4,28 +4,17 @@ sidebar: sidebar
 keywords:  
 summary: A partire da ONTAP 9.8, è possibile rimuovere un gruppo di DR da una configurazione MetroCluster a otto nodi per creare una configurazione MetroCluster a quattro nodi. 
 ---
-= Rimozione di un gruppo di disaster recovery
+= Rimuovere un gruppo DR da una configurazione MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-A partire da ONTAP 9.8, è possibile rimuovere un gruppo di DR da una configurazione MetroCluster a otto nodi per creare una configurazione MetroCluster a quattro nodi.
+A partire da ONTAP 9.8, è possibile rimuovere un gruppo di disaster recovery (DR) da una configurazione MetroCluster a otto nodi per creare una configurazione MetroCluster a quattro nodi.
 
-Questa procedura è supportata in ONTAP 9.8 e versioni successive. Per i sistemi che eseguono ONTAP 9.7 o versioni precedenti, consultare l'articolo della Knowledge base
 
-link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/How_to_remove_a_DR-Group_from_a_MetroCluster["Come rimuovere un gruppo DR da una configurazione MetroCluster"]
-
-https://mysupport.netapp.com/site/global/dashboard["Supporto NetApp"]
-
-Una configurazione a otto nodi include otto nodi organizzati in due gruppi DR a quattro nodi.
-
-image::../media/mcc_dr_groups_8_node.gif[mcc dr raggruppa 8 nodi]
-
-Rimuovendo un gruppo di DR, nella configurazione rimangono quattro nodi.
-
-image::../media/mcc_dr_groups_4_node.gif[mcc dr raggruppa 4 nodi]
+NOTE: Utilizzare questi passaggi durante i flussi di lavoro di transizione e di aggiornamento del sistema.
 
 
 
@@ -43,7 +32,18 @@ Consultare l'articolo della Knowledge base link:https://kb.netapp.com/Support_Bu
 
 
 
-== Rimozione dei nodi del gruppo di DR da ciascun cluster
+== Rimuovere i nodi del gruppo DR da ciascun cluster
+
+Questa procedura è supportata a partire da ONTAP 9.8.  Per i sistemi che eseguono ONTAP 9.7 o versioni precedenti, consultare l'articolo della Knowledge Base:link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/How_to_remove_a_DR-Group_from_a_MetroCluster["Come rimuovere un gruppo DR da una configurazione MetroCluster"^] .
+
+.A proposito di questa attività
+Una configurazione a otto nodi include otto nodi organizzati in due gruppi DR a quattro nodi.
+
+image::../media/mcc_dr_groups_8_node.gif[mcc dr raggruppa 8 nodi]
+
+Quando si rimuove un gruppo DR, nella configurazione rimangono quattro nodi.
+
+image::../media/mcc_dr_groups_4_node.gif[mcc dr raggruppa 4 nodi]
 
 .Prima di iniziare
 * È necessario eseguire questa operazione su entrambi i cluster.
@@ -51,13 +51,13 @@ Consultare l'articolo della Knowledge base link:https://kb.netapp.com/Support_Bu
 
 
 .Fasi
-. Se non lo hai già fatto, preparati per la rimozione del gruppo di DR.
+. Preparatevi a rimuovere il gruppo DR se non l'avete già fatto.
 +
 .. Spostare tutti i volumi di dati in un altro gruppo di DR.
-.. Se il gruppo DR da rimuovere contiene volumi mirror per la condivisione del carico, non è possibile spostarli.  Ricreare tutti i volumi mirror di condivisione del carico in un altro gruppo DR, quindi eliminare i volumi mirror di condivisione del carico nel gruppo DR da rimuovere.
+.. Se il gruppo DR da rimuovere dispone di volumi mirror con condivisione del carico, ricreare tutti i volumi mirror con condivisione del carico in un altro gruppo DR ed eliminarli dal gruppo DR da rimuovere.
 .. Spostare tutti i volumi di metadati MDV_CRS in un altro gruppo DR seguendo la link:https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_move_a_metadata_volume_in_mcc_configurations.html["Spostamento di un volume di metadati nelle configurazioni MetroCluster"] procedura.
 .. Eliminare tutti i volumi di metadati MDV_aud che potrebbero esistere nel gruppo di DR da rimuovere.
-.. Eliminare tutti gli aggregati di dati nel gruppo DR da rimuovere, come illustrato nell'esempio seguente:
+.. Eliminare tutti gli aggregati di dati nel gruppo DR da rimuovere:
 +
 [listing]
 ----
@@ -70,25 +70,29 @@ ClusterB::> aggr delete -aggregate aggregate_name
 
 NOTE: Gli aggregati root non vengono cancellati.
 
-.. Spostare i dati LIF offline.
-`network interface modify -vserver _svm-name_ -lif _data-lif_ -status-admin down`
-.. Eseguire la migrazione di tutte le LIF dei dati nei nodi domestici di un altro gruppo di DR. +
-`network interface show -home-node _old_node_`
+.. Migrare tutti i LIF dei dati NAS utilizzati per NFS e CIFS (SMB) sui nodi home in un altro gruppo DR. + 
+`network interface show -home-node <old_node>`
 +
-`network interface modify -vserver _svm-name_ -lif _data-lif_ -home-node _new_node_ -home-port _port-id_`
+`network interface migrate -vserver <svm_name> -lif <data_lif> -destination-node <new_node> -destination-port <port>`
 
-.. Riportare online i dati LIF.
-`network interface modify -vserver _svm-name_ -lif _data-lif_ -status-admin up`
+.. Spostare i dati LIF sul nuovo nodo home in un altro gruppo DR.
+`network interface modify -vserver <svm-name> -lif <data-lif> -home-node <new_node> -home-port <port>`
 .. Eseguire la migrazione della LIF di gestione del cluster a un nodo principale in un altro gruppo di DR.
 +
 `network interface show -role cluster-mgmt`
 
 +
-`network interface modify -vserver _svm-name_ -lif _cluster_mgmt_ -home-node _new_node_ -home-port _port-id_`
+`network interface modify -vserver <svm-name> -lif <cluster_mgmt> -home-node <new_node> -home-port <port-id>`
 
 +
-La gestione dei nodi e le LIF tra cluster non vengono migrate.
+[NOTE]
+====
+*** La gestione dei nodi e i LIF inter-cluster non vengono migrati.  Creare nuovi LIF di gestione dei nodi e inter-cluster sui nodi del gruppo DR, secondo necessità.
+*** Non è possibile migrare o spostare le interfacce FCP utilizzate per l'accesso ai blocchi (SAN) tra i nodi.  Creare nuove interfacce FCP in base alle necessità.
+*** È necessario che i LIF SAN iSCSI siano inattivi prima che il nodo home e la porta home possano essere aggiornati.
 
+
+====
 .. Trasferire epsilon a un nodo di un altro gruppo DR, se necessario.
 +
 [listing]
@@ -119,6 +123,9 @@ ClusterB::*> set admin
 Nell'esempio seguente viene illustrata la rimozione della configurazione del gruppo di DR sul cluster_A.
 
 +
+.Esempio
+[%collapsible]
+====
 [listing]
 ----
 cluster_A::*>
@@ -152,19 +159,127 @@ Do you want to continue? {y|n}: y
 
 cluster_A::*>
 ----
+====
 
 
 . Ripetere il passaggio precedente sul cluster partner.
-. In una configurazione MetroCluster IP, rimuovere le connessioni MetroCluster sui nodi del vecchio gruppo di DR.
+. Disabilitare il failover dello storage sui nodi del vecchio gruppo DR:
 +
-Questi comandi possono essere emessi da entrambi i cluster e applicati all'intero gruppo di DR che copre entrambi i cluster.
+`storage failover modify -node <node-name> -enable false`
+
+. Se si utilizza una configurazione IP MetroCluster , eseguire i passaggi seguenti per eliminare i plex remoti degli aggregati radice e rimuovere la proprietà del disco sui nodi del vecchio gruppo DR.
++
+Questi passaggi devono essere eseguiti per entrambi i nodi della coppia HA in ciascun sito.
+
++
+.. Visualizza i plex remoti degli aggregati radice sui nodi nel gruppo DR che deve essere eliminato:
++
+`storage aggregate plex show -aggregate <root_aggr_name> -pool 1`
+
+.. Elimina i plex remoti:
++
+`storage aggregate plex delete -aggregate <root_aggr_name> -plex <plex_from_previous_step>`
+
+.. Identificare i dischi remoti di proprietà dei nodi nel gruppo DR.
++
+I comandi da utilizzare variano a seconda che si utilizzino dischi partizionati/condivisi o dischi interi:
+
++
+
+NOTE: Utilizzare un elenco separato da virgole nel `-owner <node_names>` campo per specificare i nomi dei nodi nel gruppo DR che devono essere eliminati.
+
++
+[role="tabbed-block"]
+====
+.Dischi partizionati/condivisi:
+--
+... Impostare il livello di privilegio su Advanced (avanzato):
++
+`set advanced`
+
+... Visualizza i dischi remoti:
++
+`storage disk show -pool Pool1 -owner <node_names> -partition-ownership`
+
+
+
+--
+.Dischi interi:
+--
+... Impostare il livello di privilegio su Advanced (avanzato):
++
+`set advanced`
+
+... Visualizza i dischi remoti:
++
+`storage disk show -pool Pool1 -owner <node_names>`
+
+
+
+--
+====
+.. Disabilita l'assegnazione automatica del disco:
++
+`disk option modify -node <node_names_in_the_DR_group_to_be_deleted>  -autoassign off`
+
+.. Rimuovere la proprietà dei dischi pool1 su ciascun nodo del gruppo DR da eliminare.  Eseguire questi passaggi su ciascun nodo da rimuovere.
++
+... Vai al nodeshell:
++
+`run -node <node_name>`
+
+... Identificare i dischi pool1:
++
+`aggr status -s`
+
++
+Vengono visualizzati tutti i dischi di riserva, inclusi i dischi di riserva pool0 e pool1 di proprietà del nodo.
+
+... Rimuovere la proprietà del disco per ogni disco di riserva del pool1:
++
+`disk remove_ownership <disk_name>`
+
++
+Per i dischi partizionati, rimuovere la proprietà della partizione e quindi rimuovere la proprietà del disco contenitore.
+
+
+
+
+
+. Se si utilizza una configurazione IP MetroCluster , rimuovere le connessioni MetroCluster sui nodi del vecchio gruppo DR.
++
+Questi comandi possono essere emessi da entrambi i cluster e si applicano all'intero gruppo DR che si estende su entrambi i cluster.
 
 +
 .. Scollegare i collegamenti:
 +
-`metrocluster configuration-settings connection disconnect _dr-group-id_`
+`metrocluster configuration-settings connection disconnect -dr-group-id <dr_group_id>`
 
++
+.Esempio
+[%collapsible]
+====
+[listing]
+----
+cluster_A::*> metrocluster configuration-settings connection disconnect -dr-group-id 1
+
+Warning: For the nodes in the DR group 1, this command will remove the existing connections that are used to mirror NV logs and access remote storage.
+Do you want to continue? {y|n}: y
+
+Warning: Before proceeding with disconnect, you must verify the following:
+      1. Unmirrored aggregates do not have disks in remote plexes.
+      2. Aggregates are not mirrored.
+      3. No disks are assigned in Pool1.
+      4. Storage failover is not enabled.
+      Follow the "MetroCluster Installation and Configuration guide" for detailed instructions to verify this.
+Do you want to continue? {y|n}: y
+----
+====
 .. Eliminare le interfacce MetroCluster sui nodi del vecchio gruppo di DR:
++
+
+NOTE: Questo passaggio deve essere ripetuto su ciascun nodo del gruppo DR.
+
 +
 `metrocluster configuration-settings interface delete`
 
@@ -174,32 +289,30 @@ Questi comandi possono essere emessi da entrambi i cluster e applicati all'inter
 
 . Disunire i nodi nel vecchio gruppo di DR.
 +
-È necessario eseguire questa operazione su ciascun cluster.
+Eseguire questo passaggio su ciascun cluster.
 
 +
 .. Impostare il livello di privilegio avanzato:
 +
 `set -privilege advanced`
 
-.. Disattivare il failover dello storage:
-+
-`storage failover modify -node _node-name_ -enable false`
-
-.. Disunire il nodo: +
-`cluster unjoin -node _node-name_`
+.. Separa il nodo: +
+`cluster unjoin -node <node-name>`
 +
 Ripetere questo passaggio per l'altro nodo locale del vecchio gruppo DR.
 
-.. Impostare il livello di privilegio admin: +
+.. Imposta il livello di privilegio di amministratore:
++
 `set -privilege admin`
 
 
-. Riattivare il cluster ha nel nuovo gruppo di DR:
+
+. Verificare che il cluster HA sia abilitato nel nuovo gruppo DR.  Se necessario, riabilitare il cluster HA:
 +
 `cluster ha modify -configured true`
 
 +
-È necessario eseguire questa operazione su ciascun cluster.
+Eseguire questo passaggio su ciascun cluster.
 
 . Arrestare, spegnere e rimuovere i vecchi moduli controller e gli shelf di storage.
 
