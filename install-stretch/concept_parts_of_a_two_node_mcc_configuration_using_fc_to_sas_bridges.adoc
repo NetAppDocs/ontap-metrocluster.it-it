@@ -34,7 +34,7 @@ La rete di peering del cluster fornisce la connettività per il mirroring della 
 
 La figura seguente mostra una vista semplificata della configurazione MetroCluster. Per alcune connessioni, una singola linea rappresenta connessioni multiple e ridondanti tra i componenti. Le connessioni di rete per dati e gestione non vengono visualizzate.
 
-image::../media/mcc_hardware_architecture_both_clusters_2_node_atto.gif[architettura hardware mcc entrambi i cluster a 2 nodi atto]
+image::../media/mcc_hardware_architecture_both_clusters_2_node_atto.gif[Architettura hardware MetroCluster a due nodi, entrambi i cluster con bridge FC-SAS]
 
 * La configurazione è costituita da due cluster a nodo singolo.
 * Ogni sito dispone di uno o più stack di storage SAS.

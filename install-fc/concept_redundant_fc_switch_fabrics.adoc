@@ -13,7 +13,7 @@ summary: 'Ogni fabric di switch include link tra switch che collegano i siti. I 
 [role="lead"]
 Ogni fabric di switch include i link inter-switch (ISL) che collegano i siti. I dati vengono replicati da un sito all'altro attraverso l'ISL. Per la ridondanza, ciascun fabric dello switch deve trovarsi su percorsi fisici diversi.
 
-image::../media/mcc_hw_architecture_switch_fabrics.gif[fabric di switch con architettura mcc hw]
+image::../media/mcc_hw_architecture_switch_fabrics.gif[Architettura hardware MetroCluster , switch fabric ridondanti]
 
 .Informazioni correlate
 link:concept_illustration_of_the_local_ha_pairs_in_a_mcc_configuration.html["Immagine delle coppie ha locali in una configurazione MetroCluster"]

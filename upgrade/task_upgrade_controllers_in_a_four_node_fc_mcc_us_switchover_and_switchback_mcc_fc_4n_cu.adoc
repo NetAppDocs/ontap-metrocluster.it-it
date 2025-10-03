@@ -568,7 +568,7 @@ Questa attività deve essere eseguita sul sito_A.
 
 Al termine di questa attività, cluster_A è attivo e fornisce dati per entrambi i siti. Cluster_B è inattivo e pronto per iniziare il processo di aggiornamento, come mostrato nell'illustrazione seguente.
 
-image::../media/mcc_upgrade_cluster_a_in_switchover.png[aggiornamento mcc del cluster a nello switchover]
+image::../media/mcc_upgrade_cluster_a_in_switchover.png[Site_B inattivo e pronto per l'aggiornamento dopo il passaggio a MetroCluster]
 
 .Fasi
 . Passare alla configurazione MetroCluster del sito_A in modo che i nodi del sito_B possano essere aggiornati:
@@ -1464,7 +1464,7 @@ Una volta configurati i nuovi controller, si torna alla configurazione MetroClus
 .A proposito di questa attività
 Questa attività consente di eseguire l'operazione di switchback, ripristinando il normale funzionamento della configurazione MetroCluster. I nodi sul sito_A sono ancora in attesa di aggiornamento.
 
-image::../media/mcc_upgrade_cluster_a_switchback.png[switchback del cluster di aggiornamento mcc a.]
+image::../media/mcc_upgrade_cluster_a_switchback.png[Site_A in attesa di aggiornamento dopo il passaggio a MetroCluster]
 
 .Fasi
 . Eseguire il `metrocluster node show` Su Site_B e controllare l'output.

@@ -60,7 +60,7 @@ I servizi di condivisione dei collegamenti, ad esempio i collegamenti MPLS (Mult
 
 Gli switch backend MetroCluster sono collegati alla rete del cliente.
 
-image::../media/MCC_layer2.png[MCC Layer2]
+image::../media/MCC_layer2.png[Configurazione di rete di livello 2 MetroCluster]
 
 Gli switch intermedi forniti dal cliente devono soddisfare i seguenti requisiti:
 
@@ -101,7 +101,7 @@ Per tutti gli altri sistemi, è necessario configurare la VLAN quando si creano 
 
 Gli switch backend MetroCluster sono collegati alla rete IP instradata, direttamente ai router (come illustrato nell'esempio semplificato seguente) o tramite altri switch interventistici.
 
-image::../media/mcc_layer3_backend.png[backend mcc layer3]
+image::../media/mcc_layer3_backend.png[Configurazione della rete backend di livello 3 MetroCluster]
 
 L'ambiente MetroCluster viene configurato e cablato come configurazione standard IP MetroCluster, come descritto in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_parts_of_an_ip_mcc_configuration_mcc_ip.html["Configurare i componenti hardware di MetroCluster"]. Quando si esegue la procedura di installazione e cablaggio, è necessario eseguire i passaggi specifici per una configurazione di livello 3. Quanto segue si applica alle configurazioni di livello 3:
 
@@ -138,11 +138,11 @@ Quando il traffico MetroCluster attraversa un ISL in una rete intermedia, è nec
 
 Il seguente diagramma fornisce una panoramica delle impostazioni richieste quando si utilizzano gli switch Cisco convalidati da NetApp:
 
-image::../media/switch_traffic_with_cisco_switches.png[cambia il traffico con gli switch cisco]
+image::../media/switch_traffic_with_cisco_switches.png[Impostazioni richieste quando si utilizzano switch Cisco convalidati da NetApp per il traffico MetroCluster]
 
 Il diagramma seguente offre una panoramica delle impostazioni richieste per una rete condivisa quando gli switch esterni sono switch Broadcom IP.
 
-image::../media/switch_traffic_with_broadcom_switches.png[cambia il traffico con gli switch broadcom]
+image::../media/switch_traffic_with_broadcom_switches.png[Impostazioni richieste per la rete condivisa quando si utilizzano switch IP Broadcom]
 
 In questo esempio, vengono creati i seguenti criteri e mappe per il traffico MetroCluster:
 

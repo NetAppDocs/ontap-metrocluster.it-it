@@ -13,7 +13,7 @@ summary: 'Eseguire l"operazione di switchback per ripristinare il normale funzio
 [role="lead"]
 Eseguire l'operazione di switchback per ripristinare il normale funzionamento della configurazione MetroCluster. I nodi sul sito_A sono ancora in attesa di aggiornamento.
 
-image::../media/mcc_upgrade_cluster_a_switchback.png[switchback del cluster di aggiornamento mcc a.]
+image::../media/mcc_upgrade_cluster_a_switchback.png[Site_A in attesa di aggiornamento dopo il passaggio a MetroCluster]
 
 .Fasi
 . Eseguire il `metrocluster node show` Su Site_B e controllare l'output.

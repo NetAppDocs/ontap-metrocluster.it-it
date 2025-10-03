@@ -33,7 +33,7 @@ I due cluster della rete peered forniscono il disaster recovery bidirezionale, i
 
 La figura seguente mostra una configurazione MetroCluster FC. La funzionalità ha è la stessa nelle configurazioni IP di MetroCluster, tranne per il fatto che l'interconnessione ha è fornita dagli switch del cluster.
 
-image::../media/mcc_hw_architecture_local_ha.gif[architettura hw mcc ha locale]
+image::../media/mcc_hw_architecture_local_ha.gif[HA locale in una configurazione MetroCluster]
 
 .Informazioni correlate
 link:https://docs.netapp.com/us-en/ontap/high-availability/index.html["Configurazione ad alta disponibilità"^]
@@ -83,11 +83,11 @@ In caso di passaggio riuscito dal cluster A al cluster B, SVM_cluster_A viene ar
 
 
 
-image::../media/mcc_mirroring_of_svms.gif[mirroring mcc di svm]
+image::../media/mcc_mirroring_of_svms.gif[Mirroring MetroCluster delle SVM]
 
 Se si verifica uno switchover, il plex remoto sul cluster in uso viene online e la SVM secondaria inizia a fornire i dati.
 
-image::../media/mcc_svms_after_switchover.gif[mcc svm dopo lo switchover]
+image::../media/mcc_svms_after_switchover.gif[SVM MetroCluster dopo il passaggio]
 
 La disponibilità di plessi remoti dopo lo switchover dipende dal tipo di configurazione MetroCluster:
 
@@ -163,7 +163,7 @@ La seguente illustrazione mostra come vengono mirrorati i pool di dischi tra i c
 
 IMPORTANT: Se si utilizzano aggregati ibridi, le performance possono peggiorare dopo un guasto di un SyncMirror plex a causa del riempimento dello strato del disco a stato solido (SSD).
 
-image::../media/mcc_mirroring_of_pools.gif[mirroring mcc dei pool]
+image::../media/mcc_mirroring_of_pools.gif[Mirroring MetroCluster dei pool di archiviazione]
 
 
 
@@ -185,9 +185,9 @@ In una configurazione MetroCluster a quattro nodi, la cache non volatile di cias
 
 
  a| 
-image:../media/mcc_nvram_quartering.gif[""]
+image:../media/mcc_nvram_quartering.gif["Cache non volatile in quarti nella configurazione MetroCluster"]
  a| 
-image:../media/mcc_nvram_split_in_non_mcc_ha_pair.gif[""]
+image:../media/mcc_nvram_split_in_non_mcc_ha_pair.gif["Cache non volatile divisa in coppia HA non MetroCluster"]
 
 |===
 Le cache non volatili memorizzano i seguenti contenuti:
@@ -212,7 +212,7 @@ In una configurazione MetroCluster a due nodi, non esiste alcuna partizione part
 
 Ad esempio, la cache locale di un nodo (Node_A_1) viene sottoposta a mirroring sia localmente che in remoto nei siti MetroCluster. L'illustrazione seguente mostra che la cache locale di Node_A_1 viene mirrorata al partner ha (Node_A_2) e al partner DR (Node_B_1):
 
-image::../media/mcc_nvram_mirroring_example.gif[esempio di mirroring nvram mcc]
+image::../media/mcc_nvram_mirroring_example.gif[Esempio di mirroring NVRAM MetroCluster]
 
 
 
@@ -222,7 +222,7 @@ Se si verifica un Takeover ha locale in una configurazione MetroCluster a quattr
 
 Ad esempio, Node_B_1 non riesce e viene sostituito da Node_B_2. Non è più possibile eseguire il mirroring della cache locale di Node_A_1 su Node_B_1. Il mirroring passa al partner ausiliario DR, Node_B_2.
 
-image::../media/mcc_nvram_mirroring_example_dynamic_dr_aux.gif[mcc nvram mirroring esempio di dr aux dinamico]
+image::../media/mcc_nvram_mirroring_example_dynamic_dr_aux.gif[Mirroring NVRAM MetroCluster con DR ausiliario]
 
 
 
@@ -557,7 +557,7 @@ ID del proprietario originale del disco all'interno della configurazione MetroCl
 |===
 L'illustrazione e la tabella seguenti forniscono un esempio di come cambia la proprietà, per un disco nel pool di dischi di Node_A_1, fisicamente ubicato in cluster_B.
 
-image::../media/mcc_disk_ownership.gif[proprietà del disco mcc]
+image::../media/mcc_disk_ownership.gif[Proprietà del disco MetroCluster]
 
 |===
 
@@ -839,7 +839,7 @@ Questa funzione si applica alle configurazioni IP di MetroCluster con ONTAP 9.5 
 
 I comandi di riparazione manuale sono ancora necessari nelle configurazioni MetroCluster IP con ONTAP 9.4 e versioni precedenti.
 
-image::../media/mcc_so_sb_with_autoheal.gif[mcc so sb con autogual]
+image::../media/mcc_so_sb_with_autoheal.gif[Switchover e switchback MetroCluster con autoheal]
 
 
 
@@ -865,7 +865,7 @@ Se i siti di disastro sono rimasti in alto, vengono immediatamente spostati nell
 
 
 
-image::../media/mcc_uso_with_autoheal.gif[mcc uso con correzione automatica]
+image::../media/mcc_uso_with_autoheal.gif[Passaggio non programmato MetroCluster con autoheal]
 
 
 

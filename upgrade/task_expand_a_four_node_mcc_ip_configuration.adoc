@@ -18,12 +18,16 @@ A partire da ONTAP 9.13.1, puoi espandere temporaneamente una configurazione Met
 A partire da ONTAP 9.9.1, è possibile aggiungere quattro nuovi nodi alla configurazione IP di MetroCluster come secondo gruppo di DR. In questo modo viene creata una configurazione MetroCluster a otto nodi.
 
 .Informazioni importanti
-Durante le procedure di transizione, aggiornamento, installazione a otto nodi ed espansione a quattro nodi, è possibile aggiungere un nuovo modello di piattaforma alla configurazione di MetroCluster. In qualsiasi fase di queste procedure, se la configurazione di MetroCluster esistente contiene una piattaforma che utilizza *porte cluster/HA condivise*, non è possibile aggiungere una piattaforma che utilizza *porte MetroCluster/HA condivise* alla configurazione senza aggiornare la versione di ONTAP a ONTAP 9.15.1P11 o ONTAP 9.16.1P4 o versioni successive.
+Le seguenti indicazioni riguardano uno scenario insolito in cui è necessario aggiungere un modello di piattaforma precedente (piattaforme rilasciate prima di ONTAP 9.15.1) a una configurazione MetroCluster esistente che contiene un modello di piattaforma più recente (piattaforme rilasciate in ONTAP 9.15.1 o versioni successive).
 
-Prima di decidere di utilizzare questa procedura, leggere attentamente le informazioni nella tabella seguente. Se la piattaforma esistente è elencata nella prima colonna e la piattaforma che si desidera aggiungere alla configurazione è elencata nella seconda, tutti i nodi nella configurazione devono eseguire ONTAP 9.15.1P11 o ONTAP 9.16.1P4 o versioni successive per supportare questa procedura.
+Se la configurazione MetroCluster esistente contiene una piattaforma che utilizza *porte cluster/HA condivise* (piattaforme rilasciate in ONTAP 9.15.1 o versioni successive), non è possibile aggiungere una piattaforma che utilizza *porte MetroCluster/HA condivise* (piattaforme rilasciate prima di ONTAP 9.15.1) senza aggiornare tutti i nodi nella configurazione a ONTAP 9.15.1P11 o ONTAP 9.16.1P4 o versioni successive.
 
+[CAUTION]
+====
+L'aggiunta di un modello di piattaforma più vecchio che utilizza *porte condivise/ MetroCluster HA* a un MetroCluster contenente un modello di piattaforma più recente che utilizza *porte condivise cluster/HA* è uno scenario insolito e la maggior parte delle combinazioni non ne è interessata.
 
-CAUTION: Sia la piattaforma esistente che quella che si desidera aggiungere alla configurazione devono eseguire ONTAP 9.15.1P11 o ONTAP 9.16.1P4 o versioni successive.
+====
+Utilizzare la seguente tabella per verificare se la combinazione è interessata.  Se la piattaforma esistente è elencata nella prima colonna e la piattaforma che si desidera aggiungere alla configurazione è elencata nella seconda colonna, tutti i nodi nella configurazione devono eseguire ONTAP 9.15.1P11 o ONTAP 9.16.1P4 o versioni successive per aggiungere il nuovo gruppo DR.
 
 [cols="20,20,20,20,20"]
 |===
@@ -185,14 +189,14 @@ Le seguenti note si applicano a entrambi i gruppi:
 --
 Esaminare le combinazioni di espansione per i sistemi AFF A150, AFF A20, FAS2750, FAS8300, FAS500f, AFF C250, AFF A250, FAS50, AFF C30, AFF A30, FAS8200, AFF A300, AFF A320, AFF A220, AFF C400, AFF A400 e FAS8700.
 
-image:../media/expand-ip-group-1-updated.png[""]
+image:../media/expand-ip-group-1-updated.png["Combinazioni di espansione per piattaforme AFF e FAS gruppo 1 in MetroCluster IP"]
 
 --
 .Combinazioni AFF e FAS gruppo 2
 --
 Esaminare le combinazioni di espansione per i sistemi AFF C60, AFF A50, FAS70, FAS9000, AFF A700, AFF A70, AFF C800, AFF A800, FAS9500, AFF A900, AFF C80, FAS90, AFF A90 e AFF A1K.
 
-image:../media/expand-ip-group-2-updated.png[""]
+image:../media/expand-ip-group-2-updated.png["Combinazioni di espansione per piattaforme AFF e FAS gruppo 2 in MetroCluster IP"]
 
 --
 ====

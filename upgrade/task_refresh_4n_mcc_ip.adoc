@@ -18,12 +18,16 @@ A partire da ONTAP 9.13.1, è possibile aggiornare i controller e lo storage in 
 A partire da ONTAP 9.8, è possibile aggiornare i controller e lo storage in una configurazione MetroCluster IP a quattro nodi espandendo la configurazione fino a diventare una configurazione temporanea a otto nodi e rimuovendo quindi il vecchio gruppo di DR.
 
 .Informazioni importanti
-Durante le procedure di transizione, aggiornamento ed espansione, è possibile aggiungere un nuovo modello di piattaforma alla configurazione di MetroCluster. In qualsiasi fase di queste procedure, se la configurazione di MetroCluster esistente contiene una piattaforma che utilizza *porte cluster/HA condivise*, non è possibile aggiungere una piattaforma che utilizza *porte MetroCluster/HA condivise* alla configurazione senza aggiornare la versione di ONTAP a ONTAP 9.15.1P11 o ONTAP 9.16.1P4 o versioni successive.
+Le seguenti indicazioni riguardano uno scenario insolito in cui è necessario aggiungere un modello di piattaforma precedente (piattaforme rilasciate prima di ONTAP 9.15.1) a una configurazione MetroCluster esistente che contiene un modello di piattaforma più recente (piattaforme rilasciate in ONTAP 9.15.1 o versioni successive).
 
-Prima di decidere di utilizzare questa procedura, leggere attentamente le informazioni nella tabella seguente. Se la piattaforma esistente è elencata nella prima colonna e la piattaforma che si desidera aggiungere alla configurazione è elencata nella seconda, tutti i nodi nella configurazione devono eseguire ONTAP 9.15.1P11 o ONTAP 9.16.1P4 o versioni successive per supportare questa procedura.
+Se la configurazione MetroCluster esistente contiene una piattaforma che utilizza *porte cluster/HA condivise* (piattaforme rilasciate in ONTAP 9.15.1 o versioni successive), non è possibile aggiungere una piattaforma che utilizza *porte MetroCluster/HA condivise* (piattaforme rilasciate prima di ONTAP 9.15.1) senza aggiornare tutti i nodi nella configurazione a ONTAP 9.15.1P11 o ONTAP 9.16.1P4 o versioni successive.
 
+[CAUTION]
+====
+L'aggiunta di un modello di piattaforma più vecchio che utilizza *porte condivise/ MetroCluster HA* a un MetroCluster contenente un modello di piattaforma più recente che utilizza *porte condivise cluster/HA* è uno scenario insolito e la maggior parte delle combinazioni non ne è interessata.
 
-CAUTION: Sia la piattaforma esistente che quella che si desidera aggiungere alla configurazione devono eseguire ONTAP 9.15.1P11 o ONTAP 9.16.1P4 o versioni successive.
+====
+Utilizzare la seguente tabella per verificare se la combinazione è interessata.  Se la piattaforma esistente è elencata nella prima colonna e la piattaforma che si desidera aggiungere alla configurazione è elencata nella seconda colonna, tutti i nodi nella configurazione devono eseguire ONTAP 9.15.1P11 o ONTAP 9.16.1P4 o versioni successive per aggiungere il nuovo gruppo DR.
 
 [cols="20,20,20,20,20"]
 |===
@@ -85,10 +89,11 @@ Un sistema FAS che utilizza *porte MetroCluster/HA condivise*:
 * Se si stanno aggiornando anche gli switch IP, è necessario aggiornarli prima di eseguire questa procedura di aggiornamento.
 * Questa procedura descrive i passaggi necessari per aggiornare un gruppo DR a quattro nodi. Se si dispone di una configurazione a otto nodi (due gruppi DR), è possibile aggiornare uno o entrambi i gruppi DR.
 +
-Se si aggiornano entrambi i gruppi di DR, è necessario aggiornare un gruppo di DR alla volta.
-
-* I riferimenti ai "vecchi nodi" indicano i nodi che si intende sostituire.
-* Per le configurazioni a otto nodi, è necessario supportare la combinazione di piattaforme MetroCluster a otto nodi di origine e destinazione.
+....
+ Refresh DR groups one at a time.
+* References to "old nodes" mean the nodes that you intend to replace.
+* For eight-node configurations, the source and target eight-node MetroCluster platform combination must be supported.
+....
 +
 
 NOTE: Se si aggiornano entrambi i gruppi di DR, la combinazione di piattaforme potrebbe non essere supportata dopo l'aggiornamento del primo gruppo di DR. È necessario aggiornare entrambi i gruppi di DR per ottenere una configurazione a otto nodi supportata.
@@ -132,20 +137,20 @@ Quando si aggiungono nuovi nodi a un cluster esistente senza un dominio di broad
 A questo punto, la configurazione a quattro nodi viene visualizzata come mostrato nell'immagine seguente:
 
 +
-image::../media/mcc_dr_group_a.png[mcc dr gruppo a]
+image::../media/mcc_dr_group_a.png[Configurazione a quattro nodi IP MetroCluster prima dell'espansione]
 
 +
 La configurazione a otto nodi viene visualizzata come mostrato nell'immagine seguente:
 
 +
-image::../media/mcc_dr_groups_8_node.gif[mcc dr raggruppa 8 nodi]
+image::../media/mcc_dr_groups_8_node.gif[Configurazione IP MetroCluster con otto nodi dopo l'espansione]
 
 . Per impedire la generazione automatica del caso di supporto, inviare un messaggio AutoSupport per indicare che l'aggiornamento è in corso.
 +
 .. Eseguire il seguente comando: +
 `system node autosupport invoke -node * -type all -message "MAINT=10h Upgrading _old-model_ to _new-model"_`
 +
-Nell'esempio seguente viene specificata una finestra di manutenzione di 10 ore. A seconda del piano, potrebbe essere necessario dedicare più tempo.
+L'esempio seguente specifica una finestra di manutenzione di 10 ore.  Calcolare del tempo aggiuntivo a seconda del piano.
 
 +
 Se la manutenzione viene completata prima che sia trascorso il tempo, è possibile richiamare un messaggio AutoSupport che indica la fine del periodo di manutenzione:
@@ -213,11 +218,11 @@ Al termine della procedura di espansione, la configurazione temporanea viene vis
 
 +
 .Configurazione temporanea a otto nodi
-image::../media/mcc_dr_group_b.png[mcc dr gruppo b]
+image::../media/mcc_dr_group_b.png[Configurazione MetroCluster dopo l'espansione e la migrazione del volume CRS]
 
 +
 .Configurazione temporanea a dodici nodi
-image::../media/mcc_dr_group_c4.png[gruppo dr mcc c4]
+image::../media/mcc_dr_group_c4.png[Configurazione temporanea MetroCluster a dodici nodi]
 
 . Verificare che sia possibile il Takeover e che i nodi siano connessi eseguendo il seguente comando su entrambi i cluster:
 +
@@ -353,17 +358,17 @@ cluster_B::>
 
 
 . Seguire la procedura descritta in link:concept_removing_a_disaster_recovery_group.html["Rimozione di un gruppo di disaster recovery"] Per rimuovere il vecchio gruppo DR.
-. Se si desidera aggiornare entrambi i gruppi di DR in una configurazione a otto nodi, è necessario ripetere l'intera procedura per ciascun gruppo di DR.
+. Se è necessario aggiornare entrambi i gruppi DR in una configurazione a otto nodi, ripetere l'intera procedura per ciascun gruppo DR.
 +
 Dopo aver rimosso il vecchio gruppo DR, la configurazione viene visualizzata come mostrato nelle seguenti immagini:
 
 +
 .Configurazione a quattro nodi
-image::../media/mcc_dr_group_d.png[gruppo dr mcc d]
+image::../media/mcc_dr_group_d.png[Configurazione MetroCluster dopo la rimozione del vecchio gruppo DR]
 
 +
 .Configurazione a otto nodi
-image::../media/mcc_dr_group_c5.png[gruppo dr mcc c5]
+image::../media/mcc_dr_group_c5.png[Configurazione finale MetroCluster a otto nodi]
 
 . Confermare la modalità operativa della configurazione MetroCluster ed eseguire un controllo MetroCluster.
 +

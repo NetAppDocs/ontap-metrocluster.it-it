@@ -357,14 +357,14 @@ Un'origine può essere una SVM di origine della sincronizzazione prima dello swi
 La seguente immagine mostra il comportamento del disaster recovery SVM in uno stato stabile:
 
 +
-image::../media/svm_dr_normal_behavior.gif[comportamento normale del dr svm]
+image::../media/svm_dr_normal_behavior.gif[Ripristino di emergenza SVM durante il funzionamento in stato stazionario]
 
 * Quando la SVM di origine della sincronizzazione è l'origine di una relazione DR con SVM, le informazioni di relazione DR con SVM di origine vengono replicate nel partner MetroCluster.
 +
 In questo modo, gli aggiornamenti DR di SVM possono continuare dopo uno switchover, come mostrato nell'immagine seguente:
 
 +
-image::../media/svm_dr_image_2.gif[immagine dr svm 2]
+image::../media/svm_dr_image_2.gif[Aggiornamenti SVM dopo il passaggio]
 
 * Durante i processi di switchover e switchback, la replica alla destinazione DR SVM potrebbe non riuscire.
 +
@@ -382,7 +382,7 @@ Durante la risincronizzazione, l'origine del disaster recovery (DR) delle macchi
 
 Durante la risincronizzazione, la SVM di origine (cluster_A) agisce temporaneamente come SVM di destinazione, come mostrato nell'immagine seguente:
 
-image::../media/svm_dr_resynchronization.gif[risincronizzazione dr svm]
+image::../media/svm_dr_resynchronization.gif[Risincronizzazione del ripristino di emergenza SVM]
 
 
 

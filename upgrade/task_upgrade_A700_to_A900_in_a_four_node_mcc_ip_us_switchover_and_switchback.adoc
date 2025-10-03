@@ -78,7 +78,7 @@ Consultare l'articolo della Knowledge base link:https://kb.netapp.com/Support_Bu
 
 È possibile utilizzare il diagramma del flusso di lavoro per pianificare le attività di aggiornamento.
 
-image::../media/workflow_ip_upgrade.png[aggiornamento ip del workflow]
+image::../media/workflow_ip_upgrade.png[Flusso di lavoro per l'aggiornamento dei controller nella configurazione IP MetroCluster]
 
 
 
@@ -444,7 +444,7 @@ Questa attività deve essere eseguita sul sito_A.
 
 Dopo aver completato questa attività, Site_A è attivo e fornisce dati per entrambi i siti. Site_B è inattivo e pronto per iniziare il processo di aggiornamento.
 
-image::../media/mcc_upgrade_cluster_a_in_switchover_A900.png[Aggiornamento mcc del cluster a nello switchover A900]
+image::../media/mcc_upgrade_cluster_a_in_switchover_A900.png[Site_B inattivo e pronto per l'aggiornamento dopo il passaggio a MetroCluster]
 
 .Fasi
 . Passare alla configurazione MetroCluster del sito_A in modo che i nodi del sito_B possano essere aggiornati:
@@ -499,7 +499,7 @@ Utilizzare la seguente procedura per rimuovere il modulo controller AFF A700 o F
 +
 .. Far scorrere il pulsante arancione sulla maniglia della camma verso il basso fino a sbloccarla.
 +
-image::../media/drw_9500_remove_PCM.png[modulo controller]
+image::../media/drw_9500_remove_PCM.png[Rimozione del modulo controller dallo chassis: sbloccare e far scorrere verso l'esterno]
 
 +
 |===
@@ -530,7 +530,7 @@ Nota: Il modulo NVS si trova nello slot 6 e presenta un'altezza doppia rispetto 
 .. Ruotare il fermo della camma verso il basso fino a portarlo in posizione orizzontale. Il sistema NVS si disinnesta dal telaio e si sposta di pochi centimetri.
 .. Rimuovere l'NVS dal telaio tirando le linguette di estrazione ai lati della superficie del modulo.
 +
-image::../media/drw_a900_move-remove_NVRAM_module.png[rimuovere il modulo]
+image::../media/drw_a900_move-remove_NVRAM_module.png[Rimozione del modulo NVRAM dallo chassis: sbloccare e tirare le linguette]
 
 +
 |===
@@ -565,7 +565,7 @@ Utilizzare la seguente procedura per installare AFF A900 o FAS9500 NVS nello slo
 . Allineare l'NVS con i bordi dell'apertura dello chassis nello slot 6.
 . Far scorrere delicatamente l'NVS nello slot fino a quando il dispositivo di chiusura della camma i/o con lettere e numeri non inizia a impegnarsi con il perno della camma i/o, quindi spingere il dispositivo di chiusura della camma i/o fino in fondo per bloccare l'NVS in posizione.
 +
-image::../media/drw_a900_move-remove_NVRAM_module.png[rimuovere il modulo]
+image::../media/drw_a900_move-remove_NVRAM_module.png[Installazione del modulo NVRAM nello chassis: allineare e bloccare in posizione]
 
 +
 |===
@@ -589,7 +589,7 @@ Utilizzare la seguente procedura per installare il modulo controller AFF A900 o 
 . Spingere con decisione il modulo controller nello chassis fino a quando non raggiunge la scheda intermedia e non è completamente inserito. Il dispositivo di chiusura si solleva quando il modulo controller è completamente inserito. Attenzione: Per evitare di danneggiare i connettori, non esercitare una forza eccessiva quando si fa scorrere il modulo controller nel telaio.
 . Collegare le porte di gestione e console al modulo controller.
 +
-image::../media/drw_9500_remove_PCM.png[modulo controller]
+image::../media/drw_9500_remove_PCM.png[Installazione del modulo controller nel telaio: allineamento, posizionamento e cablaggio]
 
 +
 |===
@@ -1337,7 +1337,7 @@ Eseguire questo passaggio su tutte le SVM secondo necessità.
 
 In questa attività, viene eseguita l'operazione di switchback e la configurazione MetroCluster torna al funzionamento normale. I nodi sul sito_A sono ancora in attesa di aggiornamento.
 
-image::../media/mcc_upgrade_cluster_a_switchback_A900.png[Cluster di upgrade mcc a switchback A900]
+image::../media/mcc_upgrade_cluster_a_switchback_A900.png[Site_A in attesa di aggiornamento dopo il passaggio a MetroCluster]
 
 .Fasi
 . Eseguire il `metrocluster node show` Dal sito_B e controllare l'output.

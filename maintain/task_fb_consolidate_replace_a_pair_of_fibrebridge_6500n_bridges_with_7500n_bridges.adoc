@@ -115,7 +115,7 @@ In questo caso, si dovrebbe iniziare con il passaggio seguente per sostituire a 
 
 Il seguente diagramma mostra un esempio della configurazione iniziale, in cui quattro bridge FibreBridge 6500N collegano due stack di storage SAS:
 
-image::../media/consolidating_stacks_before.gif[consolidamento degli stack prima]
+image::../media/consolidating_stacks_before.gif[Consolidamento degli stack prima della sostituzione di FibreBridge]
 
 .Fasi
 . Utilizzando le seguenti linee guida, sostituire a caldo il ponte FibreBridge 6500N superiore con un ponte FibreBridge 7600N o 7500N utilizzando la procedura descritta nella link:task_replace_a_sle_fc_to_sas_bridge.html#hot_swap_6500n["Scambio a caldo di un bridge FibreBridge 6500N con un bridge FibreBridge 7600N o 7500N"]:
@@ -128,7 +128,7 @@ Si tratta della stessa connessione effettuata alla porta FC1 del bridge FibreBri
 
 
 +
-image::../media/consolidating_stacks_1st_7500n_in_place.gif[consolidamento degli stack 1° 7500n in uso]
+image::../media/consolidating_stacks_1st_7500n_in_place.gif[Consolidamento degli stack con il primo FibreBridge 7500N in posizione]
 
 . Verificare la connettività ai dischi collegati al bridge e che il nuovo FibreBridge 7500N sia visibile nella configurazione:
 +
@@ -188,7 +188,7 @@ slot 0: FC Host Adapter 0g (QLogic 8324 rev. 2, N-port, <UP>)**<=== Initiator po
 +
 Si tratta della stessa connessione effettuata alla porta FC1 del bridge FibreBridge 6500N.
 
-** Non collegare la porta FC1 del bridge FibreBridge 7600N o 7500N in questo momento.image:../media/consolidating_stacks_2nd_7500n_in_place.gif[""]
+** Non collegare la porta FC1 del bridge FibreBridge 7600N o 7500N in questo momento.image:../media/consolidating_stacks_2nd_7500n_in_place.gif["Consolidamento delle pile con il secondo FibreBridge 7500N in posizione"]
 
 
 . Verificare la connettività ai dischi collegati al bridge:
@@ -267,28 +267,28 @@ NOTE: Attendere almeno 10 secondi prima di collegare la porta. I connettori dei 
 Il cavo viene visualizzato in blu nel seguente esempio:
 
 +
-image::../media/consolidating_stacks_sas_top_before.gif[consolidamento degli stack sas top in precedenza]
+image::../media/consolidating_stacks_sas_top_before.gif[Consolidamento degli stack SAS prima del cablaggio a FibreBridge 7500N]
 
 . Utilizzando un cavo con connettore mini-SAS, collegare la stessa porta SAS sullo shelf di storage alla porta SAS B del bridge superiore FibreBridge 7600N o 7500N.
 +
 Il cavo viene visualizzato in blu nel seguente esempio:
 
 +
-image::../media/consolidating_stacks_sas_top_after.gif[consolidamento degli stack sas top after]
+image::../media/consolidating_stacks_sas_top_after.gif[Cablaggio superiore SAS dopo il consolidamento]
 
 . Rimuovere il cavo che collega la porta SAS A del bridge FibreBridge 6500N inferiore allo shelf SAS superiore, accertandosi di annotare la porta SAS sullo shelf di storage a cui si collega.
 +
 Questo cavo viene visualizzato in verde nel seguente esempio:
 
 +
-image::../media/consolidating_stacks_sas_bottom_before.gif[consolidamento degli stack sas in precedenza]
+image::../media/consolidating_stacks_sas_bottom_before.gif[Cablaggio SAS verde prima del consolidamento sullo scaffale inferiore]
 
 . Utilizzando un cavo con connettore mini-SAS, collegare la stessa porta SAS sullo shelf di storage alla porta SAS B del bridge inferiore FibreBridge 7600N o 7500N.
 +
 Questo cavo viene visualizzato in verde nel seguente esempio:
 
 +
-image::../media/consolidating_stacks_sas_bottom_after.gif[consolidamento degli stack sas bottom after]
+image::../media/consolidating_stacks_sas_bottom_after.gif[Cablaggio inferiore SAS dopo il consolidamento]
 
 . Verificare la connettività ai dischi collegati al bridge:
 +
@@ -351,7 +351,7 @@ slot 0: FC Host Adapter 0g (QLogic 8324 rev. 2, N-port, <UP>)**<=== Initiator po
 Ogni stack SAS deve essere collegato alla stessa porta SAS sul bridge superiore e inferiore. Ad esempio, se la connessione superiore dello stack è collegata alla porta SAS B del bridge superiore, la connessione inferiore deve essere collegata alla porta SAS B del bridge inferiore.
 
 +
-image::../media/consolidation_sas_bottom_connection_4_stacks.gif[consolidamento sas connessione inferiore 4 stack]
+image::../media/consolidation_sas_bottom_connection_4_stacks.gif[Cablaggio inferiore SAS per quattro stack]
 
 
 
@@ -374,7 +374,7 @@ Le modifiche di zoning sono necessarie per evitare problemi con ONTAP, che richi
 
 Il seguente diagramma mostra lo zoning sul sito_A prima delle modifiche:
 
-image::../media/zoning_consolidation_site_a_before.gif[sito di consolidamento dello zoning a prima]
+image::../media/zoning_consolidation_site_a_before.gif[Consolidamento della zonizzazione nel sito A prima delle modifiche di FibreBridge]
 
 .Fasi
 . Aggiornare le zone di storage per gli switch FC rimuovendo metà delle porte iniziatore da ciascuna zona esistente e creando nuove zone per le porte FC2 FibreBridge 7500N.
@@ -479,7 +479,7 @@ Marrone tratteggiato + arancione
 |===
 Il seguente diagramma mostra lo zoning nel sito_A dopo il consolidamento:
 
-image::../media/zoning_consolidation_site_a_after.gif[sito di consolidamento dello zoning a after]
+image::../media/zoning_consolidation_site_a_after.gif[Consolidamento della zonizzazione nel sito A dopo le modifiche di FibreBridge]
 
 
 
@@ -519,11 +519,11 @@ Lo zoning deve essere stato regolato in modo da fornire zone per le seconde port
 .Fasi
 . Collegare la porta FC2 del ponte superiore alla porta corretta su FC_switch_A_2.
 +
-image::../media/consolidating_stacks_sas_ports_recabled.gif[consolidamento delle porte sas degli stack cablate]
+image::../media/consolidating_stacks_sas_ports_recabled.gif[Cablaggio della porta FC2 dopo il consolidamento su FC_switch_A_2]
 
 . Collegare la porta FC1 del bridge inferiore alla porta corretta su FC_switch_A_1.
 +
-image::../media/consolidating_stacks_final.gif[consolidamento degli stack finale]
+image::../media/consolidating_stacks_final.gif[Cablaggio di consolidamento finale dello stack]
 
 . Verificare la connettività ai dischi collegati al bridge:
 +

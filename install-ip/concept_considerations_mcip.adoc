@@ -29,7 +29,7 @@ Si tratta di configurazioni diverse da quelle FC di MetroCluster, in cui i pool 
 
 In una configurazione MetroCluster IP, la replica dello storage e della cache non volatile tra le coppie ha e i partner DR viene eseguita su collegamenti dedicati ad alta larghezza di banda nel fabric IP di MetroCluster. Le connessioni iSCSI vengono utilizzate per la replica dello storage. Gli switch IP vengono utilizzati anche per tutto il traffico intra-cluster all'interno dei cluster locali. Il traffico MetroCluster viene mantenuto separato dal traffico intra-cluster utilizzando sottoreti IP e VLAN separate. Il fabric IP di MetroCluster è distinto e diverso dalla rete di peering del cluster.
 
-image::../media/mcc_ip_ip_subnets.gif[subnet ip mcc]
+image::../media/mcc_ip_ip_subnets.gif[Separazione delle subnet IP e delle VLAN MetroCluster]
 
 La configurazione MetroCluster IP richiede due indirizzi IP su ciascun nodo che sono riservati al fabric MetroCluster IP back-end. Gli indirizzi IP riservati vengono assegnati alle LIF (MetroCluster IP Logical Interface) durante la configurazione iniziale e presentano i seguenti requisiti:
 

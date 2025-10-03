@@ -64,7 +64,7 @@ Cluster_A_2::> storage aggregate show -aggr dataA_2_data
 L'esempio seguente mostra una coppia di bridge che collegano un singolo stack SAS, che contiene lo shelf di destinazione:
 
 +
-image::../media/mcc_shelf_replacement_bridges_with_a_single_stack.gif[i bridge di sostituzione degli shelf mcc con un singolo stack]
+image::../media/mcc_shelf_replacement_bridges_with_a_single_stack.gif[Ponti di sostituzione degli scaffali con pila singola]
 
 +
 Le porte 8 e 9 di ogni switch collegano i bridge alla rete.
@@ -107,7 +107,7 @@ FC_switch_A_2(config)# end
 L'esempio seguente mostra una coppia di bridge che collegano quattro stack SAS. Lo stack SAS 2 contiene lo shelf di destinazione:
 
 +
-image::../media/mcc_shelf_replacement_bridges_with_four_stacks.gif[ponti di sostituzione degli shelf mcc con quattro stack]
+image::../media/mcc_shelf_replacement_bridges_with_four_stacks.gif[Ponti di sostituzione degli scaffali con quattro pile]
 
 +
 La porta SAS B collega i bridge allo shelf di destinazione. Disattivando solo la porta SAS B su entrambi gli shelf, gli altri stack SAS possono continuare a servire i dati durante la procedura di sostituzione.

@@ -40,13 +40,13 @@ Quando si aggiungono nuovi nodi a un cluster esistente senza un dominio di broad
 * Questa procedura è un'interruzione e richiede circa quattro ore per essere completata.
 * Prima di eseguire questa procedura, la configurazione MetroCluster FC è costituita da due cluster a nodo singolo:
 +
-image::../media/mcc_dr_groups_2_node.gif[nodo gruppi dr mcc 2]
+image::../media/mcc_dr_groups_2_node.gif[Configurazione MetroCluster FC con due nodi prima dell'espansione]
 
 +
 Al termine di questa procedura, la configurazione MetroCluster FC è costituita da due coppie ha, una per ciascun sito:
 
 +
-image::../media/mcc_dr_groups_4_node.gif[mcc dr raggruppa 4 nodi]
+image::../media/mcc_dr_groups_4_node.gif[Configurazione MetroCluster FC con quattro nodi dopo l'espansione]
 
 * Entrambi i siti devono essere espansi in modo uguale.
 +
@@ -59,4 +59,4 @@ Il tempo di inizializzazione dei dischi dipende dalle dimensioni dei dischi.
 * Questa procedura utilizza il seguente flusso di lavoro:
 
 
-image::../media/workflow_mcc_2_to_4_node_expansion_high_level.gif[workflow mcc espansione da 2 a 4 nodi di alto livello]
+image::../media/workflow_mcc_2_to_4_node_expansion_high_level.gif[Flusso di lavoro per l'espansione da 2 a 4 nodi MetroCluster FC]

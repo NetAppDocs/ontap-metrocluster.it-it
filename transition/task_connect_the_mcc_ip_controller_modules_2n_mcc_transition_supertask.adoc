@@ -30,7 +30,7 @@ Questi passaggi devono essere eseguiti su ciascuno dei nodi IP di MetroCluster.
 
 Nell'esempio seguente, vengono aggiunti due shelf di storage aggiuntivi in ogni sito per fornire storage per ospitare i nuovi moduli controller.
 
-image::../media/transition_2n_4_new_ip_nodes_and_shelves.png[transizione 2n 4 nuovi nodi ip e shelf]
+image::../media/transition_2n_4_new_ip_nodes_and_shelves.png[Cablaggio di nuovi nodi IP e scaffali per la transizione]
 
 .Fasi
 . Pianificare il posizionamento dei nuovi moduli controller e degli shelf di storage in base alle necessità.
@@ -588,7 +588,7 @@ Questi passaggi vengono eseguiti sui seguenti nodi:
 * Node_B_2-IP
 
 
-image::../media/transition_2n_booting_a_2_and_b_2.png[transizione 2n avvio di 2 e b 2]
+image::../media/transition_2n_booting_a_2_and_b_2.png[Avvio di nuovi nodi IP durante la transizione]
 
 .Fasi
 . Avviare i nuovi nodi usando l'opzione di boot "`9c`".
@@ -802,7 +802,8 @@ node_A_1-IP
              Data: interface_reachable
              ICMP: interface_reachable true       true            true
 node_A_2-IP
-           cluster_B                   node_B_1-IP
+
+image::../media/transition_2n_booting_a_2_and_b_2.png["Booting new IP nodes during transition"]
              Data: interface_reachable
              ICMP: interface_reachable true       true            true
                                        node_B_2-IP

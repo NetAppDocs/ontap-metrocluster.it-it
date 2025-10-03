@@ -39,11 +39,11 @@ Questa procedura è supportata a partire da ONTAP 9.8.  Per i sistemi che eseguo
 .A proposito di questa attività
 Una configurazione a otto nodi include otto nodi organizzati in due gruppi DR a quattro nodi.
 
-image::../media/mcc_dr_groups_8_node.gif[mcc dr raggruppa 8 nodi]
+image::../media/mcc_dr_groups_8_node.gif[Configurazione MetroCluster con otto nodi in due gruppi DR]
 
 Quando si rimuove un gruppo DR, nella configurazione rimangono quattro nodi.
 
-image::../media/mcc_dr_groups_4_node.gif[mcc dr raggruppa 4 nodi]
+image::../media/mcc_dr_groups_4_node.gif[Configurazione MetroCluster con quattro nodi dopo la rimozione del gruppo DR]
 
 .Prima di iniziare
 * È necessario eseguire questa operazione su entrambi i cluster.

@@ -28,11 +28,11 @@ Questa procedura non è supportata nelle versioni precedenti di ONTAP o nelle co
 
 Prima di eseguire questa procedura, la configurazione MetroCluster FC è costituita da quattro nodi, con una coppia ha in ogni sito:
 
-image::../media/mcc_dr_groups_4_node.gif[mcc dr raggruppa 4 nodi]
+image::../media/mcc_dr_groups_4_node.gif[Configurazione MetroCluster FC con quattro nodi prima dell'espansione]
 
 Al termine di questa procedura, la configurazione MetroCluster FC è costituita da due coppie ha in ogni sito:
 
-image::../media/mcc_dr_groups_8_node.gif[mcc dr raggruppa 8 nodi]
+image::../media/mcc_dr_groups_8_node.gif[Configurazione MetroCluster FC con otto nodi dopo l'espansione]
 
 Entrambi i siti devono essere espansi in modo uguale. Una configurazione MetroCluster FC non può essere costituita da un numero di nodi non uniforme.
 
