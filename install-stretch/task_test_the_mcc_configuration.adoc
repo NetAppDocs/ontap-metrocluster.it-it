@@ -19,7 +19,7 @@ summary: È possibile verificare gli scenari di errore per confermare il corrett
 
 È possibile testare un'operazione di switchover negoziata (pianificata) per confermare la disponibilità ininterrotta dei dati.
 
-Questo test verifica che la disponibilità dei dati non sia interessata (ad eccezione dei protocolli SMB (Server message Block) di Microsoft e Fibre Channel di Solaris) passando il cluster al secondo data center.
+Questo test convalida che la disponibilità dei dati non viene influenzata (ad eccezione dei protocolli SMB e Fibre Channel) dal passaggio del cluster al secondo data center.
 
 Questo test dovrebbe richiedere circa 30 minuti.
 
@@ -99,8 +99,6 @@ Remote: cluster_B               not-reachable          -
 +
 [listing]
 ----
-cluster_A::>  metrocluster operation show
-
 cluster_A::> metrocluster operation show
   Operation: switchover
       State: successful
@@ -140,7 +138,7 @@ Group Cluster Node               State          Mirroring Mode
               node_A_1         configured     enabled   heal roots completed
       cluster_B
               node_B_2         unreachable    -         switched over
-42 entries were displayed.metrocluster operation show
+42 entries were displayed.
 ----
 . Verificare che tutti gli aggregati siano `mirrored`:
 +

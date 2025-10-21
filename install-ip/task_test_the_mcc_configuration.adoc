@@ -20,7 +20,7 @@ summary: È possibile verificare gli scenari di errore per confermare il corrett
 È possibile testare l'operazione di switchover negoziata (pianificata) per confermare la disponibilità ininterrotta dei dati.
 
 .A proposito di questa attività
-Questo test verifica che la disponibilità dei dati non sia interessata (ad eccezione dei protocolli SMB (Server message Block) di Microsoft e Fibre Channel di Solaris) passando il cluster al secondo data center.
+Questo test convalida che la disponibilità dei dati non viene influenzata (ad eccezione dei protocolli SMB e Fibre Channel) dal passaggio del cluster al secondo data center.
 
 Questo test dovrebbe richiedere circa 30 minuti.
 
@@ -100,8 +100,6 @@ Remote: cluster_B               not-reachable          -
 +
 [listing]
 ----
-cluster_A::>  metrocluster operation show
-
 cluster_A::> metrocluster operation show
   Operation: switchover
       State: successful
@@ -175,7 +173,7 @@ Group Cluster Node               State          Mirroring Mode
               node_A_1         configured     enabled   heal roots completed
       cluster_B
               node_B_2         unreachable    -         switched over
-42 entries were displayed.metrocluster operation show
+42 entries were displayed.
 ----
 +
 Se l'operazione di riparazione automatica non riesce per qualsiasi motivo, è necessario eseguire il `metrocluster heal` Comandi manuali come nelle versioni di ONTAP precedenti a ONTAP 9.5. È possibile utilizzare `metrocluster operation show` e. `metrocluster operation history show -instance` comandi per monitorare lo stato di riparazione e determinare la causa di un errore.

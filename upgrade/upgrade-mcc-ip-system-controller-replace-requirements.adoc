@@ -13,6 +13,9 @@ summary: 'Verifica che il sistema soddisfi tutti i requisiti prima di eseguire l
 [role="lead"]
 Verifica che il tuo sistema soddisfi tutti i requisiti prima di eseguire l'upgrade del controller.
 
+
+CAUTION: *È necessario eseguire questa procedura come descritto ogni volta che si aggiornano i controller.* Quando vengono rilasciate nuove piattaforme, potrebbero esserci passaggi nuovi o modificati da seguire. Ad esempio, quando si esegue l'aggiornamento alle piattaforme introdotte in ONTAP 9.15.1 o versioni successive, è necessario link:upgrade-mcc-ip-system-controller-replace-set-bootarg.html["imposta il bootarg richiesto"] ed eseguire altri passaggi aggiuntivi per un aggiornamento riuscito.
+
 * Questa procedura può essere utilizzata solo per l'aggiornamento del controller.
 +
 Gli altri componenti della configurazione, come gli shelf di storage o gli switch, non possono essere aggiornati contemporaneamente.

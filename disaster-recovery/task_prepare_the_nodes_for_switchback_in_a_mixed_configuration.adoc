@@ -92,9 +92,9 @@ NOTE: Se il contenuto della NVRAM di un controller sostitutivo usato non è stat
 +
 `halt`
 
-.. Avviare il nodo in Maintenance (manutenzione):
+.. Avviare il nodo in modalità di manutenzione:
 +
-`mode:boot_ontap maint`
+`boot_ontap maint`
 
 
 
@@ -149,7 +149,7 @@ Se necessario, è possibile ripristinare boot_recovery e rdb_corrotto_bootargs
 +
 [listing]
 ----
-node_A_1::*> halt -node _node-name_
+siteA::*> halt -node <node-name>
 ----
 . Controllare se sono stati impostati i seguenti bootargs:
 +

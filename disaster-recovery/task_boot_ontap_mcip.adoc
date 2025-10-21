@@ -205,7 +205,7 @@ Se necessario, è possibile ripristinare boot_recovery e rdb_corrotto_bootargs
 +
 [listing]
 ----
-node_A_1::*> halt -node _node-name_
+siteA::*> halt -node <node-name>
 ----
 . Controllare se sono stati impostati i seguenti bootargs:
 +
