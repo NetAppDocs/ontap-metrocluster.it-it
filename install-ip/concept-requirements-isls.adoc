@@ -15,7 +15,7 @@ Gli ISL (Inter-Switch Links) che trasportano il traffico MetroCluster su tutte l
 
 
 
-== Requisiti generali dell'ISL MetroCluster
+== Requisiti MetroCluster ISL
 
 Quanto segue si applica agli ISL in tutte le configurazioni IP di MetroCluster:
 
@@ -24,7 +24,12 @@ Quanto segue si applica agli ISL in tutte le configurazioni IP di MetroCluster:
 * Gli ISL in entrambi i fabric devono essere della stessa velocità e lunghezza.
 * La differenza massima supportata di distanza tra il tessuto 1 e il tessuto 2 è 20km o 0,2ms.
 * Gli ISL devono avere la stessa topologia. Ad esempio, dovrebbero essere tutti collegamenti diretti, o se la configurazione utilizza WDM, devono tutti utilizzare WDM.
-* La velocità dell'ISL deve essere di almeno 10Gbps.
+* La velocità ISL minima richiesta dipende dal modello della piattaforma:
++
+** Sui sistemi AFF A1K e AFF A90 , la velocità ISL deve essere almeno di 100 Gbps. L'utilizzo di una velocità ISL diversa richiede una richiesta di variazione del prodotto caratteristica (FPVR). Per presentare un FPVR, contatta il tuo team di vendita.
+** Su tutte le altre piattaforme, la velocità ISL deve essere almeno di 10 Gbps.
+
+
 * Deve essere presente almeno una porta ISL 10Gbps per fabric.
 
 
