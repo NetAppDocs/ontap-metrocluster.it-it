@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: installation, tiebreaker, software, add, modify, metrocluster, configuration, remove, configuring, configure, launch, cli, add, command, modify, removing 
 summary: 'Dopo l"installazione del software Tiebreaker, è possibile aggiungere o modificare le configurazioni MetroCluster o rimuoverle dal software Tiebreaker.' 
 ---
-= Configurazione del software Tiebreaker
+= Configurare il software MetroCluster Tiebreaker
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -15,7 +15,7 @@ Dopo l'installazione del software Tiebreaker, è possibile aggiungere o modifica
 
 
 
-== Avvio della CLI del software Tiebreaker
+== Avviare la CLI del software Tiebreaker
 
 Dopo aver installato il software Tiebreaker, è necessario avviarne la CLI per configurare il software.
 
@@ -78,6 +78,39 @@ Are you sure you want to enable automatic switchover capability for monitor "8pa
 
 .Informazioni correlate
 link:concept_risks_and_limitation_of_using_mcc_tiebreaker_in_active_mode.html["Rischi e limitazioni dell'utilizzo di MetroCluster Tiebreaker in modalità attiva"]
+
+
+
+== Certificati di importazione
+
+Per abilitare il monitoraggio senza interruzioni in Tiebreaker 1.6 o versioni successive, è necessario importare il certificato Secure Sockets Layer (SSL) del server, il certificato intermedio (se presente) e il certificato radice da ONTAP nell'archivio chiavi nella Java Virtual Machine (JVM).
+
+.A proposito di questa attività
+* Questa attività è richiesta in Tiebreaker 1.6 o versioni successive.
+* Questa attività può essere eseguita dopo aver aggiunto correttamente una configurazione MetroCluster a Tiebreaker o se i certificati sono scaduti.
+
+
+.Fase
+. Eseguire il seguente comando per ogni certificato che si desidera importare (server SSL, intermedio o root).
++
+`/opt/netapp/java/bin/keytool -import -trustcacerts -file <certificate_file_name> -keystore "/opt/netapp/java/lib/security/cacerts" -alias <certificate>`
+
++
+** IL `<certificate_file_name>` Il valore specifica il nome del file del certificato che si desidera importare.
+** IL `-alias <certificate>` value specifica il nome con cui si desidera archiviare il certificato dopo averlo importato nella JVM.
++
+L'esempio seguente mostra come importare un certificato radice con il nome del file `root.crt` e un certificato del server SSL con il nome del file `ssl_cert.crt`:
+
++
+[listing]
+----
+/opt/netapp/java/bin/keytool -import -trustcacerts -file root.crt -keystore "/opt/netapp/java/lib/security/cacerts" -alias root
+
+/opt/netapp/java/bin/keytool -import -trustcacerts -file ssl_cert.crt -keystore "/opt/netapp/java/lib/security/cacerts" -alias ssl_cert
+----
+
+
+
 
 
 
@@ -180,7 +213,7 @@ La password utente è stata aggiornata correttamente
 |===
 
 
-== Rimozione delle configurazioni MetroCluster
+== Rimuovere le configurazioni MetroCluster
 
 È possibile rimuovere la configurazione MetroCluster monitorata dal software Tiebreaker quando non si desidera più monitorare una configurazione MetroCluster.
 
