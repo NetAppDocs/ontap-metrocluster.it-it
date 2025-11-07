@@ -90,7 +90,7 @@ Per abilitare il monitoraggio senza interruzioni in Tiebreaker 1.6 o versioni su
 * Questa attività può essere eseguita dopo aver aggiunto correttamente una configurazione MetroCluster a Tiebreaker o se i certificati sono scaduti.
 
 
-.Fase
+.Fasi
 . Eseguire il seguente comando per ogni certificato che si desidera importare (server SSL, intermedio o root).
 +
 `/opt/netapp/java/bin/keytool -import -trustcacerts -file <certificate_file_name> -keystore "/opt/netapp/java/lib/security/cacerts" -alias <certificate>`
@@ -109,6 +109,10 @@ L'esempio seguente mostra come importare un certificato radice con il nome del f
 /opt/netapp/java/bin/keytool -import -trustcacerts -file ssl_cert.crt -keystore "/opt/netapp/java/lib/security/cacerts" -alias ssl_cert
 ----
 
+
+. Riavviare il software Tiebreaker:
++
+`systemctl restart netapp-metrocluster-tiebreaker-software`
 
 
 

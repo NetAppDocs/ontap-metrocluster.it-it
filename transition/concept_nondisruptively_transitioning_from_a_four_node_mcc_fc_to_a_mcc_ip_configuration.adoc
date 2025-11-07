@@ -15,9 +15,9 @@ summary: A partire da ONTAP 9.13.1, è possibile eseguire una transizione senza 
 
 A partire da ONTAP 9.13.1, questa procedura è supportata nelle configurazioni IP di MetroCluster in cui MetroCluster e gli shelf di dischi sono connessi agli stessi switch IP (configurazione di uno storage condiviso).
 
-A partire da ONTAP 9.13.1, è possibile eseguire una transizione senza interruzioni di carichi di lavoro e dati da una configurazione MetroCluster FC a otto nodi esistente a una nuova configurazione MetroCluster IP.
+A partire da ONTAP 9.13.1, è possibile eseguire una transizione senza interruzioni dei carichi di lavoro e dei dati da una configurazione MetroCluster FC a otto nodi esistente a una nuova configurazione MetroCluster IP a otto nodi.  Utilizzare questa procedura per trasferire un gruppo FC DR a quattro nodi, rimuovere il gruppo FC DR vuoto e quindi ripetere la procedura per il secondo gruppo FC DR. 
 
-A partire da ONTAP 9.8, è possibile eseguire una transizione senza interruzioni di carichi di lavoro e dati da una configurazione MetroCluster FC a quattro nodi esistente a una nuova configurazione MetroCluster IP.
+A partire da ONTAP 9.8, è possibile eseguire una transizione senza interruzioni dei carichi di lavoro e dei dati da una configurazione MetroCluster FC a quattro nodi esistente a una nuova configurazione MetroCluster IP a quattro nodi.  Dopo aver completato la transizione, se necessario, è possibile passare a una configurazione IP MetroCluster a otto nodi. Vederelink:../upgrade/task_expand_a_four_node_mcc_ip_configuration.html["Espandere una configurazione IP MetroCluster"] .
 
 * Questa procedura è senza interruzioni.
 +
@@ -28,6 +28,10 @@ La configurazione MetroCluster può continuare a fornire dati durante l'operazio
 Se si dispone di una configurazione MetroCluster FC a due nodi, vedere link:concept_choosing_your_transition_procedure_mcc_transition.html["Scelta della procedura di transizione"].
 
 * Questa procedura descrive i passaggi necessari per la transizione di un gruppo DR FC a quattro nodi. Se si dispone di una configurazione a otto nodi (due gruppi DR FC), è necessario ripetere l'intera procedura per ciascun gruppo DR FC.
++
+
+NOTE: Quando si aggiunge o si rimuove un gruppo DR come parte di questa procedura, è necessario verificare che la rimozione o l'aggiunta del gruppo DR sia avvenuta correttamente prima di aggiungere o rimuovere un altro gruppo DR.
+
 * È necessario soddisfare tutti i requisiti e seguire tutte le fasi della procedura.
 
 

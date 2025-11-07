@@ -3997,7 +3997,6 @@
   <block id="feb6447b54e85b35757c82bf8e07abf7" category="summary">A partire da ONTAP 9.13.1, è possibile eseguire una transizione senza interruzioni di carichi di lavoro e dati da una configurazione MetroCluster FC a otto nodi esistente a una nuova configurazione MetroCluster IP.</block>
   <block id="2380f44f4dcec1f84b76f71d467c0c65" category="doc">Transizione senza interruzioni da una configurazione MetroCluster FC a una configurazione MetroCluster IP (ONTAP 9.8 e versioni successive)</block>
   <block id="3d24a5eddf097cddc7e369398b35f959" category="paragraph">È possibile eseguire transizioni senza interruzioni di carichi di lavoro e dati da una configurazione MetroCluster FC esistente a una nuova configurazione MetroCluster IP.</block>
-  <block id="31c4d6a80fe871ada10a219d5727c166" category="paragraph">A partire da ONTAP 9.8, è possibile eseguire una transizione senza interruzioni di carichi di lavoro e dati da una configurazione MetroCluster FC a quattro nodi esistente a una nuova configurazione MetroCluster IP.</block>
   <block id="14b3de5cc3b7ebe82cf797d4c070ce27" category="list-text">Questa procedura è senza interruzioni.</block>
   <block id="c360a01208e0f0cebb82608c945309e8" category="paragraph">La configurazione MetroCluster può continuare a fornire dati durante l'operazione.</block>
   <block id="1bf2c57ed29fc24c2ccb26dcba0c45be" category="list-text">Questa procedura si applica solo alle configurazioni MetroCluster FC a quattro e otto nodi.</block>
@@ -4119,7 +4118,6 @@
   <block id="5a2ebfb8baa378cfcfcba58bbb1380c2" category="cell">Requisiti</block>
   <block id="8c4271e6faf2cea4cfc8e5b7108d8ee9" category="cell">Procedura</block>
   <block id="b8910962b1d031cc1eb8e8ad588c4c48" category="paragraph">Senza interruzioni</block>
-  <block id="b1967383562a98a66ed0eff3ea640595" category="paragraph">I nuovi shelf di storage sono supportati sulle nuove piattaforme.</block>
   <block id="6e2ee39d0f9ccdad593782674a048e67" category="inline-link-macro">Collegamento alla procedura</block>
   <block id="5c85f685c62c106f7c5565f5f9efa724" category="paragraph">Due nodi</block>
   <block id="fb36a3d5cdf2e3b5ecef9b3c9fbab504" category="paragraph">Disgregativo</block>
@@ -13636,7 +13634,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="74d14036e96594d67869316b84c6d566" category="paragraph">Pacchetto scaricato CSHM elaborato correttamente.</block>
   <block id="89c6b3e5f896b8d329ae4e4fe91cc812" category="paragraph">In caso di errore, contattare il supporto NetApp.</block>
   <block id="a6fd16052b19595c024aa4e5bcb0b366" category="list-text">[[step6]]attendere fino a due volte l'intervallo di polling del monitor dello stato dello switch Ethernet, rilevato eseguendo<block ref="c9e6cd6140c9d8677df821c7cce2aac1" prefix=" " category="inline-code"></block>, prima di completare il passaggio successivo.</block>
-  <block id="c947c5faccdddd0a9a87be7895f50511" category="list-text">Eseguire il comando<block ref="db3929a8e897b02a87f7f4bc42f38fc1" prefix=" " category="inline-code"></block> sul sistema ONTAP e assicurarsi che gli switch del cluster vengano rilevati con il campo monitorato impostato su *vero* e il campo del numero di serie non visualizzi *Sconosciuto*.</block>
   <block id="d57382f230671f8cd52f47dc80838934" category="admonition">Se il modello mostra ancora *ALTRO* dopo aver applicato il file di configurazione, contattare il supporto NetApp.</block>
   <block id="58a19c530e54f6364edd838f35b1830e" category="inline-link-macro">Configurare il monitoraggio dello stato dello switch</block>
   <block id="d47e3b820b4e0ef60cfed3bd03049a46" category="paragraph"><block ref="402ba92b413c133107b7e0b0a0255bc4" category="inline-link-macro-rx"></block>.</block>
@@ -14435,4 +14432,17 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="50579aa28b2b0ac01c180e6e07119273" category="paragraph"><block ref="50579aa28b2b0ac01c180e6e07119273" category="inline-link-macro-rx"></block></block>
   <block id="9a1a464601bee502d12616aa9be06bb3" category="list-text"><block ref="d77847ddf2a5535e4974575f39191ae2" category="inline-link-macro-rx"></block> dal software Tiebreaker.</block>
   <block id="ba13dd5c52c50f7bb5ef919e4d340c98" category="paragraph"><block ref="83029083d25b0153769c6039afb8beb5" category="inline-link-macro-rx"></block>.</block>
+  <block id="62633c6c7bc1e478b0c226fc706ce7d1" category="list-text">Esegui il comando<block ref="350d65f100fdbc8d411ce22a179f4b29" prefix=" " category="inline-code"></block> sul sistema ONTAP e assicurarsi che gli switch del cluster vengano rilevati con il campo monitorato impostato su *True* e che il campo del numero di serie non mostri *Unknown*.</block>
+  <block id="f53c5f8d2c3b0e3b1854e0c8f280aac0" category="list-text">Riavviare il software Tiebreaker:</block>
+  <block id="3b879e464448b1abbc76cb49a3e48f67" category="paragraph"><block ref="5c46787eed9475e8e2a2351216605e90" prefix="" category="inline-code"></block></block>
+  <block id="f4c717f63bbf7bf7a91d2fde6f9051f1" category="paragraph">Sono necessari nuovi scaffali di stoccaggio sulle nuove piattaforme.  Una volta completata la transizione, i vecchi controller, shelf e dischi vengono rimossi dal cluster.</block>
+  <block id="0c6fc3d80e5d75918b6f2d338a395bfe" category="paragraph">*Nota:* questa procedura supporta le seguenti transizioni da FC a IP:</block>
+  <block id="b9a67b79bf8805e04026764220f5644c" category="list-text">Da una configurazione MetroCluster FC a quattro nodi a una configurazione MetroCluster IP a quattro nodi</block>
+  <block id="b5c21ffa00510d1334f85119eb48a645" category="list-text">Da una configurazione MetroCluster FC a otto nodi a una configurazione MetroCluster IP a otto nodi</block>
+  <block id="7a2504e84fd0f2574207d002a4e82d9a" category="paragraph">A partire da ONTAP 9.13.1, è possibile eseguire una transizione senza interruzioni dei carichi di lavoro e dei dati da una configurazione MetroCluster FC a otto nodi esistente a una nuova configurazione MetroCluster IP a otto nodi.  Utilizzare questa procedura per trasferire un gruppo FC DR a quattro nodi, rimuovere il gruppo FC DR vuoto e quindi ripetere la procedura per il secondo gruppo FC DR. </block>
+  <block id="e59a63f4705f92f189efd0bae23c593c" category="paragraph">A partire da ONTAP 9.8, è possibile eseguire una transizione senza interruzioni dei carichi di lavoro e dei dati da una configurazione MetroCluster FC a quattro nodi esistente a una nuova configurazione MetroCluster IP a quattro nodi.  Dopo aver completato la transizione, se necessario, è possibile passare a una configurazione IP MetroCluster a otto nodi. Vedere<block ref="3a5645d9f79878fa2875b4b5fe2e8c9e" category="inline-link-macro-rx"></block> .</block>
+  <block id="584e8e12c74fdc178c6cb5a7049fb874" category="admonition">Quando si aggiunge o si rimuove un gruppo DR come parte di questa procedura, è necessario verificare che la rimozione o l'aggiunta del gruppo DR sia avvenuta correttamente prima di aggiungere o rimuovere un altro gruppo DR.</block>
+  <block id="d134f3e8bbc2dfac90ce02f2d628c649" category="list-text">Se si utilizza Onboard Key Manager, eseguire i seguenti passaggi dal cluster in cui è stato aggiunto un nuovo nodo:</block>
+  <block id="87f7e23221d5cdfbe745a1b00fcf1068" category="list-text">Sincronizzare la configurazione del gestore delle chiavi:</block>
+  <block id="65ce095af1b3ce283b41ed1ff6456ed9" category="list-text">Quando richiesto, immettere la passphrase di Onboard Key Manager.</block>
 </blocks>
