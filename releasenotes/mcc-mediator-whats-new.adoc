@@ -4,22 +4,38 @@ sidebar: sidebar
 keywords: metrocluster, mediator, new, release, update, install, 
 summary: Con ogni release vengono fornite nuove funzionalità del mediatore ONTAP.  Ecco le novità. 
 ---
-= Novità del supporto di ONTAP Mediator
+= Novità nel supporto ONTAP Mediator per MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Con ogni versione vengono forniti nuovi miglioramenti a ONTAP Mediator. Ecco le novità.
+Scopri le nuove funzionalità e i miglioramenti MetroCluster per il supporto di ONTAP Mediator.
 
-Per i dettagli sull'installazione o l'aggiornamento di ONTAP Mediator nella configurazione MetroCluster, puoi andare link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_mediator_requirements.html["Prepararsi all'installazione di ONTAP Mediator"^] .
+Per i dettagli sulle funzionalità e i miglioramenti per ogni versione di ONTAP Mediator, fare riferimento alink:https://docs.netapp.com/us-en/ontap/mediator/whats-new-concept.html["Novità di ONTAP Mediator"^] .
 
-[cols="75,25"]
+[cols="4,2"]
 |===
+| Funzionalità ONTAP Mediator | Inizio disponibile 
 
 
-| Funzionalità ONTAP Mediator | Versione di ONTAP 
+ a| 
+IPv6 è supportato per ONTAP Mediator 1.11 o versioni successive nelle configurazioni IP MetroCluster .
+
+link:../install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html["Impostare ONTAP Mediator per una configurazione IP MetroCluster"]
+ a| 
+ONTAP 9.18.1
+
+
+
+ a| 
+ONTAP Mediator 1.11 aggiunge il supporto per la gestione di un massimo di dieci configurazioni IP MetroCluster utilizzando una singola istanza di ONTAP Mediator.
+
+link:../install-ip/concept_mediator_requirements.html["Prepararsi all'installazione di ONTAP Mediator in una configurazione IP MetroCluster"]
+ a| 
+ONTAP 9.18.1
+
 
 
  a| 

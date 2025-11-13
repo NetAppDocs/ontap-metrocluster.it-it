@@ -11,7 +11,7 @@ summary: 'Per l"utilizzo in una configurazione IP MetroCluster, ONTAP Mediator d
 
 
 [role="lead"]
-Per l'utilizzo in una configurazione IP MetroCluster, ONTAP Mediator deve essere configurato sul nodo ONTAP.
+È necessario configurare ONTAP Mediator sul nodo ONTAP per utilizzarlo in una configurazione IP MetroCluster .
 
 .Prima di iniziare
 * ONTAP Mediator deve essere stato installato correttamente in una posizione di rete raggiungibile da entrambi i siti MetroCluster.
@@ -29,18 +29,54 @@ CAUTION: A partire da ONTAP 9.12.1, è possibile attivare la funzione di switcho
 .A proposito di questa attività
 * Questa attività attiva lo switchover automatico non pianificato per impostazione predefinita.
 * Questa attività può essere eseguita sull'interfaccia ONTAP di qualsiasi nodo della configurazione IP di MetroCluster.
-* Una singola installazione di ONTAP Mediator può essere configurata con un massimo di cinque configurazioni IP MetroCluster.
+* A partire da ONTAP 9.18.1 e ONTAP Mediator 1.11, una singola istanza ONTAP Mediator può gestire fino a dieci configurazioni MetroCluster contemporaneamente.  Nelle versioni precedenti, ONTAP Mediator può supportare fino a cinque configurazioni MetroCluster contemporaneamente.
 
 
 .Fasi
-. Aggiungere ONTAP Mediator a ONTAP:
+. Aggiungere ONTAP Mediator a ONTAP.  I passaggi variano a seconda che si voglia utilizzare un indirizzo IPv4 o IPv6.
 +
-`metrocluster configuration-settings mediator add -mediator-address _ip-address-of-mediator-host_`
+[NOTE]
+====
+** Per utilizzare IPv6 è necessario eseguire ONTAP 9.18.1 o versione successiva e ONTAP Mediator 1.11 o versione successiva.
+** Se si abilita IPv6 su un cluster, non sarà possibile disabilitarlo in seguito.
+
+
+====
++
+[role="tabbed-block"]
+====
+.Utilizzare IPv4
+--
+.. Eseguire il seguente comando per aggiungere ONTAP Mediator:
++
+`metrocluster configuration-settings mediator add -mediator-address <mediator_host_ip_address>`
 
 +
 
-NOTE: Verranno richiesti nome utente e password per l'account utente amministratore di Mediator.
+NOTE: Ti verrà richiesto di inserire il nome utente e la password per l'account utente amministratore del Mediatore.
 
+
+
+--
+.Utilizzare IPv6
+--
+.. Eseguire il seguente comando su entrambi i cluster:
++
+`network options ipv6 modify -enabled true`
+
+.. Configurare l'indirizzo IP node-mgmt con indirizzi IPv6 su tutti e quattro i nodi.
+.. Aggiungere il mediatore ONTAP :
++
+`metrocluster configuration-settings mediator add -mediator-address <mediator_host_ipv6_ip_address>`
+
++
+
+NOTE: Ti verrà richiesto di inserire il nome utente e la password per l'account utente amministratore del Mediatore.
+
+
+
+--
+====
 . Verificare che la funzione di switchover automatico sia attivata:
 +
 `metrocluster show`
