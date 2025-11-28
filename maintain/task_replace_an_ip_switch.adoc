@@ -240,6 +240,10 @@ NOTE: Se si esegue l'aggiornamento o il downgrade delle reti, ripetere tutti i p
 ----
 network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert true
 ----
+. Ripristina tutti i LIF del cluster che attualmente non si trovano sulle loro porte home alle loro porte home:
++
+`network interface revert -vserver * -lif *`
+
 . In alternativa, spostare gli shelf NS224.
 +
 Se si sta riconfigurando una configurazione IP MetroCluster che non collega gli shelf NS224 agli switch IP MetroCluster, utilizzare la procedura appropriata per aggiungere o spostare gli shelf NS224:
