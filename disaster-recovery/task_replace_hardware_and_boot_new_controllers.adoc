@@ -466,16 +466,20 @@ https://mysupport.netapp.com/site/global/dashboard["Supporto NetApp"^]
 ....
 Enter username/password if applicable, or press Enter to continue.
 ....
-. Assicurarsi di entrare `n` per ignorare il ripristino del backup quando viene visualizzato un prompt simile a quanto segue:
+. Entra `n` per saltare il ripristino del backup quando viene visualizzato un messaggio simile al seguente:
 +
 ....
-Do you want to restore the backup configuration now? {y|n}
+Do you want to restore the backup configuration now? {y|n} n
 ....
 . Riavviare immettendo `y` quando viene visualizzato un prompt simile a quanto segue:
 +
 ....
-The node must be rebooted to start using the newly installed software. Do you want to reboot now? {y|n}
+The node must be rebooted to start using the newly installed software. Do you want to reboot now? {y|n} y
 ....
++
+
+NOTE: Per poter utilizzare il software appena installato è necessario riavviare il nodo.
+
 . Dal menu di avvio, selezionare *opzione 5* per accedere alla modalità di manutenzione.
 . Se si dispone di una configurazione MetroCluster a quattro nodi, ripetere questa procedura sull'altro nuovo modulo controller.
 

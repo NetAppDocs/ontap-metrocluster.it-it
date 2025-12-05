@@ -796,12 +796,22 @@ NOTE: Ignorare il seguente messaggio: `This procedure is not supported for Non-D
 
 . Completare i seguenti passaggi secondari per riavviare il modulo controller:
 +
-.. Invio `n` per ignorare il ripristino del backup quando viene visualizzato il seguente prompt:
-`Do you want to restore the backup configuration now? {y|n}`
-.. Invio `y` per riavviare quando viene visualizzato il seguente prompt:
-`The node must be rebooted to start using the newly installed software. Do you want to reboot now? {y|n}`
+.. Entra `n` per saltare il ripristino del backup quando viene visualizzato il seguente messaggio:
++
+[listing]
+----
+Do you want to restore the backup configuration now? {y|n} n
+----
+.. Entra `y` per riavviare quando viene visualizzato il seguente messaggio:
++
+`The node must be rebooted to start using the newly installed software. Do you want to reboot now? {y|n} y`
+
 +
 Il modulo controller si riavvia ma si arresta al menu di avvio perché il dispositivo di avvio è stato riformattato e i dati di configurazione devono essere ripristinati.
+
++
+
+NOTE: Per poter utilizzare il software appena installato è necessario riavviare il nodo.
 
 
 

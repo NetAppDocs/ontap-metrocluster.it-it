@@ -364,7 +364,7 @@ Ignorare il seguente messaggio:
 `http://__web_server_ip/path_to_web-accessible_directory/ontap-version___image.tgz`
 
 .. Immettere il nome utente e la password, se applicabile, oppure premere Invio per continuare.
-.. Assicurarsi di entrare `n` per ignorare il ripristino del backup quando viene visualizzato un prompt simile a quanto segue:
+.. Entra `n` per saltare il ripristino del backup quando viene visualizzato un messaggio simile al seguente:
 +
 [listing]
 ----
@@ -374,8 +374,12 @@ Do you want to restore the backup configuration now? {y|n} n
 +
 [listing]
 ----
-The node must be rebooted to start using the newly installed software. Do you want to reboot now? {y|n}
+The node must be rebooted to start using the newly installed software. Do you want to reboot now? {y|n} y
 ----
++
+
+NOTE: Per poter utilizzare il software appena installato è necessario riavviare il nodo.
+
 
 
 
