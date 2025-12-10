@@ -25,6 +25,15 @@ Ogni versione include miglioramenti al software MetroCluster Tiebreaker. Ecco le
 
 
  a| 
+1,7
+ a| 
+* Correzioni di bug
+* Aggiunge il supporto per la simulazione del passaggio tramite la CLI
+
+
+
+
+ a| 
 1.6P1
  a| 
 * Aggiornamento delle librerie di supporto
@@ -68,11 +77,13 @@ La tabella seguente indica i sistemi operativi supportati per ciascuna versione 
 |===
 
 
-| Sistema operativo per tiebreaker | 1.6P1 | 1.6 | 1.5 | 1,4 
+| Sistema operativo per tiebreaker | 1,7 | 1.6P1 | 1.6 | 1.5 | 1,4 
 
 
  a| 
 Rocky Linux 9.4
+ a| 
+Sì
  a| 
 Sì
  a| 
@@ -89,6 +100,8 @@ Rocky Linux 9.0
  a| 
 No
  a| 
+No
+ a| 
 Sì
  a| 
 No
@@ -102,6 +115,8 @@ Rocky Linux 8.10
  a| 
 Sì
  a| 
+Sì
+ a| 
 No
  a| 
 No
@@ -111,7 +126,24 @@ No
 
 
  a| 
-Red Hat Enterprise Linux (RHEL) 9.5
+Red Hat Enterprise Linux (RHEL) 9.6
+ a| 
+Sì
+ a| 
+Sì
+ a| 
+No
+ a| 
+No
+ a| 
+No
+
+
+
+ a| 
+RHEL 9.5
+ a| 
+Sì
  a| 
 Sì
  a| 
@@ -125,6 +157,8 @@ No
 
  a| 
 RHEL 9.4
+ a| 
+Sì
  a| 
 Sì
  a| 
@@ -146,11 +180,15 @@ No
 No
  a| 
 No
+ a| 
+No
 
 
 
  a| 
 RHEL 9.2
+ a| 
+Sì
  a| 
 Sì
  a| 
@@ -167,6 +205,8 @@ RHEL 9.1
  a| 
 No
  a| 
+No
+ a| 
 Sì
  a| 
 No
@@ -180,6 +220,8 @@ RHEL 9.0
  a| 
 No
  a| 
+No
+ a| 
 Sì
  a| 
 No
@@ -190,6 +232,8 @@ No
 
  a| 
 RHEL 8.11 - 9.0
+ a| 
+No
  a| 
 No
  a| 
@@ -208,6 +252,8 @@ Sì
  a| 
 Sì
  a| 
+Sì
+ a| 
 No
  a| 
 No
@@ -216,6 +262,8 @@ No
 
  a| 
 RHEL 8.9
+ a| 
+No
  a| 
 No
  a| 
@@ -234,6 +282,8 @@ Sì
  a| 
 Sì
  a| 
+Sì
+ a| 
 No
  a| 
 No
@@ -242,6 +292,8 @@ No
 
  a| 
 RHEL 8.1 - 8.7
+ a| 
+No
  a| 
 No
  a| 
@@ -262,12 +314,16 @@ No
  a| 
 No
  a| 
+No
+ a| 
 Sì
 
 
 
  a| 
 CentOS 7 - 7,9
+ a| 
+No
  a| 
 No
  a| 
