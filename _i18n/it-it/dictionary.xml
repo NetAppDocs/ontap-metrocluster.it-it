@@ -13703,7 +13703,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="ba17277e87e849f2a38d0126b17905d8" category="list-text">Verificare che l'archiviazione sia visibile dalla modalità di manutenzione.</block>
   <block id="ef1806576a0dffd58481510c7525ed90" category="list-text">Avviare in modalità di manutenzione:</block>
   <block id="41af2ca5f1002ab08c75f010d70581a4" category="list-text">Verificare che lo storage sia visibile dal sito sopravvissuto.</block>
-  <block id="b496741d8a784412385f91b26ad4e4f1" category="list-text">Verificare che l'archiviazione locale sia visibile dal nodo in modalità di manutenzione:</block>
   <block id="93ba613931cbee0caca0df20b5380feb" category="doc">Assegnazioni delle porte della piattaforma per gli switch Cisco 9336C-FX2 a 12 porte</block>
   <block id="a696f18cbd32872428df323dcf124b0f" category="list-text">Le tabelle in questa sezione si riferiscono agli switch Cisco 9336C-FX2 a 12 porte.</block>
   <block id="9e1541acccf8eedc84b54f8f9ba9022a" category="inline-link-macro">Assegnazioni delle porte della piattaforma per gli switch Cisco 3232C o Cisco 9336C-FX2 a 36 porte</block>
@@ -14527,4 +14526,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="7c6d58b5ff7d328112a439ee0ef9df40" category="paragraph">A partire da MetroCluster Tiebreaker 1.7, è possibile simulare uno switchover per testare la funzionalità di switchover di Tiebreaker.</block>
   <block id="e4e3590eb665c0a0f5d5b3467636e5a7" category="list-text">A partire da ONTAP 9.18.1, le piattaforme con una velocità della porta backend IP MetroCluster di 100G richiedono una velocità minima di collegamento ISL di 100Gbps. L'utilizzo di una velocità ISL diversa richiede una richiesta di variazione delle funzionalità (FPVR). Per presentare un FPVR, contatta il team di vendita NetApp .</block>
   <block id="deaa86cf36be952b15db4ccf35d9a39d" category="list-text">Su tutte le altre piattaforme, la velocità minima di collegamento ISL supportata è 10 Gbps.</block>
+  <block id="e8c32d7ccca6662808649d7c3e536c38" category="list-text">Verificare che l'archiviazione locale e remota sia visibile dal nodo in modalità di manutenzione:</block>
+  <block id="613654d6d797f748d730bca666bd5f45" category="list-text">Verifica che la nuova versione del firmware sia compatibile con la tua soluzione. Consulta il <block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block> per maggiori informazioni.</block>
 </blocks>

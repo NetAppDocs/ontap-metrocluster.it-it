@@ -332,7 +332,7 @@ CAUTION: Non accendere gli scaffali prima di accendere i controller. In questo m
 `boot_ontap maint`
 
 .. Verificare che lo storage sia visibile dal sito sopravvissuto.
-.. Verificare che l'archiviazione locale sia visibile dal nodo in modalità di manutenzione:
+.. Verificare che l'archiviazione locale e remota sia visibile dal nodo in modalità di manutenzione:
 +
 `disk show -v`
 
