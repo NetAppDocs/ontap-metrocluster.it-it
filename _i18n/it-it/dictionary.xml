@@ -11900,7 +11900,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="00422b8712ec5454364e6489bb81ba29" category="list-text">Quando si esegue un aggiornamento del controller, il vecchio e il nuovo tipo di piattaforma *devono* corrispondere:</block>
   <block id="5505f24f1b03305d31aacdd035c7f251" category="paragraph-title">Aggiornamenti del controller IP AFF e FAS MetroCluster supportati</block>
   <block id="ae189029f72cc261fbad1afff41d9552" category="list-text">Nota 3: La piattaforma di destinazione non può avere dischi interni fino al completamento dell'aggiornamento del controller. È possibile aggiungere le unità interne dopo l'aggiornamento.</block>
-  <block id="39eb8422a5f49fae94f0335febb78701" category="list-text">Nota 4: Richiede la sostituzione dei moduli controller.</block>
   <block id="2d5d2a9ece12ce430adc9f20c9e9464d" category="paragraph-title">Aggiornamenti del controller IP ASA MetroCluster supportati</block>
   <block id="9311605dda14c8d475dd817b196dbe33" category="list-text">Nota 1: Gli upgrade dei controller sono supportati sui sistemi con ONTAP 9.13.1 o versione successiva.</block>
   <block id="e201b3063a835c6ab815286f4d0dc126" category="paragraph-title">Aggiornamenti dei controller FC AFF e FAS MetroCluster supportati</block>
@@ -12020,7 +12019,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="641cba091515001a3bb48d030bddd608" category="section-title">Aggiornare i nodi su cluster_A.</block>
   <block id="2ce39beb4bd7e0662d271e0be20e56c4" category="paragraph">Prima di avviare l'aggiornamento, esaminare le seguenti considerazioni per verificare che la configurazione sia supportata.</block>
   <block id="a63b5e3f602b86fc07da490951d07b9f" category="list-text">Nota 2: La piattaforma di destinazione non può avere dischi interni fino al completamento dell'aggiornamento del controller. È possibile aggiungere le unità interne dopo l'aggiornamento.</block>
-  <block id="3b2d91208084a85415d107e904b61128" category="list-text">Nota 3: Richiede la sostituzione dei moduli controller.</block>
   <block id="15301c23263e749022234eacd3de3300" category="paragraph">L'aggiornamento dei controller tramite<block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> comandi sui sistemi ASA non è supportato.</block>
   <block id="8f93576e78d28328ad0cf696ed0604e4" category="list-text">Gli switch IP MetroCluster (tipo di switch, fornitore e modello) e la versione del firmware devono essere supportati sui controller nuovi ed esistenti nella configurazione di aggiornamento.</block>
   <block id="1df73bda435b5d96d663aead5cdd3220" category="list-text"><block ref="d6f593c128c20b2b477999ba1d624969" prefix="" category="inline-code"></block></block>
@@ -12827,13 +12825,10 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="3d8c3985ef8f7b9c50308a5dfab923c4" category="paragraph"><block ref="f85c62a3a981a8b83a61b1dc7959165b" category="inline-link-macro-rx"></block>.</block>
   <block id="ed1dd620ec6ed4baac7e1208e4a9d25d" category="summary">Gli aggiornamenti ai sistemi introdotti in ONTAP 9.15.1 o versioni successive richiedono l'impostazione di un bootarg prima di poter procedere con l'aggiornamento del controller.</block>
   <block id="496db1855de52190cc06d85f972a650b" category="doc">Impostare il bootarg richiesto (per gli aggiornamenti MetroCluster IP ai sistemi introdotti in ONTAP 9.15.1 o versioni successive)</block>
-  <block id="59b020257dd689cba5d5780a512943fd" category="section-title">Passo 1: Determinare il bootarg da impostare sui vecchi controller</block>
-  <block id="6e9eadf85899a23a56a99cb9a6df7652" category="paragraph">Tutti gli aggiornamenti supportati ai seguenti sistemi richiedono di impostare un bootarg sui vecchi controller prima di eseguire l'aggiornamento del controller:</block>
   <block id="724bf3ae18d86521a5b9d77a13fcfddb" category="list-text">AFF C80</block>
   <block id="bf35733b2711515e1aa7614ca7dd1ef0" category="list-text">AFF A50, AFF A20, AFF A30</block>
   <block id="b1a7d02f89c62c97fedf60bb09caa4bc" category="list-text">AFF C30, AFF C60</block>
   <block id="55aa8632230fb0a23186560320c2411c" category="inline-link-macro">Preparare il sistema per l'aggiornamento</block>
-  <block id="05c6aa6eca73dc8505cf4bcf7e51677a" category="paragraph">La maggior parte degli aggiornamenti ai sistemi introdotti in ONTAP 9.15.1 o versioni successive richiedono di impostare il<block ref="ee06f9ce95f0e4407845e7566ca3219e" prefix=" " category="inline-code"></block> bootarg sui vecchi controller. Tuttavia, alcuni percorsi di aggiornamento richiedono invece di impostare il<block ref="547c6b727c1ad89e0e0a9fab4efaf59d" prefix=" " category="inline-code"></block> bootarg.</block>
   <block id="ffe782ee595f504f732429ce74813c9c" category="paragraph">Utilizzare la tabella seguente per determinare quale bootarg impostare per la combinazione di aggiornamento specifica.</block>
   <block id="9a5481a4499f03b428516e1e655b2247" category="cell">Per questo aggiornamento...</block>
   <block id="2960c7c521e801666250bc33502b1481" category="cell">Impostare il bootarg...</block>
@@ -12843,7 +12838,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="1587ade3a80eae494164e86cb2dd5734" category="cell">Da AFF A150 a AFF A20</block>
   <block id="66d5b6c0a5d29009937264288b2bed0e" category="cell">Da AFF A220 a AFF A20</block>
   <block id="3ea751f5e7ad018c7a1c4ebe22608ee6" category="cell"><block ref="ee06f9ce95f0e4407845e7566ca3219e" prefix="" category="inline-code"></block></block>
-  <block id="4e154455580c2924ab538f717efce366" category="section-title">Fase 2: Impostare il bootarg richiesto sui vecchi controller</block>
   <block id="31bb07ea477e7a663bf099ca3ed9b374" category="inline-xref">determinare il bootarg da impostare</block>
   <block id="b0eddbd28deec4566b9a1e2f57d34c8f" category="list-text">Impostare il bootarg richiesto per la combinazione di aggiornamento. È già stato determinato il bootarg che è necessario impostare utilizzando la tabella in <block ref="092a73eeb155f2a0de79637a5ae185e0" category="inline-xref-macro-rx"></block>.</block>
   <block id="ee06f9ce95f0e4407845e7566ca3219e" category="open-title">hw.cxgbe.toe_keepalive_disable</block>
@@ -13003,7 +12997,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="95a0dc0cefe38a8a65f4b4857599a767" category="paragraph"><block ref="7540bef2d37c83ab15db307604964774" category="inline-link-macro-rx"></block>.</block>
   <block id="471b1d5bf7b9020a821b9612fad3ac61" category="summary">Gli aggiornamenti ai sistemi introdotti in ONTAP 9.15.1 o versioni successive richiedono l'impostazione di un bootarg prima di procedere con l'aggiornamento.</block>
   <block id="867034ce824c06d2ae20a2782eada4c4" category="list-text">AFF A70, AFF A90, AFF A1K</block>
-  <block id="e13c96308702af19fbafc3aa4886ae41" category="admonition">Se si sta eseguendo l'aggiornamento a uno dei sistemi elencati, è *necessario* impostare un bootarg richiesto sul sistema esistente prima di eseguire l'aggiornamento. Per tutti gli altri aggiornamenti, è possibile saltare questa attività e passare direttamente a <block ref="7316c75eb3c5ee7c2327a2b6a0fcc53b" category="inline-link-macro-rx"></block>.</block>
   <block id="f05c544454e5ae504161071bcf104914" category="list-text">Impostare il bootarg richiesto per la combinazione di aggiornamento. È già stato determinato il bootarg che è necessario impostare utilizzando la tabella in <block ref="4e6a8a5f8b225717259653d744f685bb" category="inline-xref-macro-rx"></block>.</block>
   <block id="01e12de62fa77fda2815719aed8ff892" category="paragraph-title">Cosa succederà</block>
   <block id="9a24b7f06d5ef108e1e9e3a9b9635840" category="paragraph"><block ref="7316c75eb3c5ee7c2327a2b6a0fcc53b" category="inline-link-macro-rx"></block>.</block>
@@ -13015,7 +13008,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="15d63e3040229aa69f2bacf54450c8aa" category="paragraph">Non è necessario estrarre il<block ref="24f58b52875ae0cf9e2f71f5f4715aba" prefix=" " category="inline-code"></block> file.</block>
   <block id="553c80eee3874db37c74026e9cd54f1c" category="paragraph"><block ref="669980a1306854f119900d6a8876f53d" category="inline-link-macro-rx"></block>.</block>
   <block id="1134c88b3e27b3208779089225a7548e" category="summary">Prima di iniziare l'aggiornamento del controller IP MetroCluster, verificare che la combinazione di aggiornamento sia supportata.</block>
-  <block id="3bd44928438eecd88373e90938479338" category="list-text">Nota 4: Richiede moduli IOM per convertire i vecchi controller in uno shelf SAS esterno. Fare riferimento alla <block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block> per i moduli IOM supportati.</block>
   <block id="fd82efb2b9fc7033a2ee19efb493d464" category="inline-link-macro">Scegliere un metodo di aggiornamento o aggiornamento</block>
   <block id="cbbc95c0b1d7c5d8feea0d31eafa9a28" category="paragraph">Per ulteriori procedure, fare riferimento alla <block ref="1547bd533de8078ec6c6f72dc3468122" category="inline-link-macro-rx"></block>.</block>
   <block id="a397b8fc1d64d0e666558911201a9d53" category="inline-link-macro">requisiti per l'utilizzo di questa procedura di aggiornamento</block>
@@ -13414,13 +13406,10 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="2077cee62d2dc819ca10d6e3f6a4f59b" category="list-text">Nota 2: Per queste combinazioni è necessario ONTAP 9.13.1 o versioni successive (o la versione minima di ONTAP supportata sulla piattaforma).</block>
   <block id="9bc3cb19080afd7c3475f6c80b5ee013" category="paragraph">Esaminare le combinazioni di espansione per i sistemi AFF A150, AFF A20, FAS2750, FAS8300, FAS500f, AFF C250, AFF A250, FAS50, AFF C30, AFF A30, FAS8200, AFF A300, AFF A320, AFF A220, AFF C400, AFF A400 e FAS8700.</block>
   <block id="99032e371bac241eac644b68481b2c7c" category="paragraph">Esaminare le combinazioni di espansione per i sistemi AFF C60, AFF A50, FAS70, FAS9000, AFF A700, AFF A70, AFF C800, AFF A800, FAS9500, AFF A900, AFF C80, FAS90, AFF A90 e AFF A1K.</block>
-  <block id="1f33c4b21d6c848bec5712e27807c50a" category="paragraph">Questa attività è *solo* necessaria quando si esegue l'aggiornamento a un sistema AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30, AFF C60 o FAS50.</block>
   <block id="63856cfb46890240aad0d97a958b298b" category="paragraph">La tabella seguente mostra le combinazioni di piattaforme supportate per l'aggiornamento di un sistema AFF o FAS in una configurazione IP MetroCluster utilizzando i comandi "sostituzione controller di sistema", suddivisi in due gruppi.</block>
   <block id="e94f3a81af196da788fa0f158f9d57fc" category="sidebar">Scopri di più sull'utilizzo di Active IQ Unified Manager e System Manager per ulteriori informazioni su configurazione e monitoring</block>
-  <block id="d7aa339b18c7637dfafa2ace54386b6c" category="admonition">È necessario impostare il bootarg richiesto su tutti i vecchi nodi in entrambi i siti prima di avviare l'aggiornamento.</block>
   <block id="ac37738788377720cfa00ec2fd76c841" category="list-text">Arrestare un nodo in entrambi i siti e consentire al partner ha di eseguire un takeover dello storage del nodo:</block>
   <block id="0fd6026f96835994e1e5d178235825d6" category="list-text">Ripetere la procedura per tutti i nodi del gruppo DR o dei gruppi DR che si sta aggiornando.</block>
-  <block id="29a7afcbdc44731ef5db6482e263bc76" category="paragraph">Gli aggiornamenti ai sistemi introdotti in ONTAP 9.15.1 o versioni successive richiedono di impostare un bootarg sui vecchi controller prima di poter avviare l'aggiornamento.</block>
   <block id="ffb8d6643ebe516c638a6ca5b500299d" category="list-text">Ripetere la procedura su tutti e quattro i nodi del gruppo DR che si sta aggiornando.</block>
   <block id="d91bce8efd531c677e67c52eb81908cc" category="doc">Scopri la manutenzione di MetroCluster</block>
   <block id="8f618269f9967b96ce33544121035a9a" category="paragraph">Scoprite come preparare le attività di manutenzione di MetroCluster e scegliere la procedura di manutenzione corretta per la vostra configurazione.</block>
@@ -13681,7 +13670,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="90700c1e50cb21bc8204f5e8e63ff08f" category="inline-image-macro">Mostra le combinazioni di aggiornamento AFF e FAS gruppo 1</block>
   <block id="2b3092608ec3c36288b967b8d2e51cd0" category="paragraph"><block ref="2b3092608ec3c36288b967b8d2e51cd0" category="inline-image-macro-rx" type="image"></block></block>
   <block id="c86a11671a0682bdfafd478847f74282" category="inline-image-macro">Mostra le combinazioni di aggiornamento AFF e FAS gruppo 2</block>
-  <block id="51cfa502e93acea429147cf299cd152c" category="paragraph"><block ref="51cfa502e93acea429147cf299cd152c" category="inline-image-macro-rx" type="image"></block></block>
   <block id="7ffbff14d15222d12cd1d90edd7e729d" category="sidebar">Configurare lo switch NVIDIA SN2100</block>
   <block id="96a5ba855b4ee3dba60ecf722a706b29" category="sidebar">Installare il file CSHM</block>
   <block id="eb4b6887e705dad904287c0e3641b25e" category="sidebar">Monitorare lo stato dello switch IP MetroCluster</block>
@@ -14150,11 +14138,9 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="ba5335bcde9d44f534e3d1f52ca0bc09" category="paragraph">Nei passaggi seguenti viene utilizzata la suddivisione in zone descritta nella sezione Suddivisione in zone per un FibreBridge 7500N in una configurazione MetroCluster a quattro nodi.</block>
   <block id="ebcbebb3418f0f51f4443340ff325a84" category="list-text">Durante il cablaggio, collegare gli stack basati sui moduli IOM12 allo stesso bridge, a condizione che siano collegati a porte SAS separate.</block>
   <block id="11824150050e29484950961f3f0906e9" category="paragraph"><block ref="fb3f1acbe91ec35c5f5605a9b6d4efef" category="inline-xref-macro-rx"></block></block>
-  <block id="317e4f171d10313b7d9f57b9ee71c757" category="paragraph"><block ref="317e4f171d10313b7d9f57b9ee71c757" category="inline-image-macro-rx" type="image"></block></block>
   <block id="eaf2dec7a97ec668369075c4f3865b63" category="paragraph">Se si esegue l'aggiornamento a un sistema introdotto in ONTAP 9.15.1 o versione successiva, solitamente è necessario impostare un bootarg sui vecchi controller prima di poter avviare l'aggiornamento.</block>
   <block id="c845c22e49c5544061c5d10f7d34b798" category="admonition">Se la combinazione di aggiornamento è interessata, per un aggiornamento riuscito è necessario impostare un bootarg su tutti i vecchi controller.  Esaminare attentamente le informazioni contenute in questa sezione per verificare se la combinazione di aggiornamento richiede l'impostazione di un bootarg e come impostare il bootarg corretto per la combinazione.</block>
   <block id="97009239e0cfec412eecee57adec7fbb" category="section-title">Passaggio 1: determinare se è necessario impostare un bootarg sui vecchi controller</block>
-  <block id="4562de78a80791e72df05ddefb3bd680" category="paragraph">Utilizzare le seguenti informazioni per verificare se è necessario impostare un bootarg obbligatorio prima di avviare l'aggiornamento:</block>
   <block id="61cf51d7e6639bbabc9b0e1161cf9d1a" category="list-text">*È necessario* impostare un bootarg sui vecchi controller per gli aggiornamenti supportati sui seguenti sistemi, salvo diversa indicazione:</block>
   <block id="8279d52ff386b78e641d51f228ca0759" category="list-text">*Non* è necessario impostare alcun bootarg sui vecchi controller se l'aggiornamento è una delle seguenti combinazioni:</block>
   <block id="a208bde2bbdb812d3731f4621c803c41" category="list-text">Da un sistema AFF A70 a un sistema AFF A90</block>
@@ -14165,9 +14151,7 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="50bb0724e98833a5ad53f4aca5baebaf" category="paragraph">Tutti gli altri aggiornamenti ai sistemi AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A30, AFF C30, AFF C60 o FAS50</block>
   <block id="9cd6725fb8f6020f90629ee4847213aa" category="paragraph">*Nota:* non è necessario impostare alcun bootarg se l'aggiornamento avviene da un sistema AFF A70 a un sistema AFF A90 o da un sistema FAS70 a un sistema FAS90.</block>
   <block id="7a8f8d0a76afd2956fbc911927b76065" category="section-title">Passaggio 3: impostare il bootarg richiesto sui vecchi controller</block>
-  <block id="ada21e32b58b8c3670abec0c9bd43b39" category="paragraph">Dopo aver determinato il bootarg richiesto per la combinazione di aggiornamento, seguire i passaggi per impostare il bootarg sui vecchi controller.  Questa attività è *necessaria* solo per gli aggiornamenti interessati.</block>
   <block id="5c60cc2ba2a9eb0236f0d3ba52d42179" category="admonition">Prima di avviare l'aggiornamento, è necessario impostare bootarg su tutti i vecchi nodi in entrambi i siti.</block>
-  <block id="51e9ae39fa32c368d27f8e565c6a0512" category="cell">Tutti gli altri aggiornamenti supportati per i sistemi AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A30, AFF C30, AFF C60 o FAS50</block>
   <block id="9f0a4554064856ae78dbf1c08bc876ce" category="doc">Rimuovere un gruppo DR da una configurazione MetroCluster</block>
   <block id="2f5075fd2401e26a07990d72f3087874" category="paragraph">A partire da ONTAP 9.8, è possibile rimuovere un gruppo di disaster recovery (DR) da una configurazione MetroCluster a otto nodi per creare una configurazione MetroCluster a quattro nodi.</block>
   <block id="73ac4183b96cb40ebb14a9dc72a13298" category="admonition">Utilizzare questi passaggi durante i flussi di lavoro di transizione e di aggiornamento del sistema.</block>
@@ -14528,4 +14512,24 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="deaa86cf36be952b15db4ccf35d9a39d" category="list-text">Su tutte le altre piattaforme, la velocità minima di collegamento ISL supportata è 10 Gbps.</block>
   <block id="e8c32d7ccca6662808649d7c3e536c38" category="list-text">Verificare che l'archiviazione locale e remota sia visibile dal nodo in modalità di manutenzione:</block>
   <block id="613654d6d797f748d730bca666bd5f45" category="list-text">Verifica che la nuova versione del firmware sia compatibile con la tua soluzione. Consulta il <block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block> per maggiori informazioni.</block>
+  <block id="6d590dae977ef221f9c84c254e46f83f" category="paragraph">SnapMirror cloud supporto per MetroCluster FlexGroup volumes</block>
+  <block id="241800f8494edf500ad950d6dc737a4f" category="paragraph">SnapMirror cloud supporta le operazioni di backup e ripristino per i volumi FlexGroup nelle configurazioni MetroCluster.</block>
+  <block id="9fba9b738ffb50e00e660628b4e18f5a" category="inline-link-macro">Esegui il backup dei dati sul cloud utilizzando ONTAP SnapMirror</block>
+  <block id="18b24a167aecf15b34fd1d9c3134070d" category="paragraph"><block ref="18b24a167aecf15b34fd1d9c3134070d" category="inline-link-macro-rx"></block></block>
+  <block id="d1deb46a10dc3123edfe76c7a47cbee1" category="paragraph">ONTAP 9.18.1GA</block>
+  <block id="38fc12d8890f30afa1b180ca8bd43d52" category="paragraph">Nuove combinazioni di aggiornamento supportate per MetroCluster aggiornamenti del controller IP utilizzando <block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> comandi</block>
+  <block id="04b6e0caeafa8afd1fddb03f2837eb91" category="paragraph">Aggiunge il supporto per l'aggiornamento di un AFF A70 a un sistema AFF A90 o di un FAS70 a un sistema FAS90 utilizzando i comandi <block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> in una configurazione IP MetroCluster.</block>
+  <block id="7c876b2b1c29ab7cbf4dd35f76fe9601" category="paragraph"><block ref="7c876b2b1c29ab7cbf4dd35f76fe9601" category="inline-link-macro-rx"></block></block>
+  <block id="b4043feb827ed258b03c0dc9d5c7e979" category="list-text">Nota 4: Gli aggiornamenti dei sistemi integrati (dischi e controller nello stesso chassis) richiedono la sostituzione dei moduli controller mantenendo lo chassis e i dischi esistenti.</block>
+  <block id="4232872ec24791a771e26762eb9729a1" category="paragraph"><block ref="4232872ec24791a771e26762eb9729a1" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="20d22f3415d5c154c703babbfee40553" category="paragraph">Prima di iniziare l'upgrade, determina se è necessario impostare un bootarg sui vecchi controller utilizzando le seguenti informazioni:</block>
+  <block id="f7dad78d22aba2309c18549bb2e1990e" category="paragraph">Dopo aver determinato il bootarg richiesto per la tua combinazione di aggiornamento, segui i passaggi per impostare il bootarg sui vecchi controller.</block>
+  <block id="15a3efc45ba755dedf588ac88bf541a6" category="list-text">Un AFF A250 a un sistema AFF A30</block>
+  <block id="13fa7ab37c8f78945a0ca14da0aa4198" category="list-text">Un AFF C250 a un sistema AFF C30</block>
+  <block id="61ec242ab28e21649a7ba4c3bc6010f3" category="list-text">Un sistema AFF A70 a un sistema AFF A90</block>
+  <block id="5b0b4899478dc191f6732af89e9c726a" category="admonition">Se l'upgrade non richiede di impostare alcun bootarg, puoi saltare questa operazione e andare direttamente a <block ref="7316c75eb3c5ee7c2327a2b6a0fcc53b" category="inline-link-macro-rx"></block>.</block>
+  <block id="f8823620823bdbe70425ce033ac49ff9" category="list-text">Nota 3: Gli upgrade dei sistemi integrati (dischi e controller nello stesso chassis) richiedono la sostituzione dei moduli controller mantenendo lo chassis e i dischi esistenti.</block>
+  <block id="3e72f6e14914c8788932c9e928d6b32b" category="list-text">Nota 4: Richiede moduli IOM per convertire i vecchi controller in uno shelf SAS esterno. Fare riferimento alla <block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block> per i moduli IOM supportati.</block>
+  <block id="ba0ea850ad143cf2644fe04fa6c67417" category="list-text">Nota 5: Richiede ONTAP 9.18.1GA o versioni successive.</block>
+  <block id="c57a703687b0f21729f368950b7a5618" category="paragraph"><block ref="c57a703687b0f21729f368950b7a5618" category="inline-image-macro-rx" type="image"></block></block>
 </blocks>

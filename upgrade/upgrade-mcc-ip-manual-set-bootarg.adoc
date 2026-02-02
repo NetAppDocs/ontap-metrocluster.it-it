@@ -20,7 +20,7 @@ NOTE: Se la combinazione di aggiornamento è interessata, per un aggiornamento r
 
 == Passaggio 1: determinare se è necessario impostare un bootarg sui vecchi controller
 
-Utilizzare le seguenti informazioni per verificare se è necessario impostare un bootarg obbligatorio prima di avviare l'aggiornamento:
+Prima di iniziare l'upgrade, determina se è necessario impostare un bootarg sui vecchi controller utilizzando le seguenti informazioni:
 
 * *È necessario* impostare un bootarg sui vecchi controller per gli aggiornamenti supportati sui seguenti sistemi, salvo diversa indicazione:
 +
@@ -78,7 +78,7 @@ Tutti gli altri aggiornamenti ai sistemi AFF A70, AFF A90, AFF A1K, FAS70, FAS90
 
 == Passaggio 3: impostare il bootarg richiesto sui vecchi controller
 
-Dopo aver determinato il bootarg richiesto per la combinazione di aggiornamento, seguire i passaggi per impostare il bootarg sui vecchi controller.  Questa attività è *necessaria* solo per gli aggiornamenti interessati.
+Dopo aver determinato il bootarg richiesto per la tua combinazione di aggiornamento, segui i passaggi per impostare il bootarg sui vecchi controller.
 
 
 NOTE: Prima di avviare l'aggiornamento, è necessario impostare bootarg su tutti i vecchi nodi in entrambi i siti.
