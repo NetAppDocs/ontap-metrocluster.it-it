@@ -4,14 +4,14 @@ sidebar: sidebar
 keywords: configure, configuring, metrocluster, software, ontap 
 summary: È necessario impostare ciascun nodo nella configurazione MetroCluster in ONTAP, incluse le configurazioni a livello di nodo e la configurazione dei nodi in due siti. 
 ---
-= Configurazione del software MetroCluster in ONTAP
+= Configurare il MetroCluster software FC in ONTAP
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-È necessario impostare ciascun nodo nella configurazione MetroCluster in ONTAP, incluse le configurazioni a livello di nodo e la configurazione dei nodi in due siti. È inoltre necessario implementare la relazione MetroCluster tra i due siti.
+È necessario impostare ciascun nodo nella configurazione MetroCluster FC in ONTAP, incluse le configurazioni a livello di nodo e la configurazione dei nodi in due siti. È inoltre necessario implementare la relazione MetroCluster tra i due siti.
 
 image::../media/workflow_high_level_node_and_cluster_configuration_software.gif[Flusso di lavoro per la configurazione di nodi e cluster di alto livello]
 
@@ -89,7 +89,7 @@ Quando si crea il cluster per la prima volta, sono necessarie le seguenti inform
  a| 
 Nome del cluster
 
-Esempio utilizzato in questa guida: Site_A.
+Esempio utilizzato in questa procedura: Site_A.
  a| 
 
 
@@ -132,7 +132,7 @@ Per ciascun nodo del cluster, sono necessari un indirizzo IP di gestione, una ma
  a| 
 Nodo 1
 
-Esempio utilizzato in questa guida: Controller_A_1
+Esempio utilizzato in questa procedura: Controller_A_1
  a| 
  a| 
  a| 
@@ -145,7 +145,7 @@ Nodo 2
 
 Non richiesto se si utilizza una configurazione MetroCluster a due nodi (un nodo per ogni sito).
 
-Esempio utilizzato in questa guida: Controller_A_2
+Esempio utilizzato in questa procedura: Controller_A_2
  a| 
  a| 
  a| 
@@ -388,7 +388,7 @@ Quando si crea il cluster per la prima volta, sono necessarie le seguenti inform
  a| 
 Nome del cluster
 
-Esempio utilizzato in questa guida: Site_B.
+Esempio utilizzato in questa procedura: site_B
  a| 
 
 
@@ -431,7 +431,7 @@ Per ciascun nodo del cluster, sono necessari un indirizzo IP di gestione, una ma
  a| 
 Nodo 1
 
-Esempio utilizzato in questa guida: Controller_B_1
+Esempio utilizzato in questa procedura: controller_B_1
  a| 
  a| 
  a| 
@@ -444,7 +444,7 @@ Nodo 2
 
 Non richiesto per configurazioni MetroCluster a due nodi (un nodo per sito).
 
-Esempio utilizzato in questa guida: Controller_B_2
+Esempio utilizzato in questa procedura: controller_B_2
  a| 
  a| 
  a| 
@@ -2509,6 +2509,7 @@ link:https://docs.netapp.com/us-en/ontap/volumes/index.html["Gestione dello stor
 * Se nel sistema sono presenti più tipi di dischi (storage eterogeneo), è necessario comprendere come assicurarsi di selezionare il tipo di disco corretto.
 * I dischi sono di proprietà di un nodo specifico; quando si crea un aggregato, tutti i dischi in tale aggregato devono essere di proprietà dello stesso nodo, che diventa il nodo principale per quell'aggregato.
 * I nomi degli aggregati devono essere conformi allo schema di denominazione stabilito al momento della pianificazione della configurazione MetroCluster. Vedere link:https://docs.netapp.com/us-en/ontap/disks-aggregates/index.html["Gestione di dischi e aggregati"^].
+* I nomi degli aggregati devono essere univoci in tutti i siti MetroCluster. Ciò significa che non è possibile avere due aggregati diversi con lo stesso nome sul sito A e sul sito B.
 
 
 .Fasi

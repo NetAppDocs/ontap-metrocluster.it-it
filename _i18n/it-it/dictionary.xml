@@ -7697,7 +7697,6 @@
   <block id="94d54d70c5d7ee5cc198da3e79246db2" category="list-text">Se viene utilizzato il trunking, confermare quanto segue:</block>
   <block id="3c4e32c4ec392d71a4445aa8de2c38a3" category="paragraph"><block ref="ee2c754b77dd1cecae3dc492ea4a6a75" prefix="" category="inline-code"></block></block>
   <block id="23d8ab4e8486ac34b4198e32edee8347" category="doc">Verifica e configurazione dello stato ha dei componenti in modalità manutenzione</block>
-  <block id="5c6c610b9df037c3c93893e9123552e5" category="paragraph">Questa attività non è richiesta sui sistemi ricevuti dalla fabbrica.</block>
   <block id="a557db64e7a1a7811ee58be8f70a14b6" category="list-text">Avviare il nodo su ONTAP:</block>
   <block id="cbbfaef273014b8355328497ea2a64a8" category="summary">I bridge FC-SAS forniscono un bridging del protocollo tra i dischi SAS collegati e il fabric dello switch FC.</block>
   <block id="1da4d9acb2ddf3dadc76f2d24f6e0fff" category="doc">Immagine di bridge FC-SAS ridondanti</block>
@@ -7727,17 +7726,9 @@
   <block id="4e0ca507efddc63c28aeb3319df00d5d" category="paragraph">Esempio utilizzato in questa procedura: Controller_A_2</block>
   <block id="2ddeb191957d309760a14e2f4353284d" category="paragraph">Nodo 2 IC LIF 1</block>
   <block id="f5507f270d90478e3aff8d9e8b61a8cc" category="paragraph">Non richiesto per configurazioni MetroCluster a due nodi (un nodo per sito).</block>
-  <block id="2dbf0641a33d566e3e841975208de0ae" category="paragraph">Node 2 IC LIF 2Non richiesto per le configurazioni MetroCluster a due nodi (un nodo per ogni sito).</block>
-  <block id="4b18b6ffcae5c35c0fd047b621fdb59e" category="section-title">Sito A nbsp;informazioni AutoSupport</block>
-  <block id="ed68524d33cb83b7bc35eb3921cd5e50" category="section-title">Informazioni sul sito A nbsp;SP</block>
   <block id="7943526b8cee7f099dbecfda7ab6075b" category="section-title">Informazioni sullo switch del sito B (cluster con switch)</block>
   <block id="f8d79c79841817997fa985a802f8fe91" category="paragraph">Quando si collega il sistema, è necessario disporre di un nome host e di un indirizzo IP di gestione per ogni switch del cluster. Queste informazioni non sono necessarie se si utilizza un cluster senza switch a due nodi o si dispone di una configurazione MetroCluster a due nodi (un nodo per ogni sito).</block>
-  <block id="2eef5c9469dc2ce9cbe3c71dabc6f13e" category="paragraph">Esempio utilizzato: Site_B</block>
-  <block id="b72239aa6dab42301b66b43e2f099b73" category="paragraph">Esempio utilizzato: Controller_B_1</block>
-  <block id="5a824bb09d91d3c1fd4e6c54c0023c1b" category="paragraph">Esempio utilizzato: Controller_B_2</block>
   <block id="782e54b0ba0da8311c22531d4ba4ee23" category="paragraph">Nodo 2 IC LIF 2</block>
-  <block id="75cb9d2c8e6c492546bef17abe8e5a69" category="section-title">Sito B nbsp;informazioni AutoSupport</block>
-  <block id="336d72b5902fa5007c0f1b27db5d4cb7" category="section-title">Sito B nbsp;informazioni SP</block>
   <block id="9c7d24fa70f73a1fe4ee0bc58f0d443b" category="paragraph">Nodo 2 (controller_B_2)</block>
   <block id="4a94c7ab81b2c8ac93e5e9e84c29b30c" category="paragraph">Configurare i nodi nel cluster come coppie ha</block>
   <block id="92ff79a647640d3b30f4c82876951a35" category="section-title">Verifica dell'assegnazione dei dischi in modalità Maintenance in una configurazione a otto o quattro nodi</block>
@@ -7775,8 +7766,6 @@
   <block id="e9bbaf304559b73edee9fc8ff30c1f60" category="paragraph">Shelf di dischi 7 (shelf_A_4_2)</block>
   <block id="f00cb83aeac0f163b4df0421aac97b3a" category="paragraph">Shelf di dischi 8 (shelf_A_4_4)</block>
   <block id="683d8fa155473191b705eb53449747c4" category="list-text">Confermare le assegnazioni degli shelf:</block>
-  <block id="0d02db028459671974f0cd5ab64607ed" category="list-text">Se necessario, assegnare esplicitamente i dischi sugli shelf di dischi collegati al pool appropriato utilizzando<block ref="c178c5200490874139035e8139da7b82" prefix=" " category="inline-code"></block> comando.</block>
-  <block id="8768bb4842d961c867a1ac749cb45725" category="paragraph">L'utilizzo dei caratteri jolly nel comando consente di assegnare tutti i dischi su uno shelf di dischi con un unico comando. È possibile identificare gli ID e gli alloggiamenti degli shelf di dischi per ciascun disco con<block ref="a60cd4318256da44fc281f689decee48" prefix=" " category="inline-code"></block> comando.</block>
   <block id="6e76b55f087d96abf0ec71cdd443d325" category="section-title">Assegnazione della proprietà del disco in sistemi non AFF</block>
   <block id="95bcbc09935edc1dfac4e02d6d6f6d1e" category="paragraph">Se i dischi non sono stati assegnati correttamente ai nodi MetroCluster o se si utilizzano shelf di dischi DS460C nella configurazione, è necessario assegnare i dischi a ciascuno dei nodi nella configurazione MetroCluster in base allo shelf-by-shelf. Verrà creata una configurazione in cui ciascun nodo ha lo stesso numero di dischi nei pool di dischi locali e remoti.</block>
   <block id="1481fa640eeaed51dc3191992b757d35" category="paragraph">I controller dello storage devono essere in modalità Maintenance (manutenzione).</block>
@@ -7795,16 +7784,13 @@
   <block id="361fba3ca069f31e5bf2dbf5e8fd55cf" category="paragraph">Gli shelf di dischi nello stesso sito del nodo vengono assegnati al pool 0 e gli shelf di dischi situati nel sito del partner vengono assegnati al pool 1.</block>
   <block id="5ecb91d7586592c08f567342b63e11e2" category="paragraph">È necessario assegnare un numero uguale di shelf a ciascun pool.</block>
   <block id="42cee3a86fb831661e8609f43e2dde49" category="list-text">Sul primo nodo, assegnare sistematicamente gli shelf di dischi locali al pool 0 e gli shelf di dischi remoti al pool 1:</block>
-  <block id="a03c39da2d1b1ed17db1d6007949ef4e" category="paragraph"><block ref="04c2d9c4de549eb4a3e68547866b7a4c" prefix="" category="inline-code"></block></block>
   <block id="e2574328d91cd59945ad29aa210d3439" category="paragraph">Se lo storage controller Controller Controller Controller_A_1 dispone di quattro shelf, eseguire i seguenti comandi:</block>
   <block id="d041e05c9855dafc814c110fb30bdfe4" category="list-text">Ripetere la procedura per il secondo nodo nel sito locale, assegnando sistematicamente gli shelf di dischi locali al pool 0 e gli shelf di dischi remoti al pool 1:</block>
   <block id="2755d781bc19b54a989ea6aa2786dff1" category="paragraph">Se lo storage controller Controller Controller Controller_A_2 dispone di quattro shelf, eseguire i seguenti comandi:</block>
   <block id="81e819121b3ebf02b4a4dae19de5fe0e" category="list-text">Assegnare gli shelf di dischi ai nodi situati nel secondo sito (sito B):</block>
   <block id="2ca8dece2916dae1feb076d5d600835b" category="list-text">Sul primo nodo del sito remoto, assegnare sistematicamente i propri shelf di dischi locali al pool 0 e i relativi shelf di dischi remoti al pool 1:</block>
-  <block id="72f3c55c79c5c3713292f0ab302f417d" category="paragraph"><block ref="5dfcd9fe6af96569327df5a2de91148c" prefix="" category="inline-code"></block></block>
   <block id="da61c866b7e09eeeadb776f1026db8e8" category="paragraph">Se lo storage controller Controller Controller_B_1 dispone di quattro shelf, eseguire i seguenti comandi:</block>
   <block id="876b81d6c6fffe8bff52d6604a764837" category="list-text">Ripetere la procedura per il secondo nodo del sito remoto, assegnando sistematicamente i propri shelf di dischi locali al pool 0 e i relativi shelf di dischi remoti al pool 1:</block>
-  <block id="42ec1151bc3506b679e500df023c1328" category="paragraph"><block ref="4fad108bc23cf791f515ef08922cb4d1" prefix="" category="inline-code"></block></block>
   <block id="b54870bfbe63b26725b1d4cdbe52a605" category="paragraph">Se lo storage controller Controller Controller Controller_B_2 dispone di quattro shelf, eseguire i seguenti comandi:</block>
   <block id="e016389a608a4c287976977e83b0db58" category="paragraph"><block ref="e1612b591b95402a3d6018867b197261" prefix="" category="inline-code"></block></block>
   <block id="17b412c1769fa6af6546d9478e4fee9c" category="list-text">Su ciascun nodo, selezionare l'opzione *4* per inizializzare tutti i dischi.</block>
@@ -7816,7 +7802,6 @@
   <block id="d20b8cfb874e6e9f03d674eb1aa75557" category="list-text">Assegnare i dischi ai nodi situati nel primo sito (sito A):</block>
   <block id="712aad4a30a4c355dc1c871dd9321da9" category="paragraph">È necessario assegnare un numero uguale di dischi a ciascun pool.</block>
   <block id="5b3b3befc8a90dad61024595c4cace3e" category="list-text">Sul primo nodo, assegnare sistematicamente metà dei dischi su ogni shelf al pool 0 e l'altra metà al pool 0 del partner ha:</block>
-  <block id="de5e78d1adbb2b4fcd10925ec03863f6" category="paragraph"><block ref="3429f098b42c31023f5d2d0c7f2eebb6" prefix="" category="inline-code"></block></block>
   <block id="82c6640a7367ae60e14af1760177cace" category="paragraph">Se lo storage controller Controller Controller Controller_A_1 ha quattro shelf, ciascuno con 8 SSD, devi eseguire i seguenti comandi:</block>
   <block id="07bc435bec5058b71ef961e81ee33a7c" category="list-text">Ripetere la procedura per il secondo nodo del sito locale, assegnando sistematicamente metà dei dischi su ogni shelf al pool 1 e l'altra metà al pool 1 del partner ha:</block>
   <block id="7500666b9c58ee4ff02426972c6492db" category="paragraph"><block ref="280c51ec4eb55c6220d4a2b1e9137dbd" prefix="" category="inline-code"></block></block>
@@ -7827,32 +7812,18 @@
   <block id="fadc571601c6f366fc816c9da35e37d3" category="paragraph">Se lo storage controller Controller Controller Controller_B_2 dispone di quattro shelf, ciascuno con 8 SSD, devi eseguire i seguenti comandi:</block>
   <block id="e9cdcb04cba5d85ea24e428771838349" category="list-text">Confermare le assegnazioni dei dischi:</block>
   <block id="517c9f7214db1d3a85dacb3357ddbead" category="paragraph"><block ref="409a5acc7da61019844dfc5c8aace58e" prefix="" category="inline-code"></block></block>
-  <block id="e45fb1f6a3be35cf34e0645a5dba1b2b" category="list-text">Uscire dalla modalità di manutenzione: +<block ref="4a1bde0ea8bcda2a591f42646813c477" prefix=" " category="inline-code"></block></block>
   <block id="a0c589f804ecfbaea2c0711fc5b01500" category="cell">Shelf di dischi (nome di esempio)...</block>
   <block id="b011ef75febefb6802f448c8f557a86e" category="list-text">Se necessario, è possibile assegnare esplicitamente i dischi sugli shelf di dischi collegati al pool appropriato utilizzando il comando disk assign.</block>
   <block id="d62104b14c9d01be53e30302968da071" category="list-text">Sul nodo del sito A, assegnare sistematicamente gli shelf di dischi locali al pool 0 e gli shelf di dischi remoti al pool 1:</block>
-  <block id="d85cfd1622f01917e3e145291df3c635" category="paragraph"><block ref="ca26e34af7cdce6c9ac62a0d25010155" prefix="" category="inline-code"></block></block>
   <block id="71c0737f02cd1b953ecdde530bf520ff" category="list-text">Sul nodo del sito remoto (sito B), assegnare sistematicamente i propri shelf di dischi locali al pool 0 e i relativi shelf di dischi remoti al pool 1:</block>
   <block id="a7fbdb6c8e7d959be4d5a89782a63dc8" category="list-text">Mostrare gli ID e gli alloggiamenti degli shelf di dischi per ciascun disco:</block>
-  <block id="1d256cd4005056aea7773d889c3d6827" category="paragraph">Quando si configura un sistema storage in una configurazione MetroCluster, è necessario assicurarsi che lo stato di alta disponibilità (ha) del modulo controller e dei componenti dello chassis sia mcc o mcc-2n in modo che questi componenti si avviino correttamente.</block>
-  <block id="52d6900f00a9806f77cb3a2c8f52cd66" category="paragraph">ha-config modify controller mcc</block>
-  <block id="35b229745aacd4fd8cb650c9ec363a36" category="paragraph">ha-config modify controller mcc-2n</block>
-  <block id="d68e680c0ad920bf3b70363718aa8c5b" category="paragraph">ha-config modify controller mccip</block>
-  <block id="529252ae610752213411fe31905fb1bd" category="paragraph">ha-config modify chassis mcc</block>
-  <block id="6f949e06526d6c6a8f1c9ab8bb85fcea" category="paragraph">ha-config modifica telaio mcc-2n</block>
-  <block id="e2f29383f427c1bb29ab03d5c0b0ea17" category="paragraph">ha-config modify chassis mccip</block>
   <block id="49263ce76ed7dd5239c1a66ac12d2d4e" category="section-title">Configurazione di ONTAP</block>
   <block id="a9e993f3d21d2cbe38c03108e316d551" category="paragraph">È necessario impostare ONTAP su ciascun modulo controller.</block>
   <block id="6ac13e0a4727f000a91d0d6ee9e79705" category="paragraph">Se è necessario eseguire il netboot dei nuovi controller, vedere<block ref="b34364dcfcca19b16f474eb17e5220c7" category="inline-link-rx"></block> Nella _Guida all'aggiornamento, alla transizione e all'espansione di MetroCluster_.</block>
   <block id="0b39c5cb4b3f3f49373baeeadf7dc123" category="paragraph">In una configurazione MetroCluster a due nodi, su ciascun cluster è necessario avviare il nodo, uscire dalla procedura guidata di installazione del cluster e utilizzare il comando di installazione del cluster per configurare il nodo in un cluster a nodo singolo.</block>
-  <block id="1b8e8c7488b5a9cb01bbce47b4cbfd12" category="paragraph">Per ulteriori informazioni generali sulla configurazione di ONTAP, consultare la _Guida all'installazione del software_</block>
   <block id="4931c10e912b9e2bedd73db57677efb5" category="paragraph">Il nodo si avvia, quindi viene avviata la procedura guidata di configurazione del cluster sulla console, che informa che AutoSupport verrà attivato automaticamente.</block>
   <block id="67aabab9f492ee92f6763017f38bfe8c" category="list-text">Accettare le impostazioni predefinite del sistema<block ref="a6105c0a611b41b08f1209506350279e" prefix=" " category="inline-code"></block> Premendo Invio, oppure immettere i propri valori digitando<block ref="7fa3b767c460b54a2be4d49030b349c7" prefix=" " category="inline-code"></block>, Quindi premere Invio.</block>
-  <block id="aca85a1555dedfa21c22fb9087fd8fbb" category="list-text">Seguire le istruzioni per completare l'installazione guidata del cluster, premere Invio per accettare i valori predefiniti o digitare i propri valori, quindi premere Invio.</block>
-  <block id="08f652038f1a179808212e2f8e4590e3" category="list-text">Dopo aver completato l'installazione guidata del cluster e averlo chiuso, verificare che il cluster sia attivo e che il primo nodo funzioni correttamente:</block>
   <block id="11fec51b6a709a671a0bad7bd4d6055a" category="paragraph">Se è necessario modificare una delle impostazioni immesse per l'SVM amministrativa o il nodo SVM, è possibile accedere alla procedura guidata di installazione del cluster utilizzando il comando di installazione del cluster.</block>
-  <block id="1a9dbc3089b2c22ecdefe28bf423258a" category="inline-link">Installazione del software</block>
-  <block id="49fd6eac557fd3205a3431ae072641b8" category="paragraph"><block ref="49fd6eac557fd3205a3431ae072641b8" category="inline-link-rx"></block></block>
   <block id="6ba05c3635c2380101c6d1694ffb9f1b" category="section-title">Impostazione di ONTAP in una configurazione MetroCluster a otto o quattro nodi</block>
   <block id="f2fd2ba8ba98fa6a5271b09f2670f5aa" category="paragraph">Dopo aver avviato ciascun nodo, viene richiesto di eseguire il programma di installazione del sistema per eseguire la configurazione di base del nodo e del cluster. Dopo aver configurato il cluster, tornare alla CLI ONTAP per creare aggregati e creare la configurazione MetroCluster.</block>
   <block id="1fc34dc1a2bf40981cbdbe67372e71b6" category="paragraph">La configurazione MetroCluster deve essere cablata.</block>
@@ -7872,58 +7843,36 @@
   <block id="8de6d8ea3f7806bbd46e1924769d5f95" category="paragraph">L'esempio seguente mostra l'output per cluster_A:</block>
   <block id="db0013ead6feda0925dab5a74c8650a1" category="list-text">Se si crea un cluster senza switch a due nodi (un cluster senza switch di interconnessione del cluster), attivare la modalità di rete senza switch del cluster:</block>
   <block id="f94c0b2723507c24f643c398936ddbaa" category="paragraph">Puoi rispondere<block ref="415290769594460e2e485922904f345d" prefix=" " category="inline-code"></block> quando viene richiesto di passare alla modalità avanzata. Viene visualizzato il prompt della modalità avanzata (*).</block>
-  <block id="54ae43b8b32e733a05527e814b7d8de1" category="list-text">Abilitare la modalità cluster senza switch:<block ref="8ee7c46e024e2fbfff7364b3fa906826" prefix=" " category="inline-code"></block></block>
   <block id="14f809e80015cc5e4cca6e9ac5bb0e1d" category="list-text">Avviare il programma di installazione del sistema seguendo le istruzioni fornite dalle informazioni visualizzate sulla console del sistema dopo l'avvio iniziale.</block>
   <block id="a1f9b3aabd3dc01bacdfe7bc09462c04" category="list-text">Utilizzare lo strumento di configurazione del sistema per configurare ciascun nodo e creare il cluster, ma non per creare aggregati.</block>
   <block id="c67b6fe4fa472bf0e23c71468611a210" category="admonition">È possibile creare aggregati mirrorati nelle attività successive.</block>
   <block id="c5f6ae1a3a37c521928e14a692842c6b" category="paragraph">Tornare all'interfaccia della riga di comando di ONTAP e completare la configurazione di MetroCluster eseguendo le seguenti operazioni.</block>
   <block id="6713a57dac43fec925dae196654210ba" category="paragraph"><block ref="6713a57dac43fec925dae196654210ba" category="inline-link-macro-rx"></block></block>
   <block id="180b8063135f5150a5856ecf0f5f28ef" category="paragraph"><block ref="180b8063135f5150a5856ecf0f5f28ef" category="inline-link-macro-rx"></block></block>
-  <block id="e06bf301ea32fa4d6464e6e0c1c31818" category="paragraph"><block ref="1fb4766ac4a43be81cfabe6da6af4959" prefix="" category="inline-code"></block></block>
-  <block id="240381aac72e018a5c9749db4ada23d1" category="paragraph">Nell'esempio riportato di seguito vengono assegnate le porte "`e0e`" e "`e0f`" al gruppo di failover che si intercluster01 sul sistema SVMcluster01:</block>
   <block id="66ae80227e2bb4254c031f8dff1a2aa1" category="paragraph">9.6 e versioni successive</block>
   <block id="415eea33dacbefbf4c2e5acffb73798b" category="paragraph">9.5 e versioni precedenti</block>
-  <block id="45affadac35f4e36d8abb4cc94eb9e6e" category="paragraph">Nell'esempio seguente vengono create le LIF dell'intercluster "`cluster01_icl01`" e "`cluster01_icl02`" nel gruppo di failover intercluster01:</block>
   <block id="db791edb316fea3142afb2ef2d340209" category="cell">*In ONTAP 9.6 e versioni successive:*</block>
   <block id="b323cd4828d87797e97ad72bd35b6b79" category="cell">*In ONTAP 9.5 e versioni precedenti:*</block>
-  <block id="91ea7a38a1266389c4424c356e68d0f1" category="paragraph">L'esempio seguente mostra che le LIF dell'intercluster "`cluster01_icl01`" e "`cluster01_icl02`" sulla porta SVM "`e0e`" effettueranno il failover sulla porta "`e0f`".</block>
   <block id="26b17225b626fb9238849fd60eabdf60" category="paragraph">+</block>
-  <block id="ce2034e3e322f8406cf6ca46f905c9fb" category="paragraph"><block ref="94d1ac93d142b30595dea7c7ce67c996" prefix="" category="inline-code"></block></block>
-  <block id="5234664df25823d24e2779ea23a2aea1" category="paragraph"><block ref="a95e2d29f4907b8b27d7a8683d428c09" prefix="" category="inline-code"></block></block>
-  <block id="29c7a215dd6ee71543010039c946511e" category="paragraph">L'esempio seguente mostra che le LIF dell'intercluster "`cluster01_icl01`" e "`cluster01_icl02`" sulla porta "`e0c`" effettueranno il failover sulla porta "`e0d`".</block>
   <block id="1d8f4251a8e86e2424aff140993d62ef" category="paragraph">È possibile utilizzare il comando cluster peer create per creare una relazione peer tra un cluster locale e un cluster remoto. Una volta creata la relazione peer, è possibile eseguire cluster peer create sul cluster remoto per autenticarla nel cluster locale.</block>
-  <block id="a2a790f1b66195c582363f3ddaad4198" category="paragraph"><block ref="245a3c65ddc096693c6b91334e142c6c" prefix="" category="inline-code"></block></block>
   <block id="5568705314477e94eb7c24806ca7b453" category="paragraph"><block ref="8d1573e2732ae46629c83c12d0c7fba4" prefix="" category="inline-code"></block></block>
-  <block id="a159211d3c11db71dc6ba0af4f65258e" category="list-text">Verificare che la relazione peer del cluster sia stata creata:<block ref="5cdd2540d44c1775d98bc8cede68e64f" prefix=" " category="inline-code"></block></block>
-  <block id="38ec41a2df2c968e5e4f7d0369bd7ff3" category="paragraph">È possibile utilizzare il comando cluster peer create per avviare una richiesta di relazione di peering tra un cluster locale e remoto. Una volta richiesta la relazione peer dal cluster locale, è possibile eseguire la creazione peer del cluster sul cluster remoto per accettare la relazione.</block>
-  <block id="f351a65c74a8a4f1061627e2b4aa5026" category="paragraph"><block ref="4094501b2bf534cd60d3b8caee424688" prefix="" category="inline-code"></block></block>
   <block id="7229c2240727fa0976a719ef2950e038" category="paragraph"><block ref="f24933c9c781ced109a1a398e303c2b4" prefix="" category="inline-code"></block></block>
   <block id="df48f09d2bf110a410011a8de35fb788" category="paragraph">Il seguente comando esegue il mirroring dell'aggregato root per controller_A_1:</block>
-  <block id="be99b27fc7d6edf127381655525e4155" category="list-text">I nomi degli aggregati devono essere conformi allo schema di denominazione stabilito al momento della pianificazione della configurazione MetroCluster. Vedere<block ref="46a180d322a34c1f2719942dadd3e4fb" category="inline-link-rx"></block>.</block>
   <block id="154ebb71084bf22add00430e4fa08d7d" category="paragraph"><block ref="f4d4d9244c772de067a2a3fc1196b6fc" prefix="" category="inline-code"></block></block>
   <block id="095878b2b9ceb6ee18550854864bc080" category="list-text">Creare l'aggregato utilizzando il comando storage aggregate create -mirror true.</block>
-  <block id="184f9da9dc438e19cd9cecb2175ad4c5" category="paragraph">Se si è connessi al cluster nell'interfaccia di gestione del cluster, è possibile creare un aggregato su qualsiasi nodo del cluster. Per garantire che l'aggregato venga creato su un nodo specifico, utilizzare il parametro -node o specificare i dischi di proprietà di quel nodo.</block>
-  <block id="d9bd86ef926208fe90e170b165fc17ad" category="admonition">Nella configurazione minima supportata, in cui è disponibile un numero limitato di dischi, è necessario utilizzare l'opzione force-Small-aggregate per consentire la creazione di un aggregato RAID-DP a tre dischi.</block>
   <block id="ef2f43e3af3c4fa749e73a7911ab793f" category="list-text">Se sono consentiti dischi con diversi RPM</block>
   <block id="dcf4701604c34addcef13b54ec69afb0" category="paragraph">Per ulteriori informazioni su queste opzioni, consultare<block ref="1b40ef6e34df7d2fb54b5d639e14412d" prefix=" " category="inline-code"></block> pagina man.</block>
-  <block id="33f2ae7558982e7313c9f99b4a9180d8" category="paragraph"><block ref="9c053cebe334c71435d946460ea3c35c" prefix="" category="inline-code"></block></block>
   <block id="0829264e645ef456fedfb9d7d6e189a9" category="admonition">Nelle configurazioni MetroCluster FC, gli aggregati senza mirror saranno online solo dopo uno switchover se i dischi remoti nell'aggregato sono accessibili. In caso di errore degli ISL, il nodo locale potrebbe non essere in grado di accedere ai dati dei dischi remoti senza mirror. Il guasto di un aggregato può causare il riavvio del nodo locale.</block>
   <block id="4b8414b2021cbbd4b58cc5b95bc166cd" category="list-text">_Gestione di dischi e aggregati_ contiene ulteriori informazioni sugli aggregati di mirroring.</block>
-  <block id="a09517d85950406142abe0b5f1a98a2e" category="paragraph">Puoi verificarlo con il comando show dell'aggregato di storage.</block>
   <block id="b25308b36735da11e4a37c52a93d5b81" category="inline-link-macro">Configurare il software MetroCluster in ONTAP</block>
-  <block id="0a2884dde8bcccd27a62adc735d32316" category="admonition">Se si desidera utilizzare un singolo aggregato di dati mirrorato, vedere la fase 1 in <block ref="38d510a4fa3d22240b8943da6055e4df" category="inline-link-macro-rx"></block> per istruzioni.</block>
-  <block id="8c5e3ad1d44826cc667d071df3606d74" category="paragraph">Lo stato ha-config dei controller e dello chassis deve essere "`mcc`".</block>
   <block id="9ea79dc17a6b01f7950f89175d68862a" category="paragraph">Si emette il<block ref="3b3242ced99842a6c2c16f489b78e773" prefix=" " category="inline-code"></block> Per abilitare la configurazione MetroCluster, eseguire una sola volta il comando su uno dei nodi. Non è necessario eseguire il comando su ciascuno dei siti o nodi e non è importante il nodo o il sito su cui si sceglie di eseguire il comando.</block>
   <block id="d7f15f09df4ff19cfec06353603aa12d" category="paragraph">Il<block ref="3b3242ced99842a6c2c16f489b78e773" prefix=" " category="inline-code"></block> Command associa automaticamente i due nodi con gli ID di sistema più bassi in ciascuno dei due cluster come partner di disaster recovery (DR). In una configurazione MetroCluster a quattro nodi, esistono due coppie di partner DR. La seconda coppia di DR viene creata dai due nodi con ID di sistema superiori.</block>
   <block id="a9694210aee07751d2c398edcb8235e6" category="paragraph"><block ref="5c0e0e09321a243e360813f49f9d6782" prefix="" category="inline-code"></block></block>
   <block id="ea00fbc3649d5a240ebf0ffe4ebe4dc5" category="paragraph">Devi rispondere con<block ref="415290769594460e2e485922904f345d" prefix=" " category="inline-code"></block> quando viene richiesto di passare alla modalità avanzata e viene visualizzato il prompt della modalità avanzata (*).</block>
-  <block id="87a0372b66bbde5d80a11c1c7ebc30db" category="list-text">Configurare MetroCluster con il parametro -allow-with-one-aggregate true:</block>
-  <block id="794714ece855897a8f048ab85dcccd86" category="paragraph"><block ref="deafeea0aa4f8d9d4f616ec96accc787" prefix="" category="inline-code"></block></block>
   <block id="c1720ee15ca6b853bdb55d81deac3213" category="paragraph">Il seguente comando abilita la configurazione MetroCluster su tutti i nodi del gruppo DR che contiene controller_A_1:</block>
   <block id="710c5f8841f3c912049b8c944c965f92" category="paragraph">L'esempio seguente mostra l'utilizzo della porta di rete in una configurazione MetroCluster a quattro nodi:</block>
   <block id="181565e0d5a61ce819e8e64ea713e991" category="list-text">Verificare la configurazione dal sito A:</block>
   <block id="3fc44516e07f7c4278d79a805adf2be2" category="list-text">Verificare la configurazione dal sito B:</block>
-  <block id="2a89c3d80528b6491c00ce0f75c43860" category="paragraph">È necessario configurare la consegna in-order (IOD) o la consegna out-of-order (OOD) dei frame in base alla configurazione dello switch Fibre Channel (FC). Se lo switch FC è configurato per IOD, il software ONTAP deve essere configurato per IOD. Analogamente, se lo switch FC è configurato per OOD, è necessario configurare ONTAP per OOD.</block>
   <block id="65cc666ecd4a5bdf3c624b12e425c91f" category="admonition">Riavviare il controller per modificare la configurazione.</block>
   <block id="8698590793be75e8ed64cdf02f1947bb" category="list-text">Configurare ONTAP per il funzionamento di IOD o OOD di frame.</block>
   <block id="56c4cc733f4aa42d513f8ae8dc7be89b" category="list-text">Per impostazione predefinita, l'IOD dei frame è attivato in ONTAP. Per verificare i dettagli della configurazione:</block>
@@ -7932,11 +7881,9 @@
   <block id="a10883945c82dd773336721614913845" category="list-text">Per configurare l'OOD dei frame, è necessario eseguire le seguenti operazioni su ciascun nodo:</block>
   <block id="214f6d964c1923698862576e1de7ed1a" category="list-text">Verificare le impostazioni di configurazione di MetroCluster:</block>
   <block id="ac054e502f25f5713b21dda9c908f901" category="list-text">Abilitare OOOD sul nodo "`mcc4-b1`" e sul nodo "`mcc4-b2`":</block>
-  <block id="00d8a967aae192561db3b04fc12aaf7a" category="paragraph"><block ref="2323d8d011949e186c2fd751b30245e1" prefix="" category="inline-code"></block></block>
   <block id="57d89ae0fa9051439d76f5f61398fa16" category="list-text">Riavviare il controller eseguendo un takeover ad alta disponibilità (ha) in entrambe le direzioni.</block>
   <block id="7ded485b7ebcebc3bd6f05399892bc0d" category="section-title">Configurazione di SNMPv3 in una configurazione MetroCluster</block>
   <block id="aad314edd91dd520fd86444157d56f66" category="paragraph">I protocolli di autenticazione e privacy sugli switch e sul sistema ONTAP devono essere identici.</block>
-  <block id="b2ac2c4a8a523e04a6c0ddb23069d5cf" category="paragraph">ONTAP attualmente supporta la crittografia AES-128 e AES-256.</block>
   <block id="e96826849500e7c6adab84f1693eb72c" category="list-text">Creare un utente SNMP per ogni switch dal prompt del controller:</block>
   <block id="df5566493ce43130608af35ff9c2f4d8" category="paragraph"><block ref="5d6b067bb8a979d6b47c787077dfae6f" prefix="" category="inline-code"></block></block>
   <block id="eaddf5b42a6f6933693578764fd14443" category="list-text">Rispondere alle seguenti richieste in base alle esigenze della propria sede:</block>
@@ -7947,14 +7894,11 @@
   <block id="34d50950463bd9deb8050c6afe5d8652" category="paragraph"><block ref="025c83c1a746b39471a98aa72befe950" prefix="" category="inline-code"></block></block>
   <block id="00045154249cbebb0c448b3f16b85947" category="list-text">Configurare SNMPv3 sugli switch dal prompt dello switch:</block>
   <block id="8877f60294cec4f344b4ffc0df4449c3" category="paragraph"><block ref="f508dc950a961eb3d640359c9730a18d" prefix="" category="inline-code"></block></block>
-  <block id="721af9da2b28dbf4cf6b943cba7d482c" category="paragraph">Se si richiede l'accesso RO, dopo "`User (ro):`" specificare "`snmpv3user`" come mostrato nell'esempio:</block>
-  <block id="766c26974a4c90ad9b490830ebb9d74a" category="paragraph">L'esempio mostra come configurare un utente di sola lettura. Se necessario, è possibile regolare gli utenti RW. È inoltre necessario impostare le password degli account inutilizzati per proteggerli e utilizzare la migliore crittografia disponibile nella versione di ONTAP.</block>
   <block id="b650107d3033a6cbfd9eec73b7b79ab2" category="list-text">Configurare la crittografia e le password per gli altri utenti dello switch in base alle esigenze del sito.</block>
   <block id="b8faea2432f5d49678ba72e9e265fe05" category="section-title">Configurazione dei componenti di MetroCluster per il monitoraggio dello stato di salute</block>
   <block id="19db8c18601831a8ea2a7591d6f878f0" category="paragraph">Prima di monitorare i componenti in una configurazione MetroCluster, è necessario eseguire alcune procedure di configurazione speciali.</block>
   <block id="48b362592ae748a2b4676d1e63b57fca" category="paragraph">Queste attività si applicano solo ai sistemi con bridge FC-SAS.</block>
   <block id="ea7f8a0fa7f1d7f464025ba86a6284cd" category="list-text">Per evitare interferenze da altre fonti, è necessario posizionare bridge e LIF di gestione dei nodi in una rete dedicata.</block>
-  <block id="7271fe2deb2377f6fe3e360239e1a3ff" category="list-text">Se si utilizza una rete dedicata per il monitoraggio dello stato di salute, ciascun nodo deve disporre di una LIF di gestione dei nodi in tale rete dedicata.</block>
   <block id="9245afe84f46306a811d61036f2f5698" category="section-title">Configurazione degli switch MetroCluster FC per il monitoraggio dello stato di salute</block>
   <block id="6d8346a61b76a8b57a9dd1d8b8188d3f" category="paragraph">In una configurazione Fabric-Attached MetroCluster, è necessario eseguire alcune procedure di configurazione aggiuntive per monitorare gli switch FC.</block>
   <block id="2699745f7ba3417d015d2b62691bd3b8" category="list-text">Aggiungere uno switch con un indirizzo IP a ciascun nodo MetroCluster:</block>
@@ -7968,9 +7912,7 @@
   <block id="2cb2270e802d872bc52174cef7168741" category="paragraph">Se viene visualizzato il nome internazionale (WWN) dello switch, il monitor dello stato di salute ONTAP può contattare e monitorare lo switch FC.</block>
   <block id="5b40bcb2b8f219e462b2be259c9f9ca0" category="paragraph">Nei sistemi con versioni di ONTAP precedenti alla 9.8, è necessario eseguire alcune procedure di configurazione speciali per monitorare i bridge FC-SAS nella configurazione di MetroCluster.</block>
   <block id="1bc1772a048f664f8417882fe0defa0b" category="paragraph">9.5 e versioni successive</block>
-  <block id="2e520a1b682a16f2dd769ccc659bb91f" category="paragraph"><block ref="53ae82a453a1adee430b8838b89cb425" prefix="" category="inline-code"></block></block>
   <block id="f92d3360c9aec157cc0bd0d447d0c44b" category="paragraph">9.4 e versioni precedenti</block>
-  <block id="619f93caa0c27ba9b6068c4c105a7868" category="paragraph"><block ref="2be4b3634c9ab11403140c237e614aa1" prefix="" category="inline-code"></block></block>
   <block id="9aa100213ac06e4996c83aafb9f55bca" category="paragraph">A causa dell'intervallo di polling, potrebbero essere necessari 15 minuti per riflettere tutti i dati. Il monitor dello stato di ONTAP può contattare e monitorare il bridge se il valore nella colonna "Stato" è "ok" e vengono visualizzate altre informazioni, ad esempio il nome internazionale (WWN).</block>
   <block id="1fc888e4b44a770160a429e97648d3ee" category="paragraph">Se si dispone di una configurazione MetroCluster a quattro nodi, verificare il funzionamento delle coppie ha locali nella configurazione MetroCluster. Questo non è necessario per le configurazioni a due nodi.</block>
   <block id="225a700989ad161efc2f148c77ec5bf3" category="paragraph">Le configurazioni MetroCluster a due nodi non sono costituite da coppie ha locali e questa attività non è applicabile.</block>
@@ -7989,11 +7931,6 @@
   <block id="f4f91b70141dc9efb919484e27a495c8" category="list-text">Verificare che il failover dello storage sia tornato allo stato normale:</block>
   <block id="6c434084469e8a6d440ef80517f081d2" category="list-text">Ripetere i passaggi precedenti, questa volta prendendo il controllo di controller_A_1 da controller_A_2.</block>
   <block id="3b82e46bb2d614a665de9e2c8b9c5e7c" category="list-text">Ripetere i passaggi precedenti su cluster_B.</block>
-  <block id="d483490d3082f02c6057abcd983c34e6" category="list-text">Utilizzare le procedure per lo switchover negoziato, la riparazione e lo switchback in<block ref="218502de673c582fbc556024d0b3de54" category="inline-link-rx"></block></block>
-  <block id="14a8fc6fe6b58444388acfef6a176529" category="inline-link">Gestione dei backup di configurazione</block>
-  <block id="f1573b913aebef18602249e23e196f67" category="paragraph"><block ref="09965663397032e7c8c3dcc98b9deca2" category="inline-link-rx"></block> contiene informazioni aggiuntive.</block>
-  <block id="6c0e4fd4b7e2ef11d891ac59729c5f3e" category="inline-link">Amministrazione del cluster</block>
-  <block id="3d324eced25a10d4e6f55d473d59805b" category="paragraph"><block ref="3d324eced25a10d4e6f55d473d59805b" category="inline-link-rx"></block></block>
   <block id="7beedda8cb5d2fb431ddb232b7ee7fe0" category="summary">È possibile rimuovere la configurazione MetroCluster da tutti i nodi della configurazione MetroCluster o da tutti i nodi di un gruppo di disaster recovery.</block>
   <block id="91e18356a7709afa40abb10b89a17636" category="summary">È necessario attivare il fabric dello switch FC e assicurarsi che gli switch e i dispositivi funzionino correttamente.</block>
   <block id="812485d2987632a33cf46fd5403f564d" category="doc">Riabilitare il fabric dello switch e verificarne il funzionamento</block>
@@ -8047,15 +7984,9 @@
   <block id="ebfae2d3948048a9601c4d22e5b3e877" category="list-text">Consultare la sezione relativa alle considerazioni sull'ISL.</block>
   <block id="1c2ac66406fbd86dae3a5ebc91801648" category="inline-link-macro">Considerazioni per gli ISL</block>
   <block id="69e92926786e575346dbd083b8dec2f2" category="paragraph"><block ref="69e92926786e575346dbd083b8dec2f2" category="inline-link-macro-rx"></block></block>
-  <block id="a67eabd25a14e4d0c90e1d8b28411988" category="paragraph">Esempio utilizzato in questa guida: Site_A.</block>
-  <block id="b4d7baf41cc0c5cafe8cdf28d3c7d4a9" category="paragraph">Esempio utilizzato in questa guida: Controller_A_1</block>
-  <block id="1ccec885efe14190b68ea60168729b15" category="paragraph">Esempio utilizzato in questa guida: Controller_A_2</block>
   <block id="c6e21fae72937c189cf8456f90c8f3a5" category="section-title">Sito A nbsp; informazioni AutoSupport</block>
   <block id="9416a5cc051e7f0bc3db126192f4a9c8" category="section-title">Sito A nbsp; informazioni SP</block>
   <block id="289895aab699c5956a58644cc2118b0c" category="section-title">Foglio di lavoro con le informazioni della rete IP per il sito B</block>
-  <block id="9de6a3d21baa3d2477fcc28e8859e959" category="paragraph">Esempio utilizzato in questa guida: Site_B.</block>
-  <block id="f841368b0e6e89de1f7f957dad84a039" category="paragraph">Esempio utilizzato in questa guida: Controller_B_1</block>
-  <block id="7f92c2e38c8b2f1d9d424f284d8b974e" category="paragraph">Esempio utilizzato in questa guida: Controller_B_2</block>
   <block id="ac3e6c4174906200ce86dcb34e0c1feb" category="section-title">Sito B nbsp;informazioni AutoSupport</block>
   <block id="be9e3196b872778c6a28445130404d80" category="section-title">Sito B nbsp;informazioni SP</block>
   <block id="9cd42a5631953faa458518cebea26463" category="paragraph">*Shelf di dischi nel sito A*</block>
@@ -11582,8 +11513,6 @@ Si applica a tutte le configurazioni MetroCluster.</block>
   <block id="00395061ba5a721f2a906e4ac75f9fde" category="inline-link-macro">Impostare gli archivi di oggetti per FabricPool in una configurazione MetroCluster</block>
   <block id="e0e300856a5e4a2a419fdf0d5fb20e62" category="admonition">Prima di configurare l'aggregato, è necessario impostare gli archivi di oggetti come descritto in <block ref="bf6f1feb5dfb0381998cf99478ab26ea" category="inline-link-macro-rx"></block>.</block>
   <block id="39998026607048d04a8bc09fac18fa8f" category="paragraph">A partire da ONTAP 9.11.1, <block ref="7a1a77fa3bd3a175233cd6cdfe493836" category="inline-link-macro-rx"></block> Sono supportati nelle configurazioni MetroCluster.</block>
-  <block id="664f9c52f93e2fbf6e801148b0f573ad" category="inline-link-macro">Gestione delle coppie HA</block>
-  <block id="fc0b22bb38f11521c03de86c56643d5d" category="paragraph"><block ref="fc0b22bb38f11521c03de86c56643d5d" category="inline-link-macro-rx"></block></block>
   <block id="0f87578f11104e3d1178b1b6a73f5684" category="paragraph"><block ref="0f87578f11104e3d1178b1b6a73f5684" category="inline-link-macro-rx"></block></block>
   <block id="3973235e869d719328cf4b37e59562e5" category="paragraph"><block ref="3973235e869d719328cf4b37e59562e5" category="inline-link-macro-rx"></block></block>
   <block id="c5d34bb560e327e8975a1da2f0e0c0fe" category="cell"><block ref="c5d34bb560e327e8975a1da2f0e0c0fe" category="inline-link-macro-rx"></block></block>
@@ -14230,7 +14159,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="6a322d79cc829cae0de4701dc672ffca" category="image-alt">Diagramma che mostra le porte FCIP con configurazione ISL doppia su ogni switch</block>
   <block id="d0c92c7c34253959ed1ec5127a53af0a" category="image-alt">Installazione e configurazione del bridge FC-SAS del flusso di lavoro</block>
   <block id="74a4dfe29ccc8cc96b410e9b0a5d1c1b" category="image-alt">Cablaggio MetroCluster per FibreBridge con più stack SAS3</block>
-  <block id="91808658b22ba7487b8c09753a426fbe" category="image-alt">Configurazione di nodi e cluster di alto livello del flusso di lavoro in ONTAP</block>
   <block id="42ceaa81d7a1ae07decd6672f9c77b45" category="image-alt">Configurazione di rete di livello 2 MetroCluster</block>
   <block id="9abaaa939f8a0df07de4dc260378e835" category="image-alt">Configurazione della rete backend di livello 3 MetroCluster</block>
   <block id="623fd1b20a7dbd0dcbc1a35f2641d584" category="image-alt">Impostazioni richieste quando si utilizzano switch Cisco convalidati da NetApp per il traffico MetroCluster</block>
@@ -14532,4 +14460,14 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="3e72f6e14914c8788932c9e928d6b32b" category="list-text">Nota 4: Richiede moduli IOM per convertire i vecchi controller in uno shelf SAS esterno. Fare riferimento alla <block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block> per i moduli IOM supportati.</block>
   <block id="ba0ea850ad143cf2644fe04fa6c67417" category="list-text">Nota 5: Richiede ONTAP 9.18.1GA o versioni successive.</block>
   <block id="c57a703687b0f21729f368950b7a5618" category="paragraph"><block ref="c57a703687b0f21729f368950b7a5618" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="ae5ea867d279a95654ecca471767e6af" category="list-text">Se nel sistema sono presenti più tipi di unità (storage eterogeneo), è necessario comprendere come assicurarsi che venga selezionato il tipo di unità corretto.</block>
+  <block id="5ff5ba1e734a1c6acf560244a4167653" category="list-text">I nomi degli aggregati devono essere univoci in tutti i siti MetroCluster. Ciò significa che non è possibile avere due aggregati diversi con lo stesso nome sul sito A e sul sito B.</block>
+  <block id="c4feaf0c81d09c76b61f0eca4a4fda38" category="admonition">Si consiglia di mantenere almeno il 20% di spazio libero per gli aggregati con mirroring per performance dello storage e disponibilità ottimali. Sebbene la raccomandazione sia del 10% per gli aggregati non con mirroring, il 10% di spazio aggiuntivo può essere utilizzato dal filesystem per assorbire modifiche incrementali. Le modifiche incrementali aumentano l'utilizzo dello spazio per gli aggregati con mirroring a causa dell'architettura copy-on-write basata su Snapshot di ONTAP. Il mancato rispetto di queste best practice potrebbe avere un impatto negativo sulle performance.</block>
+  <block id="ca62b4409e0debbfd43445111440710d" category="paragraph">Se si è effettuato l'accesso al cluster tramite l'interfaccia di gestione del cluster, è possibile creare un aggregato su qualsiasi nodo del cluster. Per verificare che l'aggregato sia stato creato su un nodo specifico, utilizzare il <block ref="13f7dbdfe17d26284f31a4eac8e056e8" prefix=" " category="inline-code"></block> parametro o specificare le unità di proprietà di quel nodo.</block>
+  <block id="0c9650faa23cd2f874557f75db0b04f3" category="doc">Configurare il MetroCluster software FC in ONTAP</block>
+  <block id="4f967023ad75f6a54cb36abaf26a7048" category="paragraph">È necessario impostare ciascun nodo nella configurazione MetroCluster FC in ONTAP, incluse le configurazioni a livello di nodo e la configurazione dei nodi in due siti. È inoltre necessario implementare la relazione MetroCluster tra i due siti.</block>
+  <block id="445fc242bee9ea016b8ec73c9a312fcb" category="paragraph">Esempio utilizzato in questa procedura: site_B</block>
+  <block id="55417ec59fd4af1a5afffacb42333c5a" category="paragraph">Esempio utilizzato in questa procedura: controller_B_1</block>
+  <block id="1acb751c22e164e9d61c762caf509e82" category="paragraph">Esempio utilizzato in questa procedura: controller_B_2</block>
+  <block id="eccb3ce2fe6ad5d172a57438aae17dae" category="doc">Crea un aggregato di dati mirrorati su ciascun nodo FC MetroCluster</block>
 </blocks>

@@ -1187,9 +1187,13 @@ NOTE: Non è necessario riavviare i nodi in un ordine specifico, ma è necessari
 `storage aggregate create -aggregate <aggregate-name> -node <node-name> -diskcount <no-of-disks> -mirror true`
 
 +
+[NOTE]
+====
+** È necessario creare almeno un aggregato di dati mirrorati per sito. Si consiglia di disporre di due aggregati di dati mirrorati per sito su nodi IP MetroCluster per ospitare i volumi MDV, tuttavia è supportato un singolo aggregato per sito (ma non consigliato). È accettabile che un sito della MetroCluster disponga di un singolo aggregato di dati mirrorati e l'altro sito disponga di più di un aggregato di dati mirrorati.
+** I nomi degli aggregati devono essere univoci in tutti i siti MetroCluster. Ciò significa che non è possibile avere due aggregati diversi con lo stesso nome sul sito A e sul sito B.
 
-NOTE: È necessario creare almeno un aggregato di dati mirrorati per sito. Si consiglia di disporre di due aggregati di dati mirrorati per sito su nodi IP MetroCluster per ospitare i volumi MDV, tuttavia è supportato un singolo aggregato per sito (ma non consigliato). È accettabile che un sito della MetroCluster disponga di un singolo aggregato di dati mirrorati e l'altro sito disponga di più di un aggregato di dati mirrorati.
 
+====
 +
 Nell'esempio seguente viene illustrata la creazione di un aggregato su Node_A_1-New.
 

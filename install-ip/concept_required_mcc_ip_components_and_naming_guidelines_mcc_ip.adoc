@@ -281,6 +281,10 @@ Una configurazione MetroCluster IP a quattro nodi richiede la configurazione min
 +
 In una configurazione MetroCluster a quattro nodi con un singolo aggregato di dati mirrorati per nodo, la configurazione minima richiede 24 dischi nel sito.
 
++
+
+NOTE: I nomi degli aggregati devono essere univoci in tutti i siti MetroCluster. Ciò significa che non è possibile avere due aggregati diversi con lo stesso nome sul sito A e sul sito B.
+
 
 
 In una configurazione minima supportata, ciascun pool ha il seguente layout di unità:
