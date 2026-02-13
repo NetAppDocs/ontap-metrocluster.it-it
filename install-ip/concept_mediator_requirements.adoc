@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: ontap, mediator, assist, metrocluster, ip, configuration, perform, automatic, unplan, switchover, physical, repository, status, information, configuring, configure, install, configuring, configure, mtu size, packet loss, bandwidth, firewall, rhel, centos, linux, revert, kernal, upgrade, latency 
 summary: 'A partire da ONTAP 9.7, ONTAP Mediator può assistere la configurazione IP di MetroCluster nell"esecuzione di uno switchover automatico non pianificato fornendo un repository fisicamente separato per le informazioni sullo stato.' 
 ---
-= Prepararsi all'installazione di ONTAP Mediator in una configurazione IP MetroCluster
+= Requisiti di installazione di ONTAP Mediator per le configurazioni IP di MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -133,7 +133,7 @@ API REST (HTTPS)
  a| 
 LIF di gestione dei nodi
  a| 
-Bidirezionale
+In entrata
  a| 
 Target iSCSI del mediatore ONTAP
  a| 

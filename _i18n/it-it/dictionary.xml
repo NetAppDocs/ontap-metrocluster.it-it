@@ -13113,7 +13113,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="6c7e3200049198face0d2648e9d1a27d" category="paragraph">In entrata</block>
   <block id="58dc7db50a2e11a9de9e6cc092c59d4d" category="paragraph">Mediatore ONTAP</block>
   <block id="348d25e332990b97eda5823a9561cd76" category="paragraph">Gestione SSH / ONTAP Mediator</block>
-  <block id="abd4328c725637aabedbd02d3b7ffd40" category="paragraph">Bidirezionale</block>
   <block id="7df18ff4393ac59f9af7b68478828591" category="inline-link-macro">Guida all'aggiornamento del software del sistema operativo Brocade Fabric, 9,2.x</block>
   <block id="81095da37e6499e1af51ce2d0316b8c1" category="paragraph">Se si sta eseguendo l'aggiornamento a Fabric OS v 9,2.x o versioni successive, è necessario disporre di un certificato Brocade TruFOS installato. Per ulteriori informazioni, fare riferimento a <block ref="0c25af31b20d46ca79e55fb8f6beb4c9" category="inline-link-macro-rx"></block>.</block>
   <block id="b2fe7ec3c609e490e177268be9c6a2c7" category="open-title">Rimozione dei bridge FC-to-SAS</block>
@@ -13670,10 +13669,8 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="ca2ba184117d249efe6f978511379d06" category="paragraph">Se si dispone di uno switch Cisco 9336C-FX2 a 12 porte, utilizzare le tabelle in <block ref="67221021aed93298a4f5ea2fd779fba0" category="inline-link-macro-rx"></block> .</block>
   <block id="045ecf3a2dbe25ed7ed0298e865ad8aa" category="paragraph">Se si dispone di uno switch Cisco 9336C-FX2 a 36 porte e almeno una configurazione MetroCluster o un gruppo DR collega gli scaffali NS224 allo switch MetroCluster, utilizzare le tabelle in <block ref="0bde9be66bb65d34d39560c7bec9f5ff" category="inline-link-macro-rx"></block> .</block>
   <block id="24a2b83846d1cc0fd499ffd7c44a8766" category="list-text">Le tabelle in questa sezione si riferiscono agli switch Cisco 9336C-FX2 a 36 porte quando almeno una configurazione MetroCluster o un gruppo DR collega gli shelf NS224 allo switch MetroCluster.</block>
-  <block id="be04f167387be19d404ab8525e42eb36" category="paragraph">Se si dispone di uno switch Cisco 9336C-FX2 a 36 porte che non collega l'archiviazione NS224, utilizzare le tabelle in <block ref="5e1610ecd3627713f0895c655a667651" category="inline-link-macro-rx"></block> .</block>
   <block id="67f1cdced842853dcaa748f1574de4a2" category="inline-link-macro">Assegnazioni delle porte della piattaforma per gli switch Cisco 9336C-FX2 a 12 porte</block>
   <block id="38f841f1e9d996375153a7c10a011d16" category="paragraph">Se si dispone di uno switch Cisco 9336C-FX2 a 12 porte, utilizzare le tabelle in <block ref="ce9e67085330d921aaa0fff0495dc70b" category="inline-link-macro-rx"></block> .</block>
-  <block id="01c9231aeeef68ed3519963715841bfa" category="list-text">Quando si cabla uno switch Cisco 9336C-FX2 che collega storage NS224, è possibile avere un massimo di due configurazioni MetroCluster o gruppi DR. Almeno una configurazione MetroCluster o un gruppo DR deve collegare shelf NS224 allo switch MetroCluster. È possibile collegare solo piattaforme che non collegano shelf NS224 collegati allo switch come seconda configurazione MetroCluster o come secondo gruppo DR.</block>
   <block id="674e97a0c22c1388979c98f80b98f4b5" category="inline-xref">tabelle di cablaggio per controllori che non collegano ripiani NS224 collegati all'interruttore</block>
   <block id="93a0ba86005851fcdd55129adf1c0b46" category="paragraph">Se il secondo gruppo MetroCluster o DR non collega gli scaffali NS224 allo switch MetroCluster, seguire le istruzioni <block ref="b9dbe6880b7454d3bcbbe8f7d7793db4" category="inline-xref-macro-rx"></block> .</block>
   <block id="b3e24b8d0d23855e43550444290c1574" category="list-text">Tenere traccia del gruppo di porte MetroCluster (MetroCluster 1, MetroCluster 2, ecc.). Queste informazioni saranno necessarie quando si utilizzerà lo strumento RcfFileGenerator come descritto più avanti in questa procedura di configurazione.</block>
@@ -14007,7 +14004,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="75ab17da123365d00f2ec499305169d8" category="doc">Scopri di più sulle configurazioni IP MetroCluster e di archiviazione remota</block>
   <block id="1d4d3b05fa1ffe4d168028cb764f168a" category="doc">Requisiti per il peering del cluster nelle configurazioni IP MetroCluster</block>
   <block id="a6fa9144699b7827d36eaf11a183930c" category="doc">Requisiti e considerazioni per le operazioni ONTAP con configurazioni IP MetroCluster</block>
-  <block id="3ad5bf8bede2de85749104cd1c558a70" category="doc">Prepararsi all'installazione di ONTAP Mediator in una configurazione IP MetroCluster</block>
   <block id="5f41d8cf5282355fa3aefb7176c3f60e" category="paragraph">LIF cluster-mgmt e node-mgmt</block>
   <block id="adcf0c2ac79e72965c57c716ea214337" category="paragraph">LIF di gestione dei nodi</block>
   <block id="5450af98b7b980559b29b88b2f4d9081" category="doc">Scopri di più sulle interconnessioni dei componenti hardware in una configurazione IP MetroCluster</block>
@@ -14446,7 +14442,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="18b24a167aecf15b34fd1d9c3134070d" category="paragraph"><block ref="18b24a167aecf15b34fd1d9c3134070d" category="inline-link-macro-rx"></block></block>
   <block id="d1deb46a10dc3123edfe76c7a47cbee1" category="paragraph">ONTAP 9.18.1GA</block>
   <block id="38fc12d8890f30afa1b180ca8bd43d52" category="paragraph">Nuove combinazioni di aggiornamento supportate per MetroCluster aggiornamenti del controller IP utilizzando <block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> comandi</block>
-  <block id="04b6e0caeafa8afd1fddb03f2837eb91" category="paragraph">Aggiunge il supporto per l'aggiornamento di un AFF A70 a un sistema AFF A90 o di un FAS70 a un sistema FAS90 utilizzando i comandi <block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> in una configurazione IP MetroCluster.</block>
   <block id="7c876b2b1c29ab7cbf4dd35f76fe9601" category="paragraph"><block ref="7c876b2b1c29ab7cbf4dd35f76fe9601" category="inline-link-macro-rx"></block></block>
   <block id="b4043feb827ed258b03c0dc9d5c7e979" category="list-text">Nota 4: Gli aggiornamenti dei sistemi integrati (dischi e controller nello stesso chassis) richiedono la sostituzione dei moduli controller mantenendo lo chassis e i dischi esistenti.</block>
   <block id="4232872ec24791a771e26762eb9729a1" category="paragraph"><block ref="4232872ec24791a771e26762eb9729a1" category="inline-image-macro-rx" type="image"></block></block>
@@ -14470,4 +14465,8 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="55417ec59fd4af1a5afffacb42333c5a" category="paragraph">Esempio utilizzato in questa procedura: controller_B_1</block>
   <block id="1acb751c22e164e9d61c762caf509e82" category="paragraph">Esempio utilizzato in questa procedura: controller_B_2</block>
   <block id="eccb3ce2fe6ad5d172a57438aae17dae" category="doc">Crea un aggregato di dati mirrorati su ciascun nodo FC MetroCluster</block>
+  <block id="b5fd13a9bac03ffc7e9ccde70adc8242" category="doc">Requisiti di installazione di ONTAP Mediator per le configurazioni IP di MetroCluster</block>
+  <block id="e5287e41bb7b528f560b85847eb683be" category="paragraph">Se si dispone di uno switch Cisco 9336C-FX2 a 36 porte e non si prevede di collegare lo storage NS224 allo switch, utilizzare le tabelle in <block ref="5e1610ecd3627713f0895c655a667651" category="inline-link-macro-rx"></block>.</block>
+  <block id="096faa4efe64cfbabf158d3e14db33d7" category="list-text">Quando si collega uno switch Cisco 9336C-FX2 che connette lo storage NS224, è possibile avere un massimo di due configurazioni o gruppi DR MetroCluster. Almeno una configurazione o un gruppo DR MetroCluster deve collegare shelf NS224 allo switch MetroCluster. Se una delle configurazioni o dei gruppi DR MetroCluster è un sistema che non supporta shelf NS224, può essere collegata solo come seconda configurazione o gruppo DR MetroCluster.</block>
+  <block id="b68398936049bd282794c33831e2aea9" category="paragraph">Supporto per gli aggiornamenti di sistema da AFF A70 ad AFF A90 e da FAS70 a FAS90 utilizzando i comandi <block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> in una configurazione IP MetroCluster.</block>
 </blocks>

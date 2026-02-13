@@ -17,7 +17,7 @@ Prima di utilizzare le tabelle di configurazione, fare riferimento alle seguenti
 
 * Le tabelle in questa sezione si riferiscono agli switch Cisco 9336C-FX2 a 36 porte quando almeno una configurazione MetroCluster o un gruppo DR collega gli shelf NS224 allo switch MetroCluster.
 +
-Se si dispone di uno switch Cisco 9336C-FX2 a 36 porte che non collega l'archiviazione NS224, utilizzare le tabelle in link:port_usage_3232c_9336c.html["Assegnazioni delle porte della piattaforma per gli switch Cisco 3232C o Cisco 9336C-FX2 a 36 porte"] .
+Se si dispone di uno switch Cisco 9336C-FX2 a 36 porte e non si prevede di collegare lo storage NS224 allo switch, utilizzare le tabelle in link:port_usage_3232c_9336c.html["Assegnazioni delle porte della piattaforma per gli switch Cisco 3232C o Cisco 9336C-FX2 a 36 porte"].
 
 +
 Se si dispone di uno switch Cisco 9336C-FX2 a 12 porte, utilizzare le tabelle in link:port-usage-9336c-fx-2-12-port.html["Assegnazioni delle porte della piattaforma per gli switch Cisco 9336C-FX2 a 12 porte"] .
@@ -26,7 +26,7 @@ Se si dispone di uno switch Cisco 9336C-FX2 a 12 porte, utilizzare le tabelle in
 
 NOTE: Lo switch Cisco 9336C-FX2 a 12 porte non supporta la connessione degli scaffali NS224 allo switch MetroCluster.
 
-* Quando si cabla uno switch Cisco 9336C-FX2 che collega storage NS224, è possibile avere un massimo di due configurazioni MetroCluster o gruppi DR. Almeno una configurazione MetroCluster o un gruppo DR deve collegare shelf NS224 allo switch MetroCluster. È possibile collegare solo piattaforme che non collegano shelf NS224 collegati allo switch come seconda configurazione MetroCluster o come secondo gruppo DR.
+* Quando si collega uno switch Cisco 9336C-FX2 che connette lo storage NS224, è possibile avere un massimo di due configurazioni o gruppi DR MetroCluster. Almeno una configurazione o un gruppo DR MetroCluster deve collegare shelf NS224 allo switch MetroCluster. Se una delle configurazioni o dei gruppi DR MetroCluster è un sistema che non supporta shelf NS224, può essere collegata solo come seconda configurazione o gruppo DR MetroCluster.
 +
 Se il secondo gruppo MetroCluster o DR non collega gli scaffali NS224 allo switch MetroCluster, seguire le istruzioni <<tables_not_connecting_ns224,tabelle di cablaggio per controllori che non collegano ripiani NS224 collegati all'interruttore>> .
 
