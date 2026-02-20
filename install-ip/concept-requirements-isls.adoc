@@ -26,11 +26,15 @@ Quanto segue si applica agli ISL in tutte le configurazioni IP di MetroCluster:
 * Gli ISL devono avere la stessa topologia. Ad esempio, dovrebbero essere tutti collegamenti diretti, o se la configurazione utilizza WDM, devono tutti utilizzare WDM.
 * La velocità ISL minima richiesta dipende dal modello della piattaforma:
 +
-** A partire da ONTAP 9.18.1, le piattaforme con una velocità della porta backend IP MetroCluster di 100G richiedono una velocità minima di collegamento ISL di 100Gbps. L'utilizzo di una velocità ISL diversa richiede una richiesta di variazione delle funzionalità (FPVR). Per presentare un FPVR, contatta il team di vendita NetApp .
+** A partire da ONTAP 9.18.1, le piattaforme con una velocità di porta back-end IP MetroCluster di 100Gbps richiedono una velocità di collegamento ISL minima di 100Gbps. L'utilizzo di una velocità ISL diversa richiede una Feature Product Variance Request (FPVR). Per presentare una FPVR, contatta il tuo team di vendita NetApp.
++
+
+CAUTION: Gli aggiornamenti a ONTAP 9.18.1 e versioni successive su piattaforme che attualmente non soddisfano il requisito ISL a 100Gbps non sono bloccati e possono procedere. Tuttavia, NetApp raccomanda vivamente ai clienti di passare alla connettività ISL a 100Gbps per mantenere i livelli di prestazioni e disponibilità previsti.
+
 ** Su tutte le altre piattaforme, la velocità minima di collegamento ISL supportata è 10 Gbps.
 
 
-* Deve essere presente almeno una porta ISL 10Gbps per fabric.
+* Deve essere presente almeno una porta ISL da 10Gbps per fabric.
 
 
 
