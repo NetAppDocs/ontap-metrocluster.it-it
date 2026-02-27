@@ -1,0 +1,42 @@
+---
+permalink: install-ip/update-mediator-timeout.html 
+sidebar: sidebar 
+keywords: ontap, metrocluster, mediator, timeout, settings, change, update, default, value 
+summary:  
+---
+= Aumentare il timeout predefinito della casella di posta ONTAP Mediator nelle configurazioni IP di MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+I nodi MetroCluster IP possono accedere ai dischi delle caselle di posta di ONTAP Mediator utilizzando sessioni iSCSI, che hanno un timeout di connessione predefinito di 10 secondi, incluso un singolo tentativo dopo 5 secondi. A seconda della versione di ONTAP e dell'ambiente, è possibile aumentare il timeout della casella di posta fino a un massimo di 60 secondi per evitare interruzioni del Mediator-assisted unplanned switchover (MAUSO).
+
+NetApp consiglia di aumentare il timeout di connessione predefinito della casella di posta se si utilizzano protocolli di ridondanza di rete (come HSRP o VRRP), protocolli di prevenzione dei loop (come STP) o se la latenza di rete nell'ambiente supera il timeout predefinito di 10 secondi.
+
+.Prima di iniziare
+È necessario valutare la finestra di interruzione, ovvero il tempo necessario per riconnettere i nodi IP di MetroCluster al ONTAP Mediator. Se impiega più di 10 secondi, è necessario impostare il valore di timeout a qualche secondo in più rispetto al tempo necessario per riconnettere i nodi IP di MetroCluster.
+
+Se la connettività viene mantenuta in modo indipendente da ciascun sito e l'interruzione in un sito non influisce sulla connettività al ONTAP Mediator dal sito attivo, il valore predefinito di 10 secondi è sufficiente e non è necessario modificare il timeout della casella di posta.
+
+.A proposito di questa attività
+* Le seguenti versioni di ONTAP supportano l'aumento del timeout della casella di posta di ONTAP Mediator:
++
+** ONTAP 9.18.1GA o versioni successive
+** ONTAP 9.17.1P3 o patch successive di ONTAP 9.17.1
+** ONTAP 9.16.1P10 o patch successive di ONTAP 9.16.1
+** ONTAP 9.15.1P16 o patch successive di ONTAP 9.15.1
+
+
+* L'aumento del timeout della mailbox è supportato su tutte le versioni di ONTAP Mediator.
+* L'intervallo supportato per il valore di timeout è compreso tra 10 e 60 secondi. Se si specifica un valore fuori intervallo, ONTAP lo modifica automaticamente al valore predefinito di 10 secondi.
+* Se i nodi MetroCluster impiegano più di 10 secondi per riconnettersi al mediatore ONTAP, è necessario impostare il valore di timeout in modo che sia di qualche secondo più lungo del tempo impiegato dai nodi per connettersi.
+
+
+.Fase
+. Per aumentare il timeout predefinito della casella di posta di ONTAP Mediator, fare riferimento a link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/How_to_Increase_Mediator_Mailbox_Timeout_for_environments_where_network_latency_exceeds_10_seconds["NetApp articolo della Knowledge Base: Come aumentare il timeout della casella di posta del mediatore per ambienti in cui la latenza di rete supera i 10 secondi"^]
+
+
+.Informazioni correlate
+link:concept-ontap-mediator-supports-automatic-unplanned-switchover.html["Scopri di più su come ONTAP Mediator supporta il passaggio automatico non pianificato nelle configurazioni IP di MetroCluster."]
