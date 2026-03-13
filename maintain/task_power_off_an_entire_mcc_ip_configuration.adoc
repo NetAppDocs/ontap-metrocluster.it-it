@@ -4,19 +4,19 @@ sidebar: sidebar
 keywords: metrocluster, maintain, service, power, off, entire, metrocluster, ip, configuration 
 summary: 'Prima di iniziare la manutenzione o il trasferimento, è necessario spegnere l"intera configurazione IP di MetroCluster e tutte le apparecchiature.' 
 ---
-= Spegnimento di un'intera configurazione IP MetroCluster
+= Spegnere un'intera configurazione IP MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Prima di iniziare la manutenzione o il trasferimento, è necessario spegnere l'intera configurazione IP di MetroCluster e tutte le apparecchiature.
+Spegnere l'intera configurazione IP di MetroCluster e tutte le apparecchiature prima di iniziare la manutenzione o lo spostamento.
 
 
 NOTE: A partire da ONTAP 9.8, la `*storage switch*` il comando viene sostituito con `*system switch*`. La procedura riportata di seguito mostra `*storage switch*` Ma se si utilizza ONTAP 9.8 o versione successiva, il comando `*system switch*` è preferibile utilizzare il comando.
 
-. Verificare la configurazione MetroCluster da entrambi i siti nella configurazione MetroCluster.
+. Verificare la configurazione di MetroCluster da entrambi i siti.
 +
 .. Verificare che la configurazione e la modalità operativa di MetroCluster siano normali. +
 `*metrocluster show*`
@@ -53,7 +53,7 @@ cluster_A_site_A::*>metrocluster modify -auto-switchover-failure-domain auso-dis
 ----
 +
 
-NOTE: In una configurazione IP MetroCluster, il dominio di errore AUSODISABLED è già impostato su 'ausodisabled', a meno che la configurazione non sia configurata con il supporto ONTAP.
+NOTE: In una configurazione IP MetroCluster, il dominio di errore AUSO è già impostato su 'auso-disabled' a meno che la configurazione non utilizzi ONTAP Mediator.
 
 . Verificare la modifica utilizzando il comando
 +
@@ -70,14 +70,12 @@ NOTE: In una configurazione IP MetroCluster, il dominio di errore AUSODISABLED �
         End Time: 4/25/2020 20:20:36
           Errors: -
 ----
-. Arrestare i nodi:
-+
-`*halt*`
-
+. Arresta i nodi in entrambi i siti:
 +
 [listing]
 ----
-system node halt -node node1_SiteA -inhibit-takeover true -ignore-quorum-warnings true
+cluster_A::*>system node halt -node * -inhibit-takeover true -ignore-quorum-warnings true
+cluster_B::*>system node halt -node * -inhibit-takeover true -ignore-quorum-warnings true
 ----
 . Spegnere le seguenti apparecchiature presso il sito:
 +

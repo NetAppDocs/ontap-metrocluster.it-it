@@ -143,7 +143,7 @@ Se si esegue l'aggiornamento o il downgrade di uno switch, applicare il file RCF
 +
 .. Modifica tutte le LIF del cluster per disattivare l'indirizzamento automatico:
 +
-[source, asciidoc]
+[source, cli]
 ----
 network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert false
 ----
@@ -236,7 +236,7 @@ NOTE: Se si esegue l'aggiornamento o il downgrade delle reti, ripetere tutti i p
 
 . Modifica tutte le LIF del cluster per riattivare l'indirizzamento automatico:
 +
-[source, asciidoc]
+[source, cli]
 ----
 network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert true
 ----
