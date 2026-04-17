@@ -10092,7 +10092,6 @@
   <block id="91271938ac44f690cd5a064a6a92425f" category="paragraph">Ogni LIF del cluster dovrebbe visualizzare true per is Home e avere uno stato Admin/Oper di up/up</block>
   <block id="e74ba48b87be882bffe68906351b713a" category="list-text">Verificare che l'autorevert sia attivato su tutte le LIF del cluster:</block>
   <block id="e4490c39e3c7c690b2b28793dd430b44" category="paragraph"><block ref="d268e7bf124a9f74e2dbe2e0127d951b" prefix="" category="inline-code"></block></block>
-  <block id="0bc247e1fb33acc5636986c990aa1e9a" category="section-title">Rimozione della configurazione dalle applicazioni di monitoraggio</block>
   <block id="ae81bff40f90f640ae14eb37aaf345ea" category="paragraph">Se la configurazione esistente viene monitorata con il software MetroCluster Tiebreaker, il mediatore ONTAP o altre applicazioni di terze parti (ad esempio, ClusterLion) che possono avviare uno switchover, è necessario rimuovere la configurazione MetroCluster dal software di monitoraggio prima di eseguire l'aggiornamento.</block>
   <block id="dbdccf881e62a812392682de3b418def" category="list-text">Rimuovere la configurazione MetroCluster esistente da Tiebreaker, Mediator o altro software in grado di avviare lo switchover.</block>
   <block id="3cf98495d2d0556357fd3275c2ff1c80" category="cell">Utilizzare questa procedura...</block>
@@ -10132,7 +10131,6 @@
   <block id="5dc920411c59b1b9f32058239fb24330" category="list-text">Verificare che le connessioni siano state stabilite correttamente:<block ref="e7acb1ae14be0e5233d619851263fdae" prefix=" " category="inline-code"></block></block>
   <block id="2dccf53d6ed326f889d8e764529b9794" category="list-text">Verificare l'assegnazione automatica e il partizionamento del disco:</block>
   <block id="3f95b2ea711d433e26a8b5eb63bbd17a" category="paragraph"><block ref="02b924a96c72679822883a70dfe48211" prefix="" category="inline-code"></block></block>
-  <block id="6c46e592d5f16891d3a16e5f364e031b" category="section-title">Finalizzare l'aggiunta dei nuovi nodi</block>
   <block id="7062dd7205e5ed0cba84efd4203bc9cc" category="paragraph">Nell'esempio seguente viene illustrata la creazione di un aggregato su Node_A_1-New.</block>
   <block id="7d7a3fc828a61ba2a0ef14619b7c2ccb" category="list-text">Verificare che i nodi siano aggiunti al gruppo di DR.</block>
   <block id="b0d21d87e852192022d32882c31d8709" category="paragraph">L'esempio seguente mostra i volumi MDV in<block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block> uscita:</block>
@@ -12545,10 +12543,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="be4fd0012ddc006ea303591c9df6f76d" category="paragraph"><block ref="39b06b9a26b49c3db6d9409a6abaa9d8" prefix="" category="inline-code"></block></block>
   <block id="9e1d9b9e8b88355df08194559af6865a" category="summary">Durante uno switchover, alcune operazioni non devono essere eseguite.</block>
   <block id="fa33dcb38c0cd6e15dd757f1ef3072ee" category="doc">Limiti durante lo switchover della configurazione di MetroCluster</block>
-  <block id="5722cde27dfa05f795a5466b6d0859c9" category="paragraph">Quando il sistema è in switchover, alcune operazioni non devono essere eseguite. Ulteriori informazioni sulle operazioni con restrizioni durante lo switchover del sistema.</block>
-  <block id="b72a4837907e7fef0771c42da901c811" category="section-title">Operazioni limitate nello switchover</block>
-  <block id="1b5f91752d52b3bac4319cf07ea0efb8" category="paragraph">Quando il sistema è in switchover, le seguenti operazioni non sono supportate:</block>
-  <block id="272c8dfc8e0821088d85ed5d0fe037a8" category="list-text">Creazione o eliminazione di aggregati e volumi</block>
   <block id="d825dd35fde2fe33a56ef95c52f545a0" category="list-text">Creazione o eliminazione di SVM</block>
   <block id="8c120d60e412429a6f43b748c02dc233" category="list-text">Creazione o eliminazione di LIF</block>
   <block id="9cc6607cba1650bc799439425f9b085e" category="list-text">Aggiunta o rimozione di dischi (solo se vengono sostituiti come parte di una procedura di ripristino)</block>
@@ -13436,7 +13430,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="4e4facc560c88d40d47ce2b1369d5552" category="doc">Configurare la raccolta dei log su uno switch IP MetroCluster</block>
   <block id="d5a5c9619599da12d87af6daeab1ece6" category="paragraph">In una configurazione IP MetroCluster, è possibile configurare la raccolta dei log per raccogliere i log degli switch a scopo di debug.</block>
   <block id="7c51c84110459cf460a444094be133c4" category="admonition">Sugli switch Broadcom e Cisco, è necessario un nuovo utente per ogni cluster con raccolta di log. Ad esempio, MetroCluster 1, MetroCluster 2, MetroCluster 3 e MetroCluster 4 richiedono tutti la configurazione di un utente separato sugli switch. Non è supportato l'utilizzo di più chiavi SSH per lo stesso utente.</block>
-  <block id="8ac20e3719b6b58e94e5a4385e87b52e" category="paragraph">Il monitor dello stato degli switch Ethernet (CSHM) ha la responsabilità di garantire lo stato operativo degli switch del cluster e della rete di storage e di raccogliere i registri degli switch a scopo di debug. Questa procedura guida l'utente attraverso il processo di impostazione della raccolta, la richiesta di registri *supporto* dettagliati e l'abilitazione di una raccolta oraria di dati *periodici* raccolti da AutoSupport.</block>
   <block id="2ded3ff3862adfc6f54d2a2f3ebf1147" category="paragraph">*NOTA:* se si attiva la modalità FIPS, è necessario completare quanto segue:</block>
   <block id="81f0d5b127adfd87f50ce10bc85e1e65" category="list-text">Rigenerare le chiavi SSH sullo switch utilizzando le istruzioni del fornitore.</block>
   <block id="a60a00967db7342947b326a8f7618f52" category="list-text">Rigenerare le chiavi SSH in ONTAP utilizzando<block ref="c079360670e0f4f9441a54ac1d262788" prefix=" " category="inline-code"></block></block>
@@ -14500,4 +14493,15 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="108a4ad72df5c318a77dad90928d8770" category="admonition">In una configurazione IP MetroCluster, il dominio di errore AUSO è già impostato su 'auso-disabled' a meno che la configurazione non utilizzi ONTAP Mediator.</block>
   <block id="6ba9661e38afca32fe30fec08ca5c4ab" category="list-text">Arresta i nodi in entrambi i siti:</block>
   <block id="f759ce596ef74c921d7bddaf277a11c8" category="paragraph">*Nota:* La velocità di 25 GbE richiede l'adattatore ricetrasmettitore MAM1Q00A-QSA28.</block>
+  <block id="316fa55db721e45107647fc0de79704f" category="paragraph">L'health monitor dello switch Ethernet (CSHM) è responsabile di garantire lo stato operativo degli switch di rete e di raccogliere i log degli switch per scopi di debug. Questa procedura ti guida attraverso il processo di configurazione della raccolta, richiesta di log *Support* dettagliati e abilitazione di una raccolta oraria di dati *Periodic* che vengono raccolti da AutoSupport.</block>
+  <block id="4526d2820ba573572df0eafdc557014c" category="paragraph">Quando il sistema è in fase di commutazione, NetApp consiglia di evitare di eseguire determinate operazioni.</block>
+  <block id="6efa43350457e5d9dbe5d6c555eb32f9" category="paragraph">Le seguenti operazioni sono sconsigliate durante la fase di switchover del sistema e devono essere eseguite solo seguendo le indicazioni del supporto NetApp:</block>
+  <block id="9ea78d85c08becd89d5d23daef8687fa" category="list-text">Creazione o eliminazione di aggregati</block>
+  <block id="56f10876ae2bed5f3da63c125772429f" category="list-text">Creazione o eliminazione di volumi (inclusi i volumi crittografati)</block>
+  <block id="6e05136dba32fad75bd64f601602c77e" category="section-title">Rimuovere la configurazione dalle applicazioni di monitoraggio</block>
+  <block id="a8b426026583d79d39676c969bdc3456" category="section-title">Preparare i nuovi moduli del controller</block>
+  <block id="af8fde2f19f4ba506d9bb950533f5776" category="list-text">Dalla modalità Maintenance, immettere il comando halt per uscire dalla modalità Maintenance:</block>
+  <block id="b8bbebbdaa85ea395d4339565372cafe" category="list-text">Avvia il sistema e accedi alla configurazione del cluster:</block>
+  <block id="e219586e70791b35867f7d4dc343163f" category="section-title">Configurare le LIF intercluster, creare le interfacce MetroCluster e replicare gli aggregati root</block>
+  <block id="8780af330d271744603135da4ae91fd9" category="section-title">Completare l'aggiunta dei nuovi nodi</block>
 </blocks>

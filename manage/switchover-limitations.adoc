@@ -11,15 +11,12 @@ summary: Durante uno switchover, alcune operazioni non devono essere eseguite.
 
 
 [role="lead"]
-Quando il sistema è in switchover, alcune operazioni non devono essere eseguite. Ulteriori informazioni sulle operazioni con restrizioni durante lo switchover del sistema.
+Quando il sistema è in fase di commutazione, NetApp consiglia di evitare di eseguire determinate operazioni.
 
+Le seguenti operazioni sono sconsigliate durante la fase di switchover del sistema e devono essere eseguite solo seguendo le indicazioni del supporto NetApp:
 
-
-== Operazioni limitate nello switchover
-
-Quando il sistema è in switchover, le seguenti operazioni non sono supportate:
-
-* Creazione o eliminazione di aggregati e volumi
+* Creazione o eliminazione di aggregati
+* Creazione o eliminazione di volumi (inclusi i volumi crittografati)
 * Creazione o eliminazione di SVM
 * Creazione o eliminazione di LIF
 * Aggiunta o rimozione di dischi (solo se vengono sostituiti come parte di una procedura di ripristino)

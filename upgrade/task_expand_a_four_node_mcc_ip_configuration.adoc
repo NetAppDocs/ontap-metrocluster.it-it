@@ -210,7 +210,7 @@ image::../media/8node_comb_ip_asa.png[Combinazioni di piattaforme per configuraz
 
 
 
-== Invio di un messaggio AutoSupport personalizzato prima della manutenzione
+== Inviare un messaggio AutoSupport personalizzato prima della manutenzione
 
 Prima di eseguire la manutenzione, devi inviare un messaggio AutoSupport per informare il supporto tecnico NetApp che la manutenzione è in corso. Informare il supporto tecnico che la manutenzione è in corso impedisce loro di aprire un caso partendo dal presupposto che si sia verificata un'interruzione.
 
@@ -305,7 +305,7 @@ Intervalli VLAN validi:
 
 
 
-== Verifica dello stato della configurazione MetroCluster
+== Verificare lo stato della configurazione MetroCluster
 
 È necessario verificare lo stato e la connettività della configurazione MetroCluster prima di eseguire l'espansione.
 
@@ -442,7 +442,7 @@ cluster_A::>
 
 
 
-== Rimozione della configurazione dalle applicazioni di monitoraggio
+== Rimuovere la configurazione dalle applicazioni di monitoraggio
 
 Se la configurazione esistente viene monitorata con il software MetroCluster Tiebreaker, il mediatore ONTAP o altre applicazioni di terze parti (ad esempio, ClusterLion) che possono avviare uno switchover, è necessario rimuovere la configurazione MetroCluster dal software di monitoraggio prima di eseguire l'aggiornamento.
 
@@ -486,7 +486,7 @@ Consultare la documentazione dell'applicazione.
 
 
 
-== Preparazione dei nuovi moduli controller
+== Preparare i nuovi moduli del controller
 
 È necessario preparare i quattro nuovi nodi MetroCluster e installare la versione corretta di ONTAP.
 
@@ -512,7 +512,22 @@ In questa procedura, si cancella la configurazione sui nodi e si cancella l'area
 .. link:../install-ip/task_sw_config_assign_pool0.html#manually-assigning-drives-for-pool-0-ontap-9-4-and-later["Assegnazione manuale dei dischi per il pool 0 (ONTAP 9,4 e versioni successive)"]
 
 
-. Dalla modalità Maintenance, eseguire il comando halt per uscire dalla modalità Maintenance, quindi eseguire il comando boot_ontap per avviare il sistema e accedere alla configurazione del cluster.
+. Dalla modalità Maintenance, immettere il comando halt per uscire dalla modalità Maintenance:
++
+`halt`
+
+. Verificare se il partner-sysid è corretto:
++
+`printenv partner-sysid`
+
+. Se il partner-sysid non è corretto, impostarlo:
++
+`setenv partner-sysid <partner-sysID>`
+
+. Avvia il sistema e accedi alla configurazione del cluster:
++
+`boot_ontap`
+
 +
 Non completare la procedura guidata del cluster o del nodo.
 
@@ -689,7 +704,7 @@ Do you want to use this configuration? {yes, no} [yes]: yes
 
 
 
-== Configurazione delle LIF tra cluster, creazione delle interfacce MetroCluster e mirroring degli aggregati root
+== Configurare le LIF intercluster, creare le interfacce MetroCluster e replicare gli aggregati root
 
 È necessario creare le LIF di peering del cluster e le interfacce MetroCluster sui nuovi nodi IP MetroCluster.
 
@@ -1131,7 +1146,7 @@ aggr_data_a2
 
 
 
-== Finalizzare l'aggiunta dei nuovi nodi
+== Completare l'aggiunta dei nuovi nodi
 
 È necessario incorporare il nuovo gruppo DR nella configurazione MetroCluster e creare aggregati di dati mirrorati sui nuovi nodi.
 
