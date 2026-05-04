@@ -124,7 +124,7 @@ NOTE: L'account utente specificato durante l'installazione di Tiebreaker deve di
 
 * Utilizzare la crittografia del database
 +
-** È supportata la crittografia dei dati inattivi.link:https://mariadb.com/docs/server/security/securing-mariadb/securing-mariadb-encryption/encryption-data-at-rest-encryption/data-at-rest-encryption-overview["Scopri di più sulla crittografia dei dati a riposo"^]
+** La crittografia dei dati a riposo è supportata. link:https://mariadb.com/docs/server/security/encryption/data-at-rest-encryption/data-at-rest-encryption-tde-fundamentals["Scopri di più sulla crittografia dei dati a riposo"^]
 ** I dati in volo non sono crittografati. I dati in volo utilizzano una connessione di file locale "SOCKS".
 ** Conformità FIPS per MariaDB: Non è necessario attivare la conformità FIPS nel database. È sufficiente installare l'host in modalità conforme a FIPS.
 +
@@ -155,3 +155,6 @@ link:https://mariadb.com/docs/server/security/securing-mariadb["Protezione di Ma
 link:https://developer.hashicorp.com/vault/tutorials/operations/production-hardening/["Protezione avanzata della produzione"^]
 
 
+
+.Quali sono le prossime novità?
+link:install-choose-procedure.html["Scegliere la procedura di installazione"] per installare o aggiornare Tiebreaker.
