@@ -13,9 +13,6 @@ summary:
 [role="lead"]
 I nodi MetroCluster IP possono accedere ai dischi delle caselle di posta di ONTAP Mediator utilizzando sessioni iSCSI, che hanno un timeout di connessione predefinito di 10 secondi, incluso un singolo tentativo dopo 5 secondi. A seconda della versione di ONTAP e dell'ambiente, è possibile aumentare il timeout della casella di posta fino a un massimo di 60 secondi per evitare interruzioni del Mediator-assisted unplanned switchover (MAUSO).
 
-
-NOTE: Questa procedura si applica solo a un ONTAP Mediator configurato con iSCSI. Questa procedura non si applica a un ONTAP Mediator che utilizza HTTPS.
-
 NetApp consiglia di aumentare il timeout di connessione predefinito della casella di posta se una delle seguenti condizioni si applica al tuo ambiente:
 
 * Si stanno utilizzando protocolli di ridondanza di rete (come HSRP o VRRP) o protocolli di prevenzione dei loop (come STP).
