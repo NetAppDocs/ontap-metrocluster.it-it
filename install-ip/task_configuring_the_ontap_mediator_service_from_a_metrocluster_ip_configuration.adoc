@@ -28,11 +28,147 @@ CAUTION: A partire da ONTAP 9.12.1, è possibile attivare la funzione di switcho
 
 .A proposito di questa attività
 * Questa attività attiva lo switchover automatico non pianificato per impostazione predefinita.
-* Questa attività può essere eseguita sull'interfaccia ONTAP di qualsiasi nodo della configurazione IP di MetroCluster.
-* A partire da ONTAP 9.18.1 e ONTAP Mediator 1.11, una singola istanza ONTAP Mediator può gestire fino a dieci configurazioni MetroCluster contemporaneamente.  Nelle versioni precedenti, ONTAP Mediator può supportare fino a cinque configurazioni MetroCluster contemporaneamente.
+* È possibile eseguire questa operazione sull'interfaccia ONTAP di qualsiasi nodo nella configurazione IP MetroCluster.
+* A partire da ONTAP 9.18.1 e ONTAP Mediator 1.11, una singola istanza di ONTAP Mediator configurata con iSCSI può gestire fino a dieci MetroCluster configurazioni contemporaneamente. In ONTAP 9.17.1 e ONTAP Mediator 1.10 e versioni precedenti, un'istanza ONTAP Mediator configurata con iSCSI può supportare fino a cinque MetroCluster configurazioni contemporaneamente.
+* A partire da ONTAP 9.19.1 e ONTAP Mediator 1.12, è possibile installare ONTAP Mediator con supporto per iSCSI e HTTPS, oppure solo HTTPS. Se si installa ONTAP Mediator solo per HTTPS, non è possibile configurare un Mediator con iSCSI.
+* Se non si specifica il  `-type` parametro nel  `metrocluster configuration-settings mediator add` comando, viene utilizzato il protocollo iSCSI predefinito.
+* Se si configura ONTAP Mediator con HTTPS, una singola istanza di ONTAP Mediator può monitorare una sola configurazione IP MetroCluster. Il monitoraggio simultaneo di più configurazioni IP MetroCluster non è supportato quando ONTAP Mediator è configurato con HTTPS.
+* Se è necessario configurare ONTAP Mediator con HTTPS per monitorare più configurazioni IP di MetroCluster, è necessario configurare istanze separate di ONTAP Mediator per ciascuna configurazione IP di MetroCluster. È necessario valutare attentamente i requisiti per il proprio ambiente IP di MetroCluster prima di scegliere di configurare ONTAP Mediator con HTTPS per MetroCluster IP.
+* Se si desidera utilizzare una singola istanza di ONTAP Mediator per monitorare più configurazioni IP MetroCluster, è necessario configurare ONTAP Mediator utilizzando iSCSI anziché HTTPS.
 
+
+[role="tabbed-block"]
+====
+.Configurare un ONTAP Mediator con HTTPS
+--
+A partire da ONTAP 9.19.1 e ONTAP Mediator 1.12, è possibile configurare un ONTAP Mediator che utilizza HTTPS per la comunicazione in una configurazione IP MetroCluster.
 
 .Fasi
+. Individuare i certificati CA di ONTAP Mediator dalla posizione di installazione del software ONTAP Mediator sulla macchina virtuale/host Linux:
++
+`[root@ontap-mediator ~] cd /opt/netapp/lib/ontap_mediator/ontap_mediator/server_config`
+
++
+Dovresti vedere un output simile al seguente esempio:
+
++
+[listing]
+----
+1-ontap-mediator.rules  intermediate.crt   make_self_signed_certs.sh      ontap_mediator_server_chain.crt  ontap_mediator.user_config.yaml  root_ca.crt
+config_migration        intermediate.key   netapp_sudoers                 ontap_mediator_server.crt        openssl_ca.cnf                   root_ca.key
+config.pyc              intermediate.srl   ontap_mediator.config.yaml     ontap_mediator_server.csr        openssl_intermediate.cnf
+__init__.pyc            logging.conf.yaml  ontap_mediator.constants.yaml  ontap_mediator_server.key        openssl_server.cnf
+----
+. Visualizza il contenuto del certificato CA radice:
++
+`[root@ontap-mediator ~] cat root_ca.crt`
+
++
+[listing]
+----
+-----BEGIN CERTIFICATE-----
+<certificate_value>
+-----END CERTIFICATE-----
+----
+. Visualizza il contenuto del certificato CA intermedio:
++
+`[root@ontap-mediator ~] cat intermediate.crt`
+
++
+[listing]
+----
+-----BEGIN CERTIFICATE-----
+<certificate_value>
+-----END CERTIFICATE-----
+----
+. Installare i certificati CA radice e intermedi sul sito A:
++
+.. Installa il certificato CA radice:
++
+`security certificate install -type server-ca -vserver <vserver_name>`
+
++
+Inserisci il  `root_ca.crt` quando richiesto, come mostrato nell'esempio seguente:
+
++
+[listing]
+----
+cluster_A::*> security certificate install -type server-ca -vserver cluster_A
+
+Enter certificate: Press <Enter> when done
+
+-----BEGIN CERTIFICATE-----
+<certificate_value>
+-----END CERTIFICATE-----
+
+You should keep a copy of the CA-signed digital certificate for future
+reference.
+
+The installed certificate's CA and serial number for reference:
+CA: ONTAP Mediator CA
+serial: <serial_value>
+
+The certificate's generated name for reference: ONTAPMediatorCA
+
+cluster_A::*>
+
+----
+
+
+. Installare il certificato CA intermedio:
++
+`security certificate install -type server-ca -vserver <vserver_name>`
+
++
+Inserisci il  `intermediate.crt` quando richiesto, come mostrato nell'esempio seguente:
+
++
+[listing]
+----
+cluster_A::*> security certificate install -type server-ca -vserver cluster_A
+
+Enter certificate: Press <Enter> when done
+
+-----BEGIN CERTIFICATE-----
+<certificate_value>
+-----END CERTIFICATE-----
+
+You should keep a copy of the CA-signed digital certificate for future
+reference.
+
+The installed certificate's CA and serial number for reference:
+CA: ONTAP Mediator CA
+serial: <serial_value>
+
+The certificate's generated name for reference: ONTAPMediatorCA
+
+cluster_A::*>
+
+----
+. Ripetere il passaggio precedente per installare i certificati CA root e intermediate sul sito B.
+. Visualizza i certificati CA autofirmati installati utilizzando il nome generato dei certificati:
++
+`security certificate show -common-name <common_name>`
+
++
+Dovresti vedere un output simile al seguente esempio:
+
++
+[listing]
+----
+security certificate show -common-name ONTAPMediatorCA
+Vserver    Serial Number      Certificate Name                     Type
+---------- ---------------    ------------------------------------ ------------
+cluster_A  <serial_value>     ONTAPMediatorCA                      server-ca
+    Certificate Authority: ONTAP Mediator CA
+          Expiration Date: Thu Nov 28 05:26:07 2030
+
+cluster_A  <serial_value>    ONTAPMediatorCA                       server-ca
+    Certificate Authority: ONTAP Mediator CA
+          Expiration Date: Thu Nov 28 05:26:07 2030
+
+2 entries were displayed.
+----
 . Aggiungere ONTAP Mediator a ONTAP.  I passaggi variano a seconda che si voglia utilizzare un indirizzo IPv4 o IPv6.
 +
 [NOTE]
@@ -43,47 +179,68 @@ CAUTION: A partire da ONTAP 9.12.1, è possibile attivare la funzione di switcho
 
 ====
 +
-[role="tabbed-block"]
-====
-.Utilizzare IPv4
---
-.. Eseguire il seguente comando per aggiungere ONTAP Mediator:
+.. Se desideri utilizzare IPv6, segui questi passaggi:
 +
-`metrocluster configuration-settings mediator add -mediator-address <mediator_host_ip_address>`
+Per utilizzare IPv4, passare a <<https_ipv4_step8b,il passaggio IPv4>>.
 
 +
-
-NOTE: Ti verrà richiesto di inserire il nome utente e la password per l'account utente amministratore del Mediatore.
-
-
-
---
-.Utilizzare IPv6
---
-.. Eseguire il seguente comando su entrambi i cluster:
+... Eseguire il seguente comando su entrambi i cluster:
 +
 `network options ipv6 modify -enabled true`
 
-.. Configurare l'indirizzo IP node-mgmt con indirizzi IPv6 su tutti e quattro i nodi.
-.. Aggiungere il mediatore ONTAP :
+... Configurare l'indirizzo IP node-mgmt con indirizzi IPv6 su tutti e quattro i nodi.
+... Aggiungere il mediatore ONTAP :
 +
-`metrocluster configuration-settings mediator add -mediator-address <mediator_host_ipv6_ip_address>`
+`metrocluster configuration-settings mediator add -mediator-address <mediator_host_ipv6_ip_address> -type https-mediator`
 
 +
 
-NOTE: Ti verrà richiesto di inserire il nome utente e la password per l'account utente amministratore del Mediatore.
+NOTE: Inserisci il nome utente e la password di amministratore di Mediator quando richiesto.
 
 
 
---
-====
-. Verificare che la funzione di switchover automatico sia attivata:
+.. [[https_ipv4_step8b]]Se desideri utilizzare IPv4, completa il seguente passaggio:
++
+... Aggiungere il mediatore ONTAP :
++
+`metrocluster configuration-settings mediator add -mediator-address <mediator_host_ip_address> -type https-mediator`
+
++
+
+NOTE: Inserisci il nome utente e la password di amministratore di Mediator quando richiesto.
+
+
+
+
+
+. Verificare lo stato della connessione e il tipo di ONTAP Mediator:
++
+`metrocluster configuration-settings mediator show`
+
++
+Dovresti vedere un output simile al seguente esempio:
+
++
+[listing]
+----
+cluster_A::*> metrocluster configuration-settings mediator show
+        Mediator IP     Port    Type              Node                    Configuration Connection
+                                                  Status                  Status
+        --------------- ------- ----------------- ----------------------- ------------- -----------
+        10.101.101.101
+                        31784   https-mediator    cluster1_node_01        true          true
+                                                  cluster1_node_02        true          true
+                                                  cluster2_node_01        true          true
+                                                  cluster2_node_02        true          true
+----
++
+.. Verificare che la funzione di switchover automatico sia attivata:
 +
 `metrocluster show`
 
-. Verificare che Mediator sia in esecuzione.
+.. Verificare che Mediator sia in esecuzione.
 +
-.. Mostra i dischi virtuali di Mediator:
+... Mostra i dischi virtuali di Mediator:
 +
 `storage disk show -container-type mediator`
 
@@ -98,33 +255,7 @@ NOTE: Ti verrà richiesto di inserire il nome utente e la password per l'account
  NET-1.7                   -     -   - VMDISK  mediator    -         node_B_2
  NET-1.8                   -     -   - VMDISK  mediator    -         node_A_1
 ....
-.. Impostare la modalità dei privilegi su Advanced (avanzata):
-+
-`set advanced`
-
-+
-....
- cluster_A::> set advanced
-....
-.. Visualizzare gli iniziatori etichettati come mediatore:
-+
-`storage iscsi-initiator show -label mediator`
-
-+
-....
- cluster_A::*> storage iscsi-initiator show -label mediator
-   (storage iscsi-initiator show)
-  +                                                                     Status
- Node Type Label    Target Portal      Target Name                      Admin/Op
- ---- ---- -------- ------------------ -------------------------------- --------
- node_A_1
-      mailbox
-           mediator 1.1.1.1       iqn.2012-05.local:mailbox.target.6616cd3f-9ef1-11e9-aada-00a098ccf5d8:a05e1ffb-9ef1-11e9-8f68- 00a098cbca9e:1 up/up
- node_A_2
-      mailbox
-           mediator 1.1.1.1       iqn.2012-05.local:mailbox.target.6616cd3f-9ef1-11e9-aada-00a098ccf5d8:a05e1ffb-9ef1-11e9-8f68-00a098cbca9e:1 up/up
-....
-.. Verificare lo stato del dominio dell'errore di switchover non pianificato automatico (AURO):
+... Verificare lo stato del dominio dell'errore di switchover non pianificato automatico (AURO):
 +
 `metrocluster show`
 
@@ -147,19 +278,129 @@ Remote: cluster_B         Configuration state configured
 ----
 
 
-. In alternativa, configurare lo switchover forzato automatico MetroCluster.
+
+
+
+
+--
+.Configurare un ONTAP Mediator con iSCSI
+--
+.Fasi
+. Aggiungere ONTAP Mediator a ONTAP.  I passaggi variano a seconda che si voglia utilizzare un indirizzo IPv4 o IPv6.
 +
-È possibile utilizzare il seguente comando solo a livello di privilegi avanzati.
+[NOTE]
+====
+** Per utilizzare IPv6 è necessario eseguire ONTAP 9.18.1 o versione successiva e ONTAP Mediator 1.11 o versione successiva.
+** Se si abilita IPv6 su un cluster, non sarà possibile disabilitarlo in seguito.
+
+
+====
++
+.. Se desideri utilizzare IPv6, segui questi passaggi:
++
+Per utilizzare IPv4, passare a <<iscsi_ipv4_step8b,il passaggio IPv4>>.
+
++
+... Eseguire il seguente comando su entrambi i cluster:
++
+`network options ipv6 modify -enabled true`
+
+... Configurare l'indirizzo IP node-mgmt con indirizzi IPv6 su tutti e quattro i nodi.
+... Aggiungere il mediatore ONTAP :
++
+`metrocluster configuration-settings mediator add -mediator-address <mediator_host_ipv6_ip_address> -type iscsi-mediator`
 
 +
 
-IMPORTANT: Prima di utilizzare questo comando, rivedere la link:concept-ontap-mediator-supports-automatic-unplanned-switchover.html#mauso-9-12-1["Rischi e limitazioni dell'utilizzo dello switchover forzato automatico di MetroCluster"].
+NOTE: Inserisci il nome utente e la password di amministratore di Mediator quando richiesto.
+
+
+
+.. [[iscsi_ipv4_step8b]]Se si desidera utilizzare IPv4, completare il seguente passaggio:
++
+... Aggiungere il mediatore ONTAP :
++
+`metrocluster configuration-settings mediator add -mediator-address <mediator_host_ip_address> -type iscsi-mediator`
 
 +
-`metrocluster modify -allow-auto-forced-switchover true`
+
+NOTE: Inserisci il nome utente e la password di amministratore di Mediator quando richiesto.
+
+
+
+.. Verificare che la funzione di switchover automatico sia attivata:
++
+`metrocluster show`
+
+.. Verificare che Mediator sia in esecuzione.
++
+... Mostra i dischi virtuali di Mediator:
++
+`storage disk show -container-type mediator`
 
 +
 ....
-cluster_A::*> metrocluster modify -allow-auto-forced-switchover true
+ cluster_A::> storage disk show -container-type mediator
+                        Usable           Disk    Container   Container
+ Disk                   Size Shelf Bay Type    Type        Name      Owner
+ ---------------- ---------- ----- --- ------- ----------- --------- --------
+ NET-1.5                   -     -   - VMDISK  mediator    -         node_A_2
+ NET-1.6                   -     -   - VMDISK  mediator    -         node_B_1
+ NET-1.7                   -     -   - VMDISK  mediator    -         node_B_2
+ NET-1.8                   -     -   - VMDISK  mediator    -         node_A_1
 ....
+... Impostare la modalità dei privilegi su Advanced (avanzata):
++
+`set advanced`
 
++
+....
+ cluster_A::> set advanced
+....
+... Visualizzare gli iniziatori etichettati come mediatore:
++
+`storage iscsi-initiator show -label mediator`
+
++
+....
+ cluster_A::*> storage iscsi-initiator show -label mediator
+   (storage iscsi-initiator show)
+  +                                                                     Status
+ Node Type Label    Target Portal      Target Name                      Admin/Op
+ ---- ---- -------- ------------------ -------------------------------- --------
+ node_A_1
+      mailbox
+           mediator 1.1.1.1       iqn.2012-05.local:mailbox.target.6616cd3f-9ef1-11e9-aada-00a098ccf5d8:a05e1ffb-9ef1-11e9-8f68- 00a098cbca9e:1 up/up
+ node_A_2
+      mailbox
+           mediator 1.1.1.1       iqn.2012-05.local:mailbox.target.6616cd3f-9ef1-11e9-aada-00a098ccf5d8:a05e1ffb-9ef1-11e9-8f68-00a098cbca9e:1 up/up
+....
+... Verificare lo stato del dominio dell'errore di switchover non pianificato automatico (AURO):
++
+`metrocluster show`
+
++
+
+NOTE: L'output di esempio riportato di seguito è valido per ONTAP 9.13.1 e versioni successive. Per ONTAP 9.12.1 e versioni precedenti, lo stato del dominio di errore AUSO dovrebbe essere `auso-on-cluster-disaster`.
+
++
+[listing]
+----
+cluster_A::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+Local: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-dr-group-disaster
+Remote: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-dr-group-disaster
+----
+
+
+
+
+
+
+--
+====
