@@ -623,27 +623,99 @@ Raccogliere l'output dei seguenti comandi:
 ** `ucadmin show`
 
 
-. Se il volume root è crittografato, raccogliere e salvare la passphrase utilizzata per il gestore delle chiavi:
+. Se i nodi MetroCluster sono configurati con un gestore di chiavi esterno per l'SVM di amministrazione (cluster), copiare le informazioni del server delle chiavi in una posizione sicura. Se è configurato l'Onboard Key Manager, copiare le informazioni di backup e la passphrase in una posizione sicura.
 +
-`security key-manager backup show`
+[role="tabbed-block"]
+====
+.Onboard Key Manager
+--
+.. Eseguire il seguente comando per visualizzare il backup di Onboard Key Manager:
++
+`security key-manager onboard show-backup`
 
-. Se i nodi MetroCluster utilizzano la crittografia per volumi o aggregati, copiare le informazioni relative alle chiavi e alle passphrase.
++
+Durante la procedura di aggiornamento, avrai bisogno anche della passphrase più aggiornata di Onboard Key Manager.
+
 +
 Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-1677AE0A-FEF7-45FA-8616-885AA3283BCF.html["Eseguire il backup manuale delle informazioni di gestione delle chiavi integrate"].
 
+
+
+--
+.Gestore chiavi esterno
+--
+Raccogli le informazioni sulla gestione delle chiavi esterne che ti serviranno per ripristinare la configurazione del key manager in una fase successiva della procedura.
+
+.. Visualizza il nome dell'SVM amministratore (cluster).
 +
-.. Se Onboard Key Manager è configurato: +
-`security key-manager onboard show-backup`
+`vserver show -type admin`
+
 +
-La passphrase è necessaria più avanti nella procedura di aggiornamento.
+In questo esempio, il nome dell'SVM amministratore è cluster_B:
 
-.. Se la gestione delle chiavi aziendali (KMIP) è configurata, eseguire i seguenti comandi:
 +
-`security key-manager external show -instance`
-`security key-manager key query`
+[listing]
+----
+cluster_B::*> vserver show -type admin
+                               Admin      Operational Root
+Vserver     Type    Subtype    State      State       Volume     Aggregate
+----------- ------- ---------- ---------- ----------- ---------- ----------
+cluster_B
+            admin   -          -          -           -          -
+----
+.. Ottenere l'indirizzo e il numero di porta di un server di chiave primaria associato al gestore di chiavi esterno configurato sull'SVM di amministrazione (cluster):
++
+[NOTE]
+====
+*** L'SVM di amministrazione può avere fino a quattro server di chiavi primarie, ma avrai bisogno solo del numero di porta e dell'indirizzo di uno dei server di chiavi primarie per ripristinare la configurazione di gestione delle chiavi più avanti nella procedura.
+*** Se al server della chiave primaria che hai scelto sono associati un nome utente e una password, avrai bisogno anche di queste informazioni per la procedura di ripristino.
+
+
+====
++
+`security key-manager external show -instance -vserver <admin_svm_name>`
+
++
+[listing]
+----
+cluster_B::> security key-manager external show -instance -vserver cluster_B
+
+                  Vserver: cluster_B
+       Client Certificate: NTAPKM_C
+   Server CA Certificates: NTAPKM_I, NTAPKM_R
+       Primary Key Server: 172.18.27.34:12014
+                  Timeout: 25
+                 Username:
+              Policy name: -
+    Secondary Key Servers: -
+    Create/Remove Timeout: 10
+
+----
+.. Se si utilizza ONTAP 9.16.1 o versioni successive, ottenere l'UUID del keystore per l'SVM di amministrazione.
++
+`security key-manager show-key-store -vserver <admin_svm_name> -fields uuid`
+
++
+[listing]
+----
+cluster_B::*>  security key-manager show-key-store -vserver cluster_B -fields uuid
+vserver         uuid
+--------------- ------------------------------------
+cluster_B        f281aa55-d635-11f0-93bc-005056bb68f2
+
+cluster_B::*
+----
+.. Salva le informazioni raccolte in un luogo sicuro per utilizzarle in seguito durante la procedura. Dovresti aver raccolto le seguenti informazioni:
++
+*** Il numero di porta e l'indirizzo di uno dei server chiave primari per l'SVM di amministrazione
+*** Il nome utente e la password se associati al server della chiave primaria scelto
+*** L'UUID del keystore per l'SVM di amministrazione (richiesto in ONTAP 9.16.1 o versioni successive)
 
 
 
+
+--
+====
 . Raccogliere gli ID di sistema dei nodi esistenti:
 +
 `metrocluster node show -fields node-systemid,ha-partner-systemid,dr-partner-systemid,dr-auxiliary-systemid`

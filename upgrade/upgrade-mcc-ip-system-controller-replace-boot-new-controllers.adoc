@@ -54,7 +54,7 @@ Se il partner-sysid non è corretto, impostarlo:
 +
 `boot_ontap menu`
 
-. Se viene utilizzata la crittografia root, selezionare l'opzione del menu di avvio per la configurazione della gestione delle chiavi.
+. Se l'SVM di amministrazione del MetroCluster system è configurato con un key manager, selezionare l'opzione corretta del menu di boot per la configurazione della gestione delle chiavi.
 +
 |===
 
@@ -65,18 +65,28 @@ Se il partner-sysid non è corretto, impostarlo:
  a| 
 Gestione delle chiavi integrata
  a| 
-Opzione "`10`"
+Opzione `10`
 
-Seguire le istruzioni per fornire gli input necessari per ripristinare la configurazione di gestione delle chiavi.
+Segui le istruzioni e fornisci i seguenti dati per recuperare e ripristinare la configurazione del key manager:
+
+** Backup e passphrase di Onboard Key Manager
+
 
 
 
  a| 
 Gestione esterna delle chiavi
  a| 
-Opzione "`11`"
+Opzione `11`
 
-Seguire le istruzioni per fornire gli input necessari per ripristinare la configurazione di gestione delle chiavi.
+Segui le istruzioni e fornisci i seguenti dati per recuperare e ripristinare la configurazione del key manager:
+
+** Il numero di porta e l'indirizzo di uno dei server chiave primari per l'SVM di amministrazione
+** Il nome utente e la password se associati al server della chiave primaria scelto
+** L'UUID del keystore per l'SVM di amministrazione (richiesto in ONTAP 9.16.1 o versioni successive)
+
+
+*Nota:* Sebbene l'SVM amministratore possa avere fino a quattro server di chiave primaria, durante il processo di ripristino è possibile specificare le informazioni relative a un solo server di chiave primaria.
 
 |===
 . Dal menu di boot, eseguire l'opzione "`6`".
@@ -111,7 +121,7 @@ Se il partner-sysid non è corretto, impostarlo:
 +
 `setenv partner-sysid <partner-sysID>`
 
-. Se viene utilizzata la crittografia root, selezionare nuovamente l'opzione del menu di avvio per la configurazione della gestione delle chiavi.
+. Se si utilizza la crittografia del volume root, selezionare nuovamente l'opzione del menu di boot per la configurazione della gestione delle chiavi.
 +
 |===
 
@@ -122,18 +132,28 @@ Se il partner-sysid non è corretto, impostarlo:
  a| 
 Gestione delle chiavi integrata
  a| 
-Opzione "`10`"
+Opzione `10`
 
-Seguire le istruzioni per fornire gli input necessari per ripristinare la configurazione di gestione delle chiavi.
+Segui le istruzioni e fornisci i seguenti dati per recuperare e ripristinare la configurazione del key manager:
+
+** Backup e passphrase di Onboard Key Manager
+
 
 
 
  a| 
 Gestione esterna delle chiavi
  a| 
-Opzione "`11`"
+Opzione `11`
 
-Seguire le istruzioni per fornire gli input necessari per ripristinare la configurazione di gestione delle chiavi.
+Segui le istruzioni e fornisci i seguenti dati per recuperare e ripristinare la configurazione del key manager:
+
+** Il numero di porta e l'indirizzo di uno dei server chiave primari per l'SVM di amministrazione
+** Il nome utente e la password se associati al server della chiave primaria scelto
+** L'UUID del keystore per l'SVM di amministrazione (richiesto in ONTAP 9.16.1 o versioni successive)
+
+
+*Nota:* Sebbene l'SVM amministratore possa avere fino a quattro server di chiave primaria, durante il processo di ripristino è possibile specificare le informazioni relative a un solo server di chiave primaria.
 
 |===
 +
@@ -210,7 +230,7 @@ Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.net
  a| 
 Gestione esterna delle chiavi
  a| 
-`security key-manager external restore -vserver <svm-name> -node <node-name> -key-server <host_name|IP_address:port> -key-id <key_id> -key-tag key_tag <node-name>`
+`security key-manager external restore -vserver <admin-svm> -key-server <host_name|IP_address:port>`
 
 Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-32DA96C3-9B04-4401-92B8-EAF323C3C863.html["Ripristinare le chiavi di crittografia esterne per la gestione delle chiavi"^].
 

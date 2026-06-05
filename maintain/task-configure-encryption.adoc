@@ -112,7 +112,7 @@ system health alert show
 +
 [source, cli]
 ----
-security key-manager external show-status
+security key-manager external show
 ----
 . Abilita la crittografia end-to-end per ogni gruppo di DR:
 +
@@ -226,7 +226,7 @@ system health alert show
 +
 [source, cli]
 ----
-security key-manager external show-status
+security key-manager external show
 ----
 . Disattivare la crittografia end-to-end per ogni gruppo di DR:
 +
