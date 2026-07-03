@@ -15,6 +15,9 @@ Se si utilizzano nuovi switch IP per la configurazione IP MetroCluster, è neces
 
 Questa attività è necessaria se si utilizzano nuovi switch.
 
+
+NOTE: Se stai eseguendo una transizione da FC a quattro nodi a IP a otto nodi, puoi applicare l'RCF da FC a quattro nodi a IP a otto nodi prima di aggiungere il secondo gruppo DR. Non devi applicare prima l'RCF da FC a quattro nodi a IP a quattro nodi.
+
 Se si utilizzano switch esistenti, passare alla sezione link:task_move_cluster_connections.html["Spostamento delle connessioni del cluster locale"].
 
 . Installare e installare in rack i nuovi switch IP.
