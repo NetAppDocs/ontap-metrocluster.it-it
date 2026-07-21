@@ -15,6 +15,7 @@ Se i sistemi preconfigurati non sono stati ricevuti dalla fabbrica, potrebbe ess
 
 
 
+[[manually-assigning-drives-for-pool-0-ontap-9-4-and-later]]
 == Assegnazione manuale dei dischi per il pool 0 (ONTAP 9.4 e versioni successive)
 
 Se il sistema non è stato preconfigurato in fabbrica e non soddisfa i requisiti per l'assegnazione automatica del disco, è necessario assegnare manualmente il pool 0 dischi.
@@ -118,6 +119,7 @@ I dischi devono essere assegnati simmetricamente, in modo che ogni nodo abbia un
 
 
 
+[[manually-assigning-drives-for-pool-0-ontap-9-3]]
 == Assegnazione manuale delle unità per il pool 0 (ONTAP 9.3)
 
 Se si dispone di almeno due shelf di dischi per ciascun nodo, si utilizza la funzionalità di assegnazione automatica di ONTAP per assegnare automaticamente i dischi locali (pool 0).

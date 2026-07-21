@@ -130,6 +130,7 @@ NOTE: Se si utilizzano i limiti di velocità, il traffico dovrebbe essere *model
 
 
 
+[[examples-for-configuring-switch-ports-connecting-the-metrocluster-controller]]
 == Esempi di configurazione delle porte dello switch che collegano il controller MetroCluster
 
 I comandi di esempio forniti sono validi per gli switch Cisco NX3232 o Cisco NX9336. I comandi variano a seconda del tipo di interruttore.
@@ -157,6 +158,7 @@ The load balancing policy should be set so that order is preserved.
 ----
 
 
+[[examples-for-configuring-classification]]
 == Esempi di configurazione della classificazione
 
 È necessario configurare le mappe di accesso e di classe per mappare il traffico RDMA e iSCSI alle classi appropriate.
@@ -223,6 +225,7 @@ class type queuing c-out-8q-q-default
 ----
 
 
+[[examples-for-configuring-the-node-ports]]
 == Esempi di configurazione delle porte di nodo
 
 Potrebbe essere necessario configurare una porta di nodo in modalità breakout. Nell'esempio seguente, le porte 25 e 26 sono configurate in modalità breakout 4 x 25Gbps.
@@ -272,6 +275,7 @@ fec off
 ----
 
 
+[[examples-of-configuration-of-isl-ports-throughout-the-network]]
 == Esempi di configurazione delle porte ISL in tutta la rete
 
 Uno switch conforme a MetroCluster viene considerato uno switch intermedio anche se connette direttamente le interfacce MetroCluster. Le porte ISL che trasportano traffico MetroCluster sullo switch compatibile con MetroCluster devono essere configurate nello stesso modo delle porte ISL su uno switch intermedio. Fare riferimento a. link:concept-considerations-layer-2-layer-3.html#required-settings-for-intermediate-switches["Impostazioni richieste sugli switch intermedi"] per indicazioni ed esempi.

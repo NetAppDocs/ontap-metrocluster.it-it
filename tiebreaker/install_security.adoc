@@ -15,12 +15,14 @@ Per le configurazioni che eseguono MetroCluster Tiebreaker 1.5 e versioni succes
 
 
 
+[[secure-the-host]]
 == Proteggere l'host
 
 Le seguenti linee guida mostrano come proteggere l'host in cui è installato il software Tiebreaker.
 
 
 
+[[user-management-recommendations]]
 === Consigli per la gestione degli utenti
 
 * Limitare l'accesso dell'utente "root".
@@ -52,6 +54,7 @@ NOTE: Gli utenti che non sono membri di questo gruppo non possono accedere al so
 
 
 
+[[baseline-host-security-recommendations]]
 === Raccomandazioni sulla protezione dell'host di base
 
 * Utilizzare la crittografia del disco
@@ -101,6 +104,7 @@ NOTE: OpenJDK 19 verifica all'avvio se l'host è installato in modalità FIPS. N
 
 
 
+[[secure-the-database-installation]]
 == Proteggere l'installazione del database
 
 Le seguenti linee guida mostrano come proteggere e rafforzare l'installazione del database MariaDB 10.x.

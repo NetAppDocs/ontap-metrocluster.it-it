@@ -37,6 +37,7 @@ NOTE: Quando si aggiunge o si rimuove un gruppo DR come parte di questa procedur
 
 
 
+[[transition-scenarios-supported-by-this-procedure]]
 == Scenari di transizione supportati da questa procedura
 
 Consulta la tabella seguente per conoscere gli scenari di transizione supportati da questa procedura.
@@ -86,6 +87,7 @@ Per ulteriori informazioni, vedere il link:concept_transition_workflow_fc_to_ip_
 
 
 
+[[important-information-when-adding-an-older-platform-model]]
 == Informazioni importanti quando aggiungi un modello di piattaforma precedente
 
 Le seguenti indicazioni riguardano uno scenario insolito in cui è necessario aggiungere un modello di piattaforma precedente (piattaforme rilasciate prima di ONTAP 9.15.1) a una configurazione MetroCluster esistente che contiene un modello di piattaforma più recente (piattaforme rilasciate in ONTAP 9.15.1 o versioni successive).  Per una transizione da FC a IP a otto nodi, questa guida si applica se hai trasferito il tuo primo gruppo DR FC a un modello di piattaforma introdotto in ONTAP 9.15.1 o versione successiva e intendi trasferire il secondo gruppo DR a una piattaforma introdotta prima di ONTAP 9.15.1.

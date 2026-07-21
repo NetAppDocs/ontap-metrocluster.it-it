@@ -15,6 +15,7 @@ Configurare i nuovi controller prima di eseguire il netboot dei controller per c
 
 
 
+[[set-up-the-new-controllers]]
 == Configurare le nuove centraline
 
 I nuovi controller devono essere montati in rack e cablati.
@@ -114,6 +115,7 @@ https://docs.netapp.com/us-en/ontap-systems/index.html["Documentazione dei siste
 
 
 
+[[netboot-the-new-controllers]]
 == NetBoot i nuovi controller
 
 Dopo aver installato i nuovi nodi, è necessario eseguire il netboot per assicurarsi che i nuovi nodi eseguano la stessa versione di ONTAP dei nodi originali. Il termine netboot indica che si sta eseguendo l'avvio da un'immagine ONTAP memorizzata su un server remoto. Durante la preparazione per il netboot, è necessario inserire una copia dell'immagine di boot di ONTAP 9 su un server Web a cui il sistema può accedere.
@@ -172,6 +174,7 @@ NOTE: Per poter utilizzare il software appena installato è necessario riavviare
 
 
 
+[[clear-the-configuration-on-a-controller-module]]
 == Cancellare la configurazione su un modulo controller
 
 Prima di utilizzare un nuovo modulo controller nella configurazione MetroCluster, è necessario cancellare la configurazione esistente.

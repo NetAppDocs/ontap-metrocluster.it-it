@@ -15,6 +15,7 @@ Potrebbe essere necessario aggiornare il firmware su uno switch IP MetroCluster.
 
 
 
+[[verify-that-the-rcf-is-supported]]
 == Verificare che l'RCF sia supportato
 
 Quando si modifica la versione di ONTAP o la versione del firmware dello switch, è necessario verificare di disporre di un file di configurazione di riferimento (RCF) supportato per tale versione. Se si utilizza link:https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator"^]lo strumento, viene generato l'RCF corretto per la configurazione.
@@ -67,6 +68,7 @@ Filename : NX3232_v1.80_Switch-A2.txt
 
 
 
+[[upgrade-the-switch-firmware]]
 == Aggiornare il firmware dello switch
 
 .A proposito di questa attività

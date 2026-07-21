@@ -15,6 +15,7 @@ Nei sistemi configurati per ADP, è necessario verificare che il pool di dischi 
 
 
 
+[[verifying-drive-assignment-of-pool-0-drives-on-adp-systems-at-the-disaster-site-metrocluster-ip-systems]]
 == Verifica dell'assegnazione dei dischi del pool 0 su sistemi ADP nel sito di emergenza (sistemi IP MetroCluster)
 
 Se i dischi sono stati sostituiti nel sito di emergenza e il sistema è configurato per ADP, è necessario verificare che i dischi remoti siano visibili ai nodi e siano stati assegnati correttamente.
@@ -72,6 +73,7 @@ node_A_2:0n.43   -          0     43  SSD-NVM unassigned  -         -
 
 
 
+[[assigning-pool-0-drives-on-non-adp-systems-at-the-disaster-site-metrocluster-ip-configurations]]
 == Assegnazione di pool 0 dischi su sistemi non ADP nel sito di disastro (configurazioni IP MetroCluster)
 
 Se i dischi sono stati sostituiti nel sito di emergenza e il sistema non è configurato per ADP, è necessario assegnare manualmente i nuovi dischi al pool 0.

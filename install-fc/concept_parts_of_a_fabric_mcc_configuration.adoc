@@ -15,6 +15,7 @@ Durante la pianificazione della configurazione MetroCluster, è necessario compr
 
 
 
+[[disaster-recovery-dr-groups]]
 == Gruppi di disaster recovery (DR)
 
 Una configurazione Fabric MetroCluster è costituita da uno o due gruppi DR, a seconda del numero di nodi nella configurazione MetroCluster. Ciascun gruppo di DR è costituito da quattro nodi.
@@ -33,6 +34,7 @@ image::../media/mcc_dr_groups_4_node.gif[MetroCluster DR raggruppa quattro nodi]
 
 
 
+[[key-hardware-elements]]
 == Elementi hardware chiave
 
 Una configurazione MetroCluster include i seguenti elementi hardware principali:
@@ -57,6 +59,7 @@ La rete di peering del cluster fornisce la connettività per il mirroring della 
 
 
 
+[[eight-node-fabric-metrocluster-configuration]]
 == Configurazione Fabric MetroCluster a otto nodi
 
 Una configurazione a otto nodi è costituita da due cluster, uno per ciascun sito geograficamente separato. Cluster_A si trova nel primo sito MetroCluster. Cluster_B si trova nel secondo sito MetroCluster. Ogni sito dispone di uno stack di storage SAS. Sono supportati ulteriori stack di storage, ma ne viene mostrato solo uno per ciascun sito. Le coppie ha sono configurate come cluster senza switch, senza switch di interconnessione del cluster. Una configurazione commutata è supportata, ma non viene visualizzata.
@@ -79,6 +82,7 @@ La configurazione SVM viene replicata sulla rete di peering del cluster.
 
 
 
+[[four-node-fabric-metrocluster-configuration]]
 == Configurazione Fabric MetroCluster a quattro nodi
 
 La figura seguente mostra una vista semplificata di una configurazione Fabric MetroCluster a quattro nodi. Per alcune connessioni, una singola linea rappresenta connessioni multiple e ridondanti tra i componenti. Le connessioni di rete per dati e gestione non vengono visualizzate.
@@ -91,6 +95,7 @@ image::../media/mcc_hardware_architecture_cluster_a_with_7500n.gif[Connettività
 
 
 
+[[two-node-fabric-metrocluster-configuration]]
 == Configurazione Fabric MetroCluster a due nodi
 
 La figura seguente mostra una vista semplificata di una configurazione MetroCluster fabric a due nodi. Per alcune connessioni, una singola linea rappresenta connessioni multiple e ridondanti tra i componenti. Le connessioni di rete per dati e gestione non vengono visualizzate.

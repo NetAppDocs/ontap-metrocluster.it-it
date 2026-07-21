@@ -15,6 +15,7 @@ summary: È possibile verificare gli scenari di errore per confermare il corrett
 
 
 
+[[verifying-negotiated-switchover]]
 == Verifica dello switchover negoziato
 
 È possibile testare l'operazione di switchover negoziata (pianificata) per confermare la disponibilità ininterrotta dei dati.
@@ -112,6 +113,7 @@ cluster_A::> metrocluster operation show
 
 
 
+[[verifying-healing-and-manual-switchback]]
 == Verifica della riparazione e dello switchback manuale
 
 È possibile testare le operazioni di riparazione e switchback manuale per verificare che la disponibilità dei dati non sia compromessa (ad eccezione delle configurazioni SMB e Solaris FC), ripristinando il cluster al data center originale dopo uno switchover negoziato.
@@ -276,6 +278,7 @@ cluster_A::> metrocluster operation show
 
 
 
+[[verifying-operation-after-power-line-disruption]]
 == Verifica del funzionamento in seguito a interruzione della linea di alimentazione
 
 È possibile verificare la risposta della configurazione MetroCluster in caso di errore di una PDU.
@@ -337,6 +340,7 @@ Power               Critical condition is detected in storage shelf power supply
 
 
 
+[[verifying-operation-after-loss-of-a-single-storage-shelf]]
 == Verifica del funzionamento dopo la perdita di un singolo shelf di storage
 
 È possibile verificare il guasto di un singolo shelf di storage per verificare che non vi sia un singolo punto di errore.

@@ -25,6 +25,7 @@ A partire da ONTAP 9.9.1, le configurazioni IP MetroCluster possono essere imple
 ====
 
 
+[[isl-requirements-for-layer-2-and-layer-3-networks]]
 == Requisiti ISL per le reti Layer 2 e Layer 3
 
 Quanto segue si applica alle reti di livello 2 e 3:
@@ -56,6 +57,7 @@ I servizi di condivisione dei collegamenti, ad esempio i collegamenti MPLS (Mult
 
 
 
+[[considerations-for-layer-2-networks]]
 == Considerazioni per le reti di livello 2
 
 Gli switch backend MetroCluster sono collegati alla rete del cliente.
@@ -97,6 +99,7 @@ Per tutti gli altri sistemi, è necessario configurare la VLAN quando si creano 
 
 
 
+[[considerations-for-layer-3-networks]]
 == Considerazioni per le reti di livello 3
 
 Gli switch backend MetroCluster sono collegati alla rete IP instradata, direttamente ai router (come illustrato nell'esempio semplificato seguente) o tramite altri switch interventistici.
@@ -132,6 +135,7 @@ Quando si configurano gli indirizzi IP dei router e dei gateway, sono necessari 
 
 
 
+[[required-settings-for-intermediate-switches]]
 == Impostazioni richieste per gli interruttori intermedi
 
 Quando il traffico MetroCluster attraversa un ISL in una rete intermedia, è necessario verificare che la configurazione degli switch intermedi assicuri che il traffico MetroCluster (RDMA e storage) soddisfi i livelli di servizio richiesti attraverso l'intero percorso tra i siti MetroCluster.

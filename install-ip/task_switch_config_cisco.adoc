@@ -18,6 +18,7 @@ Molte delle procedure descritte in questa sezione sono procedure indipendenti ed
 
 
 
+[[resetting-the-cisco-ip-switch-to-factory-defaults]]
 == Ripristino delle impostazioni predefinite dello switch IP Cisco
 
 Prima di installare qualsiasi file RCF, è necessario cancellare la configurazione dello switch Cisco ed eseguire la configurazione di base. Questa procedura è necessaria quando si desidera reinstallare lo stesso file RCF dopo un'installazione precedente non riuscita o se si desidera installare una nuova versione di un file RCF.
@@ -168,6 +169,7 @@ IP_switch_A_1#
 
 
 
+[[downloading-and-installing-the-cisco-switch-nx-os-software]]
 == Download e installazione del software NX-OS dello switch Cisco
 
 È necessario scaricare il file del sistema operativo dello switch e il file RCF su ciascun switch nella configurazione IP MetroCluster.
@@ -428,6 +430,7 @@ Module 1 EPLD upgrade is successful.
 
 
 
+[[downloading-and-installing-the-cisco-ip-rcf-files]]
 == Download e installazione dei file Cisco IP RCF
 
 È necessario generare e installare il file RCF in ogni switch nella configurazione IP di MetroCluster.
@@ -607,6 +610,7 @@ IP_switch_A_1# reload
 
 
 
+[[setting-forward-error-correction-for-systems-using-25-gbps-connectivity]]
 == Impostazione della correzione degli errori di inoltro per i sistemi che utilizzano la connettività a 25 Gbps
 
 Se il sistema è configurato utilizzando la connettività a 25 Gbps, è necessario impostare manualmente il parametro fec (Forward Error Correction) su Off dopo aver applicato il file RCF. Il file RCF non applica questa impostazione.
@@ -654,6 +658,7 @@ IP_switch_A_1# copy running-config startup-config
 
 
 
+[[disable-unused-isl-ports-and-port-channels]]
 == Disattivare le porte e i canali delle porte ISL non utilizzati
 
 NetApp consiglia di disattivare le porte ISL e i canali delle porte inutilizzati per evitare avvisi di integrità non necessari.

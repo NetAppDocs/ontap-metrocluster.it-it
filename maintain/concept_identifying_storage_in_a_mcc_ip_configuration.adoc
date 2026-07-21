@@ -15,6 +15,7 @@ Se è necessario sostituire un disco o un modulo shelf, è necessario prima iden
 
 
 
+[[identification-of-local-and-remote-shelves]]
 == Identificazione degli shelf locali e remoti
 
 Quando si visualizzano le informazioni sugli shelf da un sito MetroCluster, tutti i dischi remoti si trovano su 0 m, l'adattatore host iSCSI virtuale. Ciò significa che l'accesso ai dischi avviene tramite le interfacce IP di MetroCluster. Tutti gli altri dischi sono locali.
@@ -32,6 +33,7 @@ https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-ds-sas3-service/home.ht
 
 
 
+[[example-of-sysconfig-a-output]]
 == Esempio di output sysconfig -A.
 
 Nell'esempio riportato di seguito viene utilizzato il `sysconfig -a` Per visualizzare i dispositivi su un nodo nella configurazione IP MetroCluster. Questo nodo ha i seguenti shelf e dispositivi collegati:

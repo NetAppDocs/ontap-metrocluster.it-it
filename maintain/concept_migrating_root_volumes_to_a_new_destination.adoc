@@ -15,12 +15,14 @@ Potrebbe essere necessario spostare i volumi root in un altro aggregato root all
 
 
 
+[[migrating-root-volumes-within-a-two-node-metrocluster-configuration]]
 == Migrazione dei volumi root all'interno di una configurazione MetroCluster a due nodi
 
 Per migrare i volumi root in un nuovo aggregato root all'interno di una configurazione MetroCluster a due nodi, fare riferimento a. https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/How_to_move_mroot_to_a_new_root_aggregate_in_a_2-node_Clustered_MetroCluster_with_Switchover["Come spostare mroot in un nuovo aggregato root in un Clustered MetroCluster a 2 nodi con switchover"]. Questa procedura illustra come migrare senza interruzioni i volumi root durante un'operazione di switchover MetroCluster. Questa procedura è leggermente diversa da quella utilizzata in una configurazione a quattro nodi.
 
 
 
+[[migrating-root-volumes-within-a-four-node-metrocluster-configuration]]
 == Migrazione dei volumi root all'interno di una configurazione MetroCluster a quattro nodi
 
 Per migrare i volumi root in un nuovo aggregato root all'interno di una configurazione MetroCluster a quattro nodi, è possibile utilizzare http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-cmpr-930/system%5F%5Fnode%5F%5Fmigrate-root.html["nodo di sistema migra-root"] controllare rispettando i seguenti requisiti.

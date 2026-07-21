@@ -18,10 +18,12 @@ NOTE: Per Cisco 9132T, vedere link:cisco-9132t-fc-port-config-bridges.html["Util
 
 
 
+[[shelf-configurations-using-fibrebridge-7500n-or-7600n-using-both-fc-ports-fc1-and-fc2]]
 == Configurazioni degli shelf che utilizzano FibreBridge 7500N o 7600N usando entrambe le porte FC (FC1 e FC2)
 
 
 
+[[metrocluster-1-or-dr-group-1]]
 === MetroCluster 1 o DR 1
 
 La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 1 o DR Group 1 utilizzando bridge FibreBridge 7500N o 7600N ed entrambe le porte FC (FC1 e FC2) sugli switch Cisco (escluso il modello 9132T). Quando si utilizza questa tabella di configurazione, è importante tenere presente quanto segue:
@@ -332,6 +334,7 @@ FC2
 |===
 
 
+[[metrocluster-2-or-dr-group-2]]
 === MetroCluster 2 o DR 2
 
 La tabella seguente mostra le configurazioni di shelf supportate in MetroCluster 2 o DR Group 2 utilizzando FibreBridge 7500N o 7600N ed entrambe le porte FC (FC1 e FC2) sugli switch Cisco (escluso il modello 9132T). Quando si utilizzano le tabelle di cablaggio, è importante tenere presente quanto segue:
@@ -642,10 +645,12 @@ n / a
 |===
 
 
+[[shelf-configurations-using-fibrebridge-7500n-or-7600n-using-one-fc-port-fc1-or-fc2-only]]
 == Configurazioni di shelf che utilizzano FibreBridge 7500N o 7600N utilizzando solo una porta FC (FC1 o FC2)
 
 
 
+[[metrocluster-1-or-dr-group-1]]
 === MetroCluster 1 o DR 1
 
 La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 1 o DR Group 1 per i bridge FibreBridge 7500N o 7600N che utilizzano una porta FC (FC1 o FC2) sugli switch Cisco (escluso il modello 9132T). Il file di configurazione di riferimento (RCF) non supporta una porta FC sui bridge FibreBridge, quindi è necessario configurare manualmente gli switch Fibre Channel back-end.
@@ -952,6 +957,7 @@ bridge_x_8b
 |===
 
 
+[[metrocluster-2-or-dr-group-2]]
 === MetroCluster 2 o DR 2
 
 La tabella seguente mostra le configurazioni shelf supportate in MetroCluster 2 o DR Group 2 per i bridge FibreBridge 7500N o 7600N che utilizzano una porta FC (FC1 o FC2) sugli switch Cisco (escluso il modello 9132T). Quando si utilizza questa tabella di configurazione, è importante tenere presente quanto segue:

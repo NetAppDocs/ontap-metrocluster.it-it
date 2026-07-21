@@ -52,6 +52,7 @@ NOTE: Quando si esegue l'aggiornamento da ONTAP 9.4 a 9.5, il sistema riconosce 
 
 
 
+[[automatic-partitioning]]
 == Partizione automatica
 
 L'ADP viene eseguito automaticamente durante la configurazione iniziale del sistema.
@@ -74,6 +75,7 @@ Per i dischi interni ed esterni, è necessario popolare gli shelf parzialmente p
 ====
 
 
+[[how-shelf-by-shelf-automatic-assignment-works]]
 == Come funziona l'assegnazione automatica shelf-by-shelf
 
 Se sono presenti quattro shelf esterni per sito, ogni shelf viene assegnato a un nodo diverso e a un pool diverso, come illustrato nell'esempio seguente:
@@ -90,6 +92,8 @@ Se sono presenti quattro shelf esterni per sito, ogni shelf viene assegnato a un
 
 
 
+[[how-to-populate-partially-full-shelves]]
+[[populate-partially-full-shelves]]
 == Come popolare gli shelf parzialmente completi
 
 Se la configurazione utilizza shelf non completamente popolati (con alloggiamenti per dischi vuoti), è necessario distribuire i dischi in modo uniforme in tutto lo shelf, a seconda della policy di assegnazione dei dischi. La policy di assegnazione dei dischi dipende dal numero di shelf presenti in ciascun sito MetroCluster.
@@ -172,6 +176,7 @@ Ad esempio, se si installano 12 dischi in uno shelf da 24 dischi, installare i d
 
 
 
+[[manual-drive-assignment-ontap-9-5]]
 == Assegnazione manuale del disco (ONTAP 9.5)
 
 In ONTAP 9.5, l'assegnazione manuale dei dischi è necessaria sui sistemi con le seguenti configurazioni di shelf:
@@ -190,6 +195,7 @@ Gli shelf extra sopra il multiplo più vicino di quattro vengono lasciati non as
 
 
 
+[[manual-drive-assignment-ontap-9-4]]
 == Assegnazione manuale del disco (ONTAP 9.4)
 
 In ONTAP 9.4, l'assegnazione manuale dei dischi è necessaria sui sistemi con le seguenti configurazioni di shelf:
@@ -218,6 +224,7 @@ Quando si assegnano manualmente i dischi, è necessario assegnarli simmetricamen
 
 
 
+[[adding-shelves-to-an-existing-configuration]]
 == Aggiunta di shelf a una configurazione esistente
 
 L'assegnazione automatica dei dischi supporta l'aggiunta simmetrica di shelf a una configurazione esistente.
@@ -231,6 +238,8 @@ https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gest
 
 
 
+[[adp-and-disk-assignment-differences-by-system-in-metrocluster-ip-configurations]]
+[[adp-disk-assign]]
 == Differenze di assegnazione dei dischi e ADP in base al sistema nelle configurazioni IP MetroCluster
 
 Il funzionamento della partizione avanzata dei dischi (ADP) e dell'assegnazione automatica dei dischi nelle configurazioni MetroCluster IP varia a seconda del modello di sistema.
@@ -246,6 +255,7 @@ Prima di utilizzare le tabelle, verificare i seguenti requisiti:
 
 
 
+[[adp-and-disk-assignment-on-aff-a320-systems]]
 === Assegnazione di ADP e dischi sui sistemi AFF A320
 
 |===
@@ -289,6 +299,7 @@ Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
 |===
 
 
+[[adp-and-disk-assignment-on-aff-a150-asa-a150-and-aff-a220-systems]]
 === ADP e assegnazione dei dischi sui sistemi AFF A150, ASA A150 e AFF A220
 
 |===
@@ -350,6 +361,7 @@ Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
 |===
 
 
+[[adp-and-disk-assignment-on-aff-a250-aff-c250-asa-a250-asa-c250-fas500f-aff-a20-aff-a30-and-aff-c30-systems]]
 === ADP e assegnazione dei dischi su sistemi AFF A250, AFF C250, ASA A250, ASA C250, FAS500f, AFF A20, AFF A30 e AFF C30
 
 |===
@@ -405,6 +417,7 @@ Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
 |===
 
 
+[[adp-and-disk-assignment-on-aff-a50-and-aff-c60-systems]]
 === Assegnazione di dischi e ADP sui sistemi AFF A50 e AFF C60
 
 |===
@@ -460,6 +473,7 @@ Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
 |===
 
 
+[[adp-and-disk-assignment-on-aff-a300-systems]]
 === Assegnazione di ADP e dischi sui sistemi AFF A300
 
 |===
@@ -503,6 +517,7 @@ Ciascuno dei due plessi nell'aggregato root include le seguenti partizioni:
 |===
 
 
+[[adp-and-disk-assignment-on-aff-c400-aff-a400-asa-c400-and-asa-a400-systems]]
 === ADP e assegnazione dei dischi sui sistemi AFF C400, AFF A400, ASA C400 e ASA A400
 
 |===
@@ -544,6 +559,7 @@ Ciascuno dei due plessi nell'aggregato root include:
 |===
 
 
+[[adp-and-disk-assignment-on-aff-a700-systems]]
 === Assegnazione di ADP e dischi sui sistemi AFF A700
 
 |===
@@ -585,6 +601,7 @@ Ciascuno dei due plessi nell'aggregato root include:
 |===
 
 
+[[adp-and-disk-assignment-on-aff-c800-asa-c800-asa-a800-and-aff-a800-systems]]
 === ADP e assegnazione dei dischi sui sistemi AFF C800, ASA C800, ASA A800 e AFF A800
 
 |===
@@ -630,6 +647,7 @@ Ciascuno dei due plessi nell'aggregato root include:
 |===
 
 
+[[adp-and-disk-assignment-on-aff-a70-aff-a90-and-aff-c80-systems]]
 === ADP e assegnazione dei dischi su sistemi AFF A70, AFF A90 e AFF C80
 
 |===
@@ -671,6 +689,7 @@ Ciascuno dei due plessi nell'aggregato root include:
 |===
 
 
+[[adp-and-disk-assignment-on-aff-a900-asa-a900-and-aff-a1k-systems]]
 === ADP e assegnazione dei dischi sui sistemi AFF A900, ASA A900 e AFF A1K
 
 |===
@@ -712,6 +731,7 @@ Ciascuno dei due plessi nell'aggregato root include:
 |===
 
 
+[[disk-assignment-on-fas2750-systems]]
 === Assegnazione dei dischi sui sistemi FAS2750
 
 |===
@@ -743,6 +763,7 @@ Non applicabile
 |===
 
 
+[[disk-assignment-on-fas8200-systems]]
 === Assegnazione dei dischi sui sistemi FAS8200
 
 |===
@@ -774,12 +795,14 @@ Non applicabile
 |===
 
 
+[[disk-assignment-on-fas500f-systems]]
 === Assegnazione dei dischi sui sistemi FAS500f
 
 Le stesse linee guida e regole per l'assegnazione dei dischi per i sistemi AFF C250 e AFF A250 si applicano ai sistemi FAS500f. Per l'assegnazione dei dischi nei sistemi FAS500f, fare riferimento alla <<ADP_FAS500f>> tabella.
 
 
 
+[[disk-assignment-on-fas9000-fas9500-fas70-and-fas90-systems]]
 === Assegnazione dei dischi su sistemi FAS9000, FAS9500, FAS70 e FAS90
 
 |===
@@ -811,6 +834,7 @@ Non applicabile
 |===
 
 
+[[disk-assignment-on-fas50-systems]]
 === Assegnazione dei dischi sui sistemi FAS50
 
 |===
@@ -849,6 +873,7 @@ Non applicabile
 |===
 
 
+[[disk-assignment-on-fas50-systems-with-flash-cache]]
 === Assegnazione del disco sui sistemi FAS50 con Flash Cache
 
 A partire da ONTAP 9.18.1, Flash Cache è supportato sui sistemi FAS50 per le configurazioni IP MetroCluster .

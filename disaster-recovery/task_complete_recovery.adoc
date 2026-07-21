@@ -15,6 +15,7 @@ Eseguire le attività richieste per completare il ripristino da un errore di con
 
 
 
+[[reestablishing-object-stores-for-fabricpool-configurations]]
 == Ripristino degli archivi di oggetti per le configurazioni FabricPool
 
 Se uno degli archivi di oggetti in un mirror FabricPool è stato co-localizzato con il sito di emergenza MetroCluster ed è stato distrutto, è necessario ristabilire l'archivio di oggetti e il mirror FabricPool.
@@ -30,6 +31,7 @@ Se uno degli archivi di oggetti in un mirror FabricPool è stato co-localizzato 
 
 
 
+[[verifying-licenses-on-the-replaced-nodes]]
 == Verifica delle licenze sui nodi sostituiti
 
 È necessario installare nuove licenze per i nodi sostitutivi se i nodi con problemi utilizzavano funzionalità ONTAP che richiedono una licenza standard (bloccata da nodo). Per le funzionalità con licenze standard, ogni nodo del cluster deve disporre di una propria chiave per la funzionalità.
@@ -116,6 +118,7 @@ NOTE: Le nuove chiavi di licenza richieste vengono generate automaticamente e in
 
 
 
+[[restoring-key-management]]
 == Ripristino della gestione delle chiavi
 
 Se i volumi di dati sono crittografati, è necessario ripristinare la gestione delle chiavi. Se il volume root è crittografato, è necessario ripristinare la gestione delle chiavi.
@@ -152,6 +155,7 @@ Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.net
 
 
 
+[[performing-a-switchback]]
 == Esecuzione di uno switchback
 
 Dopo aver corretto la configurazione MetroCluster, è possibile eseguire l'operazione di switchback MetroCluster. L'operazione di switchback MetroCluster riporta la configurazione al suo normale stato operativo, con le macchine virtuali dello storage di origine di sincronizzazione (SVM) sul sito di emergenza attive e i dati provenienti dai pool di dischi locali.
@@ -249,6 +253,7 @@ In ONTAP 8.3, è necessario ristabilire manualmente una configurazione di SnapMi
 
 
 
+[[verifying-a-successful-switchback]]
 == Verifica di uno switchback riuscito
 
 Dopo aver eseguito lo switchback, si desidera confermare che tutti gli aggregati e le macchine virtuali di storage (SVM) siano ripristinati e in linea.
@@ -344,6 +349,7 @@ Ripetere le sezioni precedenti per eseguire il switchback nella direzione oppost
 
 
 
+[[mirroring-the-root-aggregates-of-the-replacement-nodes]]
 == Mirroring degli aggregati root dei nodi sostitutivi
 
 Se i dischi sono stati sostituiti, è necessario eseguire il mirroring degli aggregati root dei nuovi nodi nel sito di emergenza.
@@ -448,6 +454,7 @@ Qualsiasi aggregato root che non ha lo stato di mirrored deve essere mirrorato.
 
 
 
+[[reconfiguring-ontap-mediator-metrocluster-ip-configurations]]
 == Riconfigurazione di ONTAP Mediator (configurazioni IP MetroCluster)
 
 Se si dispone di una configurazione IP MetroCluster configurata con ONTAP Mediator, è necessario rimuovere e riconfigurare l'associazione con ONTAP Mediator.
@@ -470,6 +477,7 @@ Se si dispone di una configurazione IP MetroCluster configurata con ONTAP Mediat
 
 
 
+[[verifying-the-health-of-the-metrocluster-configuration]]
 == Verifica dello stato della configurazione MetroCluster
 
 Verificare lo stato della configurazione MetroCluster per verificarne il corretto funzionamento.

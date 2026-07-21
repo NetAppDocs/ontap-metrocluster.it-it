@@ -15,6 +15,7 @@ Per preparare la configurazione per la transizione, aggiungere i nuovi nodi alla
 
 
 
+[[sending-a-custom-autosupport-message-prior-to-maintenance]]
 == Invio di un messaggio AutoSupport personalizzato prima della manutenzione
 
 Prima di eseguire la manutenzione, devi inviare un messaggio AutoSupport per informare il supporto tecnico NetApp che la manutenzione è in corso. Informare il supporto tecnico che la manutenzione è in corso impedisce loro di aprire un caso partendo dal presupposto che si sia verificata un'interruzione.
@@ -38,6 +39,7 @@ Questa attività deve essere eseguita su ciascun sito MetroCluster.
 
 
 
+[[enabling-transition-mode-and-disabling-cluster-ha]]
 == Attivazione della modalità di transizione e disattivazione del cluster ha
 
 È necessario attivare la modalità di transizione MetroCluster per consentire ai nodi vecchi e nuovi di operare insieme nella configurazione MetroCluster e disattivare il cluster ha.
@@ -157,6 +159,7 @@ cluster_B::>
 
 
 
+[[joining-the-metrocluster-ip-nodes-to-the-clusters]]
 == Unione dei nodi IP MetroCluster ai cluster
 
 È necessario aggiungere i quattro nuovi nodi IP MetroCluster alla configurazione MetroCluster esistente.
@@ -236,6 +239,7 @@ Do you want to use this configuration? {yes, no} [yes]: yes
 
 
 
+[[configuring-intercluster-lifs-creating-the-metrocluster-interfaces-and-mirroring-root-aggregates]]
 == Configurazione delle LIF tra cluster, creazione delle interfacce MetroCluster e mirroring degli aggregati root
 
 È necessario creare le LIF di peering del cluster e le interfacce MetroCluster sui nuovi nodi IP MetroCluster.
@@ -608,6 +612,7 @@ aggr_data_a2
 
 
 
+[[finalizing-the-addition-of-the-metrocluster-ip-nodes]]
 == Finalizzazione dell'aggiunta dei nodi IP MetroCluster
 
 È necessario incorporare il nuovo gruppo DR nella configurazione MetroCluster e creare aggregati di dati mirrorati sui nuovi nodi.

@@ -15,6 +15,7 @@ Spostare le interfacce cluster della configurazione MetroCluster FC sugli switch
 
 
 
+[[step-1-move-the-cluster-connections-on-the-metrocluster-fc-nodes]]
 == Passaggio 1: spostare le connessioni del cluster sui nodi MetroCluster FC
 
 Spostare le connessioni del cluster sui nodi MetroCluster FC sugli switch IP. I passaggi da seguire variano a seconda che si utilizzino switch IP esistenti o nuovi.
@@ -25,6 +26,7 @@ Spostare le connessioni del cluster sui nodi MetroCluster FC sugli switch IP. I 
 
 
 
+[[which-connections-to-move]]
 === Quali connessioni spostare
 
 L'attività seguente presuppone che un modulo controller utilizzi due porte per le connessioni del cluster. Alcuni modelli di moduli controller utilizzano quattro o più porte per la connessione cluster. In questo esempio, le porte sono divise in due gruppi, alternando le porte tra i due gruppi.
@@ -155,6 +157,7 @@ Interfaccia del cluster locale sul nodo FC
 |===
 
 
+[[move-the-local-cluster-connections-when-using-new-ip-switches]]
 === Spostare le connessioni del cluster locale quando si utilizzano nuovi switch IP
 
 Se si utilizzano nuovi switch IP, è necessario spostare fisicamente le connessioni cluster dei nodi MetroCluster FC esistenti sui nuovi switch.
@@ -278,6 +281,7 @@ cluster_A::*>
 
 
 
+[[move-the-local-cluster-connections-when-reusing-existing-ip-switches]]
 === Spostare le connessioni del cluster locale quando si riutilizzano gli switch IP esistenti
 
 Se si riutilizzano switch IP esistenti, è necessario aggiornare il firmware, riconfigurare gli switch con i file di configurazione di riferimento (RCF) corretti e spostare le connessioni sulle porte corrette, uno switch alla volta.
@@ -409,6 +413,7 @@ Cluster-A::*>
 
 
 
+[[step-2-verify-that-the-cluster-connections-are-moved-and-the-cluster-is-healthy]]
 == Passaggio 2: verificare che le connessioni del cluster siano state spostate e che il cluster sia integro
 
 Per garantire che la connettività sia corretta e che la configurazione sia pronta per procedere con il processo di transizione, verificare che le connessioni del cluster siano state spostate correttamente, che gli switch del cluster siano stati riconosciuti e che il cluster sia integro.

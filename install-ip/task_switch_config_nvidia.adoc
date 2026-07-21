@@ -15,6 +15,7 @@ summary: 'È necessario configurare gli switch IP NVIDIA per l"utilizzo come int
 
 
 
+[[reset-the-switch-reset-the-nvidia-ip-sn2100-switch-to-factory-defaults]]
 == [[Reset-the-switch]] Ripristina le impostazioni predefinite dello switch NVIDIA IP SN2100
 
 Per ripristinare le impostazioni predefinite di uno switch, è possibile scegliere tra i seguenti metodi.
@@ -25,6 +26,7 @@ Per ripristinare le impostazioni predefinite di uno switch, è possibile sceglie
 
 
 
+[[rcf-file-optionreset-the-switch-using-the-rcf-file-option]]
 === [[RCF-file-option]]ripristinare lo switch utilizzando l'opzione del file RCF
 
 Prima di installare una nuova configurazione RCF, è necessario ripristinare le impostazioni dello switch NVIDIA.
@@ -112,6 +114,7 @@ Lo switch viene ripristinato e conserva la configurazione iniziale, ad esempio l
 
 
 
+[[cumulus-install-option-download-and-install-the-cumulus-software]]
 === [[Cumulus-install-option]] scaricare e installare il software Cumulus
 
 .A proposito di questa attività
@@ -297,6 +300,7 @@ Al riavvio dello switch, è possibile applicare una nuova configurazione seguend
 
 
 
+[[download-and-installdownload-and-install-the-nvidia-rcf-files]]
 == [[Download-and-install]]Scarica e installa i file NVIDIA RCF
 
 È necessario generare e installare il file RCF dello switch in ogni switch nella configurazione IP di MetroCluster.
@@ -406,6 +410,7 @@ NOTE: Quando si imposta l'opzione DAC per più porte dello switch, è necessario
 
 
 
+[[set-forward-error-correction-for-systems-using-25-gbps-connectivity]]
 == Impostare la correzione degli errori in avanti per i sistemi che utilizzano la connettività a 25 Gbps
 
 Se il sistema è configurato utilizzando una connettività a 25 Gbps, impostare manualmente il parametro Forward Error Correction (fec) su Off dopo aver applicato l'RCF. L'RCF non applica questa impostazione.
@@ -426,6 +431,7 @@ Se il sistema è configurato utilizzando una connettività a 25 Gbps, impostare 
 
 
 
+[[set-the-switch-port-speed-for-the-metrocluster-ip-interfaces]]
 == Impostare la velocità della porta dello switch per le interfacce IP MetroCluster
 
 .A proposito di questa attività
@@ -475,6 +481,7 @@ cumulus@Switch-A-1:mgmt:~$
 
 
 
+[[disable-unused-isl-ports-and-port-channels]]
 == Disattivare le porte e i canali delle porte ISL non utilizzati
 
 NetApp consiglia di disattivare le porte ISL e i canali delle porte inutilizzati per evitare avvisi di integrità non necessari. È necessario disattivare ogni porta o canale porta individualmente, non è possibile specificare più porte o intervalli di porte nel comando.

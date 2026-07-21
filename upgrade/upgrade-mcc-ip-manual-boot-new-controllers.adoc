@@ -15,6 +15,7 @@ Avviare i nuovi controller e verificare che le LIF siano ospitate sui nodi e sul
 
 
 
+[[boot-the-new-controllers]]
 == Avviare le nuove centraline
 
 È necessario avviare i nuovi controller, assicurandosi che le variabili di boot siano corrette e, se necessario, eseguire le operazioni di ripristino della crittografia.
@@ -216,6 +217,7 @@ https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-DBC9DEE2-EA
 
 
 
+[[verify-and-restore-lif-configuration]]
 == Verificare e ripristinare la configurazione LIF
 
 Verificare che i file LIF siano ospitati su nodi e porte appropriati, come mappati all'inizio della procedura di aggiornamento.

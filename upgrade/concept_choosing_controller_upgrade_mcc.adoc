@@ -21,18 +21,21 @@ In una procedura di aggiornamento, i controller vengono sostituiti con un nuovo 
 
 
 
+[[supported-controller-upgrades]]
 == Aggiornamenti dei controller supportati
 
 Scopri le combinazioni di aggiornamento dei controller FC e IP MetroCluster supportate.
 
 
 
+[[supported-metrocluster-ip-controller-upgrades-using-system-controller-replace-commands]]
 === Aggiornamenti del controller IP MetroCluster supportati utilizzando i comandi "sostituzione del controller di sistema"
 
 Fare riferimento alla tabella in link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_ip.html["Aggiornare i controller in una configurazione MetroCluster IP a quattro nodi utilizzando lo switchover e lo switchback con i comandi "system controller replace" (ONTAP 9.13.1 e versioni successive)"] per le piattaforme supportate.
 
 
 
+[[all-other-supported-metrocluster-ip-controller-upgrades]]
 === Tutti gli altri aggiornamenti dei controller IP MetroCluster supportati
 
 Individuare la piattaforma *Source* dalle tabelle di aggiornamento del controller MetroCluster in questa sezione. Se l'intersezione della riga della piattaforma *Source* e della colonna della piattaforma *Target* è vuota, l'aggiornamento non è supportato.
@@ -99,6 +102,7 @@ image:../media/mcc-ip-upgrade-asa-comb-9161.png["Mostra le combinazioni di piatt
 
 
 
+[[supported-metrocluster-fc-controller-upgrades]]
 === Aggiornamenti del controller FC MetroCluster supportati
 
 Individuare la piattaforma *Source* dalle tabelle di aggiornamento del controller MetroCluster in questa sezione. Se l'intersezione della riga della piattaforma *Source* e della colonna della piattaforma *Target* è vuota, l'aggiornamento non è supportato.
@@ -168,6 +172,7 @@ La tabella seguente mostra le combinazioni di piattaforme supportate per l'upgra
 
 
 
+[[choose-a-procedure-that-uses-the-switchover-and-switchback-process]]
 == Scegliere una procedura che utilizzi il processo di switchover e switchback
 
 Dopo aver esaminato le combinazioni di aggiornamenti supportate, scegliere la procedura di aggiornamento del controller corretta per la configurazione.
@@ -246,6 +251,7 @@ link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback
 |===
 
 
+[[choosing-a-procedure-using-aggregate-relocation]]
 == Scelta di una procedura che utilizzi il trasferimento di aggregati
 
 In una procedura di upgrade del controller basata su ARL, le operazioni di trasferimento aggregato vengono utilizzate per spostare i dati senza interruzioni dalla vecchia configurazione alla nuova configurazione aggiornata.

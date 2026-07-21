@@ -28,6 +28,7 @@ link:task_fb_consolidate_replace_a_pair_of_fibrebridge_6500n_bridges_with_7500n_
 
 
 
+[[verifying-storage-connectivity]]
 == Verifica della connettività dello storage
 
 Prima di sostituire i bridge, verificare la connettività del bridge e dello storage. Familiarizzare con l'output dei comandi consente di confermare successivamente la connettività dopo aver apportato modifiche alla configurazione.
@@ -95,6 +96,7 @@ slot 0: FC Host Adapter 0g (QLogic 8324 rev. 2, N-port, <UP>)**<=== Initiator po
 
 
 
+[[hot-swapping-a-bridge-with-a-replacement-bridge-of-the-same-model]]
 == Sostituzione a caldo di un bridge con un bridge sostitutivo dello stesso modello
 
 È possibile sostituire a caldo un bridge guasto con un altro bridge dello stesso modello.
@@ -630,6 +632,7 @@ link:concept_in_band_management_of_the_fc_to_sas_bridges.html["Gestione in-band 
 
 
 
+[[hot-swapping-a-fibrebridge-7500n-with-a-7600n-bridge]]
 == Scambio a caldo di un FibreBridge 7500N con un bridge 7600N
 
 È possibile sostituire a caldo un bridge FibreBridge 7500N con un bridge 7600N.
@@ -1022,6 +1025,8 @@ link:concept_in_band_management_of_the_fc_to_sas_bridges.html["Gestione in-band 
 
 
 
+[[hot-swapping-a-fibrebridge-6500n-bridge-with-a-fibrebridge-7600n-or-7500n-bridge]]
+[[hot_swap_6500n]]
 == Scambio a caldo di un bridge FibreBridge 6500N con un bridge FibreBridge 7600N o 7500N
 
 È possibile sostituire a caldo un bridge FibreBridge 6500N con un bridge FibreBridge 7600N o 7500N per sostituire un bridge guasto o aggiornare il bridge in una configurazione MetroCluster collegata a fabric o a bridge.

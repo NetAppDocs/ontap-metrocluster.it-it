@@ -22,12 +22,14 @@ Se necessario, è possibile configurare la crittografia MACsec sulle porte WAN I
 ====
 
 
+[[licensing-requirements-for-macsec]]
 == Requisiti di licenza per MACsec
 
 MACsec richiede una licenza di sicurezza. Per una spiegazione completa dello schema di licenza di Cisco NX-OS e su come ottenere e richiedere le licenze, consultare la https://www.cisco.com/c/en/us/td/docs/switches/datacenter/sw/nx-os/licensing/guide/b_Cisco_NX-OS_Licensing_Guide/b_Cisco_NX-OS_Licensing_Guide_chapter_01.html["Guida alle licenze di Cisco NX-OS"^]
 
 
 
+[[enable-cisco-macsec-encryption-wan-isls-in-metrocluster-ip-configurations]]
 == Abilitare gli ISL WAN con crittografia Cisco MACsec nelle configurazioni IP di MetroCluster
 
 È possibile attivare la crittografia MACsec per gli switch Cisco 9336C sugli ISL WAN in una configurazione IP MetroCluster.
@@ -65,6 +67,7 @@ IP_switch_A_1(config)# copy running-config startup-config
 
 
 
+[[configure-a-macsec-key-chain-and-keys]]
 == Configurare una catena di chiavi MACsec e le chiavi
 
 È possibile creare una o più chiavi MACsec nella configurazione.
@@ -168,6 +171,7 @@ IP_switch_A_1(config-macseckeychain-macseckey)# show key chain 1
 
 
 
+[[configure-a-macsec-policy]]
 == Configurare un criterio MACsec
 
 .Fasi
@@ -292,6 +296,7 @@ IP_switch_A_1(config-macsec-policy)# show macsec policy
 
 
 
+[[enable-cisco-macsec-encryption-on-the-interfaces]]
 == Abilitare la crittografia Cisco MACsec sulle interfacce
 
 . Accedere alla modalità di configurazione globale:
@@ -337,6 +342,7 @@ IP_switch_A_1(config)# copy running-config startup-config
 
 
 
+[[disable-cisco-macsec-encryption-wan-isls-in-metrocluster-ip-configurations]]
 == Disattivare gli ISL WAN con crittografia Cisco MACsec nelle configurazioni IP di MetroCluster
 
 Potrebbe essere necessario disattivare la crittografia MACsec per gli switch Cisco 9336C sugli ISL WAN in una configurazione IP MetroCluster.
@@ -398,6 +404,7 @@ IP_switch_A_1(config)# copy running-config startup-config
 
 
 
+[[verifying-the-macsec-configuration]]
 == Verifica della configurazione MACsec
 
 .Fasi

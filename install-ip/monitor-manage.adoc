@@ -13,6 +13,7 @@ Nella maggior parte dei casi, gli switch Ethernet vengono rilevati automaticamen
 
 
 
+[[create-a-switch-entry-so-that-ontap-can-monitor-it]]
 == Creare una voce dello switch in modo che ONTAP possa monitorarla
 
 .A proposito di questa attività
@@ -26,6 +27,7 @@ Un esempio tipico è l'aggiunta di uno switch denominato [deviceName], con l'ind
 
 
 
+[[disable-monitoring-without-deleting-the-switch]]
 == Disattivare il monitoraggio senza eliminare l'interruttore
 
 Se si desidera sospendere o interrompere il monitoraggio di un determinato switch, ma conservarlo per il monitoraggio futuro, modificare il `is-monitoring-enabled-admim` parametro invece di eliminarlo.
@@ -40,6 +42,7 @@ In questo modo è possibile conservare i dettagli e la configurazione dello swit
 
 
 
+[[remove-a-switch-you-no-longer-need]]
 == Rimuovere uno switch non più necessario
 
 Utilizzare `system switch ethernet delete` per eliminare un interruttore scollegato o non più necessario:

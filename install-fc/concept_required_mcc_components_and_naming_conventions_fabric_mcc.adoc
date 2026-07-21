@@ -15,6 +15,7 @@ Durante la pianificazione della configurazione MetroCluster FC, è necessario co
 
 
 
+[[supported-software-and-hardware]]
 == Software e hardware supportati
 
 L'hardware e il software devono essere supportati per la configurazione MetroCluster FC.
@@ -28,12 +29,14 @@ NOTE: Gli SFP a onde lunghe non sono supportati negli switch di storage MetroClu
 
 
 
+[[hardware-redundancy-in-the-metrocluster-fc-configuration]]
 == Ridondanza dell'hardware nella configurazione MetroCluster FC
 
 A causa della ridondanza hardware nella configurazione MetroCluster FC, sono presenti due componenti per ogni sito. Ai siti vengono assegnate arbitrariamente le lettere A e B e ai singoli componenti vengono assegnati arbitrariamente i numeri 1 e 2.
 
 
 
+[[requirement-for-two-ontap-clusters]]
 == Requisito per due cluster ONTAP
 
 La configurazione MetroCluster FC fabric-attached richiede due cluster ONTAP, uno per ciascun sito MetroCluster.
@@ -48,6 +51,7 @@ Nomi di esempio:
 
 
 
+[[requirement-for-four-fc-switches]]
 == Requisito per quattro switch FC
 
 La configurazione Fabric-Attached MetroCluster FC richiede quattro switch FC (modelli Brocade o Cisco supportati).
@@ -58,6 +62,7 @@ La denominazione deve essere univoca all'interno della configurazione MetroClust
 
 
 
+[[requirement-for-two-four-or-eight-controller-modules]]
 == Requisito per due, quattro o otto moduli controller
 
 La configurazione Fabric-Attached MetroCluster FC richiede due, quattro o otto moduli controller.
@@ -91,6 +96,7 @@ Nomi di esempio:
 
 
 
+[[requirement-for-four-cluster-interconnect-switches]]
 == Requisito per quattro switch di interconnessione cluster
 
 La configurazione Fabric-Attached MetroCluster FC richiede quattro switch di interconnessione cluster (se non si utilizzano cluster senza switch a due nodi)
@@ -99,6 +105,7 @@ Questi switch forniscono la comunicazione del cluster tra i moduli controller di
 
 
 
+[[requirement-for-fc-to-sas-bridges]]
 == Requisiti per i bridge FC-SAS
 
 La configurazione MetroCluster FC con collegamento a fabric richiede una coppia di bridge FC-SAS per ciascun gruppo di stack di shelf SAS.
@@ -115,6 +122,7 @@ I nomi suggeriti utilizzati come esempi in questa documentazione identificano il
 
 
 
+[[pool-and-drive-requirements-minimum-supported]]
 == Requisiti di pool e disco (supporto minimo)
 
 Si consigliano otto shelf di dischi SAS (quattro shelf in ogni sito) per consentire la proprietà dei dischi in base allo shelf.
@@ -144,6 +152,7 @@ Le configurazioni MetroCluster supportano RAID-DP e RAID4.
 
 
 
+[[drive-location-considerations-for-partially-populated-shelves]]
 == Considerazioni sulla posizione dei dischi per gli shelf parzialmente popolati
 
 Per una corretta assegnazione automatica dei dischi quando si utilizzano shelf a metà popolati (12 dischi in uno shelf da 24 dischi), i dischi devono essere posizionati negli slot 0-5 e 18-23.
@@ -152,6 +161,7 @@ In una configurazione con uno shelf parzialmente popolato, i dischi devono esser
 
 
 
+[[bridge-naming-conventions]]
 == Convenzioni di denominazione dei bridge
 
 I bridge utilizzano il seguente esempio di denominazione:

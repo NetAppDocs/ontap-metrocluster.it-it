@@ -15,6 +15,7 @@ La configurazione MetroCluster richiede una vasta gamma di componenti hardware. 
 
 
 
+[[supported-software-and-hardware]]
 == Software e hardware supportati
 
 L'hardware e il software devono essere supportati per la configurazione MetroCluster FC.
@@ -25,12 +26,14 @@ Quando si utilizzano sistemi AFF, tutti i moduli controller nella configurazione
 
 
 
+[[hardware-redundancy-in-the-metrocluster-configuration]]
 == Ridondanza dell'hardware nella configurazione MetroCluster
 
 A causa della ridondanza hardware nella configurazione MetroCluster, sono presenti due componenti per ogni sito. Ai siti vengono assegnate arbitrariamente le lettere A e B e ai singoli componenti vengono assegnati arbitrariamente i numeri 1 e 2.
 
 
 
+[[two-single-node-ontap-clusters]]
 == Due cluster ONTAP a nodo singolo
 
 La configurazione di Stretch MetroCluster SAS-attached richiede due cluster ONTAP a nodo singolo.
@@ -45,6 +48,7 @@ Nomi di esempio:
 
 
 
+[[two-storage-controller-modules]]
 == Due moduli controller storage
 
 La configurazione di Stretch MetroCluster SAS-attached richiede due moduli controller storage.
@@ -74,6 +78,7 @@ Nomi di esempio:
 
 
 
+[[at-least-four-sas-disk-shelves-recommended]]
 == Almeno quattro shelf di dischi SAS (consigliato)
 
 La configurazione Smagliature MetroCluster con connessione SAS richiede almeno due shelf di dischi SAS. Si consigliano quattro shelf di dischi SAS.

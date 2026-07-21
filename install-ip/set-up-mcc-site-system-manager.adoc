@@ -27,10 +27,12 @@ Un sito MetroCluster è costituito da due cluster. In genere, i cluster si trova
 
 
 
+[[assign-a-node-management-ip-address]]
 == Assegnare un indirizzo IP di gestione dei nodi
 
 
 
+[[windows-system]]
 === Sistema Windows
 
 Collegare il computer Windows alla stessa subnet dei controller. In questo modo viene automaticamente assegnato al sistema un indirizzo IP di gestione dei nodi.
@@ -42,6 +44,7 @@ Collegare il computer Windows alla stessa subnet dei controller. In questo modo 
 
 
 
+[[other-systems]]
 === Altri sistemi
 
 È necessario configurare l'indirizzo IP di gestione dei nodi per uno dei nodi nel cluster. È possibile utilizzare questo indirizzo IP di gestione dei nodi per avviare la configurazione guidata del cluster.
@@ -50,6 +53,7 @@ Vedere link:https://docs.netapp.com/us-en/ontap/software_setup/task_create_the_c
 
 
 
+[[initialize-and-configure-the-cluster]]
 == Inizializzare e configurare il cluster
 
 Per inizializzare il cluster, impostare una password amministrativa per il cluster e le reti di gestione dei nodi e del cluster. È inoltre possibile configurare servizi quali un DNS (Domain Name Server) per risolvere i nomi host e un server NTP per sincronizzare l'ora.
@@ -76,6 +80,7 @@ Dopo aver impostato, inizializzato e configurato entrambi i cluster, eseguire la
 
 
 
+[[configure-ontap-on-a-new-cluster-video]]
 == Configurare ONTAP su un nuovo video del cluster
 
 video::PiX41bospbQ[youtube,width=848,height=480]

@@ -15,6 +15,7 @@ summary: 'È possibile utilizzare l"operazione di switchover MetroCluster per fo
 
 
 
+[[supported-platform-combinations]]
 == Combinazioni di piattaforme supportate
 
 È possibile aggiornare alcune piattaforme utilizzando le operazioni di switchover e switchback in una configurazione MetroCluster FC.
@@ -25,6 +26,7 @@ Fare riferimento a. https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/con
 
 
 
+[[about-this-task]]
 == A proposito di questa attività
 
 * Questa procedura può essere utilizzata solo per l'aggiornamento del controller.
@@ -99,6 +101,7 @@ In questa procedura vengono utilizzati i seguenti nomi di esempio:
 
 
 
+[[enable-console-logging]]
 == Attivare la registrazione della console
 
 NetApp consiglia vivamente di attivare la registrazione della console sui dispositivi in uso e di eseguire le seguenti operazioni quando si esegue questa procedura:
@@ -113,12 +116,14 @@ Consultare l'articolo della Knowledge base link:https://kb.netapp.com/Support_Bu
 
 
 
+[[prepare-for-the-upgrade]]
 == Preparatevi per l'aggiornamento
 
 Prima di apportare modifiche alla configurazione MetroCluster esistente, è necessario controllare lo stato della configurazione, preparare le nuove piattaforme ed eseguire altre attività varie.
 
 
 
+[[verify-the-health-of-the-metrocluster-configuration]]
 === Verificare lo stato della configurazione MetroCluster
 
 Prima di eseguire l'aggiornamento, verificare lo stato e la connettività della configurazione MetroCluster.
@@ -211,6 +216,7 @@ https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Downlo
 
 
 
+[[map-ports-from-the-old-nodes-to-the-new-nodes]]
 === Mappare le porte dai vecchi nodi ai nuovi nodi
 
 È necessario pianificare la mappatura delle LIF sulle porte fisiche dei vecchi nodi alle porte fisiche dei nuovi nodi.
@@ -404,6 +410,7 @@ Porta intercluster
 
 
 
+[[gather-information-before-the-upgrade]]
 === Raccogliere informazioni prima dell'aggiornamento
 
 Prima di eseguire l'aggiornamento, è necessario raccogliere informazioni per ciascuno dei vecchi nodi e, se necessario, regolare i domini di broadcast di rete, rimuovere eventuali VLAN e gruppi di interfacce e raccogliere informazioni sulla crittografia.
@@ -583,6 +590,7 @@ cluster_B::*
 
 
 
+[[remove-the-existing-configuration-from-the-tiebreaker-or-other-monitoring-software]]
 === Rimuovere la configurazione esistente dallo spareggio o da un altro software di monitoraggio
 
 Se la configurazione esistente viene monitorata con la configurazione di MetroCluster Tiebreaker o altre applicazioni di terze parti (ad esempio ClusterLion) che possono avviare uno switchover, è necessario rimuovere la configurazione MetroCluster dal Tiebreaker o da un altro software prima della transizione.
@@ -600,6 +608,7 @@ Consultare la documentazione dell'applicazione.
 
 
 
+[[send-a-custom-autosupport-message-prior-to-maintenance]]
 === Inviare un messaggio AutoSupport personalizzato prima della manutenzione
 
 Prima di eseguire la manutenzione, devi inviare un messaggio AutoSupport per informare il supporto tecnico NetApp che la manutenzione è in corso. Informare il supporto tecnico che la manutenzione è in corso impedisce loro di aprire un caso partendo dal presupposto che si sia verificata un'interruzione.
@@ -627,6 +636,7 @@ Questa attività deve essere eseguita su ciascun sito MetroCluster.
 
 
 
+[[switch-over-the-metrocluster-configuration]]
 == Passare alla configurazione MetroCluster
 
 È necessario passare alla configurazione Site_A in modo che le piattaforme sul sito_B possano essere aggiornate.
@@ -717,6 +727,7 @@ cluster_A::> metrocluster operation show
 
 
 
+[[prepare-the-network-configuration-of-the-old-controllers]]
 == Preparare la configurazione di rete dei vecchi controller
 
 Per garantire che la rete riprenda correttamente sui nuovi controller, è necessario spostare i file LIF su una porta comune e rimuovere la configurazione di rete dei vecchi controller.
@@ -818,6 +829,7 @@ Questa operazione deve essere eseguita su entrambi i nodi.
 
 
 
+[[remove-the-old-platforms]]
 == Rimuovere le vecchie piattaforme
 
 I vecchi controller devono essere rimossi dalla configurazione.
@@ -834,12 +846,14 @@ Questa attività viene eseguita sul sito_B.
 
 
 
+[[configure-the-new-controllers]]
 == Configurare i nuovi controller
 
 È necessario eseguire il rack e installare i controller, eseguire la configurazione richiesta in modalità manutenzione, quindi avviare i controller e verificare la configurazione LIF sui controller.
 
 
 
+[[set-up-the-new-controllers]]
 === Configurare le nuove centraline
 
 I nuovi controller devono essere montati in rack e cablati.
@@ -870,6 +884,7 @@ https://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardware 
 
 
 
+[[netboot-the-new-controllers]]
 === NetBoot i nuovi controller
 
 Dopo aver installato i nuovi nodi, è necessario eseguire il netboot per assicurarsi che i nuovi nodi eseguano la stessa versione di ONTAP dei nodi originali. Il termine netboot indica che si sta eseguendo l'avvio da un'immagine ONTAP memorizzata su un server remoto. Durante la preparazione per il netboot, è necessario inserire una copia dell'immagine di boot di ONTAP 9 su un server Web a cui il sistema può accedere.
@@ -942,6 +957,7 @@ NOTE: Per poter utilizzare il software appena installato è necessario riavviare
 
 
 
+[[clear-the-configuration-on-a-controller-module]]
 === Cancellare la configurazione su un modulo controller
 
 Prima di utilizzare un nuovo modulo controller nella configurazione MetroCluster, è necessario cancellare la configurazione esistente.
@@ -981,6 +997,7 @@ Rispondere `yes` al prompt di conferma.
 
 
 
+[[restore-the-hba-configuration]]
 === Ripristinare la configurazione dell'HBA
 
 A seconda della presenza e della configurazione delle schede HBA nel modulo controller, è necessario configurarle correttamente per l'utilizzo da parte del sito.
@@ -1063,6 +1080,7 @@ FC
 
 
 
+[[set-the-ha-state-on-the-new-controllers-and-chassis]]
 === Impostare lo stato ha sui nuovi controller e chassis
 
 È necessario verificare lo stato ha dei controller e dello chassis e, se necessario, aggiornarlo in modo che corrisponda alla configurazione del sistema.
@@ -1124,6 +1142,7 @@ mcc
 
 
 
+[[reassign-root-aggregate-disks]]
 === Riassegnare i dischi aggregati root
 
 Riassegnare i dischi aggregati root al nuovo modulo controller, utilizzando i sistemi raccolti in precedenza
@@ -1239,6 +1258,7 @@ aggr0_node_b_1-root    online      raid_dp, aggr    root, nosnap=on,
 
 
 
+[[boot-up-the-new-controllers]]
 === Avviare i nuovi controller
 
 Riavviare i controller dal menu di avvio per aggiornare l'immagine flash del controller. Se la crittografia è configurata, sono necessari ulteriori passaggi.
@@ -1501,6 +1521,7 @@ Per ulteriori informazioni, vedere https://docs.netapp.com/ontap-9/topic/com.net
 
 
 
+[[verify-lif-configuration]]
 === Verificare la configurazione LIF
 
 Verificare che i file LIF siano ospitati su nodi/porte appropriati prima di passare al switchback. È necessario eseguire le seguenti operazioni
@@ -1537,6 +1558,7 @@ Eseguire questo passaggio su tutte le SVM secondo necessità.
 
 
 
+[[install-the-new-licenses]]
 === Installare le nuove licenze
 
 Prima dell'operazione di switchback, è necessario installare le licenze per i nuovi controller.
@@ -1547,6 +1569,7 @@ Prima dell'operazione di switchback, è necessario installare le licenze per i n
 
 
 
+[[switch-back-the-metrocluster-configuration]]
 == Ripristinare la configurazione MetroCluster
 
 Una volta configurati i nuovi controller, si torna alla configurazione MetroCluster per ripristinare il normale funzionamento della configurazione.
@@ -1610,6 +1633,7 @@ Se il completamento di uno switchback richiede molto tempo, è possibile verific
 
 
 
+[[check-the-health-of-the-metrocluster-configuration]]
 == Controllare lo stato della configurazione MetroCluster
 
 Dopo aver aggiornato i moduli controller, è necessario verificare lo stato della configurazione MetroCluster.
@@ -1652,6 +1676,7 @@ Si tratta di un comportamento previsto dovuto a una mancata corrispondenza del c
 
 
 
+[[upgrade-the-nodes-on-clustera]]
 == Aggiornare i nodi su cluster_A.
 
 È necessario ripetere le attività di aggiornamento su cluster_A.
@@ -1665,6 +1690,7 @@ Quando si ripete la procedura, tutti i riferimenti di esempio ai cluster e ai no
 
 
 
+[[send-a-custom-autosupport-message-after-maintenance]]
 == Inviare un messaggio AutoSupport personalizzato dopo la manutenzione
 
 Una volta completato l'aggiornamento, inviare un messaggio AutoSupport che indica la fine della manutenzione, in modo da poter riprendere la creazione automatica del caso.
@@ -1683,6 +1709,7 @@ Una volta completato l'aggiornamento, inviare un messaggio AutoSupport che indic
 
 
 
+[[restore-tiebreaker-monitoring]]
 == Ripristinare il monitoraggio di Tiebreaker
 
 Se la configurazione MetroCluster è stata precedentemente configurata per il monitoraggio da parte del software Tiebreaker, è possibile ripristinare la connessione Tiebreaker.

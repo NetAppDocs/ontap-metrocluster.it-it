@@ -28,6 +28,7 @@ image::../media/workflow_bridge_installation_and_configuration.gif[Flusso di lav
 
 
 
+[[in-band-management-of-the-fc-to-sas-bridges]]
 == Gestione in-band dei bridge FC-SAS
 
 A partire dai bridge ONTAP 9.5 con FibreBridge 7500N o 7600N, la _gestione in-band_ dei bridge è supportata come alternativa alla gestione IP dei bridge. A partire da ONTAP 9.8, la gestione fuori banda è obsoleta.
@@ -51,6 +52,7 @@ NOTE: Si consiglia di utilizzare la gestione in-band con accesso IP disattivato 
 
 
 
+[[fibrebridge-7600n-and-7500n-bridge-limits-and-attachment-rules]]
 == Limiti del bridge FibreBridge 7600N e 7500N e regole di collegamento
 
 Rivedere i limiti e le considerazioni quando si collegano i ponti FibreBridge 7600N e 7500N.
@@ -89,6 +91,7 @@ Di seguito è illustrato un esempio di configurazione per il collegamento di qua
 |===
 
 
+[[prepare-for-the-installation]]
 == Prima dell'installazione
 
 Durante la preparazione all'installazione dei bridge come parte del nuovo sistema MetroCluster, è necessario verificare che il sistema soddisfi determinati requisiti, inclusi i requisiti di configurazione e impostazione dei bridge. Altri requisiti includono il download dei documenti necessari, l'utility barra di navigazione atto e il firmware bridge.
@@ -142,6 +145,7 @@ I client VPN attivi causano un errore nella ricerca di bridge nella barra di nav
 
 
 
+[[install-the-fc-to-sas-bridge-and-sas-shelves]]
 == Installare il bridge FC-to-SAS e gli shelf SAS
 
 Dopo aver effettuato la verifica che il sistema soddisfi tutti i requisiti di "`preparazione dell'installazione`", è possibile installare il nuovo sistema.
@@ -175,6 +179,7 @@ NOTE: Gli shelf SAS nelle configurazioni MetroCluster non supportano il cablaggi
 
 
 
+[[enable-ip-port-access-on-the-fibrebridge-7600n-bridge-if-necessary]]
 === Abilitare l'accesso alla porta IP sul bridge FibreBridge 7600N, se necessario
 
 Se si utilizza una versione di ONTAP precedente alla 9.5 o si intende utilizzare un accesso out-of-band al bridge FibreBridge 7600N utilizzando telnet o altri protocolli e servizi di porta IP (FTP, ExpressNAV, ICMP o barra di navigazione), è possibile attivare i servizi di accesso tramite la porta della console.
@@ -235,6 +240,7 @@ SNMP è l'unico protocollo che richiede un comando di abilitazione separato.
 
 
 
+[[configure-the-fc-to-sas-bridges]]
 === Configurare bridge FC-to-SAS
 
 Prima di collegare il modello di bridge FC-SAS, è necessario configurare le impostazioni nel software FibreBridge.
@@ -488,6 +494,7 @@ link:../maintain/index.html["Gestire i componenti di MetroCluster"]
 
 
 
+[[cable-a-fibrebridge-7600n-or-7500n-bridge-with-disk-shelves-using-iom12-modules]]
 === Collegare un ponte FibreBridge 7600N o 7500N con shelf di dischi utilizzando IOM12 moduli
 
 Dopo aver configurato il bridge, è possibile iniziare a cablare il nuovo sistema.
@@ -533,6 +540,7 @@ image::../media/mcc_cabling_bridge_and_sas3_stack_with_7500n_and_multiple_stacks
 
 
 
+[[verify-bridge-connectivity-and-cable-the-fc-to-sas-bridges-to-the-controller-fc-ports]]
 === Verificare la connettività del bridge e collegare i bridge FC-to-SAS alle porte FC del controller
 
 Collegare i bridge alle porte FC del controller in una configurazione MetroCluster collegata tramite bridge a due nodi.
@@ -620,6 +628,7 @@ image:../media/cluster_peering_network.png["Immagine di una rete di peering dei 
 
 
 
+[[secure-or-unsecure-the-fibrebridge-bridge]]
 == Proteggere o non proteggere il bridge FibreBridge
 
 Per disattivare facilmente i protocolli Ethernet potenzialmente non sicuri su un bridge, a partire da ONTAP 9.5 è possibile proteggere il bridge. In questo modo vengono disattivate le porte Ethernet del bridge. È anche possibile riabilitare l'accesso Ethernet.

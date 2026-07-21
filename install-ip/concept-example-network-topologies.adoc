@@ -20,6 +20,7 @@ NOTE: Se si condivide un ISL con traffico non MetroCluster, è necessario verifi
 
 
 
+[[shared-network-configuration-with-direct-links]]
 == Configurazione di rete condivisa con collegamenti diretti
 
 In questa topologia, due siti distinti sono collegati da collegamenti diretti. Questi collegamenti possono essere tra dispositivi o switch xWDM e TDM. La capacità degli ISL non è dedicata al traffico MetroCluster, ma è condivisa con altro traffico non MetroCluster.
@@ -28,6 +29,7 @@ image::../media/mcc_ip_networking_with_shared_isls.gif[Esempio di rete IP MetroC
 
 
 
+[[shared-infrastructure-with-intermediate-networks]]
 == Infrastruttura condivisa con reti intermedie
 
 In questa topologia, i siti MetroCluster non sono collegati direttamente, ma MetroCluster e il traffico host viaggiano attraverso una rete.
@@ -37,6 +39,7 @@ image::../media/mcc_ip_networking_with_intermediate_private_networks.gif[Esempio
 
 
 
+[[multiple-metrocluster-configurations-sharing-an-intermediate-network]]
 == Configurazioni MetroCluster multiple che condividono una rete intermedia
 
 In questa topologia, due configurazioni MetroCluster separate condividono la stessa rete intermedia. Nell'esempio, MetroCluster ONE switch_A_1 e MetroCluster Two switch_A_1, entrambi si collegano allo stesso interruttore intermedio.
@@ -48,6 +51,7 @@ image::../media/mcc_ip_two_mccs_sharing_the_same_shared_network_sx.gif[Cablaggio
 
 
 
+[[combination-of-a-metrocluster-configuration-using-netapp-validated-switches-and-a-configuration-using-metrocluster-compliant-switches]]
 == Combinazione di una configurazione MetroCluster con switch validati NetApp e una configurazione con switch compatibili MetroCluster
 
 Due configurazioni MetroCluster separate condividono lo stesso switch intermedio, dove una MetroCluster viene configurata con switch validati NetApp in una configurazione Layer 2 condivisa (MetroCluster uno) e l'altra MetroCluster con switch compatibili MetroCluster che si collegano direttamente agli switch intermedi (MetroCluster due).

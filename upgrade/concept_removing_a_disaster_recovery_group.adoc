@@ -18,6 +18,7 @@ NOTE: Questi passaggi vengono utilizzati durante i flussi di lavoro di transizio
 
 
 
+[[enable-console-logging]]
 == Attivare la registrazione della console
 
 NetApp consiglia vivamente di attivare la registrazione della console sui dispositivi in uso e di eseguire le seguenti operazioni quando si esegue questa procedura:
@@ -32,6 +33,7 @@ Consultare l'articolo della Knowledge base link:https://kb.netapp.com/Support_Bu
 
 
 
+[[remove-the-dr-group-nodes-from-each-cluster]]
 == Rimuovere i nodi del gruppo DR da ciascun cluster
 
 Questa procedura è supportata a partire da ONTAP 9.8.  Per i sistemi che eseguono ONTAP 9.7 o versioni precedenti, consultare l'articolo della Knowledge Base:link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/How_to_remove_a_DR-Group_from_a_MetroCluster["Come rimuovere un gruppo DR da una configurazione MetroCluster"^] .

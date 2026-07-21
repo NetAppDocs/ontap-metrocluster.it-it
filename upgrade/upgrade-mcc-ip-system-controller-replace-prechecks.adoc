@@ -15,6 +15,7 @@ Per prepararsi all'aggiornamento del controller, potrebbe essere necessario aggi
 
 
 
+[[update-the-metrocluster-switch-rcfs-before-upgrading-controllers]]
 == Aggiornare gli RCF degli switch MetroCluster prima di aggiornare i controller
 
 A seconda dei modelli di piattaforma vecchi e nuovi, potrebbe essere necessario aggiornare i file di configurazione di riferimento dello switch MetroCluster (RCF) prima di aggiornare i controller.
@@ -115,6 +116,7 @@ Seguire la procedura descritta nella sezione relativa al fornitore dello switch:
 
 
 
+[[start-the-controller-replacement-operation]]
 == Avviare l'operazione di sostituzione del controller
 
 Quando si avvia l'operazione di sostituzione automatizzata del controller, l'operazione emette una serie di controlli preliminari e poi si interrompe in modo da consentire la raccolta manuale delle informazioni relative alla configurazione.
@@ -165,6 +167,7 @@ Controllare se si è verificato questo errore a causa di aggregati senza mirror 
 
 
 
+[[gather-information-before-the-upgrade]]
 == Raccogliere informazioni prima dell'aggiornamento
 
 Prima di eseguire l'aggiornamento, se il volume root è crittografato, è necessario raccogliere la chiave di backup e altre informazioni per avviare i nuovi controller con i vecchi volumi root crittografati.
@@ -364,6 +367,7 @@ cluster_B::*
 
 
 
+[[remove-the-existing-configuration-from-tiebreaker-or-other-monitoring-software]]
 == Rimuovere la configurazione esistente da tiebreaker o da altro software di monitoraggio
 
 Prima di avviare l'aggiornamento, rimuovere la configurazione esistente dal Tiebreaker o da un altro software di monitoraggio.

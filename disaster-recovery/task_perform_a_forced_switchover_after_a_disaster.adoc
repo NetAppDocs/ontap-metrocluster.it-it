@@ -22,6 +22,7 @@ Per determinare se si è verificato un disastro, procedere come segue:
 
 
 
+[[fencing-off-the-disaster-site]]
 == Recinzione fuori dal sito di disastro
 
 Dopo il disastro, se i nodi del sito di emergenza devono essere sostituiti, è necessario arrestarli per evitare che il sito riprenda il servizio. In caso contrario, si rischia di danneggiare i dati se i client iniziano ad accedere ai nodi prima del completamento della procedura di sostituzione.
@@ -38,6 +39,7 @@ Se i nodi del sito di emergenza sono stati distrutti o non possono essere arrest
 
 
 
+[[performing-a-forced-switchover]]
 == Esecuzione di uno switchover forzato
 
 Il processo di switchover, oltre a fornire operazioni senza interruzioni durante i test e la manutenzione, consente di eseguire il ripristino da un guasto del sito con un singolo comando.
@@ -93,12 +95,14 @@ Le relazioni di SnapMirror devono essere ristabilita dopo lo switchover.
 
 
 
+[[output-for-the-storage-aggregate-plex-show-command-is-indeterminate-after-a-metrocluster-switchover]]
 == L'output per il comando di visualizzazione plesso dell'aggregato di storage è indeterminato dopo uno switchover MetroCluster
 
 Quando si esegue `storage aggregate plex show` Comando dopo uno switchover MetroCluster, lo stato di plex0 dell'aggregato root commutato è indeterminato e viene visualizzato come failed (non riuscito). Durante questo periodo, la root commutata non viene aggiornata. Lo stato effettivo di questo plex può essere determinato solo dopo la fase di riparazione MetroCluster.
 
 
 
+[[accessing-volumes-in-nvfail-state-after-a-switchover]]
 == Accesso ai volumi in stato NVFAIL dopo uno switchover
 
 Dopo uno switchover, è necessario cancellare lo stato NVFAIL ripristinando `-in-nvfailed-state` del parametro `volume modify` comando per rimuovere la restrizione di accesso dei client ai dati.

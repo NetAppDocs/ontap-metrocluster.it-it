@@ -15,12 +15,14 @@ Se la configurazione include aggregati senza mirror, è necessario essere consap
 
 
 
+[[unmirrored-aggregates-and-hierarchical-namespaces]]
 == Aggregati non speculari e namespace gerarchici
 
 Se si utilizzano spazi dei nomi gerarchici, è necessario configurare il percorso di giunzione in modo che tutti i volumi in quel percorso siano solo su aggregati mirrorati o solo su aggregati senza mirror. La configurazione di una combinazione di aggregati senza mirror e mirrorati nel percorso di giunzione potrebbe impedire l'accesso agli aggregati senza mirror dopo l'operazione di switchover.
 
 
 
+[[unmirrored-aggregates-and-maintenance-that-requires-power-shutdown]]
 == Aggregati non speculari e manutenzione che richiede l'interruzione dell'alimentazione
 
 Se si esegue un passaggio negoziato per manutenzione che richiede l'interruzione dell'alimentazione in tutto il sito, è necessario innanzitutto disattivare manualmente tutti gli aggregati non sottoposti a mirroring di proprietà del sito interessato dal disastro.
@@ -29,24 +31,28 @@ Se non si mettono offline gli aggregati non mirrorati di proprietà del sito del
 
 
 
+[[unmirrored-aggregates-crs-metadata-volumes-and-data-svm-root-volumes]]
 == Aggregati non speculari, volumi di metadati CRS e volumi radice SVM di dati
 
 Il volume di metadati del servizio di replica della configurazione (CRS) e i volumi radice SVM dei dati devono trovarsi su un aggregato mirrorato. Non è possibile spostare questi volumi in un aggregato senza mirror. Se si trovano su un aggregato non speculare, le operazioni di switchover e switchback negoziate vengono sottoposte a veto e  `metrocluster check` il comando restituisce un avviso.
 
 
 
+[[unmirrored-aggregates-and-svms]]
 == Aggregati non speculari e SVM
 
 È consigliabile configurare le SVM solo su aggregati con mirroring o solo su aggregati senza mirroring. La configurazione delle SVM su una combinazione di aggregati con e senza mirroring può comportare un'operazione di switchover che dura più di 120 secondi. Ciò può causare un'interruzione dei dati se gli aggregati senza mirroring non sono online.
 
 
 
+[[unmirrored-aggregates-and-san]]
 == Aggregati non speculari e SAN
 
 Prima di ONTAP 9.9.1, una LUN non doveva essere posizionata su un aggregato non sottoposto a mirroring. La configurazione di un LUN su un aggregato senza mirror può comportare un'operazione di switchover che supera i 120 secondi e un'interruzione dei dati.
 
 
 
+[[add-storage-shelves-for-unmirrored-aggregates]]
 == Aggiungere ripiani di stoccaggio per aggregati non specchiati
 
 Se si aggiungono ripiani e si desidera utilizzarli per aggregati non speculari in una configurazione IP MetroCluster , è necessario procedere come segue:

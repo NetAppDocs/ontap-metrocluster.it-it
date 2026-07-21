@@ -16,6 +16,7 @@ ONTAP Mediator fornisce LUN di cassette postali per memorizzare le informazioni 
 
 NOTE: MAUSO non è supportato nelle configurazioni MetroCluster FC.
 
+[[default_scenarios]]
 Quando un nodo rileva un guasto di un sito che richiede uno switchover, prende le misure necessarie per confermare che lo switchover è appropriato e, in tal caso, esegue lo switchover. Per impostazione predefinita, viene avviato un MAUSO per i seguenti scenari:
 
 * Il mirroring SyncMirror e il mirroring DR della cache non volatile di ciascun nodo sono in funzione e le cache e i mirror vengono sincronizzati al momento dell'errore.

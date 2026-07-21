@@ -15,6 +15,7 @@ Il software MetroCluster Tiebreaker automatizza il processo di recovery consente
 
 
 
+[[configuring-autosupport]]
 == Configurazione di AutoSupport
 
 Per impostazione predefinita, i messaggi AutoSupport vengono inviati a NetApp una settimana dopo l'installazione del software Tiebreaker. Gli eventi che attivano la notifica AutoSupport includono la panoramica del software Tiebreaker, il rilevamento di condizioni di emergenza nelle configurazioni MetroCluster o uno stato di configurazione MetroCluster sconosciuto.
@@ -130,6 +131,7 @@ Autosupport configuration deleted successfully.
 
 
 
+[[snmp-events-and-traps]]
 === Eventi e trap SNMP
 
 Il software NetApp MetroCluster Tiebreaker utilizza trap SNMP per notificare eventi significativi. Questi trap fanno parte del file NetApp MIB. Ogni trap contiene le seguenti informazioni: Nome, severità, livello di impatto, data e ora e messaggio.
@@ -187,6 +189,7 @@ La configurazione SNMP può ora essere testata eseguendo il comando di test di c
 |===
 
 
+[[displaying-the-status-of-monitoring-operations]]
 == Visualizzazione dello stato delle operazioni di monitoraggio
 
 È possibile visualizzare lo stato generale delle operazioni di monitoraggio per una configurazione MetroCluster.
@@ -286,6 +289,7 @@ MetroCluster: cluster_B
 
 
 
+[[displaying-metrocluster-configuration-information]]
 == Visualizzazione delle informazioni di configurazione di MetroCluster
 
 È possibile visualizzare il nome del monitor e l'indirizzo IP di tutte le istanze di configurazioni MetroCluster nel software Tiebreaker.
@@ -309,6 +313,7 @@ MetroCluster: North America
 
 
 
+[[creating-dump-files]]
 == Creazione di file dump
 
 Si salva lo stato generale del software Tiebreaker in un file dump a scopo di debug.
@@ -329,6 +334,7 @@ MetroCluster Tiebreaker status successfully dumped in file /var/log/netapp/mcctb
 
 
 
+[[disable-tiebreaker-observer-mode]]
 == Disabilita la modalità osservatore Tiebreaker
 
 È possibile disattivare la modalità osservatore affinché il software Tiebreaker avvii automaticamente uno switchover dopo aver rilevato un errore del sito.

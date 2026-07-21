@@ -21,6 +21,7 @@ image::power-on-off-data-center.gif[MetroCluster con cluster spento per manutenz
 
 
 
+[[power-off-a-metrocluster-site]]
 == Spegnere un sito MetroCluster
 
 È necessario spegnere un sito e tutte le apparecchiature prima di iniziare la manutenzione o il trasferimento del sito.
@@ -342,6 +343,7 @@ Le seguenti apparecchiature devono essere spente nell'ordine indicato:
 
 
 
+[[relocating-the-powered-off-site-of-the-metrocluster]]
 == Spostamento del sito spento di MetroCluster
 
 Una volta spento il sito, è possibile iniziare il lavoro di manutenzione. La procedura è la stessa sia che i componenti MetroCluster vengano ricollocati all'interno dello stesso data center sia che vengano ricollocati in un data center diverso.
@@ -549,6 +551,7 @@ switch_A_1# copy running-config startup-config
 
 
 
+[[powering-on-the-metrocluster-configuration-and-returning-to-normal-operation]]
 == Accensione della configurazione MetroCluster e ripristino del normale funzionamento
 
 Una volta completata la manutenzione o spostato il sito, è necessario accendere il sito e ripristinare la configurazione MetroCluster.

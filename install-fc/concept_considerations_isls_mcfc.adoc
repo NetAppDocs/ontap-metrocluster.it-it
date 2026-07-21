@@ -15,6 +15,7 @@ summary: È necessario determinare il numero di ISL necessari per ciascun fabric
 
 
 
+[[isl-sharing-considerations-ontap-9-2]]
 == Considerazioni sulla condivisione ISL (ONTAP 9.2)
 
 A partire da ONTAP 9.2, è possibile utilizzare la condivisione ISL nei seguenti casi:
@@ -47,6 +48,7 @@ https://hwu.netapp.com["NetApp Hardware Universe"]
 
 
 
+[[platform-specific-isl-considerations]]
 == Considerazioni ISL specifiche per la piattaforma
 
 Il numero di ISL consigliati è specifico per il modello di piattaforma. La seguente tabella mostra i requisiti ISL per ciascun fabric in base al modello di piattaforma. Si presume che ogni ISL abbia una capacità di 16 Gbps.

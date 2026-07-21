@@ -15,6 +15,7 @@ A partire da ONTAP 9.7, le configurazioni IP di MetroCluster possono utilizzare 
 
 
 
+[[metrocluster-compliant-versus-netapp-validated-switches]]
 == Conformità a MetroCluster rispetto agli switch validati NetApp
 
 Uno switch è validato da NetApp se soddisfa i seguenti requisiti:
@@ -34,6 +35,7 @@ NOTE: NetApp non offre servizi di supporto per la configurazione o il troublesho
 
 
 
+[[general-requirements-for-metrocluster-compliant-switches]]
 == Requisiti generali per gli switch compatibili con MetroCluster
 
 Lo switch che collega le interfacce IP MetroCluster deve soddisfare i seguenti requisiti generali:
@@ -64,6 +66,7 @@ Tutti gli switch intermedi utilizzati tra gli switch che collegano le interfacce
 
 
 
+[[limitations-when-using-metrocluster-compliant-switches]]
 == Limitazioni relative all'utilizzo di switch compatibili con MetroCluster
 
 Non è possibile utilizzare alcuna configurazione o funzione che richieda che le connessioni del cluster locale siano connesse a uno switch. Ad esempio, non è possibile utilizzare le seguenti configurazioni e procedure con uno switch conforme a MetroCluster:

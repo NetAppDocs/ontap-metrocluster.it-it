@@ -15,6 +15,7 @@ summary: 'È utile comprendere che cos"è il software NetApp MetroCluster Tiebre
 
 
 
+[[detecting-failures-with-netapp-metrocluster-tiebreaker-software]]
 == Rilevamento degli errori con il software NetApp MetroCluster Tiebreaker
 
 Il software Tiebreaker è necessario solo se si desidera monitorare due cluster e lo stato di connettività tra di essi da un terzo sito. Il software Tiebreaker si trova su un host Linux nel terzo sito e consente a ciascun partner in un cluster di distinguere tra un errore ISL, quando i collegamenti tra siti sono inattivi, da un errore del sito.
@@ -25,12 +26,14 @@ Il software Tiebreaker è in grado di monitorare fino a 15 configurazioni MetroC
 
 
 
+[[how-the-tiebreaker-software-detects-site-failures]]
 == Il modo in cui il software Tiebreaker rileva i guasti del sito
 
 Il software NetApp MetroCluster Tiebreaker verifica la raggiungibilità dei nodi in una configurazione MetroCluster e del cluster per determinare se si è verificato un guasto al sito. Il software di spareggio attiva anche un avviso in determinate condizioni.
 
 
 
+[[components-monitored-by-the-tiebreaker-software]]
 === Componenti monitorati dal software Tiebreaker
 
 Il software Tiebreaker monitora ciascun controller nella configurazione MetroCluster stabilendo connessioni ridondanti attraverso percorsi multipli a una LIF di gestione dei nodi e alla LIF di gestione dei cluster, entrambi ospitati sulla rete IP.
@@ -49,6 +52,7 @@ NOTE: Tutti i collegamenti vengono interrotti se il cluster sopravvissuto non ri
 
 
 
+[[failure-scenarios-during-which-tiebreaker-software-triggers-an-alert]]
 === Scenari di guasto durante i quali il software di spareggio attiva un avviso
 
 Il software di spareggio attiva un avviso quando il cluster (tutti i nodi) nel sito di disastro è inattivo o irraggiungibile e il cluster nel sito sopravvissuto indica lo stato "`AllLinksSevered`".
@@ -68,12 +72,14 @@ link:concept_risks_and_limitation_of_using_mcc_tiebreaker_in_active_mode.html["R
 
 
 
+[[how-the-tiebreaker-software-detects-intersite-connectivity-failures]]
 == Il modo in cui il software Tiebreaker rileva gli errori di connettività tra siti
 
 Il software MetroCluster Tiebreaker avvisa l'utente in caso di perdita di tutte le connessioni tra i siti.
 
 
 
+[[types-of-network-paths]]
 === Tipi di percorsi di rete
 
 A seconda della configurazione, esistono tre tipi di percorsi di rete tra i due cluster in una configurazione MetroCluster:
@@ -94,12 +100,14 @@ Questo tipo di rete è composto da due reti di switch IP ridondanti. Ogni rete d
 
 
 
+[[monitoring-intersite-connectivity]]
 === Monitoraggio della connettività tra siti
 
 Il software Tiebreaker recupera regolarmente lo stato della connettività tra siti dai nodi. Se la connettività di interconnessione NV viene persa e il peering dell'intercluster non risponde ai ping, i cluster presumono che i siti siano isolati e il software di spareggio attiva un avviso come "`AllLinksSevered`". Se un cluster identifica lo stato "`AllLinksSevered`" e l'altro cluster non è raggiungibile attraverso la rete, il software di spareggio attiva un avviso come "`disaster`".
 
 
 
+[[how-different-disaster-types-affect-tiebreaker-software-detection-time]]
 == In che modo i diversi tipi di disastro influiscono sul tempo di rilevamento del software Tiebreaker
 
 Per una migliore pianificazione del disaster recovery, il software MetroCluster Tiebreaker richiede un po' di tempo per rilevare un disastro. Questo tempo impiegato è il "`dtempo di rilevamento dell'isaster`". Il software MetroCluster Tiebreaker rileva il disastro del sito entro 30 secondi dal verificarsi del disastro e attiva l'operazione di disaster recovery per avvisare l'utente in merito.
@@ -114,12 +122,14 @@ Il tempo di rilevamento dipende anche dal tipo di disastro e potrebbe superare i
 
 
 
+[[power-loss]]
 === Perdita di alimentazione
 
 Il software Tiebreaker attiva immediatamente un avviso quando il nodo smette di funzionare. In caso di interruzione dell'alimentazione, tutte le connessioni e gli aggiornamenti, ad esempio peering tra cluster, interconnessione NV e disco della mailbox, si interrompono. Il tempo necessario tra l'irraggiungibile del cluster, il rilevamento del disastro e il trigger, compreso il tempo di inattività predefinito di 5 secondi, non deve superare i 30 secondi.
 
 
 
+[[panic]]
 === Panico
 
 Nelle configurazioni MetroCluster FC, il software di spareggio attiva un avviso quando la connessione di interconnessione NV tra i siti è inattiva e il sito sopravvissuto indica lo stato "`AllLinksSevered`". Questo avviene solo dopo il completamento del processo di coredump. In questo scenario, il tempo impiegato tra il passaggio da un cluster all'altro e il rilevamento di un disastro potrebbe essere più lungo o approssimativamente uguale al tempo impiegato per il processo di coredump. In molti casi, il tempo di rilevamento è superiore a 30 secondi.
@@ -128,18 +138,21 @@ Se un nodo smette di funzionare ma non genera un file per il processo di coredum
 
 
 
+[[halt-or-reboot]]
 === Arrestare o riavviare
 
 Il software di spareggio attiva un avviso solo quando il nodo è inattivo e il sito sopravvissuto indica lo stato "`AllLinksSevered`". Il tempo impiegato tra l'inraggiungibile del cluster e il rilevamento di un disastro potrebbe essere superiore a 30 secondi. In questo scenario, il tempo necessario per rilevare un disastro dipende dal tempo necessario per l'arresto dei nodi nel sito di disastro.
 
 
 
+[[loss-of-fc-switches-at-the-disaster-site-fabric-attached-metrocluster-configuration]]
 === Perdita di switch FC nel sito di emergenza (configurazione Fabric-Attached MetroCluster)
 
 Il software di spareggio attiva un avviso quando un nodo smette di funzionare. In caso di perdita degli switch FC, il nodo tenta di ripristinare il percorso di un disco per circa 30 secondi. Durante questo periodo di tempo, il nodo è attivo e risponde sulla rete di peering. Quando entrambi gli switch FC sono disattivi e non è possibile ripristinare il percorso di un disco, il nodo genera un errore MultiDiskFailure e si arresta. Il tempo impiegato tra il guasto dello switch FC e il numero di volte in cui i nodi hanno generato errori MultiDiskFailure è di circa 30 secondi più lungo. Questi 30 secondi aggiuntivi devono essere aggiunti al tempo di rilevamento dei disastri.
 
 
 
+[[about-the-tiebreaker-cli-and-man-pages]]
 == Informazioni sulle pagine di manuale e CLI di spareggio
 
 La CLI di Tiebreaker fornisce comandi che consentono di configurare in remoto il software di Tiebreaker e monitorare le configurazioni MetroCluster.

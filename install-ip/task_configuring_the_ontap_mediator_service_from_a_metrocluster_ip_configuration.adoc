@@ -29,12 +29,9 @@ CAUTION: A partire da ONTAP 9.12.1, è possibile attivare la funzione di switcho
 .A proposito di questa attività
 * Questa attività attiva lo switchover automatico non pianificato per impostazione predefinita.
 * È possibile eseguire questa operazione sull'interfaccia ONTAP di qualsiasi nodo nella configurazione IP MetroCluster.
-* A partire da ONTAP 9.18.1 e ONTAP Mediator 1.11, una singola istanza di ONTAP Mediator configurata con iSCSI può gestire fino a dieci MetroCluster configurazioni contemporaneamente. In ONTAP 9.17.1 e ONTAP Mediator 1.10 e versioni precedenti, un'istanza ONTAP Mediator configurata con iSCSI può supportare fino a cinque MetroCluster configurazioni contemporaneamente.
 * A partire da ONTAP 9.19.1 e ONTAP Mediator 1.12, è possibile installare ONTAP Mediator con supporto per iSCSI e HTTPS, oppure solo HTTPS. Se si installa ONTAP Mediator solo per HTTPS, non è possibile configurare un Mediator con iSCSI.
 * Se non si specifica il  `-type` parametro nel  `metrocluster configuration-settings mediator add` comando, viene utilizzato il protocollo iSCSI predefinito.
-* Se si configura ONTAP Mediator con HTTPS, una singola istanza di ONTAP Mediator può monitorare una sola configurazione IP MetroCluster. Il monitoraggio simultaneo di più configurazioni IP MetroCluster non è supportato quando ONTAP Mediator è configurato con HTTPS.
-* Se è necessario configurare ONTAP Mediator con HTTPS per monitorare più configurazioni IP di MetroCluster, è necessario configurare istanze separate di ONTAP Mediator per ciascuna configurazione IP di MetroCluster. È necessario valutare attentamente i requisiti per il proprio ambiente IP di MetroCluster prima di scegliere di configurare ONTAP Mediator con HTTPS per MetroCluster IP.
-* Se si desidera utilizzare una singola istanza di ONTAP Mediator per monitorare più configurazioni IP MetroCluster, è necessario configurare ONTAP Mediator utilizzando iSCSI anziché HTTPS.
+* Il supporto per il monitoraggio di più configurazioni IP di MetroCluster utilizzando un'unica istanza di ONTAP Mediator dipende dal fatto che tu configuri ONTAP Mediator con HTTPS o iSCSI. Per ulteriori informazioni, consulta link:concept_mediator_requirements.html#mediator-multiple-mccip["Utilizza ONTAP Mediator per monitorare più configurazioni IP MetroCluster"].
 
 
 [role="tabbed-block"]

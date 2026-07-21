@@ -15,6 +15,7 @@ Dopo l'installazione del software Tiebreaker, è possibile aggiungere o modifica
 
 
 
+[[launch-the-tiebreaker-software-cli]]
 == Avviare la CLI del software Tiebreaker
 
 Dopo aver installato il software Tiebreaker, è necessario avviarne la CLI per configurare il software.
@@ -28,6 +29,7 @@ Dopo aver installato il software Tiebreaker, è necessario avviarne la CLI per c
 
 
 
+[[add-metrocluster-configurations]]
 == Aggiunta di configurazioni MetroCluster
 
 Dopo aver installato il software NetApp MetroCluster Tiebreaker, è possibile aggiungere altre configurazioni MetroCluster, una alla volta.
@@ -169,6 +171,8 @@ link:concept_risks_and_limitation_of_using_mcc_tiebreaker_in_active_mode.html["R
 
 
 
+[[import-certificates]]
+[[import-certificates-tb17]]
 == Certificati di importazione
 
 Per abilitare il monitoraggio senza interruzioni in Tiebreaker 1.6 o versioni successive, è necessario importare il certificato Secure Sockets Layer (SSL) del server, il certificato intermedio (se presente) e il certificato radice da ONTAP nell'archivio chiavi nella Java Virtual Machine (JVM).
@@ -349,6 +353,7 @@ L'esempio seguente mostra come importare un certificato radice con il nome del f
 ====
 
 
+[[commands-for-modifying-metrocluster-tiebreaker-configurations]]
 == Comandi per la modifica delle configurazioni di MetroCluster Tiebreaker
 
 È possibile modificare la configurazione MetroCluster ogni volta che si desidera modificare le impostazioni.
@@ -448,6 +453,7 @@ La password utente è stata aggiornata correttamente
 |===
 
 
+[[remove-metrocluster-configurations]]
 == Rimuovere le configurazioni MetroCluster
 
 È possibile rimuovere la configurazione MetroCluster monitorata dal software Tiebreaker quando non si desidera più monitorare una configurazione MetroCluster.

@@ -42,6 +42,8 @@ Red Hat Enterprise Linux 8
 
 
 
+[[install-jdk]]
+[[install-java-17]]
 == Installare JDK
 
 È necessario installare JDK sul sistema host prima di installare o aggiornare il software tiebreaker. Tiebreaker 1,5 e versioni successive supporta OpenJDK 17, 18 o 19.
@@ -86,6 +88,8 @@ OpenJDK 64-Bit Server VM 21.9 (build 17.0.2+8-LTS, mixed mode, sharing)
 
 
 
+[[install-and-configure-vault]]
+[[install-vault]]
 == Installare e configurare il vault
 
 Se non si dispone o si desidera utilizzare il server del vault locale, è necessario installare Vault. Si può fare riferimento a questa procedura standard per l'installazione del vault o fare riferimento alle istruzioni di installazione di Hashicorp per linee guida alternative.
@@ -368,6 +372,8 @@ NOTE: Viene richiesto di utilizzare questa funzione durante l'installazione di M
 
 
 
+[[install-mysql-server-5-5-30-or-later-and-5-6-x-versions-on-red-hat-enterprise-linux-7-or-centos-7]]
+[[install-mysql-redhat]]
 == Installare MySQL Server 5.5.30 o versioni successive e 5,6.x su Red Hat Enterprise Linux 7 o CentOS 7
 
 È necessario installare MySQL Server 5.5.30 o versione successiva e la versione 5.6.x sul sistema host prima di installare o aggiornare il software Tiebreaker. Per Red Hat Enterprise Linux 8, <<install-mariadb,Installare il server MariaDB>>.
@@ -667,6 +673,7 @@ Se il login MySQL funziona, l'output terminerà con `mysql>` prompt.
 
 
 
+[[enable-the-mysql-autostart-setting]]
 === Abilitare l'impostazione di avvio automatico di MySQL
 
 Verificare che la funzionalità di autostart sia attivata per il daemon MySQL. L'attivazione del daemon MySQL riavvia automaticamente MySQL se il sistema su cui risiede il software MetroCluster Tiebreaker si riavvia. Se il daemon MySQL non è in esecuzione, il software Tiebreaker continua a funzionare, ma non può essere riavviato e non è possibile apportare modifiche alla configurazione.
@@ -691,6 +698,8 @@ Se MySQL non è abilitato all'avvio automatico all'avvio, consultare la document
 
 
 
+[[install-mariadb-server-on-red-hat-enterprise-linux-8]]
+[[install-mariadb]]
 == Installare il server MariaDB su Red Hat Enterprise Linux 8
 
 È necessario installare il server MariaDB sul sistema host prima di installare o aggiornare il software Tiebreaker. Per Red Hat Enterprise Linux 7 o CentOS 7, <<install-mysql-redhat,Installare MySQL Server>>.
@@ -861,6 +870,7 @@ Thanks for using MariaDB!
 
 
 
+[[enable-the-autostart-setting-for-the-mariadb-server]]
 === Attivare l'impostazione di avvio automatico per il server MariaDB
 
 Verificare che la funzione di avvio automatico sia attivata per il server MariaDB. Se non si attiva la funzione di avvio automatico e il sistema su cui risiede il software MetroCluster Tiebreaker deve essere riavviato, il software Tiebreaker continua a funzionare, ma il servizio MariaDB non può essere riavviato e non è possibile apportare modifiche alla configurazione.

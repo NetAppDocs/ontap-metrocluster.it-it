@@ -15,6 +15,7 @@ summary: È possibile utilizzare questa operazione di switchover MetroCluster au
 
 
 
+[[supported-platform-combinations]]
 == Combinazioni di piattaforme supportate
 
 * Per informazioni sulle combinazioni di upgrade della piattaforma supportate, consultare la tabella di aggiornamento MetroCluster FC in  link:concept_choosing_controller_upgrade_mcc.html#supported-metrocluster-fc-controller-upgrades["Scegliere una procedura di aggiornamento del controller"].
@@ -24,6 +25,7 @@ Per ulteriori procedure, fare riferimento alla link:concept_choosing_an_upgrade_
 
 
 
+[[about-this-task]]
 == A proposito di questa attività
 
 * Questa procedura può essere utilizzata solo per l'aggiornamento del controller.
@@ -79,6 +81,7 @@ In questa procedura vengono utilizzati i seguenti nomi di esempio:
 
 
 
+[[enable-console-logging]]
 == Attivare la registrazione della console
 
 NetApp consiglia vivamente di attivare la registrazione della console sui dispositivi in uso e di eseguire le seguenti operazioni quando si esegue questa procedura:
@@ -93,6 +96,8 @@ Consultare l'articolo della Knowledge base link:https://kb.netapp.com/Support_Bu
 
 
 
+[[prepare-for-the-upgrade]]
+[[fc_controller_replace_prepare]]
 == Preparatevi per l'aggiornamento
 
 Per prepararsi all'aggiornamento del controller, è necessario eseguire controlli preliminari del sistema e raccogliere le informazioni di configurazione.
@@ -139,6 +144,7 @@ Controllare se si è verificato questo errore a causa di aggregati senza mirror 
 
 
 
+[[gather-information-before-the-upgrade]]
 === Raccogliere informazioni prima dell'aggiornamento
 
 Prima di eseguire l'aggiornamento, se il volume root è crittografato, è necessario raccogliere la chiave di backup e altre informazioni per avviare i nuovi controller con i vecchi volumi root crittografati.
@@ -327,6 +333,7 @@ cluster_B::*
 
 
 
+[[remove-the-existing-configuration-from-the-tiebreaker-or-other-monitoring-software]]
 === Rimuovere la configurazione esistente dallo spareggio o da un altro software di monitoraggio
 
 Se la configurazione esistente viene monitorata con la configurazione di MetroCluster Tiebreaker o altre applicazioni di terze parti (ad esempio, ClusterLion) che possono avviare uno switchover, è necessario rimuovere la configurazione MetroCluster dal Tiebreaker o da un altro software prima di sostituire il vecchio controller.
@@ -341,6 +348,7 @@ Consultare la documentazione dell'applicazione.
 
 
 
+[[replace-the-old-controllers-and-boot-up-the-new-controllers]]
 == Sostituire i vecchi controller e avviare i nuovi controller
 
 Una volta raccolte le informazioni e riavviata l'operazione, l'automazione procede con l'operazione di switchover.
@@ -353,6 +361,7 @@ Prima di iniziare lo switchover, l'operazione di automazione viene interrotta in
 
 
 
+[[prepare-the-network-configuration-of-the-old-controllers]]
 === Preparare la configurazione di rete dei vecchi controller
 
 Per garantire che la rete riprenda correttamente sui nuovi controller, è necessario spostare i file LIF su una porta comune e rimuovere la configurazione di rete dei vecchi controller.
@@ -454,6 +463,7 @@ Questa operazione deve essere eseguita su entrambi i nodi.
 
 
 
+[[set-up-the-new-controllers]]
 === Configurare le nuove centraline
 
 I nuovi controller devono essere montati in rack e cablati.
@@ -484,6 +494,7 @@ https://docs.netapp.com/platstor/index.jsp["Documentazione dei sistemi hardware 
 
 
 
+[[netboot-the-new-controllers]]
 === NetBoot i nuovi controller
 
 Dopo aver installato i nuovi nodi, è necessario eseguire il netboot per assicurarsi che i nuovi nodi eseguano la stessa versione di ONTAP dei nodi originali. Il termine netboot indica che si sta eseguendo l'avvio da un'immagine ONTAP memorizzata su un server remoto. Durante la preparazione per il netboot, è necessario inserire una copia dell'immagine di boot di ONTAP 9 su un server Web a cui il sistema può accedere.
@@ -556,6 +567,7 @@ NOTE: Per poter utilizzare il software appena installato è necessario riavviare
 
 
 
+[[clear-the-configuration-on-a-controller-module]]
 === Cancellare la configurazione su un modulo controller
 
 Prima di utilizzare un nuovo modulo controller nella configurazione MetroCluster, è necessario cancellare la configurazione esistente.
@@ -595,6 +607,7 @@ Rispondere `yes` al prompt di conferma.
 
 
 
+[[restore-the-hba-configuration]]
 === Ripristinare la configurazione dell'HBA
 
 A seconda della presenza e della configurazione delle schede HBA nel modulo controller, è necessario configurarle correttamente per l'utilizzo da parte del sito.
@@ -676,6 +689,7 @@ FC
 
 
 
+[[reassign-root-aggregate-disks]]
 === Riassegnare i dischi aggregati root
 
 Riassegnare i dischi aggregati root al nuovo modulo controller, utilizzando `sysids` raccolte in precedenza
@@ -791,6 +805,7 @@ aggr0_node_b_1-root        online      raid_dp, aggr    root, nosnap=on,
 
 
 
+[[boot-up-the-new-controllers]]
 === Avviare i nuovi controller
 
 Riavviare i controller dal menu di avvio per aggiornare l'immagine flash del controller. Se la crittografia è configurata, sono necessari ulteriori passaggi.
@@ -1004,6 +1019,7 @@ Verificare che i nuovi nodi (Site_B) si trovino nello stato *Waiting for switchb
 
 
 
+[[complete-the-upgrade]]
 == Completare l'aggiornamento
 
 L'operazione di automazione esegue controlli del sistema di verifica e quindi si ferma per verificare la raggiungibilità della rete. Dopo la verifica, viene avviata la fase di riconquista delle risorse e l'operazione di automazione esegue lo switchback nel sito A e si ferma ai controlli successivi all'aggiornamento. Dopo aver ripristinato l'operazione di automazione, esegue i controlli post-aggiornamento e, se non vengono rilevati errori, contrassegna l'aggiornamento come completo.
@@ -1031,6 +1047,7 @@ Se i controlli successivi all'aggiornamento non hanno segnalato errori, l'aggior
 
 
 
+[[upgrade-the-nodes-on-clustera]]
 == Aggiornare i nodi su cluster_A.
 
 È necessario ripetere le attività di aggiornamento per aggiornare i nodi su cluster_A nel sito A.
@@ -1044,6 +1061,7 @@ Quando si ripete la procedura, tutti i riferimenti di esempio ai cluster e ai no
 
 
 
+[[restoring-tiebreaker-monitoring]]
 === Ripristino del monitoraggio di Tiebreaker
 
 Se la configurazione MetroCluster è stata precedentemente configurata per il monitoraggio da parte del software Tiebreaker, è possibile ripristinare la connessione Tiebreaker.

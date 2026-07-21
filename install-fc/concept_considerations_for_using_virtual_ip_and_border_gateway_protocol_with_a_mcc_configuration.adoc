@@ -19,6 +19,7 @@ image::../media/vip_and_bgp_in_metrocluster_2.png[IP virtuale e Border Gateway P
 
 
 
+[[ontap-limitations]]
 == Limitazioni di ONTAP
 
 ONTAP non verifica automaticamente che tutti i nodi su entrambi i siti della configurazione MetroCluster siano configurati con il peering BGP.
@@ -29,6 +30,7 @@ ONTAP non supporta il vero Anycast -- solo un singolo nodo nel cluster presenta 
 
 
 
+[[guidelines-for-using-this-layer-3-solution-with-a-metrocluster-configuration]]
 == Linee guida per l'utilizzo di questa soluzione Layer 3 con una configurazione MetroCluster
 
 È necessario configurare correttamente BGP e VIP per fornire la ridondanza richiesta.

@@ -15,6 +15,7 @@ Dopo aver aggiornato i moduli controller, eseguire le attività necessarie per c
 
 
 
+[[check-the-health-of-the-metrocluster-configuration]]
 == Controllare lo stato della configurazione MetroCluster
 
 Dopo aver aggiornato i moduli controller, è necessario verificare lo stato della configurazione MetroCluster.
@@ -59,6 +60,7 @@ Dopo aver aggiornato i moduli controller, è necessario verificare lo stato dell
 
 
 
+[[upgrade-the-nodes-on-clustera]]
 == Aggiornare i nodi su cluster_A.
 
 È necessario ripetere le attività di aggiornamento per aggiornare i nodi su cluster_A nel sito A.
@@ -72,6 +74,7 @@ Quando si ripete la procedura, tutti i riferimenti di esempio ai cluster e ai no
 
 
 
+[[re-add-the-internal-drives-to-the-new-controller]]
 == Aggiungere nuovamente le unità interne al nuovo controller
 
 Se hai effettuato l'aggiornamento da un sistema con solo unità esterne a un sistema con unità esterne e interne (dischi e controller nello stesso chassis), puoi aggiungere o reinstallare i dischi rimossi o rimossi dagli slot interni del nuovo sistema. Puoi farlo in qualsiasi momento dopo aver completato l'aggiornamento su entrambi i siti e dopo che il cluster è integro.
@@ -83,6 +86,7 @@ NOTE: Questo compito si applica solo a determinate combinazioni di potenziamento
 
 
 
+[[restore-tiebreaker-or-mediator-monitoring]]
 == Ripristinare il monitoraggio di Tiebreaker o Mediator
 
 Dopo aver completato l'aggiornamento della configurazione MetroCluster, è possibile riprendere il monitoraggio con l'utility Tiebreaker o Mediator.
@@ -118,6 +122,7 @@ Consultare la documentazione del prodotto.
 
 
 
+[[send-a-custom-autosupport-message-after-maintenance]]
 == Inviare un messaggio AutoSupport personalizzato dopo la manutenzione
 
 Una volta completato l'aggiornamento, inviare un messaggio AutoSupport che indica la fine della manutenzione, in modo da poter riprendere la creazione automatica del caso.
@@ -134,6 +139,7 @@ Una volta completato l'aggiornamento, inviare un messaggio AutoSupport che indic
 
 
 
+[[configure-end-to-end-encryption]]
 == Configurare la crittografia end-to-end
 
 Se è supportato sul sistema, è possibile crittografare il traffico back-end, come NVlog e i dati di replica dello storage, tra i siti IP di MetroCluster. Fare riferimento a. link:../maintain/task-configure-encryption.html["Configurare la crittografia end-to-end"] per ulteriori informazioni.

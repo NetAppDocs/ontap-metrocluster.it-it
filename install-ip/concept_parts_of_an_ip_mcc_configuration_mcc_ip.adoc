@@ -15,6 +15,7 @@ Durante la pianificazione della configurazione IP di MetroCluster, è necessario
 
 
 
+[[key-hardware-elements]]
 == Elementi hardware chiave
 
 Una configurazione MetroCluster IP include i seguenti elementi hardware principali:
@@ -45,6 +46,7 @@ image::../media/mcc_ip_hardware_architecture_mcc_ip.gif[Architettura hardware IP
 
 
 
+[[disaster-recovery-dr-groups]]
 == Gruppi di disaster recovery (DR)
 
 Una configurazione IP MetroCluster è costituita da un gruppo di DR composto da quattro nodi.
@@ -55,6 +57,7 @@ image::../media/mcc_dr_groups_4_node.gif[Gruppi MetroCluster DR in una configura
 
 
 
+[[illustration-of-the-local-ha-pairs-in-a-metrocluster-configuration]]
 == Immagine delle coppie ha locali in una configurazione MetroCluster
 
 Ogni sito MetroCluster è costituito da controller di storage configurati come coppia ha. Ciò consente la ridondanza locale in modo che, in caso di guasto di uno storage controller, il partner ha locale possa assumere il controllo. Tali guasti possono essere gestiti senza un'operazione di switchover MetroCluster.
@@ -68,6 +71,7 @@ https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-concepts/home.html["
 
 
 
+[[illustration-of-the-metrocluster-ip-and-cluster-interconnect-network]]
 == Immagine dell'IP MetroCluster e della rete di interconnessione del cluster
 
 I cluster ONTAP in genere includono una rete di interconnessione cluster per il traffico tra i nodi del cluster. Nelle configurazioni MetroCluster IP, questa rete viene utilizzata anche per trasportare il traffico di replica dei dati tra i siti MetroCluster.
@@ -89,6 +93,7 @@ link:concept_considerations_mcip.html["Considerazioni per le configurazioni Metr
 
 
 
+[[illustration-of-the-cluster-peering-network]]
 == Immagine della rete di peering del cluster
 
 I due cluster nella configurazione MetroCluster vengono peering tramite una rete di peering cluster fornita dal cliente. Il peering dei cluster supporta il mirroring sincrono delle macchine virtuali di storage (SVM, precedentemente noto come Vserver) tra i siti.

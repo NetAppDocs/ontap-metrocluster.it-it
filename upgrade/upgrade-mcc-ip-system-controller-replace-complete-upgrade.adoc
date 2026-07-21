@@ -15,6 +15,7 @@ Completare il processo di aggiornamento automatico del controller verificando la
 
 
 
+[[verify-network-reachability]]
 == Verificare la raggiungibilità della rete
 
 L'operazione di automazione esegue controlli del sistema di verifica e quindi si ferma per verificare la raggiungibilità della rete. Dopo la verifica, viene avviata la fase di riconquista delle risorse e l'operazione di automazione esegue lo switchback nel sito A e si ferma ai controlli successivi all'aggiornamento. Dopo aver ripristinato l'operazione di automazione, esegue i controlli post-aggiornamento e, se non vengono rilevati errori, contrassegna l'aggiornamento come completo.
@@ -42,6 +43,7 @@ Se i controlli post-aggiornamento non hanno segnalato alcun errore, l'aggiorname
 
 
 
+[[upgrade-the-nodes-on-clustera]]
 == Aggiornare i nodi su cluster_A.
 
 È necessario ripetere le attività di aggiornamento per aggiornare i nodi su cluster_A nel sito A.
@@ -55,6 +57,7 @@ Quando si ripete la procedura, tutti i riferimenti di esempio ai cluster e ai no
 
 
 
+[[re-add-internal-drives-to-the-new-controller]]
 == Aggiungere nuovamente le unità interne al nuovo controller
 
 Se hai effettuato l'aggiornamento da un sistema con solo unità esterne a un sistema con unità esterne e interne (dischi e controller nello stesso chassis), puoi aggiungere o reinstallare i dischi rimossi o rimossi dagli slot interni del nuovo sistema. Puoi farlo in qualsiasi momento dopo aver completato l'aggiornamento su entrambi i siti e dopo che il cluster è integro.
@@ -66,6 +69,7 @@ NOTE: Questo compito si applica solo a determinate combinazioni di potenziamento
 
 
 
+[[reconfigure-ontap-mediator]]
 == Riconfigurare il mediatore ONTAP
 
 Configurare manualmente ONTAP Media, che è stato rimosso automaticamente prima di avviare l'aggiornamento.
@@ -75,6 +79,7 @@ Configurare manualmente ONTAP Media, che è stato rimosso automaticamente prima 
 
 
 
+[[restore-tiebreaker-monitoring]]
 == Ripristinare il monitoraggio di Tiebreaker
 
 Se la configurazione MetroCluster è stata precedentemente configurata per il monitoraggio da parte del software Tiebreaker, è possibile ripristinare la connessione Tiebreaker.
@@ -84,6 +89,7 @@ Se la configurazione MetroCluster è stata precedentemente configurata per il mo
 
 
 
+[[configure-end-to-end-encryption]]
 == Configurare la crittografia end-to-end
 
 Se è supportato sul sistema, è possibile crittografare il traffico back-end, come NVlog e i dati di replica dello storage, tra i siti IP di MetroCluster. Fare riferimento a. link:../maintain/task-configure-encryption.html["Configurare la crittografia end-to-end"] per ulteriori informazioni.

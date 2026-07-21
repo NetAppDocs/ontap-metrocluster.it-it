@@ -9,12 +9,14 @@ http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-clus-peer/home.html["Con
 
 
 
+[[prerequisites-for-cluster-peering]]
 == Prerequisiti per il peering del cluster
 
 Prima di configurare il peering del cluster, è necessario verificare che la connettività tra porta, indirizzo IP, subnet, firewall e i requisiti di denominazione del cluster siano soddisfatti.
 
 
 
+[[connectivity-requirements]]
 === Requisiti di connettività
 
 Ogni LIF di intercluster sul cluster locale deve essere in grado di comunicare con ogni LIF di intercluster sul cluster remoto.
@@ -36,6 +38,7 @@ NOTE: ONTAP 9 consente di migrare le reti peering da IPv4 a IPv6, consentendo la
 
 
 
+[[port-requirements]]
 === Requisiti delle porte
 
 È possibile utilizzare porte dedicate per la comunicazione tra cluster o condividere le porte utilizzate dalla rete dati. Le porte devono soddisfare i seguenti requisiti:
@@ -55,6 +58,7 @@ Le porte aggiunte a un dominio di broadcast possono essere porte di rete fisiche
 
 
 
+[[firewall-requirements]]
 === Requisiti del firewall
 
 I firewall e i criteri di firewall tra cluster devono consentire i seguenti protocolli:
@@ -68,6 +72,7 @@ Il criterio predefinito del firewall tra cluster consente l'accesso tramite il p
 
 
 
+[[considerations-when-using-dedicated-ports]]
 == Considerazioni sull'utilizzo di porte dedicate
 
 Quando si determina se l'utilizzo di una porta dedicata per la replica tra cluster è la soluzione di rete tra cluster corretta, è necessario prendere in considerazione configurazioni e requisiti quali tipo di LAN, larghezza di banda WAN disponibile, intervallo di replica, velocità di modifica e numero di porte.
@@ -85,6 +90,7 @@ La larghezza di banda della porta è condivisa tra tutte le VLAN e la porta base
 
 
 
+[[considerations-when-sharing-data-ports]]
 == Considerazioni sulla condivisione delle porte dati
 
 Quando si determina se la condivisione di una porta dati per la replica tra cluster è la soluzione di rete tra cluster corretta, è necessario prendere in considerazione configurazioni e requisiti quali tipo di LAN, larghezza di banda WAN disponibile, intervallo di replica, tasso di cambiamento e numero di porte.

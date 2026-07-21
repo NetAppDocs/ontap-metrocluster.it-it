@@ -15,6 +15,7 @@ summary: 'È possibile aggiungere collegamenti interswitch (ISL), modificare la 
 
 
 
+[[add-isls-to-a-cisco-fc-switch]]
 == Aggiunta di ISL a uno switch FC Cisco
 
 Potrebbe essere necessario aggiungere ISL a uno switch se, ad esempio, si sta aggiungendo o aggiornando l'hardware, oppure se si sta eseguendo l'aggiornamento a controller più veloci o a switch più veloci.
@@ -79,6 +80,7 @@ Immettere i seguenti comandi di configurazione, uno per riga. Terminare con CTRL
 
 
 
+[[change-isl-port-speeds-on-a-cisco-fc-switch]]
 == Consente di modificare le velocità delle porte ISL su uno switch FC Cisco
 
 È possibile modificare la velocità delle porte ISL su uno switch per migliorare la qualità dell'ISL, ad esempio riducendo la velocità su ISL che percorrono una distanza maggiore.
@@ -159,12 +161,14 @@ Immettere i seguenti comandi di configurazione, uno per riga. Terminare con CTRL
 
 
 
+[[reconfigure-the-vsan-to-guarantee-iod-or-ood-of-frames]]
 == Riconfigurare il VSAN per garantire IOD o OOD dei frame
 
 Si consigliano le impostazioni IOD standard. Se necessario, riconfigurare l'OOD.
 
 
 
+[[reconfigure-iod]]
 === Riconfigurare il modulo IOD
 
 Per riconfigurare l'IOD dei frame, procedere come segue.
@@ -227,6 +231,7 @@ FC_switch_B_1# copy running-config startup-config
 
 
 
+[[reconfigure-ood]]
 === Riconfigurare OOD
 
 Per riconfigurare l'OOOD dei fotogrammi, procedere come segue.

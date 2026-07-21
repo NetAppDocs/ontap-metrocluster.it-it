@@ -22,6 +22,7 @@ NOTE: La configurazione richiede licenze aggiuntive (6 licenze per porte da 100 
 
 
 
+[[resetting-the-broadcom-ip-switch-to-factory-defaults]]
 == Ripristino delle impostazioni predefinite dello switch IP Broadcom
 
 Prima di installare una nuova versione del software dello switch e gli RCF, è necessario cancellare le impostazioni dello switch Broadcom ed eseguire la configurazione di base.
@@ -294,6 +295,7 @@ Configuration Saved!
 
 
 
+[[downloading-and-installing-the-broadcom-switch-efos-software]]
 == Download e installazione del software EFOS dello switch Broadcom
 
 È necessario scaricare il file del sistema operativo dello switch e il file RCF su ciascun switch nella configurazione IP MetroCluster.
@@ -415,6 +417,7 @@ Non conforme a FIPS
 
 
 
+[[steps-to-upgrade-efos-with-downloading-the-software-image-to-the-backup-boot-partition]]
 === Procedura per l'aggiornamento di EFOS con il download dell'immagine software nella partizione di boot di backup
 
 È possibile eseguire i seguenti passaggi solo se entrambe le versioni di EFOS non sono conformi a FIPS o se entrambe le versioni di EFOS sono conformi a FIPS.
@@ -534,6 +537,7 @@ NOTE: In rari casi, lo switch potrebbe non avviarsi. Seguire la <<Procedura per 
 
 
 
+[[steps-to-upgrade-efos-using-the-onie-os-installation]]
 === Procedura per aggiornare EFOS utilizzando l'installazione del sistema operativo ONIE
 
 Se una versione di EFOS è conforme a FIPS e l'altra non è conforme a FIPS, eseguire le seguenti operazioni. Questa procedura può essere utilizzata per installare l'immagine EFOS 3.7.x.x non conforme a FIPS o FIPS da ONIE in caso di mancato avvio dello switch.
@@ -682,6 +686,7 @@ Lo switch si riavvia senza alcuna configurazione applicata e ripristina le impos
 
 
 
+[[downloading-and-installing-the-broadcom-rcf-files]]
 == Download e installazione dei file RCF Broadcom
 
 È necessario generare e installare il file RCF dello switch in ogni switch nella configurazione IP di MetroCluster.
@@ -897,6 +902,7 @@ IP_switch_A_1# reload
 
 
 
+[[disable-unused-isl-ports-and-port-channels]]
 == Disattivare le porte e i canali delle porte ISL non utilizzati
 
 NetApp consiglia di disattivare le porte ISL e i canali delle porte inutilizzati per evitare avvisi di integrità non necessari.

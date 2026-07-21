@@ -15,6 +15,7 @@ Configurare le schede HBA nel modulo controller e verificare e impostare lo stat
 
 
 
+[[restore-the-hba-configuration]]
 == Ripristinare la configurazione dell'HBA
 
 A seconda della presenza e della configurazione delle schede HBA nel modulo controller, è necessario configurarle correttamente per il proprio sito.
@@ -96,6 +97,7 @@ FC
 
 
 
+[[set-the-ha-state-on-the-new-controllers-and-chassis]]
 == Impostare lo stato ha sui nuovi controller e chassis
 
 È necessario verificare lo stato ha dei controller e dello chassis e, se necessario, aggiornarlo in modo che corrisponda alla configurazione del sistema.
@@ -164,6 +166,7 @@ Il nodo deve arrestarsi su `LOADER>` prompt.
 
 
 
+[[remove-internal-drives-from-the-chassis-on-the-new-controller]]
 == Rimuovere le unità interne dallo chassis del nuovo controller
 
 Quando si esegue l'aggiornamento da un sistema dotato solo di unità esterne a un sistema dotato di unità esterne e interne (dischi e controller nello stesso chassis), è necessario rimuovere o sostituire tutte le unità interne dal nuovo sistema finché non si completa l'aggiornamento.

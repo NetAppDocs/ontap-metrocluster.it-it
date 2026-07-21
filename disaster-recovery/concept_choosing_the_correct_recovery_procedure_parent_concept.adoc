@@ -81,6 +81,7 @@ link:task_recover_from_a_multi_controller_and_or_storage_failure.html["Ripristin
 |===
 
 
+[[controller-module-failure-scenarios-during-metrocluster-installation]]
 == Scenari di guasto del modulo controller durante l'installazione di MetroCluster
 
 La risposta a un errore del modulo controller durante la procedura di configurazione MetroCluster dipende dal fatto che il `metrocluster configure` comando completato correttamente.
@@ -95,6 +96,7 @@ NOTE: Eseguire le operazioni descritte in link:https://docs.netapp.com/us-en/ont
 
 
 
+[[controller-module-failure-scenarios-during-metrocluster-fc-to-ip-transition]]
 == Scenari di guasto del modulo controller durante la transizione MetroCluster FC-IP
 
 La procedura di ripristino può essere utilizzata se si verifica un guasto del sito durante la transizione. Tuttavia, può essere utilizzato solo se la configurazione è una configurazione mista stabile, con il gruppo FC DR e il gruppo IP DR completamente configurati. L'output di `metrocluster node show` Il comando dovrebbe mostrare entrambi i gruppi DR con tutti e otto i nodi.
@@ -104,6 +106,7 @@ IMPORTANT: Se il guasto si è verificato durante la transizione quando i nodi so
 
 
 
+[[controller-module-failure-scenarios-in-eight-node-metrocluster-configurations]]
 == Scenari di guasto del modulo controller nelle configurazioni MetroCluster a otto nodi
 
 Scenari di guasto:
@@ -116,6 +119,7 @@ Scenari di guasto:
 
 
 
+[[single-controller-module-failures-in-a-single-dr-group]]
 === Guasti a un singolo modulo controller in un singolo gruppo di DR
 
 In questo caso il guasto è limitato a una coppia ha.
@@ -138,6 +142,7 @@ image::../media/mcc_dr_groups_8_node_with_a_single_controller_failure.gif[Gruppi
 
 
 
+[[two-controller-module-failures-in-a-single-dr-group]]
 === Due guasti del modulo controller in un singolo gruppo di DR
 
 In questo caso il guasto richiede uno switchover. È possibile utilizzare la procedura di failure recovery del modulo multi-controller.
@@ -150,6 +155,7 @@ image::../media/mcc_dr_groups_8_node_with_a_multi_controller_failure.gif[Gruppi 
 
 
 
+[[single-controller-module-failures-in-separate-dr-groups]]
 === Guasti a un singolo modulo controller in gruppi di DR separati
 
 In questo caso il guasto è limitato a coppie ha separate.
@@ -171,6 +177,7 @@ image::../media/mcc_dr_groups_8_node_with_two_single_controller_failures.gif[Gru
 
 
 
+[[three-controller-module-failures-spread-across-the-dr-groups]]
 === Tre guasti del modulo controller distribuiti tra i gruppi di DR
 
 In questo caso il guasto richiede uno switchover. È possibile utilizzare la procedura di failure recovery del modulo multi-controller per il gruppo DR uno.
@@ -185,6 +192,7 @@ image::../media/mcc_dr_groups_8_node_with_a_3_controller_failure.gif[Gruppi Metr
 
 
 
+[[controller-module-failure-scenarios-in-two-node-metrocluster-configurations]]
 == Scenari di guasto del modulo controller nelle configurazioni MetroCluster a due nodi
 
 La procedura utilizzata dipende dall'entità del guasto.
