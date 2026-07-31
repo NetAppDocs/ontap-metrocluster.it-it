@@ -978,7 +978,7 @@ Questa attività è destinata alle configurazioni MetroCluster a due nodi che ut
 
 Questa attività deve essere eseguita su entrambi i cluster nella configurazione MetroCluster.
 
-Per ulteriori informazioni generali sulla configurazione di ONTAP, consultare link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ssg/home.html["Setup ONTAP (Configurazione guidata)"]
+Per informazioni più generali sulla configurazione di ONTAP, vedi la link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ssg/home.html["Setup ONTAP (Configurazione guidata)"^]
 
 .Fasi
 . Accendere il primo nodo.
@@ -1836,7 +1836,7 @@ NOTE: Gli aggregati senza mirror devono essere locali rispetto al nodo che li po
 
 * I dischi sono di proprietà di un nodo specifico; quando si crea un aggregato, tutti i dischi in tale aggregato devono essere di proprietà dello stesso nodo, che diventa il nodo principale per quell'aggregato.
 * I nomi degli aggregati devono essere conformi allo schema di denominazione stabilito al momento della pianificazione della configurazione MetroCluster.
-* Il link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"] contiene ulteriori informazioni sugli aggregati di mirroring.
+* Il link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestione di dischi e aggregati"^] contiene maggiori informazioni sugli aggregati di mirroring.
 
 
 .Fasi
@@ -2271,6 +2271,6 @@ Verificare le operazioni di switchover, riparazione e switchback della configura
 `system configuration backup settings modify URL-of-destination`
 
 +
-Il link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Gestione dei cluster con la CLI"] Contiene ulteriori informazioni nella sezione _Gestione dei backup di configurazione_.
+Il link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Gestione dei cluster con la CLI"^] contiene ulteriori informazioni nella sezione _Gestione dei backup di configurazione_.
 
 

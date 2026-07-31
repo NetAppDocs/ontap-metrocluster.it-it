@@ -35,7 +35,7 @@ Node_B_1
 
 |===
 .Fasi
-. Collegare tutte le altre connessioni ai nuovi moduli controller (FC-VI, storage, cluster Interconnect e così via).
+. Collega tutti gli altri cavi che erano stati scollegati dai vecchi controller ai nuovi moduli controller.
 . Arrestare il sistema e avviare la modalità di manutenzione dal `LOADER` prompt (prompt):
 +
 `boot_ontap maint`

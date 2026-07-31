@@ -22,6 +22,7 @@ Le operazioni vengono eseguite in modalità manutenzione.
 NOTE: I dischi aggregati root sono gli unici dischi che devono essere riassegnati durante il processo di upgrade dei controller. La proprietà del disco degli aggregati di dati viene gestita come parte dell'operazione di switchover/switchback.
 
 .Fasi
+. Collega tutti gli altri cavi che erano stati scollegati dai vecchi controller ai nuovi moduli controller.
 . Avviare il sistema in modalità di manutenzione:
 +
 `boot_ontap maint`

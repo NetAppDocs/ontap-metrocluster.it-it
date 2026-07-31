@@ -40,6 +40,9 @@ Dopo aver aggiornato i moduli controller, è necessario verificare lo stato dell
 +
 .. Verificare le connessioni IP MetroCluster:
 +
+`set -privilege advanced`
+
++
 `storage iscsi-initiator show`
 
 .. Verificare che i nodi funzionino:

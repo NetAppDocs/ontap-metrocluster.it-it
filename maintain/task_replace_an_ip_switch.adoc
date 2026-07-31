@@ -218,7 +218,7 @@ Collegare gli switch nel seguente ordine (se necessario):
 
 .. Se le interfacce del cluster locale sono *non* collegate a uno switch:
 +
-... Utilizzare link:https://docs.netapp.com/us-en/ontap-systems-switches/switch-bes-53248/migrate-to-2n-switched.html["Migrare a un ambiente cluster NetApp con switch"] procedura per convertire un cluster senza switch in un cluster con switch. Utilizzare le porte indicate nella link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installazione e configurazione di MetroCluster IP"] Oppure i file di cablaggio RCF per collegare l'interfaccia cluster locale.
+... Usa la link:https://docs.netapp.com/us-en/ontap-systems-switches/switch-bes-53248/migrate-to-2n-switched.html["Migrare a un ambiente cluster NetApp con switch"^] procedura per convertire un cluster senza switch in un cluster con switch. Usa le porte indicate in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installazione e configurazione di MetroCluster IP"] o i file di cablaggio RCF per collegare l'interfaccia locale del cluster.
 
 
 
