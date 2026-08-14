@@ -168,6 +168,59 @@ mcc1A::> metrocluster operation show
 
 
 
+[[verify-and-restore-lif-configuration]]
+== Verificare e ripristinare la configurazione LIF
+
+Verifica che i LIF siano ospitati sui nodi e sulle porte appropriate prima di eseguire uno switchback.
+
+.Fasi
+. Prima di eseguire uno switchback, verifica che i LIF siano ospitati sui nodi e sulle porte appropriate.
++
+.. Passare al livello di privilegio avanzato:
++
+`set -privilege advanced`
+
+.. Visualizza le LIF e conferma che ogni LIF dati sta utilizzando la porta home corretta:
++
+`network interface show`
+
+.. Modificare le LIF che non utilizzano la porta home corretta:
++
+`network interface modify -vserver <svm-name> -lif <data-lif> -home-port <port-id>`
+
++
+Se il comando restituisce un errore, è possibile ignorare la configurazione della porta:
+
++
+`vserver config override -command "network interface modify -vserver <svm-name> -home-port <active_port_after_upgrade> -lif <lif_name> -home-node <new_node_name>"`
+
++
+Quando si immette il comando di modifica dell'interfaccia di rete in `vserver config override` non è possibile utilizzare la funzione di completamento automatico della scheda. È possibile creare la rete `interface modify` utilizzando il completamento automatico e quindi racchiuderlo in `vserver config override` comando.
+
+.. Verificare che tutte le LIF dati si trovino sulla porta home corretta:
++
+`network interface show`
+
+.. Tornare al livello di privilegio admin:
++
+`set -privilege admin`
+
+
+
+. Ripristinare le interfacce nel nodo principale:
++
+`network interface revert * -vserver <svm-name>`
+
++
+Eseguire questo passaggio su tutte le SVM secondo necessità.
+
+
+
+
+CAUTION: Devi verificare che la posizione delle LIF dati sui nuovi nodi sia corretta prima di eseguire lo switchback. Quando esegui lo switchback della configurazione, ONTAP tenta di riprendere il traffico sulla porta home utilizzata dalle LIF. Può verificarsi un errore di I/O se la connessione della porta home alla porta dello switch e alla VLAN non è corretta. Se riscontri problemi nel posizionare le LIF sui nodi o sulle porte corrette, non procedere con lo switchback e contatta il supporto tecnico NetApp.
+
+
+
 [[verifying-that-your-system-is-ready-for-a-switchback]]
 == Verificare che il sistema sia pronto per lo switchback
 
@@ -451,8 +504,7 @@ vs1a           data    sync-source
 +
 `metrocluster operation show`
 
-
-
++
 |===
 
 
@@ -472,8 +524,58 @@ Che l'operazione di switchback o. `switchback-continuation-agent` operazione par
 Eseguire la correzione suggerita nell'output di `metrocluster operation show` comando.
 
 |===
-.Al termine
-Ripetere le sezioni precedenti per eseguire il switchback nella direzione opposta. Se Site_A ha eseguito uno switchover di Site_B, chiedere a Site_B di eseguire uno switchover di Site_A.
+. Esegui i seguenti controlli per confermare che il passaggio di consegne tra i due cluster sia operativo:
++
+.. Dal cluster di DR, controlla se è possibile eseguire un passaggio di consegne dal cluster funzionante al cluster di DR:
++
+`metrocluster switchover -simulate`
+
+.. Dal cluster rimanente, controlla se è possibile eseguire un passaggio di controllo dal cluster DR al cluster rimanente:
++
+`metrocluster switchover -simulate`
+
+.. Verificare che i componenti di MetroCluster siano integri:
++
+`metrocluster check run`
+
++
+[listing]
+----
+cluster_A::*> metrocluster check run
+----
++
+L'operazione viene eseguita in background.
+
+.. Dopo il `metrocluster check run` l'operazione è completata, eseguire:
++
+`metrocluster check show`
+
++
+Dopo circa cinque minuti, vengono visualizzati i seguenti risultati:
+
++
+[listing]
+----
+cluster_A:::*> metrocluster check show
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          ok
+clusters            ok
+connections         ok
+volumes             ok
+7 entries were displayed.
+----
++
+
+NOTE: In un ambiente FC MetroCluster, "connections" dovrebbe risultare "not-applicable" nell'output del comando.
+
+
+
+
 
 
 
