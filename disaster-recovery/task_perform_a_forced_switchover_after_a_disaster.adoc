@@ -52,9 +52,6 @@ In questo modo si evita la concorrenza con lo switchover negoziato o con l'opera
 
 
 
-
-NOTE: Le configurazioni SnapMirror e SnapVault vengono eliminate automaticamente.
-
 .A proposito di questa attività
 Il `metrocluster switchover` Command consente di passare dai nodi di tutti i gruppi di DR nella configurazione MetroCluster. Ad esempio, in una configurazione MetroCluster a otto nodi, viene eseguita la commutazione dei nodi in entrambi i gruppi di DR.
 
@@ -89,9 +86,6 @@ mcc1A::> metrocluster operation show
 Se lo switchover è vetoed, è possibile emettere nuovamente il `metrocluster switchover-forced-on-disaster true` con il `--override-vetoes` opzione. Se si utilizza questo parametro opzionale, il sistema sovrascrive qualsiasi soft veto che impediva lo switchover.
 
 
-
-.Al termine
-Le relazioni di SnapMirror devono essere ristabilita dopo lo switchover.
 
 
 

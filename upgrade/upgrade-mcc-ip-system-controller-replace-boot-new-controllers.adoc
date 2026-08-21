@@ -160,6 +160,10 @@ Segui le istruzioni e fornisci i seguenti dati per recuperare e ripristinare la 
 +
 A seconda dell'impostazione del gestore delle chiavi, eseguire la procedura di ripristino selezionando l'opzione "`10`" o l'opzione "`11`", quindi l'opzione "`6`" al primo prompt del menu di avvio. Per avviare completamente i nodi, potrebbe essere necessario ripetere la procedura di ripristino, continua con l'opzione "`1`" (boot normale).
 
++
+
+NOTE: Quando esegui l'opzione del menu di boot  `6`, potrebbe essere necessario reimpostare i valori di bootarg di MetroCluster. Consulta link:upgrade-mcc-ip-system-controller-replace-apply-rcf-set-bootarg.html#set-the-metrocluster-ip-bootarg-variables["Impostare le variabili di boot IP di MetroCluster"].
+
 . Avviare i nodi:
 +
 `boot_ontap`

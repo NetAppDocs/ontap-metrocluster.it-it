@@ -11,25 +11,25 @@ summary: È necessario applicare i file RCF per riconfigurare lo zoning in modo 
 
 
 [role="lead"]
-È necessario applicare i file RCF per riconfigurare lo zoning in modo da ospitare i nuovi nodi.
+Devi applicare i file di configurazione di riferimento (RCF) per riconfigurare la suddivisione in zone e includere i nuovi nodi.
 
-Se non è possibile utilizzare i file RCF per configurare gli switch, è necessario configurarli manualmente. Vedere:
+Se non puoi usare gli RCF per configurare gli switch, devi configurarli manualmente. Vedi:
 
 * link:../install-fc/task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Configurare manualmente gli switch Brocade FC"]
 * link:../install-fc/task_fcsw_cisco_configure_a_cisco_switch_supertask.html["Configurare manualmente gli switch Cisco FC"]
 
 
 .Fasi
-. Individuare i file RCF per la configurazione.
+. Individua i RCF per la tua configurazione.
 +
-È necessario utilizzare i file RCF per una configurazione a otto nodi che corrisponda al modello di switch in uso.
+Devi usare gli RCF per una configurazione a otto nodi che corrisponde al tuo modello di switch.
 
-. Applicare i file RCF seguendo le istruzioni riportate nella pagina di download, regolando le impostazioni ISL in base alle necessità.
+. Applica i file RCF seguendo le istruzioni nella pagina di download, regolando le impostazioni ISL secondo necessità.
 . Assicurarsi che la configurazione dello switch sia salvata.
 . Riavviare gli switch FC.
 . Collegare i bridge FC-SAS preesistenti e nuovi agli switch FC, utilizzando il layout di cablaggio creato in precedenza.
 +
-L'utilizzo della porta dello switch FC deve corrispondere all'utilizzo di otto nodi MetroCluster descritto in link:../install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"] In modo da poter utilizzare i file di configurazione di riferimento (RCF).
+L'utilizzo della porta dello switch FC deve corrispondere all'utilizzo a otto nodi di MetroCluster descritto in link:../install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"] modo che tu possa usare gli RCF.
 
 . Verificare che le porte siano in linea utilizzando il comando corretto per lo switch.
 +
@@ -54,7 +54,7 @@ mostra il brief dell'interfaccia
 |===
 . Seguire la procedura descritta in link:../install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"] Per collegare le porte FC-VI dai controller esistenti e nuovi, utilizzando il layout di cablaggio creato in precedenza.
 +
-L'utilizzo della porta dello switch FC deve corrispondere all'utilizzo di otto nodi MetroCluster descritto in link:../install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"] In modo da poter utilizzare i file di configurazione di riferimento (RCF).
+L'utilizzo della porta dello switch FC deve corrispondere all'utilizzo a otto nodi di MetroCluster descritto in link:../install-fc/index.html["Installazione e configurazione di Fabric-Attached MetroCluster"] modo che tu possa usare gli RCF.
 
 . Dai nodi esistenti, verificare che le porte FC-VI siano in linea:
 +

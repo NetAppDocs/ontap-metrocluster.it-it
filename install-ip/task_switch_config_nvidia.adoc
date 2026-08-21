@@ -48,6 +48,7 @@ NOTE: Tutte le altre modifiche di configurazione che si verificano durante l'app
 * È necessario ripetere questa procedura su ciascuno switch IP nella configurazione IP di MetroCluster.
 * È necessario essere connessi allo switch con una connessione seriale alla console.
 * Questa attività ripristina la configurazione della rete di gestione.
+* Se usi questi passaggi come parte di un'altra procedura, ad esempio la sostituzione o l'aggiornamento di uno switch, controlla se devi spostare le LIF del cluster sullo switch partner per abilitare operazioni del cluster senza interruzioni. link:task_install_and_cable_the_mcc_components.html["Scopri come configurare gli switch IP MetroCluster"].
 
 
 .Fasi
@@ -128,6 +129,7 @@ Seguire questa procedura se si desidera ripristinare completamente lo switch app
 NOTE: Per ulteriori informazioni sull'installazione di Cumulus Linux, vedere link:https://docs.netapp.com/us-en/ontap-systems-switches/switch-nvidia-sn2100/configure-overview-sn2100-cluster.html#initial-configuration-overview["Panoramica dell'installazione e della configurazione degli switch NVIDIA SN2100"^]
 
 * È necessario disporre della password root per `sudo` accesso ai comandi.
+* Se usi questi passaggi come parte di un'altra procedura, ad esempio la sostituzione o l'aggiornamento di uno switch, controlla se devi spostare le LIF del cluster sullo switch partner per abilitare operazioni del cluster senza interruzioni. link:task_install_and_cable_the_mcc_components.html["Scopri come configurare gli switch IP MetroCluster"].
 
 
 .Fasi
@@ -314,10 +316,14 @@ Al riavvio dello switch, è possibile applicare una nuova configurazione seguend
 
 NOTE: Se si esegue un'ulteriore configurazione dopo aver reimpostato lo switch e prima di applicare il file RCF, non è possibile utilizzare questa procedura.
 
+* Se usi questi passaggi come parte di un'altra procedura, ad esempio la sostituzione o l'aggiornamento di uno switch, controlla se devi spostare le LIF del cluster sullo switch partner per abilitare operazioni del cluster senza interruzioni. link:task_install_and_cable_the_mcc_components.html["Scopri come configurare gli switch IP MetroCluster"].
 
 
 .A proposito di questa attività
 Ripetere questa procedura su ciascuno switch IP nella configurazione MetroCluster IP (nuova installazione) o sullo switch sostitutivo (sostituzione dello switch).
+
+
+NOTE: Devi aggiornare gli switch nel seguente ordine: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2. Se la tua procedura richiede di spostare i cluster LIF, devi ripetere i passaggi per spostare i cluster LIF sul secondo fabric (Switch_A_2, Switch_B_2) dopo aver configurato gli switch nel primo fabric (Switch_A_1, Switch_B_1). Consulta link:task_install_and_cable_the_mcc_components.html["Scopri come configurare gli switch IP MetroCluster"].
 
 Se si utilizza un adattatore QSFP-SFP+, potrebbe essere necessario configurare la porta ISL in modalità di velocità nativa invece che in modalità di velocità breakout. Per determinare la modalità di velocità della porta ISL, consultare la documentazione fornita con lo switch.
 
@@ -405,6 +411,81 @@ cumulus@IP_switch_A_1:mgmt:~$
 +
 
 NOTE: Quando si imposta l'opzione DAC per più porte dello switch, è necessario riavviare lo switch una sola volta.
+
+. Verifica che il ripristino automatico sia abilitato per le LIF del cluster:
++
+`network interface show -vserver Cluster -fields auto-revert`
+
++
+
+CAUTION: Devi assicurarti che il ripristino automatico sia abilitato per le LIF del cluster.
+
+. Se la funzione di ripristino automatico non è abilitata, modifica tutti i LIF del cluster per abilitarla:
++
+
+NOTE: Se stai eseguendo questi passaggi come parte di un'altra procedura, ad esempio la sostituzione o l'aggiornamento di uno switch, potresti aver disabilitato il ripristino automatico come parte dei passaggi per link:switch-move-cluster-lifs.html["Sposta i LIF del cluster"].
+
++
+.. Riattiva il ripristino automatico:
++
+`network interface modify -vserver Cluster -lif * -auto-revert true`
+
++
+[listing]
+----
+cluster_A::*> network interface modify -vserver Cluster -lif * -auto-revert true
+
+Warning: Changes to a cluster LIF can affect the health of the Cluster. Are you
+         sure you want to continue? {y|n}: y
+4 entries were modified.
+
+cluster_A::*>
+----
+.. Ripristina tutti i LIF del cluster che attualmente non si trovano sulle loro porte home alle loro porte home:
++
+`network interface revert -vserver Cluster -lif *`
+
++
+Attendi qualche minuto affinché i LIF tornino alla loro porta home:
+
+.. Conferma che tutti i LIF siano sulle rispettive porte home:
++
+[listing]
+----
+cluster_A::*> network interface show -role cluster
+            Logical        Status     Network            Current       Current Is
+Vserver     Interface      Admin/Oper Address/Mask       Node          Port    Home
+----------- -------------- ---------- ------------------ ------------- ------- ----
+Cluster
+            node_A_1_clus1 up/up      192.168.204.88/18  node_A_1      e4a     true
+            node_A_1_clus2 up/up      192.168.204.93/18  node_A_1      e4b     true
+            node_A_2_clus1 up/up      192.168.204.96/18  node_A_2      e4a     true
+            node_A_2_clus2 up/up      192.168.204.97/18  node_A_2      e4b     true
+4 entries were displayed.
+----
+.. Verifica lo stato dei nodi MetroCluster:
++
+`metrocluster node show`
+
++
+[listing]
+----
+cluster_A::*> metrocluster node show
+
+DR                               Configuration  DR
+Group Cluster Node               State          Mirroring Mode
+----- ------- ------------------ -------------- --------- --------------------
+1     cluster_A
+              node_A_1           configured     enabled   normal
+              node_A_2           configured     enabled   normal
+      cluster_B
+              node_B_1           configured     enabled   normal
+              node_B_2           configured     enabled   normal
+4 entries were displayed.
+
+cluster_A::*>
+----
+
 
 
 

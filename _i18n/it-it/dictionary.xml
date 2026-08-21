@@ -1054,8 +1054,6 @@
   <block id="7882a4b556b6996eaf604413a9e602d9" category="inline-xref">Fase 4</block>
   <block id="081cd064d2071e8aa77edcf5d45444be" category="paragraph">Se si stanno riutilizzando gli switch esistenti, passare a. <block ref="046a26a191748a2899dce4a2c37c0cb7" category="inline-xref-macro-rx"></block>.</block>
   <block id="3d498d8c3038973579898c766829437a" category="admonition">Se si stanno aggiornando o eseguendo il downgrade degli switch, è necessario configurare tutti gli switch della rete.</block>
-  <block id="0c0a905fe7b3d34fc7c66142e87fa36d" category="inline-link-macro">Installazione e configurazione di MetroCluster IP.</block>
-  <block id="bd411d4fdabe28e7276d566979ec2b21" category="paragraph">Seguire le istruzioni della sezione _Configurazione degli switch IP_ in <block ref="6ca94d3c62e2aa037b337bfb7e2a3c37" category="inline-link-macro-rx"></block></block>
   <block id="e569faada464fba9f3dbbdbda211c148" category="paragraph">Assicurarsi di applicare il file RCF corretto per lo switch _A_1, _A_2, _B_1 o _B_2. Se il nuovo switch è lo stesso del vecchio switch, è necessario applicare lo stesso file RCF.</block>
   <block id="21d70434879bc17385bedbe3b2231480" category="paragraph">Se si esegue l'aggiornamento o il downgrade di uno switch, applicare il file RCF più recente supportato per il nuovo switch.</block>
   <block id="140f85d0d849f4cdeb15f3576a478d27" category="list-text">Eseguire il comando port show per visualizzare le informazioni relative alle porte di rete:</block>
@@ -1081,7 +1079,6 @@
   <block id="56ba5c8d245e7af9f26245ccc8eddba9" category="inline-link-macro">Aggiornare i file RCF sugli switch IP MetroCluster</block>
   <block id="45cb34f2cec27064a29ed6e3a54a294f" category="list-text"><block ref="45cb34f2cec27064a29ed6e3a54a294f" category="inline-link-macro-rx"></block></block>
   <block id="3a14a65fbfc927e7fc3c51dcb8d932f8" category="list-text">Collegare gli switch.</block>
-  <block id="e864e1a0a83c248ec6705eecbb75a2e4" category="paragraph">Seguire la procedura descritta nella sezione _collegamento degli switch IP_ di <block ref="69c250b2ff0cdf92dd9f1322bce627cf" category="inline-link-macro-rx"></block>.</block>
   <block id="abba6801f76a30e62f42a339319d8046" category="paragraph">Collegare gli switch nel seguente ordine (se necessario):</block>
   <block id="eed332b6efe7c74f805fd4d57a6089fa" category="list-text">Collegare gli ISL al sito remoto.</block>
   <block id="c78a73a52795719f0a6c0e4e534be9ef" category="list-text">Collegare le interfacce IP di MetroCluster.</block>
@@ -1093,10 +1090,7 @@
   <block id="10fb2fd01be021da5cbd6629a96e24a6" category="list-text">Se le interfacce del cluster locale sono *non* collegate a uno switch:</block>
   <block id="446e9d64184ff722494a9a706bbd9d06" category="inline-link-macro">Migrare a un ambiente cluster NetApp con switch</block>
   <block id="39ef49ece238860759e8870c2160120a" category="list-text">Accendere lo switch o gli switch.</block>
-  <block id="a2ff4a69c8e810edbb5274ee75363ce0" category="paragraph">Se il nuovo switch è lo stesso, accendere il nuovo switch. Se si stanno aggiornando o eseguendo il downgrade degli switch, accendere entrambi gli switch. La configurazione può funzionare con due switch diversi in ogni sito fino all'aggiornamento della seconda rete.</block>
   <block id="ef28ede8698d6b9355079c76d077c08d" category="list-text">Verificare che la configurazione di MetroCluster sia corretta ripetendo la configurazione <block ref="78909af09fbcfe8c1bea7d5cc8b7674c" category="inline-xref-macro-rx"></block>.</block>
-  <block id="4d7ea7c5860513bb0b675638d55fcd77" category="paragraph">Se si aggiornano o si esegue il downgrade degli switch nella prima rete, potrebbero essere visualizzati alcuni avvisi relativi al clustering locale.</block>
-  <block id="c997b3e19c99644bd488baf3bfa8890d" category="admonition">Se si esegue l'aggiornamento o il downgrade delle reti, ripetere tutti i passaggi per la seconda rete.</block>
   <block id="15bac38a5276c64284cc172e6de7c1f3" category="list-text">In alternativa, spostare gli shelf NS224.</block>
   <block id="13c9917203c8c2e988a75ac2cf246dcd" category="paragraph">Se si sta riconfigurando una configurazione IP MetroCluster che non collega gli shelf NS224 agli switch IP MetroCluster, utilizzare la procedura appropriata per aggiungere o spostare gli shelf NS224:</block>
   <block id="a6c32053e88f456cb0f33bc2215c1e48" category="list-text"><block ref="a6c32053e88f456cb0f33bc2215c1e48" category="inline-link-macro-rx"></block></block>
@@ -1624,14 +1618,8 @@
   <block id="44d9da525f678322921a73864bd0b924" category="paragraph">A partire dalla versione 1.4a di RcfFileGenerator, è disponibile una nuova opzione per modificare (aggiornare, eseguire il downgrade o sostituire) la configurazione dello switch sugli switch IP Cisco senza eseguire una "cancellazione in scrittura".</block>
   <block id="0d98f6fd87f88cd68844ee1450081b43" category="paragraph">È possibile utilizzare questo metodo se la configurazione soddisfa i seguenti requisiti:</block>
   <block id="cf5d82da1dbb504eeff51105d1c22631" category="list-text">Viene applicata la configurazione RCF standard.</block>
-  <block id="6b20882c651017ff72189d2d3ffa3c80" category="list-text">Il<block ref="c52b4d12f68853a25c52576697c6b2b5" category="inline-link-rx"></block> Deve essere in grado di creare lo stesso file RCF applicato, con la stessa versione e configurazione (piattaforme, VLAN).</block>
-  <block id="c37890f623a8fcecb93e9309d3462a5a" category="list-text">Il file RCF applicato non è stato fornito da NetApp per una configurazione speciale.</block>
-  <block id="3ff3eb13919d98b8bc5b485dcf074e8a" category="list-text">Il file RCF non è stato modificato prima dell'applicazione.</block>
-  <block id="22bfd0bc1ef7b5ec6b0c3d09a25173dd" category="list-text">Prima di applicare il file RCF corrente, sono state seguite le procedure per ripristinare le impostazioni predefinite dello switch.</block>
   <block id="bdda45d6734a620758197fdb8292141f" category="list-text">Non sono state apportate modifiche alla configurazione dello switch (porta) dopo l'applicazione dell'RCF.</block>
-  <block id="7db0739314c77bc294505bdbb23e67b7" category="paragraph">Se non si soddisfano questi requisiti, non è possibile utilizzare i CleanUpFiles creati durante la generazione dei file RCF. Tuttavia, è possibile sfruttare la funzione per creare file CleanUpFiles generici -- la pulitura che utilizza questo metodo deriva dall'output di<block ref="d064a73c32d00bf384204782a696a298" prefix=" " category="inline-code"></block> ed è la best practice.</block>
   <block id="0bab44e07fec8808eebb4c9baedcc312" category="admonition">È necessario aggiornare gli switch nel seguente ordine: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2. In alternativa, è possibile aggiornare gli switch Switch_A_1 e Switch_B_1 contemporaneamente, seguiti dagli switch Switch_A_2 e Switch_B_2.</block>
-  <block id="0e0fe23e527e37b417182290ff6ed374" category="list-text">Determinare la versione corrente del file RCF e le porte e le VLAN utilizzate:<block ref="9b0b071cbeedb9bb40e134702701197f" prefix=" " category="inline-code"></block></block>
   <block id="e020d7382ce2a21b56ea6460a45b49c2" category="admonition">È necessario ottenere queste informazioni da tutti e quattro gli switch e completare la seguente tabella di informazioni.</block>
   <block id="2b6ad2a040294d5c6d9cd85338614383" category="paragraph">Da questo output, è necessario raccogliere le informazioni mostrate nelle due tabelle seguenti.</block>
   <block id="f144e7b7cc102698f980f9982e2a5e1d" category="cell">Informazioni generiche</block>
@@ -1662,15 +1650,8 @@
   <block id="140f6969d5213fd0ece03148e62e461e" category="cell">159</block>
   <block id="c0e190d8267e36708f955d7ab048990d" category="cell">219</block>
   <block id="cfa0860e83a4c3a763a7e62d825349f7" category="cell">259</block>
-  <block id="92b3853ab8f28c919e230db814cc7d3c" category="list-text">[[Create-RCF-Files-and-CleanUpFiles-or-create-generic-CleanUpFiles]] Crea i file RCF e CleanUpFiles oppure crea file generici per la configurazione corrente.</block>
   <block id="8f1cf5ff45cd4e25f9add94959779152" category="paragraph">Se la configurazione soddisfa i requisiti indicati nei prerequisiti, selezionare *opzione 1*. Se la configurazione *non* soddisfa i requisiti indicati nei prerequisiti, selezionare *opzione 2*.</block>
-  <block id="08593dc75ce732119b98a7568c2bf0f8" category="open-title">Opzione 1: Creare i file RCF e CleanUpFiles</block>
   <block id="257583b315f4448eaa8b40d0996d314d" category="paragraph">Utilizzare questa procedura se la configurazione soddisfa i requisiti.</block>
-  <block id="5c4f1865e4bc1d73184e237f9959c388" category="list-text">Utilizzare RcfFileGenerator 1.4a (o versione successiva) per creare i file RCF con le informazioni recuperate nel passaggio 1. La nuova versione di RcfFileGenerator crea un set aggiuntivo di CleanUpFiles che è possibile utilizzare per ripristinare alcune configurazioni e preparare lo switch ad applicare una nuova configurazione RCF.</block>
-  <block id="65f306707f97b0e6528c632443da6ffa" category="list-text">Confrontare il motd del banner con i file RCF attualmente applicati. I tipi di piattaforma, il tipo di switch, la porta e l'utilizzo della VLAN devono essere identici.</block>
-  <block id="eeca5f39015a896c3fd153b273497470" category="admonition">È necessario utilizzare CleanUpFiles della stessa versione del file RCF e per la stessa configurazione. L'utilizzo di CleanUpFile non funziona e potrebbe richiedere un ripristino completo dello switch.</block>
-  <block id="f7f6e369dd85b855e692642fc45404d1" category="admonition">La versione di ONTAP per la quale viene creato il file RCF non è rilevante. È importante solo la versione del file RCF.</block>
-  <block id="5ac0010e09da0a19568a51f509b47c9e" category="admonition">Il file RCF (anche se è della stessa versione) potrebbe elencare un numero inferiore o superiore di piattaforme. Assicurarsi che la piattaforma sia presente nell'elenco.</block>
   <block id="b801f2818024b60718ab5b68f7b2eb23" category="open-title">Opzione 2: Creazione di file CleanUpFiles generici</block>
   <block id="4863f68e17407624559d4ea8f5de6e15" category="paragraph">Utilizzare questa procedura se la configurazione *non* soddisfa tutti i requisiti.</block>
   <block id="fb1067b2548231b6038213796f92b520" category="list-text">Recuperare l'output di<block ref="d064a73c32d00bf384204782a696a298" prefix=" " category="inline-code"></block> da ogni switch.</block>
@@ -1680,17 +1661,8 @@
   <block id="3dcf0272d83a4c69033ee60eb75d9580" category="list-text">Copiare l'output dalla finestra inferiore in un file di testo (questo file è CleanUpFile).</block>
   <block id="03486ffd0acf93e60ea6875d70823cbf" category="list-text">Ripetere i passaggi c, d ed e per tutti gli switch della configurazione.</block>
   <block id="250543158aeade1deea5f13bbe9c80b5" category="paragraph">Al termine di questa procedura, si dovrebbero avere quattro file di testo, uno per ogni switch. È possibile utilizzare questi file nello stesso modo dei CleanUpFiles che è possibile creare utilizzando l'opzione 1.</block>
-  <block id="222b8c1d4cb1f6af18d4f87ae8a60226" category="list-text">[[Create-the-new-RCF-Files-for-the-new-Configuration]] Crea i "nuovi" file RCF per la nuova configurazione. Creare questi file nello stesso modo in cui sono stati creati nel passaggio precedente, ad eccezione della scelta della versione del file ONTAP e RCF corrispondente.</block>
-  <block id="a7d33b18445fe3decdb0f90d8636fbc1" category="paragraph">Dopo aver completato questo passaggio, si dovrebbero avere due set di file RCF, ciascuno costituito da dodici file.</block>
   <block id="6999307e181dd9c4d01a65b848b47fd3" category="list-text">Scaricare i file sul bootflash.</block>
-  <block id="6b3a86257ee5d114600528fa7f5c7bf4" category="inline-xref">Creare i file RCF e CleanUpFiles oppure creare file CleanUpFiles generici per la configurazione corrente</block>
-  <block id="0f23428de5fb7b85f84bc0371d73292e" category="list-text">Scaricare i CleanUpFiles creati in <block ref="c8340163884f51bb133b6171f43e6a09" category="inline-xref-macro-rx"></block></block>
-  <block id="72f2778a0cd9028b2b314aa743b0dedb" category="admonition">Questo file CleanUpFile si applica al file RCF corrente e *NON* al nuovo RCF a cui si desidera eseguire l'aggiornamento.</block>
   <block id="1c4d6db343dcde2655f5a2b6fb6a4fc1" category="paragraph">Esempio di CleanUpFile per Switch-A1:<block ref="1fc9725ed435f4fed09eb89487a1acab" prefix=" " category="inline-code"></block></block>
-  <block id="63a80dfd5cc3c6944330a9e459d8284b" category="inline-xref">Creare i "nuovi" file RCF per la nuova configurazione.</block>
-  <block id="c3f65a7773b44ccd20e3e511f5993d75" category="list-text">Scarica i "nuovi" file RCF creati in <block ref="59c54752a2fb487390ef8f9f21a2c752" category="inline-xref-macro-rx"></block></block>
-  <block id="17e0fefcaf2813560ada5ff7d65a8d95" category="paragraph">Esempio di file RCF per Switch-A1:<block ref="fcb7173e7a2e786c277b7ad6470af002" prefix=" " category="inline-code"></block></block>
-  <block id="9bfdc1d8656a6a994323ae166f7f7201" category="list-text">Scaricare i CleanUpFiles creati in <block ref="59c54752a2fb487390ef8f9f21a2c752" category="inline-xref-macro-rx"></block> Questo passaggio è facoltativo: È possibile utilizzare il file in futuro per aggiornare la configurazione dello switch. Corrisponde alla configurazione attualmente applicata.</block>
   <block id="4dfd3caa3db27470042b1db1ab3290bd" category="paragraph">Esempio di CleanUpFile per Switch-A1:<block ref="37baca0a0e7be54c34c22300bed7e052" prefix=" " category="inline-code"></block></block>
   <block id="e22c8d95bd31d52b85280c2595f839cf" category="admonition">Utilizzare CleanUpFile per la versione RCF corretta (corrispondente). Se si utilizza un CleanUpFile per una versione RCF diversa o per una configurazione diversa, la pulizia della configurazione potrebbe non funzionare correttamente.</block>
   <block id="432b7619f02e011863c5b9e1c9903161" category="paragraph">Il seguente esempio copia i tre file nella flash di avvio:</block>
@@ -1709,9 +1681,6 @@
   <block id="319961110e1d1f6c900b9f842e20c81a" category="list-text">Nessuna policy di servizio configurata</block>
   <block id="00f4ac9296724f6455056845c09f6cea" category="list-text">Nessun profilo porta configurato</block>
   <block id="459722fc0d9b873b0459e6cc0213fe45" category="list-text">Tutte le interfacce Ethernet (ad eccezione di mgmt0 che non devono mostrare alcuna configurazione e deve essere configurata solo la VLAN 1).</block>
-  <block id="a7c1dc82620aa47d13a5325a92e48b8b" category="paragraph">Se uno degli elementi sopra indicati è configurato, potrebbe non essere possibile applicare una nuova configurazione del file RCF. Tuttavia, è possibile tornare alla configurazione precedente ricaricando lo switch *senza* salvare la configurazione in esecuzione nella configurazione di avvio. Lo switch verrà configurato in precedenza.</block>
-  <block id="b96e894aca032efb6ce18c3fee836f2e" category="list-text">Applicare il file RCF e verificare che le porte siano in linea.</block>
-  <block id="57eec47f7c1d3f7c578a164a838dcb88" category="list-text">Applicare i file RCF.</block>
   <block id="94f2f59cf614fa38bf778db2f227f97f" category="list-text">Una volta applicata la configurazione, verificare che il cluster e le porte MetroCluster siano in linea con uno dei seguenti comandi:<block ref="9bacb249b0368cefba275373cd07ba98" prefix=" " category="inline-code"></block>,<block ref="cdf610401d84a31ec0b35a9530629e42" prefix=" " category="inline-code"></block>, o.<block ref="3820d68048e47b324f0599909ddc9e1f" prefix=" " category="inline-code"></block></block>
   <block id="36654f0d51aef3cf2ff1ad8320086412" category="admonition">Se è stata modificata la VLAN per il cluster locale e si è aggiornato il primo switch del sito, il monitoraggio dello stato del cluster potrebbe non riportare lo stato come "integro" perché le VLAN delle configurazioni precedenti e nuove non corrispondono. Dopo l'aggiornamento del secondo switch, lo stato dovrebbe tornare a essere integro.</block>
   <block id="d83d3a40a56d46ffaf1367b944bbd493" category="paragraph">Se la configurazione non viene applicata correttamente o non si desidera mantenere la configurazione, è possibile tornare alla configurazione precedente ricaricando lo switch *senza* salvare la configurazione in esecuzione nella configurazione di avvio. Lo switch verrà configurato in precedenza.</block>
@@ -2077,7 +2046,6 @@
   <block id="ab09caec1407f77495e6c20853fcfd75" category="list-text">Controllare lo stato della configurazione.</block>
   <block id="a755a72f514254c41e2fe4747c117fd7" category="list-text">Installare il software sul primo switch.</block>
   <block id="8385ca59dee772c25d8029fd40151e4e" category="admonition">È necessario installare il software dello switch sugli switch nel seguente ordine: Switch_A_1, switch_B_1, switch_A_2, switch_B_2.</block>
-  <block id="220d6c1bfe741784a72c631856e0b298" category="list-text">Ripetere il passaggio precedente per ciascuno degli switch.</block>
   <block id="b51ae922bb862c3daed086b031b039a1" category="summary">Per aggiornare o eseguire il downgrade del firmware su uno switch FC Cisco, è necessario utilizzare i comandi specifici di Cisco per disattivare lo switch, eseguire e verificare l'aggiornamento, riavviare e riabilitare lo switch.</block>
   <block id="7dd5dd10d7f07bdbe6967e7acfbcce32" category="doc">Aggiornamento o downgrade del firmware su uno switch FC Cisco</block>
   <block id="37152fbf6505ff7869875fddafc189ff" category="paragraph">Il fabric dello switch viene disattivato durante l'aggiornamento o il downgrade del firmware e la configurazione MetroCluster si basa sul secondo fabric per continuare a funzionare.</block>
@@ -3451,7 +3419,6 @@
   <block id="bc4f214d80008718500b069cac10f107" category="list-text">Se necessario, aggiornare il firmware dello switch a una versione supportata.</block>
   <block id="0031dbc1afe1c2ec91d4c02136da5eb6" category="list-text">Utilizzare lo strumento generatore RCF per creare il file RCF in base al fornitore dello switch e ai modelli di piattaforma, quindi aggiornare gli switch con il file.</block>
   <block id="4ab496c462bc9a729fe703221c683545" category="paragraph"><block ref="4ab496c462bc9a729fe703221c683545" category="inline-link-macro-rx"></block></block>
-  <block id="11a5f8de5dc8fd3561b2b849e4277433" category="inline-link-macro">Download e installazione dei file Cisco IP RCF</block>
   <block id="d8fc98725f26a2d12fba73cce936f3a8" category="doc">Configurare MetroCluster per la transizione</block>
   <block id="cff1f1e3d1bd4979f788b1439a65b093" category="paragraph">Prima di eseguire la manutenzione, devi inviare un messaggio AutoSupport per informare il supporto tecnico NetApp che la manutenzione è in corso. Informare il supporto tecnico che la manutenzione è in corso impedisce loro di aprire un caso partendo dal presupposto che si sia verificata un'interruzione.</block>
   <block id="eed44caddb3285306022006c75d33680" category="list-text">Per impedire la generazione automatica del caso di supporto, inviare un messaggio AutoSupport per indicare che la manutenzione è in corso:</block>
@@ -4560,7 +4527,6 @@
   <block id="b349d9011e6c4e1cf8a591559716772a" category="paragraph">L'operazione di switchback è completa quando l'output visualizza normale:</block>
   <block id="4e744856add58c0bc300801dfd73d288" category="paragraph">Se il completamento di uno switchback richiede molto tempo, è possibile verificare lo stato delle linee di base in corso utilizzando<block ref="32762e78cfa49b07513c4f60c2b0a741" prefix=" " category="inline-code"></block> comando. Questo comando si trova al livello di privilegio avanzato.</block>
   <block id="bebab338ce208a8365444e4ebe4efe11" category="list-text">Ripristinare le configurazioni SnapMirror o SnapVault.</block>
-  <block id="6414d473dfb2c6598f8118312a0cc177" category="paragraph">In ONTAP 8.3, è necessario ristabilire manualmente una configurazione di SnapMirror persa dopo un'operazione di switchback MetroCluster. In ONTAP 9.0 e versioni successive, la relazione viene ristabilita automaticamente.</block>
   <block id="7824b634d408d2d802d23fc3564aeacf" category="summary">È possibile utilizzare ONTAP MetroCluster Commands e Active IQ Unified Manager (precedentemente noto come Gestore unificato di OnCommand) per monitorare lo stato di salute di una vasta gamma di componenti software e lo stato delle operazioni MetroCluster.</block>
   <block id="c01a785ae5fde9a2ca584e4698cbfda1" category="doc">Monitoraggio della configurazione di MetroCluster</block>
   <block id="1a1d676eb137d78d5e010f28f7acfd98" category="section-title">Verifica della configurazione MetroCluster</block>
@@ -6690,13 +6656,11 @@
   <block id="8d05d7bd3136c1c3d27ce612d1642b55" category="paragraph">Il processo di switchover, oltre a fornire operazioni senza interruzioni durante i test e la manutenzione, consente di eseguire il ripristino da un guasto del sito con un singolo comando.</block>
   <block id="2054a94796fbdefe9b1b24a74c1e246e" category="list-text">Almeno uno dei nodi del sito sopravvissuti deve essere attivo e in esecuzione prima di eseguire lo switchover.</block>
   <block id="46244e26ed027de3f7dac5055551ea67" category="list-text">Prima di eseguire un'operazione di switchback, è necessario completare tutte le modifiche di configurazione precedenti.</block>
-  <block id="ca776b7a0f214042bab6636ff7235436" category="admonition">Le configurazioni SnapMirror e SnapVault vengono eliminate automaticamente.</block>
   <block id="6fe56a61eacaba0f58f729f4dff36b33" category="list-text">Eseguire lo switchover eseguendo il seguente comando nel sito sopravvissuto:</block>
   <block id="9b6012ae921487ba43de70a4b89eea50" category="admonition">Il completamento dell'operazione può richiedere alcuni minuti. È possibile verificare l'avanzamento utilizzando<block ref="0d47d8f5f26b2a71aacf597494f0adbb" prefix=" " category="inline-code"></block> comando.</block>
   <block id="7e2e7baa90ed02c71ec0c1aff8c2f52f" category="list-text">Risposta<block ref="415290769594460e2e485922904f345d" prefix=" " category="inline-code"></block> quando viene richiesto di continuare con lo switchover.</block>
   <block id="732b254ce7502fe430a0cca5faf72038" category="list-text">Verificare che lo switchover sia stato completato correttamente eseguendo il<block ref="0d47d8f5f26b2a71aacf597494f0adbb" prefix=" " category="inline-code"></block> comando.</block>
   <block id="37a919d754d5135e54d0f9a3243827d8" category="paragraph">Se lo switchover è vetoed, è possibile emettere nuovamente il<block ref="f21bdd44d13cd6a6cd9df751ce913b94" prefix=" " category="inline-code"></block> con il<block ref="5b8353fafaa1c451a58b0b87dede3fc0" prefix=" " category="inline-code"></block> opzione. Se si utilizza questo parametro opzionale, il sistema sovrascrive qualsiasi soft veto che impediva lo switchover.</block>
-  <block id="8e2df6a076ab8c2df47dff186e779dab" category="paragraph">Le relazioni di SnapMirror devono essere ristabilita dopo lo switchover.</block>
   <block id="3f98066376e4f19519c40bfdf06de035" category="paragraph">Quando si esegue<block ref="cebf74479b2272b4850814937a5307b5" prefix=" " category="inline-code"></block> Comando dopo uno switchover MetroCluster, lo stato di plex0 dell'aggregato root commutato è indeterminato e viene visualizzato come failed (non riuscito). Durante questo periodo, la root commutata non viene aggiornata. Lo stato effettivo di questo plex può essere determinato solo dopo la fase di riparazione MetroCluster.</block>
   <block id="26ae5bd346260cedabbff8836c7dbe90" category="paragraph">Impostazione di<block ref="220a09317a394db7460a4ecdbff414b1" prefix=" " category="inline-code"></block> il parametro richiede privilegi di livello avanzato.</block>
   <block id="435c84e42126f3721e7aa0fe94d2e1a5" category="list-text">Ripristinare il volume utilizzando<block ref="9f9fc58b577820fbcd41ff15739ed6f0" prefix=" " category="inline-code"></block> con il<block ref="220a09317a394db7460a4ecdbff414b1" prefix=" " category="inline-code"></block> parametro impostato su false.</block>
@@ -7503,7 +7467,6 @@
   <block id="96d44db22d3fd08538feb9a1879238ff" category="paragraph">Questa operazione richiede un software per il trasferimento dei file, ad esempio FTP, Trivial file Transfer Protocol (TFTP), SFTP o Secure Copy Protocol (SCP), per copiare i file sugli switch.</block>
   <block id="8aeaab0b1ea6e8bd8d15f02b7e031b5f" category="paragraph">Questi passaggi devono essere ripetuti su ciascuno switch FC Cisco nella configurazione MetroCluster Fabric.</block>
   <block id="334bb3a6374f5b9196a0bbf69255c7da" category="paragraph">È necessario utilizzare la versione del software dello switch supportata.</block>
-  <block id="d217c29c9e353e853ad6e00612eccbf6" category="paragraph">Sono disponibili quattro file RCF, uno per ciascuno dei quattro switch nella configurazione MetroCluster Fabric. È necessario utilizzare i file RCF corretti per il modello di switch in uso.</block>
   <block id="bbc155fb2b111bf61c4f5ff892915e6b" category="cell">Switch</block>
   <block id="ce03f8603301ea51b9ff5d168605b3a2" category="cell">File RCF</block>
   <block id="1aece110a2933cbd949f7e3f9cd6c03f" category="paragraph"><block ref="334910bbc7198eea40a5718a09788dc1" prefix="" category="inline-code"></block></block>
@@ -7512,13 +7475,9 @@
   <block id="a323e2cf1a28908546cf8fa814adbd2a" category="paragraph"><block ref="fed227599b689943135c765d47b6045a" prefix="" category="inline-code"></block></block>
   <block id="c25ab44b50d7096a2ad90bccd3cd2c9b" category="admonition">Le uscite mostrate si riferiscono agli switch IP Cisco; tuttavia, questi passaggi sono applicabili anche agli switch FC Cisco.</block>
   <block id="12e8011a69d75e50d0c2e6c31c958c7d" category="inline-link">Pagina di download di MetroCluster RCF</block>
-  <block id="6c3c4e2f6a6fa289f415cc08715f355e" category="list-text">Scaricare i file Cisco FC RCF da<block ref="47f7dd3b2352c1e61640eee11f081c5a" category="inline-link-rx"></block>.</block>
-  <block id="19a6d9ed6294004d8d6991040db238ff" category="list-text">Copiare i file RCF sugli switch.</block>
   <block id="f1902b8db7b7d15899c7c9bbe42f5589" category="list-text">Copiare i file RCF sul primo switch:</block>
   <block id="e9d934746596f9e64a832bbfa5698daa" category="paragraph"><block ref="b6d3769d6883ebd42265ad0df78d5b56" prefix="" category="inline-code"></block></block>
-  <block id="4d5890e7ea6dcdaf056d3131f9a1f60f" category="paragraph">In questo esempio, il<block ref="334910bbc7198eea40a5718a09788dc1" prefix=" " category="inline-code"></block> Il file RCF viene copiato dal server SFTP all'indirizzo<block ref="f8a554bd262c1f2aca6545aab6fbbd47" prefix=" " category="inline-code"></block> al bootflash locale. Utilizzare l'indirizzo IP del server TFTP/SFTP e il nome file del file RCF da installare.</block>
   <block id="4e6235f5fa957d18f111326f98759ca4" category="list-text">Ripetere il passaggio precedente per ciascuno degli altri tre switch, assicurandosi di copiare il file RCF corrispondente sullo switch corrispondente.</block>
-  <block id="f86146750d5caee0dd0ee6f541390137" category="list-text">Verificare su ogni switch che il file RCF sia presente in ogni switch<block ref="67b5ed08894c07eba0af4a7a7247711e" prefix=" " category="inline-code"></block> directory:</block>
   <block id="c501e60a6e35ce752f0f81fbb7711249" category="paragraph"><block ref="e9f058f9eb93e2ccc12f103620639e90" prefix="" category="inline-code"></block></block>
   <block id="08b3f40c7d81e458f31352fcceb58a09" category="paragraph">Il seguente esempio mostra che i file sono presenti su IP_switch_A_1:</block>
   <block id="6eba85a8051babcfbe6e81b8247fda1f" category="list-text">Copiare il file RCF corrispondente dalla flash di avvio locale alla configurazione in esecuzione su ogni switch:</block>
@@ -7943,12 +7902,7 @@
   <block id="ec25303fa6412309bf87b276dbbd7a8c" category="paragraph">Ogni fabric di switch include i link inter-switch (ISL) che collegano i siti. I dati vengono replicati da un sito all'altro attraverso l'ISL. Per la ridondanza, ciascun fabric dello switch deve trovarsi su percorsi fisici diversi.</block>
   <block id="26c467a24332bb8d92780a3eb059ce38" category="summary">È necessario scaricare il file di configurazione di riferimento (RCF) su ogni switch nella configurazione MetroCluster Fabric.</block>
   <block id="4fbbc0ce852ccef3a7adceb0f9bc2c27" category="doc">Download del file RCF dello switch FC Brocade</block>
-  <block id="b5909b79c9831ace5a37a88ecc8d8221" category="paragraph">È necessario scaricare il file di configurazione di riferimento (RCF) su ogni switch nella configurazione MetroCluster Fabric.</block>
-  <block id="d2bd72e53c2a5d47d1f0bb05a3b47e86" category="paragraph">Per utilizzare questi file RCF, il sistema deve eseguire ONTAP 9.1 o versione successiva ed è necessario utilizzare il layout delle porte per ONTAP 9.1 o versione successiva.</block>
-  <block id="842acf8263038e7278a435d288defafa" category="list-text">Fare riferimento alla tabella dei file RCF nella pagina di download di Brocade RCF e identificare il file RCF corretto per ogni switch nella configurazione.</block>
-  <block id="d7a31e24d4a31d091e030bcf962857a2" category="paragraph">I file RCF devono essere applicati agli switch corretti.</block>
   <block id="28a95a083b2cfe8b9ffb5bddf7064e7b" category="inline-link">Download di MetroCluster RCF</block>
-  <block id="827782113c613dee6a1aabc786e39335" category="list-text">Scaricare i file RCF per gli switch da<block ref="7a2a5b3ce34e84b17e1e6ffcc479aaa8" category="inline-link-rx"></block> pagina.</block>
   <block id="af833d07deb3fe26ff9462cdf18f37ab" category="paragraph">I file devono essere collocati in una posizione in cui possono essere trasferiti allo switch. È disponibile un file separato per ciascuno dei quattro switch che compongono il fabric a due switch.</block>
   <block id="6141173db52bd750748a18081d69700e" category="list-text">Ripetere questi passaggi su ogni switch nella configurazione.</block>
   <block id="a45eb6ab149dfb9c88ab3dcd2184e695" category="section-title">Linee guida generali per il cablaggio</block>
@@ -9029,7 +8983,6 @@
   <block id="efb8c1fbbf863af4171bcf90c577ed9e" category="list-text">Sullo switch Cisco 3232C, impostare le seguenti regioni TCAM:</block>
   <block id="778cd8c0308c5b50a6c5c457a4fba024" category="list-text">Dopo aver impostato le regioni TCAM, salvare la configurazione e ricaricare lo switch:</block>
   <block id="9907713d23e4a8ccaed056f63f830b76" category="paragraph"><block ref="e61fbe74fd6a784cc44f6dfa8008a8ad" prefix="" category="inline-code"></block></block>
-  <block id="ffe1f559bee6f65df8232945e7f1517d" category="section-title">Impostazione della correzione degli errori di inoltro per i sistemi che utilizzano la connettività a 25 Gbps</block>
   <block id="85b091192b5f7d8d84eccf6181fd6ae8" category="paragraph">Se il sistema è configurato utilizzando la connettività a 25 Gbps, è necessario impostare manualmente il parametro fec (Forward Error Correction) su Off dopo aver applicato il file RCF. Il file RCF non applica questa impostazione.</block>
   <block id="21b34813f1e8c3819fcd4c2d1a97dc87" category="paragraph">Le porte a 25 Gbps devono essere cablate prima di eseguire questa procedura.</block>
   <block id="de42a51018ae76cdec0d5104c4b44724" category="inline-link-macro">Assegnazioni delle porte della piattaforma per switch Cisco 3232C o Cisco 9336C</block>
@@ -10471,18 +10424,13 @@
   <block id="cac3d29269cf69756d4750034581575a" category="paragraph"><block ref="68488204f7ac9ea750fd772a1721f76d" prefix="" category="inline-code"></block></block>
   <block id="f13350a82ffb5e406781c64809e8f8a8" category="summary">È necessario applicare i file RCF per riconfigurare lo zoning in modo da ospitare i nuovi nodi.</block>
   <block id="5582507cb9f874f57ac6bf62db65d371" category="doc">È possibile riconfigurare e riconfigurare gli switch</block>
-  <block id="6647147ed73881ba6516c57ac1b5fe4a" category="paragraph">Se non è possibile utilizzare i file RCF per configurare gli switch, è necessario configurarli manualmente. Vedere:</block>
   <block id="e5303b615c196a6ae1c68873f1d05073" category="inline-link-macro">Configurare manualmente gli switch Brocade FC</block>
   <block id="71620bedc8491865816460c55b3cde98" category="list-text"><block ref="71620bedc8491865816460c55b3cde98" category="inline-link-macro-rx"></block></block>
   <block id="9ee7e057ce8f87d9c6d58a3ac45b4a14" category="inline-link-macro">Configurare manualmente gli switch Cisco FC</block>
   <block id="3a8190b24d904ae352e54f8a0a3df0bb" category="list-text"><block ref="3a8190b24d904ae352e54f8a0a3df0bb" category="inline-link-macro-rx"></block></block>
-  <block id="6a82c384f85f037d7996beaa2d1d7d15" category="list-text">Individuare i file RCF per la configurazione.</block>
-  <block id="c0b2ef0c7e8bedc314010fcbe929e544" category="paragraph">È necessario utilizzare i file RCF per una configurazione a otto nodi che corrisponda al modello di switch in uso.</block>
-  <block id="93db71f559f17fb1c146361893f3ff36" category="list-text">Applicare i file RCF seguendo le istruzioni riportate nella pagina di download, regolando le impostazioni ISL in base alle necessità.</block>
   <block id="b862528f72ea6d2ddcdf03d59e55fa27" category="list-text">Assicurarsi che la configurazione dello switch sia salvata.</block>
   <block id="9566c6febae9d51d50e73e64dbd10cfe" category="list-text">Riavviare gli switch FC.</block>
   <block id="cc421f36cbb2a622eb7463c75215237e" category="list-text">Collegare i bridge FC-SAS preesistenti e nuovi agli switch FC, utilizzando il layout di cablaggio creato in precedenza.</block>
-  <block id="61eb859904ba2d6f08ea80ad772e9aba" category="paragraph">L'utilizzo della porta dello switch FC deve corrispondere all'utilizzo di otto nodi MetroCluster descritto in <block ref="a9f150ef34b7953b6119f5ac779097fe" category="inline-link-macro-rx"></block> In modo da poter utilizzare i file di configurazione di riferimento (RCF).</block>
   <block id="6bea4e12f9fc7219e8f9f668a51bbd7e" category="list-text">Verificare che le porte siano in linea utilizzando il comando corretto per lo switch.</block>
   <block id="9735c41c5a405cd610d4fad10780f0e8" category="paragraph">switchshow</block>
   <block id="9bacb249b0368cefba275373cd07ba98" category="paragraph">mostra il brief dell'interfaccia</block>
@@ -10923,9 +10871,6 @@
   <block id="7c05cd1434f77b09211b33f0e3df8f7e" category="list-text">Eseguire tutte le operazioni descritte in<block ref="6f9da97248de99650a607f2ab8f8c4c5" category="inline-link-rx"></block>.</block>
   <block id="175bbe9b6bd074e923b41baad3944299" category="paragraph"><block ref="175bbe9b6bd074e923b41baad3944299" category="inline-link-macro-rx"></block></block>
   <block id="1af1c128bcb15febcfeae67428ab0606" category="paragraph">Potrebbe essere necessario aggiungere, rimuovere o modificare le porte ISL sugli switch IP Cisco. È possibile convertire porte ISL dedicate in porte ISL condivise o modificare la velocità delle porte ISL su uno switch IP Cisco.</block>
-  <block id="9ef8b8de2a46a8cdf8b96e3433081f97" category="admonition">Se si utilizza uno switch Cisco 9336C-FX2 in una configurazione condivisa che collega NS224 shelf, la modifica degli ISL potrebbe richiedere un nuovo file RCF. Non è necessario un nuovo file RCF se la velocità attuale e quella nuova dell'ISL è 40Gbps e 100Gbps. Tutte le altre modifiche alla velocità ISL richiedono un nuovo file RCF. Ad esempio, la modifica della velocità ISL da 40Gbps a 100Gbps non richiede un nuovo file RCF, ma la modifica della velocità ISL da 10Gbps a 40Gbps richiede un nuovo file RCF.</block>
-  <block id="e5a44346ea08417f9c1bb13c971ef4b4" category="inline-link-macro">Aggiornare i file RCF sugli switch IP MetroCluster.</block>
-  <block id="6780acd09b7544d9829b3c8c782e7228" category="admonition">Se si utilizzano gli switch Cisco 9336C-FX2 in una configurazione condivisa che collega gli shelf NS224 ed è necessario aggiornare il file RCF e applicare la nuova configurazione per le nuove porte ISL, seguire i passaggi da a. <block ref="06d2583ef923bd1ae27cd7aa8a48f582" category="inline-link-macro-rx"></block></block>
   <block id="4f8a3836e9b2b61340340f61f8a1d944" category="list-text">Verificare che gli ISL e i canali delle porte per gli ISL siano stabiliti tra entrambi gli switch:</block>
   <block id="f1ba48098d6a9078f5a1ba8e0141de5b" category="paragraph"><block ref="d975a431de1e74582bd6e6f677a19ad0" prefix="" category="inline-code"></block></block>
   <block id="61f7733093f25bb223a42607ca2406c1" category="list-text">È possibile utilizzare utenti in grado di elevare l'accesso root per installare e amministrare il software Tiebreaker.</block>
@@ -10938,7 +10883,6 @@
   <block id="37c5a21bd601c49050ac3301b684599c" category="list-text">Lo switch Cisco 9336C-FX2 è dotato di due tipi di storage di switch diversi con nomi diversi nell'RCF. Utilizzare la tabella seguente per determinare il tipo di storage Cisco 9336C-FX2 corretto per la propria configurazione:</block>
   <block id="df31753dd5a463d7868062b7d85b4e56" category="cell">Se si sta collegando il seguente dispositivo di archiviazione...</block>
   <block id="d78b539282fbd3ab71c056420e27d11d" category="cell">Scegliere il tipo di storage Cisco 9336C-FX2...</block>
-  <block id="b2e9c77dc19c02cc79d1cec1f3ee2fc0" category="cell">Banner/MOTD file RCF di esempio</block>
   <block id="4123b977475c9c4828f585782db5cb61" category="list-text">Shelf SAS collegati direttamente</block>
   <block id="e8ea5873a1121ec729327255bcb20d9a" category="list-text">Shelf NVMe connessi direttamente</block>
   <block id="415f7c0e4d1c31bd8bc9a1c226589d04" category="list-text">Shelf NVMe connessi a switch storage dedicati</block>
@@ -12046,7 +11990,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="f411a218519aacec5088cc5a3d23eb64" category="paragraph">Gli ID di sistema vecchi e nuovi sono stati identificati in <block ref="372daca62ea6308294fd70c00fcc8af2" category="inline-link-macro-rx"></block>.</block>
   <block id="04e334293a29a0fcdf98b56004e27edc" category="section-title">Conformità a MetroCluster rispetto agli switch validati NetApp</block>
   <block id="5c5c34d5e7843e9424f3ca2380ae18ea" category="list-text"><block ref="5c5c34d5e7843e9424f3ca2380ae18ea" category="inline-link-macro-rx"></block></block>
-  <block id="910d0f6661c3968f4e7402c808d31b3f" category="list-text"><block ref="910d0f6661c3968f4e7402c808d31b3f" category="inline-link-macro-rx"></block></block>
   <block id="740c0d0f6d37afa212fad2bd272a4212" category="list-text">Tiebreaker 1,6 supporta solo SNMPv3.</block>
   <block id="a98720fe58fe46f2a22c59d172b69fbf" category="list-text">Sebbene Tiebreaker 1,5 e 1,4 supportino SNMPv1 e SNMPv3, NetApp consiglia vivamente di configurare SNMPv3 per una sicurezza ottimale.</block>
   <block id="c93871f59c253b2d1ca21a1ce2a00ff8" category="paragraph">La<block ref="5ef546c28db0706808d8d451d5a71029" prefix=" " category="inline-code"></block> risposta del comando dipende dalla versione di tiebreaker in esecuzione.</block>
@@ -13004,10 +12947,8 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="6402d49dd52ac4a97e3a5b5df13a2b01" category="paragraph">Individuare la riga nell'output del comando che indica la versione RCF. Ad esempio, la seguente uscita da un interruttore Cisco indica che la versione RCF è "`v1,80'".</block>
   <block id="372302cd9a52d50f8bbec355aa5caad3" category="list-text">Per verificare quali file sono supportati per una specifica versione, switch e piattaforma ONTAP, utilizzare <block ref="3d323bfcd2e7c90d6e420b3bfd1a01ed" category="inline-link-macro-rx"></block>. Se è possibile generare l'RCF per la configurazione in uso o a cui si desidera eseguire l'aggiornamento, l'RCF è supportato.</block>
   <block id="5892dc73aeb0908038bb8e9380fb53c4" category="section-title">Aggiornare il firmware dello switch</block>
-  <block id="28abab10271202d2140cfed5d173dff5" category="paragraph">Potrebbe essere necessario aggiornare un file RCF (Reference Configuration file) su uno switch IP MetroCluster. Ad esempio, se la versione RCF in esecuzione sugli switch non è supportata dalla versione ONTAP, dalla versione firmware dello switch o da entrambe.</block>
   <block id="463c4e9c177d926f8a70723419e27185" category="inline-link-macro">Verificare che l'RCF sia supportato</block>
   <block id="31e4a45ff8bf040780bcaeea92eaf273" category="list-text">Prima di aggiornare l'RCF, <block ref="0cb16fc2594f35c2b9b081a93af72ead" category="inline-link-macro-rx"></block>.</block>
-  <block id="72d26e3e5a2756a67ae4a487db269cd2" category="list-text">Questa procedura interrompe il traffico sullo switch in cui viene aggiornato il file RCF. Il traffico riprende quando viene applicato il nuovo file RCF.</block>
   <block id="085e87b6ec813d01dd3f597186e26f1e" category="list-text">Se il sistema che si sta aggiornando utilizza *porte cluster/ha condivise*, verificare che le interfacce IP di MetroCluster utilizzino indirizzi IP supportati.</block>
   <block id="11f90eb1d0dccabe5ea84d5795fc2ef7" category="paragraph">Utilizza le seguenti informazioni per determinare se il nuovo sistema utilizza le porte ha/cluster condivise:</block>
   <block id="fb1ce5d087cc4c4bd39c43bc3af7058b" category="admonition">L'aggiornamento a qualsiasi sistema che utilizzi *porte cluster/ha condivise* non è supportato se le interfacce MetroCluster sono configurate con indirizzi IP 169.254.17.x o 169.254.18.x.</block>
@@ -13656,8 +13597,6 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="2fc694052b4d0c9fddb171c279d9ff41" category="section-title">Aggiungere ripiani di stoccaggio per aggregati non specchiati</block>
   <block id="340ee9c6b389308075f20882f44ee863" category="paragraph">Se si aggiungono ripiani e si desidera utilizzarli per aggregati non speculari in una configurazione IP MetroCluster , è necessario procedere come segue:</block>
   <block id="fb945b959f6754639fad6c6e9e9469b9" category="list-text">L'utente locale deve disporre dei privilegi di amministratore di rete.</block>
-  <block id="5ea27988b4071e332e850721389e951a" category="doc">Scegli la procedura corretta di configurazione dello switch IP MetroCluster</block>
-  <block id="b9b3d7865c01f9cccab728c6d2bb7296" category="paragraph">È necessario configurare gli switch IP per fornire connettività MetroCluster IP back-end. La procedura da seguire dipende dal fornitore dello switch.</block>
   <block id="528aafe8fc362d0088ddcc230e89b62a" category="doc">Come utilizzare le tabelle delle porte con più configurazioni IP MetroCluster</block>
   <block id="760419501f92fb637e39b91dbfd2ea18" category="summary">È necessario scegliere la procedura di installazione corretta in base al modo in cui i controller di archiviazione si collegano agli scaffali di archiviazione.</block>
   <block id="ef78e28e8b4e7855b7b5095e4cbd705a" category="paragraph">A partire da ONTAP 9.15.1, è possibile configurare la crittografia end-to-end sui sistemi supportati per crittografare il traffico back-end, ad esempio i dati di replicazione NVlog e di storage, tra i siti in una configurazione IP MetroCluster .</block>
@@ -14649,4 +14588,131 @@ L'esempio seguente mostra che si utilizza SCP per scaricare il file<block ref="5
   <block id="5a523817621c85574dfcbf0b11c07075" category="paragraph">Configura un nome utente SNMPv3 SNMPv3_USER sugli switch NVIDIA Cumulus con CL 5.4.0:</block>
   <block id="4451c276144ff12f4a59bad51c0a1181" category="open-title">NVIDIA - CL 5.11.0+</block>
   <block id="d1f08b7bd68bdc79984e047bc1939c5d" category="paragraph">Configura un nome utente SNMPv3 SNMPv3_USER sugli switch NVIDIA Cumulus con CLI 5.11.0 o versioni successive:</block>
+  <block id="5c70de9aa6fac7d71c4ddfb2d31ae25a" category="list-text">Prepara gli switch IP per l'applicazione dei nuovi file di configurazione di riferimento (RCF).</block>
+  <block id="cf638fa08203ce9c082e7eecde22e20f" category="paragraph">Devi scaricare il file di configurazione di riferimento (RCF) su ciascuno switch nella configurazione fabric MetroCluster.</block>
+  <block id="91cd9003fc7afacd92d0952d1578d48b" category="paragraph">Sono presenti quattro RCF, uno per ciascuno dei quattro switch nella configurazione fabric MetroCluster. Devi usare gli RCF corretti per il modello di switch che stai utilizzando.</block>
+  <block id="6dcb15f9fb489afb93f692b6b7755f84" category="cell">RCF</block>
+  <block id="2132fe352bf4bb487eaf6927cffd6982" category="list-text">Scarica i Cisco FC RCF da <block ref="47f7dd3b2352c1e61640eee11f081c5a" category="inline-link-rx"></block>.</block>
+  <block id="39313cc2f6093990d3dca3755297c44e" category="list-text">Copia i file RCF sugli switch.</block>
+  <block id="8ca2fa0cdf859df18fecce8122036812" category="list-text">Copia l'RCF sul primo switch:</block>
+  <block id="99eaec47ed0f56f87ba6c6f107b1d555" category="paragraph">In questo esempio, il <block ref="334910bbc7198eea40a5718a09788dc1" prefix=" " category="inline-code"></block>RCF viene copiato dal server SFTP al<block ref="f8a554bd262c1f2aca6545aab6fbbd47" prefix=" " category="inline-code"></block> bootflash locale. Devi usare l'indirizzo IP del tuo server TFTP/SFTP e il nome del file RCF che devi installare.</block>
+  <block id="2130b5577be1c5b0ecb66a86e0e62b98" category="list-text">Ripeti il passaggio precedente per ciascuno degli altri tre switch, assicurandoti di copiare il relativo RCF sullo switch corrispondente.</block>
+  <block id="9c2d39ef52a63a0bca259adc5598a991" category="list-text">Verifica su ogni switch che il file RCF sia presente nella directory <block ref="67b5ed08894c07eba0af4a7a7247711e" prefix=" " category="inline-code"></block> di ciascuno switch:</block>
+  <block id="31809c76013c1e869215736e65c76cff" category="list-text">Copia il file RCF corrispondente dalla memoria bootflash locale alla configurazione in esecuzione su ciascuno switch:</block>
+  <block id="9eca16f5df5b1dbd9bc66d21738825d6" category="list-text">Copia i file RCF dalla configurazione in esecuzione alla configurazione di avvio su ciascuno switch:</block>
+  <block id="29ecb75ab42ddd669cd0f6e92a58cc6b" category="paragraph">Per utilizzare questi RCF, il sistema deve eseguire ONTAP 9.1 o versioni successive e devi utilizzare la configurazione delle porte per ONTAP 9.1 o versioni successive.</block>
+  <block id="3503c9d859a9eb3fcbd234a3d5c9a363" category="list-text">Consulta la tabella RCF nella pagina di download di Brocade RCF e identifica il valore RCF corretto per ogni switch nella tua configurazione.</block>
+  <block id="4171a03473af7f6456c08cdeebe281de" category="paragraph">Gli RCF devono essere applicati agli switch corretti.</block>
+  <block id="02d4864774f054081d5b074fdab94cda" category="list-text">Scarica i file RCF per gli switch dalla pagina <block ref="7a2a5b3ce34e84b17e1e6ffcc479aaa8" category="inline-link-rx"></block>.</block>
+  <block id="5bed49e108466e37517b3a12ea075d7a" category="summary">Quando aggiorni il firmware dello switch o il file di configurazione di riferimento (RCF), sposti i LIF del cluster sullo switch partner per consentire operazioni del cluster senza interruzioni durante l'aggiornamento.</block>
+  <block id="9b2826e036ff82834f75a0e7a44282ed" category="doc">Sposta i LIF del cluster prima di una sostituzione dello switch IP MetroCluster, di una modifica dell'RCF o di un aggiornamento del firmware</block>
+  <block id="ba817507ff742e4351352b3d698de081" category="paragraph">Quando sostituisci uno switch IP MetroCluster o cambi il firmware dello switch o il file di configurazione di riferimento (RCF), devi spostare i LIF del cluster sullo switch partner per consentire operazioni del cluster senza interruzioni.</block>
+  <block id="b418b4fad97ed4823768d59cc9628c62" category="list-text">Devi eseguire questa operazione prima di aggiornare o effettuare il downgrade del firmware dello switch, sostituire l'RCF dello switch o sostituire uno switch IP.</block>
+  <block id="f6ab7b470572966bac3482a56c334dfc" category="admonition">Se stai configurando gli switch per la prima volta, puoi saltare questo passaggio a meno che tu non stia sostituendo uno switch.</block>
+  <block id="a95f710d416a28711f7057a66ef327d5" category="list-text">L'attività richiede di usare sia i comandi ONTAP che i comandi dello switch; si usano i comandi ONTAP, salvo diversa indicazione.</block>
+  <block id="652d64acba0f102d37b42ef27f23f740" category="list-text">Negli esempi utilizzati in questa procedura, stai eseguendo l'aggiornamento di IP_switch_A_1, quindi devi migrare i cluster LIF su IP_switch_A_2.</block>
+  <block id="83b73f0ed3a170e10c1e7afb1f2de22f" category="list-text">Gli esempi di output dei comandi in questa procedura mostrano i dettagli relativi a uno switch Cisco. L'output può variare a seconda del modello e del produttore dello switch.</block>
+  <block id="c06b2e93c970fd796fa3b646ea0c91e7" category="list-text">Visualizza le porte del cluster connesse agli switch del cluster su ciascun nodo:</block>
+  <block id="6015ee0c3c4dbc37f534783a65239e72" category="example-title">Mostra esempio</block>
+  <block id="1b75649d1b9ec0a73e309fd9b384b32a" category="list-text">Controlla lo stato amministrativo e operativo di ogni porta del cluster.</block>
+  <block id="a8a837b1d24982d8fd8c7b71b0da1a7a" category="list-text">Verifica che tutte le porte del cluster siano attive e con stato integro:</block>
+  <block id="1998c6d3154f5a2c373da0aeca0fd3ff" category="paragraph"><block ref="856f897c52a15ad9c779d1f7b82c2593" prefix="" category="inline-code"></block></block>
+  <block id="d9fb568577d38aa5ca1f9412c1a4e107" category="list-text">Verifica che tutte le interfacce del cluster (LIF) siano sulla porta home:</block>
+  <block id="a2d27af8ce0592e36b8a208c0cb93d3e" category="paragraph"><block ref="fb5130635551fff679ab6d902eaff8d9" prefix="" category="inline-code"></block></block>
+  <block id="98f234e93ec030ce67a050ab46bd6ee6" category="list-text">Verifica che il cluster visualizzi le informazioni per entrambi gli switch del cluster:</block>
+  <block id="798dfbe36e04e65261e623680213b38d" category="paragraph"><block ref="c57378c3b3bb81c6b42a2b31a30ddda7" prefix="" category="inline-code"></block></block>
+  <block id="aa831e5ed3cf3569aacf417dc10d9847" category="list-text">Disabilita il ripristino automatico sui cluster LIF. I cluster LIF eseguono il failover sullo switch del cluster partner e vi rimangono mentre esegui la procedura di aggiornamento sullo switch di destinazione:</block>
+  <block id="684818f9d30d8e8936a73d9c92c51cfe" category="admonition">Se stai aggiornando il secondo fabric, puoi saltare questo passaggio e andare a <block ref="327988adbe3e93c3ffe0ff2abeb91411" category="inline-xref-macro-rx"></block>.</block>
+  <block id="b1046cdb57cd97fe9c20f711ba08bed8" category="paragraph"><block ref="76be4589a0f314371f336c42f473092c" prefix="" category="inline-code"></block></block>
+  <block id="6f80841cf0831aea5bbcbeaff818df5a" category="list-text">[[shut-down-ports]]Sul cluster switch IP_switch_A1, disattiva le porte collegate alle porte cluster dei nodi.</block>
+  <block id="a2fe9051fe051f819bd739ef3e340377" category="open-title">NVIDIA</block>
+  <block id="3dc2e7033e76926da5578cb873563ec1" category="list-text">Visualizza le interfacce del cluster:</block>
+  <block id="640aabb1d4c1c1f949a0a35374202d42" category="list-text">Spegni la porta dell'interfaccia del cluster:</block>
+  <block id="506cbd48c08948901f7b3d2fcf241e24" category="list-text">[[verify_cluster_lif_migration]] Verifica che i cluster LIF siano stati migrati alle porte ospitate sullo switch del cluster IP_switch_A2. Questo potrebbe richiedere alcuni secondi.</block>
+  <block id="af4fb0eecc11b6a91b245e052b6c0a20" category="paragraph">Dopo che le LIF del cluster sono state spostate sullo switch del partner, puoi seguire le procedure di configurazione standard secondo il tuo fornitore di switch per completare l'aggiornamento alla versione di firmware o RCF di destinazione:</block>
+  <block id="86e838bf9c0847e26da95e5f1fb7811d" category="admonition">Dopo aver configurato gli switch nel primo fabric, devi ripetere i passaggi per spostare i LIF del cluster sul secondo fabric.</block>
+  <block id="ea73d8af7135d7d225784b371375310f" category="doc">Scopri come configurare gli switch IP MetroCluster</block>
+  <block id="b398c546b361af58bcc92050d70db2b4" category="paragraph">Devi configurare gli switch IP per fornire connettività IP di backend MetroCluster. La procedura che segui dipende dal vendor degli switch e dal fatto che tu stia configurando gli switch come parte di una nuova installazione di MetroCluster IP o come parte di un'altra procedura.</block>
+  <block id="92e541a9c70ad67c77b89e2d969764ce" category="section-title">Nuova installazione IP MetroCluster</block>
+  <block id="66ae00fed61743cbd269595ede42450e" category="paragraph">Se stai eseguendo una nuova installazione IP MetroCluster, scegli la procedura di configurazione dello switch in base al fornitore dello switch:</block>
+  <block id="7a6a9c61a00d805db560ab9153141683" category="section-title">Sostituzione dello switch e aggiornamenti RCF o del firmware</block>
+  <block id="3a5ca636d042ba14163790e15fb14b39" category="paragraph">Nell'ambito di altre procedure IP MetroCluster, come la sostituzione o l'aggiornamento di uno switch, potresti dover aggiornare il firmware dello switch, il file di configurazione di riferimento (RCF) o entrambi. In questi scenari, devi spostare le LIF del cluster prima di configurare gli switch IP. I passaggi high-level per questi scenari sono i seguenti:</block>
+  <block id="c45b5cac6c505399616694a0b7c6c04d" category="admonition">Devi aggiornare gli switch nel seguente ordine: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2.</block>
+  <block id="032e6e8ef98f5ba6f14159f917ab3e15" category="inline-link-macro">Sposta i LIF del cluster</block>
+  <block id="b0e11f8bc3115af6f46ef95760b7108a" category="list-text"><block ref="b0e11f8bc3115af6f46ef95760b7108a" category="inline-link-macro-rx"></block></block>
+  <block id="c7d46afd534f9d0360e5628b1907f177" category="list-text">Dopo aver spostato le LIF del cluster sullo switch del partner, puoi seguire le procedure di configurazione standard in base al tuo fornitore di switch:</block>
+  <block id="3702fa9bc5c3f18bbbeed6b44a352090" category="list-text">Dopo aver configurato gli switch nel primo fabric (Switch_A_1, Switch_B_1), devi ripetere i passaggi sul secondo fabric (Switch_A_2, Switch_B_2), a partire da <block ref="b0e11f8bc3115af6f46ef95760b7108a" category="inline-link-macro-rx"></block>.</block>
+  <block id="0d748d04c15c51dc82adaafb202380f8" category="list-text">Se usi questi passaggi come parte di un'altra procedura, ad esempio la sostituzione o l'aggiornamento di uno switch, controlla se devi spostare le LIF del cluster sullo switch partner per abilitare operazioni del cluster senza interruzioni. <block ref="9ce2e245234110ff72cc16bc02886cc0" category="inline-link-macro-rx"></block>.</block>
+  <block id="852176ba820381370f520dbeca56dbfa" category="admonition">Devi aggiornare gli switch nel seguente ordine: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2. Se la tua procedura richiede di spostare i cluster LIF, devi ripetere i passaggi per spostare i cluster LIF sul secondo fabric (Switch_A_2, Switch_B_2) dopo aver configurato gli switch nel primo fabric (Switch_A_1, Switch_B_1). Consulta <block ref="9ce2e245234110ff72cc16bc02886cc0" category="inline-link-macro-rx"></block>.</block>
+  <block id="cec0c4ac2074d499d97d20ee0fde64ef" category="list-text">Verifica che il ripristino automatico sia abilitato per le LIF del cluster:</block>
+  <block id="a28cce9c0e3ab8ac431128996388bcfd" category="admonition">Devi assicurarti che il ripristino automatico sia abilitato per le LIF del cluster.</block>
+  <block id="7a7d7054decebaeb3dba2307d6555fb9" category="list-text">Se la funzione di ripristino automatico non è abilitata, modifica tutti i LIF del cluster per abilitarla:</block>
+  <block id="861865437c84fdf002bbc9c73fb2554f" category="admonition">Se stai eseguendo questi passaggi come parte di un'altra procedura, ad esempio la sostituzione o l'aggiornamento di uno switch, potresti aver disabilitato il ripristino automatico come parte dei passaggi per <block ref="ff2aaf62543af58cd0f5c49e7e04cef2" category="inline-link-macro-rx"></block>.</block>
+  <block id="90563211213c93906ee730f25ee9143e" category="list-text">Riattiva il ripristino automatico:</block>
+  <block id="2c70d9b6ebd85a5ee2fff0f363a115ac" category="paragraph"><block ref="bf3c84eda3ab699c2564d177a409447a" prefix="" category="inline-code"></block></block>
+  <block id="268d66b259b50e25cbef3d39885d450f" category="paragraph"><block ref="d4a4086e7952a80201c11ae52219be46" prefix="" category="inline-code"></block></block>
+  <block id="8ed8ddf647d2420b5b9cfef94d1e66ca" category="paragraph">Attendi qualche minuto affinché i LIF tornino alla loro porta home:</block>
+  <block id="9c01e65c2e65b640d8118fe54781309e" category="list-text">Conferma che tutti i LIF siano sulle rispettive porte home:</block>
+  <block id="052bf57f898d3892d0551c66dc793e8b" category="list-text">Verifica lo stato dei nodi MetroCluster:</block>
+  <block id="53c1dca890ccf51d340a7239987710a8" category="list-text">Devi usare la versione del software dello switch supportata. Consulta la <block ref="ed4326c3351d8ac0e334b8b4d9b37c82" category="inline-link-rx"></block>.</block>
+  <block id="fdb08440fb03aec95dda7df506525f73" category="list-text">Ripeti i passaggi precedenti sugli altri tre switch IP nella configurazione IP MetroCluster.</block>
+  <block id="0a87ee4fa6163be20e6bf1d980e5a277" category="paragraph">Devi capire come usare le informazioni nelle tabelle delle porte per generare correttamente i file di configurazione di riferimento (RCF).</block>
+  <block id="350ebdbb66bf03c8efc403678120e39d" category="admonition">Se usi uno switch Cisco 9336C-FX2 in una configurazione condivisa che collega shelf NS224, cambiare le ISL potrebbe richiedere un nuovo file di configurazione (RCF). Non ti serve un nuovo RCF se le velocità ISL attuale e nuova sono 40 Gbps e 100 Gbps. Tutte le altre modifiche alla velocità ISL richiedono un nuovo RCF. Ad esempio, cambiare la velocità ISL da 40 Gbps a 100 Gbps non richiede un nuovo RCF, ma cambiare la velocità ISL da 10 Gbps a 40 Gbps richiede un nuovo RCF.</block>
+  <block id="6c5a911225660b72c17cb2db5923a54a" category="inline-link-macro">aggiorna gli RCF sugli switch IP MetroCluster.</block>
+  <block id="69cb6427980eccf80b5d0c17f1aab875" category="admonition">Se usi gli switch Cisco 9336C-FX2 in una configurazione condivisa che collega gli shelf NS224 e devi aggiornare l'RCF e applicare la nuova configurazione per le nuove porte ISL, segui i passaggi per <block ref="c3ee1b38b8c2251d663b314073e9cd8a" category="inline-link-macro-rx"></block></block>
+  <block id="8707fdff465b4f0541eaf591583954a7" category="list-text"><block ref="b0e11f8bc3115af6f46ef95760b7108a" category="inline-link-macro-rx"></block>.</block>
+  <block id="856a04ccf59d2820da6a47984fbd3ea0" category="admonition">Devi aggiornare gli switch nel seguente ordine: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2. Devi ripetere i passaggi per spostare le LIF del cluster sul secondo fabric (Switch_A_2, Switch_B_2) dopo aver configurato gli switch nel primo fabric (Switch_A_1, Switch_B_1). Consulta <block ref="5f804b3f3e9acee141e0ae306b7a6f59" category="inline-link-macro-rx"></block>.</block>
+  <block id="8dc1f99634c85a613352ad949b508cf1" category="paragraph">Puoi seguire i passaggi in <block ref="7176836221733e9bf6fcbaccc1aa9ffd" category="inline-link-macro-rx"></block>.</block>
+  <block id="0d35a64434c5cb583e6703803b6a3251" category="paragraph">Se il nuovo switch è identico, accendi il nuovo switch. Se stai eseguendo un upgrade o un downgrade degli switch, accendi entrambi gli switch. La configurazione può funzionare con due switch diversi in ciascun sito fino all'aggiornamento del secondo fabric.</block>
+  <block id="acc1856da35d6d8c04024997f2eb6084" category="paragraph">Se stai aggiornando o eseguendo il downgrade degli switch nel primo fabric, potresti vedere alcuni avvisi relativi al clustering locale.</block>
+  <block id="73d919208b85f9e19c80b7413d6e453e" category="admonition">Se aggiorni o esegui il downgrade del fabric, ripeti tutti i passaggi per il secondo fabric.</block>
+  <block id="73117420b1d3da1446aeff431e81d9c6" category="list-text"><block ref="b0e11f8bc3115af6f46ef95760b7108a" category="inline-link-macro-rx"></block>prima di iniziare l'aggiornamento.</block>
+  <block id="19bc1d3a8e5db6fb9ca5ed1d6e53ad7f" category="list-text">Ripeti i passaggi precedenti per ciascuno degli switch.</block>
+  <block id="31bbe12313f1a40b18eaa501279a0be3" category="admonition">Dopo aver configurato gli switch nella prima fabric (Switch_A_1, Switch_B_1), devi ripetere i passaggi per spostare le LIF del cluster sulla seconda fabric (Switch_A_2, Switch_B_2). Consulta <block ref="5f804b3f3e9acee141e0ae306b7a6f59" category="inline-link-macro-rx"></block>.</block>
+  <block id="b0eaff36df906302d61d2a732f0bd280" category="paragraph">Potresti dover aggiornare un file di configurazione di riferimento (RCF) su uno switch IP Cisco. Ad esempio, un upgrade di ONTAP o un upgrade del firmware dello switch richiedono entrambi un nuovo RCF.</block>
+  <block id="9a6efb0d6ef62b264d464f9318c33ea5" category="cell">Esempio di banner/MOTD RCF</block>
+  <block id="270442fca75eb1d9b0a0f7fbda94ec91" category="list-text">Il<block ref="c52b4d12f68853a25c52576697c6b2b5" category="inline-link-rx"></block> deve essere in grado di creare lo stesso RCF che viene applicato, con la stessa versione e configurazione (piattaforme, VLAN).</block>
+  <block id="9841cae1f3cd8f3083a447c8f51118b2" category="list-text">Il RCF applicato non è stato fornito da NetApp per una configurazione speciale.</block>
+  <block id="9ec3c03b2e25d0fd885e119b26a47209" category="list-text">Il RCF non è stato modificato prima che venisse applicato.</block>
+  <block id="7d4a576e62d8fa25121aba113311ce11" category="list-text">Prima di applicare l'attuale RCF, hai seguito i passaggi per ripristinare le impostazioni di fabbrica dello switch.</block>
+  <block id="4f9ef492ce457924cabecc16236a4c41" category="paragraph">Se non soddisfi questi requisiti, non puoi usare i CleanUpFiles che vengono creati quando generi gli RCF. Tuttavia, puoi sfruttare la funzione per creare CleanUpFiles generici: la pulizia usando questo metodo deriva dall'output di <block ref="d064a73c32d00bf384204782a696a298" prefix=" " category="inline-code"></block> ed è best practice.</block>
+  <block id="385e6272a2260d5d2074d187f64c13d0" category="list-text">Determina la versione corrente di RCF e quali porte e VLAN sono utilizzate:<block ref="9b0b071cbeedb9bb40e134702701197f" prefix=" " category="inline-code"></block></block>
+  <block id="31a1a5eb41a54f193dee4fcd85f62f3c" category="cell">Versione RCF</block>
+  <block id="d2c73fd480128bba9ad18b2cc35e088a" category="list-text">[[Create-RCF-files-and-CleanUpFiles-or-create-generic-CleanUpFiles]] Crea i file RCF e CleanUpFiles, oppure crea file generici CleanUpFiles per la configurazione corrente.</block>
+  <block id="2d3daa23f8c1124a7f51b396b2c83599" category="open-title">Opzione 1: Crea gli RCF e CleanUpFiles</block>
+  <block id="09a9232d68d132ce906d6729982e29da" category="list-text">Usa il RcfFileGenerator 1.4a (o successivo) per creare gli RCF con le informazioni che hai recuperato nel passaggio 1. La nuova versione del RcfFileGenerator crea un set aggiuntivo di CleanUpFiles che puoi usare per ripristinare alcune configurazioni e preparare lo switch ad applicare una nuova configurazione RCF.</block>
+  <block id="e978980bdc9465fa0544fbecc209d5f7" category="list-text">Confronta il banner motd con le RCF attualmente applicate. I tipi di piattaforma, il tipo di switch, la porta e l'utilizzo delle VLAN devono essere gli stessi.</block>
+  <block id="cbf0859eba1f468560501286f96bce70" category="admonition">Devi usare il CleanUpFiles della stessa versione dell'RCF e per la stessa identica configurazione. Usare qualsiasi CleanUpFile diverso non funzionerà e potrebbe richiedere un reset completo dello switch.</block>
+  <block id="bf8da3127630e1672d896214577b32f3" category="admonition">La versione di ONTAP per cui è stato creato l'RCF non è rilevante. È importante solo la versione dell'RCF.</block>
+  <block id="b542d9b58edaa8b0bd2dd3ae2b80c0a7" category="admonition">Il file RCF (anche se si tratta della stessa versione) potrebbe elencare meno o più piattaforme. Assicurati che la tua piattaforma sia elencata.</block>
+  <block id="b79f0a153ad93b9722d2cdc284bd859f" category="list-text">[[Create-the-new-RCF-files-for-the-new-configuration]] Crea i "nuovi" file RCF per la nuova configurazione. Crea questi file nello stesso modo in cui hai creato i file nel passaggio precedente, ma scegli la rispettiva versione di ONTAP e RCF.</block>
+  <block id="0b172d151494b14e7fdff735f6e210c6" category="paragraph">Dopo aver completato questo passaggio dovresti avere due set di RCF, ciascun set composto da dodici file.</block>
+  <block id="39da313cd3d2efd5a85461c6b18b0e9a" category="inline-xref">Crea gli RCF e CleanUpFiles, oppure crea generici CleanUpFiles per la configurazione corrente</block>
+  <block id="b34bc751b388df2a26c3d747fe1f39cf" category="list-text">Scarica il CleanUpFiles che hai creato in <block ref="bce5d5db6b460239ddd9d2efeebaa897" category="inline-xref-macro-rx"></block></block>
+  <block id="e57c406545eb94b55e46fd490e3dcc6f" category="admonition">Questo CleanUpFile è per l'RCF attualmente applicato e *NON* per il nuovo RCF a cui vuoi aggiornare.</block>
+  <block id="a1fa8ef8fe9fe6945d9a481c566faf1a" category="inline-xref">Crea i 'nuovi' RCF per la nuova configurazione.</block>
+  <block id="0e19bf9641c612dddacde2528d12e17c" category="list-text">Scarica i 'nuovi' RCF che hai creato in <block ref="97f3ac22394457ab69892174bef80b4e" category="inline-xref-macro-rx"></block></block>
+  <block id="19e2eaf9177ade8d5a63d99d3fa7e5e4" category="paragraph">Esempio di RCF per lo switch A1:<block ref="fcb7173e7a2e786c277b7ad6470af002" prefix=" " category="inline-code"></block></block>
+  <block id="d72478cb233a7ba8b75d8a2c92a6a6c1" category="list-text">Scarica il CleanUpFiles che hai creato in <block ref="97f3ac22394457ab69892174bef80b4e" category="inline-xref-macro-rx"></block> Questo passaggio è facoltativo: puoi usare il file in futuro per aggiornare la configurazione dello switch. Corrisponde alla configurazione attualmente applicata.</block>
+  <block id="b4fb6ce79e810065e4af4b50b355268c" category="paragraph">Se riscontri che uno qualsiasi degli elementi sopra elencati è configurato, potresti non essere in grado di applicare una nuova configurazione RCF. Tuttavia, puoi ripristinare la configurazione precedente riavviando lo switch *senza* salvare la configurazione in esecuzione nella configurazione di avvio. Lo switch si avvierà con la configurazione precedente.</block>
+  <block id="39a59a7f698d76b6c515d442d496fc20" category="list-text">Applica l'RCF e verifica che le porte siano online.</block>
+  <block id="b4ff3823ad51690657517a6cc43f5bbc" category="list-text">Applica l'RCF.</block>
+  <block id="92dce1ba931a31f563746a7fc012ede0" category="list-text">Modifica tutti i LIF del cluster per abilitare il ripristino automatico:</block>
+  <block id="7506fa2af11ba55ddb93c46406818219" category="paragraph">Potresti dover aggiornare un file di configurazione di riferimento (RCF) su uno switch IP MetroCluster. Ad esempio, se la versione di RCF che stai utilizzando sugli switch non è supportata dalla versione di ONTAP, dalla versione del firmware dello switch o da entrambe.</block>
+  <block id="0fd7975d8fcd31db8559ed95a3a7ca29" category="list-text">Se stai installando un nuovo firmware dello switch, devi installare il firmware dello switch prima di aggiornare l'RCF.</block>
+  <block id="5b6e304706a21e319010fab102707c79" category="list-text">Questa procedura interrompe il traffico sullo switch in cui viene aggiornato l'RCF. Il traffico riprende quando viene applicato il nuovo RCF.</block>
+  <block id="ef79769a9b12c47ca8e0242e864b2c02" category="list-text">Scarica e installa gli IP RCF, a seconda del vendor dello switch.</block>
+  <block id="0a7486debceb3d7717c123eee7f53e26" category="inline-link-macro">Scarica e installa i Broadcom IP RCF</block>
+  <block id="91d44de3771ac094a8fc8ef949f447f1" category="list-text"><block ref="91d44de3771ac094a8fc8ef949f447f1" category="inline-link-macro-rx"></block></block>
+  <block id="e78e0be76deac39685c069c02b9c59b8" category="paragraph">Devi applicare i file di configurazione di riferimento (RCF) per riconfigurare la suddivisione in zone e includere i nuovi nodi.</block>
+  <block id="b60b2b518843eb58af59ce647217c844" category="paragraph">Se non puoi usare gli RCF per configurare gli switch, devi configurarli manualmente. Vedi:</block>
+  <block id="880c5e16abd9dabbb6ec7c79be346e14" category="list-text">Individua i RCF per la tua configurazione.</block>
+  <block id="f78893de7c74e6fe864a719bc7efc19e" category="paragraph">Devi usare gli RCF per una configurazione a otto nodi che corrisponde al tuo modello di switch.</block>
+  <block id="59f3d762e99b09ec1becaca961e395a1" category="list-text">Applica i file RCF seguendo le istruzioni nella pagina di download, regolando le impostazioni ISL secondo necessità.</block>
+  <block id="0cd61c4c88f15a8971607489f9b6d653" category="paragraph">L'utilizzo della porta dello switch FC deve corrispondere all'utilizzo a otto nodi di MetroCluster descritto in <block ref="a9f150ef34b7953b6119f5ac779097fe" category="inline-link-macro-rx"></block> modo che tu possa usare gli RCF.</block>
+  <block id="eabc5692452c984a6976e8e815a16418" category="admonition">Quando esegui l'opzione del menu di boot<block ref="1679091c5a880faf6fb5e6087eb1b2dc" prefix=" " category="inline-code"></block>, i valori di bootarg di MetroCluster potrebbero dover essere reimpostati. Consulta <block ref="34d15be42555000516d0cc6b7f35d1c4" category="inline-link-macro-rx"></block>.</block>
+  <block id="74babbf42b11f149a7a363757d584c3b" category="admonition">Quando esegui l'opzione del menu di boot<block ref="1679091c5a880faf6fb5e6087eb1b2dc" prefix=" " category="inline-code"></block>, potrebbe essere necessario reimpostare i valori di bootarg di MetroCluster. Consulta <block ref="06c3fdcb6cd8d64a7d2e8bffb99c9b80" category="inline-link-macro-rx"></block>.</block>
+  <block id="b8c3014a64ccb52cfe10dc2bcccd245f" category="admonition">Quando esegui l'opzione del menu di boot <block ref="1679091c5a880faf6fb5e6087eb1b2dc" prefix=" " category="inline-code"></block>, potrebbe essere necessario reimpostare i valori di bootarg di MetroCluster. Consulta <block ref="c2cec781ec7263394dd955380787b572" category="inline-link-macro-rx"></block>.</block>
+  <block id="9a3f31a7018cf62078b2f2f088863f9b" category="sidebar">Scopri come configurare gli switch IP MetroCluster</block>
+  <block id="96e6a3f92b027e80b14698a7b22b316f" category="sidebar">Sposta le LIF del cluster</block>
 </blocks>

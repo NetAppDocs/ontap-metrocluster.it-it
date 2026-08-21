@@ -424,10 +424,6 @@ Se il completamento di uno switchback richiede molto tempo, è possibile verific
 +
 `metrocluster config-replication resync-status show`
 
-. Ripristinare le configurazioni SnapMirror o SnapVault.
-+
-In ONTAP 8.3, è necessario ristabilire manualmente una configurazione di SnapMirror persa dopo un'operazione di switchback MetroCluster. In ONTAP 9.0 e versioni successive, la relazione viene ristabilita automaticamente.
-
 
 
 

@@ -4,16 +4,44 @@ sidebar: sidebar
 keywords: ip, switch, configuring 
 summary: È necessario configurare gli switch IP per fornire la connettività IP MetroCluster back-end. 
 ---
-= Scegli la procedura corretta di configurazione dello switch IP MetroCluster
+= Scopri come configurare gli switch IP MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-È necessario configurare gli switch IP per fornire connettività MetroCluster IP back-end. La procedura da seguire dipende dal fornitore dello switch.
+Devi configurare gli switch IP per fornire connettività IP di backend MetroCluster. La procedura che segui dipende dal vendor degli switch e dal fatto che tu stia configurando gli switch come parte di una nuova installazione di MetroCluster IP o come parte di un'altra procedura.
+
+
+
+[[fresh-metrocluster-ip-installation]]
+== Nuova installazione IP MetroCluster
+
+Se stai eseguendo una nuova installazione IP MetroCluster, scegli la procedura di configurazione dello switch in base al fornitore dello switch:
 
 * link:../install-ip/task_switch_config_broadcom.html["Configurare gli switch IP Broadcom"]
 * link:../install-ip/task_switch_config_cisco.html["Configurare gli switch IP Cisco"]
 * link:../install-ip/task_switch_config_nvidia.html["Configurare gli switch NVIDIA IP"]
+
+
+
+
+[[switch-replacement-and-rcf-or-firmware-updates]]
+== Sostituzione dello switch e aggiornamenti RCF o del firmware
+
+Nell'ambito di altre procedure IP MetroCluster, come la sostituzione o l'aggiornamento di uno switch, potresti dover aggiornare il firmware dello switch, il file di configurazione di riferimento (RCF) o entrambi. In questi scenari, devi spostare le LIF del cluster prima di configurare gli switch IP. I passaggi high-level per questi scenari sono i seguenti:
+
+
+NOTE: Devi aggiornare gli switch nel seguente ordine: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2.
+
+. link:../install-ip/switch-move-cluster-lifs.html["Sposta i LIF del cluster"]
+. Dopo aver spostato le LIF del cluster sullo switch del partner, puoi seguire le procedure di configurazione standard in base al tuo fornitore di switch:
++
+** link:../install-ip/task_switch_config_broadcom.html["Configurare gli switch IP Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Configurare gli switch IP Cisco"]
+** link:../install-ip/task_switch_config_nvidia.html["Configurare gli switch NVIDIA IP"]
+
+
+. Dopo aver configurato gli switch nel primo fabric (Switch_A_1, Switch_B_1), devi ripetere i passaggi sul secondo fabric (Switch_A_2, Switch_B_2), a partire da link:../install-ip/switch-move-cluster-lifs.html["Sposta i LIF del cluster"].
 

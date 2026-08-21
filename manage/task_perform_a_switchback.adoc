@@ -113,10 +113,6 @@ Remote: cluster_A         Configuration state configured
 +
 Se il completamento di uno switchback richiede molto tempo, è possibile verificare lo stato delle linee di base in corso utilizzando `metrocluster config-replication resync-status show` comando. Questo comando si trova al livello di privilegio avanzato.
 
-.. Ripristinare le configurazioni SnapMirror o SnapVault.
-+
-In ONTAP 8.3, è necessario ristabilire manualmente una configurazione di SnapMirror persa dopo un'operazione di switchback MetroCluster. In ONTAP 9.0 e versioni successive, la relazione viene ristabilita automaticamente.
-
 
 
 

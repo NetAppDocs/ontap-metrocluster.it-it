@@ -129,13 +129,19 @@ Se si stanno riutilizzando gli switch esistenti, passare a. <<existing_step4,Fas
 NOTE: Se si stanno aggiornando o eseguendo il downgrade degli switch, è necessario configurare tutti gli switch della rete.
 
 +
-Seguire le istruzioni della sezione _Configurazione degli switch IP_ in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installazione e configurazione di MetroCluster IP."]
+Seguire la procedura per il fornitore dello switch:
 
++
+** link:../install-ip/task_switch_config_broadcom.html["Configurare gli switch IP Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Configurare gli switch IP Cisco"]
+** link:../install-ip/task_switch_config_nvidia.html["Configurare gli switch NVIDIA IP"]
 +
 Assicurarsi di applicare il file RCF corretto per lo switch _A_1, _A_2, _B_1 o _B_2. Se il nuovo switch è lo stesso del vecchio switch, è necessario applicare lo stesso file RCF.
 
 +
 Se si esegue l'aggiornamento o il downgrade di uno switch, applicare il file RCF più recente supportato per il nuovo switch.
+
+
 
 . Eseguire il comando port show per visualizzare le informazioni relative alle porte di rete:
 +
@@ -148,6 +154,11 @@ Se si esegue l'aggiornamento o il downgrade di uno switch, applicare il file RCF
 ----
 network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert false
 ----
+.. link:../install-ip/switch-move-cluster-lifs.html["Sposta i LIF del cluster"].
++
+
+NOTE: Devi aggiornare gli switch nel seguente ordine: Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2. Devi ripetere i passaggi per spostare le LIF del cluster sul secondo fabric (Switch_A_2, Switch_B_2) dopo aver configurato gli switch nel primo fabric (Switch_A_1, Switch_B_1). Consulta link:../install-ip/task_install_and_cable_the_mcc_components.html["Scopri come configurare gli switch IP MetroCluster"].
+
 
 
 . [[existing_step4]]Disconnetti le connessioni dal vecchio switch.
@@ -190,7 +201,7 @@ Per configurare gli switch esistenti, seguire la procedura per installare e aggi
 
 . Collegare gli switch.
 +
-Seguire la procedura descritta nella sezione _collegamento degli switch IP_ di link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installazione e configurazione di MetroCluster IP"].
+Puoi seguire i passaggi in link:../install-ip/using_rcf_generator.html["Collegare via cavo gli switch IP MetroCluster"].
 
 +
 Collegare gli switch nel seguente ordine (se necessario):
@@ -225,15 +236,15 @@ Collegare gli switch nel seguente ordine (se necessario):
 
 . Accendere lo switch o gli switch.
 +
-Se il nuovo switch è lo stesso, accendere il nuovo switch. Se si stanno aggiornando o eseguendo il downgrade degli switch, accendere entrambi gli switch. La configurazione può funzionare con due switch diversi in ogni sito fino all'aggiornamento della seconda rete.
+Se il nuovo switch è identico, accendi il nuovo switch. Se stai eseguendo un upgrade o un downgrade degli switch, accendi entrambi gli switch. La configurazione può funzionare con due switch diversi in ciascun sito fino all'aggiornamento del secondo fabric.
 
 . Verificare che la configurazione di MetroCluster sia corretta ripetendo la configurazione <<all_step1,Fase 1>>.
 +
-Se si aggiornano o si esegue il downgrade degli switch nella prima rete, potrebbero essere visualizzati alcuni avvisi relativi al clustering locale.
+Se stai aggiornando o eseguendo il downgrade degli switch nel primo fabric, potresti vedere alcuni avvisi relativi al clustering locale.
 
 +
 
-NOTE: Se si esegue l'aggiornamento o il downgrade delle reti, ripetere tutti i passaggi per la seconda rete.
+NOTE: Se aggiorni o esegui il downgrade del fabric, ripeti tutti i passaggi per il secondo fabric.
 
 . Modifica tutte le LIF del cluster per riattivare l'indirizzamento automatico:
 +

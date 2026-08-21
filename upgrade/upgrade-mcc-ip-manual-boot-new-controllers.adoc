@@ -154,6 +154,10 @@ Segui le istruzioni e fornisci i seguenti dati per recuperare e ripristinare la 
 +
 A seconda del tipo di gestore delle chiavi, eseguire la procedura di ripristino selezionando l'opzione "`10`" o l'opzione "`11`", seguita dall'opzione  `6` al primo prompt del menu di boot. Per avviare completamente i nodi, potrebbe essere necessario ripetere la procedura di ripristino continuando con l'opzione "`1`" (avvio normale).
 
++
+
+NOTE: Quando esegui l'opzione del menu di boot `6`, potrebbe essere necessario reimpostare i valori di bootarg di MetroCluster. Consulta link:upgrade-mcc-ip-manual-apply-rcf-set-bootarg.html#set-the-metrocluster-ip-bootarg-variables["Impostare le variabili di boot IP di MetroCluster"].
+
 . Attendere l'avvio dei nodi sostituiti.
 +
 Se uno dei nodi è in modalità Takeover, eseguire un giveback utilizzando `storage failover giveback` comando.
