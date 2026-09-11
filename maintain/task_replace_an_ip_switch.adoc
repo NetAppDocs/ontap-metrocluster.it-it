@@ -13,11 +13,21 @@ summary: 'Potrebbe essere necessario sostituire uno switch guasto oppure eseguir
 [role="lead"]
 Potrebbe essere necessario sostituire uno switch guasto, aggiornare o eseguire il downgrade di uno switch o modificare l'utilizzo degli switch IP MetroCluster esistenti.
 
+
+CAUTION: Se devi sostituire uno switch sulle piattaforme AFF A220, AFF A250 o FAS2750, consulta link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/Cluster_and_HA_communication_issues_during_back-end_switch_replacement["l'articolo della Knowledge Base "Cluster and HA communication issues during back-end switch replacement""^].
+
 .A proposito di questa attività
 Questa procedura si applica quando si utilizzano switch validati da NetApp. Se si utilizzano switch compatibili con MetroCluster, rivolgersi al fornitore dello switch.
 
 link:enable-console-logging-before-maintenance.html["Attivare la registrazione della console"] prima di eseguire questa attività.
 
+[NOTE]
+====
+Le velocità di collegamento miste non sono supportate sulle piattaforme che utilizzano una scheda di interfaccia di rete X60134A. Per verificare se la tua piattaforma è interessata, consulta la  https://hwu.netapp.com/["Hardware Universe"^].
+
+Se stai sostituendo uno switch che utilizza porte da 25G con un nuovo switch che utilizza porte da 100G su una piattaforma interessata (ad esempio sostituendo uno switch BES-53248 con uno switch Cisco 9336C su una piattaforma AFF A50), consulta link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/100G_link_not_coming_online_during_MetroCluster_back-end_switch_replacement?caseId=2010523490["l'articolo della Knowledge Base "100G link not coming online during MetroCluster back-end switch replacement""^].
+
+====
 Questa procedura supporta le seguenti conversioni:
 
 * Modifica del vendor, del tipo o di entrambi gli switch. Il nuovo switch può essere lo stesso del vecchio switch in caso di guasto oppure è possibile modificare il tipo di switch (aggiornare o eseguire il downgrade dello switch).
