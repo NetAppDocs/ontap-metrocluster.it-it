@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: start, ontap, disruptive, transition, two-node, metrocluster, fc, configuration, four-node, two-node, retire, storage, shelves, shelf, procedure, exist, drive, requirement, retiring, workflow, moving, data, move, retiring, retire, migrate, migrating, root, aggregate, 
 summary: A partire da ONTAP 9.8, è possibile passare in modo disgregante da una configurazione MetroCluster FC a due nodi a una configurazione MetroCluster IP a quattro nodi e dismettere gli shelf di storage esistenti. La procedura include passaggi per spostare i dati dagli shelf di dischi esistenti alla nuova configurazione e poi ritirare i vecchi shelf. 
 ---
-= Transizione senza interruzioni da MetroCluster FC a MetroCluster IP quando si ritirano gli shelf di storage (ONTAP 9.8 e versioni successive)
+= Esegui una transizione MetroCluster in modo discontinuo mentre ritiri gli shelf di storage
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: start, ontap, disruptive, transition, two-node, metrocluster, fc, configuration, data, exist, drive, shelves, shelf, ip, node, requirement, support, workflow, preparing, prepare, controller, module, controller, migrate 
 summary: A partire da ONTAP 9.8, è possibile eseguire la transizione di una configurazione MetroCluster FC a due nodi e spostare i dati dagli shelf di dischi esistenti anche se gli shelf di storage esistenti non sono supportati dai nuovi nodi MetroCluster IP. 
 ---
-= Transizione disgregativa quando gli shelf esistenti non sono supportati sui nuovi controller (ONTAP 9.8 e versioni successive)
+= Effettua la transizione in modo brusco quando gli shelf MetroCluster non sono supportati sui nuovi controller
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
