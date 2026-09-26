@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: metrocluster, upgrade, assign, disk, ownership, aff, systems 
 summary: 'Se si utilizzano sistemi AFF in una configurazione con aggregati mirrorati e i nodi non hanno i dischi (SSD) assegnati correttamente, è necessario assegnare metà dei dischi su ogni shelf a un nodo locale e l"altra metà dei dischi al nodo partner ha. È necessario creare una configurazione in cui ciascun nodo abbia lo stesso numero di dischi nei pool di dischi locali e remoti.' 
 ---
-= Assegnazione della proprietà del disco nei sistemi AFF
+= Assegna la proprietà dei dischi ai sistemi AFF in una configurazione FC MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

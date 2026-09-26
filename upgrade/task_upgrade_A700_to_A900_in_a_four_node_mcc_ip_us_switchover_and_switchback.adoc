@@ -4,12 +4,12 @@ sidebar: sidebar
 keywords: metrocluster, upgrade, controller, ip, configuration, switchover, switchback, workflow, nodes, tiebreaker, verify, bootrage, root, aggregate, disks 
 summary: 'È possibile utilizzare l"operazione di switchover MetroCluster per fornire un servizio senza interruzioni ai client mentre i moduli controller sul cluster partner vengono aggiornati. Altri componenti (ad esempio shelf di storage o switch) non possono essere aggiornati come parte di questa procedura.' 
 ---
-= Upgrade dei controller da AFF A700/FAS9000 a AFF A900/FAS9500 in una configurazione MetroCluster IP utilizzando switchover e switchback (ONTAP 9.10.1 o versione successiva)
+= Aggiorna AFF A700 ad AFF A900 o FAS9000 a FAS9500 in una configurazione IP MetroCluster usando switchover e switchback
 :allow-uri-read: 
 
 
 [role="lead"]
-È possibile utilizzare l'operazione di switchover MetroCluster per fornire un servizio senza interruzioni ai client mentre i moduli controller sul cluster partner vengono aggiornati. Altri componenti (ad esempio shelf di storage o switch) non possono essere aggiornati come parte di questa procedura.
+A partire da ONTAP 9.10.1, puoi utilizzare l'operazione di switchover di MetroCluster per fornire un servizio senza interruzioni ai client durante l'aggiornamento dei moduli controller sul cluster partner. Altri componenti (come shelf di storage o switch) non possono essere aggiornati nell'ambito di questa procedura.
 
 .A proposito di questa attività
 * Per aggiornare i moduli controller AFF A700 a AFF A900, i controller devono eseguire ONTAP 9.10.1 o versione successiva.

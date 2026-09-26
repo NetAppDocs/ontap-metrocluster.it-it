@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: metrocluster, upgrade, assign, disk, ownership, aff, systems 
 summary: Se i dischi non sono stati assegnati correttamente ai nodi MetroCluster o se si utilizzano shelf di dischi DS460C nella configurazione, è necessario assegnare i dischi a ciascuno dei nodi nella configurazione MetroCluster in base allo shelf-by-shelf. Verrà creata una configurazione in cui ciascun nodo ha lo stesso numero di dischi nei pool di dischi locali e remoti. 
 ---
-= Assegnazione della proprietà del disco in sistemi non AFF
+= Assegna la proprietà del disco ai sistemi non AFF in una configurazione FC MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

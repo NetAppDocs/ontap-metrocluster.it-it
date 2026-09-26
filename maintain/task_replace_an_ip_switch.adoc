@@ -256,15 +256,23 @@ Se stai aggiornando o eseguendo il downgrade degli switch nel primo fabric, potr
 
 NOTE: Se aggiorni o esegui il downgrade del fabric, ripeti tutti i passaggi per il secondo fabric.
 
-. Modifica tutte le LIF del cluster per riattivare l'indirizzamento automatico:
+. Ripristina tutti i LIF del cluster alla loro porta home.
++
+
+CAUTION: Non ripristinare le LIF del cluster nelle rispettive porte home finché non hai completato i passaggi precedenti per tutti gli switch che richiedono un aggiornamento.
+
++
+.. Modifica tutte le LIF del cluster per riattivare l'indirizzamento automatico:
 +
 [source, cli]
 ----
 network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert true
 ----
-. Ripristina tutti i LIF del cluster che attualmente non si trovano sulle loro porte home alle loro porte home:
+.. Ripristina manualmente tutte le LIF del cluster che al momento non si trovano sulle rispettive porte home alle loro porte home:
 +
-`network interface revert -vserver * -lif *`
+`network interface revert -vserver Cluster -lif *`
+
+
 
 . In alternativa, spostare gli shelf NS224.
 +
