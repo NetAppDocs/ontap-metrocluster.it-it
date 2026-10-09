@@ -250,7 +250,16 @@ NOTE: Eseguire questa operazione per tutti i plessi che hanno dischi remoti a Cl
 
 
 
-. Le porte dello switch ISL sono costantemente offline in base al tipo di switch.
+. Disattiva le porte dello switch ISL. Seleziona la procedura corretta per il tipo di switch in uso.
++
+Le seguenti procedure mostrano come disabilitare le porte ISL non utilizzate e puoi usare gli stessi comandi per disabilitare tutte le porte ISL attive come parte di questa procedura.
+
++
+** link:../install-ip/task_switch_config_cisco.html#disable-unused-isl-ports-and-port-channels["Disabilita le porte ISL sugli switch IP Cisco"]
+** link:../install-ip/task_switch_config_broadcom.html#disable-unused-isl-ports-and-port-channels["Disabilita le porte ISL sugli switch IP Broadcom"]
+** link:../install-ip/task_switch_config_nvidia.html#disable-unused-isl-ports-and-port-channels["Disabilitare le porte ISL sugli switch IP NVIDIA"]
+
+
 . Arrestare i nodi eseguendo il seguente comando su ciascun nodo:
 +
 `node halt -inhibit-takeover true -skip-lif-migration true -node <node-name>`

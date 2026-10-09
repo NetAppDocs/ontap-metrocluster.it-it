@@ -33,17 +33,10 @@ Questa procedura differisce dalla procedura di riparazione per le configurazioni
 +
 Se il sistema visualizza il prompt DEL CARICATORE, eseguire `boot_ontap` comando.
 
-. Eseguire la fase di healing dell'aggregato root: `metrocluster heal root-aggregates`
+. Riparare gli aggregati di dati:
 +
-[listing]
-----
-cluster_A::> metrocluster heal root-aggregates
-[Job 137] Job succeeded: Heal Root-Aggregates is successful
-----
-+
-Se la riparazione è vetoed, è possibile emettere nuovamente il comando MetroCluster heal root-aggregates con il parametro --override-vetoes. Se si utilizza questo parametro opzionale, il sistema sovrascrive qualsiasi veto soft che impedisca l'operazione di riparazione.
+`metrocluster heal aggregates`
 
-. Risincronizzare gli aggregati: `metrocluster heal aggregates`
 +
 [listing]
 ----
@@ -51,9 +44,22 @@ cluster_A::> metrocluster heal aggregates
 [Job 137] Job succeeded: Heal Aggregates is successful
 ----
 +
-Se la riparazione è vetoed, è possibile emettere nuovamente il comando MetroCluster Heal con il parametro --override-vetoes. Se si utilizza questo parametro opzionale, il sistema sovrascrive qualsiasi veto soft che impedisca l'operazione di riparazione.
+Se la riparazione è vetoed, si ha la possibilità di riemettere il `metrocluster heal` con il `--override-vetoes` parametro. Se si utilizza questo parametro opzionale, il sistema sovrascrive qualsiasi veto soft che impedisca l'operazione di riparazione.
 
-. Verificare che l'operazione di riparazione sia completa eseguendo il comando MetroCluster Operation show sul cluster integro:
+. Riparare gli aggregati root:
++
+`metrocluster heal root-aggregates`
+
++
+[listing]
+----
+cluster_A::> metrocluster heal root-aggregates
+[Job 137] Job succeeded: Heal Root-Aggregates is successful
+----
++
+Se il ripristino viene bloccato, puoi riemettere il  `metrocluster heal root-aggregates`comando con il  `--override-vetoes`parametro. Se utilizzi questo parametro facoltativo, il sistema ignora eventuali soft veto che impediscono l'operazione di ripristino.
+
+. Verificare che l'operazione di riparazione sia completa eseguendo il `metrocluster operation show` comando sul cluster integro:
 +
 [listing]
 ----
