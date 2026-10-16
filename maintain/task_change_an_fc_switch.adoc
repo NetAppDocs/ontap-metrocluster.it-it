@@ -18,7 +18,7 @@ Potrebbe essere necessario cambiare il vendor per gli switch FC da Cisco a Broca
 
 
 .Fasi
-. [[step_1,Step 1]]controllare lo stato della configurazione.
+. [[step_1]]Verifica lo stato della configurazione.
 +
 .. Verificare che MetroCluster sia configurato e in modalità normale su ciascun cluster: `*metrocluster show*`
 +
@@ -91,6 +91,6 @@ Seguire la procedura descritta in link:../install-fc/concept-configure-fc-switch
 
 
 . Accendere gli interruttori.
-. Verificare che la configurazione di MetroCluster sia corretta ripetendo la configurazione <<Fase 1>>.
+. Verifica che la configurazione MetroCluster sia integra ripetendo <<step_1,Fase 1>>.
 . Ripetere i passaggi da 1 a 7 per il secondo fabric nella configurazione.
 

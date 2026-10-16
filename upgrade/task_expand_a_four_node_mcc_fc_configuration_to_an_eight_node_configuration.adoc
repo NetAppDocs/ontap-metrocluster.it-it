@@ -49,6 +49,12 @@ Nelle tabelle seguenti sono illustrate le combinazioni di piattaforme supportate
 * Le combinazioni di questa tabella si applicano solo alle configurazioni a otto nodi regolari o permanenti.
 * Le combinazioni di piattaforme in questa tabella *non* si applicano se si utilizzano le procedure di transizione o refresh.
 * Tutti i nodi di un gruppo di DR devono essere dello stesso tipo e configurazione.
+* Quando esegui un'espansione del sistema, il tipo di piattaforma vecchio e quello nuovo *devono* corrispondere:
++
+** Puoi aggiungere un sistema FAS a un sistema FAS o un AFF A-Series a un AFF A-Series.
+** Non puoi aggiungere un sistema FAS a un AFF A-Series, né un AFF A-Series a un AFF C-Series.
+
+
 
 
 ====

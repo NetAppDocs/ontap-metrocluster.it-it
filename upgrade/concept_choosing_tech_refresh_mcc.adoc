@@ -22,7 +22,15 @@ La procedura di refresh del sistema utilizzata dipende dal modello di piattaform
 * Tutti i nodi della configurazione MetroCluster devono utilizzare la stessa versione di ONTAP. Ad esempio, se si dispone di una configurazione a otto nodi, tutti e otto i nodi devono utilizzare la stessa versione di ONTAP. Fare riferimento alla link:https://hwu.netapp.com["Hardware Universe"^] per la versione minima supportata di ONTAP per la combinazione in uso.
 * Non superare i limiti di oggetti della "parte inferiore" delle piattaforme nella combinazione. Applicare il limite inferiore di oggetti delle due piattaforme.
 * Se i limiti della piattaforma di destinazione sono inferiori ai limiti MetroCluster, è necessario riconfigurare il MetroCluster in modo che sia uguale o inferiore ai limiti della piattaforma di destinazione prima di aggiungere i nuovi nodi.
-* Fare riferimento a. link:https://hwu.netapp.com["Hardware Universe"^] per i limiti della piattaforma.
++
+Fare riferimento a. link:https://hwu.netapp.com["Hardware Universe"^] per i limiti della piattaforma.
+
+* Quando esegui un aggiornamento del sistema, il tipo di piattaforma vecchio e quello nuovo *devono* corrispondere:
++
+** Puoi aggiungere un sistema FAS a un sistema FAS o un AFF A-Series a un AFF A-Series.
+** Non puoi aggiungere un sistema FAS a un AFF A-Series, né un AFF A-Series a un AFF C-Series.
+
+
 
 
 
@@ -77,6 +85,12 @@ image::../media/mcc-ip-techrefresh-asa-9161.png[Combinazioni di aggiornamento te
 * Non superare i limiti di oggetti della "parte inferiore" delle piattaforme nella combinazione. Applicare il limite inferiore di oggetti delle due piattaforme.
 * Se i limiti della piattaforma di destinazione sono inferiori ai limiti MetroCluster, è necessario riconfigurare il MetroCluster in modo che sia pari o inferiore ai limiti della piattaforma di destinazione prima di aggiungere i nuovi nodi.
 * Fare riferimento a. link:https://hwu.netapp.com["Hardware Universe"^] per i limiti della piattaforma.
+* Quando esegui un aggiornamento del sistema, il tipo di piattaforma vecchio e quello nuovo *devono* corrispondere:
++
+** Puoi aggiungere un sistema FAS a un sistema FAS o un AFF A-Series a un AFF A-Series.
+** Non puoi aggiungere un sistema FAS a un AFF A-Series, né un AFF A-Series a un AFF C-Series.
+
+
 
 
 
