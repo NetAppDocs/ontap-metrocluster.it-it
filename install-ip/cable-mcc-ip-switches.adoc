@@ -1,0 +1,38 @@
+---
+permalink: install-ip/cable-mcc-ip-switches.html 
+sidebar: sidebar 
+keywords: cabling, cable, component, link, site, management, network, hardware, component, switch, cluster, connection, management, data, configuring, configure, rcf, file, generator, RcfFileGenerator 
+summary: È necessario comprendere come utilizzare le informazioni nelle tabelle delle porte per generare correttamente i file RCF. 
+---
+= Collega gli MetroCluster IP switch utilizzando lo strumento RCFfilegenerator e Hardware Universe
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Devi capire come utilizzare lo strumento RCFfilegenerator e le informazioni in NetApp Hardware Universe per cablare correttamente gli switch.
+
+.Prima di iniziare
+Esamina le informazioni in link:using_rcf_generator.html["Scopri come cablare gli switch IP MetroCluster"] prima di eseguire questa operazione.
+
+.Fasi
+. Scarica e installa lo https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator per MetroCluster IP"^] strumento dal NetApp Support Site.
+. Segui i passaggi in link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/How_to_use_the_RCF_Generator_for_MetroCluster_IP["Come utilizzare il generatore RCF per MetroCluster IP"^] per compilare i campi della tua configurazione.
++
+Lo strumento genera una panoramica del cablaggio per ciascuna porta per ogni switch.
+
++
+
+NOTE: RcfFileGenerator mostra solo le piattaforme idonee quando viene selezionata la prima piattaforma.
+
+. Vai a link:https://hwu.netapp.com/DetailViews/Home.aspx["Hardware Universe"^]
+. Seleziona il tipo di piattaforma dalla scheda *Prodotti*, quindi seleziona la tua piattaforma specifica e indica se stai cablando una configurazione IP MetroCluster a quattro o otto nodi.
+. Seleziona la versione di ONTAP dalla finestra di visualizzazione e quindi seleziona *Mostra risultati*.
+. Seleziona *Connessioni supportate* e seleziona la scheda *Connessione di storage*
+. Raccogli le informazioni sulle porte del controller necessarie per la tua configurazione.
++
+
+NOTE: Le informazioni sulla porta del controller non sono incluse nella panoramica del cablaggio generata dallo strumento RcfFileGenerator, quindi devi utilizzare Hardware Universe per raccogliere queste informazioni.
+
+

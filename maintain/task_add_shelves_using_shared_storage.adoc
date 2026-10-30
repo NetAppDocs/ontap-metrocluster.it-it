@@ -200,7 +200,7 @@ cluster_A::>
 NOTE: Se lo switch è già configurato correttamente, è possibile saltare queste sezioni successive e passare direttamente a. <<Configurazione della crittografia MACsec sugli switch Cisco 9336C>>, se applicabile o a. <<Collegamento del nuovo shelf NS224>>.
 
 * È necessario modificare la configurazione dello switch per aggiungere shelf.
-* Consultare i dettagli del cablaggio all'indirizzo link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/port_usage_3232c_9336c.html#cabling-a-aff-a800-to-a-cisco-3232c-or-cisco-9336c-switch["Assegnazioni delle porte della piattaforma"^].
+* Dovresti rivedere i dettagli del cablaggio in link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Scopri come cablare gli switch IP MetroCluster"^].
 * È necessario utilizzare lo strumento **RcfFileGenerator** per creare il file RCF per la configurazione. Il link:https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator"^] fornisce inoltre una panoramica del cablaggio per porta per ogni switch. Assicurarsi di scegliere il numero corretto di shelf. Insieme al file RCF vengono creati file aggiuntivi che forniscono un layout di cablaggio dettagliato corrispondente alle opzioni specifiche. Utilizzare questa panoramica dei cavi per verificare il cablaggio durante il cablaggio dei nuovi shelf.
 
 

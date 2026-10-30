@@ -497,7 +497,7 @@ cluster_A::*>
 Se il sistema è configurato utilizzando una connettività a 25 Gbps, impostare manualmente il parametro Forward Error Correction (fec) su Off dopo aver applicato l'RCF. L'RCF non applica questa impostazione.
 
 .A proposito di questa attività
-* Questa attività si applica solo alle piattaforme che utilizzano la connettività a 25 Gbps. Fare riferimento alla link:../install-ip/port_usage_sn2100.html["Assegnazioni delle porte della piattaforma per gli switch IP SN2100 supportati da NVIDIA"].
+* Questa operazione si applica solo alle piattaforme che utilizzano connettività a 25 Gbps. Fai riferimento a link:../install-ip/using_rcf_generator.html["Scopri come cablare gli switch IP MetroCluster"].
 * Questa attività deve essere eseguita su tutti e quattro gli switch nella configurazione IP di MetroCluster.
 * È necessario aggiornare ogni porta dello switch singolarmente, non è possibile specificare più porte o intervalli di porte nel comando.
 
