@@ -491,6 +491,22 @@ Impossibile creare una SVM:
  a| 
 È possibile interrompere una relazione SnapMirror tra un endpoint di origine e di destinazione di un mirror per la protezione dei dati.
 
+
+
+ a| 
+`vserver modify -storage-limit`
+ a| 
+A partire da ONTAP 9.20.1, puoi configurare i limiti di storage per le SVM che fanno parte di una configurazione IP MetroCluster.
+
+Le seguenti limitazioni si applicano all'attivazione o alla disattivazione dei limiti di storage durante uno switchover di MetroCluster:
+
+* Sull'SVM di destinazione della sincronizzazione, non è possibile utilizzare il `vserver modify -storage-limit` comando per abilitare o disabilitare il limite di archiviazione. Ciò significa che non è possibile modificare il valore da 0 a un valore diverso da zero o da un valore diverso da zero a 0. Il comando fallisce con il seguente errore:
++
+`This operation is not permitted on a Vserver that is configured as the destination of a MetroCluster Vserver relationship`
+
+* Puoi ancora modificare il limite di archiviazione da un valore diverso da zero a un altro (ad esempio, da 100 TB a 200 TB). Questo nuovo valore viene mantenuto anche dopo lo switchback.
+
+
 |===
 
 

@@ -1,0 +1,23 @@
+= 
+:allow-uri-read: 
+
+
+A partire da ONTAP 9.20.1, puoi configurare i limiti di storage per le SVM che fanno parte di una configurazione IP MetroCluster.
+
+
+CAUTION: Devi assicurarti che la configurazione MetroCluster non superi i limiti per la tua piattaforma elencati nel  https://hwu.netapp.com/["Hardware Universe"^].
+
+* Durante il normale funzionamento (non in fase di switchover), puoi modificare la configurazione del limite di storage solo sulla *sync-source SVM*. Non puoi abilitare, disabilitare o modificare i limiti di storage sulla *sync-destination SVM*.
+* Durante il passaggio di consegne, si applicano le seguenti restrizioni alla *sync-destination SVM*:
++
+** Non puoi utilizzare il `vserver modify -storage-limit` comando per abilitare o disabilitare il limite di archiviazione sull'SVM di destinazione della sincronizzazione. In altre parole, non puoi modificare il valore da 0 a un valore diverso da zero o da un valore diverso da zero a 0. Il comando non riesce con il seguente errore:
++
+`This operation is not permitted on a Vserver that is configured as the destination of a MetroCluster Vserver relationship`
+
+** Puoi ancora modificare il limite di archiviazione da un valore diverso da zero a un altro (ad esempio, da 100 TB a 200 TB). Questo nuovo valore viene mantenuto anche dopo lo switchback.
+** Per abilitare o disabilitare il limite di storage, aspetta il completamento dello switchback, quindi apporta la modifica sulla *sync-source SVM*. Il valore viene quindi replicato sulla sync-destination SVM.
+
+
+
+
+Per ulteriori informazioni, consulta link:https://docs.netapp.com/us-en/ontap/volumes/manage-svm-capacity.html["Gestire la capacità SVM di ONTAP"^]

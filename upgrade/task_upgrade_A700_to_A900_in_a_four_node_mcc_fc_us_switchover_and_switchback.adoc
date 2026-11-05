@@ -579,6 +579,9 @@ Dopo aver completato questa attività, Site_A è attivo e fornisce dati per entr
 
 image::../media/mcc_upgrade_cluster_a_in_switchover_A900.png[Site_B inattivo e pronto per l'aggiornamento]
 
+
+NOTE: Prima di eseguire una commutazione, consulta link:../manage/switchover-limitations.html["Limiti durante lo switchover della configurazione di MetroCluster"].
+
 .Fasi
 . Passare alla configurazione MetroCluster del sito_A in modo che i nodi del sito_B possano essere aggiornati:
 +

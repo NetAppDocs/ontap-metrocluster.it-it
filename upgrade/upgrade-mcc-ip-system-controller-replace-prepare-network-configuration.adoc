@@ -16,6 +16,9 @@ Dopo aver raccolto informazioni e ripristinato l'operazione, l'automazione proce
 .Prima di iniziare
 Prima di iniziare lo switchover, l'operazione di automazione viene interrotta in modo da poter verificare manualmente che tutti i LIF siano "`up`" nel sito B. Se necessario, portare i LIF "`dpropri`" su "`up`" e riprendere l'operazione di automazione utilizzando `system controller replace resume` comando.
 
+
+NOTE: Prima di eseguire una commutazione, consulta link:../manage/switchover-limitations.html["Limiti durante lo switchover della configurazione di MetroCluster"].
+
 L'operazione di automazione avvia le operazioni di switchover. Al termine di queste operazioni, l'operazione viene sospesa in *pausa per l'intervento dell'utente*, in modo da poter installare e installare i controller, avviare i controller partner e riassegnare i dischi dell'aggregato root al nuovo modulo controller dal backup flash utilizzando il `sysids` raccolto in precedenza.
 
 .A proposito di questa attività

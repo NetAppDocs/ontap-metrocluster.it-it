@@ -136,4 +136,5 @@ Po10         1       eth  trunk  up      none                                a-1
 Po11         1       eth  trunk  up      none                                a-100G(D)  lacp
 ----
 . Ripetere la procedura per il fabric 2.
+. Se nella configurazione IP di MetroCluster hai abilitato il controllo della congestione WAN ISL, devi link:mcc-congestion-control.html#refresh-congestion-control["aggiorna la configurazione del controllo della congestione WAN ISL"].
 

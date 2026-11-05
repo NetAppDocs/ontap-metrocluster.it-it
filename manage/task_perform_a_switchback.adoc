@@ -13,6 +13,9 @@ summary: 'Dopo aver ripristinato la configurazione di MetroCluster, esegui l"ope
 [role="lead"]
 Dopo aver corretto la configurazione MetroCluster, è possibile eseguire l'operazione di switchback MetroCluster. L'operazione di switchback MetroCluster riporta la configurazione al suo normale stato operativo, con le macchine virtuali dello storage di origine di sincronizzazione (SVM) sul sito di emergenza attive e i dati provenienti dai pool di dischi locali.
 
+.A proposito di questa attività
+Prima di eseguire lo switchback, verifica i seguenti requisiti:
+
 * Il cluster di emergenza deve essere passato correttamente al cluster esistente.
 * La riparazione deve essere stata eseguita sui dati e sugli aggregati root.
 * I nodi del cluster sopravvissuti non devono trovarsi nello stato di failover ha (tutti i nodi devono essere attivi e in esecuzione per ogni coppia ha).
@@ -20,8 +23,10 @@ Dopo aver corretto la configurazione MetroCluster, è possibile eseguire l'opera
 * L'aggregato root deve essere mirrorato.
 * I collegamenti Inter-Switch (ISL) devono essere online.
 * Tutte le licenze richieste devono essere installate sul sistema.
-+
-.. Verificare che tutti i nodi siano nello stato abilitato: `metrocluster node show`
+
+
+.Fasi
+. Verificare che tutti i nodi siano nello stato abilitato: `metrocluster node show`
 +
 Nell'esempio riportato di seguito vengono visualizzati i nodi che si trovano nello stato abilitato:
 
@@ -41,10 +46,10 @@ Group Cluster Node        State          Mirroring Mode
               node_B_2    configured     enabled   waiting for switchback recovery
 4 entries were displayed.
 ----
-.. Verificare che la risincronizzazione sia completa su tutte le SVM: `metrocluster vserver show`
-.. Verificare che tutte le migrazioni LIF automatiche eseguite dalle operazioni di riparazione siano state completate correttamente: `metrocluster check lif show`
-.. Eseguire uno switchback simulato per verificare che il sistema sia pronto: `metrocluster switchback -simulate`
-.. Controllare la configurazione:
+. Verificare che la risincronizzazione sia completa su tutte le SVM: `metrocluster vserver show`
+. Verificare che tutte le migrazioni LIF automatiche eseguite dalle operazioni di riparazione siano state completate correttamente: `metrocluster check lif show`
+. Eseguire uno switchback simulato per verificare che il sistema sia pronto: `metrocluster switchback -simulate`
+. Controllare la configurazione:
 +
 `metrocluster check run`
 
@@ -76,8 +81,8 @@ clusters            ok
 connections         ok
 6 entries were displayed.
 ----
-.. Eseguire lo switchback eseguendo il comando MetroCluster switchback da qualsiasi nodo del cluster esistente: `metrocluster switchback`
-.. Controllare l'avanzamento dell'operazione di switchback: `metrocluster show`
+. Eseguire lo switchback eseguendo il comando MetroCluster switchback da qualsiasi nodo del cluster esistente: `metrocluster switchback`
+. Controllare l'avanzamento dell'operazione di switchback: `metrocluster show`
 +
 L'operazione di switchback è ancora in corso quando l'output visualizza Waiting-for-switchback:
 
@@ -112,7 +117,5 @@ Remote: cluster_A         Configuration state configured
 ----
 +
 Se il completamento di uno switchback richiede molto tempo, è possibile verificare lo stato delle linee di base in corso utilizzando `metrocluster config-replication resync-status show` comando. Questo comando si trova al livello di privilegio avanzato.
-
-
 
 

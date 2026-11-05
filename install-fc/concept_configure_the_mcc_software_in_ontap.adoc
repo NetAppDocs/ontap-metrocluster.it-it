@@ -2936,12 +2936,24 @@ mcc4-b2      mlx4_0          IB      Up     false     192.0.2.10  	ib2b
 I protocolli di autenticazione e privacy sugli switch e sul sistema ONTAP devono essere identici.
 
 .A proposito di questa attività
-ONTAP attualmente supporta AES-128 per la privacy (crittografia) e SHA-256 per l'autenticazione.
+* A partire da ONTAP 9.20.1, ONTAP supporta SHA-512 per l'autenticazione SNMP.
+* ONTAP supporta i seguenti protocolli per l'autenticazione e la crittografia SNMP:
++
+** Privacy (crittografia): AES-128
+** Autenticazione:
++
+*** SHA-512 (a partire da ONTAP 9.20.1)
+*** SHA-256
+
+
+
+
+
 
 [CAUTION]
 ====
-* Nelle versioni di Fabric OS 10.x e successive, Brocade supporta solo SHA-512 per l'autenticazione SNMP. ONTAP attualmente non supporta SHA-512, con il supporto limitato a SHA-256.
-* Se i tuoi switch FC MetroCluster stanno utilizzando Fabric OS 10.x o versioni successive, non puoi configurare SNMP e non puoi aggiungere questi switch al monitoraggio dello stato di salute di ONTAP. Se vuoi eseguire il downgrade del firmware dello switch, puoi seguire i passaggi in link:../maintain/task_upgrade_or_downgrad_the_firmware_on_a_brocade_fc_switch_mcc.html["Aggiornare o eseguire il downgrade del firmware su uno switch Brocade FC"].
+* Nelle versioni di Fabric OS 10.x e successive, Brocade supporta solo SHA-512 per l'autenticazione SNMP.
+* Se utilizzi una versione di ONTAP precedente alla 9.20.1 e i tuoi switch FC MetroCluster eseguono Fabric OS 10.x o versione successiva, non puoi configurare SNMP e non puoi aggiungere questi switch al monitoraggio dello stato di salute di ONTAP. Se vuoi eseguire il downgrade del firmware dello switch, puoi seguire i passaggi in link:../maintain/task_upgrade_or_downgrad_the_firmware_on_a_brocade_fc_switch_mcc.html["Aggiornare o eseguire il downgrade del firmware su uno switch Brocade FC"].
 
 
 ====
@@ -2961,12 +2973,15 @@ Controller_A_1::> security login create -user-or-group-name snmpv3user -applicat
 NOTE: Per EngineID, premere *INVIO* per assegnare il valore predefinito.
 
 +
+L'output seguente è fornito solo a scopo esemplificativo; devi scegliere le impostazioni supportate nel tuo ambiente.
+
++
 [listing]
 ----
 
 Enter the authoritative entity's EngineID [remote EngineID]:
 
-Which authentication protocol do you want to choose (none, md5, sha, sha2-256) [none]: sha
+Which authentication protocol do you want to choose (none, md5, sha, sha2-256, sha512) [none]: sha512
 
 Enter the authentication protocol password (minimum 8 characters long):
 
