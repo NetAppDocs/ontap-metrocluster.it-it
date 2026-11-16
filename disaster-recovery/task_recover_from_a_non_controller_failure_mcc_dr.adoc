@@ -239,7 +239,7 @@ Eseguire il comando: `boot_ontap`
 
 --
 ====
-. Una volta completato il boot del nodo, verificare che gli aggregati root siano mirrorati.
+. Al termine dell'avvio del nodo, verifica che l'aggregato root e gli aggregati di dati siano mirrorati.
 +
 [role="tabbed-block"]
 ====
@@ -258,9 +258,21 @@ Eseguire il comando: `boot_ontap`
 --
 .Se un plex è offline:
 --
-Online il plesso:
+.. Dal sito di disastro, controlla i plex dell'aggregato root:
++
+`storage aggregate plex show`
 
++
+Se un plex dell'aggregato root è offline, riportalo online dal sito di emergenza:
+
++
 `storage aggregate plex online -aggregate <aggregate_name> -plex <plex_name>`
+
+.. Dal sito superstite, porta online tutti i plex che sono offline:
++
+`storage aggregate plex online -aggregate <aggregate_name> -plex <plex_name>`
+
+
 
 --
 .Se entrambi i plessi sono presenti:

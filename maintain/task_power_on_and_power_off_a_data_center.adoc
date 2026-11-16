@@ -219,10 +219,6 @@ Sì. I dischi sono remoti nel cluster A.
  a| 
 Node_B_1_aggr1/plex0
 
-Node_B_1_aggr0/plex0
-
-Node_B_2_aggr0/plex0
-
 Node_B_2_aggr1/plex0
 
 
@@ -242,11 +238,11 @@ No I dischi sono locali nel cluster A.
 +
 [listing]
 ----
-storage aggregate plex offline -aggregate Node_B_1_aggr0 -plex plex0
+storage aggregate plex offline -aggregate Node_B_1_aggr1 -plex plex0
 ----
 +
 
-NOTE: Eseguire questa operazione per tutti i plessi che hanno dischi remoti a Cluster_A.
+NOTE: Non portare offline i plex degli aggregati root di Cluster_B (aggr0).
 
 
 
